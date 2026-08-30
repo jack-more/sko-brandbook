@@ -166,6 +166,7 @@ img{display:block;max-width:100%}
 </div>
 
 <script type="module" src="js/sphere.js"></script>
+<script defer src="js/helix.js"></script>
 
 <!-- 06 helix -->
 <div class="page">
@@ -177,13 +178,16 @@ img{display:block;max-width:100%}
     <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
     B&#8209;DNA its wide major groove and narrow minor one. Depth drives size, brightness and draw
     order, so the near strand occludes the far one.</p>
-    <p><b>Three scales.</b> Hero, frame, and field. The field carries no boxes or labels and runs
-    under other work; the frame is a band; the hero stands alone.</p>
+    <p><b>The path is constant, the substance is not.</b> Six states &mdash; inspection, accretion,
+    ladder, chain, readout, disperse &mdash; and it tears between them on a seven-band horizontal
+    glitch. The silhouette never breaks.</p>
+    <p>Three scales ship alongside: hero, frame, and a field carrying no boxes or labels that runs
+    under other work.</p>
   </div>
   <div class="body">
     <div class="tiles t2">
-      <div class="tile"><img class="fill" src="img/mv-hero.jpg" alt="The helix as machine vision"><span class="cap">HERO</span></div>
-      <div class="tile dark"><img class="fill" src="img/mv-field.png" alt="The field, for use under other work"><span class="cap">FIELD</span></div>
+      <div class="tile dark" style="padding:0"><canvas id="helixField" style="display:block;width:100%"></canvas><span class="cap">SUBSTANCES &middot; LIVE</span></div>
+      <div class="tile"><img class="fill" src="img/mv-hero.jpg" alt="The helix as machine vision"><span class="cap">HERO &middot; INSPECTION</span></div>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
