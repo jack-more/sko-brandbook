@@ -207,42 +207,52 @@
   const SUBS = [subVision, subBloom, subRungs, subGlyph, subReadout, subDust];
   const NAMES = ['INSPECTION', 'ACCRETION', 'LADDER', 'CHAIN', 'READOUT', 'DISPERSE'];
 
+  /* Behaviour, read off the reference at 24fps:
+     - every state change is a HARD CUT in one frame. There are no crossfades.
+     - structure and bloom are two independent layers. The bloom flickers on
+       and off frame to frame while the structure holds.
+     - the structure holds roughly 0.3-0.5s, then cuts.
+     - occasional single-frame flat blue flash as a cut.                        */
+  const STRUCT = [subVision, subRungs, subGlyph, subReadout, subDust];
+  const SNAMES = ['INSPECTION', 'LADDER', 'CHAIN', 'READOUT', 'DISPERSE'];
+  let sIdx = 0, sUntil = 0, bloomOn = true, bUntil = 0, flashUntil = 0;
+
   function frame(ts) {
     requestAnimationFrame(frame);
     if (!W && !layout()) return;
     if (t0 === null) t0 = ts;
-    const el = ts - t0, cyc = HOLD + TURN;
-    const idx = Math.floor(el / cyc) % SUBS.length;
-    const nxt = (idx + 1) % SUBS.length;
-    const into = Math.max(0, (el % cyc) - HOLD) / TURN;   /* 0 hold, ->1 crossing */
+    const el = ts - t0;
 
-    ctx.fillStyle = '#07090F'; ctx.fillRect(0, 0, W, H);
-    seedn = 1 + idx * 977;
-    const [A, B] = strands(560, el * 0.00016);
-
-    /* glitch only while crossing: torn horizontal offsets */
-    const tear = into > 0 && into < 1;
-    if (tear) {
-      const bands = 7;
-      for (let b = 0; b < bands; b++) {
-        ctx.save();
-        const y0 = H * b / bands, hh = H / bands;
-        ctx.beginPath(); ctx.rect(0, y0, W, hh); ctx.clip();
-        ctx.translate((rnd() - 0.5) * 26 * Math.sin(into * Math.PI), 0);
-        SUBS[idx](A, B, 1 - into); SUBS[nxt](A, B, into);
-        ctx.restore();
-      }
-    } else {
-      SUBS[idx](A, B, 1);
+    if (el > sUntil) {                       /* hard cut, no blend */
+      sIdx = (sIdx + 1 + Math.floor(Math.random() * (STRUCT.length - 1))) % STRUCT.length;
+      sUntil = el + 300 + Math.random() * 420;
+      if (Math.random() < 0.16) flashUntil = el + 42;   /* one-frame flash */
+    }
+    if (el > bUntil) {                       /* the bloom toggles on its own clock */
+      bloomOn = Math.random() < 0.62;
+      bUntil = el + 60 + Math.random() * 260;
     }
 
-    ctx.font = '10px "DM Mono",ui-monospace,monospace';
+    if (el < flashUntil) {
+      ctx.fillStyle = '#2F55E8'; ctx.fillRect(0, 0, W, H);
+      return;
+    }
+
+    ctx.fillStyle = '#07090F'; ctx.fillRect(0, 0, W, H);
+    seedn = 1 + sIdx * 977;
+    const [A, B] = strands(560, el * 0.00016);
+
+    STRUCT[sIdx](A, B, 1);
+    if (bloomOn) subBloom(A, B, 0.92);       /* the accretion rides on top */
+
+    ctx.font = '10px Manrope,"DM Mono",ui-monospace,monospace';
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
     ctx.fillStyle = `rgba(${INK},.5)`;
-    ctx.fillText(NAMES[into > 0.5 ? nxt : idx], 14, H - 14);
+    ctx.fillText(SNAMES[sIdx] + (bloomOn ? '  +  ACCRETION' : ''), 14, H - 14);
     ctx.textAlign = 'right';
-    ctx.fillText(`${(into > 0.5 ? nxt : idx) + 1} / ${SUBS.length}`, W - 14, H - 14);
+    ctx.fillText(String(sIdx + 1) + ' / ' + STRUCT.length, W - 14, H - 14);
   }
+
   addEventListener('resize', () => { W = 0; });
   requestAnimationFrame(frame);
 })();
