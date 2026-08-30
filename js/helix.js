@@ -112,30 +112,97 @@
       ctx.fillText(str, x0, ay);
     }
   }
-  function subVision(A, B, k) {                      /* the inspection pass */
-    for (const S of [A, B]) for (let i = 0; i < S.length; i += 3) {
-      const [x, y, d] = S[i], s = sh(d), r = 0.9 + 2.1 * s;
-      ctx.strokeStyle = `rgba(${INK},${(0.9 * s * k).toFixed(3)})`;
+  /* The inspection pass, ported to spec from amirmushichge/machine-vision
+     (MIT): anchor kinds and their odds, two-corner brackets, the box corner
+     tick, the label vocabulary, square caps and mitre joins. Their feature
+     source is a video frame; ours is the helix. */
+  function mvLabel(i, x, y, score) {
+    const o = [
+      'X ' + x.toFixed(3).replace('0.', '.'),
+      'Y ' + y.toFixed(3).replace('0.', '.'),
+      'IDX ' + String(i).padStart(3, '0'),
+      'S ' + score.toFixed(2).replace('0.', '.'),
+      'F ' + String((i * 37) % 999).padStart(3, '0'),
+      'A' + String((i * 11) % 28).padStart(2, '0'),
+      'C ' + Math.min(0.99, score + 0.07).toFixed(2),
+    ];
+    return o[i % o.length];
+  }
+  function subVision(A, B, k) {
+    ctx.lineCap = 'square'; ctx.lineJoin = 'miter';
+    const pts = [];
+    for (const S of [A, B]) for (let i = 0; i < S.length; i += 7) {
+      const [x, y, d] = S[i];
+      pts.push({ x, y, d, s: 0.55 + 0.44 * (d + 1) / 2, i });
+    }
+    /* connections: max two per point, y compressed 0.7 */
+    ctx.lineWidth = 1;
+    for (let i = 0; i < pts.length; i++) {
+      let n = 0;
+      for (let j = i + 1; j < pts.length && n < 2; j++) {
+        const a = pts[i], b = pts[j];
+        const dist = Math.hypot((a.x - b.x) / W, ((a.y - b.y) / H) * 0.7);
+        if (dist < 0.052 && ((i * 7 + j) % 5) < 2) {
+          const dep = sh(Math.max(a.d, b.d));
+          ctx.strokeStyle = `rgba(${INK},${(0.55 * dep * k).toFixed(3)})`;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          n++;
+        }
+      }
+    }
+    /* anchors: point 50 / cross 28 / square 22, far strand first */
+    pts.slice().sort((p, q) => p.d - q.d).forEach((p, n) => {
+      const dep = sh(p.d), size = 2.5 * (0.7 + ((n * 13) % 75) / 100) * (0.55 + 0.65 * dep);
+      const r = (n * 29) % 100;
+      ctx.strokeStyle = ctx.fillStyle = `rgba(${INK},${(dep * k).toFixed(3)})`;
       ctx.lineWidth = 1;
-      if (i % 9 === 0) ctx.strokeRect(x - r, y - r, r * 2, r * 2);
-      else { ctx.fillStyle = `rgba(${INK},${(0.8 * s * k).toFixed(3)})`;
-             ctx.beginPath(); ctx.arc(x, y, r * 0.8, 0, 7); ctx.fill(); }
-    }
-    ctx.font = '8px "DM Mono",ui-monospace,monospace'; ctx.textAlign = 'left';
-    for (let m = 0; m < 6; m++) {
-      const i = Math.floor(A.length * (m + 0.5) / 6), S = m % 2 ? A : B;
-      const [x, y, d] = S[i]; if (d < -0.2) continue;
-      const bw = 30, bh = 22, tk = 8, al = (0.85 * sh(d) * k).toFixed(3);
-      ctx.strokeStyle = `rgba(${INK},${al})`;
-      [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([sx, sy]) => {
-        const cx2 = x + sx * bw / 2, cy2 = y + sy * bh / 2;
+      if (r < 50) { ctx.beginPath(); ctx.arc(p.x, p.y, size * 0.72, 0, 7); ctx.fill(); }
+      else if (r < 78) {
         ctx.beginPath();
-        ctx.moveTo(cx2 - sx * tk, cy2); ctx.lineTo(cx2, cy2); ctx.lineTo(cx2, cy2 - sy * tk);
+        ctx.moveTo(p.x - size * 1.8, p.y); ctx.lineTo(p.x + size * 1.8, p.y);
+        ctx.moveTo(p.x, p.y - size * 1.8); ctx.lineTo(p.x, p.y + size * 1.8);
         ctx.stroke();
-      });
-      ctx.fillStyle = `rgba(${INK},${al})`;
-      ctx.fillText((0.9 + (m * 17 % 9) / 100).toFixed(2), x - bw / 2, y - bh / 2 - 7);
+      } else ctx.strokeRect(p.x - size, p.y - size, size * 2, size * 2);
+    });
+    /* brackets: two opposite corners, never four */
+    pts.forEach((p, n) => {
+      if ((n * 17) % 100 > 15) return;
+      const s = 9 + ((n * 7) % 11), dep = sh(p.d);
+      ctx.strokeStyle = `rgba(${INK},${(0.9 * dep * k).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.moveTo(p.x - s, p.y - s * 0.3); ctx.lineTo(p.x - s, p.y - s); ctx.lineTo(p.x - s * 0.3, p.y - s);
+      ctx.moveTo(p.x + s * 0.3, p.y + s); ctx.lineTo(p.x + s, p.y + s); ctx.lineTo(p.x + s, p.y + s * 0.3);
+      ctx.stroke();
+    });
+    /* tracking boxes: four corners, plus the tick off the top right */
+    ctx.font = '9px Manrope,"DM Mono",ui-monospace,monospace';
+    ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+    for (let m = 0; m < 4; m++) {
+      const p = pts[Math.floor(pts.length * (m + 0.5) / 4)];
+      if (!p || p.d < -0.2) continue;
+      const bw = 46, bh = 33, cn = Math.min(18, bw * 0.24, bh * 0.24);
+      const x0 = p.x - bw / 2, y0 = p.y - bh / 2;
+      ctx.strokeStyle = ctx.fillStyle = `rgba(${INK},${(0.85 * k).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.moveTo(x0, y0 + cn); ctx.lineTo(x0, y0); ctx.lineTo(x0 + cn, y0);
+      ctx.moveTo(x0 + bw - cn, y0); ctx.lineTo(x0 + bw, y0); ctx.lineTo(x0 + bw, y0 + cn);
+      ctx.moveTo(x0 + bw, y0 + bh - cn); ctx.lineTo(x0 + bw, y0 + bh); ctx.lineTo(x0 + bw - cn, y0 + bh);
+      ctx.moveTo(x0 + cn, y0 + bh); ctx.lineTo(x0, y0 + bh); ctx.lineTo(x0, y0 + bh - cn);
+      ctx.moveTo(x0 + bw, y0 + 8); ctx.lineTo(x0 + bw + 13, y0 + 8);
+      ctx.stroke();
+      ctx.fillText('B' + String(m + 1).padStart(2, '0') + '  ' + (0.88 + m * 0.03).toFixed(2), x0 + bw + 5, y0 - 5);
     }
+    /* labels */
+    ctx.textBaseline = 'middle';
+    pts.forEach((p, n) => {
+      if ((n * 23) % 100 > 9) return;
+      const align = p.x > W * 0.72 ? 'right' : 'left';
+      ctx.textAlign = align;
+      ctx.fillStyle = `rgba(${INK},${(0.9 * sh(p.d) * k).toFixed(3)})`;
+      ctx.fillText(mvLabel(n, p.x / W, p.y / H, p.s),
+                   p.x + (align === 'left' ? 14 : -14), p.y - 9);
+    });
+    ctx.textBaseline = 'alphabetic';
   }
   const SUBS = [subVision, subBloom, subRungs, subGlyph, subReadout, subDust];
   const NAMES = ['INSPECTION', 'ACCRETION', 'LADDER', 'CHAIN', 'READOUT', 'DISPERSE'];
