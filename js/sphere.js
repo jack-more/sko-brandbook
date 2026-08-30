@@ -15,19 +15,12 @@ const HOST = document.getElementById('arraySphere');
 if (HOST) start(HOST);
 
 function start(host) {
-  /* one edit here when the storefront's URL pattern is confirmed */
-  const HREF = slug => `/products/${slug}`;
-  const UNITS = [
-    ['arr-1.png','BPC-157','bpc-157'], ['arr-2.png','TB-500','tb-500'],
-    ['arr-3.png','GHK-Cu','ghk-cu'],   ['arr-4.png','CJC-1295','cjc-1295'],
-    ['arr-5.png','Ipamorelin','ipamorelin'],
-  ];
-  /* the full catalogue repeats the five renders we ship with the book;
-     swap in one image per SKU and the ring fills out on its own */
-  const NAMES = ['BPC-157','TB-500','GHK-Cu','CJC-1295','Ipamorelin','Sermorelin',
-    'Tesamorelin','IGF-1 LR3','MOTS-c','NAD+','SS-31','Glutathione','Semax','Selank',
-    'DSIP','PT-141','Kisspeptin','KPV','TA-1','ARA-290','AOD-9604','Cagrilintide',
-    'Adamax','5-Amino-1MQ','MT-1','MT-2','Glow','Wolverine'];
+  /* Read off skocompounds.com/products — real names, sizes, prices.
+     The storefront has no per-product route (every card is a button,
+     there is not one product anchor on the site), so a click can only
+     open the catalogue. Point HREF at a product page the day one exists. */
+  const HREF = () => 'https://skocompounds.com/products';
+  let CAT = [];
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -107,21 +100,24 @@ function start(host) {
   const loader = new THREE.TextureLoader();
   const orbit = new THREE.Group(); scene.add(orbit);
   const units = [];
-  const N = NAMES.length;
-  const GA = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < N; i++) {
-    const y = 1 - (i / (N - 1)) * 2;
-    const rad = Math.sqrt(Math.max(0, 1 - y * y));
-    const th = GA * i;
-    const src = UNITS[i % UNITS.length];
-    const tex = loader.load('img/' + src[0]);
-    tex.colorSpace = THREE.SRGBColorSpace;
-    const m = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.92, 2.09),
-      new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
-    m.position.set(Math.cos(th) * rad * R, y * R, Math.sin(th) * rad * R);
-    orbit.add(m);
-    units.push({ m, name: NAMES[i], href: HREF(NAMES[i].toLowerCase().replace(/[^a-z0-9]+/g, '-')), hov: 0 });
+
+  function build() {
+    const N = CAT.length;
+    const GA = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i / (N - 1)) * 2;
+      const rad = Math.sqrt(Math.max(0, 1 - y * y));
+      const th = GA * i;
+      const d = CAT[i];
+      const tex = loader.load(d.img);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      const m = new THREE.Mesh(
+        new THREE.PlaneGeometry(0.92, 2.09),
+        new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
+      m.position.set(Math.cos(th) * rad * R, y * R, Math.sin(th) * rad * R);
+      orbit.add(m);
+      units.push({ m, ...d, href: HREF(), hov: 0 });
+    }
   }
 
   /* ---- label ---- */
@@ -203,7 +199,10 @@ function start(host) {
 
     if (hot) {
       hot.m.getWorldPosition(v3); v3.project(camera);
-      tag.textContent = hot.name;
+      tag.innerHTML = '<b>' + hot.name + '</b>'
+        + '<span style="opacity:.55;margin-left:7px">' + hot.size + '</span>'
+        + '<span style="margin-left:9px">' + hot.price + '</span>'
+        + (hot.status ? '<span style="margin-left:9px;color:#9a3b3b">' + hot.status + '</span>' : '');
       tag.style.left = ((v3.x * 0.5 + 0.5) * W) + 'px';
       tag.style.top = ((-v3.y * 0.5 + 0.5) * H) + 'px';
       tag.style.opacity = '1';
@@ -213,5 +212,5 @@ function start(host) {
     renderer.render(scene, camera);
   }
   addEventListener('resize', () => { W = 0; });
-  frame();
+  fetch('js/catalogue.json').then(r => r.json()).then(j => { CAT = j; build(); frame(); });
 }

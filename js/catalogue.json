@@ -1,0 +1,240 @@
+[
+{
+"img": "img/cat/00.webp",
+"name": "BPC-157",
+"size": "10MG",
+"price": "$69.99",
+"status": ""
+},
+{
+"img": "img/cat/01.webp",
+"name": "TB-500",
+"size": "10MG",
+"price": "$59.99",
+"status": ""
+},
+{
+"img": "img/cat/02.webp",
+"name": "GHK-Cu",
+"size": "50MG",
+"price": "$54.99",
+"status": ""
+},
+{
+"img": "img/cat/03.webp",
+"name": "CJC 1295 no dac + Ipamorelin",
+"size": "10MG",
+"price": "$89.99",
+"status": ""
+},
+{
+"img": "img/cat/04.webp",
+"name": "Ipamorelin",
+"size": "10MG",
+"price": "$79.99",
+"status": ""
+},
+{
+"img": "img/cat/05.webp",
+"name": "Sermorelin",
+"size": "5MG",
+"price": "$99.99",
+"status": ""
+},
+{
+"img": "img/cat/06.webp",
+"name": "Tesamorelin",
+"size": "10MG",
+"price": "$114.99",
+"status": ""
+},
+{
+"img": "img/cat/07.webp",
+"name": "TESA/IPA Blend",
+"size": "10MG/3MG",
+"price": "$139.99",
+"status": "SOLD OUT"
+},
+{
+"img": "img/cat/08.webp",
+"name": "IGF1-LR3",
+"size": "1MG",
+"price": "$89.99",
+"status": ""
+},
+{
+"img": "img/cat/09.webp",
+"name": "MOTS-c",
+"size": "10MG",
+"price": "$79.99",
+"status": ""
+},
+{
+"img": "img/cat/10.webp",
+"name": "SKO-NAD",
+"size": "500MG",
+"price": "$77.99",
+"status": ""
+},
+{
+"img": "img/cat/11.webp",
+"name": "SS-31",
+"size": "10MG",
+"price": "$69.99",
+"status": ""
+},
+{
+"img": "img/cat/12.webp",
+"name": "Glutathione",
+"size": "600MG",
+"price": "$64.99",
+"status": "SOLD OUT"
+},
+{
+"img": "img/cat/13.webp",
+"name": "Semax",
+"size": "10MG",
+"price": "$64.99",
+"status": ""
+},
+{
+"img": "img/cat/14.webp",
+"name": "Selank",
+"size": "10MG",
+"price": "$66.99",
+"status": ""
+},
+{
+"img": "img/cat/15.webp",
+"name": "DSIP",
+"size": "10MG",
+"price": "$79.99",
+"status": ""
+},
+{
+"img": "img/cat/16.webp",
+"name": "PT-141",
+"size": "10MG",
+"price": "$69.99",
+"status": ""
+},
+{
+"img": "img/cat/17.webp",
+"name": "Kisspeptin",
+"size": "10MG",
+"price": "$79.99",
+"status": "SOLD OUT"
+},
+{
+"img": "img/cat/18.webp",
+"name": "KPV",
+"size": "10MG",
+"price": "$64.99",
+"status": ""
+},
+{
+"img": "img/cat/19.webp",
+"name": "Thymosin Alpha-1",
+"size": "10MG",
+"price": "$109.99",
+"status": ""
+},
+{
+"img": "img/cat/20.webp",
+"name": "ARA-290",
+"size": "10MG",
+"price": "$74.99",
+"status": ""
+},
+{
+"img": "img/cat/21.webp",
+"name": "AOD-9604",
+"size": "10MG",
+"price": "$89.99",
+"status": ""
+},
+{
+"img": "img/cat/22.webp",
+"name": "Cagrilintide",
+"size": "10MG",
+"price": "$119.99",
+"status": ""
+},
+{
+"img": "img/cat/23.webp",
+"name": "ADAMAX",
+"size": "10MG",
+"price": "$79.99",
+"status": ""
+},
+{
+"img": "img/cat/24.webp",
+"name": "5-Amino-1MQ",
+"size": "5MG",
+"price": "$54.99",
+"status": "SOLD OUT"
+},
+{
+"img": "img/cat/25.webp",
+"name": "MT-1",
+"size": "10MG",
+"price": "$54.99",
+"status": ""
+},
+{
+"img": "img/cat/26.webp",
+"name": "MT-2",
+"size": "10MG",
+"price": "$54.99",
+"status": ""
+},
+{
+"img": "img/cat/27.webp",
+"name": "GLOW",
+"size": "70MG",
+"price": "$129.99",
+"status": ""
+},
+{
+"img": "img/cat/28.webp",
+"name": "Wolverine Blend",
+"size": "10MG",
+"price": "$84.99",
+"status": ""
+},
+{
+"img": "img/cat/29.webp",
+"name": "NAD Spray",
+"size": "500MG",
+"price": "$99.99",
+"status": "PRE-ORDER"
+},
+{
+"img": "img/cat/30.webp",
+"name": "SEMAX Spray",
+"size": "10MG",
+"price": "$91.99",
+"status": "PRE-ORDER"
+},
+{
+"img": "img/cat/31.webp",
+"name": "GHK-Cu Spray",
+"size": "100MG",
+"price": "$89.99",
+"status": "PRE-ORDER"
+},
+{
+"img": "img/cat/32.webp",
+"name": "SELANK Spray",
+"size": "10MG",
+"price": "$89.99",
+"status": "PRE-ORDER"
+},
+{
+"img": "img/cat/33.webp",
+"name": "MT-2 Spray",
+"size": "10MG",
+"price": "$79.99",
+"status": "PRE-ORDER"
+}
+]
