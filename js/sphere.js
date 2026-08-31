@@ -73,13 +73,19 @@ function start(host) {
   scene.add(key);
   scene.add(new THREE.PointLight(0x9DBFD9, 44, 30, 2));
 
-  /* ---- the core: a liquid-metal helix ------------------------
-     Not an orb. Two strands offset 0.42 of a turn, which is what gives
-     B-DNA its wide major groove and narrow minor one — the same
-     geometry the helix module uses. Chrome with real thin-film
+  /* ---- the spine: a liquid-metal helix ----------------------
+     Not an orb, and not an object floating in the middle either — a
+     short helix suspended inside the sphere reads as debris. It runs
+     the full height and out the top and bottom, so the catalogue
+     orbits the helix rather than the helix sitting among it.
+
+     Two strands offset 0.42 of a turn, which is what gives B-DNA its
+     wide major groove and narrow minor one — the same geometry the
+     helix module uses. Pitch is held near twice the diameter so it
+     reads as DNA and not as a spring. Chrome with real thin-film
      iridescence, and a slow lateral wave so the metal moves like
      metal rather than spinning like a prop.                        */
-  const CORE_H = 2.9, CORE_R = 0.54, CORE_TURNS = 2.6, PHASE = 0.42;
+  const CORE_H = 13.9, CORE_R = 0.80, CORE_TURNS = 4.6, PHASE = 0.42;
   const coreShaders = [];
 
   function liquidMetal(tint) {
@@ -94,8 +100,8 @@ function start(host) {
         '#include <begin_vertex>',
         `#include <begin_vertex>
          float wy = transformed.y;
-         transformed.x += sin(wy * 1.75 + uT * 1.25) * 0.085;
-         transformed.z += cos(wy * 1.55 + uT * 0.95) * 0.085;`);
+         transformed.x += sin(wy * 0.52 + uT * 1.05) * 0.115;
+         transformed.z += cos(wy * 0.46 + uT * 0.85) * 0.115;`);
       coreShaders.push(sh);
     };
     return m;
@@ -106,26 +112,26 @@ function start(host) {
 
   function strand(phase) {
     const pts = [];
-    for (let i = 0; i <= 220; i++) {
-      const t = i / 220, a = t * CORE_TURNS * Math.PI * 2 + phase;
+    for (let i = 0; i <= 420; i++) {
+      const t = i / 420, a = t * CORE_TURNS * Math.PI * 2 + phase;
       pts.push(new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R));
     }
     return new THREE.Mesh(
-      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 220, 0.062, 16, false),
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 420, 0.078, 16, false),
       liquidMetal(0xffffff));
   }
   core.add(strand(0), strand(PHASE * Math.PI * 2));
 
   /* the rungs, foreshortening to nothing where the strands cross */
   const rungMat = liquidMetal(0xdfe6f2);
-  for (let i = 1; i < 22; i++) {
-    const t = i / 22, a = t * CORE_TURNS * Math.PI * 2;
+  for (let i = 1; i < 46; i++) {
+    const t = i / 46, a = t * CORE_TURNS * Math.PI * 2;
     const b = a + PHASE * Math.PI * 2;
     const p1 = new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R);
     const p2 = new THREE.Vector3(Math.cos(b) * CORE_R, (t - 0.5) * CORE_H, Math.sin(b) * CORE_R);
     const len = p1.distanceTo(p2);
-    if (len < 0.12) continue;
-    const r = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, len, 10), rungMat);
+    if (len < 0.16) continue;
+    const r = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.036, len, 10), rungMat);
     r.position.copy(p1).add(p2).multiplyScalar(0.5);
     r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0),
       p2.clone().sub(p1).normalize());
@@ -367,9 +373,9 @@ function start(host) {
 
     /* the core spins, wavers, and drifts off-axis a touch */
     const t = performance.now() * 0.001;
-    core.rotation.y = t * 0.42;
-    core.rotation.z = Math.sin(t * 0.63) * 0.075;
-    core.rotation.x = Math.sin(t * 0.41) * 0.055;
+    core.rotation.y = t * 0.30;
+    core.rotation.z = Math.sin(t * 0.63) * 0.022;
+    core.rotation.x = Math.sin(t * 0.41) * 0.016;
     for (const sh of coreShaders) sh.uniforms.uT.value = t;
 
     renderer.render(scene, camera);
