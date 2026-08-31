@@ -37,7 +37,7 @@ function start(host) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
-  camera.position.set(0, 0, 23.5);
+  camera.position.set(0, 0, 17.4);
 
   /* ---- the room the glass and metal reflect ---- */
   (function env() {
@@ -74,7 +74,7 @@ function start(host) {
   scene.add(new THREE.PointLight(0x9DBFD9, 44, 30, 2));
 
   /* ---- the core ---- */
-  const CORE_R = 2.55;
+  const CORE_R = 1.14;
   const core = new THREE.Mesh(
     new THREE.SphereGeometry(CORE_R, 96, 96),
     new THREE.MeshPhysicalMaterial({
@@ -97,7 +97,7 @@ function start(host) {
           gl_Position = projectionMatrix * mv; }`,
       fragmentShader: `uniform vec3 c; varying vec3 vN; varying vec3 vP;
         void main(){ float f = pow(1.0 - abs(dot(normalize(vN), normalize(-vP))), 3.6);
-          gl_FragColor = vec4(c, f * 0.48); }`,
+          gl_FragColor = vec4(c, f * 0.32); }`,
     }));
   scene.add(glow);
 
@@ -183,7 +183,7 @@ function start(host) {
   }
 
   /* ---- the units, on a Fibonacci sphere so spacing stays even ---- */
-  const R = 7.9;
+  const R = 5.85;
   const loader = new THREE.TextureLoader();
   const orbit = new THREE.Group(); scene.add(orbit);
   const units = [];
