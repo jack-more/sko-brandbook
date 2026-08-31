@@ -7,7 +7,7 @@
 <title>SKO Compounds — Brand Book</title>
 <meta property="og:title" content="SKO Compounds — Brand Book">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root{
   --blue:#173384; --deep:#092266; --field:#244399; --halo:#9DBFD9;
@@ -19,7 +19,7 @@
 body{background:#D9DCE2;color:var(--ink);font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;padding:28px 0}
 img{display:block;max-width:100%}
-.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.mono{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 
 /* one page = one topic, 16:9, like a real book spread */
 .page{width:min(1400px,94vw);margin:0 auto 26px;aspect-ratio:16/9;background:var(--paper);
@@ -31,7 +31,7 @@ img{display:block;max-width:100%}
 .body{min-width:0}
 .foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
   border-top:1px solid var(--line);margin-top:26px;padding:12px 0 16px;
-  font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;color:var(--mid)}
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9.5px;letter-spacing:.14em;color:var(--mid)}
 .foot .l{display:flex;align-items:center;gap:12px}
 .foot img{height:13px;width:auto}
 
@@ -46,7 +46,7 @@ img{display:block;max-width:100%}
 .tile.blue{background:var(--blue)}
 .tile img.fill{width:100%;height:100%;object-fit:cover}
 .tile img.mark{width:56%;max-height:52%;object-fit:contain}
-.cap{position:absolute;left:10px;bottom:8px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;
+.cap{position:absolute;left:10px;bottom:8px;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8.5px;
   letter-spacing:.12em;color:var(--mid)}
 .tile.dark .cap,.tile.blue .cap{color:rgba(255,255,255,.72)}
 
@@ -57,7 +57,7 @@ img{display:block;max-width:100%}
 .cover h1{position:absolute;left:46px;top:40px;font-size:clamp(34px,4.4vw,62px);font-weight:700;
   letter-spacing:-.04em;line-height:.94;color:#fff;text-shadow:0 2px 30px rgba(10,24,70,.45)}
 .cover .stamp{position:absolute;left:46px;bottom:34px;display:flex;gap:34px;align-items:center;
-  font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:rgba(255,255,255,.9)}
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9.5px;letter-spacing:.16em;color:rgba(255,255,255,.9)}
 .cover .stamp a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px}
 .cover .stamp a:hover{border-color:#fff}
 .cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil)}
@@ -66,14 +66,80 @@ img{display:block;max-width:100%}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-content:start}
 .sw .chip{height:104px;border-radius:5px;border:1px solid var(--line)}
 .sw table{width:100%;margin-top:9px;border-collapse:collapse}
-.sw td{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--mid);padding:1px 0;
+.sw td{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:8.5px;color:var(--mid);padding:1px 0;
   letter-spacing:.04em}
 .sw td:first-child{color:var(--ink);width:34px}
 .sw b{display:block;font-size:11.5px;font-family:'DM Sans';letter-spacing:-.01em;margin-bottom:4px}
 
+/* assets — the team download list */
+.page.tall{aspect-ratio:auto;min-height:0}
+.agroup{margin-bottom:16px}
+.agroup h3{font-size:12px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.agroup>p{font-size:9.5px;line-height:1.5;color:var(--mid);margin-bottom:8px;max-width:78ch}
+.ass{display:flex;align-items:center;gap:12px;padding:6px 10px;border-radius:4px;
+  text-decoration:none;color:inherit;border:1px solid var(--line);margin-bottom:5px;background:#fff}
+.ass:hover{border-color:var(--blue)}
+.ass .th{width:42px;height:34px;flex:none;display:grid;place-items:center;
+  background:var(--wash);border-radius:3px;overflow:hidden}
+.ass.dk .th{background:var(--blue)}
+.ass .th img{max-width:82%;max-height:82%;width:auto;height:auto;object-fit:contain}
+.ass .meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.ass .meta b{font-size:10.5px;font-weight:500;letter-spacing:-.005em}
+.ass .meta i{font-style:normal;font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;
+  font-size:8px;letter-spacing:.06em;color:var(--mid)}
+.ass .dl{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.14em;color:var(--blue);flex:none}
+
+/* typography specimen */
+.dm{font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif}
+.in{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+.w400{font-weight:400}.w500{font-weight:500}.w600{font-weight:600}.w700{font-weight:700}
+.typespec{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.face{background:var(--wash);border-radius:5px;padding:16px 18px;min-width:0}
+.fname{font-size:11.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px;display:flex;
+  justify-content:space-between;align-items:baseline}
+.fname i{font-style:normal;font-family:'Inter',sans-serif;font-size:8.5px;letter-spacing:.16em;
+  color:var(--mid);font-weight:500}
+.fsample{font-size:clamp(17px,2.1vw,27px);line-height:1.06;letter-spacing:-.032em;color:var(--ink);
+  margin-bottom:11px;overflow-wrap:anywhere}
+.face .in.fsample{letter-spacing:-.005em;line-height:1.28}
+.wts{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--mid)}
+.wts span{font-family:'DM Sans',sans-serif}
+.tester{margin-top:13px;background:var(--wash);border-radius:5px;padding:13px 18px 16px}
+.tester .lbl{display:block;font-size:8px;letter-spacing:.18em;color:var(--mid);margin-bottom:7px}
+.tester input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;
+  font:400 11px/1.4 'Inter',sans-serif;color:var(--ink);padding:0 0 6px;outline:none}
+.tester input:focus{border-bottom-color:var(--blue)}
+#typeOut{margin-top:11px;font-size:clamp(19px,2.6vw,34px);line-height:1.02;letter-spacing:-.036em;
+  color:var(--blue);overflow-wrap:anywhere}
+.scale{width:100%;border-collapse:collapse;margin-top:13px;
+  font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;font-size:9px}
+.scale th{text-align:left;color:var(--mid);font-weight:500;letter-spacing:.14em;font-size:7.5px;
+  padding:0 0 5px;border-bottom:1px solid var(--line)}
+.scale td{padding:3.5px 0;color:var(--mid);border-bottom:1px solid var(--line)}
+.scale td:first-child{color:var(--ink)}
+.col .note{font-size:9.5px;letter-spacing:.01em;color:var(--mid);border-left:2px solid var(--line);
+  padding-left:9px;margin-top:12px}
+
+/* motion demos */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mdemo{margin:0}
+.mstage{aspect-ratio:4/3;background:var(--wash);border-radius:5px;position:relative;overflow:hidden;
+  display:grid;place-items:center;gap:5px}
+.mstage.dark{background:var(--ink)}
+.mbox{width:34%;aspect-ratio:1;background:var(--blue);border-radius:3px}
+.mrow{display:flex;gap:4px}
+.mrow i{width:7px;height:16px;background:var(--blue);border-radius:1px;opacity:.18}
+.mrow.alt i{background:var(--halo);height:9px}
+.odot{width:11px;height:11px;border-radius:50%;background:var(--blue);position:absolute}
+.mdemo figcaption{margin-top:6px;display:flex;flex-direction:column;gap:1px}
+.mdemo figcaption b{font-size:10.5px;letter-spacing:-.01em}
+.mdemo figcaption .mono{font-size:8px;letter-spacing:.08em;color:var(--mid)}
+.mfoot{margin-top:12px;font-size:8px;letter-spacing:.16em;color:var(--mid);text-align:center}
+@media (max-width:900px){.typespec{grid-template-columns:1fr}.mgrid{grid-template-columns:repeat(2,1fr)}}
+
 /* the flat shield ladder */
 .ladder{display:flex;align-items:flex-end;gap:11px;margin-top:14px;
-  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--mid)}
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9px;letter-spacing:.12em;color:var(--mid)}
 .ladder span{margin-right:4px}
 .ladder img{height:auto}
 .ladder img[alt="128px"]{width:52px}
@@ -86,7 +152,7 @@ img{display:block;max-width:100%}
 /* helix cut captions */
 .cutcaps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:9px}
 .cutcaps span{display:flex;flex-direction:column;gap:2px;text-align:center;
-  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--mid)}
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8px;letter-spacing:.1em;color:var(--mid)}
 .cutcaps b{font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:-.01em;color:var(--ink)}
 @media (max-width:900px){.cutcaps{grid-template-columns:repeat(3,1fr);gap:8px 0}}
 
@@ -99,7 +165,7 @@ img{display:block;max-width:100%}
 .ast a:hover{box-shadow:0 0 0 2px var(--blue)}
 .ast img{max-height:132px;max-width:100%;width:auto;height:auto;object-fit:contain}
 .ast figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;
-  font-size:8.5px;letter-spacing:.1em;color:var(--mid);font-family:'IBM Plex Mono',monospace}
+  font-size:8.5px;letter-spacing:.1em;color:var(--mid);font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
 .col .dl{font-size:8.5px;letter-spacing:.14em;color:var(--blue);margin-top:14px}
 @media (max-width:900px){.assets.a3{grid-template-columns:repeat(2,1fr)}.ast a{height:120px}.ast img{max-height:102px}}
 
@@ -112,8 +178,8 @@ img{display:block;max-width:100%}
 .fr-tile{aspect-ratio:16/9;border-radius:5px;display:grid;place-items:center;overflow:hidden}
 .fr-tile img{width:46%;height:auto}
 .fr-pair figcaption{margin-top:6px;font-size:9.5px;line-height:1.4;color:var(--mid);display:flex;gap:6px}
-.fr-pair .ok{color:var(--blue);font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em}
-.fr-pair .no{color:var(--bad);font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em}
+.fr-pair .ok{color:var(--blue);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
+.fr-pair .no{color:var(--bad);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
 
 /* don'ts */
 .dont .tile{border:1px solid rgba(192,57,43,.55);background:#fff}
@@ -247,6 +313,82 @@ img{display:block;max-width:100%}
           <figcaption><span class="no">DON&rsquo;T</span> Gradient backdrop, lit vignette, falloff.</figcaption></figure>
       </div>
     </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- typography -->
+<div class="page" id="typography">
+  <div class="col">
+    <h2>Typography</h2>
+    <p>Two faces. <b>DM Sans</b> does the talking, <b>Inter</b> does the work, and nothing else is
+    added without replacing one of them.</p>
+    <p>Both load from Google, so what this page shows is what ships &mdash; there is no licensed file
+    to chase before artwork can be approved.</p>
+    <p>Labels are uppercase at 0.18em. Nothing else is uppercase. Set tabular figures wherever
+    numbers line up in a column.</p>
+    <p class="mono note">Manrope stays in exactly one place &mdash; the Machine Vision readouts,
+    because that is the face the overlay system renders its labels in. It is not a brand face.</p>
+  </div>
+  <div class="body">
+    <div class="typespec">
+      <div class="face">
+        <div class="fname">DM&nbsp;Sans<i>Display</i></div>
+        <div class="fsample dm w700">High tech. High class.</div>
+        <div class="wts"><span class="w500">Medium 500</span><span class="w700">Bold 700</span></div>
+      </div>
+      <div class="face">
+        <div class="fname">Inter<i>Text</i></div>
+        <div class="fsample in w400">Read the certificate. Then decide.</div>
+        <div class="wts"><span class="in w400">Regular 400</span><span class="in w500">Medium 500</span><span class="in w600">Semibold 600</span></div>
+      </div>
+    </div>
+
+    <div class="tester">
+      <label class="mono lbl">TYPE HERE</label>
+      <input id="typeIn" value="High tech. High class. High design." spellcheck="false">
+      <div id="typeOut" class="dm w700">High tech. High class. High design.</div>
+    </div>
+
+    <table class="scale">
+      <tr><th>ROLE</th><th>FACE</th><th>SIZE</th><th>LINE</th><th>WEIGHT</th><th>TRACKING</th></tr>
+      <tr><td>Display</td><td>DM Sans</td><td>72</td><td>0.94</td><td>700</td><td>&minus;0.038</td></tr>
+      <tr><td>Section title</td><td>DM Sans</td><td>34</td><td>1.05</td><td>500</td><td>&minus;0.020</td></tr>
+      <tr><td>Lead</td><td>Inter</td><td>18</td><td>1.55</td><td>400</td><td>&minus;0.005</td></tr>
+      <tr><td>Body</td><td>Inter</td><td>15</td><td>1.60</td><td>400</td><td>0</td></tr>
+      <tr><td>Caption</td><td>Inter</td><td>12</td><td>1.45</td><td>500</td><td>0</td></tr>
+      <tr><td>Label</td><td>Inter</td><td>10</td><td>1.20</td><td>500</td><td>0.180</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- motion -->
+<div class="page" id="motion">
+  <div class="col">
+    <h2>Motion</h2>
+    <p>The glitch DNA transition is the brand&rsquo;s own move, read off the reference frame by frame
+    at 24fps. These are the values the build uses &mdash; running, not described.</p>
+    <p><b>Hard cuts only.</b> Every state change happens in a single frame. There are no crossfades
+    anywhere in the system: a dissolve reads as a transition effect, a cut reads as a machine
+    switching modes.</p>
+    <p><b>Two clocks, never locked.</b> Structure holds 300&ndash;720ms; accretion toggles every
+    60&ndash;320ms on its own timer. The flicker between them is where the life is.</p>
+    <p><b>The flash is a cut, not a glow.</b> One frame of flat blue, about 42ms, roughly one state
+    change in six.</p>
+  </div>
+  <div class="body">
+    <div class="mgrid">
+      <figure class="mdemo"><div class="mstage" id="mCut"><span class="mbox"></span></div>
+        <figcaption><b>Hard cut</b><span class="mono">300&ndash;720ms hold &middot; 0ms transition</span></figcaption></figure>
+      <figure class="mdemo"><div class="mstage" id="mClocks"><span class="mrow"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="mrow alt"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+        <figcaption><b>Two clocks</b><span class="mono">structure 300&ndash;720 &middot; accretion 60&ndash;320</span></figcaption></figure>
+      <figure class="mdemo"><div class="mstage dark" id="mFlash"></div>
+        <figcaption><b>The flash</b><span class="mono">42ms &middot; 1 in 6 &middot; flat, no glow</span></figcaption></figure>
+      <figure class="mdemo"><div class="mstage" id="mOrbit"><span class="odot"></span></div>
+        <figcaption><b>The orbit</b><span class="mono">idle 0.0016 rad/f &middot; damping 0.90</span></figcaption></figure>
+    </div>
+    <p class="mono mfoot">THE ARRAY &mdash; FILL 9000ms &middot; HOLD 2800ms &middot; CLEAR 3200ms &middot; CUBIC IN-OUT &middot; SEAL PROPAGATES ADJACENT ONLY</p>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
 </div>
@@ -436,6 +578,52 @@ img{display:block;max-width:100%}
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>SYSTEM</span></div>
 </div>
 
+<!-- assets -->
+<div class="page tall" id="assets">
+  <div class="col">
+    <h2>Assets</h2>
+    <p>Everything the team needs, on the page that documents it. Click any row to download.</p>
+    <p><b>Start from the vector.</b> Every flat cut on this page was rendered from it, so if a size
+    or a colour is missing, render it &mdash; do not redraw it and do not upscale a PNG.</p>
+    <p>The system plates &mdash; field, bar, bleed, mark, woven shield &mdash; download from their own
+    pages, where the rule that governs them is written.</p>
+    <p class="mono note">Product imagery is not here. It lives in the catalogue and the stills
+    folders and is pulled from there, never redrawn.</p>
+  </div>
+  <div class="body">
+    <div class="agroup">
+      <h3>Start here — the vector master</h3><p>One path, every subpath, even-odd fill. Scales without limit, recolours to anything, prints and embroiders flat. Never re-trace the mark from a raster.</p>
+      <a class="ass" href="img/vector/sko-mark-1c.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark-1c.svg" alt=""></span><span class="meta"><b>One colour — takes currentColor</b><i>sko-mark-1c.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Flat shields</h3><p>The shield alone, one colour, no gradient and no bevel. White for disclaimers and any coloured ground; blue and deep for light grounds. Use these below ~48px and over any photograph.</p>
+      <a class="ass dk" href="img/shield/shield-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-2000.png" alt=""></span><span class="meta"><b>White — disclaimers, colour, photography</b><i>shield-white-2000.png &middot; 1765&times;2000 &middot; 238 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-2000.png" alt=""></span><span class="meta"><b>Blue #173384 — light grounds</b><i>shield-blue-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-deep-2000.png" alt=""></span><span class="meta"><b>Deep #092266 — light grounds, more weight</b><i>shield-deep-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/shield/shield-white-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>White — 512</b><i>shield-white-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Blue — 512</b><i>shield-blue-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-128.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-128.png" alt=""></span><span class="meta"><b>Blue — 128, favicons and chips</b><i>shield-blue-128.png &middot; 113&times;128 &middot; 8 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Lockups</h3><p>Shield and wordmark together. White is the only cut for coloured grounds. Full colour is white-ground-only, at size only.</p>
+      <a class="ass" href="img/logo/clean/lockup-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-2000.png" alt=""></span><span class="meta"><b>Full colour — white ground, at size</b><i>lockup-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/logo/clean/lockup-white-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-white-2000.png" alt=""></span><span class="meta"><b>White — colour, ink, photography</b><i>lockup-white-2000.png &middot; 821&times;688 &middot; 452 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/mark-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-navy-2000.png" alt=""></span><span class="meta"><b>Flat navy — from the vector</b><i>mark-navy-2000.png &middot; 2000&times;1654 &middot; 163 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/mark-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-white-2000.png" alt=""></span><span class="meta"><b>Flat white — from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; 125 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/mark-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-deep-2000.png" alt=""></span><span class="meta"><b>Flat deep — from the vector</b><i>mark-deep-2000.png &middot; 2000&times;1654 &middot; 161 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Texture cuts</h3><p>The same form rendered in material, chosen per campaign — never invented per asset.</p>
+      <a class="ass dk" href="img/logo/clean/lockup-silver-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-silver-2000.png" alt=""></span><span class="meta"><b>Silver — machined metal, any ground</b><i>lockup-silver-2000.png &middot; 820&times;679 &middot; 586 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/logo/clean/lockup-chrome-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-chrome-2000.png" alt=""></span><span class="meta"><b>Chrome — dark grounds</b><i>lockup-chrome-2000.png &middot; 832&times;691 &middot; 341 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/logo/clean/lockup-pool-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-pool-2000.png" alt=""></span><span class="meta"><b>Pool — water caustics</b><i>lockup-pool-2000.png &middot; 826&times;683 &middot; 423 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/logo/clean/stamp-vintage-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/stamp-vintage-2000.png" alt=""></span><span class="meta"><b>Vintage LA stamp — provenance work</b><i>stamp-vintage-2000.png &middot; 806&times;811 &middot; 593 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
+</div>
+
 <!-- 07 photography -->
 <div class="page">
   <div class="col">
@@ -487,5 +675,69 @@ img{display:block;max-width:100%}
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>LANGUAGE</span></div>
 </div>
 
+
+<script>
+/* Typography — the tester types in the display face, live. */
+(function () {
+  const i = document.getElementById('typeIn'), o = document.getElementById('typeOut');
+  if (!i || !o) return;
+  i.addEventListener('input', () => { o.textContent = i.value || '\u00a0'; });
+})();
+
+/* Motion — the documented values, running. Everything here is a hard cut:
+   no CSS transitions, because a dissolve would contradict the rule the
+   page is stating. */
+(function () {
+  const R = (a, b) => a + Math.random() * (b - a);
+  const box = document.querySelector('#mCut .mbox');
+  if (box) {
+    const COL = ['#173384', '#092266', '#244399', '#9DBFD9'];
+    let n = 0;
+    (function step() {
+      box.style.background = COL[n++ % COL.length];      /* single frame */
+      setTimeout(step, R(300, 720));                     /* structure hold */
+    })();
+  }
+
+  const rows = document.querySelectorAll('#mClocks .mrow');
+  if (rows.length === 2) {
+    const run = (row, lo, hi) => (function step() {
+      row.querySelectorAll('i').forEach(el => {
+        el.style.opacity = Math.random() < 0.5 ? 0.18 : 1;
+      });
+      setTimeout(step, R(lo, hi));
+    })();
+    run(rows[0], 300, 720);        /* structure */
+    run(rows[1], 60, 320);         /* accretion, its own clock */
+  }
+
+  const flash = document.getElementById('mFlash');
+  if (flash) {
+    (function step() {
+      const hit = Math.random() < 1 / 6;                  /* about one in six */
+      if (hit) {
+        flash.style.background = '#244399';
+        setTimeout(() => { flash.style.background = ''; }, 42);
+      }
+      setTimeout(step, R(300, 720));
+    })();
+  }
+
+  const dot = document.querySelector('#mOrbit .odot');
+  if (dot) {
+    let a = 0, v = 0.0016 * 60;                           /* idle rad/frame */
+    let kick = 0;
+    (function frame() {
+      requestAnimationFrame(frame);
+      if (dot.offsetParent === null) return;
+      if (--kick <= 0) { v += 0.05; kick = 180; }         /* a drag, then it settles */
+      v += (0.0016 * 60 - v) * 0.02;
+      a += v * 0.06;
+      const st = dot.parentElement, r = st.clientWidth * 0.31;
+      dot.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r * 0.62}px)`;
+    })();
+  }
+})();
+</script>
 </body>
 </html>
