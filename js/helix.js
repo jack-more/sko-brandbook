@@ -217,8 +217,20 @@
   const SNAMES = ['INSPECTION', 'LADDER', 'CHAIN', 'READOUT', 'DISPERSE'];
   let sIdx = 0, sUntil = 0, bloomOn = true, bUntil = 0, flashUntil = 0;
 
+  /* only draw while the canvas is on screen — three WebGL modules all
+     rendering at once took the book to 1fps */
+  /* Default to drawing. The observer only ever pauses — if it never
+     fires, or is not supported, the module still runs rather than
+     silently rendering nothing. Keep a reference so it is not collected. */
+  let onScreen = true;
+  const seen = new IntersectionObserver(
+    es => { onScreen = es[0].isIntersecting; },
+    { rootMargin: '150px' });
+  seen.observe(cv);
+
   function frame(ts) {
     requestAnimationFrame(frame);
+    if (!onScreen) return;
     if (!W && !layout()) return;
     if (t0 === null) t0 = ts;
     const el = ts - t0;

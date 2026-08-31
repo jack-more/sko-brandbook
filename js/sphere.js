@@ -308,9 +308,22 @@ function start(host) {
     return true;
   }
 
+  /* Three WebGL modules share this page. Rendering all of them every
+     frame regardless of what is on screen took the book to 1fps, so each
+     one only draws while its own canvas is in view. */
+  /* Default to drawing. The observer only ever pauses — if it never
+     fires, or is not supported, the module still runs rather than
+     silently rendering nothing. Keep a reference so it is not collected. */
+  let onScreen = true;
+  const seen = new IntersectionObserver(
+    es => { onScreen = es[0].isIntersecting; },
+    { rootMargin: '150px' });
+  seen.observe(host);
+
   const v3 = new THREE.Vector3();
   function frame() {
     requestAnimationFrame(frame);
+    if (!onScreen) return;
     if (!W && !resize()) return;
 
     ray.setFromCamera(ptr, camera);

@@ -28,10 +28,31 @@ function start(host) {
     { id: 'flatw', label: 'Flat white', note: 'Flat · #FFFFFF', ground: 0x244399 },
     { id: 'flatb', label: 'Flat blue', note: 'Flat · #173384', ground: 0xF4F5F7 },
     { id: 'flatl', label: 'Flat light blue', note: 'Flat · #9DBFD9', ground: 0x07090F },
+    { id: 'ombre', label: 'Logo ombré', note: 'The mark\'s own blues', ground: 0xF4F5F7 },
   ];
 
   const H = 2.95, RAD = 0.46, TURNS = 2.7, PHASE = 0.42;
   const CELL_W = 1.80, CELL_H = 3.85;
+
+  /* The mark's own ombré. Taking it off the shield fill alone gives a
+     ramp that is all deep navy — on a thin strand that reads black, not
+     as blue. The mark actually runs the full range: a light chrome-blue
+     helix (#B1D8EB, sampled) sitting inside a shield that ends deep at
+     the point (#061842, sampled). Between them it passes through the
+     named palette, so the cut is the brand's blues top to bottom. */
+  const MARK_RAMP = [
+    [0.00, 0xC6E4F2], [0.16, 0xB1D8EB], [0.32, 0x9DBFD9],
+    [0.52, 0x244399], [0.72, 0x173384], [0.88, 0x092266], [1.00, 0x061842],
+  ].map(([t, hex]) => [t, new THREE.Color(hex).convertSRGBToLinear()]);
+
+  function rampAt(t) {
+    t = Math.max(0, Math.min(1, t));
+    for (let i = 1; i < MARK_RAMP.length; i++) {
+      const [t0, c0] = MARK_RAMP[i - 1], [t1, c1] = MARK_RAMP[i];
+      if (t <= t1) return c0.clone().lerp(c1, (t - t0) / (t1 - t0));
+    }
+    return MARK_RAMP[MARK_RAMP.length - 1][1].clone();
+  }
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -96,11 +117,26 @@ function start(host) {
     flatw:  () => new THREE.MeshBasicMaterial({ color: 0xffffff }),
     flatb:  () => new THREE.MeshBasicMaterial({ color: 0x173384 }),
     flatl:  () => new THREE.MeshBasicMaterial({ color: 0x9DBFD9 }),
+    ombre:  () => new THREE.MeshPhysicalMaterial({
+              vertexColors: true, metalness: 0.2, roughness: 0.3,
+              clearcoat: 0.75, clearcoatRoughness: 0.14 }),
   };
 
   /* ---- one helix, built once per cut so materials stay separate ---- */
-  function helix(mat, tubeR, rungR) {
+  function helix(mat, tubeR, rungR, ombre) {
     const g = new THREE.Group();
+    const paint = (geo) => {
+      if (!ombre) return geo;
+      const pos = geo.attributes.position;
+      const col = new Float32Array(pos.count * 3);
+      for (let i = 0; i < pos.count; i++) {
+        /* the ramp is written top of mark first, so invert */
+        const c = rampAt(1 - (pos.getY(i) + H / 2) / H);
+        col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+      }
+      geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      return geo;
+    };
     const curve = (phase) => {
       const pts = [];
       for (let i = 0; i <= 200; i++) {
@@ -110,17 +146,21 @@ function start(host) {
       return new THREE.CatmullRomCurve3(pts);
     };
     [0, PHASE * Math.PI * 2].forEach(p =>
-      g.add(new THREE.Mesh(new THREE.TubeGeometry(curve(p), 200, tubeR, 14, false), mat)));
+      g.add(new THREE.Mesh(paint(new THREE.TubeGeometry(curve(p), 200, tubeR, 14, false)), mat)));
     for (let i = 1; i < 22; i++) {
       const t = i / 22, a = t * TURNS * Math.PI * 2, b = a + PHASE * Math.PI * 2;
       const p1 = new THREE.Vector3(Math.cos(a) * RAD, (t - 0.5) * H, Math.sin(a) * RAD);
       const p2 = new THREE.Vector3(Math.cos(b) * RAD, (t - 0.5) * H, Math.sin(b) * RAD);
       const len = p1.distanceTo(p2);
       if (len < 0.12) continue;                       /* foreshorten to nothing at the crossings */
-      const r = new THREE.Mesh(new THREE.CylinderGeometry(rungR, rungR, len, 10), mat);
-      r.position.copy(p1).add(p2).multiplyScalar(0.5);
-      r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), p2.clone().sub(p1).normalize());
-      g.add(r);
+      /* bake the rung's transform into its geometry so the ombré ramp can
+         be read straight off y, the same way it is on the strands */
+      const rg = new THREE.CylinderGeometry(rungR, rungR, len, 10);
+      const q = new THREE.Quaternion().setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0), p2.clone().sub(p1).normalize());
+      const mid = p1.clone().add(p2).multiplyScalar(0.5);
+      rg.applyMatrix4(new THREE.Matrix4().compose(mid, q, new THREE.Vector3(1, 1, 1)));
+      g.add(new THREE.Mesh(paint(rg), mat));
     }
     return g;
   }
@@ -134,7 +174,7 @@ function start(host) {
       new THREE.PlaneGeometry(CELL_W - 0.055, CELL_H),
       new THREE.MeshBasicMaterial({ color: cut.ground }));
     plate.position.z = PLATE_Z; plate.userData.cx = x; cell.add(plate); plates.push(plate);
-    const h = helix(MATS[cut.id](), 0.055, 0.026);
+    const h = helix(MATS[cut.id](), 0.055, 0.026, cut.id === 'ombre');
     cell.add(h); spins.push(h);
   });
 
@@ -164,8 +204,18 @@ function start(host) {
     return true;
   }
 
+  /* Default to drawing. The observer only ever pauses — if it never
+     fires, or is not supported, the module still runs rather than
+     silently rendering nothing. Keep a reference so it is not collected. */
+  let onScreen = true;
+  const seen = new IntersectionObserver(
+    es => { onScreen = es[0].isIntersecting; },
+    { rootMargin: '150px' });
+  seen.observe(host);
+
   (function frame() {
     requestAnimationFrame(frame);
+    if (!onScreen) return;
     if (!W && !resize()) return;
     const t = performance.now() * 0.001;
     spins.forEach((h, i) => {
