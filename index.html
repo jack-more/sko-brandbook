@@ -71,6 +71,18 @@ img{display:block;max-width:100%}
 .sw td:first-child{color:var(--ink);width:34px}
 .sw b{display:block;font-size:11.5px;font-family:'DM Sans';letter-spacing:-.01em;margin-bottom:4px}
 
+/* the flat shield ladder */
+.ladder{display:flex;align-items:flex-end;gap:11px;margin-top:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--mid)}
+.ladder span{margin-right:4px}
+.ladder img{height:auto}
+.ladder img[alt="128px"]{width:52px}
+.ladder img[alt="64px"]{width:26px}
+.ladder img[alt="32px"]{width:13px}
+.ladder i{font-style:normal;margin-right:10px}
+.body{display:flex;flex-direction:column}
+.body .tiles{flex:1;min-height:0}
+
 /* helix cut captions */
 .cutcaps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:9px}
 .cutcaps span{display:flex;flex-direction:column;gap:2px;text-align:center;
@@ -160,6 +172,36 @@ img{display:block;max-width:100%}
       <div class="tile blue"><img class="mark" src="img/mark-white.png" alt="1x1 mark, white on blue"><span class="cap">1&times;1 &middot; WHITE</span></div>
       <div class="tile dark"><img class="mark" src="img/mark-silver.png" alt="1x1 mark, silver on black, for apparel"><span class="cap">1&times;1 &middot; SILVER</span></div>
       <div class="tile"><img class="mark" src="img/mark-full.png" alt="1x1 mark, full colour"><span class="cap">1&times;1 &middot; FULL COLOUR</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- 02b the flat shield -->
+<div class="page" id="flat-shield">
+  <div class="col">
+    <h2>The Flat Shield</h2>
+    <p>The shield on its own, one colour, no gradient and no bevel. Cut from the vector, so the helix
+    knockout is the mark&rsquo;s own &mdash; not a redraw.</p>
+    <p><b>Disclaimers take the flat white shield.</b> Research Use Only, the claim strip, the legal
+    line at the foot of an ad. Never the full&#8209;colour mark, never silver.</p>
+    <p><b>Below roughly 48&nbsp;px, and over any photograph, the flat cut is the only cut.</b> The
+    full&#8209;colour mark is a render; its gradient and bevel turn to mud at size and disappear into
+    an image.</p>
+    <p>Blue on light grounds, white on everything else. Deep is there for a light ground that needs
+    more weight than SKO Blue gives it.</p>
+  </div>
+  <div class="body">
+    <div class="tiles t3">
+      <div class="tile blue"><img class="mark" src="img/shield/shield-white-512.png" alt="Flat white shield on blue"><span class="cap">WHITE &middot; DISCLAIMERS &amp; COLOUR</span></div>
+      <div class="tile"><img class="mark" src="img/shield/shield-blue-512.png" alt="Flat blue shield on paper"><span class="cap">BLUE &middot; #173384</span></div>
+      <div class="tile"><img class="mark" src="img/shield/shield-deep-512.png" alt="Flat deep shield on paper"><span class="cap">DEEP &middot; #092266</span></div>
+    </div>
+    <div class="ladder">
+      <span>Holds all the way down &mdash;</span>
+      <img src="img/shield/shield-blue-128.png" alt="128px"><i>128</i>
+      <img src="img/shield/shield-blue-64.png" alt="64px"><i>64</i>
+      <img src="img/shield/shield-blue-32.png" alt="32px"><i>32</i>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
