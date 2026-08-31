@@ -37,7 +37,7 @@ function start(host) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
-  camera.position.set(0, 0, 17.4);
+  camera.position.set(0, 0, 21.6);
 
   /* ---- the room the glass and metal reflect ---- */
   (function env() {
@@ -73,33 +73,64 @@ function start(host) {
   scene.add(key);
   scene.add(new THREE.PointLight(0x9DBFD9, 44, 30, 2));
 
-  /* ---- the core ---- */
-  const CORE_R = 1.14;
-  const core = new THREE.Mesh(
-    new THREE.SphereGeometry(CORE_R, 96, 96),
-    new THREE.MeshPhysicalMaterial({
-      color: 0xffffff, metalness: 1.0, roughness: 0.035,
+  /* ---- the core: a liquid-metal helix ------------------------
+     Not an orb. Two strands offset 0.42 of a turn, which is what gives
+     B-DNA its wide major groove and narrow minor one — the same
+     geometry the helix module uses. Chrome with real thin-film
+     iridescence, and a slow lateral wave so the metal moves like
+     metal rather than spinning like a prop.                        */
+  const CORE_H = 2.9, CORE_R = 0.54, CORE_TURNS = 2.6, PHASE = 0.42;
+  const coreShaders = [];
+
+  function liquidMetal(tint) {
+    const m = new THREE.MeshPhysicalMaterial({
+      color: tint, metalness: 1.0, roughness: 0.045,
       iridescence: 1.0, iridescenceIOR: 1.6,
       iridescenceThicknessRange: [340, 760],
-    }));
+    });
+    m.onBeforeCompile = (sh) => {
+      sh.uniforms.uT = { value: 0 };
+      sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace(
+        '#include <begin_vertex>',
+        `#include <begin_vertex>
+         float wy = transformed.y;
+         transformed.x += sin(wy * 1.75 + uT * 1.25) * 0.085;
+         transformed.z += cos(wy * 1.55 + uT * 0.95) * 0.085;`);
+      coreShaders.push(sh);
+    };
+    return m;
+  }
+
+  const core = new THREE.Group();
   scene.add(core);
 
-  /* the glow: a fresnel rim on a slightly larger back-facing shell */
-  const glow = new THREE.Mesh(
-    new THREE.SphereGeometry(CORE_R * 1.16, 64, 64),
-    new THREE.ShaderMaterial({
-      transparent: true, blending: THREE.AdditiveBlending,
-      side: THREE.BackSide, depthWrite: false,
-      uniforms: { c: { value: new THREE.Color(0x9fd0f2) } },
-      vertexShader: `varying vec3 vN; varying vec3 vP;
-        void main(){ vN = normalize(normalMatrix * normal);
-          vec4 mv = modelViewMatrix * vec4(position,1.0); vP = mv.xyz;
-          gl_Position = projectionMatrix * mv; }`,
-      fragmentShader: `uniform vec3 c; varying vec3 vN; varying vec3 vP;
-        void main(){ float f = pow(1.0 - abs(dot(normalize(vN), normalize(-vP))), 3.6);
-          gl_FragColor = vec4(c, f * 0.32); }`,
-    }));
-  scene.add(glow);
+  function strand(phase) {
+    const pts = [];
+    for (let i = 0; i <= 220; i++) {
+      const t = i / 220, a = t * CORE_TURNS * Math.PI * 2 + phase;
+      pts.push(new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R));
+    }
+    return new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 220, 0.062, 16, false),
+      liquidMetal(0xffffff));
+  }
+  core.add(strand(0), strand(PHASE * Math.PI * 2));
+
+  /* the rungs, foreshortening to nothing where the strands cross */
+  const rungMat = liquidMetal(0xdfe6f2);
+  for (let i = 1; i < 22; i++) {
+    const t = i / 22, a = t * CORE_TURNS * Math.PI * 2;
+    const b = a + PHASE * Math.PI * 2;
+    const p1 = new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R);
+    const p2 = new THREE.Vector3(Math.cos(b) * CORE_R, (t - 0.5) * CORE_H, Math.sin(b) * CORE_R);
+    const len = p1.distanceTo(p2);
+    if (len < 0.12) continue;
+    const r = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, len, 10), rungMat);
+    r.position.copy(p1).add(p2).multiplyScalar(0.5);
+    r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0),
+      p2.clone().sub(p1).normalize());
+    core.add(r);
+  }
 
   /* ---------------- the vial ----------------------------------
      Three revolved sections cut out of one measured profile, plus
@@ -130,18 +161,30 @@ function start(host) {
     return best[1];
   }
 
-  const glassMat = () => new THREE.MeshPhysicalMaterial({
-    color: 0xdfeaff, metalness: 0, roughness: 0.045,
-    clearcoat: 1, clearcoatRoughness: 0.02,
-    transparent: true, opacity: 0.26, side: THREE.DoubleSide, depthWrite: false,
-  });
-  const collarMat = () => new THREE.MeshPhysicalMaterial({
-    color: 0xd6d8de, metalness: 1, roughness: 0.26, transparent: true,
-  });
-  const capMat = () => new THREE.MeshPhysicalMaterial({
-    color: 0x172e7a, metalness: 0.3, roughness: 0.3,
-    clearcoat: 0.85, clearcoatRoughness: 0.18, transparent: true,
-  });
+  /* A vial is glass, aluminium and a blue flip-top. A nasal spray is
+     none of those: an opaque white bottle, a white pump, and a clear
+     over-cap. Same three sections, different materials. */
+  const MAT = {
+    vial: {
+      body:   () => new THREE.MeshPhysicalMaterial({ color: 0xdfeaff, metalness: 0, roughness: 0.045,
+                clearcoat: 1, clearcoatRoughness: 0.02,
+                transparent: true, opacity: 0.26, side: THREE.DoubleSide, depthWrite: false }),
+      middle: () => new THREE.MeshPhysicalMaterial({ color: 0xd6d8de, metalness: 1, roughness: 0.26, transparent: true }),
+      top:    () => new THREE.MeshPhysicalMaterial({ color: 0x172e7a, metalness: 0.3, roughness: 0.3,
+                clearcoat: 0.85, clearcoatRoughness: 0.18, transparent: true }),
+      bodyOpacity: 0.26,
+    },
+    spray: {
+      body:   () => new THREE.MeshPhysicalMaterial({ color: 0xf3f5f9, metalness: 0, roughness: 0.42,
+                clearcoat: 0.35, clearcoatRoughness: 0.25, transparent: true }),
+      middle: () => new THREE.MeshPhysicalMaterial({ color: 0xeef1f6, metalness: 0, roughness: 0.5,
+                clearcoat: 0.3, transparent: true }),
+      top:    () => new THREE.MeshPhysicalMaterial({ color: 0xe6edfa, metalness: 0, roughness: 0.06,
+                clearcoat: 1, clearcoatRoughness: 0.03,
+                transparent: true, opacity: 0.34, side: THREE.DoubleSide, depthWrite: false }),
+      bodyOpacity: 1,
+    },
+  };
 
   function buildVial(g, tex) {
     const grp = new THREE.Group();
@@ -150,9 +193,10 @@ function start(host) {
       if (!geo) return null;
       const m = new THREE.Mesh(geo, mat); grp.add(m); parts.push(m); return m;
     };
-    const glass  = add(section(g.prof, 0, g.colBot, true, false), glassMat());
-    const collar = add(section(g.prof, g.colBot, g.capBot, false, false), collarMat());
-    const cap    = add(section(g.prof, g.capBot, g.h, false, true), capMat());
+    const M = MAT[g.kind] || MAT.vial;
+    const body   = add(section(g.prof, 0, g.colBot, true, false), M.body());
+    const middle = add(section(g.prof, g.colBot, g.capBot, false, false), M.middle());
+    const top    = add(section(g.prof, g.capBot, g.h, false, true), M.top());
 
     /* the label: a cylinder at the glass radius, its own artwork wrapped
        on. u = 0.5 is the front of the label, which is why it is turned a
@@ -169,17 +213,20 @@ function start(host) {
     label.rotation.y = Math.PI;         /* u=0.5 to camera-facing */
     grp.add(label); parts.push(label);
 
-    /* one height for every unit; diameter left alone */
-    const s = UNIT_H / g.h;
+    /* Scaling every unit to one height makes a spray a sliver and its
+       label unreadable; scaling to one diameter makes it tower over the
+       vials. Split the difference — a taller bottle gets some of its
+       height back, and keeps enough width to read. */
+    const s = (UNIT_H / g.h) * Math.pow(g.h / 2.28, 0.5);
     grp.scale.setScalar(s);
     /* hang it on its own centre so it orbits about the middle of the vial */
     grp.position.y = -g.h * s / 2;
     const inner = new THREE.Group();
     inner.add(grp);
-    /* glass draws last so it reads over the label it encloses */
-    if (glass) glass.renderOrder = 1;
-    return { grp: inner, spin: grp, parts,
-             mats: [glass, collar, cap, label].filter(Boolean).map(m => m.material) };
+    /* a transparent body draws last so it reads over the label it encloses */
+    if (body && M.bodyOpacity < 1) body.renderOrder = 1;
+    return { grp: inner, spin: grp, parts, bodyOpacity: M.bodyOpacity,
+             mats: [body, middle, top, label].filter(Boolean).map(m => m.material) };
   }
 
   /* ---- the units, on a Fibonacci sphere so spacing stays even ---- */
@@ -288,10 +335,10 @@ function start(host) {
       u.hov += (want - u.hov) * 0.18;
       const depth = (v3.z + R) / (2 * R);          /* 0 at the back, 1 at the front */
       const a = Math.min(1, (0.10 + 0.90 * Math.pow(depth, 2.1)) * (1 + u.hov * 0.7));
-      u.mats.forEach((m, i) => { m.opacity = i === 0 ? a * 0.26 : a; });
+      u.mats.forEach((m, i) => { m.opacity = i === 0 ? a * u.bodyOpacity : a; });
       u.grp.scale.setScalar(1 + u.hov * 0.34);
       const ro = Math.round(depth * 100) * 4;
-      u.parts.forEach(p => { p.renderOrder = ro + (p === u.parts[0] ? 1 : 0); });
+      u.parts.forEach(p => { p.renderOrder = ro + (p === u.parts[0] && u.bodyOpacity < 1 ? 1 : 0); });
     });
 
     if (hot) {
@@ -305,7 +352,13 @@ function start(host) {
       tag.style.opacity = '1';
     } else tag.style.opacity = '0';
 
-    glow.material.uniforms.c.value.setHSL(0.56, 0.62, 0.62);
+    /* the core spins, wavers, and drifts off-axis a touch */
+    const t = performance.now() * 0.001;
+    core.rotation.y = t * 0.42;
+    core.rotation.z = Math.sin(t * 0.63) * 0.075;
+    core.rotation.x = Math.sin(t * 0.41) * 0.055;
+    for (const sh of coreShaders) sh.uniforms.uT.value = t;
+
     renderer.render(scene, camera);
   }
   addEventListener('resize', () => { W = 0; });
