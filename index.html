@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400&display=swap">
 <style>
 :root{
-  --blue:#26379B; --deep:#1B2A7A; --halo:#9DBFD9;
+  --blue:#173384; --deep:#092266; --field:#244399; --halo:#9DBFD9;
   --ink:#111318; --mid:#6B7280; --line:#E4E7EC; --paper:#fff; --wash:#F4F5F7;
   --bad:#C0392B;
   --foil:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#7578B0,#C3AFD7);
@@ -56,18 +56,32 @@ img{display:block;max-width:100%}
 .cover .art img{width:100%;height:100%;object-fit:cover;object-position:center 58%}
 .cover h1{position:absolute;left:46px;top:40px;font-size:clamp(34px,4.4vw,62px);font-weight:700;
   letter-spacing:-.04em;line-height:.94;color:#fff;text-shadow:0 2px 30px rgba(10,24,70,.45)}
-.cover .stamp{position:absolute;left:46px;bottom:34px;display:flex;gap:34px;
+.cover .stamp{position:absolute;left:46px;bottom:34px;display:flex;gap:34px;align-items:center;
   font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:rgba(255,255,255,.9)}
+.cover .stamp a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px}
+.cover .stamp a:hover{border-color:#fff}
 .cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil)}
 
 /* colour spec table */
-.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-content:start}
-.sw .chip{height:120px;border-radius:5px;border:1px solid var(--line)}
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-content:start}
+.sw .chip{height:104px;border-radius:5px;border:1px solid var(--line)}
 .sw table{width:100%;margin-top:9px;border-collapse:collapse}
 .sw td{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--mid);padding:1px 0;
   letter-spacing:.04em}
 .sw td:first-child{color:var(--ink);width:34px}
 .sw b{display:block;font-size:11.5px;font-family:'DM Sans';letter-spacing:-.01em;margin-bottom:4px}
+
+/* the field specimen */
+.field-rule{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.fr-copy{font-size:11.5px;line-height:1.6;color:var(--mid);max-width:88ch;margin-bottom:14px}
+.fr-copy b{color:var(--ink)}
+.fr-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fr-pair figure{margin:0}
+.fr-tile{aspect-ratio:16/9;border-radius:5px;display:grid;place-items:center;overflow:hidden}
+.fr-tile img{width:46%;height:auto}
+.fr-pair figcaption{margin-top:6px;font-size:9.5px;line-height:1.4;color:var(--mid);display:flex;gap:6px}
+.fr-pair .ok{color:var(--blue);font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em}
+.fr-pair .no{color:var(--bad);font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em}
 
 /* don'ts */
 .dont .tile{border:1px solid rgba(192,57,43,.55);background:#fff}
@@ -91,7 +105,7 @@ img{display:block;max-width:100%}
   <div class="art">
     <img src="img/rail.jpg" alt="Five SKO vials at identical scale on a machined rail against open sky">
     <h1>SKO Compounds<br>Brand Book</h1>
-    <div class="stamp"><span>V1.0</span><span>AUG 2026</span><span>RESEARCH USE ONLY</span></div>
+    <div class="stamp"><span>V1.0</span><span>AUG 2026</span><span>RESEARCH USE ONLY</span><a href="img/system/">BRAND SYSTEM &rarr;</a><a href="https://vessa.design/brand/sko-compounds">GUIDELINE &rarr;</a></div>
     <div class="seal"></div>
   </div>
 </div>
@@ -127,9 +141,14 @@ img{display:block;max-width:100%}
 <div class="page">
   <div class="col">
     <h2>Colour</h2>
-    <p>SKO Blue is the primary. Halo is the light blue that already runs as a full-frame wash in the ad
-    system. Foil is a material, not a colour. On the label it is two bands, top and bottom. In a composition it appears only where it physically exists — on product. It is never added as a graphic.</p>
-    <p><b>Measured 29 Aug 2026</b> off the label artwork: SKO Blue is <b>#173384</b> lit, <b>#092266</b> in shade. The earlier #26379B was read off photographs and is wrong. The seal is <b>two bands</b>, top and bottom of the label — not a full perimeter.</p>
+    <p>One blue at three values. SKO Blue is the primary, measured off the label. <b>Field</b> is
+    the same blue held brighter &mdash; what blue becomes when blue is the whole surface. Foil is a
+    material, not a colour: two bands on the label, and it appears only where it physically exists.</p>
+    <p><b>The blue is already Yves Klein Blue.</b> IKB is #002FA7, hue 223. SKO Blue is #173384,
+    hue 224 &mdash; the same hue, ours darker. Nothing to chase. But Klein&rsquo;s blue was never a
+    backdrop, it was the work, and that is the rule we take.</p>
+    <p><b>Measured 29 Aug 2026</b> off the label artwork. #26379B, #1B2A7A and the store&rsquo;s
+    #1447D6 were read off photographs, not the pack, and are retired.</p>
   </div>
   <div class="body">
     <div class="swatches">
@@ -137,12 +156,26 @@ img{display:block;max-width:100%}
         <table><tr><td>HEX</td><td>#173384</td></tr><tr><td>RGB</td><td>23 51 132</td></tr><tr><td>USE</td><td>Primary</td></tr></table></div>
       <div class="sw"><div class="chip" style="background:#092266"></div><b>Deep</b>
         <table><tr><td>HEX</td><td>#092266</td></tr><tr><td>RGB</td><td>9 34 102</td></tr><tr><td>USE</td><td>Ground</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:#244399"></div><b>Field</b>
+        <table><tr><td>HEX</td><td>#244399</td></tr><tr><td>RGB</td><td>36 67 153</td></tr><tr><td>USE</td><td>Flat field</td></tr></table></div>
       <div class="sw"><div class="chip" style="background:#9DBFD9"></div><b>Halo</b>
         <table><tr><td>HEX</td><td>#9DBFD9</td></tr><tr><td>RGB</td><td>157 191 217</td></tr><tr><td>USE</td><td>Secondary</td></tr></table></div>
       <div class="sw"><div class="chip" style="background:#F4F5F7"></div><b>Paper</b>
         <table><tr><td>HEX</td><td>#F4F5F7</td></tr><tr><td>RGB</td><td>244 245 247</td></tr><tr><td>USE</td><td>Surface</td></tr></table></div>
       <div class="sw"><div class="chip" style="background:linear-gradient(100deg,#6E9EB6,#BAC7F2,#5BAEE5,#C3AFD7)"></div><b>Foil</b>
         <table><tr><td>TYPE</td><td>Material</td></tr><tr><td>USE</td><td>Seal / edge</td></tr><tr><td>RULE</td><td>Only where real</td></tr></table></div>
+    </div>
+    <div class="field-rule">
+      <div class="fr-copy"><b>The field.</b> When the blue runs large it runs flat &mdash; edge to edge,
+      nothing behind it, no gradient inside it &mdash; and one machined object sits in it. A blue that
+      fades out behind a product is a backdrop, and it reads cheap. A blue that <i>is</i> the surface
+      reads expensive. Blue against polished steel is the whole composition.</div>
+      <div class="fr-pair">
+        <figure><div class="fr-tile" style="background:#244399"><img src="img/logo/clean/lockup-white-2000.png" alt="White lockup on a flat blue field"></div>
+          <figcaption><span class="ok">DO</span> Flat field #244399. One object in it.</figcaption></figure>
+        <figure><div class="fr-tile" style="background:radial-gradient(120% 90% at 50% 38%,#3E63C8 0%,#244399 45%,#0B1E58 100%)"><img src="img/logo/clean/lockup-white-2000.png" alt="White lockup on a gradient blue backdrop"></div>
+          <figcaption><span class="no">DON&rsquo;T</span> Gradient backdrop, lit vignette, falloff.</figcaption></figure>
+      </div>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
