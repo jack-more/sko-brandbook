@@ -1,10 +1,18 @@
 /* ---------------------------------------------------------------
    THE ARRAY — SKO Compounds
 
-   The catalogue in orbit. Every unit is the real product render,
-   billboarded so the label always faces the reader. At the centre, a
-   machined sphere carrying real thin-film iridescence, with a light
-   blue fresnel bleeding off its edge.
+   The catalogue in orbit. Every unit is a real vial in three
+   dimensions, not a picture of one: the profile is the silhouette
+   measured off that SKU's catalogue render and revolved, so the
+   body, shoulder, neck, crimp collar and flip-top are the shape the
+   product actually is. The label is that SKU's own artwork, un-
+   projected off the front-on render — the render is orthographic, so
+   x = xc + R sin(theta) inverts to give a true cylindrical wrap.
+
+   Units are held at one height, the way the rail shot holds them.
+   Diameter is left alone, so a tall vial reads correctly as a thin
+   one. At the centre, a machined core carrying real thin-film
+   iridescence — the same physics as the foil on the label.
 
    Drag to spin. It carries momentum and settles. Hover holds it and
    raises that unit; click opens that product.
@@ -15,12 +23,10 @@ const HOST = document.getElementById('arraySphere');
 if (HOST) start(HOST);
 
 function start(host) {
-  /* Read off skocompounds.com/products — real names, sizes, prices.
-     The storefront has no per-product route (every card is a button,
-     there is not one product anchor on the site), so a click can only
+  /* The storefront has no per-product route — every card is a button,
+     there is not one product anchor on the site — so a click can only
      open the catalogue. Point HREF at a product page the day one exists. */
   const HREF = () => 'https://skocompounds.com/products';
-  let CAT = [];
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -33,7 +39,7 @@ function start(host) {
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
   camera.position.set(0, 0, 23.5);
 
-  /* ---- the room the metal reflects ---- */
+  /* ---- the room the glass and metal reflect ---- */
   (function env() {
     const c = document.createElement('canvas'); c.width = 1024; c.height = 512;
     const x = c.getContext('2d');
@@ -95,11 +101,93 @@ function start(host) {
     }));
   scene.add(glow);
 
+  /* ---------------- the vial ----------------------------------
+     Three revolved sections cut out of one measured profile, plus
+     the label as a cylinder standing just proud of the glass.
+     Colours are the ones sampled off the pack: flip-top #172E7A,
+     collar aluminium, glass all but colourless.                  */
+
+  const RADIAL = 40;
+  const UNIT_H = 1.95;          /* every unit at one height, like the rail */
+
+  /* pull the profile between two heights, resampled and closed */
+  function section(prof, y0, y1, capBase, capTop) {
+    const pts = [];
+    if (capBase) pts.push(new THREE.Vector2(0.001, y0));
+    for (const [y, r] of prof) {
+      if (y < y0 - 1e-6 || y > y1 + 1e-6) continue;
+      pts.push(new THREE.Vector2(Math.max(r, 0.004), y));
+    }
+    if (pts.length < 2) return null;
+    if (capTop) pts.push(new THREE.Vector2(0.001, y1));
+    return new THREE.LatheGeometry(pts, RADIAL);
+  }
+
+  /* radius of the profile at a given height */
+  function radiusAt(prof, y) {
+    let best = prof[0];
+    for (const p of prof) if (Math.abs(p[0] - y) < Math.abs(best[0] - y)) best = p;
+    return best[1];
+  }
+
+  const glassMat = () => new THREE.MeshPhysicalMaterial({
+    color: 0xdfeaff, metalness: 0, roughness: 0.045,
+    clearcoat: 1, clearcoatRoughness: 0.02,
+    transparent: true, opacity: 0.26, side: THREE.DoubleSide, depthWrite: false,
+  });
+  const collarMat = () => new THREE.MeshPhysicalMaterial({
+    color: 0xd6d8de, metalness: 1, roughness: 0.26, transparent: true,
+  });
+  const capMat = () => new THREE.MeshPhysicalMaterial({
+    color: 0x172e7a, metalness: 0.3, roughness: 0.3,
+    clearcoat: 0.85, clearcoatRoughness: 0.18, transparent: true,
+  });
+
+  function buildVial(g, tex) {
+    const grp = new THREE.Group();
+    const parts = [];
+    const add = (geo, mat) => {
+      if (!geo) return null;
+      const m = new THREE.Mesh(geo, mat); grp.add(m); parts.push(m); return m;
+    };
+    const glass  = add(section(g.prof, 0, g.colBot, true, false), glassMat());
+    const collar = add(section(g.prof, g.colBot, g.capBot, false, false), collarMat());
+    const cap    = add(section(g.prof, g.capBot, g.h, false, true), capMat());
+
+    /* the label: a cylinder at the glass radius, its own artwork wrapped
+       on. u = 0.5 is the front of the label, which is why it is turned a
+       quarter here — the un-projection put the wordmark at 0.5. */
+    const lh = g.labTop - g.labBot;
+    const lr = radiusAt(g.prof, (g.labTop + g.labBot) / 2) + 0.006;
+    const label = new THREE.Mesh(
+      new THREE.CylinderGeometry(lr, lr, lh, RADIAL, 1, true),
+      new THREE.MeshStandardMaterial({
+        map: tex, roughness: 0.44, metalness: 0.05,
+        side: THREE.DoubleSide, transparent: true,
+      }));
+    label.position.y = (g.labTop + g.labBot) / 2;
+    label.rotation.y = Math.PI;         /* u=0.5 to camera-facing */
+    grp.add(label); parts.push(label);
+
+    /* one height for every unit; diameter left alone */
+    const s = UNIT_H / g.h;
+    grp.scale.setScalar(s);
+    /* hang it on its own centre so it orbits about the middle of the vial */
+    grp.position.y = -g.h * s / 2;
+    const inner = new THREE.Group();
+    inner.add(grp);
+    /* glass draws last so it reads over the label it encloses */
+    if (glass) glass.renderOrder = 1;
+    return { grp: inner, spin: grp, parts,
+             mats: [glass, collar, cap, label].filter(Boolean).map(m => m.material) };
+  }
+
   /* ---- the units, on a Fibonacci sphere so spacing stays even ---- */
   const R = 7.9;
   const loader = new THREE.TextureLoader();
   const orbit = new THREE.Group(); scene.add(orbit);
   const units = [];
+  let CAT = [], GEO = {};
 
   function build() {
     const N = CAT.length;
@@ -109,14 +197,17 @@ function start(host) {
       const rad = Math.sqrt(Math.max(0, 1 - y * y));
       const th = GA * i;
       const d = CAT[i];
-      const tex = loader.load(d.img);
+      const id = (d.img.match(/(\d+)\.webp$/) || [])[1];   /* img/cat/NN.webp */
+      const g = GEO[id];
+      if (!g) continue;
+      const tex = loader.load('img/cat/label/' + id + '.png');
       tex.colorSpace = THREE.SRGBColorSpace;
-      const m = new THREE.Mesh(
-        new THREE.PlaneGeometry(0.92, 2.09),
-        new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
-      m.position.set(Math.cos(th) * rad * R, y * R, Math.sin(th) * rad * R);
-      orbit.add(m);
-      units.push({ m, ...d, href: HREF(), hov: 0 });
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      const v = buildVial(g, tex);
+      v.grp.position.set(Math.cos(th) * rad * R, y * R, Math.sin(th) * rad * R);
+      orbit.add(v.grp);
+      units.push({ ...v, ...d, href: HREF(), hov: 0 });
     }
   }
 
@@ -154,7 +245,7 @@ function start(host) {
     }
   });
   const stop = () => { dragging = false; el.style.cursor = 'grab'; };
-  el.addEventListener('pointerup', e => {
+  el.addEventListener('pointerup', () => {
     if (moved < 5 && hot) location.href = hot.href;     /* a click, not a drag */
     stop();
   });
@@ -176,8 +267,8 @@ function start(host) {
     if (!W && !resize()) return;
 
     ray.setFromCamera(ptr, camera);
-    const hit = ray.intersectObjects(orbit.children, false)[0];
-    hot = hit ? units.find(u => u.m === hit.object) : null;
+    const hit = ray.intersectObjects(orbit.children, true)[0];
+    hot = hit ? units.find(u => u.parts.includes(hit.object)) : null;
     el.style.cursor = dragging ? 'grabbing' : (hot ? 'pointer' : 'grab');
 
     if (!dragging && !hot) {                       /* hovering holds it still */
@@ -187,18 +278,24 @@ function start(host) {
     orbit.rotation.x = Math.max(-0.55, Math.min(0.55, orbit.rotation.x));
 
     units.forEach(u => {
-      u.m.quaternion.copy(camera.quaternion);      /* always face the reader */
+      /* the vial stands up and turns on its own axis to present the
+         label — it is a bottle in the round, not a card facing front */
+      u.grp.getWorldPosition(v3);
+      u.spin.rotation.y = Math.atan2(camera.position.x - v3.x, camera.position.z - v3.z)
+                          - orbit.rotation.y;
+
       const want = u === hot ? 1 : 0;
       u.hov += (want - u.hov) * 0.18;
-      u.m.getWorldPosition(v3);
       const depth = (v3.z + R) / (2 * R);          /* 0 at the back, 1 at the front */
-      u.m.material.opacity = Math.min(1, (0.09 + 0.91 * Math.pow(depth, 2.1)) * (1 + u.hov * 0.7));
-      u.m.scale.setScalar(1 + u.hov * 0.34);
-      u.m.renderOrder = Math.round(depth * 100);
+      const a = Math.min(1, (0.10 + 0.90 * Math.pow(depth, 2.1)) * (1 + u.hov * 0.7));
+      u.mats.forEach((m, i) => { m.opacity = i === 0 ? a * 0.26 : a; });
+      u.grp.scale.setScalar(1 + u.hov * 0.34);
+      const ro = Math.round(depth * 100) * 4;
+      u.parts.forEach(p => { p.renderOrder = ro + (p === u.parts[0] ? 1 : 0); });
     });
 
     if (hot) {
-      hot.m.getWorldPosition(v3); v3.project(camera);
+      hot.grp.getWorldPosition(v3); v3.project(camera);
       tag.innerHTML = '<b>' + hot.name + '</b>'
         + '<span style="opacity:.55;margin-left:7px">' + hot.size + '</span>'
         + '<span style="margin-left:9px">' + hot.price + '</span>'
@@ -212,5 +309,9 @@ function start(host) {
     renderer.render(scene, camera);
   }
   addEventListener('resize', () => { W = 0; });
-  fetch('js/catalogue.json').then(r => r.json()).then(j => { CAT = j; build(); frame(); });
+
+  Promise.all([
+    fetch('js/catalogue.json').then(r => r.json()),
+    fetch('img/cat/label/geom.json').then(r => r.json()),
+  ]).then(([cat, geo]) => { CAT = cat; GEO = geo; build(); frame(); });
 }
