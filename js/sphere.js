@@ -200,7 +200,7 @@ function start(host) {
       const id = (d.img.match(/(\d+)\.webp$/) || [])[1];   /* img/cat/NN.webp */
       const g = GEO[id];
       if (!g) continue;
-      const tex = loader.load('img/cat/label/' + id + '.png');
+      const tex = loader.load('img/cat/label/' + id + '.png?v=coa1');
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.wrapS = THREE.RepeatWrapping;
       tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
