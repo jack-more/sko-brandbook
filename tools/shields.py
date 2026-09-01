@@ -17,6 +17,7 @@ resolution and stepped down, so every size is the same shape.
 import subprocess, io, os
 import numpy as np
 from PIL import Image
+from scipy import ndimage
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SVG  = os.path.join(ROOT, 'img/vector/sko-mark-1c.svg')
@@ -59,20 +60,35 @@ def shield_alpha(width=3000):
     return sh[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
 
 
+def plain_alpha(mark):
+    """The shield silhouette, solid — no helix, no inner gap. A plain
+    badge you can put anything on, and the cut to reach for when the mark
+    would be too busy: overlays, chips, small containers."""
+    solid = ndimage.binary_fill_holes(mark > 90)
+    solid = ndimage.binary_closing(solid, np.ones((11, 11)))
+    out = np.maximum(mark, (solid * 255).astype(np.uint8))
+    edge = ndimage.binary_dilation(solid, np.ones((3, 3))) & ~solid
+    out[edge] = np.maximum(out[edge], mark[edge])
+    return out
+
+
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     base = shield_alpha()
     h, w = base.shape
     print(f'shield cut at {w}x{h}, aspect {w/h:.3f}')
+    plain = plain_alpha(base)
     made = 0
-    for name, rgb in COLOURS.items():
-        for s in SIZES:
-            th = s
-            tw = max(1, int(round(s * w / h)))
-            al = Image.fromarray(base, 'L').resize((tw, th), Image.LANCZOS)
-            img = Image.new('RGBA', (tw, th), (*rgb, 0))
-            img.putalpha(al)
-            p = os.path.join(OUT, f'shield-{name}-{s}.png')
-            img.save(p)
-            made += 1
-    print(f'{made} flat shields -> {os.path.relpath(OUT, ROOT)}')
+    for variant, src in (('', base), ('plain-', plain)):
+        for name, rgb in COLOURS.items():
+            for s in SIZES:
+                th = s
+                tw = max(1, int(round(s * w / h)))
+                al = Image.fromarray(src).resize((tw, th), Image.LANCZOS)
+                img = Image.new('RGBA', (tw, th), (*rgb, 0))
+                img.putalpha(al)
+                img.save(os.path.join(OUT, f'shield-{variant}{name}-{s}.png'))
+                made += 1
+    print(f'{made} shields -> {os.path.relpath(OUT, ROOT)}')
+    print('  shield-<colour>-<size>.png        the mark: helix knocked out')
+    print('  shield-plain-<colour>-<size>.png  plain: solid silhouette, no helix')

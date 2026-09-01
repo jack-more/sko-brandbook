@@ -137,6 +137,12 @@ img{display:block;max-width:100%}
 .mfoot{margin-top:12px;font-size:8px;letter-spacing:.16em;color:var(--mid);text-align:center}
 @media (max-width:900px){.typespec{grid-template-columns:1fr}.mgrid{grid-template-columns:repeat(2,1fr)}}
 
+/* the two shield cuts, stacked and labelled */
+.shieldset{display:flex;flex-direction:column;gap:11px}
+.srow{display:flex;flex-direction:column;gap:5px;min-height:0}
+.slab{font-size:8px;letter-spacing:.18em;color:var(--blue)}
+.srow .tiles{min-height:0}
+
 /* the flat shield ladder */
 .ladder{display:flex;align-items:flex-end;gap:11px;margin-top:14px;
   font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9px;letter-spacing:.12em;color:var(--mid)}
@@ -218,22 +224,20 @@ img{display:block;max-width:100%}
     alone. The badges below are the <b>flat shields</b>: one colour, cut from the vector, no gradient
     and no bevel.</p>
     <p><b>Disclaimers always take the flat white shield.</b> Research Use Only, the claim strip, the
-    legal line at the foot of an ad. Never the full&#8209;colour mark, never silver.</p>
+    legal line at the foot of an ad. Never the full&#8209;colour mark.</p>
     <p><b>Below roughly 48&nbsp;px, and over any photograph, the flat cut is the only cut.</b> The
     full&#8209;colour mark is a render &mdash; gradient, chrome, bevel &mdash; and none of it survives
     being shrunk or laid over an image. It is white&#8209;ground&#8209;only, at size.</p>
-    <p>Silver is the apparel cut &mdash; the embroidery on the black Columbia Slack Tide.</p>
   </div>
   <div class="body">
     <div class="tiles t2" style="margin-bottom:12px">
       <div class="tile"><img class="mark" src="img/lockup-navy.png" alt="Lockup, navy on light"><span class="cap">LOCKUP &middot; NAVY ON LIGHT</span></div>
       <div class="tile blue"><img class="mark" src="img/lockup.png" alt="Lockup, white on blue"><span class="cap">LOCKUP &middot; WHITE ON BLUE</span></div>
     </div>
-    <div class="tiles" style="grid-template-columns:repeat(4,1fr)">
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr)">
       <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield on blue"><span class="cap">FLAT WHITE &middot; DISCLAIMERS</span></div>
       <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield on light"><span class="cap">FLAT BLUE &middot; #173384</span></div>
       <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield on light"><span class="cap">FLAT DEEP &middot; #092266</span></div>
-      <div class="tile dark"><img class="mark" src="img/logo/clean/lockup-silver-2000.png" alt="Silver lockup on black, apparel cut"><span class="cap">SILVER &middot; APPAREL</span></div>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
@@ -243,21 +247,36 @@ img{display:block;max-width:100%}
 <div class="page" id="flat-shield">
   <div class="col">
     <h2>The Flat Shield</h2>
-    <p>The shield on its own, one colour, no gradient and no bevel. Cut from the vector, so the helix
-    knockout is the mark&rsquo;s own &mdash; not a redraw.</p>
-    <p><b>Disclaimers take the flat white shield.</b> Research Use Only, the claim strip, the legal
-    line at the foot of an ad. Never the full&#8209;colour mark, never silver.</p>
-    <p><b>Below roughly 48&nbsp;px, and over any photograph, the flat cut is the only cut.</b> The
-    full&#8209;colour mark is a render; its gradient and bevel turn to mud at size and disappear into
-    an image.</p>
-    <p>Blue on light grounds, white on everything else. Deep is there for a light ground that needs
-    more weight than SKO Blue gives it.</p>
+    <p>Two cuts, and they are not interchangeable.</p>
+    <p><b>PLAIN</b> is the solid silhouette &mdash; no helix, nothing inside it. It is the badge:
+    reach for it to contain something, to sit over a photograph, or anywhere the mark would be too
+    busy to read.</p>
+    <p><b>MARK</b> is the shield with the helix knocked out. Because the helix is a hole, it takes
+    the colour of whatever is behind it &mdash; which is right on a flat ground and wrong on a busy
+    one. On a photograph, use PLAIN.</p>
+    <p>Both are one colour, cut from the vector: no gradient, no bevel. White for coloured grounds
+    and every disclaimer; blue and deep for light grounds.</p>
+    <p class="mono note">Below roughly 48&nbsp;px, and over any image, these are the only cuts. The
+    full&#8209;colour mark is a render and does not survive either.</p>
   </div>
   <div class="body">
-    <div class="tiles t3">
-      <div class="tile blue"><img class="mark" src="img/shield/shield-white-512.png" alt="Flat white shield on blue"><span class="cap">WHITE &middot; DISCLAIMERS &amp; COLOUR</span></div>
-      <div class="tile"><img class="mark" src="img/shield/shield-blue-512.png" alt="Flat blue shield on paper"><span class="cap">BLUE &middot; #173384</span></div>
-      <div class="tile"><img class="mark" src="img/shield/shield-deep-512.png" alt="Flat deep shield on paper"><span class="cap">DEEP &middot; #092266</span></div>
+    <div class="shieldset">
+      <div class="srow">
+        <span class="slab mono">PLAIN &mdash; SOLID, NO HELIX</span>
+        <div class="tiles t3">
+          <div class="tile blue"><img class="mark" src="img/shield/shield-plain-white-2000.png" alt="Plain white shield"><span class="cap">PLAIN WHITE</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-plain-blue-2000.png" alt="Plain luxury blue shield"><span class="cap">PLAIN BLUE &middot; #173384</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-plain-deep-2000.png" alt="Plain deep shield"><span class="cap">PLAIN DEEP &middot; #092266</span></div>
+        </div>
+      </div>
+      <div class="srow">
+        <span class="slab mono">MARK &mdash; HELIX KNOCKED OUT</span>
+        <div class="tiles t3">
+          <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield mark"><span class="cap">MARK WHITE</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield mark"><span class="cap">MARK BLUE &middot; #173384</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield mark"><span class="cap">MARK DEEP &middot; #092266</span></div>
+        </div>
+      </div>
     </div>
     <div class="ladder">
       <span>Holds all the way down &mdash;</span>
@@ -595,7 +614,10 @@ img{display:block;max-width:100%}
       <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
-      <h3>Flat shields</h3><p>The shield alone, one colour, no gradient and no bevel. White for disclaimers and any coloured ground; blue and deep for light grounds. Use these below ~48px and over any photograph.</p>
+      <h3>Flat shields</h3><p>Two cuts. PLAIN is the solid silhouette with no helix &mdash; the badge, and the one to use over a photograph. MARK has the helix knocked out, so the helix takes the ground colour. Both one colour, cut from the vector. Use these below ~48px and anywhere the mark sits on an image.</p>
+      <a class="ass dk" href="img/shield/shield-plain-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-white-2000.png" alt=""></span><span class="meta"><b>PLAIN white — solid, no helix</b><i>shield-plain-white-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-plain-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-blue-2000.png" alt=""></span><span class="meta"><b>PLAIN luxury blue — solid, no helix</b><i>shield-plain-blue-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-plain-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-deep-2000.png" alt=""></span><span class="meta"><b>PLAIN deep — solid, no helix</b><i>shield-plain-deep-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/shield/shield-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-2000.png" alt=""></span><span class="meta"><b>White — disclaimers, colour, photography</b><i>shield-white-2000.png &middot; 1765&times;2000 &middot; 238 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/shield/shield-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-2000.png" alt=""></span><span class="meta"><b>Blue #173384 — light grounds</b><i>shield-blue-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/shield/shield-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-deep-2000.png" alt=""></span><span class="meta"><b>Deep #092266 — light grounds, more weight</b><i>shield-deep-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
@@ -610,13 +632,6 @@ img{display:block;max-width:100%}
       <a class="ass" href="img/vector/mark-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-navy-2000.png" alt=""></span><span class="meta"><b>Flat navy — from the vector</b><i>mark-navy-2000.png &middot; 2000&times;1654 &middot; 163 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/vector/mark-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-white-2000.png" alt=""></span><span class="meta"><b>Flat white — from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; 125 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/mark-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-deep-2000.png" alt=""></span><span class="meta"><b>Flat deep — from the vector</b><i>mark-deep-2000.png &middot; 2000&times;1654 &middot; 161 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Texture cuts</h3><p>The same form rendered in material, chosen per campaign — never invented per asset.</p>
-      <a class="ass dk" href="img/logo/clean/lockup-silver-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-silver-2000.png" alt=""></span><span class="meta"><b>Silver — machined metal, any ground</b><i>lockup-silver-2000.png &middot; 820&times;679 &middot; 586 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/logo/clean/lockup-chrome-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-chrome-2000.png" alt=""></span><span class="meta"><b>Chrome — dark grounds</b><i>lockup-chrome-2000.png &middot; 832&times;691 &middot; 341 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/logo/clean/lockup-pool-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-pool-2000.png" alt=""></span><span class="meta"><b>Pool — water caustics</b><i>lockup-pool-2000.png &middot; 826&times;683 &middot; 423 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/logo/clean/stamp-vintage-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/stamp-vintage-2000.png" alt=""></span><span class="meta"><b>Vintage LA stamp — provenance work</b><i>stamp-vintage-2000.png &middot; 806&times;811 &middot; 593 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
