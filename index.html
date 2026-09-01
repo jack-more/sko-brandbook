@@ -137,6 +137,12 @@ img{display:block;max-width:100%}
 .mfoot{margin-top:12px;font-size:8px;letter-spacing:.16em;color:var(--mid);text-align:center}
 @media (max-width:900px){.typespec{grid-template-columns:1fr}.mgrid{grid-template-columns:repeat(2,1fr)}}
 
+/* alternates — fenced off so they cannot be mistaken for live cuts */
+.tile.dontuse{position:relative;opacity:.62}
+.tile.dontuse::after{content:'NOT IN USE';position:absolute;top:8px;right:8px;
+  font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:.16em;color:#fff;
+  background:var(--bad);padding:2px 6px;border-radius:2px}
+
 /* the two shield cuts, stacked and labelled */
 .shieldset{display:flex;flex-direction:column;gap:11px}
 .srow{display:flex;flex-direction:column;gap:5px;min-height:0}
@@ -322,9 +328,9 @@ img{display:block;max-width:100%}
       fades out behind a product is a backdrop, and it reads cheap. A blue that <i>is</i> the surface
       reads expensive. Blue against polished steel is the whole composition.</div>
       <div class="fr-pair">
-        <figure><div class="fr-tile" style="background:#244399"><img src="img/logo/clean/lockup-white-2000.png" alt="White lockup on a flat blue field"></div>
+        <figure><div class="fr-tile" style="background:#244399"><img src="img/vector/mark-white-2000.png" alt="White lockup on a flat blue field"></div>
           <figcaption><span class="ok">DO</span> Flat field #244399. One object in it.</figcaption></figure>
-        <figure><div class="fr-tile" style="background:radial-gradient(120% 90% at 50% 38%,#3E63C8 0%,#244399 45%,#0B1E58 100%)"><img src="img/logo/clean/lockup-white-2000.png" alt="White lockup on a gradient blue backdrop"></div>
+        <figure><div class="fr-tile" style="background:radial-gradient(120% 90% at 50% 38%,#3E63C8 0%,#244399 45%,#0B1E58 100%)"><img src="img/vector/mark-white-2000.png" alt="White lockup on a gradient blue backdrop"></div>
           <figcaption><span class="no">DON&rsquo;T</span> Gradient backdrop, lit vignette, falloff.</figcaption></figure>
       </div>
     </div>
@@ -628,13 +634,38 @@ img{display:block;max-width:100%}
     <div class="agroup">
       <h3>Lockups</h3><p>Shield and wordmark together. White is the only cut for coloured grounds. Full colour is white-ground-only, at size only.</p>
       <a class="ass" href="img/logo/clean/lockup-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-2000.png" alt=""></span><span class="meta"><b>Full colour — white ground, at size</b><i>lockup-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/logo/clean/lockup-white-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-white-2000.png" alt=""></span><span class="meta"><b>White — colour, ink, photography</b><i>lockup-white-2000.png &middot; 821&times;688 &middot; 452 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/mark-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-white-2000.png" alt=""></span><span class="meta"><b>White stacked lockup — flat, from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; flat, from the vector</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/mark-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-navy-2000.png" alt=""></span><span class="meta"><b>Flat navy — from the vector</b><i>mark-navy-2000.png &middot; 2000&times;1654 &middot; 163 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/vector/mark-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-white-2000.png" alt=""></span><span class="meta"><b>Flat white — from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; 125 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/mark-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/mark-deep-2000.png" alt=""></span><span class="meta"><b>Flat deep — from the vector</b><i>mark-deep-2000.png &middot; 2000&times;1654 &middot; 161 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
+</div>
+
+<!-- alternates -->
+<div class="page" id="alternates">
+  <div class="col">
+    <h2>Alternates &mdash; not in use</h2>
+    <p><b>None of these ship.</b> They are here so the set is documented and so nobody finds one in
+    an old folder and assumes it is live.</p>
+    <p>Every one of them is a <b>render</b> &mdash; embossed, distressed, textured. That treatment
+    reads as playful, and it is the opposite of what this brand is for. It also does not survive
+    being shrunk or laid over an image.</p>
+    <p>If you have one of these in a working file, replace it with a flat cut from the vector.</p>
+    <p class="mono note">Kept for reference only. Do not place these in new work.</p>
+  </div>
+  <div class="body">
+    <div class="tiles t3">
+      <div class="tile blue dontuse"><img class="mark" src="img/logo/clean/lockup-silver-2000.png" alt="Silver alt logo"><span class="cap">SILVER</span></div>
+      <div class="tile dark dontuse"><img class="mark" src="img/logo/clean/lockup-chrome-2000.png" alt="Chrome alt logo"><span class="cap">CHROME</span></div>
+      <div class="tile dontuse"><img class="mark" src="img/logo/clean/lockup-moss-2000.png" alt="Moss alt logo"><span class="cap">MOSS</span></div>
+      <div class="tile dontuse"><img class="mark" src="img/logo/clean/lockup-pool-2000.png" alt="Pool alt logo"><span class="cap">POOL &middot; WATER</span></div>
+      <div class="tile dontuse"><img class="mark" src="img/logo/clean/stamp-vintage-2000.png" alt="Vintage LA stamp alt logo"><span class="cap">VINTAGE LA STAMP</span></div>
+      <div class="tile blue dontuse"><img class="mark" src="img/logo/clean/lockup-white-2000.png" alt="Embossed white alt logo"><span class="cap">EMBOSSED WHITE</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ARCHIVE</span></div>
 </div>
 
 <!-- 07 photography -->
