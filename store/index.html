@@ -1,0 +1,359 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>SKO Compounds — Catalogue</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--blue:#173384;--deep:#092266;--field:#244399;--halo:#9DBFD9;
+ --ink:#0E1424;--mid:#6B7280;--line:#E6E8EE;--paper:#fff;--wash:#F5F6F8;
+ --foil:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#7578B0,#C3AFD7);}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);
+ font:400 15px/1.6 'Inter',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+.wrap{width:min(1360px,92vw);margin:0 auto}
+.seal{height:3px;background:var(--foil)}
+
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);
+ backdrop-filter:blur(14px);z-index:20}
+.hin{display:flex;align-items:center;gap:36px;padding:20px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.brand img{height:34px;width:auto}
+.brand b{font-family:'DM Sans';font-size:16px;letter-spacing:-.02em;line-height:1}
+.brand i{display:block;font-style:normal;font-size:8.5px;letter-spacing:.22em;color:var(--mid);margin-top:3px}
+nav{display:flex;gap:28px;margin-left:auto;font-size:13.5px}
+nav a{color:var(--ink);text-decoration:none;opacity:.78}
+nav a:hover{opacity:1}
+.cta{background:var(--blue);color:#fff;border-radius:100px;padding:11px 22px;
+ font-size:13px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
+.cta:hover{background:var(--deep)}
+
+.hero{padding:96px 0 64px;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.eyebrow{font-size:10.5px;letter-spacing:.24em;color:var(--mid);font-weight:600;margin-bottom:22px}
+h1{font-family:'DM Sans';font-size:clamp(38px,4.6vw,68px);font-weight:700;
+ letter-spacing:-.042em;line-height:.98}
+h1 em{font-style:normal;color:var(--blue)}
+.lede{margin-top:24px;font-size:17px;line-height:1.62;color:#3C4560;max-width:46ch}
+.acts{display:flex;gap:12px;margin-top:32px}
+.ghost{border:1px solid var(--line);color:var(--ink);border-radius:100px;padding:11px 22px;
+ font-size:13px;font-weight:600;text-decoration:none}
+.ghost:hover{border-color:var(--blue);color:var(--blue)}
+.herofig{position:relative;border-radius:6px;overflow:hidden;background:var(--field);aspect-ratio:4/3;
+ display:flex;align-items:center;justify-content:center;padding:5%}
+.herofig img{max-height:100%;max-width:100%;height:auto;width:auto;object-fit:contain}
+.herofig .fs{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--foil)}
+
+.trust{display:flex;gap:44px;flex-wrap:wrap;padding:26px 0 0;border-top:1px solid var(--line);
+ margin-top:56px;font-size:12.5px;color:var(--mid)}
+.trust b{color:var(--ink);font-weight:600}
+
+.bar{display:flex;align-items:baseline;gap:18px;padding:64px 0 22px;border-bottom:1px solid var(--line)}
+.bar h2{font-family:'DM Sans';font-size:26px;font-weight:700;letter-spacing:-.028em}
+.bar span{font-size:12.5px;color:var(--mid);font-variant-numeric:tabular-nums}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
+ gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
+.card{background:var(--paper);text-decoration:none;color:inherit;padding:30px 26px 26px;
+ display:flex;flex-direction:column;gap:22px;transition:background .16s}
+.card:hover{background:var(--wash)}
+.shot{position:relative;background:var(--wash);border-radius:4px;height:236px;
+ display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden}
+.card:hover .shot{background:#EDEFF4}
+.shot img{max-height:204px;max-width:100%;height:auto;width:auto;object-fit:contain}
+.card.is-out .shot img{opacity:.42;filter:grayscale(.35)}
+.state{position:absolute;top:12px;left:12px;font-size:8.5px;letter-spacing:.16em;font-weight:600;
+ padding:5px 9px;border-radius:3px;background:#fff;border:1px solid var(--line);color:var(--mid)}
+.state.soon{color:var(--blue);border-color:#C9D3EA}
+.meta{display:flex;flex-direction:column;gap:7px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+h3{font-family:'DM Sans';font-size:16.5px;font-weight:700;letter-spacing:-.022em;line-height:1.2}
+.price{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sub{font-size:11.5px;color:var(--mid);font-variant-numeric:tabular-nums}
+.kind{letter-spacing:.14em;font-size:9px;font-weight:600}
+
+footer{padding:72px 0 90px;color:var(--mid);font-size:12.5px}
+.fl{display:flex;gap:34px;flex-wrap:wrap;align-items:center}
+footer img{height:40px;width:auto;opacity:.9}
+@media(max-width:940px){.hero{grid-template-columns:1fr;gap:40px;padding:56px 0 40px}nav{display:none}}
+</style></head><body>
+<div class="seal"></div>
+<header><div class="wrap hin">
+  <a class="brand" href="#"><img src="../img/shield/shield-blue-512.png" alt="">
+    <span><b>SKO</b><i>COMPOUNDS</i></span></a>
+  <nav><a href="#">Catalogue</a><a href="#">Certificates</a><a href="#">Standards</a><a href="#">Support</a></nav>
+  <a class="cta" href="https://skocompounds.com/products">Shop research</a>
+</div></header>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">BEVERLY HILLS · RESEARCH USE ONLY</div>
+      <h1>Research compounds,<br><em>refined.</em></h1>
+      <p class="lede">Thirty-seven compounds, each tested eight times and shipped with its own
+      published certificate of analysis. Dispatched from Beverly Hills within 24 hours.</p>
+      <div class="acts">
+        <a class="cta" href="https://skocompounds.com/products">Shop research</a>
+        <a class="ghost" href="#">View certificates</a>
+      </div>
+    </div>
+    <figure class="herofig">
+      <img src="../img/ads/_safe-bottle.png" alt="SKO Compounds vial">
+      <span class="fs"></span>
+    </figure>
+  </section>
+
+  <div class="trust">
+    <span><b>99%</b> purity</span><span><b>8×</b> tested</span>
+    <span><b>Batch-specific</b> certificates</span><span><b>Ships in 24 hours</b> from Beverly Hills</span>
+    <span><b>4.8</b> on Trustpilot</span><span>Research Use Only</span>
+  </div>
+
+  <div class="bar"><h2>The catalogue</h2><span>34 listings</span></div>
+</div>
+
+<div class="wrap"><div class="grid">
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/00.webp" alt="BPC-157"></div>
+        <div class="meta">
+          <div class="row"><h3>BPC-157</h3><span class="price">$69.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/01.webp" alt="TB-500"></div>
+        <div class="meta">
+          <div class="row"><h3>TB-500</h3><span class="price">$59.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/02.webp" alt="GHK-Cu"></div>
+        <div class="meta">
+          <div class="row"><h3>GHK-Cu</h3><span class="price">$54.99</span></div>
+          <div class="row sub"><span>50MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/03.webp" alt="CJC 1295 no dac + Ipamorelin"></div>
+        <div class="meta">
+          <div class="row"><h3>CJC 1295 no dac + Ipamorelin</h3><span class="price">$89.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/04.webp" alt="Ipamorelin"></div>
+        <div class="meta">
+          <div class="row"><h3>Ipamorelin</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/05.webp" alt="Sermorelin"></div>
+        <div class="meta">
+          <div class="row"><h3>Sermorelin</h3><span class="price">$99.99</span></div>
+          <div class="row sub"><span>5MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/06.webp" alt="Tesamorelin"></div>
+        <div class="meta">
+          <div class="row"><h3>Tesamorelin</h3><span class="price">$114.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/07.webp" alt="TESA/IPA Blend"><span class="state out">SOLD OUT</span></div>
+        <div class="meta">
+          <div class="row"><h3>TESA/IPA Blend</h3><span class="price">$139.99</span></div>
+          <div class="row sub"><span>10MG/3MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/08.webp" alt="IGF1-LR3"></div>
+        <div class="meta">
+          <div class="row"><h3>IGF1-LR3</h3><span class="price">$89.99</span></div>
+          <div class="row sub"><span>1MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/09.webp" alt="MOTS-c"></div>
+        <div class="meta">
+          <div class="row"><h3>MOTS-c</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/10.webp" alt="SKO-NAD"></div>
+        <div class="meta">
+          <div class="row"><h3>SKO-NAD</h3><span class="price">$77.99</span></div>
+          <div class="row sub"><span>500MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/11.webp" alt="SS-31"></div>
+        <div class="meta">
+          <div class="row"><h3>SS-31</h3><span class="price">$69.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/12.webp" alt="Glutathione"><span class="state out">SOLD OUT</span></div>
+        <div class="meta">
+          <div class="row"><h3>Glutathione</h3><span class="price">$64.99</span></div>
+          <div class="row sub"><span>600MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/13.webp" alt="Semax"></div>
+        <div class="meta">
+          <div class="row"><h3>Semax</h3><span class="price">$64.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/14.webp" alt="Selank"></div>
+        <div class="meta">
+          <div class="row"><h3>Selank</h3><span class="price">$66.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/15.webp" alt="DSIP"></div>
+        <div class="meta">
+          <div class="row"><h3>DSIP</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/16.webp" alt="PT-141"></div>
+        <div class="meta">
+          <div class="row"><h3>PT-141</h3><span class="price">$69.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/17.webp" alt="Kisspeptin"></div>
+        <div class="meta">
+          <div class="row"><h3>Kisspeptin</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/18.webp" alt="KPV"></div>
+        <div class="meta">
+          <div class="row"><h3>KPV</h3><span class="price">$64.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/19.webp" alt="Thymosin Alpha-1"></div>
+        <div class="meta">
+          <div class="row"><h3>Thymosin Alpha-1</h3><span class="price">$109.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/20.webp" alt="ARA-290"><span class="state out">SOLD OUT</span></div>
+        <div class="meta">
+          <div class="row"><h3>ARA-290</h3><span class="price">$74.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/21.webp" alt="AOD-9604"></div>
+        <div class="meta">
+          <div class="row"><h3>AOD-9604</h3><span class="price">$89.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/22.webp" alt="Cagrilintide"><span class="state out">SOLD OUT</span></div>
+        <div class="meta">
+          <div class="row"><h3>Cagrilintide</h3><span class="price">$119.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/23.webp" alt="ADAMAX"></div>
+        <div class="meta">
+          <div class="row"><h3>ADAMAX</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/24.webp" alt="5-Amino-1MQ"></div>
+        <div class="meta">
+          <div class="row"><h3>5-Amino-1MQ</h3><span class="price">$54.99</span></div>
+          <div class="row sub"><span>5MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/25.webp" alt="MT-1"></div>
+        <div class="meta">
+          <div class="row"><h3>MT-1</h3><span class="price">$54.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/26.webp" alt="MT-2"></div>
+        <div class="meta">
+          <div class="row"><h3>MT-2</h3><span class="price">$54.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/27.webp" alt="GLOW"></div>
+        <div class="meta">
+          <div class="row"><h3>GLOW</h3><span class="price">$129.99</span></div>
+          <div class="row sub"><span>70MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/28.webp" alt="Wolverine Blend"></div>
+        <div class="meta">
+          <div class="row"><h3>Wolverine Blend</h3><span class="price">$84.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/29.webp" alt="NAD Spray"><span class="state soon">COMING SOON</span></div>
+        <div class="meta">
+          <div class="row"><h3>NAD Spray</h3><span class="price">$99.99</span></div>
+          <div class="row sub"><span>500MG</span><span class="kind">SPRAY</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/30.webp" alt="SEMAX Spray"><span class="state soon">COMING SOON</span></div>
+        <div class="meta">
+          <div class="row"><h3>SEMAX Spray</h3><span class="price">$91.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">SPRAY</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/31.webp" alt="GHK-Cu Spray"><span class="state soon">COMING SOON</span></div>
+        <div class="meta">
+          <div class="row"><h3>GHK-Cu Spray</h3><span class="price">$89.99</span></div>
+          <div class="row sub"><span>100MG</span><span class="kind">SPRAY</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/32.webp" alt="SELANK Spray"><span class="state soon">COMING SOON</span></div>
+        <div class="meta">
+          <div class="row"><h3>SELANK Spray</h3><span class="price">$89.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">SPRAY</span></div>
+        </div>
+      </a>
+      <a class="card is-out" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/33.webp" alt="MT-2 Spray"><span class="state soon">COMING SOON</span></div>
+        <div class="meta">
+          <div class="row"><h3>MT-2 Spray</h3><span class="price">$79.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">SPRAY</span></div>
+        </div>
+      </a>
+</div></div>
+
+<div class="wrap"><footer><div class="fl">
+  <img src="../img/vector/lockup-1x1-navy-2000.png" alt="SKO Compounds">
+  <span>SKOCOMPOUNDS.COM</span><span>BEVERLY HILLS, CA</span><span>RESEARCH USE ONLY</span>
+</div></footer></div>
+</body></html>
