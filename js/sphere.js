@@ -37,7 +37,7 @@ function start(host) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
-  camera.position.set(0, 0, 21.6);
+  camera.position.set(0, 0, 24);   /* replaced by the fit in resize() */
 
   /* ---- the room the glass and metal reflect ---- */
   (function env() {
@@ -305,12 +305,21 @@ function start(host) {
   el.addEventListener('pointercancel', stop);
   el.addEventListener('pointerleave', () => { stop(); ptr.set(-9, -9); });
 
+  /* Fit the camera to what is actually in the scene instead of guessing a
+     distance: the orbit radius plus half a unit at its largest scale, and
+     the spine, whichever reaches further. Fitting on BOTH axes is what
+     stops the sphere being clipped top and bottom on a wide canvas. */
+  const EXTENT = Math.max(R + (UNIT_H * 1.35) / 2, CORE_H / 2) + 0.55;
+
   let W = 0, H = 0;
   function resize() {
     W = host.clientWidth; if (!W) return false;
     H = Math.round(Math.min(W * 0.70, 700));
     renderer.setSize(W, H, false); el.style.height = H + 'px';
-    camera.aspect = W / H; camera.updateProjectionMatrix();
+    camera.aspect = W / H;
+    const half = Math.tan((camera.fov * Math.PI / 180) / 2);
+    camera.position.z = Math.max(EXTENT / half, EXTENT / (half * camera.aspect));
+    camera.updateProjectionMatrix();
     return true;
   }
 
