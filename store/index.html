@@ -13,7 +13,6 @@ body{background:var(--paper);color:var(--ink);
 img{display:block;max-width:100%}
 .wrap{width:min(1360px,92vw);margin:0 auto}
 .seal{height:3px;background:var(--foil)}
-
 header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.94);
  backdrop-filter:blur(14px);z-index:20}
 .hin{display:flex;align-items:center;gap:36px;padding:20px 0}
@@ -22,46 +21,60 @@ header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba
 .brand b{font-family:'DM Sans';font-size:16px;letter-spacing:-.02em;line-height:1}
 .brand i{display:block;font-style:normal;font-size:8.5px;letter-spacing:.22em;color:var(--mid);margin-top:3px}
 nav{display:flex;gap:28px;margin-left:auto;font-size:13.5px}
-nav a{color:var(--ink);text-decoration:none;opacity:.78}
-nav a:hover{opacity:1}
+nav a{color:var(--ink);text-decoration:none;opacity:.78} nav a:hover{opacity:1}
 .cta{background:var(--blue);color:#fff;border-radius:100px;padding:11px 22px;
  font-size:13px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
 .cta:hover{background:var(--deep)}
-
 .hero{padding:96px 0 64px;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
 .eyebrow{font-size:10.5px;letter-spacing:.24em;color:var(--mid);font-weight:600;margin-bottom:22px}
-h1{font-family:'DM Sans';font-size:clamp(38px,4.6vw,68px);font-weight:700;
- letter-spacing:-.042em;line-height:.98}
+h1{font-family:'DM Sans';font-size:clamp(38px,4.6vw,68px);font-weight:700;letter-spacing:-.042em;line-height:.98}
 h1 em{font-style:normal;color:var(--blue)}
 .lede{margin-top:24px;font-size:17px;line-height:1.62;color:#3C4560;max-width:46ch}
 .acts{display:flex;gap:12px;margin-top:32px}
 .ghost{border:1px solid var(--line);color:var(--ink);border-radius:100px;padding:11px 22px;
  font-size:13px;font-weight:600;text-decoration:none}
 .ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+/* The vial has to read as an object standing in a room, not a cutout
+   pasted on a panel. Two shadows do that: a drop-shadow that follows the
+   real silhouette off the alpha, and a soft contact ellipse under the
+   base so it is grounded rather than floating. */
 .herofig{position:relative;border-radius:6px;overflow:hidden;background:var(--field);aspect-ratio:4/3;
  display:flex;align-items:center;justify-content:center;padding:5%}
-.herofig img{max-height:100%;max-width:100%;height:auto;width:auto;object-fit:contain}
-.herofig .fs{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--foil)}
-
+.herofig::after{content:'';position:absolute;left:50%;bottom:11%;transform:translateX(-50%);
+ width:46%;height:26px;border-radius:50%;
+ background:radial-gradient(ellipse at center,rgba(4,10,30,.52),rgba(4,10,30,0) 70%)}
+.herofig img{position:relative;z-index:1;max-height:100%;max-width:100%;height:auto;width:auto;
+ object-fit:contain;
+ filter:drop-shadow(0 26px 30px rgba(3,8,26,.46)) drop-shadow(0 6px 10px rgba(3,8,26,.30))}
 .trust{display:flex;gap:44px;flex-wrap:wrap;padding:26px 0 0;border-top:1px solid var(--line);
  margin-top:56px;font-size:12.5px;color:var(--mid)}
 .trust b{color:var(--ink);font-weight:600}
-
 .bar{display:flex;align-items:baseline;gap:18px;padding:64px 0 22px;border-bottom:1px solid var(--line)}
 .bar h2{font-family:'DM Sans';font-size:26px;font-weight:700;letter-spacing:-.028em}
 .bar span{font-size:12.5px;color:var(--mid);font-variant-numeric:tabular-nums}
-
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
  gap:1px;background:var(--line);border-bottom:1px solid var(--line)}
 .card{background:var(--paper);text-decoration:none;color:inherit;padding:30px 26px 26px;
  display:flex;flex-direction:column;gap:22px;transition:background .16s}
 .card:hover{background:var(--wash)}
 .shot{position:relative;background:var(--wash);border-radius:4px;height:236px;
- display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden}
+ display:flex;align-items:center;justify-content:center;padding:16px 16px 26px;overflow:hidden}
+.shot::after{content:'';position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
+ width:44%;height:15px;border-radius:50%;
+ background:radial-gradient(ellipse at center,rgba(14,20,36,.30),rgba(14,20,36,0) 70%);
+ transition:width .18s,opacity .18s}
+.shot.wide::after{width:64%}
+.shot img{position:relative;z-index:1;max-height:196px;max-width:100%;height:auto;width:auto;
+ object-fit:contain;
+ filter:drop-shadow(0 16px 18px rgba(14,20,36,.20)) drop-shadow(0 3px 5px rgba(14,20,36,.13));
+ transition:transform .18s}
 .card:hover .shot{background:#EDEFF4}
-.shot img{max-height:204px;max-width:100%;height:auto;width:auto;object-fit:contain}
-.card.is-out .shot img{opacity:.42;filter:grayscale(.35)}
-.state{position:absolute;top:12px;left:12px;font-size:8.5px;letter-spacing:.16em;font-weight:600;
+.card:hover .shot img{transform:translateY(-5px)}
+.card:hover .shot::after{width:38%;opacity:.72}
+.card.is-out .shot img{opacity:.42;filter:grayscale(.35) drop-shadow(0 10px 12px rgba(14,20,36,.10))}
+.card.is-out .shot::after{opacity:.35}
+.state{position:absolute;top:12px;left:12px;z-index:2;font-size:8.5px;letter-spacing:.16em;font-weight:600;
  padding:5px 9px;border-radius:3px;background:#fff;border:1px solid var(--line);color:var(--mid)}
 .state.soon{color:var(--blue);border-color:#C9D3EA}
 .meta{display:flex;flex-direction:column;gap:7px}
@@ -70,11 +83,11 @@ h3{font-family:'DM Sans';font-size:16.5px;font-weight:700;letter-spacing:-.022em
 .price{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .sub{font-size:11.5px;color:var(--mid);font-variant-numeric:tabular-nums}
 .kind{letter-spacing:.14em;font-size:9px;font-weight:600}
-
 footer{padding:72px 0 90px;color:var(--mid);font-size:12.5px}
 .fl{display:flex;gap:34px;flex-wrap:wrap;align-items:center}
 footer img{height:40px;width:auto;opacity:.9}
 @media(max-width:940px){.hero{grid-template-columns:1fr;gap:40px;padding:56px 0 40px}nav{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <div class="seal"></div>
 <header><div class="wrap hin">
@@ -83,7 +96,6 @@ footer img{height:40px;width:auto;opacity:.9}
   <nav><a href="#">Catalogue</a><a href="#">Certificates</a><a href="#">Standards</a><a href="#">Support</a></nav>
   <a class="cta" href="https://skocompounds.com/products">Shop research</a>
 </div></header>
-
 <div class="wrap">
   <section class="hero">
     <div>
@@ -96,21 +108,15 @@ footer img{height:40px;width:auto;opacity:.9}
         <a class="ghost" href="#">View certificates</a>
       </div>
     </div>
-    <figure class="herofig">
-      <img src="../img/ads/_safe-bottle.png" alt="SKO Compounds vial">
-      <span class="fs"></span>
-    </figure>
+    <figure class="herofig"><img src="../img/ads/_safe-bottle.png" alt="SKO Compounds vial"></figure>
   </section>
-
   <div class="trust">
     <span><b>99%</b> purity</span><span><b>8×</b> tested</span>
     <span><b>Batch-specific</b> certificates</span><span><b>Ships in 24 hours</b> from Beverly Hills</span>
     <span><b>4.8</b> on Trustpilot</span><span>Research Use Only</span>
   </div>
-
-  <div class="bar"><h2>The catalogue</h2><span>34 listings</span></div>
+  <div class="bar"><h2>The catalogue</h2><span>39 listings</span></div>
 </div>
-
 <div class="wrap"><div class="grid">
       <a class="card" href="https://skocompounds.com/products">
         <div class="shot"><img loading="lazy" src="../img/cat/00.webp" alt="BPC-157"></div>
@@ -350,8 +356,42 @@ footer img{height:40px;width:auto;opacity:.9}
           <div class="row sub"><span>10MG</span><span class="kind">SPRAY</span></div>
         </div>
       </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/34.webp" alt="GLP-3 RT"></div>
+        <div class="meta">
+          <div class="row"><h3>GLP-3 RT</h3><span class="price">$99.99</span></div>
+          <div class="row sub"><span>10MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/35.webp" alt="SKO-TRZ"></div>
+        <div class="meta">
+          <div class="row"><h3>SKO-TRZ</h3><span class="price">$119.99</span></div>
+          <div class="row sub"><span>15MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/36.webp" alt="KLOW"></div>
+        <div class="meta">
+          <div class="row"><h3>KLOW</h3><span class="price">$149.99</span></div>
+          <div class="row sub"><span>80MG</span><span class="kind">VIAL</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot"><img loading="lazy" src="../img/cat/37.webp" alt="Bacteriostatic Water"></div>
+        <div class="meta">
+          <div class="row"><h3>Bacteriostatic Water</h3><span class="price">$39.99</span></div>
+          <div class="row sub"><span>30mL</span><span class="kind">DILUENT</span></div>
+        </div>
+      </a>
+      <a class="card" href="https://skocompounds.com/products">
+        <div class="shot wide"><img loading="lazy" src="../img/cat/38.webp" alt="Metabolic Reference Bundle"></div>
+        <div class="meta">
+          <div class="row"><h3>Metabolic Reference Bundle</h3><span class="price">$289.99</span></div>
+          <div class="row sub"><span>3-VIAL SET</span><span class="kind">SET</span></div>
+        </div>
+      </a>
 </div></div>
-
 <div class="wrap"><footer><div class="fl">
   <img src="../img/vector/lockup-1x1-navy-2000.png" alt="SKO Compounds">
   <span>SKOCOMPOUNDS.COM</span><span>BEVERLY HILLS, CA</span><span>RESEARCH USE ONLY</span>
