@@ -166,7 +166,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 .tile img.edge{width:100%;height:100%;object-fit:cover}
 /* on this page the plates are absolutely placed so their intrinsic height
    cannot push the body past the 16:9 page — that is what cut the footer off */
-#compound .tile img{position:absolute;inset:0;width:100%;height:100%}
+#helix .tile img,#compound .tile img{position:absolute;inset:0;width:100%;height:100%}
 /* and when the page is stacked (narrow screens) the plates need a height of their own */
 @media (max-width:900px){#compound .tiles{min-height:118vw}}
 
@@ -482,28 +482,27 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 
 <script type="module" src="js/cover.js?v=2"></script>
 <script type="module" src="js/sphere.js?v=3h0"></script>
-<script defer src="js/helix.js?v=3"></script>
 
 <!-- 06 helix -->
-<div class="page">
+<div class="page" id="helix">
   <div class="col">
     <h2>Helix</h2>
-    <p>The connective asset. It is never drawn as line art &mdash; what is on the page is what an
-    inspection system leaves behind looking at a helix: points, connections, brackets, labels,
-    tracking boxes, and selective focus.</p>
+    <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
+    iridescence, the same physics as the foil on the label. It is never line art and it is never a
+    glyph. What is on the page is a machined object standing in the Field.</p>
     <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
-    B&#8209;DNA its wide major groove and narrow minor one. Depth drives size, brightness and draw
-    order, so the near strand occludes the far one.</p>
-    <p><b>The path is constant, the substance is not.</b> Six states &mdash; inspection, accretion,
-    ladder, chain, readout, disperse &mdash; and it tears between them on a seven-band horizontal
-    glitch. The silhouette never breaks.</p>
-    <p>Three scales ship alongside: hero, frame, and a field carrying no boxes or labels that runs
-    under other work.</p>
+    B&#8209;DNA its wide major groove and narrow minor one. Two and a half turns at this radius; tighter
+    reads as a spring.</p>
+    <p><b>It joins the compound.</b> Where the helix meets the label&rsquo;s molecular linework the two
+    are the same chrome, bond for bond, and the linework fades into the blue. One material, two forms:
+    the helix is the structure, the compound is what it is made of.</p>
+    <p>The frame it sits in is the Klein rule: flat Field, edge to edge, and one side left empty for
+    the title.</p>
+    <p class="mono dl">CLICK THE PLATE TO DOWNLOAD</p>
   </div>
   <div class="body">
-    <div class="tiles t2">
-      <div class="tile dark" style="padding:0"><canvas id="helixField" style="display:block;width:100%"></canvas><span class="cap">SUBSTANCES &middot; LIVE</span></div>
-      <div class="tile"><img class="fill" src="img/mv-hero.jpg" alt="The helix as machine vision"><span class="cap">HERO &middot; INSPECTION</span></div>
+    <div class="tiles" style="grid-template-columns:1fr">
+      <a class="tile" style="background:#244399" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="Liquid chrome helix fused into the molecular linework on a flat blue field"><span class="cap">HELIX INTO THE COMPOUND &middot; LIQUID CHROME ON FIELD</span></a>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
@@ -548,22 +547,21 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     <h2>The Compound</h2>
     <p>The linework on the label is a molecule, not a honeycomb. A column of fused rings up one
     edge, a branching chain with its atoms down the other, and both fade toward the centre so the
-    type sits on clear navy. On the pack it is foil. Everywhere else it is a flat cut.</p>
+    type sits on clear navy. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the helix. Flat cuts exist for print and small sizes only.</p>
     <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one.
     Hexagons edge to edge are wallpaper, and wallpaper is what every other peptide brand does.
     Two fragments, always these two, at the margins, fading in &mdash; and never behind type.</p>
     <p><b>Drawn to a grid.</b> Bond length L, joints at 120&deg;, stroke L/24, atoms L/10, round
     caps. Render it from the vector at the size you need. Never trace it off a photograph, never
     stretch it, never add rings.</p>
-    <p>White at 62% on Field is the default. Halo on Deep and SKO Blue on paper are the other two
-    cuts. Foil only where the pack is.</p>
+    <p>Chrome on Field is the default. The flat white, Halo and blue cuts are on the Assets page for
+    print and small sizes. Foil only where the pack is.</p>
     <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
   </div>
   <div class="body">
     <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.45fr 1fr">
-      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/pattern/compound-on-field-2400.jpg" download><img class="fill" src="img/pattern/compound-on-field-2400.jpg" alt="The compound at the edges of a flat field, white lockup centred"><span class="cap">WHITE 62% ON FIELD &middot; THE DEFAULT</span></a>
-      <a class="tile" style="background:#092266" href="img/pattern/compound-halo-2400.png" download><img class="edge" style="object-position:left center" src="img/pattern/compound-halo-2400.png" alt="Halo compound on deep"><span class="cap">HALO ON DEEP</span></a>
-      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/pattern/compound-blue-2400.png" download><img class="edge" style="object-position:right center" src="img/pattern/compound-blue-2400.png" alt="Blue compound on paper"><span class="cap">SKO BLUE ON PAPER</span></a>
+      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome at the edges of a flat blue field"><span class="cap">LIQUID CHROME ON FIELD &middot; THE DEFAULT</span></a>
+      <a class="tile" style="background:#244399;grid-column:1/3" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="The helix fused into the compound"><span class="cap">WITH THE HELIX &middot; ONE MATERIAL</span></a>
       <div class="tile no" style="background:#244399"><img class="fill" src="img/pattern/dont-wallpaper.jpg" alt="Hexagons filling the frame"><span class="cap">FILLED &middot; NO ATOMS &middot; NO FADE</span></div>
     </div>
     <div class="cutcaps" style="grid-template-columns:repeat(4,1fr)">
@@ -695,7 +693,9 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
       <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
-      <h3>The compound</h3><p>The label&rsquo;s molecular linework, drawn to the grid. The composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
+      <h3>The compound</h3><p>The two rendered masters first. Then the flat cuts, drawn to the grid for print and small sizes: the composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
+      <a class="ass dk" href="img/gen/compound-chrome-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-chrome-2400.jpg" alt=""></span><span class="meta"><b>Compound — liquid chrome on Field, the master</b><i>compound-chrome-1.png &middot; 2752&times;1536 &middot; 4217 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/helix-compound-1.png" download><span class="th"><img loading="lazy" src="img/gen/helix-compound-2400.jpg" alt=""></span><span class="meta"><b>Helix into the compound — liquid chrome on Field</b><i>helix-compound-1.png &middot; 2752&times;1536 &middot; 5479 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/sko-compound.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound.svg" alt=""></span><span class="meta"><b>Composition — 16:9, faded, takes currentColor</b><i>sko-compound.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/sko-compound-fragments.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound-fragments.svg" alt=""></span><span class="meta"><b>Fragments — the column and the branch, unfaded</b><i>sko-compound-fragments.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/pattern/compound-white-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-white-2400.png" alt=""></span><span class="meta"><b>White — transparent overlay for Field and Deep</b><i>compound-white-2400.png &middot; 2400&times;1500 &middot; 76 KB</i></span><span class="dl">DOWNLOAD</span></a>
