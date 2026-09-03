@@ -54,7 +54,7 @@ function start(host) {
     return MARK_RAMP[MARK_RAMP.length - 1][1].clone();
   }
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -71,10 +71,10 @@ function start(host) {
     const x = c.getContext('2d');
     const g = x.createLinearGradient(0, 0, 0, 512);
     g.addColorStop(0.00, '#f6faff'); g.addColorStop(0.16, '#c9dcf4');
-    g.addColorStop(0.24, '#20306e'); g.addColorStop(0.40, '#0b1236');
+    g.addColorStop(0.24, '#2f52b3'); g.addColorStop(0.40, '#173384');
     g.addColorStop(0.50, '#eaf2ff'); g.addColorStop(0.57, '#7f9cc8');
-    g.addColorStop(0.66, '#0a1030'); g.addColorStop(0.86, '#16224f');
-    g.addColorStop(1.00, '#5c78ab');
+    g.addColorStop(0.66, '#12297a'); g.addColorStop(0.86, '#244399');
+    g.addColorStop(1.00, '#3b5fbd');
     x.fillStyle = g; x.fillRect(0, 0, 1024, 512);
     x.fillStyle = 'rgba(255,255,255,.92)';
     x.fillRect(0, 96, 1024, 10); x.fillRect(0, 300, 1024, 6);
@@ -94,23 +94,13 @@ function start(host) {
 
   /* ---- materials ---- */
   const waveShaders = [];
-  function wavify(m) {
-    m.onBeforeCompile = (sh) => {
-      sh.uniforms.uT = { value: 0 };
-      sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace(
-        '#include <begin_vertex>',
-        `#include <begin_vertex>
-         float wy = transformed.y;
-         transformed.x += sin(wy * 1.7 + uT * 1.2) * 0.040;
-         transformed.z += cos(wy * 1.5 + uT * 0.9) * 0.040;`);
-      waveShaders.push(sh);
-    };
-    return m;
-  }
+  /* no lateral wave: the reference render is a rigid machined object, and
+     the wobble is what read as disjointed */
+  function wavify(m) { return m; }
   const MATS = {
     metal:  () => wavify(new THREE.MeshPhysicalMaterial({
-              color: 0xffffff, metalness: 1, roughness: 0.045,
-              iridescence: 1, iridescenceIOR: 1.6, iridescenceThicknessRange: [340, 760] })),
+              color: 0xffffff, metalness: 1, roughness: 0.06,
+              iridescence: 0.35, iridescenceIOR: 1.5, iridescenceThicknessRange: [300, 600] })),
     white3: () => new THREE.MeshPhysicalMaterial({
               color: 0xffffff, metalness: 0, roughness: 0.38, clearcoat: 0.5, clearcoatRoughness: 0.3 }),
     blue3:  () => new THREE.MeshStandardMaterial({ color: 0x173384, metalness: 0, roughness: 0.82 }),
@@ -147,20 +137,21 @@ function start(host) {
     };
     [0, PHASE * Math.PI * 2].forEach(p =>
       g.add(new THREE.Mesh(paint(new THREE.TubeGeometry(curve(p), 200, tubeR, 14, false)), mat)));
-    for (let i = 1; i < 22; i++) {
-      const t = i / 22, a = t * TURNS * Math.PI * 2, b = a + PHASE * Math.PI * 2;
+    for (let i = 1; i < 27; i++) {
+      const t = i / 27, a = t * TURNS * Math.PI * 2, b = a + PHASE * Math.PI * 2;
       const p1 = new THREE.Vector3(Math.cos(a) * RAD, (t - 0.5) * H, Math.sin(a) * RAD);
       const p2 = new THREE.Vector3(Math.cos(b) * RAD, (t - 0.5) * H, Math.sin(b) * RAD);
-      const len = p1.distanceTo(p2);
-      if (len < 0.12) continue;                       /* foreshorten to nothing at the crossings */
-      /* bake the rung's transform into its geometry so the ombré ramp can
-         be read straight off y, the same way it is on the strands */
-      const rg = new THREE.CylinderGeometry(rungR, rungR, len, 10);
-      const q = new THREE.Quaternion().setFromUnitVectors(
-        new THREE.Vector3(0, 1, 0), p2.clone().sub(p1).normalize());
-      const mid = p1.clone().add(p2).multiplyScalar(0.5);
-      rg.applyMatrix4(new THREE.Matrix4().compose(mid, q, new THREE.Vector3(1, 1, 1)));
-      g.add(new THREE.Mesh(paint(rg), mat));
+      const len = p1.distanceTo(p2), dir = p2.clone().sub(p1).normalize();
+      /* a base pair: two bars, one off each strand, meeting at a gap in the
+         middle — the way the reference render draws them */
+      const bar = Math.max(0.05, (len - 0.16) / 2);
+      for (const [from, sgn] of [[p1, 1], [p2, -1]]) {
+        const rg = new THREE.CylinderGeometry(rungR, rungR, bar, 10);
+        const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().multiplyScalar(sgn));
+        const mid = from.clone().add(dir.clone().multiplyScalar(sgn * bar / 2));
+        rg.applyMatrix4(new THREE.Matrix4().compose(mid, q, new THREE.Vector3(1, 1, 1)));
+        g.add(new THREE.Mesh(paint(rg), mat));
+      }
     }
     return g;
   }
@@ -174,7 +165,7 @@ function start(host) {
       new THREE.PlaneGeometry(CELL_W - 0.055, CELL_H),
       new THREE.MeshBasicMaterial({ color: cut.ground }));
     plate.position.z = PLATE_Z; plate.userData.cx = x; cell.add(plate); plates.push(plate);
-    const h = helix(MATS[cut.id](), 0.055, 0.026, cut.id === 'ombre');
+    const h = helix(MATS[cut.id](), 0.062, 0.040, cut.id === 'ombre');
     cell.add(h); spins.push(h);
   });
 

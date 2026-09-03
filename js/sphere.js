@@ -28,7 +28,7 @@ function start(host) {
      open the catalogue. Point HREF at a product page the day one exists. */
   const HREF = () => 'https://skocompounds.com/products';
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
@@ -47,10 +47,10 @@ function start(host) {
        over dark, the way a studio ceiling actually reads in a mirror */
     const g = x.createLinearGradient(0, 0, 0, 512);
     g.addColorStop(0.00, '#f6faff'); g.addColorStop(0.16, '#c9dcf4');
-    g.addColorStop(0.24, '#20306e'); g.addColorStop(0.40, '#0b1236');
+    g.addColorStop(0.24, '#2f52b3'); g.addColorStop(0.40, '#173384');
     g.addColorStop(0.50, '#eaf2ff'); g.addColorStop(0.57, '#7f9cc8');
-    g.addColorStop(0.66, '#0a1030'); g.addColorStop(0.86, '#16224f');
-    g.addColorStop(1.00, '#5c78ab');
+    g.addColorStop(0.66, '#12297a'); g.addColorStop(0.86, '#244399');
+    g.addColorStop(1.00, '#3b5fbd');
     x.fillStyle = g; x.fillRect(0, 0, 1024, 512);
     x.fillStyle = 'rgba(255,255,255,.92)';
     x.fillRect(0, 96, 1024, 10); x.fillRect(0, 300, 1024, 6);
@@ -90,20 +90,10 @@ function start(host) {
 
   function liquidMetal(tint) {
     const m = new THREE.MeshPhysicalMaterial({
-      color: tint, metalness: 1.0, roughness: 0.045,
-      iridescence: 1.0, iridescenceIOR: 1.6,
-      iridescenceThicknessRange: [340, 760],
+      color: tint, metalness: 1.0, roughness: 0.06,
+      iridescence: 0.35, iridescenceIOR: 1.5,
+      iridescenceThicknessRange: [300, 600],
     });
-    m.onBeforeCompile = (sh) => {
-      sh.uniforms.uT = { value: 0 };
-      sh.vertexShader = 'uniform float uT;\n' + sh.vertexShader.replace(
-        '#include <begin_vertex>',
-        `#include <begin_vertex>
-         float wy = transformed.y;
-         transformed.x += sin(wy * 0.52 + uT * 1.05) * 0.115;
-         transformed.z += cos(wy * 0.46 + uT * 0.85) * 0.115;`);
-      coreShaders.push(sh);
-    };
     return m;
   }
 
@@ -117,25 +107,27 @@ function start(host) {
       pts.push(new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R));
     }
     return new THREE.Mesh(
-      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 420, 0.078, 16, false),
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 420, 0.095, 16, false),
       liquidMetal(0xffffff));
   }
   core.add(strand(0), strand(PHASE * Math.PI * 2));
 
-  /* the rungs, foreshortening to nothing where the strands cross */
+  /* the rungs as base pairs: two chrome bars off each strand meeting at a
+     gap in the middle, at every station — the reference render */
   const rungMat = liquidMetal(0xdfe6f2);
   for (let i = 1; i < 46; i++) {
     const t = i / 46, a = t * CORE_TURNS * Math.PI * 2;
     const b = a + PHASE * Math.PI * 2;
     const p1 = new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R);
     const p2 = new THREE.Vector3(Math.cos(b) * CORE_R, (t - 0.5) * CORE_H, Math.sin(b) * CORE_R);
-    const len = p1.distanceTo(p2);
-    if (len < 0.16) continue;
-    const r = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.036, len, 10), rungMat);
-    r.position.copy(p1).add(p2).multiplyScalar(0.5);
-    r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0),
-      p2.clone().sub(p1).normalize());
-    core.add(r);
+    const len = p1.distanceTo(p2), dir = p2.clone().sub(p1).normalize();
+    const bar = Math.max(0.08, (len - 0.26) / 2);
+    for (const [from, sgn] of [[p1, 1], [p2, -1]]) {
+      const r = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, bar, 10), rungMat);
+      r.position.copy(from).add(dir.clone().multiplyScalar(sgn * bar / 2));
+      r.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().multiplyScalar(sgn));
+      core.add(r);
+    }
   }
 
   /* ---------------- the vial ----------------------------------
