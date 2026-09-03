@@ -167,6 +167,8 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 /* on this page the plates are absolutely placed so their intrinsic height
    cannot push the body past the 16:9 page — that is what cut the footer off */
 #compound .tile img{position:absolute;inset:0;width:100%;height:100%}
+/* and when the page is stacked (narrow screens) the plates need a height of their own */
+@media (max-width:900px){#compound .tiles{min-height:118vw}}
 
 /* alternates — fenced off so they cannot be mistaken for live cuts */
 .tile.dontuse{position:relative;opacity:.62}
