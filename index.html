@@ -171,7 +171,8 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
    cannot push the body past the 16:9 page — that is what cut the footer off */
 #helix .tile img,#compound .tile img{position:absolute;inset:0;width:100%;height:100%}
 /* and when the page is stacked (narrow screens) the plates need a height of their own */
-@media (max-width:900px){#compound .tiles{min-height:118vw}}
+#compound .tiles{min-height:62vw;max-height:900px}
+@media (max-width:900px){#compound .tiles{min-height:170vw;max-height:none}}
 
 /* alternates — fenced off so they cannot be mistaken for live cuts */
 .tile.dontuse{position:relative;opacity:.62}
@@ -262,7 +263,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <!-- 02 logo -->
-<div class="page fill">
+<div class="page" id="logo">
   <div class="col">
     <h2>Logo</h2>
     <p><b>Three shapes, and the names matter</b> because the filename is what the next person
@@ -279,11 +280,15 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     full&#8209;colour lockup is a render and does not survive either.</p>
   </div>
   <div class="body">
-    <div class="tiles t2" style="margin-bottom:12px">
+    <div class="tiles t2" style="margin-bottom:12px;aspect-ratio:4.4">
       <div class="tile"><img class="mark" src="img/lockup-3x1-navy.png" alt="Lockup, navy on light"><span class="cap">3&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
       <div class="tile blue"><img class="mark" src="img/lockup-3x1-white.png" alt="Lockup, white on blue"><span class="cap">3&times;1 LOCKUP &middot; WHITE ON BLUE</span></div>
     </div>
-    <div class="tiles badges" style="grid-template-columns:repeat(3,1fr)">
+    <div class="tiles t2" style="margin-bottom:12px;aspect-ratio:3.2">
+      <div class="tile blue"><img class="mark" style="width:auto;height:72%;max-height:72%" src="img/vector/lockup-1x1-white-2000.png" alt="1x1 lockup, white on blue"><span class="cap">1&times;1 LOCKUP &middot; WHITE ON BLUE &middot; SHIELD ON TOP</span></div>
+      <div class="tile"><img class="mark" style="width:auto;height:72%;max-height:72%" src="img/vector/lockup-1x1-navy-2000.png" alt="1x1 lockup, navy on light"><span class="cap">1&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
+    </div>
+    <div class="tiles badges" style="grid-template-columns:repeat(3,1fr);aspect-ratio:3.6">
       <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield on blue"><span class="cap">FLAT WHITE &middot; DISCLAIMERS</span></div>
       <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield on light"><span class="cap">FLAT BLUE &middot; #173384</span></div>
       <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield on light"><span class="cap">FLAT DEEP &middot; #092266</span></div>
@@ -544,33 +549,32 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 <script type="module" src="js/helixset.js?v=11"></script>
 
 <!-- the compound -->
-<div class="page fill" id="compound">
+<div class="page" id="compound">
   <div class="col">
     <h2>The Compound</h2>
-    <p>The linework on the label is a molecule, not a honeycomb. A column of fused rings up one
-    edge, a branching chain with its atoms down the other, and both fade toward the centre so the
-    type sits on clear navy. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the helix. Flat cuts exist for print and small sizes only.</p>
-    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one.
-    Hexagons edge to edge are wallpaper, and wallpaper is what every other peptide brand does.
-    Two fragments, always these two, at the margins, fading in &mdash; and never behind type.</p>
-    <p><b>Drawn to a grid.</b> Bond length L, joints at 120&deg;, stroke L/24, atoms L/10, round
-    caps. Render it from the vector at the size you need. Never trace it off a photograph, never
-    stretch it, never add rings.</p>
-    <p>Chrome on Field is the default. The flat white, Halo and blue cuts are on the Assets page for
-    print and small sizes. Foil only where the pack is.</p>
+    <p>The linework on the label is a molecule. A column of fused rings up one edge, a branching
+    chain with its atoms down the other, both fading toward the centre so the type sits on clear
+    ground. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the
+    helix.</p>
+    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one. There is
+    no honeycomb cut, and there will not be one. Two fragments at the margins, fading in, and never
+    behind type.</p>
+    <p><b>Four grounds.</b> Field is the default. Deep for dark work, Halo for light, and white for
+    print and paper. The chrome is the same in all four; only the ground changes, so the reflections
+    change with it.</p>
+    <p><b>Three frames.</b> 16:9, 9:16 and 1:1, each composed for its shape rather than cropped from
+    the wide one. In print it runs as a foil deboss along the edges of the box and the card.</p>
     <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
   </div>
   <div class="body">
-    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.45fr 1fr">
-      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome at the edges of a flat blue field"><span class="cap">LIQUID CHROME ON FIELD &middot; THE DEFAULT</span></a>
-      <a class="tile" style="background:#244399;grid-column:1/3" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="The helix fused into the compound"><span class="cap">WITH THE HELIX &middot; ONE MATERIAL</span></a>
-      <div class="tile no" style="background:#244399"><img class="fill" src="img/pattern/dont-wallpaper.jpg" alt="Hexagons filling the frame"><span class="cap">FILLED &middot; NO ATOMS &middot; NO FADE</span></div>
-    </div>
-    <div class="cutcaps" style="grid-template-columns:repeat(4,1fr)">
-      <span><b>Bond</b>L &middot; the unit</span>
-      <span><b>Joint</b>120&deg; &middot; always</span>
-      <span><b>Stroke</b>L / 24 &middot; round caps</span>
-      <span><b>Atom</b>L / 10 &middot; terminals and alternate joints</span>
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.6fr 1fr 1fr">
+      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome on a flat blue field"><span class="cap">FIELD #244399 &middot; THE DEFAULT</span></a>
+      <a class="tile" style="background:#092266" href="img/gen/compound-deep-1.png" download><img class="fill" src="img/gen/compound-deep-web.jpg" alt="The compound on deep"><span class="cap">DEEP #092266</span></a>
+      <a class="tile" style="background:#9DBFD9" href="img/gen/compound-halo-1.png" download><img class="fill" src="img/gen/compound-halo-web.jpg" alt="The compound on halo"><span class="cap">HALO #9DBFD9</span></a>
+      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/gen/compound-white-1.png" download><img class="fill" src="img/gen/compound-white-web.jpg" alt="The compound on white"><span class="cap">WHITE &middot; PRINT</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-9x16-1.png" download><img class="fill" src="img/gen/compound-9x16-web.jpg" alt="The compound composed 9:16"><span class="cap">9:16</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-1x1-1.png" download><img class="fill" src="img/gen/compound-1x1-web.jpg" alt="The compound composed 1:1"><span class="cap">1:1</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-usage-1.png" download><img class="fill" src="img/gen/compound-usage-web.jpg" alt="The compound as a foil deboss on the box and the card"><span class="cap">IN PRINT &middot; FOIL DEBOSS</span></a>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
@@ -698,6 +702,12 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
       <h3>The compound</h3><p>The two rendered masters first. Then the flat cuts, drawn to the grid for print and small sizes: the composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
       <a class="ass dk" href="img/gen/compound-chrome-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-chrome-2400.jpg" alt=""></span><span class="meta"><b>Compound — liquid chrome on Field, the master</b><i>compound-chrome-1.png &middot; 2752&times;1536 &middot; 4217 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/gen/helix-compound-1.png" download><span class="th"><img loading="lazy" src="img/gen/helix-compound-2400.jpg" alt=""></span><span class="meta"><b>Helix into the compound — liquid chrome on Field</b><i>helix-compound-1.png &middot; 2752&times;1536 &middot; 5479 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-deep-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-deep-web.jpg" alt=""></span><span class="meta"><b>Compound on Deep</b><i>compound-deep-1.png &middot; 2752&times;1536 &middot; 4907 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/compound-halo-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-halo-web.jpg" alt=""></span><span class="meta"><b>Compound on Halo</b><i>compound-halo-1.png &middot; 2752&times;1536 &middot; 4961 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/compound-white-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-white-web.jpg" alt=""></span><span class="meta"><b>Compound on white — print</b><i>compound-white-1.png &middot; 2752&times;1536 &middot; 6116 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-9x16-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-9x16-web.jpg" alt=""></span><span class="meta"><b>Compound — 9:16</b><i>compound-9x16-1.png &middot; 1536&times;2752 &middot; 5429 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-1x1-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-1x1-web.jpg" alt=""></span><span class="meta"><b>Compound — 1:1</b><i>compound-1x1-1.png &middot; 2048&times;2048 &middot; 3898 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-usage-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-usage-web.jpg" alt=""></span><span class="meta"><b>Compound in print — foil deboss on box and card</b><i>compound-usage-1.png &middot; 2752&times;1536 &middot; 6107 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/sko-compound.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound.svg" alt=""></span><span class="meta"><b>Composition — 16:9, faded, takes currentColor</b><i>sko-compound.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/sko-compound-fragments.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound-fragments.svg" alt=""></span><span class="meta"><b>Fragments — the column and the branch, unfaded</b><i>sko-compound-fragments.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass dk" href="img/pattern/compound-white-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-white-2400.png" alt=""></span><span class="meta"><b>White — transparent overlay for Field and Deep</b><i>compound-white-2400.png &middot; 2400&times;1500 &middot; 76 KB</i></span><span class="dl">DOWNLOAD</span></a>
