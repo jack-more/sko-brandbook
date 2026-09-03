@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>SKO Compounds — Brand Book</title>
 <meta property="og:title" content="SKO Compounds — Brand Book">
+<link rel="icon" type="image/png" href="img/shield/shield-blue-128.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
 <style>
@@ -154,6 +155,15 @@ img{display:block;max-width:100%}
 .tiles.badges img.mark{width:auto;max-height:47%;max-width:40%;margin-bottom:6px}
 .col .kw{background:var(--blue);color:#fff;padding:1px 5px;border-radius:2px;
   font-size:8.5px;letter-spacing:.12em}
+
+/* the compound — edge fragments, and the two verdict badges */
+a.tile{text-decoration:none;color:inherit;cursor:pointer}
+a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
+.tile.ok::after,.tile.no::after{position:absolute;top:8px;right:8px;font-family:'Inter',sans-serif;
+  font-size:7.5px;letter-spacing:.16em;color:#fff;padding:2px 6px;border-radius:2px}
+.tile.ok::after{content:'DO';background:var(--blue)}
+.tile.no::after{content:'DON\'T';background:var(--bad)}
+.tile img.edge{width:100%;height:100%;object-fit:cover}
 
 /* alternates — fenced off so they cannot be mistaken for live cuts */
 .tile.dontuse{position:relative;opacity:.62}
@@ -527,6 +537,40 @@ img{display:block;max-width:100%}
 </div>
 <script type="module" src="js/helixset.js?v=9"></script>
 
+<!-- the compound -->
+<div class="page" id="compound">
+  <div class="col">
+    <h2>The Compound</h2>
+    <p>The linework on the label is a molecule, not a honeycomb. A column of fused rings up one
+    edge, a branching chain with its atoms down the other, and both fade toward the centre so the
+    type sits on clear navy. On the pack it is foil. Everywhere else it is a flat cut.</p>
+    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one.
+    Hexagons edge to edge are wallpaper, and wallpaper is what every other peptide brand does.
+    Two fragments, always these two, at the margins, fading in &mdash; and never behind type.</p>
+    <p><b>Drawn to a grid.</b> Bond length L, joints at 120&deg;, stroke L/24, atoms L/10, round
+    caps. Render it from the vector at the size you need. Never trace it off a photograph, never
+    stretch it, never add rings.</p>
+    <p>White at 62% on Field is the default. Halo on Deep and SKO Blue on paper are the other two
+    cuts. Foil only where the pack is.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.45fr 1fr">
+      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/pattern/compound-on-field-2400.jpg" download><img class="fill" src="img/pattern/compound-on-field-2400.jpg" alt="The compound at the edges of a flat field, white lockup centred"><span class="cap">WHITE 62% ON FIELD &middot; THE DEFAULT</span></a>
+      <a class="tile" style="background:#092266" href="img/pattern/compound-halo-2400.png" download><img class="edge" style="object-position:left center" src="img/pattern/compound-halo-2400.png" alt="Halo compound on deep"><span class="cap">HALO ON DEEP</span></a>
+      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/pattern/compound-blue-2400.png" download><img class="edge" style="object-position:right center" src="img/pattern/compound-blue-2400.png" alt="Blue compound on paper"><span class="cap">SKO BLUE ON PAPER</span></a>
+      <div class="tile no" style="background:#244399"><img class="fill" src="img/pattern/dont-wallpaper.jpg" alt="Hexagons filling the frame"><span class="cap">FILLED &middot; NO ATOMS &middot; NO FADE</span></div>
+    </div>
+    <div class="cutcaps" style="grid-template-columns:repeat(4,1fr)">
+      <span><b>Bond</b>L &middot; the unit</span>
+      <span><b>Joint</b>120&deg; &middot; always</span>
+      <span><b>Stroke</b>L / 24 &middot; round caps</span>
+      <span><b>Atom</b>L / 10 &middot; terminals and alternate joints</span>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
 <!-- system: field -->
 <div class="page" id="sys-field">
   <div class="col">
@@ -646,6 +690,18 @@ img{display:block;max-width:100%}
       <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
+      <h3>The compound</h3><p>The label&rsquo;s molecular linework, drawn to the grid. The composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
+      <a class="ass" href="img/vector/sko-compound.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound.svg" alt=""></span><span class="meta"><b>Composition — 16:9, faded, takes currentColor</b><i>sko-compound.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/sko-compound-fragments.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound-fragments.svg" alt=""></span><span class="meta"><b>Fragments — the column and the branch, unfaded</b><i>sko-compound-fragments.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/pattern/compound-white-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-white-2400.png" alt=""></span><span class="meta"><b>White — transparent overlay for Field and Deep</b><i>compound-white-2400.png &middot; 2400&times;1500 &middot; 76 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/pattern/compound-halo-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-halo-2400.png" alt=""></span><span class="meta"><b>Halo — transparent overlay for Deep</b><i>compound-halo-2400.png &middot; 2400&times;1500 &middot; 117 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-blue-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-blue-2400.png" alt=""></span><span class="meta"><b>SKO Blue — transparent overlay for paper</b><i>compound-blue-2400.png &middot; 2400&times;1500 &middot; 114 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-deep-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-deep-2400.png" alt=""></span><span class="meta"><b>Deep — transparent overlay for paper</b><i>compound-deep-2400.png &middot; 2400&times;1500 &middot; 112 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-2400.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-2400.jpg" alt=""></span><span class="meta"><b>On Field with the white lockup — 8:5</b><i>compound-on-field-2400.jpg &middot; 2400&times;1500 &middot; 246 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-1x1.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-1x1.jpg" alt=""></span><span class="meta"><b>On Field — 1&times;1</b><i>compound-on-field-1x1.jpg &middot; 1200&times;1200 &middot; 153 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-9x16.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-9x16.jpg" alt=""></span><span class="meta"><b>On Field — 9:16</b><i>compound-on-field-9x16.jpg &middot; 1080&times;1920 &middot; 173 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
       <h3>Flat shields</h3><p>Two cuts. PLAIN is the solid silhouette with no helix &mdash; the badge, and the one to use over a photograph. MARK has the helix knocked out, so the helix takes the ground colour. Both one colour, cut from the vector. Use these below ~48px and anywhere the mark sits on an image.</p>
       <a class="ass dk" href="img/shield/shield-plain-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-white-2000.png" alt=""></span><span class="meta"><b>PLAIN white — solid, no helix</b><i>shield-plain-white-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/shield/shield-plain-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-blue-2000.png" alt=""></span><span class="meta"><b>PLAIN luxury blue — solid, no helix</b><i>shield-plain-blue-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
@@ -659,11 +715,14 @@ img{display:block;max-width:100%}
     </div>
     <div class="agroup">
       <h3>Lockups</h3><p>Shield and wordmark together. 3&times;1 is horizontal, 1&times;1 is stacked with the shield on top &mdash; neither is the shield alone. White is the only cut for coloured grounds; full colour is white-ground-only, at size only.</p>
-      <a class="ass" href="img/logo/clean/lockup-3x1-fullcolour-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-3x1-fullcolour-2000.png" alt=""></span><span class="meta"><b>3×1 lockup — full colour, white ground, at size</b><i>lockup-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/vector/lockup-1x1-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — white, flat, from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; flat, from the vector</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/lockup-1x1-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, flat, from the vector</b><i>mark-navy-2000.png &middot; 2000&times;1654 &middot; 163 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/vector/lockup-1x1-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — white, flat, from the vector</b><i>mark-white-2000.png &middot; 2000&times;1654 &middot; 125 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/lockup-1x1-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-deep-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — deep, flat, from the vector</b><i>mark-deep-2000.png &middot; 2000&times;1654 &middot; 161 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/logo/clean/lockup-3x1-fullcolour-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-3x1-fullcolour-2000.png" alt=""></span><span class="meta"><b>3×1 lockup — full colour, white ground, at size</b><i>lockup-3x1-fullcolour-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/lockup-3x1-white.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-white.png" alt=""></span><span class="meta"><b>3×1 lockup — white, flat</b><i>lockup-3x1-white.png &middot; 700&times;235 &middot; 41 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/lockup-3x1-navy.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-navy.png" alt=""></span><span class="meta"><b>3×1 lockup — navy, flat</b><i>lockup-3x1-navy.png &middot; 700&times;235 &middot; 70 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/lockup-1x1-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — white, flat, from the vector</b><i>lockup-1x1-white-2000.png &middot; 2000&times;2000 &middot; 128 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, flat, from the vector</b><i>lockup-1x1-navy-2000.png &middot; 2000&times;2000 &middot; 130 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-deep-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — deep, flat, from the vector</b><i>lockup-1x1-deep-2000.png &middot; 2000&times;2000 &middot; 129 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/lockup-1x1-white-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-512.png" alt=""></span><span class="meta"><b>1×1 lockup — white, 512</b><i>lockup-1x1-white-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-navy-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-512.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, 512</b><i>lockup-1x1-navy-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
@@ -736,7 +795,7 @@ img{display:block;max-width:100%}
           <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
       <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Beverly Hills</td>
           <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Over 30k orders shipped</td>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Over 38k orders shipped</td>
           <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CONFIRMED BY OWNERSHIP</td></tr>
       <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Out the door in 24 hours</td>
           <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CARRIES ITS OWN REMEDY</td></tr>
