@@ -121,7 +121,7 @@ function start(host) {
     const p1 = new THREE.Vector3(Math.cos(a) * CORE_R, (t - 0.5) * CORE_H, Math.sin(a) * CORE_R);
     const p2 = new THREE.Vector3(Math.cos(b) * CORE_R, (t - 0.5) * CORE_H, Math.sin(b) * CORE_R);
     const len = p1.distanceTo(p2), dir = p2.clone().sub(p1).normalize();
-    const bar = Math.max(0.08, (len - 0.26) / 2);
+    const bar = Math.max(0.08, (len - 0.10) / 2);
     for (const [from, sgn] of [[p1, 1], [p2, -1]]) {
       const r = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, bar, 10), rungMat);
       r.position.copy(from).add(dir.clone().multiplyScalar(sgn * bar / 2));

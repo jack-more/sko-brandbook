@@ -144,7 +144,7 @@ function start(host) {
       const len = p1.distanceTo(p2), dir = p2.clone().sub(p1).normalize();
       /* a base pair: two bars, one off each strand, meeting at a gap in the
          middle — the way the reference render draws them */
-      const bar = Math.max(0.05, (len - 0.16) / 2);
+      const bar = Math.max(0.05, (len - 0.06) / 2);
       for (const [from, sgn] of [[p1, 1], [p2, -1]]) {
         const rg = new THREE.CylinderGeometry(rungR, rungR, bar, 10);
         const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().multiplyScalar(sgn));

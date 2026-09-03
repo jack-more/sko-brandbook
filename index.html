@@ -22,10 +22,13 @@ body{background:#D9DCE2;color:var(--ink);font-family:'DM Sans',ui-sans-serif,sys
 img{display:block;max-width:100%}
 .mono{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 
-/* one page = one topic, 16:9, like a real book spread */
-.page{width:min(1400px,94vw);margin:0 auto 26px;aspect-ratio:16/9;background:var(--paper);
+/* one page = one topic. A page is as tall as what is on it — a fixed 16:9
+   left dead space under short pages and cut the footer off tall ones. The
+   pages whose plates fill the frame keep the 16:9 spread. */
+.page{width:min(1400px,94vw);margin:0 auto 26px;aspect-ratio:auto;background:var(--paper);
   display:grid;grid-template-columns:19% 1fr;grid-template-rows:1fr auto;
   padding:44px 46px 0;position:relative;overflow:hidden}
+.page.fill,.page.cover{aspect-ratio:16/9}
 .col{padding-right:30px}
 .col h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px}
 .col p{font-size:11.5px;line-height:1.55;color:var(--mid);max-width:30ch;margin-bottom:9px}
@@ -259,7 +262,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <!-- 02 logo -->
-<div class="page">
+<div class="page fill">
   <div class="col">
     <h2>Logo</h2>
     <p><b>Three shapes, and the names matter</b> because the filename is what the next person
@@ -480,10 +483,10 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
 </div>
 
-<script type="module" src="js/sphere.js?v=4"></script>
+<script type="module" src="js/sphere.js?v=5"></script>
 
 <!-- 06 helix -->
-<div class="page" id="helix">
+<div class="page fill" id="helix">
   <div class="col">
     <h2>Helix</h2>
     <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
@@ -538,10 +541,10 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
 </div>
-<script type="module" src="js/helixset.js?v=10"></script>
+<script type="module" src="js/helixset.js?v=11"></script>
 
 <!-- the compound -->
-<div class="page" id="compound">
+<div class="page fill" id="compound">
   <div class="col">
     <h2>The Compound</h2>
     <p>The linework on the label is a molecule, not a honeycomb. A column of fused rings up one
@@ -733,7 +736,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <!-- alternates -->
-<div class="page" id="alternates">
+<div class="page fill" id="alternates">
   <div class="col">
     <h2>Alternates &mdash; not in use</h2>
     <p><b>None of these ship.</b> They are here so the set is documented and so nobody finds one in
@@ -758,7 +761,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <!-- 07 photography -->
-<div class="page">
+<div class="page fill">
   <div class="col">
     <h2>Photography</h2>
     <p>Four approved sets. Every one is the real product, composited &mdash; never generated.
