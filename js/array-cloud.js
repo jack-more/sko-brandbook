@@ -53,17 +53,17 @@
   }
 
   function metrics(c) {
-    const r = Math.min(S.W, S.H) * 0.44 * S.zoom;
+    const r = Math.min(S.W, S.H) * 0.47 * S.zoom;
     const q = project(c.p);
     let sx = S.W / 2 + q.x * r, sy = S.H / 2 - q.y * r * 0.92, z = q.z;
-    sx += (S.W / 2 - sx) * 0.86 * c.foc; sy += (S.H / 2 - sy) * 0.86 * c.foc; z += (1.25 - z) * 0.7 * c.foc;
+    sx += (S.W / 2 - sx) * 0.86 * c.foc; sy += (S.H / 2 - sy) * 0.86 * c.foc; z += (1.4 - z) * 0.85 * c.foc;
     z += 0.12 * c.hov;
     const depth = (z + 1) / 2;                                  /* 0 back .. 1 front */
-    const scale = (0.55 + depth * 0.75) * S.zoom * (1 + c.foc * 0.55 + c.hov * 0.10 - c.dim * 0.10);
-    const h = S.H * 0.26 * scale;                               /* a front vial is about a quarter of the frame */
+    const scale = (0.5 + depth * 0.8) * S.zoom * (1 + c.foc * 0.95 + c.hov * 0.10 - c.dim * 0.12);
+    const h = S.H * 0.185 * scale;                               /* a front vial is about a quarter of the frame */
     const ar = c.img.naturalWidth && c.img.naturalHeight ? c.img.naturalWidth / c.img.naturalHeight : 0.44;
     const w = h * ar;
-    const alpha = Math.min(1, (0.18 + 0.82 * Math.pow(depth, 1.6)) + c.hov * 0.2 + c.foc) * (1 - c.dim * 0.62);
+    const alpha = Math.min(1, (0.10 + 0.90 * Math.pow(depth, 1.8)) + c.hov * 0.2 + c.foc) * (1 - c.dim * 0.72);
     return { sx, sy, z, w, h, alpha, depth };
   }
 
