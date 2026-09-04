@@ -169,7 +169,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 .tile img.edge{width:100%;height:100%;object-fit:cover}
 /* on this page the plates are absolutely placed so their intrinsic height
    cannot push the body past the 16:9 page — that is what cut the footer off */
-#helix .tile img,#compound .tile img,#photo-studio .tile img,#photo-moments .tile img{position:absolute;inset:0;width:100%;height:100%}
+#helix .tile img,#helix-cuts .tile img,#compound .tile img,#photo-studio .tile img,#photo-moments .tile img{position:absolute;inset:0;width:100%;height:100%}
 /* and when the page is stacked (narrow screens) the plates need a height of their own */
 #compound .tiles{min-height:62vw;max-height:900px}
 @media (max-width:900px){#compound .tiles{min-height:170vw;max-height:none}}
@@ -387,6 +387,103 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <!-- typography -->
+<!-- 06 helix -->
+<div class="page fill" id="helix">
+  <div class="col">
+    <h2>Helix</h2>
+    <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
+    iridescence, the same physics as the foil on the label. It is never line art and it is never a
+    glyph. What is on the page is a machined object standing in the Field.</p>
+    <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
+    B&#8209;DNA its wide major groove and narrow minor one. Two and a half turns at this radius; tighter
+    reads as a spring.</p>
+    <p><b>It joins the compound.</b> Where the helix meets the label&rsquo;s molecular linework the two
+    are the same chrome, bond for bond, and the linework fades into the blue. One material, two forms:
+    the helix is the structure, the compound is what it is made of.</p>
+    <p>The frame it sits in is the Klein rule: flat Field, edge to edge, and one side left empty for
+    the title.</p>
+    <p class="mono dl">CLICK THE PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:1fr">
+      <a class="tile" style="background:#244399" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="Liquid chrome helix fused into the molecular linework on a flat blue field"><span class="cap">HELIX INTO THE COMPOUND &middot; LIQUID CHROME ON FIELD</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+
+<!-- 06b helix treatments -->
+<div class="page" id="helix-cuts">
+  <div class="col">
+    <h2>Helix &mdash; the cuts</h2>
+    <p>One helix, seven cuts. Every one is rendered off the same reference &mdash; the chrome helix
+    on the cover &mdash; so the geometry is identical in all seven: two and a half turns, strands
+    offset 0.42 of a turn, rungs as paired bars. The only variable is material.</p>
+    <p><b>Three are rendered.</b> Liquid chrome is the hero cut and carries the thin&#8209;film
+    iridescence of the foil. Soft white and matte blue are the quiet ones.</p>
+    <p><b>Three are flat.</b> Unlit colour, no shading, no highlight. These survive small sizes, flat
+    print and embroidery, and they are the default wherever a render cannot be trusted to hold.</p>
+    <p><b>And one is the mark itself.</b> The logo ombr&eacute; runs the lockup&rsquo;s own range down
+    the strand: light chrome blue at the top, through the palette, to the deep navy the shield ends on.</p>
+    <p>Each sits on the ground it is for: white on blue, blue on paper, chrome and light blue on carbon.</p>
+    <p class="mono dl">CLICK ANY CUT TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="flex:none;grid-template-columns:repeat(7,1fr);height:clamp(280px,36vw,500px)">
+      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-metal.png" download><img class="fill" src="img/gen/cuts/helix-metal-web.jpg" alt="Liquid chrome helix on carbon"></a>
+      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-white3.png" download><img class="fill" src="img/gen/cuts/helix-white3-web.jpg" alt="Soft white helix on blue"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-blue3.png" download><img class="fill" src="img/gen/cuts/helix-blue3-web.jpg" alt="Matte blue helix on paper"></a>
+      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-flatw.png" download><img class="fill" src="img/gen/cuts/helix-flatw-web.jpg" alt="Flat white helix on blue"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-flatb.png" download><img class="fill" src="img/gen/cuts/helix-flatb-web.jpg" alt="Flat blue helix on paper"></a>
+      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-flatl.png" download><img class="fill" src="img/gen/cuts/helix-flatl-web.jpg" alt="Flat light blue helix on carbon"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-ombre.png" download><img class="fill" src="img/gen/cuts/helix-ombre-web.jpg" alt="Logo ombre helix on paper"></a>
+    </div>
+    <div class="cutcaps">
+      <span><b>Liquid chrome</b>rendered &middot; thin film</span>
+      <span><b>White</b>rendered &middot; soft</span>
+      <span><b>Matte blue</b>rendered &middot; unpolished</span>
+      <span><b>Flat white</b>#FFFFFF</span>
+      <span><b>Flat blue</b>#173384</span>
+      <span><b>Flat light blue</b>#9DBFD9</span>
+      <span><b>Logo ombr&eacute;</b>the mark&rsquo;s own blues</span>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- the compound -->
+<div class="page" id="compound">
+  <div class="col">
+    <h2>The Compound</h2>
+    <p>The linework on the label is a molecule. A column of fused rings up one edge, a branching
+    chain with its atoms down the other, both fading toward the centre so the type sits on clear
+    ground. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the
+    helix.</p>
+    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one. There is
+    no honeycomb cut, and there will not be one. Two fragments at the margins, fading in, and never
+    behind type.</p>
+    <p><b>Four grounds.</b> Field is the default. Deep for dark work, Halo for light, and white for
+    print and paper. The chrome is the same in all four; only the ground changes, so the reflections
+    change with it.</p>
+    <p><b>Three frames.</b> 16:9, 9:16 and 1:1, each composed for its shape rather than cropped from
+    the wide one. In print it runs as a foil deboss along the edges of the box and the card.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.6fr 1fr 1fr">
+      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome on a flat blue field"><span class="cap">FIELD #244399 &middot; THE DEFAULT</span></a>
+      <a class="tile" style="background:#092266" href="img/gen/compound-deep-1.png" download><img class="fill" src="img/gen/compound-deep-web.jpg" alt="The compound on deep"><span class="cap">DEEP #092266</span></a>
+      <a class="tile" style="background:#9DBFD9" href="img/gen/compound-halo-1.png" download><img class="fill" src="img/gen/compound-halo-web.jpg" alt="The compound on halo"><span class="cap">HALO #9DBFD9</span></a>
+      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/gen/compound-white-1.png" download><img class="fill" src="img/gen/compound-white-web.jpg" alt="The compound on white"><span class="cap">WHITE &middot; PRINT</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-9x16-1.png" download><img class="fill" src="img/gen/compound-9x16-web.jpg" alt="The compound composed 9:16"><span class="cap">9:16</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-1x1-1.png" download><img class="fill" src="img/gen/compound-1x1-web.jpg" alt="The compound composed 1:1"><span class="cap">1:1</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-usage-1.png" download><img class="fill" src="img/gen/compound-usage-web.jpg" alt="The compound as a foil deboss on the box and the card"><span class="cap">IN PRINT &middot; FOIL DEBOSS</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
 <div class="page" id="typography">
   <div class="col">
     <h2>Typography</h2>
@@ -458,124 +555,6 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
         <figcaption><b>The orbit</b><span class="mono">idle 0.0016 rad/f &middot; damping 0.90</span></figcaption></figure>
     </div>
     <p class="mono mfoot">THE ARRAY &mdash; FILL 9000ms &middot; HOLD 2800ms &middot; CLEAR 3200ms &middot; CUBIC IN-OUT &middot; SEAL PROPAGATES ADJACENT ONLY</p>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
-</div>
-
-<!-- 04 the array -->
-<div class="page">
-  <div class="col">
-    <h2>The Array</h2>
-    <p>The catalogue in orbit &mdash; all 34 units, with the names, sizes and prices read off the
-    live store. <b>Every unit is a real vial in three dimensions</b>, not a picture of one.</p>
-    <p>The profile is that SKU&rsquo;s own silhouette, measured off its catalogue render and
-    revolved, so the body, shoulder, neck, crimp collar and flip&#8209;top are the shape the product
-    actually is. The label is its own artwork, un&#8209;projected off the front&#8209;on render and
-    wrapped. Units are held at one height the way the rail shot holds them, and diameter is left
-    alone &mdash; so a tall vial reads correctly as a thin one.</p>
-    <p>At the centre, <b>the helix runs the full height and out both ends</b> &mdash; the catalogue
-    orbits it rather than the helix sitting among the units. Liquid metal carrying real
-    thin&#8209;film iridescence, the same physics as the foil on the label. Strands offset 0.42 of a
-    turn, pitch held near twice the diameter so it reads as DNA and not as a spring.</p>
-    <p>The ground is <b>Field #244399, flat</b>. No gradient, no vignette. The depth in the frame
-    comes from the objects in it, never from the surface behind them.</p>
-    <p><b>Drag to spin it.</b> It carries momentum and settles. Hovering holds it still and raises
-    that unit; clicking opens that product.</p>
-  </div>
-  <div class="body">
-    <div id="arraySphere" style="width:100%;border-radius:5px;overflow:hidden;background:#244399"></div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
-</div>
-
-<script type="module" src="js/sphere.js?v=5"></script>
-
-<!-- 06 helix -->
-<div class="page fill" id="helix">
-  <div class="col">
-    <h2>Helix</h2>
-    <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
-    iridescence, the same physics as the foil on the label. It is never line art and it is never a
-    glyph. What is on the page is a machined object standing in the Field.</p>
-    <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
-    B&#8209;DNA its wide major groove and narrow minor one. Two and a half turns at this radius; tighter
-    reads as a spring.</p>
-    <p><b>It joins the compound.</b> Where the helix meets the label&rsquo;s molecular linework the two
-    are the same chrome, bond for bond, and the linework fades into the blue. One material, two forms:
-    the helix is the structure, the compound is what it is made of.</p>
-    <p>The frame it sits in is the Klein rule: flat Field, edge to edge, and one side left empty for
-    the title.</p>
-    <p class="mono dl">CLICK THE PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="grid-template-columns:1fr">
-      <a class="tile" style="background:#244399" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="Liquid chrome helix fused into the molecular linework on a flat blue field"><span class="cap">HELIX INTO THE COMPOUND &middot; LIQUID CHROME ON FIELD</span></a>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
-</div>
-
-
-<!-- 06b helix treatments -->
-<div class="page" id="helix-cuts">
-  <div class="col">
-    <h2>Helix &mdash; the cuts</h2>
-    <p>One helix, six treatments. The geometry is identical in all six &mdash; strands offset 0.42 of
-    a turn &mdash; so the only variable is material.</p>
-    <p><b>Three are rendered.</b> Liquid metal is the hero cut and carries real thin&#8209;film
-    iridescence, the same physics as the foil. White and matte blue are the quiet ones.</p>
-    <p><b>Three are flat.</b> Unlit colour, no shading, no highlight. These are the cuts that survive
-    small sizes, flat print and embroidery &mdash; and they are the default wherever a render cannot
-    be trusted to hold.</p>
-    <p><b>And one that is the mark itself.</b> The logo ombr&eacute; runs the lockup&rsquo;s own range
-    down the strand &mdash; the light chrome&#8209;blue of the helix at the top, through the palette,
-    to the deep navy the shield ends on at its point. Both ends are sampled off the artwork.</p>
-    <p>Each sits on the ground it is for: white on blue, blue on paper, metal and light blue on carbon.</p>
-  </div>
-  <div class="body">
-    <div id="helixSet" style="width:100%;border-radius:5px;overflow:hidden"></div>
-    <div class="cutcaps">
-      <span><b>Liquid metal</b>3D &middot; chrome + thin film</span>
-      <span><b>White</b>3D &middot; soft</span>
-      <span><b>Matte blue</b>3D &middot; unpolished</span>
-      <span><b>Flat white</b>#FFFFFF</span>
-      <span><b>Flat blue</b>#173384</span>
-      <span><b>Flat light blue</b>#9DBFD9</span>
-      <span><b>Logo ombr&eacute;</b>The mark&rsquo;s own blues</span>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
-</div>
-<script type="module" src="js/helixset.js?v=11"></script>
-
-<!-- the compound -->
-<div class="page" id="compound">
-  <div class="col">
-    <h2>The Compound</h2>
-    <p>The linework on the label is a molecule. A column of fused rings up one edge, a branching
-    chain with its atoms down the other, both fading toward the centre so the type sits on clear
-    ground. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the
-    helix.</p>
-    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one. There is
-    no honeycomb cut, and there will not be one. Two fragments at the margins, fading in, and never
-    behind type.</p>
-    <p><b>Four grounds.</b> Field is the default. Deep for dark work, Halo for light, and white for
-    print and paper. The chrome is the same in all four; only the ground changes, so the reflections
-    change with it.</p>
-    <p><b>Three frames.</b> 16:9, 9:16 and 1:1, each composed for its shape rather than cropped from
-    the wide one. In print it runs as a foil deboss along the edges of the box and the card.</p>
-    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.6fr 1fr 1fr">
-      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome on a flat blue field"><span class="cap">FIELD #244399 &middot; THE DEFAULT</span></a>
-      <a class="tile" style="background:#092266" href="img/gen/compound-deep-1.png" download><img class="fill" src="img/gen/compound-deep-web.jpg" alt="The compound on deep"><span class="cap">DEEP #092266</span></a>
-      <a class="tile" style="background:#9DBFD9" href="img/gen/compound-halo-1.png" download><img class="fill" src="img/gen/compound-halo-web.jpg" alt="The compound on halo"><span class="cap">HALO #9DBFD9</span></a>
-      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/gen/compound-white-1.png" download><img class="fill" src="img/gen/compound-white-web.jpg" alt="The compound on white"><span class="cap">WHITE &middot; PRINT</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-9x16-1.png" download><img class="fill" src="img/gen/compound-9x16-web.jpg" alt="The compound composed 9:16"><span class="cap">9:16</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-1x1-1.png" download><img class="fill" src="img/gen/compound-1x1-web.jpg" alt="The compound composed 1:1"><span class="cap">1:1</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-usage-1.png" download><img class="fill" src="img/gen/compound-usage-web.jpg" alt="The compound as a foil deboss on the box and the card"><span class="cap">IN PRINT &middot; FOIL DEBOSS</span></a>
-    </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
 </div>
@@ -697,6 +676,16 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
       <h3>Start here — the vector master</h3><p>One path, every subpath, even-odd fill. Scales without limit, recolours to anything, prints and embroiders flat. Never re-trace the mark from a raster.</p>
       <a class="ass" href="img/vector/sko-mark-1c.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark-1c.svg" alt=""></span><span class="meta"><b>One colour — takes currentColor</b><i>sko-mark-1c.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Helix — the cuts</h3><p>Seven cuts off the cover helix, 9:16 at 1536&times;2752. Same geometry in all seven; only the material changes.</p>
+      <a class="ass dk" href="img/gen/cuts/helix-metal.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-metal-web.jpg" alt=""></span><span class="meta"><b>Helix — Liquid chrome on carbon</b><i>helix-metal.png &middot; 1536&times;2752 &middot; 6158 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-white3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-white3-web.jpg" alt=""></span><span class="meta"><b>Helix — Soft white on blue</b><i>helix-white3.png &middot; 1536&times;2752 &middot; 4682 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-blue3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-blue3-web.jpg" alt=""></span><span class="meta"><b>Helix — Matte blue on paper</b><i>helix-blue3.png &middot; 1536&times;2752 &middot; 5084 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-flatw.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatw-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat white on blue</b><i>helix-flatw.png &middot; 1536&times;2752 &middot; 4238 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-flatb.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatb-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat blue on paper</b><i>helix-flatb.png &middot; 1536&times;2752 &middot; 5289 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-flatl.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatl-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat light blue on carbon</b><i>helix-flatl.png &middot; 1536&times;2752 &middot; 4465 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-ombre.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-ombre-web.jpg" alt=""></span><span class="meta"><b>Helix — Logo ombré on paper</b><i>helix-ombre.png &middot; 1536&times;2752 &middot; 5270 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
       <h3>Photography</h3><p>The studio masters and the moments, web weight. The 2048 masters live in the product-masters folder. Bundles are on white for the site.</p>
@@ -867,6 +856,34 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PHOTOGRAPHY</span></div>
 </div>
+
+<!-- 04 the array -->
+<div class="page">
+  <div class="col">
+    <h2>The Array</h2>
+    <p>The catalogue in orbit &mdash; all 34 units, with the names, sizes and prices read off the
+    live store. <b>Every unit is a real vial in three dimensions</b>, not a picture of one.</p>
+    <p>The profile is that SKU&rsquo;s own silhouette, measured off its catalogue render and
+    revolved, so the body, shoulder, neck, crimp collar and flip&#8209;top are the shape the product
+    actually is. The label is its own artwork, un&#8209;projected off the front&#8209;on render and
+    wrapped. Units are held at one height the way the rail shot holds them, and diameter is left
+    alone &mdash; so a tall vial reads correctly as a thin one.</p>
+    <p>At the centre, <b>the helix runs the full height and out both ends</b> &mdash; the catalogue
+    orbits it rather than the helix sitting among the units. Liquid metal carrying real
+    thin&#8209;film iridescence, the same physics as the foil on the label. Strands offset 0.42 of a
+    turn, pitch held near twice the diameter so it reads as DNA and not as a spring.</p>
+    <p>The ground is <b>Field #244399, flat</b>. No gradient, no vignette. The depth in the frame
+    comes from the objects in it, never from the surface behind them.</p>
+    <p><b>Drag to spin it.</b> It carries momentum and settles. Hovering holds it still and raises
+    that unit; clicking opens that product.</p>
+  </div>
+  <div class="body">
+    <div id="arraySphere" style="width:100%;border-radius:5px;overflow:hidden;background:#244399"></div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<script type="module" src="js/sphere.js?v=5"></script>
 
 <!-- 05 usage -->
 <!-- 06 claims -->
