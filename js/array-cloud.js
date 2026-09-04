@@ -113,7 +113,8 @@
   const pos = e => { const r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
 
   canvas.addEventListener('pointerdown', e => {
-    canvas.setPointerCapture(e.pointerId); const p = pos(e);
+    try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+    const p = pos(e);
     S.drag = true; S.moved = false; S.px = p.x; S.py = p.y; S.vx = 0; S.vy = 0; canvas.style.cursor = 'grabbing';
   });
   canvas.addEventListener('pointermove', e => {
