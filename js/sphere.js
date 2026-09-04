@@ -244,12 +244,32 @@ function start(host) {
       const d = CAT[i];
       const id = (d.img.match(/(\d+)\.webp$/) || [])[1];   /* img/cat/NN.webp */
       const g = GEO[id];
-      if (!g) continue;
-      const tex = loader.load('img/cat/label/' + id + '.png?v=coa1');
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.wrapS = THREE.RepeatWrapping;
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      const v = buildVial(g, tex);
+      const label = (sku) => {
+        const t = loader.load('img/cat/label/' + sku + '.png?v=coa1');
+        t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping;
+        t.anisotropy = renderer.capabilities.getMaxAnisotropy(); return t;
+      };
+      let v;
+      if (g) {
+        v = buildVial(g, label(id));
+      } else if (/bundle|set/i.test(d.name + ' ' + (d.size || ''))) {
+        /* the bundle is three real vials — Tesamorelin, GLP-3 RT, MOTS-c —
+           built from their own profiles and clustered, so every offering
+           in the catalogue is in the Array as the bottles it actually is */
+        const ids = ['06', '34', '09'].filter(k => GEO[k]);
+        if (ids.length < 2) continue;
+        const cluster = new THREE.Group();
+        const parts = [], mats = [], bodyMats = new Set(), bodyParts = new Set();
+        ids.forEach((k, j) => {
+          const b = buildVial(GEO[k], label(k));
+          b.spin.position.set((j - (ids.length - 1) / 2) * 0.66, 0, j === 1 ? 0.30 : -0.10);
+          b.spin.scale.setScalar(0.82);
+          cluster.add(b.spin);
+          parts.push(...b.parts); mats.push(...b.mats);
+          bodyMats.add(b.mats[0]); bodyParts.add(b.parts[0]);
+        });
+        v = { grp: cluster, spin: cluster, parts, mats, bodyMats, bodyParts, bodyOpacity: MAT.vial.bodyOpacity };
+      } else continue;
       v.grp.position.set(Math.cos(th) * rad * R, y * R, Math.sin(th) * rad * R);
       orbit.add(v.grp);
       units.push({ ...v, ...d, href: HREF(), hov: 0 });
@@ -355,10 +375,10 @@ function start(host) {
       u.hov += (want - u.hov) * 0.18;
       const depth = (v3.z + R) / (2 * R);          /* 0 at the back, 1 at the front */
       const a = Math.min(1, (0.10 + 0.90 * Math.pow(depth, 2.1)) * (1 + u.hov * 0.7));
-      u.mats.forEach((m, i) => { m.opacity = i === 0 ? a * u.bodyOpacity : a; });
+      u.mats.forEach((m, i) => { m.opacity = (u.bodyMats ? u.bodyMats.has(m) : i === 0) ? a * u.bodyOpacity : a; });
       u.grp.scale.setScalar(1 + u.hov * 0.34);
       const ro = Math.round(depth * 100) * 4;
-      u.parts.forEach(p => { p.renderOrder = ro + (p === u.parts[0] && u.bodyOpacity < 1 ? 1 : 0); });
+      u.parts.forEach(p => { p.renderOrder = ro + ((u.bodyParts ? u.bodyParts.has(p) : p === u.parts[0]) && u.bodyOpacity < 1 ? 1 : 0); });
     });
 
     if (hot) {
