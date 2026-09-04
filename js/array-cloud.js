@@ -79,6 +79,8 @@
   }
 
   let order = [];
+  /* read-only hook for tests: the current projected order */
+  window.__skoArray = { get order() { return order; }, S };
   function frame(now) {
     requestAnimationFrame(frame);
     if (!S.W && !fit()) return;
