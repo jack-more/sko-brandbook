@@ -1,0 +1,14 @@
+#!/bin/zsh
+cd ~/sko-brandbook-site
+R=img/ref2; O=img/proof
+LABEL="the label exactly as in the first reference image: navy label, holographic shield with a helix, the white wordmark SKO above COMPOUNDS, then 99% Purity and Research Use Only, holographic bands top and bottom, faint molecular linework on the label; every letter fully visible and unchanged; silver crimp cap with a blue flip-off top; clear glass vial"
+GLINT="hard low winter sun from the right throwing small star-shaped specular glints off every chrome edge and off the snow crystals, the snow lit deep blue in shadow and pale blue-white on the ridges, the sky a smooth gradient from deep ink blue at the top to bright sky blue at the horizon"
+gen() { n=$1; a=$2; p=$3; shift 3
+  args=(); for r in "$@"; do args+=(--image "$r"); done
+  url=$(higgsfield generate create nano_banana_2 "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
+  echo "$n $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$n.png"; }
+gen snow-cradle 3:4 "Product photograph outdoors at dusk. The sleek chrome cradle from the second reference, one flowing mirror-polished form, sits half sunk in a field of soft blue-lit snow dunes, holding this exact glass vial upright; the chrome reflects the blue snow and the gradient sky. $GLINT. $LABEL. No text anywhere except the label. Only one vial. No other objects." $R/vial.png img/proof/cradle.png $R/snow.jpg &
+gen snow-helix 3:4 "Product photograph outdoors at dusk. A tall sculpture of liquid chrome rises out of a field of blue-lit snow dunes: two thick mirror-polished strands twisting around each other into a double helix, their tips drawn out to fine sharp points like the second reference, the surface flowing and seamless. This exact glass vial stands upright in the snow at the base of the helix. $GLINT. $LABEL. No text anywhere except the label. Only one vial." $R/vial.png $R/ribbon.jpg $R/snow.jpg &
+gen snow-drip 3:4 "Product photograph. This exact glass vial stands upright pressed into powder snow, frost on its cap and shoulders, while a thick stream of liquid chrome pours down from above, splashing over the cap and running down one side of the glass in a smooth mirror sheet, without covering the label; the chrome reflects the blue snow and the sky. $GLINT. $LABEL, fully readable. No text anywhere except the label. Only one vial." $R/vial.png $R/snow.jpg &
+gen snow-badge 1:1 "Photograph outdoors at dusk. The chrome shield emblem from the first reference, the exact same object, stands upright in a field of soft blue-lit snow dunes, its lower edge sunk into the snow; the chrome reflects the blue snow and the gradient sky. $GLINT. No vial, no text, nothing else in the frame." img/proof/badge-mark.png $R/snow.jpg &
+wait; ls -la $O | grep "snow-"
