@@ -1,0 +1,413 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --blue:#173384; --deep:#020B77; --field:#0130C0; --halo:#88A9E3; --sky:#0148FE; --paperw:#EFEEEC;
+  --ink:#111318; --mid:#6B7280; --line:#E4E7EC; --paper:#fff; --wash:#F4F5F7;
+  --bad:#C0392B;
+  --foil:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#7578B0,#C3AFD7);
+}
+*{box-sizing:border-box;margin:0}
+body{background:#D9DCE2;color:var(--ink);font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;padding:28px 0}
+img{display:block;max-width:100%}
+.mono{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* one page = one topic. A page is as tall as what is on it — a fixed 16:9
+   left dead space under short pages and cut the footer off tall ones. The
+   pages whose plates fill the frame keep the 16:9 spread. */
+.page{width:min(1400px,94vw);margin:0 auto 26px;aspect-ratio:auto;background:var(--paper);
+  display:grid;grid-template-columns:19% 1fr;grid-template-rows:1fr auto;
+  padding:44px 46px 0;position:relative;overflow:hidden}
+.page.fill,.page.cover{aspect-ratio:16/9}
+.col{padding-right:30px}
+.col h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px}
+.col p{font-size:11.5px;line-height:1.55;color:var(--mid);max-width:30ch;margin-bottom:9px}
+.body{min-width:0}
+.foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);margin-top:26px;padding:12px 0 16px;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9.5px;letter-spacing:.14em;color:var(--mid)}
+.foot .l{display:flex;align-items:center;gap:12px}
+.foot img{height:13px;width:auto}
+
+/* specimen tiles — equal, gridded, never ragged */
+.tiles{display:grid;gap:12px;height:100%}
+.t2{grid-template-columns:1fr 1fr}
+.t3{grid-template-columns:repeat(3,1fr)}
+.t5{grid-template-columns:repeat(5,1fr)}
+.tile{background:var(--wash);border-radius:5px;display:grid;place-items:center;overflow:hidden;
+  position:relative}
+.tile.dark{background:var(--ink)}
+.tile.blue{background:var(--blue)}
+.tile img.fill{width:100%;height:100%;object-fit:cover}
+.tile img.mark{width:56%;max-height:52%;object-fit:contain}
+.cap{position:absolute;left:10px;bottom:8px;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8.5px;
+  letter-spacing:.12em;color:var(--mid)}
+.tile.dark .cap,.tile.blue .cap{color:rgba(255,255,255,.72)}
+
+/* cover — the flat-field rule, executed */
+.cover{padding:0;grid-template-columns:1fr;grid-template-rows:1fr}
+.cover .art{position:relative;width:100%;height:100%;min-height:clamp(300px,46vw,760px);
+  aspect-ratio:16/9;overflow:hidden;background:var(--field)}
+.cover .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
+.cover .ctype{position:absolute;left:clamp(28px,4.2vw,64px);top:50%;transform:translateY(-54%);
+  max-width:52%;z-index:2}
+.cover .clogo{display:block;width:clamp(150px,19vw,300px);height:auto;margin-bottom:clamp(16px,2vw,30px)}
+.cover .eyebrow{display:block;font-family:'Inter',sans-serif;font-size:clamp(8px,.78vw,10.5px);
+  letter-spacing:.30em;color:rgba(255,255,255,.72);margin-bottom:clamp(10px,1.3vw,18px)}
+.cover h1{font-size:clamp(38px,6.6vw,104px);font-weight:700;letter-spacing:-.045em;line-height:.9;
+  color:#fff}
+.cover .ctag{margin-top:clamp(10px,1.4vw,20px);font-family:'Inter',sans-serif;
+  font-size:clamp(11px,1.15vw,17px);letter-spacing:-.005em;color:rgba(255,255,255,.8)}
+.cover .stamp{position:absolute;left:clamp(28px,4.2vw,64px);bottom:clamp(26px,3vw,40px);
+  display:flex;gap:clamp(16px,2.2vw,34px);align-items:center;flex-wrap:wrap;z-index:2;
+  font-family:'Inter',sans-serif;font-size:clamp(7.5px,.72vw,9.5px);letter-spacing:.18em;
+  color:rgba(255,255,255,.78)}
+.cover .stamp a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);
+  padding-bottom:2px}
+.cover .stamp a:hover{border-color:#fff}
+.cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil);z-index:2}
+@media (max-width:900px){
+  .cover .ctype{max-width:82%;top:auto;bottom:96px;transform:none}
+}
+
+/* colour spec table */
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-content:start}
+.sw .chip{height:104px;border-radius:5px;border:1px solid var(--line)}
+.sw table{width:100%;margin-top:9px;border-collapse:collapse}
+.sw td{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:8.5px;color:var(--mid);padding:1px 0;
+  letter-spacing:.04em}
+.sw td:first-child{color:var(--ink);width:34px}
+.sw b{display:block;font-size:11.5px;font-family:'DM Sans';letter-spacing:-.01em;margin-bottom:4px}
+
+/* assets — the team download list */
+.page.tall{aspect-ratio:auto;min-height:0}
+.agroup{margin-bottom:16px}
+.agroup h3{font-size:12px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.agroup>p{font-size:9.5px;line-height:1.5;color:var(--mid);margin-bottom:8px;max-width:78ch}
+.ass{display:flex;align-items:center;gap:12px;padding:6px 10px;border-radius:4px;
+  text-decoration:none;color:inherit;border:1px solid var(--line);margin-bottom:5px;background:#fff}
+.ass:hover{border-color:var(--blue)}
+.ass .th{width:42px;height:34px;flex:none;display:grid;place-items:center;
+  background:var(--wash);border-radius:3px;overflow:hidden}
+.ass.dk .th{background:var(--blue)}
+.ass .th img{max-width:82%;max-height:82%;width:auto;height:auto;object-fit:contain}
+.ass .meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.ass .meta b{font-size:10.5px;font-weight:500;letter-spacing:-.005em}
+.ass .meta i{font-style:normal;font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;
+  font-size:8px;letter-spacing:.06em;color:var(--mid)}
+.ass .dl{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.14em;color:var(--blue);flex:none}
+
+/* typography specimen */
+.dm{font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif}
+.in{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+.w400{font-weight:400}.w500{font-weight:500}.w600{font-weight:600}.w700{font-weight:700}
+.typespec{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.face{background:var(--wash);border-radius:5px;padding:16px 18px;min-width:0}
+.fname{font-size:11.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px;display:flex;
+  justify-content:space-between;align-items:baseline}
+.fname i{font-style:normal;font-family:'Inter',sans-serif;font-size:8.5px;letter-spacing:.16em;
+  color:var(--mid);font-weight:500}
+.fsample{font-size:clamp(17px,2.1vw,27px);line-height:1.06;letter-spacing:-.032em;color:var(--ink);
+  margin-bottom:11px;overflow-wrap:anywhere}
+.face .in.fsample{letter-spacing:-.005em;line-height:1.28}
+.wts{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--mid)}
+.wts span{font-family:'DM Sans',sans-serif}
+.tester{margin-top:13px;background:var(--wash);border-radius:5px;padding:13px 18px 16px}
+.tester .lbl{display:block;font-size:8px;letter-spacing:.18em;color:var(--mid);margin-bottom:7px}
+.tester input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;
+  font:400 11px/1.4 'Inter',sans-serif;color:var(--ink);padding:0 0 6px;outline:none}
+.tester input:focus{border-bottom-color:var(--blue)}
+#typeOut{margin-top:11px;font-size:clamp(19px,2.6vw,34px);line-height:1.02;letter-spacing:-.036em;
+  color:var(--blue);overflow-wrap:anywhere}
+.scale{width:100%;border-collapse:collapse;margin-top:13px;
+  font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;font-size:9px}
+.scale th{text-align:left;color:var(--mid);font-weight:500;letter-spacing:.14em;font-size:7.5px;
+  padding:0 0 5px;border-bottom:1px solid var(--line)}
+.scale td{padding:3.5px 0;color:var(--mid);border-bottom:1px solid var(--line)}
+.scale td:first-child{color:var(--ink)}
+.col .note{font-size:9.5px;letter-spacing:.01em;color:var(--mid);border-left:2px solid var(--line);
+  padding-left:9px;margin-top:12px}
+
+/* motion demos */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mdemo{margin:0}
+.mstage{aspect-ratio:4/3;background:var(--wash);border-radius:5px;position:relative;overflow:hidden;
+  display:grid;place-items:center;gap:5px}
+.mstage.dark{background:var(--ink)}
+.mbox{width:34%;aspect-ratio:1;background:var(--blue);border-radius:3px}
+.mrow{display:flex;gap:4px}
+.mrow i{width:7px;height:16px;background:var(--blue);border-radius:1px;opacity:.18}
+.mrow.alt i{background:var(--halo);height:9px}
+.odot{width:11px;height:11px;border-radius:50%;background:var(--blue);position:absolute}
+.mdemo figcaption{margin-top:6px;display:flex;flex-direction:column;gap:1px}
+.mdemo figcaption b{font-size:10.5px;letter-spacing:-.01em}
+.mdemo figcaption .mono{font-size:8px;letter-spacing:.08em;color:var(--mid)}
+.mfoot{margin-top:12px;font-size:8px;letter-spacing:.16em;color:var(--mid);text-align:center}
+@media (max-width:900px){.typespec{grid-template-columns:1fr}.mgrid{grid-template-columns:repeat(2,1fr)}}
+
+.tiles.badges .tile{padding-bottom:26px}
+.tiles.badges img.mark{width:auto;max-height:47%;max-width:40%;margin-bottom:6px}
+.col .kw{background:var(--blue);color:#fff;padding:1px 5px;border-radius:2px;
+  font-size:8.5px;letter-spacing:.12em}
+
+/* the compound — edge fragments, and the two verdict badges */
+a.tile{text-decoration:none;color:inherit;cursor:pointer}
+a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
+.tile.ok::after,.tile.no::after{position:absolute;top:8px;right:8px;font-family:'Inter',sans-serif;
+  font-size:7.5px;letter-spacing:.16em;color:#fff;padding:2px 6px;border-radius:2px}
+.tile.ok::after{content:'DO';background:var(--blue)}
+.tile.no::after{content:'DON\'T';background:var(--bad)}
+.tile img.edge{width:100%;height:100%;object-fit:cover}
+/* on this page the plates are absolutely placed so their intrinsic height
+   cannot push the body past the 16:9 page — that is what cut the footer off */
+#helix .tile img,#helix-cuts .tile img,#compound .tile img,#photo-studio .tile img,#photo-moments .tile img{position:absolute;inset:0;width:100%;height:100%}
+/* and when the page is stacked (narrow screens) the plates need a height of their own */
+#compound .tiles{min-height:62vw;max-height:900px}
+@media (max-width:900px){#compound .tiles{min-height:170vw;max-height:none}}
+
+/* alternates — fenced off so they cannot be mistaken for live cuts */
+.tile.dontuse{position:relative;opacity:.62}
+.tile.dontuse::after{content:'NOT IN USE';position:absolute;top:8px;right:8px;
+  font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:.16em;color:#fff;
+  background:var(--bad);padding:2px 6px;border-radius:2px}
+
+/* the two shield cuts, stacked and labelled */
+.shieldset{display:flex;flex-direction:column;gap:11px}
+.srow{display:flex;flex-direction:column;gap:5px;min-height:0}
+.slab{font-size:8px;letter-spacing:.18em;color:var(--blue)}
+.srow .tiles{min-height:0}
+
+/* the flat shield ladder */
+.ladder{display:flex;align-items:flex-end;gap:11px;margin-top:14px;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9px;letter-spacing:.12em;color:var(--mid)}
+.ladder span{margin-right:4px}
+.ladder img{height:auto}
+.ladder img[alt="128px"]{width:52px}
+.ladder img[alt="64px"]{width:26px}
+.ladder img[alt="32px"]{width:13px}
+.ladder i{font-style:normal;margin-right:10px}
+.body{display:flex;flex-direction:column}
+.body .tiles{flex:1;min-height:0}
+
+/* helix cut captions */
+.cutcaps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:9px}
+.cutcaps span{display:flex;flex-direction:column;gap:2px;text-align:center;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8px;letter-spacing:.1em;color:var(--mid)}
+.cutcaps b{font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:-.01em;color:var(--ink)}
+@media (max-width:900px){.cutcaps{grid-template-columns:repeat(3,1fr);gap:8px 0}}
+
+/* system asset plates */
+.assets{display:grid;gap:11px;align-content:start}
+.assets.a3{grid-template-columns:repeat(3,1fr)}
+.ast{margin:0;display:flex;flex-direction:column}
+.ast a{display:block;background:var(--wash);border-radius:4px;overflow:hidden;height:150px;
+  display:flex;align-items:center;justify-content:center;padding:9px;transition:box-shadow .16s}
+.ast a:hover{box-shadow:0 0 0 2px var(--blue)}
+.ast img{max-height:132px;max-width:100%;width:auto;height:auto;object-fit:contain}
+.ast figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;
+  font-size:8.5px;letter-spacing:.1em;color:var(--mid);font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+.col .dl{font-size:8.5px;letter-spacing:.14em;color:var(--blue);margin-top:14px}
+@media (max-width:900px){.assets.a3{grid-template-columns:repeat(2,1fr)}.ast a{height:120px}.ast img{max-height:102px}}
+
+/* the field specimen */
+.field-rule{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.fr-copy{font-size:11.5px;line-height:1.6;color:var(--mid);max-width:88ch;margin-bottom:14px}
+.fr-copy b{color:var(--ink)}
+.fr-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fr-pair figure{margin:0}
+.fr-tile{aspect-ratio:16/9;border-radius:5px;display:grid;place-items:center;overflow:hidden}
+.fr-tile img{width:46%;height:auto}
+.fr-pair figcaption{margin-top:6px;font-size:9.5px;line-height:1.4;color:var(--mid);display:flex;gap:6px}
+.fr-pair .ok{color:var(--blue);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
+.fr-pair .no{color:var(--bad);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
+
+/* don'ts */
+.dont .tile{border:1px solid rgba(192,57,43,.55);background:#fff}
+.dont figcaption{display:flex;gap:6px;font-size:9.5px;color:var(--mid);margin-top:7px;line-height:1.4}
+.dont .x{color:var(--bad);font-weight:700}
+.dont .cell{display:flex;flex-direction:column}
+.dont .cell .tile{aspect-ratio:16/10}
+
+@media (max-width:900px){
+  .page{aspect-ratio:auto;grid-template-columns:1fr;padding:26px 22px 0}
+  .col{padding-right:0;margin-bottom:18px}
+  .t5,.t3{grid-template-columns:repeat(2,1fr)}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+}
+
+/* edition three additions */
+.disp{font-family:'Archivo Black','Archivo',Impact,sans-serif;font-weight:400;letter-spacing:-.02em;line-height:.92}
+.col h2{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-.01em;font-size:18px}
+.cover h1{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-.03em}
+.sentence{background:var(--field);color:#fff;display:grid;place-items:center;text-align:left;
+  padding:clamp(40px,7vw,120px) clamp(28px,6vw,100px);min-height:clamp(320px,44vw,640px)}
+.sentence .disp{font-size:clamp(34px,6.4vw,104px);max-width:14ch;text-wrap:balance}
+.sentence small{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(8px,.8vw,11px);
+  letter-spacing:.2em;color:rgba(255,255,255,.7);margin-top:clamp(18px,2.4vw,36px)}
+.plate{position:relative;overflow:hidden;background:var(--field)}
+.plate img{width:100%;height:100%;object-fit:cover;display:block}
+.rules{list-style:none;padding:0;margin:0}
+.rules li{font-size:11px;line-height:1.5;color:var(--mid);padding:7px 0;border-top:1px solid var(--line)}
+.rules li b{color:var(--ink)}
+.hood{background:var(--deep);color:#8FB0FF;font-family:'JetBrains Mono',monospace;font-size:clamp(9px,.95vw,13px);
+  line-height:1.7;padding:clamp(18px,2.6vw,40px);white-space:pre;overflow:auto;border-radius:5px;min-height:clamp(220px,30vw,420px)}
+.hood b{color:#fff;font-weight:400}
+.poster{background:var(--field);color:#fff;padding:clamp(20px,3vw,44px);border-radius:5px;display:flex;
+  flex-direction:column;justify-content:flex-end;min-height:clamp(200px,26vw,380px)}
+.poster .disp{font-size:clamp(28px,5vw,80px)}
+.poster .mono{font-family:'JetBrains Mono',monospace;font-size:clamp(8px,.8vw,11px);letter-spacing:.18em;opacity:.75;margin-top:12px}
+.tok{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tok .chip{height:110px;border-radius:5px;border:1px solid var(--line)}
+.tok b{display:block;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:11px;margin:8px 0 2px}
+.tok i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--mid);letter-spacing:.06em}
+.tok p{font-size:9.5px;color:var(--mid);line-height:1.45;margin-top:4px}
+@media (max-width:900px){.tok{grid-template-columns:repeat(3,1fr)}}
+</style>
+<title>SKO Brand Book</title>
+
+<div class="page cover">
+  <div class="art">
+    <img class="plate" src="img/edition3/powder.jpg" alt="The vial in ultramarine pigment" style="object-position:center 40%">
+    <div class="ctype">
+      <img class="clogo" src="img/lockup-3x1-white.png" alt="SKO Compounds">
+      <h1>Brand Book</h1>
+      <p class="ctag">The pigment.</p>
+    </div>
+    <div class="stamp"><span>V3.0 DRAFT</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span><a href="#assets">ASSETS &rarr;</a></div>
+    <div class="seal"></div>
+  </div>
+</div>
+
+<div class="page" id="sentence" style="padding:0;grid-template-columns:1fr;grid-template-rows:1fr auto">
+  <div class="sentence"><div><p class="disp">Blue is the pigment. Chrome is the body. The vial is what it holds.</p>
+  <small>ONE OBJECT PER FRAME &middot; ONE OBJECT PER SCREEN &middot; NOTHING ELSE GETS A MATERIAL</small></div></div>
+  <div class="foot" style="padding-left:46px;padding-right:46px;margin-top:0"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE SENTENCE</span></div>
+</div>
+
+<div class="page" id="idea">
+  <div class="col"><h2>The idea</h2><p><b>Three materials, three roles.</b> The blue is a pigment: dry, matte, absolute, something you pour, dust and carve. The chrome is a body: liquid mirror, cast as a hand, a figure, a ribbon, never a person. The vial is the only subject, the only thing that is ever photographed.</p>
+<p><b>Power comes from stillness.</b> One big object per frame, hard light, flat ground. Not from more objects, more colours or more motion. If a frame has two subjects it has none.</p>
+<p><b>Cold, not cute.</b> Snow, water, ice, stone, marble. Alpine air. Nothing warm, nothing soft, nothing that could sell a sports drink.</p>
+<p class="mono note">The site follows the book. One object per screen on flat Pigment, heavy type under it, nothing else.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(220px,30vw,460px);"><a class="tile" style="background:#0130C0" href="img/edition3/powder.jpg" download><img class="fill" src="img/edition3/powder-w.jpg" alt="PIGMENT &middot; THE GROUND"><span class="cap">PIGMENT &middot; THE GROUND</span></a><a class="tile" style="background:#0130C0" href="img/edition3/statue.jpg" download><img class="fill" src="img/edition3/statue-w.jpg" alt="CHROME AND MARBLE &middot; THE BODY"><span class="cap">CHROME AND MARBLE &middot; THE BODY</span></a><a class="tile" style="background:#0130C0" href="img/edition3/water.jpg" download><img class="fill" src="img/edition3/water-w.jpg" alt="THE VIAL &middot; THE SUBJECT"><span class="cap">THE VIAL &middot; THE SUBJECT</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE IDEA</span></div>
+</div>
+
+<div class="page" id="logo">
+  <div class="col"><h2>The label</h2><p><b>Unchanged.</b> The shield and the wordmark are what is printed on the bottle and they are used exactly as they appear on it. The pack keeps the measured label blue, #173384. Everything else in this book is what surrounds the label, not the label.</p>
+<p><span class="mono kw">3&times;1</span> horizontal lockup, the default. <span class="mono kw">1&times;1</span> stacked, shield on top, the avatar. <span class="mono kw">SHIELD</span> alone, taller than wide.</p>
+<p>White on Pigment and on photography, navy on Paper. Clear space on all sides equals the shield height. Below 48&nbsp;px, and over any image, use the flat white shield.</p></div>
+  <div class="body"><div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(120px,14vw,190px)">
+  <div class="tile" style="background:#0130C0"><img class="mark" src="img/lockup-3x1-white.png" alt="Lockup white on Pigment"><span class="cap">3&times;1 &middot; WHITE ON PIGMENT</span></div>
+  <div class="tile" style="background:#EFEEEC"><img class="mark" src="img/lockup-3x1-navy.png" alt="Lockup navy on Paper"><span class="cap">3&times;1 &middot; NAVY ON PAPER</span></div></div>
+<div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(170px,22vw,300px)">
+  <div class="tile" style="background:#0130C0"><img class="mark" style="width:auto;height:72%;max-height:72%;max-width:60%" src="img/vector/lockup-1x1-white-2000.png" alt="1x1 lockup"><span class="cap">1&times;1 &middot; WHITE ON PIGMENT</span></div>
+  <div class="tile" style="background:#0130C0"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield"><span class="cap">FLAT WHITE SHIELD &middot; DISCLAIMERS</span></div>
+  <div class="tile" style="background:#EFEEEC"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield"><span class="cap">FLAT BLUE SHIELD &middot; #173384</span></div></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<div class="page" id="colour">
+  <div class="col"><h2>Colour</h2><p><b>One pigment, lit three ways.</b> Pigment is the ground and it is International Klein Blue as it photographs on screen. Ink is that same blue in shadow, the deep of the water. Sky is it under hard light. Frost is the one pale blue, taken from lit snow, and it is a highlight, never a surface.</p>
+<p><b>Chrome is not a colour.</b> It is white to Frost with Pigment in its shadows. Any chrome that does not reflect the blue is wrong.</p>
+<p><b>Paper is the rest.</b> Off-white, for the rock shots and the pages between blue ones. Pure white is never used as a ground.</p>
+<p class="mono note">The pack keeps #173384. It is a print measurement, not a screen token.</p></div>
+  <div class="body"><div class="tok">
+<div><div class="chip" style="background:#0130C0"></div><b>Pigment</b><i>#0130C0</i><p>The ground. Flat, edge to edge, nothing behind it.</p></div>
+<div><div class="chip" style="background:#020B77"></div><b>Ink</b><i>#020B77</i><p>Shadow blue. The hood, the dark set, type on Frost.</p></div>
+<div><div class="chip" style="background:#0148FE"></div><b>Sky</b><i>#0148FE</i><p>The lit blue. Water highlights, poster grounds.</p></div>
+<div><div class="chip" style="background:#88A9E3"></div><b>Frost</b><i>#88A9E3</i><p>Snow highlight. Captions on Pigment. Never a fill.</p></div>
+<div><div class="chip" style="background:linear-gradient(135deg,#fff 0%,#99A9CD 45%,#0130C0 100%)"></div><b>Chrome</b><i>WHITE &rarr; PIGMENT</i><p>The body. Always reflecting the ground.</p></div>
+<div><div class="chip" style="background:#EFEEEC"></div><b>Paper</b><i>#EFEEEC</i><p>The off-white ground. Rock shots, text pages.</p></div>
+</div>
+<div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,20vw,290px);margin-top:14px">
+  <div class="tile" style="background:#0130C0"><span class="cap">PIGMENT &middot; GROUND</span></div>
+  <div class="tile" style="background:#020B77"><span class="cap">INK &middot; HOOD</span></div>
+  <div class="tile" style="background:#EFEEEC"><span class="cap">PAPER &middot; BETWEEN</span></div></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>COLOUR</span></div>
+</div>
+
+<div class="page" id="type">
+  <div class="col"><h2>Type</h2><p><b>Heavy and plain.</b> Archivo Black is the display face, set big and left, white on Pigment. It is Helvetica Bold's weight without Helvetica's licence. No tracking, no outlines, no gradients, no italics.</p>
+<p><b>Inter</b> carries everything that has to be read: body, captions, labels, the site.</p>
+<p><b>JetBrains Mono</b> is the hood. Readouts, batch numbers, the Array, anything that is data. It is the only place the brand is allowed to look like a machine.</p>
+<p class="mono note">Display is never smaller than 56&nbsp;px on a 350&nbsp;px slot. If it has to be small, it is Inter.</p></div>
+  <div class="body"><div class="poster"><p class="disp">SKO<br>COMPOUNDS</p><p class="mono">ARCHIVO BLACK &middot; WHITE ON PIGMENT &middot; LEFT &middot; NO TRACKING</p></div>
+<div class="typespec" style="margin-top:12px">
+  <div class="face"><div class="fname">Archivo Black <i>DISPLAY</i></div><p class="fsample disp" style="font-size:clamp(22px,2.8vw,36px)">Research, refined.<br>BPC-157 &middot; 10 mg</p><div class="wts"><span>One weight. Set it big or not at all.</span></div></div>
+  <div class="face"><div class="fname">Inter <i>BODY</i></div><p class="fsample in" style="font-weight:500">Research-grade compounds, verified by third-party analysis, shipped cold from Los Angeles.</p><div class="wts"><span>400</span><span>500</span><span>600</span><span>700</span></div></div>
+</div>
+<div class="hood" style="margin-top:12px;min-height:0"><b>SKO/HOOD</b>   batch  0x79CE   purity  99.1%   mass  10.00 mg   lot  2026-09   <b>RESEARCH USE ONLY</b>
+JetBrains Mono. Ink ground, Frost text. Data only. Never a headline.</div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>TYPE</span></div>
+</div>
+
+<div class="page" id="grounds">
+  <div class="col"><h2>The grounds</h2><p><b>Four grounds, one blue.</b> Pigment powder, blue water, blue-lit snow, and Paper with a pigment rock. Every product shot stands on one of these. Nothing else is a ground.</p>
+<p><b>Pigment</b> is the cover and the primary. The vial lies in it or stands on it, dust on the cap, label clean.</p>
+<p><b>Water</b> is hard sun, caustics, a broken reflection. <b>Snow</b> is dusk, blue light, crystals at the base. <b>Paper</b> is the only light ground, and the pigment always comes with it.</p>
+<p class="mono note">Wet stays optional. The water ground is the one place it is expected.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(200px,26vw,400px);"><a class="tile" style="background:#0130C0" href="img/edition3/powder.jpg" download><img class="fill" src="img/edition3/powder-w.jpg" alt="PIGMENT"><span class="cap">PIGMENT</span></a><a class="tile" style="background:#0130C0" href="img/edition3/water.jpg" download><img class="fill" src="img/edition3/water-w.jpg" alt="WATER"><span class="cap">WATER</span></a><a class="tile" style="background:#0130C0" href="img/edition3/snow.jpg" download><img class="fill" src="img/edition3/snow-w.jpg" alt="SNOW"><span class="cap">SNOW</span></a><a class="tile" style="background:#EFEEEC" href="img/edition3/rock.jpg" download><img class="fill" src="img/edition3/rock-w.jpg" alt="PAPER AND PIGMENT"><span class="cap">PAPER AND PIGMENT</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>GROUNDS</span></div>
+</div>
+
+<div class="page" id="body">
+  <div class="col"><h2>The body</h2><p><b>Chrome all the way.</b> A hand, a figure, a ribbon. Solid liquid mirror, no skin anywhere, no glove edge, no face. The chrome reflects Pigment in its shadows and goes white in its highlights.</p>
+<p><b>Marble is the other body.</b> Classical, white, on Pigment. It gives the brand a history it does not have to explain.</p>
+<p><b>The body holds the vial.</b> It never competes with it. If the chrome has its own glow, grid or highlight rig, it has become a second subject and the frame is wrong.</p>
+<p class="mono note">No candid photography. People appear cast in chrome or carved in marble, or not at all.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(200px,26vw,400px);"><a class="tile" style="background:#0130C0" href="img/edition3/statue.jpg" download><img class="fill" src="img/edition3/statue-w.jpg" alt="MARBLE &middot; APOLLO"><span class="cap">MARBLE &middot; APOLLO</span></a><a class="tile" style="background:#0130C0" href="img/edition3/palm.jpg" download><img class="fill" src="img/edition3/palm-w.jpg" alt="CHROME &middot; OPEN PALM"><span class="cap">CHROME &middot; OPEN PALM</span></a><a class="tile" style="background:#0130C0" href="img/edition3/ribbon.jpg" download><img class="fill" src="img/edition3/ribbon-w.jpg" alt="CHROME &middot; RIBBON"><span class="cap">CHROME &middot; RIBBON</span></a><a class="tile" style="background:#0130C0" href="img/edition3/hand.jpg" download><img class="fill" src="img/edition3/hand-w.jpg" alt="CHROME &middot; HAND"><span class="cap">CHROME &middot; HAND</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE BODY</span></div>
+</div>
+
+<div class="page" id="dark">
+  <div class="col"><h2>The dark set</h2><p><b>For ads, not for the book.</b> Three frames where the blue becomes a light instead of a pigment: the liquid glowing from inside the glass, the vial frozen into ice, the vial on a ledge of a pigment cliff.</p>
+<p>They are louder than the grounds and they earn their place in paid media, where a frame has half a second. On the site they are used once, if at all.</p>
+<p class="mono note">The glow is the liquid, never a halo behind the vial.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(220px,30vw,460px);"><a class="tile" style="background:#000" href="img/edition3/glow.jpg" download><img class="fill" src="img/edition3/glow-w.jpg" alt="GLOW &middot; THE LIQUID IS THE LIGHT"><span class="cap">GLOW &middot; THE LIQUID IS THE LIGHT</span></a><a class="tile" style="background:#0130C0" href="img/edition3/ice.jpg" download><img class="fill" src="img/edition3/ice-w.jpg" alt="ICE"><span class="cap">ICE</span></a><a class="tile" style="background:#EFEEEC" href="img/edition3/cliff.jpg" download><img class="fill" src="img/edition3/cliff-w.jpg" alt="THE CLIFF"><span class="cap">THE CLIFF</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE DARK SET</span></div>
+</div>
+
+<div class="page" id="hood">
+  <div class="col"><h2>The hood</h2><p><b>Where cyber lives.</b> The brand's technical edge is under the surface: mono readouts, the Array, batch data. It is text and data, never imagery. No HUD lines, no grids, no neon, no warp.</p>
+<p>Ink ground, Frost text, JetBrains Mono. It reads like an instrument panel and it is the only place the brand is allowed to.</p></div>
+  <div class="body"><div class="hood"><b>SKO/ARRAY</b>                                    <b>36 COMPOUNDS</b>
+
+  BPC-157        10 mg    99.1%    lot 2609-A    <b>●</b>
+  TB-500          5 mg    99.3%    lot 2609-A    <b>●</b>
+  GHK-Cu         50 mg    99.0%    lot 2608-C    <b>●</b>
+  MOTS-c         10 mg    99.2%    lot 2609-B    <b>●</b>
+  Semax          10 mg    98.9%    lot 2608-D    <b>●</b>
+
+  ground  PIGMENT #0130C0      body  CHROME      subject  THE VIAL
+  <b>RESEARCH USE ONLY</b>                             ORDERS 38,000+</div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE HOOD</span></div>
+</div>
+
+<div class="page" id="products">
+  <div class="col"><h2>The product set</h2><p><b>Every SKU gets the same six.</b> The 1:1 primary on Pigment first, then pigment, water, snow, the body, and the dark set frame. The primary is the card image everywhere; the rest are the carousel.</p>
+<p>Sprays use the spray master, bundles slot in as a pairs-with slide. Labels are checked at zoom before anything goes live.</p>
+<p class="mono note">Not yet rendered. The set runs after this edition is approved.</p></div>
+  <div class="body"><ul class="rules">
+<li><b>01 Primary</b> &middot; 1:1 &middot; upright on Pigment, soft contact shadow, label square to camera.</li>
+<li><b>02 Pigment</b> &middot; 3:4 &middot; lying in the powder, dust on the cap, label clean.</li>
+<li><b>03 Water</b> &middot; 3:4 &middot; standing in blue water, hard sun, broken reflection.</li>
+<li><b>04 Snow</b> &middot; 3:4 &middot; pressed into blue-lit snow at dusk.</li>
+<li><b>05 Body</b> &middot; 3:4 &middot; held by chrome or marble.</li>
+<li><b>06 Dark</b> &middot; 3:4 &middot; glow, ice or cliff, one per SKU.</li>
+</ul></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PRODUCTS</span></div>
+</div>
+
+<div class="page tall" id="assets">
+  <div class="col"><h2>Assets</h2><p>Every plate in this edition at 2000&nbsp;px. PNG masters are held with the source files.</p></div>
+  <div class="body">
+    <div class="agroup"><h3>Plates</h3>
+    <a class="ass dk" href="img/edition3/powder.jpg" download><span class="th"><img src="img/edition3/powder-w.jpg" alt=""></span><span class="meta"><b>powder.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/rock.jpg" download><span class="th"><img src="img/edition3/rock-w.jpg" alt=""></span><span class="meta"><b>rock.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/water.jpg" download><span class="th"><img src="img/edition3/water-w.jpg" alt=""></span><span class="meta"><b>water.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow.jpg" download><span class="th"><img src="img/edition3/snow-w.jpg" alt=""></span><span class="meta"><b>snow.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/ribbon.jpg" download><span class="th"><img src="img/edition3/ribbon-w.jpg" alt=""></span><span class="meta"><b>ribbon.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/glow.jpg" download><span class="th"><img src="img/edition3/glow-w.jpg" alt=""></span><span class="meta"><b>glow.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/statue.jpg" download><span class="th"><img src="img/edition3/statue-w.jpg" alt=""></span><span class="meta"><b>statue.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/cliff.jpg" download><span class="th"><img src="img/edition3/cliff-w.jpg" alt=""></span><span class="meta"><b>cliff.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/ice.jpg" download><span class="th"><img src="img/edition3/ice-w.jpg" alt=""></span><span class="meta"><b>ice.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/palm.jpg" download><span class="th"><img src="img/edition3/palm-w.jpg" alt=""></span><span class="meta"><b>palm.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/hand.jpg" download><span class="th"><img src="img/edition3/hand-w.jpg" alt=""></span><span class="meta"><b>hand.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup"><h3>Previous editions</h3><p>The blue bottle (V2) and the first edition (V1) stay online for reference.</p>
+    <a class="ass" href="index.html"><span class="th"><img src="img/shield.png" alt=""></span><span class="meta"><b>V2 · The blue bottle</b><i>INDEX.HTML</i></span><span class="dl">OPEN</span></a>
+    <a class="ass" href="v1.html"><span class="th"><img src="img/shield.png" alt=""></span><span class="meta"><b>V1</b><i>V1.HTML</i></span><span class="dl">OPEN</span></a></div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
+</div>
