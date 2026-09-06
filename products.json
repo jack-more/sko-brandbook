@@ -1,0 +1,206 @@
+[
+ {
+  "slug": "5-amino-1mq",
+  "name": "5-Amino-1MQ",
+  "file": "5-amino-1mq.png",
+  "spray": false
+ },
+ {
+  "slug": "cjc-1295",
+  "name": "CJC-1295 no DAC",
+  "file": "cjc1295-new.png",
+  "spray": false
+ },
+ {
+  "slug": "ghk-cu",
+  "name": "GHK-Cu",
+  "file": "ghkcu-new.png",
+  "spray": false
+ },
+ {
+  "slug": "glow",
+  "name": "GLOW",
+  "file": "glow-new.png",
+  "spray": false
+ },
+ {
+  "slug": "glutathione",
+  "name": "Glutathione",
+  "file": "glutathione-new.png",
+  "spray": false
+ },
+ {
+  "slug": "mots-c",
+  "name": "MOTS-c",
+  "file": "mots-c-new.png",
+  "spray": false
+ },
+ {
+  "slug": "adamax",
+  "name": "Adamax",
+  "file": "product-adamax.png",
+  "spray": false
+ },
+ {
+  "slug": "aod-9604",
+  "name": "AOD-9604",
+  "file": "product-aod-9604.png",
+  "spray": false
+ },
+ {
+  "slug": "ara-290",
+  "name": "ARA-290",
+  "file": "product-ara290.png",
+  "spray": false
+ },
+ {
+  "slug": "bpc-157",
+  "name": "BPC-157",
+  "file": "product-bpc157-B3DMlXLe.png",
+  "spray": false
+ },
+ {
+  "slug": "cagrilintide",
+  "name": "Cagrilintide",
+  "file": "product-cagrilintide.png",
+  "spray": false
+ },
+ {
+  "slug": "dsip",
+  "name": "DSIP",
+  "file": "product-dsip.png",
+  "spray": false
+ },
+ {
+  "slug": "igf1-lr3",
+  "name": "IGF1-LR3",
+  "file": "product-igf1-lr3-new.png",
+  "spray": false
+ },
+ {
+  "slug": "ipamorelin",
+  "name": "Ipamorelin",
+  "file": "product-ipamorelin-new.png",
+  "spray": false
+ },
+ {
+  "slug": "kisspeptin",
+  "name": "Kisspeptin-10",
+  "file": "product-kisspeptin.png",
+  "spray": false
+ },
+ {
+  "slug": "kpv",
+  "name": "KPV",
+  "file": "product-kpv.png",
+  "spray": false
+ },
+ {
+  "slug": "mt-1",
+  "name": "MT-1",
+  "file": "product-mt1-BDr9K4qu.png",
+  "spray": false
+ },
+ {
+  "slug": "mt-2",
+  "name": "MT-2",
+  "file": "product-mt2-Bw_Ky05C.png",
+  "spray": false
+ },
+ {
+  "slug": "nad",
+  "name": "NAD+",
+  "file": "product-nad-new.png",
+  "spray": false
+ },
+ {
+  "slug": "pt-141",
+  "name": "PT-141",
+  "file": "product-pt141.png",
+  "spray": false
+ },
+ {
+  "slug": "selank",
+  "name": "Selank",
+  "file": "product-selank.png",
+  "spray": false
+ },
+ {
+  "slug": "semax",
+  "name": "Semax",
+  "file": "product-semax-GAtACDa-.png",
+  "spray": false
+ },
+ {
+  "slug": "sermorelin",
+  "name": "Sermorelin",
+  "file": "product-sermorelin.png",
+  "spray": false
+ },
+ {
+  "slug": "ss-31",
+  "name": "SS-31",
+  "file": "product-ss31-new.png",
+  "spray": false
+ },
+ {
+  "slug": "thymosin-alpha-1",
+  "name": "Thymosin Alpha-1",
+  "file": "product-ta1.png",
+  "spray": false
+ },
+ {
+  "slug": "tb-500",
+  "name": "TB-500",
+  "file": "product-tb500-C7fPiVPG.png",
+  "spray": false
+ },
+ {
+  "slug": "tesa-ipa",
+  "name": "Tesamorelin + Ipamorelin",
+  "file": "product-tesa-ipa-new.png",
+  "spray": false
+ },
+ {
+  "slug": "ghk-cu-spray",
+  "name": "GHK-Cu Spray",
+  "file": "spray-ghk-cu-cRPkFf7n.png",
+  "spray": true
+ },
+ {
+  "slug": "mt-2-spray",
+  "name": "MT-2 Spray",
+  "file": "spray-mt-2-CHfPPrtx.png",
+  "spray": true
+ },
+ {
+  "slug": "nad-spray",
+  "name": "NAD+ Spray",
+  "file": "spray-nad-DIBRzmeD.png",
+  "spray": true
+ },
+ {
+  "slug": "selank-spray",
+  "name": "Selank Spray",
+  "file": "spray-selank-D_OUA_LF.png",
+  "spray": true
+ },
+ {
+  "slug": "semax-spray",
+  "name": "Semax Spray",
+  "file": "spray-semax-BRY66jNO.png",
+  "spray": true
+ },
+ {
+  "slug": "tesamorelin",
+  "name": "Tesamorelin",
+  "file": "tesamorelin.png",
+  "spray": false
+ },
+ {
+  "slug": "wolverine",
+  "name": "Wolverine Blend",
+  "file": "wolverine-new.png",
+  "spray": false
+ }
+]
