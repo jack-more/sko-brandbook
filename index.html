@@ -9,6 +9,7 @@
 <link rel="icon" type="image/png" href="img/shield/shield-blue-128.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="site/chrome.css?v=1">
 <style>
 :root{
   --blue:#173384; --deep:#092266; --field:#244399; --halo:#9DBFD9;
@@ -57,7 +58,7 @@ img{display:block;max-width:100%}
 /* cover — the flat-field rule, executed */
 .cover{padding:0;grid-template-columns:1fr;grid-template-rows:1fr}
 .cover .art{position:relative;width:100%;height:100%;min-height:clamp(300px,46vw,760px);
-  aspect-ratio:16/9;overflow:hidden;background:var(--field)}
+  aspect-ratio:16/9;overflow:hidden}
 .cover .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
 .cover .ctype{position:absolute;left:clamp(28px,4.2vw,64px);top:50%;transform:translateY(-54%);
   max-width:52%;z-index:2}
@@ -76,9 +77,26 @@ img{display:block;max-width:100%}
   padding-bottom:2px}
 .cover .stamp a:hover{border-color:#fff}
 .cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil);z-index:2}
+/* the cover is the studio: the wall, the snow, the bottle standing in it, the title cut in chrome */
+.cover .art .subject{left:66%;height:62%;bottom:15%}
+.cover .ctype .clogo{width:clamp(130px,16vw,250px)}
+.cover .ctag,.cover .stamp{color:#3E4750}
+.cover .stamp{z-index:4}
+.cover .stamp a{color:#232B34;border-bottom-color:rgba(35,43,52,.4)}
+.cover .stamp a:hover{border-bottom-color:#232B34}
+.cover h1.chrome{color:transparent}
 @media (max-width:900px){
   .cover .ctype{max-width:82%;top:auto;bottom:96px;transform:none}
+  .cover .art .subject{left:50%;height:40%;bottom:auto;top:6%}
 }
+/* the chrome wall page */
+#chrome-wall .tiles .fr-tile{aspect-ratio:auto;height:100%}
+#chrome-wall .fr-tile .cap,#chrome-wall .tile .cap{z-index:4;color:#3E4750}
+#chrome-wall .tile.dark .cap{color:rgba(255,255,255,.72)}
+#chrome-wall .spec{font-size:clamp(18px,2.2vw,32px);font-weight:700;letter-spacing:-.03em;line-height:.95;text-align:center;font-family:'DM Sans',sans-serif}
+#chrome-wall .fr-tile{position:relative;overflow:hidden}
+#chrome-wall .fr-tile .spec{font-size:clamp(16px,2vw,28px)}
+#chrome-wall .fr-tile .shelf{height:36%}
 
 /* colour spec table */
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-content:start}
@@ -249,15 +267,17 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 <body>
 
 <!-- 01 cover -->
-<div class="page cover">
-  <div class="art">
-    <img class="plate" src="img/gen/cover-bottle-2400.jpg" alt="The blue bottle, wet, on the flat field, chrome structure at the edge">
+<div class="page cover" id="cover">
+  <div class="art wall">
+    <div class="shelf"></div>
+    <div class="subject"><img src="img/ads/_safe-bottle.png" alt="The blue bottle, standing in the snow in front of the chrome wall"><div class="rf"><img src="img/ads/_safe-bottle.png" alt=""></div></div>
+    <div class="shelf fore"></div><canvas class="snowfall"></canvas>
     <div class="ctype">
-      <img class="clogo" src="img/lockup-3x1-white.png" alt="SKO Compounds">
-      <h1>Brand Book</h1>
-      <p class="ctag">The blue bottle.</p>
+      <img class="clogo" src="img/lockup-3x1-navy.png" alt="SKO Compounds">
+      <h1 class="chrome on-light">Brand Book</h1>
+      <p class="ctag">The blue bottle, on chrome.</p>
     </div>
-    <div class="stamp"><span>V2.0</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span>
+    <div class="stamp"><span>V2.1</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span>
       <a href="#assets">ASSETS &rarr;</a></div>
     <div class="seal"></div>
   </div>
@@ -276,7 +296,8 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     <p><b>Power, not playfulness.</b> Clinical, exact, expensive. Nothing soft, nothing warm, nothing
     cute. If a frame could belong to a sports drink, it does not belong to SKO.</p>
     <p class="mono note">Every page that follows is one of the three roles. Anything that was not is
-    in the archive.</p>
+    in the archive. The set the bottle stands in &mdash; the chrome wall and the snow &mdash; is the
+    structure, built out, and it has the next page.</p>
   </div>
   <div class="body">
     <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(240px,34vw,500px)">
@@ -289,6 +310,52 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     </div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE IDEA</span></div>
+</div>
+
+<!-- the chrome wall -->
+<div class="page" id="chrome-wall">
+  <div class="col">
+    <h2>The chrome wall</h2>
+    <p><b>The set is a studio.</b> Ribbed, brushed steel behind, snow at its foot, one object standing
+    in it. It is where the bottle is photographed and where the site and this book are presented, and
+    it is one material, done one way.</p>
+    <p><b>The wall.</b> Vertical ribs on a 72&nbsp;px pitch: a wide brushed face, then a narrow bead
+    &mdash; dark edge, bright crown, dark edge. Brushed, never mirror. Ribs run vertical, never
+    horizontal, never diagonal.</p>
+    <p><b>The light.</b> Cool from above, cyan <span class="mono kw">#3FD4FF</span> gone by the middle;
+    warm low right, blush <span class="mono kw">#FFB0AE</span>. The colour is in the light, not in
+    the steel, and nothing else on the set is coloured.</p>
+    <p><b>The snow.</b> Real, blue in the shade, lit at the crest, always at the foot of the wall. It is
+    a floor, not weather: a few flakes in the air, sparse and slow. Never a blizzard, never a snowflake
+    glyph.</p>
+    <p><b>Type on the wall is cut, not printed.</b> Chrome letters &mdash; dark at the waist, a bright
+    crown. White type on the wall reads as a sticker and is not allowed.</p>
+    <p class="mono note">The other surface is black lacquer. Plates stay blue and sit in a machined
+    bezel. Blue against polished steel is the whole composition.</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(220px,30vw,440px)">
+      <div class="array wall" style="border-radius:5px;min-height:0;max-height:none;aspect-ratio:auto;height:100%"><div class="shelf"></div>
+        <div class="row5"><div class="subject"><img src="img/arr-3.png" alt=""><div class="rf"><img src="img/arr-3.png" alt=""></div></div><div class="subject"><img src="img/arr-2.png" alt=""><div class="rf"><img src="img/arr-2.png" alt=""></div></div><div class="subject"><img src="img/arr-1.png" alt=""><div class="rf"><img src="img/arr-1.png" alt=""></div></div><div class="subject"><img src="img/arr-4.png" alt=""><div class="rf"><img src="img/arr-4.png" alt=""></div></div><div class="subject"><img src="img/arr-5.png" alt=""><div class="rf"><img src="img/arr-5.png" alt=""></div></div></div>
+        <div class="shelf fore"></div><canvas class="snowfall" data-density=".8"></canvas>
+        <div class="cap"><div class="mono" style="font-size:8.5px;letter-spacing:.18em">THE SET</div><h3 class="chrome on-light" style="font-size:clamp(16px,2.4vw,34px);font-weight:700;letter-spacing:-.03em;line-height:.95;margin-top:6px">Thirty-four compounds.<br>One label.</h3></div></div>
+    </div>
+    <div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(120px,15vw,220px);margin-top:12px">
+      <div class="fr-tile wall"><span class="cap">WALL &middot; 72 PX RIBS &middot; BRUSHED</span></div>
+      <div class="fr-tile wall"><div class="shelf" style="height:44%"></div><span class="cap">WALL &middot; SNOW AT THE FOOT</span></div>
+      <div class="fr-tile wall"><b class="spec chrome on-light">Cut<br>chrome</b><span class="cap">TYPE &middot; CUT, NOT PRINTED</span></div>
+      <div class="tile dark" style="padding:12% 18%"><div class="bezel" style="width:100%"><img src="img/products/web/bpc-157-primary.jpg" alt="" style="aspect-ratio:1;object-fit:cover;width:100%"></div><span class="cap">BEZEL &middot; BLUE PLATE IN STEEL</span></div>
+    </div>
+    <div class="field-rule" style="margin-top:14px;padding-top:14px">
+      <div class="fr-pair">
+        <figure><div class="fr-tile wall"><div class="shelf"></div><b class="spec chrome on-light">Research, refined.</b></div>
+          <figcaption><span class="ok">DO</span> Cut chrome type on the wall, snow at the foot.</figcaption></figure>
+        <figure><div class="fr-tile wall"><b class="spec" style="color:#fff">Research, refined.</b></div>
+          <figcaption><span class="no">DON&rsquo;T</span> White type on the wall. Or any printed colour.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>STRUCTURE</span></div>
 </div>
 
 <!-- the label -->
@@ -760,6 +827,13 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
       <a class="ass" href="img/vector/lockup-1x1-navy-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-512.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, 512</b><i>lockup-1x1-navy-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
+      <h3>The chrome set — wall, snow, type, bezel</h3><p>The set is code, so the site and this book share one wall and one light. Two files: the materials and the snowfall. The cut-out bottles stand in front of it.</p>
+      <a class="ass" href="site/chrome.css" download><span class="th" style="background:#0A0C10"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>chrome.css — the wall, the shelf, cut chrome type, the bezel, lacquer</b><i>site/chrome.css &middot; CSS</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="site/snow.js" download><span class="th" style="background:#0A0C10"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>snow.js — the snowfall, sparse, slow, still under reduced motion</b><i>site/snow.js &middot; JS</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/ads/_safe-bottle.png" download><span class="th"><img loading="lazy" src="img/ads/_safe-bottle.png" alt=""></span><span class="meta"><b>The bottle, cut out — the cover subject</b><i>_safe-bottle.png &middot; 516&times;1181 &middot; alpha</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/arr-1.png" download><span class="th"><img loading="lazy" src="img/arr-1.png" alt=""></span><span class="meta"><b>The five, cut out — GHK-Cu, TB-500, BPC-157, CJC+IPA, IPA</b><i>arr-1.png &hellip; arr-5.png &middot; 440&times;1000 &middot; alpha</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
       <h3>Archive — not in use</h3><p>Pages and plates from the first edition that are not one of the three roles. Kept so nobody finds one in an old folder and assumes it is live.</p>
       <a class="ass" href="v1.html#sys-field"><span class="th"><img loading="lazy" src="img/system/mark-on-field-2400.jpg" alt=""></span><span class="meta"><b>The Field, The Bar, The Bleed, The Mark, The Woven Shield</b><i>system plates · first edition</i></span><span class="dl">OPEN V1</span></a>
       <a class="ass" href="v1.html#motion"><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Motion — hard cuts, clocks, flash, orbit</b><i>first edition</i></span><span class="dl">OPEN V1</span></a>
@@ -832,5 +906,6 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   }
 })();
 </script>
+<script src="site/snow.js?v=2"></script>
 </body>
 </html>

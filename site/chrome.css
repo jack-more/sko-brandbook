@@ -1,0 +1,105 @@
+/* SKO · chrome materials — the ribbed steel wall, the snow shelf, chrome type, the bezel.
+   Built in CSS so every page shares one wall and one light. Ribs are a repeating
+   gradient (a wide brushed face, then a narrow bead: dark edge, bright crown, dark edge),
+   the brushing is an SVG noise laid over it with soft-light, the colour of the light is
+   a hue layer (cool cyan from above, warm blush low right, exactly like a lit studio wall),
+   and the luminance of the light is a separate layer so the two can be tuned apart. */
+
+:root{
+  --steel:#C3CBD3; --steel-hi:#EEF2F5; --steel-lo:#4E5862;
+  --cyan:#3FD4FF; --blush:#FFB0AE; --snowlit:#F4F9FF; --snowshade:#CBDCF2;
+  --lacquer:#0A0C10; --lacquer-2:#15181E; --silver:#D6DCE2; --silver-dim:#8A939D;
+  --rib:72px;
+}
+
+.wall{position:relative;overflow:hidden;isolation:isolate;background-color:var(--steel);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.95 0.012' numOctaves='2' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='.9' intercept='.05'/><feFuncG type='linear' slope='.9' intercept='.05'/><feFuncB type='linear' slope='.9' intercept='.05'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"),
+    repeating-linear-gradient(90deg,
+      #ADB6C0 0px,#C6CED6 5px,#DCE2E8 20px,#D8DEE4 34px,#C2CAD2 46px,#A6AFB9 52px,
+      #6B7580 55px,#4A545E 57px,#DCE2E7 60px,#FFFFFF 62px,#DCE2E7 64px,#525C66 67px,#7E8893 69px,#ADB6C0 var(--rib));
+  background-size:420px 420px,var(--rib) 100%;
+  background-blend-mode:soft-light,normal}
+/* the colour of the light */
+.wall::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:color;
+  background:
+    radial-gradient(75% 80% at 34% -12%,var(--cyan) 0%,rgba(63,212,255,.85) 30%,rgba(63,212,255,0) 68%),
+    radial-gradient(80% 70% at 100% 108%,var(--blush) 0%,var(--blush) 30%,rgba(255,176,174,0) 70%),
+    radial-gradient(55% 55% at 0% 100%,rgba(255,176,174,.7) 0%,rgba(255,176,174,0) 65%)}
+/* the strength of the light: a softbox from above, a fall-off to the floor, one broad specular band */
+.wall::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.18) 26%,rgba(255,255,255,0) 50%,rgba(20,26,34,.12) 72%,rgba(20,26,34,.34) 100%),
+    radial-gradient(60% 90% at 38% 10%,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 60%),
+    linear-gradient(90deg,rgba(0,0,0,.10) 0%,rgba(255,255,255,0) 18%,rgba(255,255,255,.10) 42%,rgba(255,255,255,0) 60%,rgba(0,0,0,.08) 100%)}
+.wall>*{position:relative;z-index:1}
+.wall.dark{background-color:#8E98A3}
+.wall.dark::after{background:
+    linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 40%,rgba(8,10,14,.28) 78%,rgba(8,10,14,.5) 100%),
+    radial-gradient(60% 90% at 38% 10%,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 60%)}
+
+/* the snow shelf: the floor of the set. The snow is the real snow from the studio plates, lit blue,
+   cut in with a mask shaped as drifts so the crest is uneven; a sparkle and a cove shadow over it.
+   Give it a height. A second shelf with .fore sits in front of the subject so the subject stands
+   in the snow, not on it */
+.shelf{position:absolute;left:-2%;right:-2%;bottom:0;height:30%;z-index:1;pointer-events:none}
+.shelf::before{content:"";position:absolute;inset:0;
+  background:url("../img/edition3/hero-snowchrome.jpg") left bottom/190% auto no-repeat;
+  -webkit-mask:radial-gradient(30% 120% at 6% 118%,#000 58%,transparent 74%),radial-gradient(36% 110% at 34% 124%,#000 56%,transparent 74%),radial-gradient(40% 120% at 62% 120%,#000 56%,transparent 73%),radial-gradient(36% 110% at 96% 116%,#000 56%,transparent 74%),linear-gradient(180deg,transparent 34%,#000 64%);
+  mask:radial-gradient(30% 120% at 6% 118%,#000 58%,transparent 74%),radial-gradient(36% 110% at 34% 124%,#000 56%,transparent 74%),radial-gradient(40% 120% at 62% 120%,#000 56%,transparent 73%),radial-gradient(36% 110% at 96% 116%,#000 56%,transparent 74%),linear-gradient(180deg,transparent 34%,#000 64%)}
+.shelf::after{content:"";position:absolute;inset:0;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='s' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='1' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  5 5 5 0 -9.9'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>") 0 0/260px 260px,
+    linear-gradient(180deg,rgba(20,30,50,.22) 0%,rgba(20,30,50,0) 26%);
+  -webkit-mask:linear-gradient(180deg,transparent 22%,#000 60%);mask:linear-gradient(180deg,transparent 22%,#000 60%)}
+.shelf.fore{height:15%;z-index:3;left:-4%;right:-4%}
+.shelf.fore::before{background-image:url("../img/edition3/hero-frost.jpg");background-position:left bottom;background-size:210% auto;
+  -webkit-mask:radial-gradient(34% 130% at 26% 124%,#000 56%,transparent 74%),radial-gradient(40% 130% at 72% 128%,#000 54%,transparent 73%),linear-gradient(180deg,transparent 40%,#000 74%);
+  mask:radial-gradient(34% 130% at 26% 124%,#000 56%,transparent 74%),radial-gradient(40% 130% at 72% 128%,#000 54%,transparent 73%),linear-gradient(180deg,transparent 40%,#000 74%)}
+.shelf.fore::after{background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='s' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='1' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  5 5 5 0 -9.9'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>") 0 0/260px 260px;
+  -webkit-mask:linear-gradient(180deg,transparent 40%,#000 75%);mask:linear-gradient(180deg,transparent 40%,#000 75%)}
+
+/* a subject standing in the snow: the object, its contact shadow, and its reflection in the lit crust */
+.subject{position:absolute;bottom:14%;left:50%;transform:translateX(-50%);z-index:2;height:60%}
+.subject img{height:100%;width:auto;display:block;filter:drop-shadow(0 26px 34px rgba(24,36,60,.32))}
+.subject .rf{position:absolute;left:0;top:100%;width:100%;height:100%;transform:scaleY(-1);opacity:.32;filter:blur(1.5px);
+  -webkit-mask:linear-gradient(180deg,transparent 52%,#000 100%);mask:linear-gradient(180deg,transparent 52%,#000 100%)}
+.subject .rf img{filter:none}
+.subject::before{content:"";position:absolute;left:50%;bottom:-3%;width:150%;height:9%;transform:translateX(-50%);
+  background:radial-gradient(50% 50% at 50% 50%,rgba(50,70,110,.5),rgba(50,70,110,0) 70%);z-index:-1}
+
+/* the array: five vials in a row on the snow, in front of the wall */
+.array{position:relative;aspect-ratio:21/9;min-height:360px;max-height:640px;color:#232B34}
+.array .row5{position:absolute;left:0;right:0;bottom:16%;height:52%;display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,2.4vw,44px);z-index:2}
+.array .row5 .subject{position:relative;left:auto;bottom:auto;transform:none;height:100%}
+.array .row5 .subject:nth-child(2),.array .row5 .subject:nth-child(4){height:92%}
+.array .row5 .subject:nth-child(1),.array .row5 .subject:nth-child(5){height:84%}
+.array .cap{position:absolute;left:clamp(20px,4vw,56px);top:clamp(20px,3vw,44px);z-index:2}
+.array .cap .mono{color:#3E4750}
+.array .cap h3{font-size:clamp(18px,3vw,44px);line-height:1;margin-top:10px}
+
+@media(max-width:900px){.array{aspect-ratio:auto;height:60vw}.array .row5 .subject:nth-child(1),.array .row5 .subject:nth-child(5){display:none}}
+
+/* chrome type: a bright crown, a dark waistline, bright again below — cast letters */
+.chrome{color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(180deg,#FFFFFF 0%,#F0F4F7 28%,#C7D0D8 44%,#5C6772 50%,#8F9AA5 54%,#E6ECF0 70%,#FFFFFF 84%,#AEB8C2 100%);
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.55)) drop-shadow(0 10px 22px rgba(10,16,26,.34))}
+.chrome.on-light{background-image:linear-gradient(180deg,#FAFCFD 0%,#B8C2CC 10%,#4E5862 34%,#1B2129 48%,#0E1318 52%,#3A434D 62%,#87929D 84%,#DCE3E9 96%,#2A323B 100%);
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.75)) drop-shadow(0 -1px 0 rgba(0,0,0,.25)) drop-shadow(0 14px 26px rgba(10,16,26,.35))}
+.chrome.on-dark{background-image:linear-gradient(180deg,#FFFFFF 0%,#DCE3E9 30%,#9AA5B0 46%,#3D4650 50%,#6E7883 55%,#D4DBE1 72%,#FFFFFF 86%,#8E98A3 100%);
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.18)) drop-shadow(0 12px 26px rgba(0,0,0,.6))}
+
+/* the bezel: a machined frame around a plate. Outer dark edge, inner bright edge */
+.bezel{position:relative;border-radius:2px;padding:1px;
+  background:linear-gradient(160deg,#F2F5F8 0%,#9AA4AE 22%,#DDE3E8 45%,#5A646E 70%,#C9D1D8 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.5),0 18px 40px rgba(10,16,26,.28),inset 0 0 0 1px rgba(0,0,0,.35)}
+.bezel>*{border-radius:1px;overflow:hidden;display:block}
+
+/* black lacquer: the other surface. A hairline of silver at the top edge */
+.lacquer{background:linear-gradient(180deg,var(--lacquer-2) 0%,var(--lacquer) 100%);color:var(--silver);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+.hairline{height:1px;background:linear-gradient(90deg,rgba(214,220,226,0) 0%,rgba(214,220,226,.9) 18%,#fff 50%,rgba(214,220,226,.9) 82%,rgba(214,220,226,0) 100%)}
+
+/* the snowfall canvas fills whatever stage it is put in */
+canvas.snowfall{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
