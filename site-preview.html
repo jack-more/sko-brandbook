@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{--pig:#0130C0;--ink:#020B77;--sky:#0148FE;--frost:#88A9E3;--paper:#EFEEEC;--line:rgba(2,11,119,.14)}
+*{box-sizing:border-box;margin:0}
+body{background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.disp{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.14em;font-size:10px;text-transform:uppercase}
+nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(20px,4vw,56px);background:var(--pig);color:#fff}
+nav img{height:26px}
+nav .links{display:flex;gap:28px}
+nav .links span{font-family:Syncopate,sans-serif;font-weight:700;font-size:10px;text-transform:uppercase}
+.hero{position:relative;height:min(86vh,900px);background:var(--pig);overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
+.hero .t{position:absolute;left:clamp(20px,5vw,80px);top:50%;transform:translateY(-50%);max-width:46%;color:#fff}
+.hero h1{font-size:clamp(28px,4.6vw,72px);line-height:1.02}
+.hero p{margin-top:22px;font-size:clamp(13px,1.1vw,17px);max-width:34ch;color:rgba(255,255,255,.82)}
+.hero .cta{display:inline-block;margin-top:30px;background:#fff;color:var(--pig);padding:16px 24px;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;text-transform:uppercase}
+.strip{display:flex;justify-content:space-between;padding:12px clamp(20px,4vw,56px);background:var(--ink);color:var(--frost)}
+section{padding:clamp(40px,6vw,96px) clamp(20px,4vw,56px)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px}
+.sec-h h2{font-size:clamp(16px,2vw,26px)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line)}
+.card .im{aspect-ratio:1;background:var(--pig);overflow:hidden}
+.card .im img{width:100%;height:100%;object-fit:cover;display:block}
+.card .meta{padding:14px 16px 18px}
+.card .name{font-family:Syncopate,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase}
+.card .dose{margin-top:6px;color:#4a5680;font-size:12px}
+.card .price{margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.card .buy{font-family:Syncopate,sans-serif;font-weight:700;font-size:9px;text-transform:uppercase;color:var(--pig)}
+.white{background:#fff}.blue{background:var(--pig);color:#fff}
+.pdp{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
+.car{position:relative;background:var(--pig);aspect-ratio:1;overflow:hidden}
+.car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.car img.on{display:block}
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+.thumbs button{aspect-ratio:1;border:2px solid transparent;padding:0;background:var(--pig);cursor:pointer;overflow:hidden}
+.thumbs button.on{border-color:var(--ink)}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.info h1{font-size:clamp(22px,3vw,40px);line-height:1.05}
+.info .sub{margin-top:10px;color:#4a5680}
+.info .p{margin-top:22px;font-size:26px}
+.info .buy{display:block;margin-top:22px;background:var(--pig);color:#fff;padding:18px;text-align:center;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;text-transform:uppercase}
+.hood{margin-top:28px;background:var(--ink);color:var(--frost);font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;padding:18px 20px;white-space:pre}
+.hood b{color:#fff;font-weight:400}
+.rules{margin-top:22px;border-top:1px solid var(--line)}
+.rules div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.rules div span:last-child{color:#4a5680}
+.note{position:fixed;left:14px;bottom:14px;z-index:9;background:#fff;color:var(--ink);border:1px solid var(--line);padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.pdp{grid-template-columns:1fr}.hero .t{max-width:80%}}
+</style>
+<title>SKO Site Preview</title>
+<div class="note">PREVIEW · EDITION THREE · NOT LIVE</div>
+<nav><img src="img/lockup-3x1-white.png" alt="SKO Compounds"><div class="links"><span>Compounds</span><span>Bundles</span><span>Sprays</span><span>Lab</span><span>Cart</span></div></nav>
+
+<div class="hero"><img src="img/edition3/hero-frost.jpg" alt=""><div class="t"><h1 class="disp">Research,<br>refined.</h1><p>Research-grade compounds, verified by third-party analysis, shipped cold from Los Angeles.</p><span class="cta">Shop compounds</span></div></div>
+<div class="strip mono"><span>99% purity · third-party tested</span><span>38,000+ orders</span><span>Research use only</span></div>
+
+<section class="white">
+  <div class="sec-h"><h2 class="disp">Compounds</h2><span class="mono" style="color:#4a5680">36 SKUs · 1:1 on Pigment</span></div>
+  <div class="grid">
+    <div class="card"><div class="im"><img src="img/products/web/bpc-157-primary.jpg" alt=""></div><div class="meta"><div class="name">BPC-157</div><div class="dose">10 mg · 99% purity</div><div class="price"><span>$44.00</span><span class="buy">Add →</span></div></div></div>
+    <div class="card"><div class="im" style="background:#fff"><img src="img/edition3/white-vial-w.jpg" alt=""></div><div class="meta"><div class="name">TB-500</div><div class="dose">10 mg · 99% purity</div><div class="price"><span>$49.00</span><span class="buy">Add →</span></div></div></div>
+    <div class="card"><div class="im"><img src="img/edition3/water-w.jpg" alt=""></div><div class="meta"><div class="name">GHK-Cu</div><div class="dose">50 mg · 99% purity</div><div class="price"><span>$39.00</span><span class="buy">Add →</span></div></div></div>
+    <div class="card"><div class="im" style="background:#fff"><img src="img/edition3/white-cradle-w.jpg" alt=""></div><div class="meta"><div class="name">MOTS-c</div><div class="dose">10 mg · 99% purity</div><div class="price"><span>$59.00</span><span class="buy">Add →</span></div></div></div>
+  </div>
+  <p class="mono" style="margin-top:18px;color:#4a5680">Cards alternate Pigment and white primaries; the three placeholders here are book plates until each SKU's primary is rendered.</p>
+</section>
+
+<section class="blue" style="padding-top:0;padding-bottom:0"><div style="aspect-ratio:21/9;overflow:hidden"><img src="img/edition3/hero-cradle.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt=""></div></section>
+
+<section class="white" id="pdp">
+  <div class="pdp">
+    <div>
+      <div class="car" id="car">
+        <img class="on" src="img/products/web/bpc-157-primary.jpg" alt="BPC-157 primary">
+        <img src="img/products/web/bpc-157-frost.jpg" alt="BPC-157 frost">
+        <img src="img/products/web/bpc-157-pigment.jpg" alt="BPC-157 pigment">
+        <img src="img/products/web/bpc-157-water.jpg" alt="BPC-157 water">
+        <img src="img/products/web/bpc-157-machine.jpg" alt="BPC-157 machine">
+      </div>
+      <div class="thumbs" id="thumbs">
+        <button class="on"><img src="img/products/web/bpc-157-primary.jpg" alt=""></button>
+        <button><img src="img/products/web/bpc-157-frost.jpg" alt=""></button>
+        <button><img src="img/products/web/bpc-157-pigment.jpg" alt=""></button>
+        <button><img src="img/products/web/bpc-157-water.jpg" alt=""></button>
+        <button><img src="img/products/web/bpc-157-machine.jpg" alt=""></button>
+      </div>
+    </div>
+    <div class="info">
+      <div class="mono" style="color:#4a5680">SKO-011 · Peptide</div>
+      <h1 class="disp" style="margin-top:10px">BPC-157</h1>
+      <div class="sub">10 mg · lyophilised · 99% purity</div>
+      <div class="p">$44.00</div>
+      <span class="buy">Add to cart</span>
+      <div class="hood"><b>SKO/HOOD</b>   batch 2609-A   purity 99.1%   mass 10.00 mg   <b>COA ↗</b>
+formula C62H98N16O22   MW 1419.5   span 28.8 Å   stored 2–8 °C</div>
+      <div class="rules"><div><span>Purity</span><span>≥ 99%, third-party HPLC</span></div><div><span>Form</span><span>Lyophilised powder, 10 mg vial</span></div><div><span>Shipping</span><span>Cold, same day from Los Angeles</span></div><div><span>Use</span><span>Research use only</span></div></div>
+    </div>
+  </div>
+</section>
+<script>
+const imgs=[...document.querySelectorAll('#car img')],bts=[...document.querySelectorAll('#thumbs button')];
+bts.forEach((b,i)=>b.addEventListener('click',()=>{imgs.forEach((im,j)=>im.classList.toggle('on',i===j));bts.forEach((x,j)=>x.classList.toggle('on',i===j));}));
+</script>
