@@ -2,7 +2,7 @@
 <style>
 :root{--pig:#0130C0;--ink:#020B77;--sky:#0148FE;--frost:#88A9E3;--paper:#EFEEEC;--line:rgba(2,11,119,.14)}
 *{box-sizing:border-box;margin:0}
-body{background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:#fff;color:var(--ink);overflow-x:hidden;font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 .disp{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0}
 .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.14em;font-size:10px;text-transform:uppercase}
 nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(20px,4vw,56px);background:var(--pig);color:#fff}
@@ -41,7 +41,7 @@ section{padding:clamp(40px,6vw,96px) clamp(20px,4vw,56px)}
 .info .sub{margin-top:10px;color:#4a5680}
 .info .p{margin-top:22px;font-size:26px}
 .info .buy{display:block;margin-top:22px;background:var(--pig);color:#fff;padding:18px;text-align:center;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;text-transform:uppercase}
-.hood{margin-top:28px;background:var(--ink);color:var(--frost);font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;padding:18px 20px;white-space:pre}
+.hood{margin-top:28px;background:var(--ink);color:var(--frost);font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.8;padding:18px 20px;white-space:pre-wrap;overflow-x:auto;max-width:100%}
 .hood b{color:#fff;font-weight:400}
 .rules{margin-top:22px;border-top:1px solid var(--line)}
 .rules div{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
