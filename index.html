@@ -319,9 +319,10 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     <p><b>The set is a studio.</b> Ribbed, brushed steel behind, snow at its foot, one object standing
     in it. It is where the bottle is photographed and where the site and this book are presented, and
     it is one material, done one way.</p>
-    <p><b>The wall.</b> Vertical ribs on a 72&nbsp;px pitch: a wide brushed face, then a narrow bead
-    &mdash; dark edge, bright crown, dark edge. Brushed, never mirror. Ribs run vertical, never
-    horizontal, never diagonal.</p>
+    <p><b>The wall is a photograph.</b> Vertical ribbed panels of brushed chrome: a wide brushed face,
+    then a narrow bead &mdash; dark edge, bright crown, dark edge. Brushed, never mirror. Ribs run
+    vertical, never horizontal, never diagonal. The reference plate is the master; every new wall is
+    generated from it, never drawn.</p>
     <p><b>The light.</b> Cool from above, cyan <span class="mono kw">#3FD4FF</span> gone by the middle;
     warm low right, blush <span class="mono kw">#FFB0AE</span>. The colour is in the light, not in
     the steel, and nothing else on the set is coloured.</p>
@@ -331,7 +332,8 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
     <p><b>Type on the wall is cut, not printed.</b> Chrome letters &mdash; dark at the waist, a bright
     crown. White type on the wall reads as a sticker and is not allowed.</p>
     <p class="mono note">The other surface is black lacquer. Plates stay blue and sit in a machined
-    bezel. Blue against polished steel is the whole composition.</p>
+    bezel. Blue against polished steel is the whole composition. New wall plates come from
+    tools/chrome_wall.sh, which holds the prompts.</p>
   </div>
   <div class="body">
     <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(220px,30vw,440px)">
@@ -341,7 +343,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
         <div class="cap"><div class="mono" style="font-size:8.5px;letter-spacing:.18em">THE SET</div><h3 class="chrome on-light" style="font-size:clamp(16px,2.4vw,34px);font-weight:700;letter-spacing:-.03em;line-height:.95;margin-top:6px">Thirty-four compounds.<br>One label.</h3></div></div>
     </div>
     <div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(120px,15vw,220px);margin-top:12px">
-      <div class="fr-tile wall"><span class="cap">WALL &middot; 72 PX RIBS &middot; BRUSHED</span></div>
+      <div class="fr-tile wall"><span class="cap">WALL &middot; THE REFERENCE PLATE</span></div>
       <div class="fr-tile wall"><div class="shelf" style="height:44%"></div><span class="cap">WALL &middot; SNOW AT THE FOOT</span></div>
       <div class="fr-tile wall"><b class="spec chrome on-light">Cut<br>chrome</b><span class="cap">TYPE &middot; CUT, NOT PRINTED</span></div>
       <div class="tile dark" style="padding:12% 18%"><div class="bezel" style="width:100%"><img src="img/products/web/bpc-157-primary.jpg" alt="" style="aspect-ratio:1;object-fit:cover;width:100%"></div><span class="cap">BEZEL &middot; BLUE PLATE IN STEEL</span></div>
@@ -827,7 +829,9 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
       <a class="ass" href="img/vector/lockup-1x1-navy-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-512.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, 512</b><i>lockup-1x1-navy-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
     <div class="agroup">
-      <h3>The chrome set — wall, snow, type, bezel</h3><p>The set is code, so the site and this book share one wall and one light. Two files: the materials and the snowfall. The cut-out bottles stand in front of it.</p>
+      <h3>The chrome set — wall, snow, type, bezel</h3><p>One wall, one light, shared by the site and this book. The wall is the reference photograph, composed wide; the materials and the snowfall are two files; the cut-out bottles stand in front of it. Generate more plates with tools/chrome_wall.sh.</p>
+      <a class="ass" href="img/edition3/wall-ref.jpg" download><span class="th"><img loading="lazy" src="img/edition3/wall-1x1.jpg" alt=""></span><span class="meta"><b>The wall — reference plate, the master for every generation</b><i>wall-ref.jpg &middot; 1200&times;1801</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/edition3/wall-wide.jpg" download><span class="th"><img loading="lazy" src="img/edition3/wall-1x1.jpg" alt=""></span><span class="meta"><b>The wall, wide — photo, mirror, photo; the site and cover ground</b><i>wall-wide.jpg &middot; 3600&times;1801</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="site/chrome.css" download><span class="th" style="background:#0A0C10"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>chrome.css — the wall, the shelf, cut chrome type, the bezel, lacquer</b><i>site/chrome.css &middot; CSS</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="site/snow.js" download><span class="th" style="background:#0A0C10"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>snow.js — the snowfall, sparse, slow, still under reduced motion</b><i>site/snow.js &middot; JS</i></span><span class="dl">DOWNLOAD</span></a>
       <a class="ass" href="img/ads/_safe-bottle.png" download><span class="th"><img loading="lazy" src="img/ads/_safe-bottle.png" alt=""></span><span class="meta"><b>The bottle, cut out — the cover subject</b><i>_safe-bottle.png &middot; 516&times;1181 &middot; alpha</i></span><span class="dl">DOWNLOAD</span></a>

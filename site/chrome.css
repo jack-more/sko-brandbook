@@ -1,9 +1,8 @@
 /* SKO · chrome materials — the ribbed steel wall, the snow shelf, chrome type, the bezel.
-   Built in CSS so every page shares one wall and one light. Ribs are a repeating
-   gradient (a wide brushed face, then a narrow bead: dark edge, bright crown, dark edge),
-   the brushing is an SVG noise laid over it with soft-light, the colour of the light is
-   a hue layer (cool cyan from above, warm blush low right, exactly like a lit studio wall),
-   and the luminance of the light is a separate layer so the two can be tuned apart. */
+   The wall is a photograph: img/edition3/wall-wide.jpg, the studio reference composed into a
+   seamless wide plate (photo, mirror, photo — the ribs are vertical so the join is clean), with
+   wall-ref.jpg, the portrait original, for narrow screens. Generate the next plates with
+   tools/chrome_wall.sh and drop them in under the same names. */
 
 :root{
   --steel:#C3CBD3; --steel-hi:#EEF2F5; --steel-lo:#4E5862;
@@ -12,31 +11,12 @@
   --rib:72px;
 }
 
-.wall{position:relative;overflow:hidden;isolation:isolate;background-color:var(--steel);
-  background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.95 0.012' numOctaves='2' seed='9' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncR type='linear' slope='.9' intercept='.05'/><feFuncG type='linear' slope='.9' intercept='.05'/><feFuncB type='linear' slope='.9' intercept='.05'/></feComponentTransfer></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"),
-    repeating-linear-gradient(90deg,
-      #ADB6C0 0px,#C6CED6 5px,#DCE2E8 20px,#D8DEE4 34px,#C2CAD2 46px,#A6AFB9 52px,
-      #6B7580 55px,#4A545E 57px,#DCE2E7 60px,#FFFFFF 62px,#DCE2E7 64px,#525C66 67px,#7E8893 69px,#ADB6C0 var(--rib));
-  background-size:420px 420px,var(--rib) 100%;
-  background-blend-mode:soft-light,normal}
-/* the colour of the light */
-.wall::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:color;
-  background:
-    radial-gradient(75% 80% at 34% -12%,var(--cyan) 0%,rgba(63,212,255,.85) 30%,rgba(63,212,255,0) 68%),
-    radial-gradient(80% 70% at 100% 108%,var(--blush) 0%,var(--blush) 30%,rgba(255,176,174,0) 70%),
-    radial-gradient(55% 55% at 0% 100%,rgba(255,176,174,.7) 0%,rgba(255,176,174,0) 65%)}
-/* the strength of the light: a softbox from above, a fall-off to the floor, one broad specular band */
+.wall{position:relative;overflow:hidden;isolation:isolate;background:#C3CBD3 url("../img/edition3/wall-wide.jpg") center top/cover no-repeat}
+/* the cove: the wall darkens a little where it meets the floor, and the top holds its light */
 .wall::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.18) 26%,rgba(255,255,255,0) 50%,rgba(20,26,34,.12) 72%,rgba(20,26,34,.34) 100%),
-    radial-gradient(60% 90% at 38% 10%,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 60%),
-    linear-gradient(90deg,rgba(0,0,0,.10) 0%,rgba(255,255,255,0) 18%,rgba(255,255,255,.10) 42%,rgba(255,255,255,0) 60%,rgba(0,0,0,.08) 100%)}
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 58%,rgba(20,26,34,.10) 82%,rgba(20,26,34,.28) 100%)}
 .wall>*{position:relative;z-index:1}
-.wall.dark{background-color:#8E98A3}
-.wall.dark::after{background:
-    linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 40%,rgba(8,10,14,.28) 78%,rgba(8,10,14,.5) 100%),
-    radial-gradient(60% 90% at 38% 10%,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 60%)}
+@media (max-width:900px){.wall{background-image:url("../img/edition3/wall-ref.jpg")}}
 
 /* the snow shelf: the floor of the set. The snow is the real snow from the studio plates, lit blue,
    cut in with a mask shaped as drifts so the crest is uneven; a sparkle and a cove shadow over it.
