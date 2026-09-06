@@ -1,6 +1,6 @@
 :root{--pig:#0130C0;--ink:#020B77;--sky:#0148FE;--frost:#88A9E3;--paper:#EFEEEC;--line:rgba(2,11,119,.14);--wline:rgba(255,255,255,.22)}
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:#fff;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -34,12 +34,12 @@ nav img{height:26px}
 .hero .btn{margin-top:30px;opacity:0;animation:fade .8s .7s forwards}
 
 /* marquee */
-.marq{background:var(--ink);color:var(--frost);overflow:hidden;white-space:nowrap;padding:12px 0;border-top:1px solid var(--wline)}
+.marq{max-width:100vw;background:var(--ink);color:var(--frost);overflow:hidden;white-space:nowrap;padding:12px 0;border-top:1px solid var(--wline)}
 .marq div{display:inline-block;animation:marq 40s linear infinite}
 .marq span{margin:0 34px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
 .marq b{color:#fff;font-weight:400}
 @keyframes marq{to{transform:translateX(-50%)}}
-.power{background:var(--pig);color:#fff;overflow:hidden;white-space:nowrap;padding:clamp(14px,2vw,26px) 0}
+.power{max-width:100vw;background:var(--pig);color:#fff;overflow:hidden;white-space:nowrap;padding:clamp(14px,2vw,26px) 0}
 .power div{display:inline-block;animation:marq 26s linear infinite}
 .power span{font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(28px,6vw,96px);text-transform:uppercase;margin:0 .35em;line-height:1}
 .power span.o{color:transparent;-webkit-text-stroke:1.5px #fff}
