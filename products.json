@@ -236,5 +236,33 @@
   "file": "wolverine-new.png",
   "spray": false,
   "label": "WOLVERINE"
+ },
+ {
+  "slug": "klow",
+  "name": "KLOW",
+  "file": "product-klow-new.png",
+  "spray": false,
+  "label": "KLOW"
+ },
+ {
+  "slug": "bac-water",
+  "name": "Bacteriostatic Water",
+  "file": "product-bacwater.png",
+  "spray": false,
+  "label": "BAC WATER"
+ },
+ {
+  "slug": "sko-3-rt",
+  "name": "SKO-3 RT",
+  "file": "sko3rt-vial.png",
+  "spray": false,
+  "label": "SKO-3 RT"
+ },
+ {
+  "slug": "sko-trz",
+  "name": "SKO-TRZ",
+  "file": "sko-trz-vial.png",
+  "spray": false,
+  "label": "SKO-TRZ"
  }
 ]
