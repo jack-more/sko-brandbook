@@ -256,7 +256,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   flex-direction:column;justify-content:flex-end;min-height:clamp(200px,26vw,380px)}
 .poster .disp{font-size:clamp(24px,4.2vw,66px)}
 .poster .mono{font-family:'JetBrains Mono',monospace;font-size:clamp(8px,.8vw,11px);letter-spacing:.18em;opacity:.75;margin-top:12px}
-.tok{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.tok{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
 .tok .chip{height:110px;border-radius:5px;border:1px solid var(--line)}
 .tok b{display:block;font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;font-size:9.5px;margin:8px 0 2px}
 .tok i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--mid);letter-spacing:.06em}
@@ -288,7 +288,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   <div class="col"><h2>The idea</h2><p><b>Three materials, three roles.</b> The blue is a pigment: dry, matte, absolute, something you pour, dust and carve. The chrome is a machine: a cradle, a badge, a clamp, a turbine, cast and polished like jewellery, never a person. The vial is the only subject, the only thing that is ever photographed.</p>
 <p><b>The air is alpine.</b> Snow, ice, frost, a frozen lake, hard mountain sun. Cold and clean. This is what keeps the chrome from becoming a car ad and the blue from becoming a paint chip.</p>
 <p><b>Power comes from stillness.</b> One big object per frame, hard light, flat ground. Not from more objects, more colours or more motion. If a frame has two subjects it has none.</p>
-<p class="mono note">The site follows the book. One object per screen, blue or white, heavy type under it, nothing else.</p></div>
+<p class="mono note">The site follows the book. One object per screen, navy or white, heavy type under it, nothing else. The bright blue is in the pictures, not the chrome of the page.</p></div>
   <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(220px,30vw,460px);"><a class="tile" style="background:#0130C0" href="img/edition3/powder.jpg" download><img class="fill" src="img/edition3/powder-w.jpg" alt="PIGMENT"><span class="cap">PIGMENT</span></a><a class="tile" style="background:#0130C0" href="img/edition3/cradle.jpg" download><img class="fill" src="img/edition3/cradle-w.jpg" alt="THE MACHINE"><span class="cap">THE MACHINE</span></a><a class="tile" style="background:#0130C0" href="img/edition3/frost.jpg" download><img class="fill" src="img/edition3/frost-w.jpg" alt="THE AIR"><span class="cap">THE AIR</span></a></div></div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE IDEA</span></div>
 </div>
@@ -309,13 +309,13 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 </div>
 
 <div class="page" id="colour">
-  <div class="col"><h2>Colour</h2><p><b>One pigment, lit three ways.</b> Pigment is the ground and it is International Klein Blue as it photographs on screen. Ink is that same blue in shadow, the deep of the water. Sky is it under hard mountain light, the alpine frames and the frost burst. Frost is the one pale blue, taken from lit snow, and it is a highlight, never a surface.</p>
+  <div class="col"><h2>Colour</h2><p><b>Navy is the primary. Pigment is the accent.</b> Navy is the label's measured blue, #173384, and it is every interface surface: navigation, buttons, footers, the grounds behind plates. Pigment is International Klein Blue as it photographs, and it lives in the photography and in accents, glints, links, small type, never as a page colour. Ink is the shadow blue, Sky the lit blue of the alpine frames, Frost the one pale blue for highlights.</p>
 <p><b>Chrome is not a colour.</b> It is white to Frost with Pigment in its shadows. Any chrome that does not reflect the blue is wrong.</p>
 <p><b>White is the second ground.</b> Pure white, equal in rank to Pigment. The vial alone, the machine, the badge and the pigment all work on it, and the chrome carries a trace of blue from off-frame so the frame is still SKO. The site alternates the two: blue screens and white screens, never a third.</p>
 <p><b>Paper</b> is the off-white for text pages and the rock shot.</p>
-<p class="mono note">Paper #EFEEEC stays for text pages. The pack keeps #173384, a print measurement, not a screen token.</p></div>
+<p class="mono note">Paper #EFEEEC stays for text pages. The pack and the screen now share #173384.</p></div>
   <div class="body"><div class="tok">
-<div><div class="chip" style="background:#0130C0"></div><b>Pigment</b><i>#0130C0</i><p>The ground. Flat, edge to edge, nothing behind it.</p></div>
+<div><div class="chip" style="background:#173384"></div><b>Navy</b><i>#173384</i><p>The primary. Every interface surface. The label's own blue.</p></div><div><div class="chip" style="background:#0130C0"></div><b>Pigment</b><i>#0130C0</i><p>The accent. Photography, glints, links. Never a page colour.</p></div>
 <div><div class="chip" style="background:#020B77"></div><b>Ink</b><i>#020B77</i><p>Shadow blue. The hood, the dark set, type on Frost.</p></div>
 <div><div class="chip" style="background:#0148FE"></div><b>Sky</b><i>#0148FE</i><p>The lit blue. Alpine sky, the frost burst, poster grounds.</p></div>
 <div><div class="chip" style="background:#88A9E3"></div><b>Frost</b><i>#88A9E3</i><p>Snow highlight. Captions on Pigment. Never a fill.</p></div>
@@ -323,8 +323,8 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 <div><div class="chip" style="background:#FFFFFF"></div><b>White</b><i>#FFFFFF</i><p>The second ground. Equal to Pigment.</p></div>
 </div>
 <div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,20vw,290px);margin-top:14px">
-  <div class="tile" style="background:#0130C0"><span class="cap">PIGMENT &middot; GROUND</span></div>
-  <div class="tile" style="background:#020B77"><span class="cap">INK &middot; HOOD</span></div>
+  <div class="tile" style="background:#173384"><span class="cap">NAVY &middot; PRIMARY</span></div>
+  <div class="tile" style="background:#0130C0"><span class="cap">PIGMENT &middot; ACCENT</span></div>
   <div class="tile" style="background:#FFFFFF;border:1px solid var(--line)"><span class="cap">WHITE &middot; THE SECOND GROUND</span></div></div></div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>COLOUR</span></div>
 </div>
