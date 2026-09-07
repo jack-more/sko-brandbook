@@ -16,8 +16,8 @@ nav .lk a:hover,nav .lk a.on{border-bottom-color:#fff}
 nav img{height:26px}
 
 /* hero */
-.hero{position:relative;aspect-ratio:16/9;max-height:920px;width:100%;background:var(--navy);overflow:hidden;color:#fff}
-.hero .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;background:var(--navy)}
+.hero{position:relative;aspect-ratio:16/9;width:100%;background:var(--navy);overflow:hidden;color:#fff}
+.hero .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:var(--navy)}
 @keyframes kb{from{transform:scale(1.04) translateX(0)}to{transform:scale(1.12) translateX(-1.5%)}}
 .hero .sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);transform:translateX(-120%);animation:sweep 7s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
 @keyframes sweep{0%{transform:translateX(-120%)}55%{transform:translateX(120%)}100%{transform:translateX(120%)}}
@@ -57,7 +57,7 @@ section{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(40px,6vw,96px)}
 .card{display:block;background:#fff;border:1px solid var(--line);transition:transform .25s,box-shadow .25s}
 .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(2,11,119,.14)}
 .card .im{aspect-ratio:1;background:#fff;overflow:hidden;position:relative}
-.card .im img{width:100%;height:100%;object-fit:contain}
+.card .im img{width:100%;height:100%;object-fit:cover}
 .card .im::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 45%,rgba(255,255,255,.22) 50%,transparent 55%);transform:translateX(-130%);transition:transform .8s}
 .card:hover .im::after{transform:translateX(130%)}
 .card .meta{padding:14px 16px 18px}
@@ -70,14 +70,14 @@ section{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(40px,6vw,96px)}
 
 /* wide plate */
 .plate-wide{background:var(--navy);overflow:hidden;position:relative}
-.plate-wide img{width:100%;aspect-ratio:16/9;object-fit:contain;background:var(--navy)}
+.plate-wide img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--navy)}
 .plate-wide .cap{position:absolute;left:clamp(20px,4vw,56px);bottom:clamp(18px,3vw,40px);color:#fff}
 .plate-wide .cap h3{font-size:clamp(18px,3vw,44px);line-height:1}
 
 /* pdp */
 .pdp{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,64px);align-items:start}
-.car{position:relative;background:var(--navy);aspect-ratio:3/4;overflow:hidden}
-.car img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--navy);opacity:0;transition:opacity .5s}
+.car{position:relative;background:var(--navy);aspect-ratio:3/4;overflow:hidden;transition:aspect-ratio .35s}
+.car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--navy);opacity:0;transition:opacity .5s}
 .car img[data-ground="white"]{background:#fff}
 .car img.on{opacity:1}
 .car .arr{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;background:rgba(255,255,255,.9);color:var(--pig);font-size:18px;cursor:pointer;display:grid;place-items:center}
@@ -86,7 +86,7 @@ section{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(40px,6vw,96px)}
 .thumbs button{aspect-ratio:3/4;border:2px solid transparent;padding:0;background:var(--navy);cursor:pointer;overflow:hidden}
 .thumbs button.on{border-color:var(--ink)}
 .thumbs button[data-ground="white"]{background:#fff}
-.thumbs img{width:100%;height:100%;object-fit:contain}
+.thumbs img{width:100%;height:100%;object-fit:cover}
 .info h1{font-size:clamp(22px,3vw,40px);line-height:1.05}
 .info .sub{margin-top:10px;color:#4a5680}
 .info .p{margin-top:22px;font-size:26px}
@@ -100,7 +100,7 @@ section{padding-top:clamp(40px,6vw,96px);padding-bottom:clamp(40px,6vw,96px)}
 /* bundles / lab */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .tile{position:relative;background:var(--navy);overflow:hidden;color:#fff;aspect-ratio:4/3}
-.tile img{width:100%;height:100%;object-fit:contain;transition:filter .5s}
+.tile img{width:100%;height:100%;object-fit:cover;transition:filter .5s}
 .tile:hover img{filter:brightness(1.06)}
 .tile .cap{position:absolute;left:20px;bottom:18px}
 .tile .cap h3{font-size:clamp(14px,1.8vw,24px)}
