@@ -11,14 +11,14 @@ python3 -c "import json;[print(p['slug'],'|',p['name'],'|',int(p['spray'])) for 
   for kind in frost pigment water; do
     [ -f "$O/$slug-$kind.png" ] && continue
     case $kind in
-      frost) ref=img/proof/frost.png; scene="the same product pressed into deep powder snow with snow bursting up around it, frost on the cap and shoulders, the same cold blue light, the same deep ultramarine to sky blue backdrop, the same framing";;
-      pigment) ref=img/proof/powder.png; scene="the same bed of ultramarine blue pigment powder, the same raking light, the same product lying on its side half sunk into the powder with dust on the cap and a clean label, the same framing";;
-      water) ref=img/proof/water.png; scene="the same product standing in shallow ultramarine water with hard sun caustics and a broken reflection, the same blue floor, the same framing";;
+      frost) ref=img/ref2/scene/frost.jpg; scene="the same product pressed into deep powder snow with snow bursting up around it, frost on the cap and shoulders, the same cold blue light, the same deep ultramarine to sky blue backdrop, the same framing";;
+      pigment) ref=img/ref2/scene/powder.jpg; scene="the same bed of ultramarine blue pigment powder, the same raking light, the same product lying on its side half sunk into the powder with dust on the cap and a clean label, the same framing";;
+      water) ref=img/ref2/scene/water.jpg; scene="the same product standing in shallow ultramarine water with hard sun caustics and a broken reflection, the same blue floor, the same framing";;
       machine) ref=img/proof/gimbal.png; scene="the same large sleek chrome gimbal, rings inside rings on a flowing base, on the same flat matte ultramarine blue ground, the same soft key light, the same framing, the product held upright at the centre of the inner ring";;
     esac
     (
-      for i in 1 2; do url=$(higgsfield generate create nano_banana_2 --image $CAT --image $ref --aspect_ratio 3:4 --wait --prompt "Reproduce the second reference exactly: $scene; the only change is the product itself: $LABEL" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; done
+      for i in 1 2 3; do higgsfield generate create nano_banana_2 --image $CAT --image $ref --aspect_ratio 3:4 --wait --prompt "Reproduce the second reference exactly: $scene; the only change is the product itself: $LABEL" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 5; done
     ) &
-    while [ $(jobs -r | wc -l) -ge 5 ]; do sleep 2; done
+    while [ $(jobs -r | wc -l) -ge 4 ]; do sleep 2; done
   done
 done; wait; echo DONE; ls $O/*.png | wc -l

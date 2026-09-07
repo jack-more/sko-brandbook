@@ -1,4 +1,4 @@
-<title>SKO Compounds – Research Peptides</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"><link rel="stylesheet" href="site.css?v=11"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="description" content="Third-party tested research peptides, shipped cold from Los Angeles."><meta property="og:title" content="SKO Compounds – Research Peptides"><meta property="og:description" content="Third-party tested research peptides, shipped cold from Los Angeles.">
+<title>SKO Compounds – Research Peptides</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"><link rel="stylesheet" href="site.css?v=12"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="description" content="Third-party tested research peptides, shipped cold from Los Angeles."><meta property="og:title" content="SKO Compounds – Research Peptides"><meta property="og:description" content="Third-party tested research peptides, shipped cold from Los Angeles.">
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TMG5WDJQ');</script>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMG5WDJQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="wrap"><a href="#top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a><div class="lk"><a href="#grid-sec">Shop</a><a href="https://skocompounds.com/coas">Lab</a><a class="keep" href="https://skocompounds.com/checkout">Cart</a></div></nav>
@@ -18,6 +18,37 @@
 <div class="card rv"><div class="im"><img src="../img/products/web/tesamorelin-primary.jpg" alt="Tesamorelin"><img class="alt" src="../img/products/web/tesamorelin-white.jpg" alt="" loading="lazy"></div><div class="meta"><div class="name">Tesamorelin</div><div class="dose">GHRH analogue peptide · lyophilised vial</div><div class="row"><span>$114.99</span><a class="buy" href="https://skocompounds.com/products/tesamorelin">Add to cart →</a></div></div></div>
 <div class="card rv"><div class="im"><img src="../img/products/web/bac-water-primary.jpg" alt="Bacteriostatic Water"><img class="alt" src="../img/products/web/bac-water-white.jpg" alt="" loading="lazy"></div><div class="meta"><div class="name">Bacteriostatic Water</div><div class="dose">Reconstitution solution · 30 mL</div><div class="row"><span>$39.99</span><a class="buy" href="https://skocompounds.com/products/bacteriostatic-water">Add to cart →</a></div></div></div>
 </div></section>
+
+<div id="pop" hidden style="position:fixed;inset:0;z-index:60;background:rgba(23,51,132,.92);display:grid;place-items:center;padding:20px">
+  <div style="background:#fff;color:#173384;max-width:460px;width:100%;padding:28px 28px 26px;text-align:center;position:relative">
+    <button id="popx" aria-label="Close" style="position:absolute;right:12px;top:10px;border:0;background:none;font-size:18px;cursor:pointer;color:#4a5680">×</button>
+    <div class="mono" style="color:#4a5680">YOUR CODE</div>
+    <div id="flip" style="margin:16px auto 0;width:min(100%,320px);aspect-ratio:2.6/1;perspective:900px;cursor:pointer">
+      <div id="flipin" style="position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d">
+        <div style="position:absolute;inset:0;backface-visibility:hidden;background:linear-gradient(135deg,#e9ecf3,#9aa3b8 45%,#e9ecf3);display:grid;place-items:center;border:1px solid #c9d0dd"><span class="disp" style="font-size:12px;color:#173384">Tap to reveal</span></div>
+        <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);background:#173384;color:#fff;display:grid;place-items:center"><span class="disp" data-offer="code" style="font-size:clamp(28px,8vw,44px);letter-spacing:.06em">LABOR</span></div>
+      </div>
+    </div>
+    <p id="popmsg" style="margin-top:16px;line-height:1.5;color:#4a5680;font-size:14px">Flip the tile for your code.</p>
+    <a id="claim" class="btn blue" href="#" style="display:block;margin-top:16px;opacity:.45;pointer-events:none">Claim: buy one, get one free</a>
+    <div class="mono" style="margin-top:12px;color:#4a5680">APPLIES AT CHECKOUT · RESEARCH USE ONLY</div>
+  </div>
+</div>
+<script>
+(function(){
+  // the funnel: any click on the page opens the code tile; the claim button goes to the product page with the code and every parameter
+  const TARGET='https://skocompounds.com/products/sko-3-rt';
+  const pop=document.getElementById('pop'),flip=document.getElementById('flip'),inner=document.getElementById('flipin'),claim=document.getElementById('claim'),msg=document.getElementById('popmsg');
+  const qs=new URLSearchParams(location.search);qs.set('code',OFFER.code);
+  claim.href=TARGET+(TARGET.includes('?')?'&':'?')+qs.toString();
+  let revealed=false;
+  function open(){pop.hidden=false}
+  flip.addEventListener('click',e=>{e.stopPropagation();if(revealed)return;revealed=true;inner.style.transform='rotateY(180deg)';setTimeout(()=>{msg.textContent='Buy one, get one free with code '+OFFER.code+'. Tap claim, the code is applied for you.';claim.style.opacity=1;claim.style.pointerEvents='auto'},650)});
+  document.getElementById('popx').addEventListener('click',e=>{e.stopPropagation();pop.hidden=true});
+  document.addEventListener('click',e=>{if(pop.contains(e.target))return;const a=e.target.closest('a,button');if(a&&a.id==='popx')return;e.preventDefault();open()},true);
+  setTimeout(open,9000);
+})();
+</script>
 <footer class="wrap"><div class="f"><div><div class="mono">SKO COMPOUNDS · LOS ANGELES</div><div class="disp big">Research,<br>refined.</div></div><div><div class="mono" style="display:flex;gap:18px;flex-wrap:wrap"><a href="https://skocompounds.com/shipping-policy">Shipping</a><a href="https://skocompounds.com/refund-return">Returns</a><a href="https://skocompounds.com/privacy-policy">Privacy</a><a href="https://skocompounds.com/terms-conditions">Terms</a><a href="https://skocompounds.com/contact">Contact</a></div><div class="mono" style="margin-top:12px">RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION · © 2026</div></div></div></footer>
 <script>
 // The offer is not hard-coded. Add lp_code and lp_offer to the URL to turn this into a sale page:
