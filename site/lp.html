@@ -60,12 +60,13 @@ html,body{height:100%;background:var(--ink);color:#fff;font-family:Inter,ui-sans
 .foot b{color:#fff;font:inherit}
 @media (prefers-reduced-motion:reduce){.card,.bg img,.code span{animation:none;transition:none;opacity:1;transform:none}.glint{display:none}}
 @media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;place-items:start center}.bg:after{background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}.bg img{object-position:50% 50%}.hd,.h1,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
+.card.plain .chip,.card.plain .perf,.card.plain .skip,.card.plain .hd b{display:none}.plain~.foot,.card.plain .glint{display:none}
 </style>
 <div class="bg"><img id="bg" src="../img/edition3/hero-structure.jpg" alt=""></div>
 <div class="top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
 <div class="wrap"><div class="card" id="card">
   <div class="hd mono"><span>TikTok offer</span><b id="offer"></b></div>
-  <div class="h1 disp">Your code is ready.<small>Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
+  <div class="h1 disp" id="h1">Your code is ready.<small id="sub">Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
   <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span><img src="../img/mark-silver.png" alt="">Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
   <div class="perf"></div>
   <div class="spec mono"><div>Applies to<b>Every compound</b></div><div>Ships<b>3–5 business days</b></div><div>Testing<b>COA on every batch</b></div><div>Use<b>Research only</b></div></div>
@@ -74,24 +75,30 @@ html,body{height:100%;background:var(--ink);color:#fff;font-family:Inter,ui-sans
 <div class="foot mono">Code <b id="code2"></b><span id="sep"> · </span><b id="offer2"></b></div>
 <script>
 // the whole page is the funnel. edit these lines for the next offer.
-// the URL is the source of truth: ?lp_code=LABOR&lp_offer=Buy%20one%2C%20get%20one%20free
-// these two are only the fallback when the ad link carries no code.
-const DEFAULT_CODE='TIKTOK15', DEFAULT_OFFER='15% off your order';
+// the ad URL is the source of truth: ?lp_code=LABOR&lp_offer=Buy%20one%2C%20get%20one%20free
+// no lp_code in the URL = evergreen: no card chip, no code anywhere, just the door to top sellers.
 const BEST='https://skocompounds.com/products?sort=best';   // top sellers; where everyone ends up
 const q=new URLSearchParams(location.search);
-const CODE=(q.get('lp_code')||DEFAULT_CODE).trim().toUpperCase().replace(/[^A-Z0-9-]/g,'')||DEFAULT_CODE;
-const OFFER=(q.get('lp_offer')||(CODE===DEFAULT_CODE?DEFAULT_OFFER:'')).trim().slice(0,60);
-q.set('lp_code',CODE);if(OFFER)q.set('lp_offer',OFFER);const qs=q.toString();
-const BESTURL=BEST+(BEST.includes('?')?'&':'?')+qs;
+const CODE=(q.get('lp_code')||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');
+const OFFER=(q.get('lp_offer')||'').trim().slice(0,60);
+if(!CODE){q.delete('lp_code')}else{q.set('lp_code',CODE)}if(OFFER)q.set('lp_offer',OFFER);const qs=q.toString();
+const BESTURL=BEST+(qs?(BEST.includes('?')?'&':'?')+qs:'');
+if(!CODE)document.querySelector('.foot').hidden=true;
 if(matchMedia('(max-aspect-ratio: 1/1)').matches)document.getElementById('bg').src='../img/edition3/hero-snowchrome-portrait.jpg';
 for(const id of['offer','offer2'])document.getElementById(id).textContent=OFFER;
 if(!OFFER){document.getElementById('offer').hidden=true;document.getElementById('sep').hidden=true}
 document.getElementById('code2').textContent=CODE;
 document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${.8+i*.06}s,0s">${c}</span>`).join('');
+if(!CODE){ // evergreen
+  document.getElementById('card').classList.add('plain');
+  document.getElementById('h1').firstChild.textContent='Research, refined.';
+  document.getElementById('sub').textContent='Third-party tested research peptides, shipped cold from Los Angeles.';
+  document.getElementById('gotxt').textContent='Shop top sellers';
+}
 document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
 setTimeout(()=>document.getElementById('card').classList.add('in'),60);
 let gone=false;
-function apply(){if(gone)return;gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
+function apply(){if(gone)return;gone=true;if(!CODE){location.href=BESTURL;return}const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
 document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
 document.getElementById('skip').addEventListener('click',e=>{e.preventDefault();location.href=BESTURL});
 // a tap on the backdrop also forwards, with the code
