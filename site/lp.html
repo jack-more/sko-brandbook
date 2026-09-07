@@ -65,7 +65,7 @@ html,body{height:100%;background:var(--ink);color:#fff;font-family:Inter,ui-sans
 <div class="bg"><img id="bg" src="../img/edition3/hero-structure.jpg" alt=""></div>
 <div class="top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
 <div class="wrap"><div class="card" id="card">
-  <div class="hd mono"><span>TikTok offer</span><b id="offer"></b></div>
+  <div class="hd mono"><span id="eyebrow">TikTok offer</span><b id="offer"></b></div>
   <div class="h1 disp" id="h1">Your code is ready.<small id="sub">Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
   <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span><img src="../img/mark-silver.png" alt="">Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
   <div class="perf"></div>
@@ -90,7 +90,7 @@ if(!OFFER){document.getElementById('offer').hidden=true;document.getElementById(
 document.getElementById('code2').textContent=CODE;
 document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${.8+i*.06}s,0s">${c}</span>`).join('');
 if(!CODE){ // evergreen
-  document.getElementById('card').classList.add('plain');
+  document.getElementById('card').classList.add('plain');document.getElementById('eyebrow').textContent='SKO Compounds';
   document.getElementById('h1').firstChild.textContent='Research, refined.';
   document.getElementById('sub').textContent='Third-party tested research peptides, shipped cold from Los Angeles.';
   document.getElementById('gotxt').textContent='Shop top sellers';
