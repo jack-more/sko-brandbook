@@ -264,9 +264,9 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 @media (max-width:900px){.tok{grid-template-columns:repeat(3,1fr)}}
 
 /* the system board */
-.board{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(120px,auto);gap:12px}
+.board{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(110px,11.5vw,180px);gap:12px}
 .bt{position:relative;overflow:hidden;border-radius:6px;min-height:0}
-.bt img{width:100%;height:100%;object-fit:cover;display:block}
+.bt>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .bt.pad{padding:clamp(14px,1.6vw,26px)}
 .bt .lbl{position:absolute;left:12px;bottom:10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;color:rgba(255,255,255,.7)}
 .bt.paper{background:#EFEEEC;color:#173384}
@@ -278,7 +278,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 .sw b{font-family:Syncopate,sans-serif;font-weight:700;font-size:10px;text-transform:uppercase}
 .icon{width:38%;aspect-ratio:1;border-radius:22%;background:#173384;display:grid;place-items:center;margin:auto}
 .icon img{width:52%;height:auto}
-.phone{width:min(62%,300px);aspect-ratio:9/19.2;margin:auto;border-radius:34px;background:#0a0f2a;padding:10px;box-shadow:0 30px 60px rgba(2,11,119,.35)}
+.phone{width:min(70%,260px);aspect-ratio:9/19.2;margin:auto;border-radius:34px;background:#0a0f2a;padding:10px;box-shadow:0 30px 60px rgba(2,11,119,.35)}
 .phone iframe{width:100%;height:100%;border:0;border-radius:26px;background:#fff}
 .bt .big{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(14px,1.9vw,30px);line-height:1.1}
 .bt .glint{position:absolute;inset:0;background:linear-gradient(105deg,transparent 45%,rgba(255,255,255,.25) 50%,transparent 55%);transform:translateX(-130%);animation:sweep 6s ease-in-out infinite;pointer-events:none}
@@ -300,9 +300,9 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   </div>
 </div>
 
-<div class="page" id="system" style="grid-template-columns:1fr;padding-bottom:0">
+<div class="page" id="system" style="grid-template-columns:1fr;grid-template-rows:auto auto">
   <div class="body"><div class="board">
-    <div class="bt paper pad" style="grid-column:span 3;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between"><img src="img/lockup-3x1-navy.png" alt="SKO Compounds" style="width:min(62%,420px);height:auto;object-fit:contain"><div class="big" style="color:#173384;max-width:14ch">Research,<br>refined.</div><span class="lbl" style="color:#4a5680">WORDMARK · PAPER</span></div>
+    <div class="bt paper pad" style="grid-column:span 3;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between"><div><img src="img/lockup-3x1-navy.png" alt="SKO Compounds" style="width:min(62%,420px);height:auto"></div><div class="big" style="color:#173384;max-width:14ch">Research,<br>refined.</div><span class="lbl" style="color:#4a5680">WORDMARK · PAPER</span></div>
     <div class="bt" style="grid-column:span 1;grid-row:span 2"><div class="sw"><div style="background:#173384;color:#fff"><b>Navy</b><span>#173384</span></div><div style="background:#0130C0;color:#fff"><b>Pigment</b><span>#0130C0</span></div><div style="background:#020B77;color:#fff"><b>Ink</b><span>#020B77</span></div><div style="background:#0148FE;color:#fff"><b>Sky</b><span>#0148FE</span></div><div style="background:#88A9E3;color:#020B77"><b>Frost</b><span>#88A9E3</span></div><div style="background:#fff;color:#173384;border:1px solid var(--line)"><b>White</b><span>#FFFFFF</span></div></div></div>
     <div class="bt paper pad" style="grid-column:span 2;grid-row:span 1;display:grid;place-items:center"><div class="icon"><img src="img/shield/shield-white-2000.png" alt="App icon"></div><span class="lbl" style="color:#4a5680">ICON · NAVY</span></div>
     <div class="bt navy pad" style="grid-column:span 2;grid-row:span 1;display:flex;align-items:flex-end"><div class="big">Chrome first.<br>Snow second.</div><div class="glint"></div><span class="lbl">TAGLINE · SYNCOPATE</span></div>
