@@ -99,7 +99,7 @@ if(code||offer){
 }
 // every link to skocompounds.com carries this page's tracking parameters (ttclid, ref_id, utm_*, sub*) so the store sees the click
 const Q=new URLSearchParams(location.search);['lp_code','lp_offer','lp_eyebrow'].forEach(k=>Q.delete(k));const q=Q.toString();
-if(q){document.querySelectorAll('a[href^="https://skocompounds.com"]').forEach(a=>{a.href+=(a.href.includes('?')?'&':'?')+q})}
+if(q){document.querySelectorAll('a[href^="https://skocompounds.com"]').forEach(a=>{if(a.id==='claim')return;a.href+=(a.href.includes('?')?'&':'?')+q})}
 </script>
 <script>document.addEventListener('touchend',e=>{const c=e.target.closest('.card');if(c&&c.querySelector('img.alt')&&!c.classList.contains('flip')){c.classList.add('flip');e.preventDefault()}},{passive:false});</script>
 <script>
