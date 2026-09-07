@@ -7,7 +7,7 @@ const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathi
 async function load(){const [prods,man]=await Promise.all([fetch('../products.json?v='+Date.now()).then(r=>r.json()),fetch('manifest.json?v='+Date.now()).then(r=>r.json()).catch(()=>({}))]);return {prods,man}}
 let nth=0;
 function card(p,man){const k=man[p.slug]||[];const has=k.includes('primary');const useWhite=k.includes('white')&&(nth++%2===1);const price=PRICE[p.slug]||49;
-  return `<a class="card rv ${has?'':'pending'}" href="product.html?s=${p.slug}"><div class="im"${useWhite?' style="background:#fff"':''}>${has?`<img src="../img/products/web/${p.slug}-${useWhite?'white':'primary'}.jpg" alt="${p.name}">`:`<span>RENDERING</span>`}</div><div class="meta"><div class="name">${p.name}</div><div class="dose">${p.spray?'nasal spray':'lyophilised vial'} · 99% purity</div><div class="row"><span>$${price}.00</span><span class="buy">Add →</span></div></div></a>`}
+  return `<a class="card rv ${has?'':'pending'}" href="product.html?s=${p.slug}"><div class="im"${useWhite?' style="background:#fff"':''}>${has?`<img src="../img/products/web/${p.slug}-${useWhite?'white':'primary'}.jpg" alt="${p.name}">${(man[p.slug]||[]).includes('white')&&!useWhite?`<img class="alt" src="../img/products/web/${p.slug}-white.jpg" alt="" loading="lazy">`:''}`:`<span>RENDERING</span>`}</div><div class="meta"><div class="name">${p.name}</div><div class="dose">${p.spray?'nasal spray':'lyophilised vial'} · 99% purity</div><div class="row"><span>$${price}.00</span><span class="buy">Add →</span></div></div></a>`}
 const grid=document.querySelector('#grid');
 if(grid){load().then(({prods,man})=>{const lim=+grid.dataset.limit||999;const list=prods.filter(p=>grid.dataset.spray?p.spray:!p.spray).slice(0,lim);grid.innerHTML=list.map(p=>card(p,man)).join('');grid.querySelectorAll('.rv').forEach(el=>io.observe(el));const c=document.querySelector('#count');if(c)c.textContent=`${list.length} SKUs`})}
 const pdp=document.querySelector('#pdp');
@@ -22,3 +22,6 @@ if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search)
   addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
   const rel=document.querySelector('#rel');if(rel){rel.innerHTML=prods.filter(x=>x.slug!==p.slug&&!x.spray).slice(0,4).map(x=>card(x,man)).join('');rel.querySelectorAll('.rv').forEach(el=>io.observe(el))}
 })}
+
+// touch: first tap flips the tile to the white shot, second tap follows the link
+document.addEventListener('touchend',e=>{const c=e.target.closest('.card');if(c&&c.querySelector('img.alt')&&!c.classList.contains('flip')){c.classList.add('flip');e.preventDefault()}},{passive:false});

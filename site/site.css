@@ -120,3 +120,9 @@ footer .mono{color:var(--frost)}
 .im.wide{aspect-ratio:4/3}
 .f .big{margin-top:14px}
 @media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:12px}.sec-h{margin-bottom:18px}.hero .t{max-width:100%;left:20px;right:20px}.hero h1{font-size:clamp(26px,9vw,44px)}.btn{padding:14px 20px}.card .meta{padding:12px}.marq span{margin:0 22px}}
+
+/* product tile: primary on blue, crossfade to the white studio shot on hover (tap on touch) so the label reads without leaving the grid */
+.card{border-radius:20px;overflow:hidden}
+.card .im img.alt{position:absolute;inset:0;opacity:0;transition:opacity .3s ease}
+.card:hover .im img.alt,.card.flip .im img.alt{opacity:1}
+.card:hover .im::after,.card.flip .im::after{display:none}
