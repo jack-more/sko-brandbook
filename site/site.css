@@ -216,6 +216,7 @@ footer .mono{color:var(--mute)}
 /* bundles and tiles: the vials lift and glow on hover, clean and short */
 .card .im{position:relative}
 .card .im img{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
-.card:hover .im img,.card.flip .im img{transform:translateY(-10px) scale(1.02)}
-.card .im::before{content:"";position:absolute;left:10%;right:10%;bottom:6%;height:34%;background:radial-gradient(ellipse at 50% 100%,rgba(136,169,227,.55),rgba(1,48,192,.18) 45%,transparent 72%);opacity:0;transition:opacity .55s;pointer-events:none;z-index:1}
+.card:hover .im img,.card.flip .im img{transform:translateY(-14px) scale(1.03)}
+.card .im::before{content:"";position:absolute;left:4%;right:4%;bottom:0;height:46%;background:radial-gradient(ellipse at 50% 100%,rgba(1,72,254,.42),rgba(136,169,227,.35) 40%,transparent 72%);opacity:0;transition:opacity .55s;pointer-events:none;z-index:1;mix-blend-mode:screen}
+.card:hover .im{box-shadow:0 30px 60px -20px rgba(1,48,192,.35)}.card .im{transition:box-shadow .55s}
 .card:hover .im::before{opacity:1}
