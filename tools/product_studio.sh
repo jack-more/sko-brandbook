@@ -12,7 +12,7 @@ gen(){ # slug label spray kind
   esac
   local P="Square product photograph, full-frame camera, macro lens, razor sharp, $scene. Composition: the whole product and the whole object inside the frame with clear margin on every side, nothing cut off, the product about half the frame height. The product is exactly the first reference with its label reproduced letter for letter, the name printed exactly '$label', the dose pill exactly as printed, 99% Purity and Research Use Only, $closure; every letter fully visible and in perfect focus. No frames, borders or panels drawn in the picture. No text anywhere except the label. Only one product."
   for i in 1 2 3; do
-    higgsfield generate create nano_banana_2 --image img/ref2/cat/$slug.png --image img/ref2/scene/$kind.jpg --aspect_ratio 1:1 --wait --prompt "$P" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null
+    higgsfield generate create nano_banana_2 --resolution 4k --image img/ref2/cat/$slug.png --image img/ref2/scene/$kind.jpg --aspect_ratio 1:1 --wait --prompt "$P" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null
     url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"
     [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 12
   done

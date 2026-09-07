@@ -12,6 +12,10 @@ const plates=[...document.querySelectorAll('.plate-wide img')];
 const BUNDLES={'b-nad-mots-c':{name:'NAD+ · MOTS-c',members:['nad','mots-c'],price:129},'b-ss-31-mots-c':{name:'SS-31 · MOTS-c',members:['ss-31','mots-c'],price:149},'b-semax-selank':{name:'Semax · Selank',members:['semax','selank'],price:99},'b-kpv-ghk-cu':{name:'KPV · GHK-Cu',members:['kpv','ghk-cu'],price:79},'b-kpv-ghk-cu-glutathione':{name:'KPV · GHK-Cu · Glutathione',members:['kpv','ghk-cu','glutathione'],price:119},'metabolic-reference':{name:'Metabolic Reference',members:['sko-trz','cagrilintide','sko-3-rt'],price:229}};
 // quantity tiers: [units, discount]. Prototype values; the store sets the real ones.
 const TIERS=[[1,0],[2,.10],[3,.15]];
+// research categories [confirm with Billy]. A compound can sit in more than one.
+const CATS={'Recovery':['bpc-157','tb-500','wolverine','kpv','ara-290','glow'],'Skin & hair':['ghk-cu','ghk-cu-spray','glow','klow'],'Cognitive':['semax','selank','semax-spray','selank-spray','adamax','dsip'],'Cellular & longevity':['nad','nad-spray','mots-c','ss-31','5-amino-1mq','glutathione','thymosin-alpha-1'],'Growth & performance':['cjc-1295','ipamorelin','sermorelin','tesamorelin','tesa-ipa','igf1-lr3'],'Metabolic':['sko-3-rt','sko-trz','cagrilintide','aod-9604'],'Pigment':['mt-1','mt-2','mt-2-spray'],'Libido':['pt-141','kisspeptin'],'Supplies':['bac-water']};
+// product slug -> structure registry slug on jackmorello.com. null = no public coordinates (the bottle stands alone).
+const REG={'bpc-157':'bpc157','tb-500':'tb500','ghk-cu':'ghk','ghk-cu-spray':'ghk','kpv':'kpv','glutathione':'glutathione','nad':'nad','nad-spray':'nad','mots-c':'motsc','semax':'semax','semax-spray':'semax','selank':'selank','selank-spray':'selank','dsip':'dsip','kisspeptin':'kisspeptin10','ipamorelin':'ipamorelin','sermorelin':'sermorelin','tesamorelin':'tesamorelin','cjc-1295':'cjc1295','thymosin-alpha-1':'thymosina1','ara-290':'ara290','aod-9604':'aod9604','ss-31':'ss31','pt-141':'pt141','mt-1':'mt1','mt-2':'mt2','mt-2-spray':'mt2','5-amino-1mq':'amino1mq','igf1-lr3':'igf1lr3','cagrilintide':'cagrilintide','sko-trz':'tirzepatide','sko-3-rt':null,'glow':'ghk','wolverine':'bpc157','tesa-ipa':'tesamorelin','adamax':'semax','klow':'ghk','bac-water':null};
 const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathione':45,'semax':54,'selank':54,'kpv':49,'dsip':39,'cagrilintide':129,'tesamorelin':79,'ipamorelin':39,'sermorelin':49,'igf1-lr3':89,'mt-1':39,'mt-2':39,'pt-141':44,'ss-31':79,'thymosin-alpha-1':69,'ara-290':59,'aod-9604':49,'kisspeptin':49,'5-amino-1mq':59,'adamax':64,'glow':99,'wolverine':89,'tesa-ipa':99,'cjc-1295':54};
 async function load(){const [prods,man]=await Promise.all([fetch('../products.json?v='+Date.now()).then(r=>r.json()),fetch('manifest.json?v='+Date.now()).then(r=>r.json()).catch(()=>({}))]);return {prods,man}}
 let nth=0;
@@ -54,3 +58,16 @@ if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search)
 
 // touch: first tap flips the tile to the white shot, second tap follows the link
 document.addEventListener('touchend',e=>{const c=e.target.closest('.card');if(c&&c.querySelector('img.alt')&&!c.classList.contains('flip')){c.classList.add('flip');e.preventDefault()}},{passive:false});
+
+
+// the hero shop: category pills, a compound dropdown, the bottle in front of its structure
+const shop=document.querySelector('.hero.shop');
+if(shop){load().then(({prods,man})=>{const cats=document.getElementById('cats'),pick=document.getElementById('pick'),mol=document.getElementById('mol'),vial=document.getElementById('vial');let cat='Recovery';
+  function options(){const list=cat==='All'?prods:prods.filter(p=>(CATS[cat]||[]).includes(p.slug));pick.innerHTML=list.map(p=>`<option value="${p.slug}">${p.name} · ${p.dose||''}</option>`).join('');choose(list[0].slug)}
+  function choose(slug){const p=prods.find(x=>x.slug===slug);if(!p)return;pick.value=slug;const k=man[slug]||[];const kind=k.includes('white')?'white':(k.includes('badge')?'badge':'primary');vial.src=`../img/products/web/${slug}-${kind}.jpg`;vial.alt=p.name;
+    const reg=REG[slug];if(reg){const src=`https://jackmorello.com/skoembed?c=${reg}&cycle=0&z=1.5&ox=0.14&spin=0`;if(mol.src!==src)mol.src=src;mol.hidden=false;document.getElementById('phint').textContent='EVERY COMPOUND FROM ITS PUBLISHED COORDINATES · DRAG TO TURN'}else{mol.hidden=true;document.getElementById('phint').textContent='NO PUBLIC COORDINATES FOR THIS COMPOUND · THE BOTTLE STANDS ALONE'}
+    document.getElementById('pname').textContent=p.name;document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
+    document.getElementById('padd').href=`product.html?s=${slug}&add=1`;document.getElementById('pview').href=`product.html?s=${slug}`}
+  cats.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
+  cats.querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;cats.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));options()});
+  pick.onchange=()=>choose(pick.value);options()})}

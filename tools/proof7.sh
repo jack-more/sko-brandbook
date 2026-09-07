@@ -4,7 +4,7 @@ R=img/ref2; O=img/proof
 LABEL="the label exactly as in the first reference image: navy label, holographic shield with a helix, the white wordmark SKO above COMPOUNDS, then 99% Purity and Research Use Only, holographic bands top and bottom, faint molecular linework on the label; every letter fully visible and unchanged; silver crimp cap with a blue flip-off top; clear glass vial"
 gen() { n=$1; a=$2; p=$3; shift 3
   args=(); for r in "$@"; do args+=(--image "$r"); done
-  url=$(higgsfield generate create nano_banana_2 "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
+  url=$(higgsfield generate create nano_banana_2 --resolution 4k "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
   echo "$n $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$n.png"; }
 W="a seamless pure white studio ground and backdrop, no horizon line, soft even light from above with one soft key from the upper left, a soft grey contact shadow"
 gen white-vial 1:1 "Studio product photograph. This exact glass vial stands upright, centred, on $W. The chrome cap picks up a faint ultramarine blue reflection from off-frame, the only colour in the picture besides the label. Generous room around the vial on every side. $LABEL. No text anywhere except the label. Only one vial." $R/vial.png &

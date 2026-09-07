@@ -17,7 +17,7 @@ python3 -c "import json;[print(p['slug'],'|',p['name'],'|',int(p['spray'])) for 
       machine) ref=img/proof/gimbal.png; scene="the same large sleek chrome gimbal, rings inside rings on a flowing base, on the same flat matte ultramarine blue ground, the same soft key light, the same framing, the product held upright at the centre of the inner ring";;
     esac
     (
-      for i in 1 2 3; do higgsfield generate create nano_banana_2 --image $CAT --image $ref --aspect_ratio 3:4 --wait --prompt "Reproduce the second reference exactly: $scene; the only change is the product itself: $LABEL" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 5; done
+      for i in 1 2 3; do higgsfield generate create nano_banana_2 --resolution 4k --image $CAT --image $ref --aspect_ratio 3:4 --wait --prompt "Reproduce the second reference exactly: $scene; the only change is the product itself: $LABEL" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 5; done
     ) &
     while [ $(jobs -r | wc -l) -ge 4 ]; do sleep 2; done
   done

@@ -194,12 +194,28 @@ footer .mono{color:var(--mute)}
 .card .row s{font-size:11px;margin-left:6px}
 @media(max-width:640px){.rungs{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:1fr}}
 
-/* the live hero: the module is the whole frame; the type owns the left over white. */
-.hero.live{aspect-ratio:auto;display:block;position:relative;background:#fff;height:min(84vh,860px);min-height:520px;overflow:hidden}
-.hero.live .mod{position:absolute;inset:0}
-.hero.live .mod iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
-.hero.live .t{position:absolute;left:clamp(20px,5vw,80px);top:50%;transform:translateY(-50%);max-width:min(46%,620px);pointer-events:none}
-.hero.live .t .btn{pointer-events:auto}
-.hero.live h1{font-size:clamp(30px,4.6vw,76px);overflow:visible;white-space:nowrap}
-.hero.live .sweep{display:none}
-@media(max-width:800px){.hero.live{height:auto;min-height:0}.hero.live .mod{position:relative;aspect-ratio:1;inset:auto}.hero.live .t{position:static;transform:none;max-width:none;padding:22px 18px 28px;pointer-events:auto}.hero.live h1{white-space:normal;font-size:clamp(26px,9vw,44px)}}
+/* the hero is the shop: the structure behind, the bottle in front, the picker on the left */
+.hero.shop{aspect-ratio:auto;display:block;position:relative;background:#fff;height:min(86vh,880px);min-height:560px;overflow:hidden}
+.hero.shop .mod{position:absolute;inset:0}
+.hero.shop .mod iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.hero.shop .mod iframe[hidden]{display:none}
+.hero.shop .vial{position:absolute;right:clamp(4vw,12vw,220px);bottom:0;height:88%;width:auto;max-width:48vw;object-fit:contain;mix-blend-mode:multiply;pointer-events:none;transition:opacity .35s}
+.hero.shop .t{position:absolute;left:clamp(20px,5vw,80px);top:50%;transform:translateY(-50%);width:min(44%,560px);display:grid;gap:14px}
+.hero.shop .cats{display:flex;flex-wrap:wrap;gap:6px}
+.hero.shop .cats button{background:#fff;border:1px solid var(--line);color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 10px;cursor:pointer}
+.hero.shop .cats button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.hero.shop label{margin-top:6px}
+.pickwrap{position:relative}.pickwrap:after{content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--navy);pointer-events:none}
+.hero.shop select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid var(--navy);color:var(--navy);font:600 14px Inter,sans-serif;padding:14px 40px 14px 14px;border-radius:0;cursor:pointer}
+.hero.shop .prow{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:4px}
+.hero.shop .pname{font-size:clamp(20px,2.2vw,34px);line-height:1.05}.hero.shop .pprice{font-size:clamp(18px,1.8vw,26px)}
+.hero.shop .pbtns{display:flex;align-items:center;gap:18px}.hero.shop .pbtns .btn{padding:16px 26px}.hero.shop .alt{color:var(--mute)}
+.hero.shop .hint{margin-top:4px}
+@media(max-width:800px){.hero.shop{height:auto;min-height:0}.hero.shop .mod{position:relative;aspect-ratio:1;inset:auto}.hero.shop .vial{right:auto;left:50%;transform:translateX(-50%);height:74%;max-width:70vw;bottom:auto;top:13vw}.hero.shop .t{position:static;transform:none;width:auto;padding:18px 18px 26px}}
+
+/* bundles and tiles: the vials lift and glow on hover, clean and short */
+.card .im{position:relative}
+.card .im img{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.card:hover .im img,.card.flip .im img{transform:translateY(-10px) scale(1.02)}
+.card .im::before{content:"";position:absolute;left:10%;right:10%;bottom:6%;height:34%;background:radial-gradient(ellipse at 50% 100%,rgba(136,169,227,.55),rgba(1,48,192,.18) 45%,transparent 72%);opacity:0;transition:opacity .55s;pointer-events:none;z-index:1}
+.card:hover .im::before{opacity:1}

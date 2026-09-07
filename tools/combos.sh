@@ -22,7 +22,7 @@ LIST
   esac
   P="Product photograph outdoors at dusk, $GL. A colossal chrome machine like a transformer robot's torso and arms, built from thick machined struts, hex joints, pistons and plates, kneeling in the snow, at least ten times the height of a vial, so that each vial is small in its hand, about the length of one of its fingers, the whole machine filling the frame; $hold, every label facing the camera and fully readable, each vial exactly its reference with its label reproduced letter for letter, a deep navy flip-off cap over a silver crimp. No head with a face, no eyes; the machine reads as engineered hardware, not a character. No text anywhere except the labels. Exactly $n vials."
   (
-    for i in 1 2 3; do higgsfield generate create nano_banana_2 "${args[@]}" --aspect_ratio 4:3 --wait --prompt "$P" > img/products/logs/combo-$name.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/combo-$name.log | head -1); echo "$name combo $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/combo-$name.png" && break; sleep 12; done
+    for i in 1 2 3; do higgsfield generate create nano_banana_2 --resolution 4k "${args[@]}" --aspect_ratio 4:3 --wait --prompt "$P" > img/products/logs/combo-$name.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/combo-$name.log | head -1); echo "$name combo $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/combo-$name.png" && break; sleep 12; done
   ) &
   while [ $(jobs -r | wc -l) -ge 3 ]; do sleep 2; done
 done; wait; echo DONE

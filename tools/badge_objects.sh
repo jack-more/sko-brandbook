@@ -3,7 +3,7 @@
 cd ~/sko-brandbook-site; O=img/edition3; mkdir -p img/products/logs
 M="The mark is exactly the shield with the double helix from the first reference, its exact outline and its exact helix, nothing added, no letters."
 run(){ local name=$1 P=$2
-  for i in 1 2 3; do higgsfield generate create nano_banana_2 --image img/ref2/scene/mark-flat.jpg --image img/ref2/scene/badge-mark.jpg --image img/ref2/scene/white-vial.jpg --aspect_ratio 3:4 --wait --prompt "$P" > img/products/logs/badge-$name.log 2>&1 < /dev/null
+  for i in 1 2 3; do higgsfield generate create nano_banana_2 --resolution 4k --image img/ref2/scene/mark-flat.jpg --image img/ref2/scene/badge-mark.jpg --image img/ref2/scene/white-vial.jpg --aspect_ratio 3:4 --wait --prompt "$P" > img/products/logs/badge-$name.log 2>&1 < /dev/null
     url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/badge-$name.log | head -1); echo "$name $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/badge-$name.png" && break; sleep 12; done; }
 run cast "Product photograph in a seamless white studio, soft key from the upper left, soft grey contact shadow. A single object: the badge, the shield-helix mark cast as a solid piece of polished mirror chrome about the size of a hand, standing upright on the white floor, the helix in relief inside the shield, a faint trace of deep blue in its reflections from off-frame. $M Nothing else in the frame, no text." &
 run cap "Macro photograph in a seamless white studio, soft key from the upper left. The top of a deep navy flip-off vial cap fills the lower two thirds of the frame, seen from slightly above, and the shield-helix mark is pressed into the navy plastic as a crisp debossed relief, the same navy, catching the light on its edges. $M No text, no other objects." &

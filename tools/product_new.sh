@@ -18,7 +18,7 @@ for slug in "$@"; do
       water) ar=3:4; refs=(--image $CAT --image img/ref2/scene/water.jpg); prompt="Reproduce the second reference exactly: the same product standing in shallow ultramarine water with hard sun caustics and a broken reflection, the same blue floor, the same framing; the only change is the product itself: $LABEL";;
     esac
     (
-      for i in 1 2 3; do higgsfield generate create nano_banana_2 "${refs[@]}" --aspect_ratio $ar --wait --prompt "$prompt" > $O/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' $O/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 5; done
+      for i in 1 2 3; do higgsfield generate create nano_banana_2 --resolution 4k "${refs[@]}" --aspect_ratio $ar --wait --prompt "$prompt" > $O/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' $O/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 5; done
     ) &
     while [ $(jobs -r | wc -l) -ge 5 ]; do sleep 2; done
   done

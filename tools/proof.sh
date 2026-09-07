@@ -6,7 +6,7 @@ LABEL="the label exactly as in the first reference image: navy label, holographi
 gen() { # name aspect prompt refs...
   n=$1; a=$2; p=$3; shift 3
   args=(); for r in "$@"; do args+=(--image "$r"); done
-  url=$(higgsfield generate create nano_banana_2 "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
+  url=$(higgsfield generate create nano_banana_2 --resolution 4k "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
   echo "$n $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$n.png"
 }
 gen hand 3:4 "Studio product photograph. A liquid-mirror chrome hand, polished like the second reference, holds this exact glass vial upright between thumb and fingers, offering it toward the camera; the hand and forearm rise from the bottom edge. Flat matte ultramarine blue ground (International Klein Blue) filling the whole frame, seamless, no horizon. The chrome reflects the blue ground so its shadows go deep blue and its highlights go white. Hard single key light from upper left, crisp specular edges. $LABEL. No text anywhere except the label. No other objects." $R/vial.png $R/hand-chrome.jpg &

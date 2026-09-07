@@ -14,7 +14,7 @@ while read slug kind; do
     primary) ref=img/ref2/scene/primary-ref.jpg; a=1:1; scene="Reproduce the second reference exactly: the same flat matte ultramarine blue ground filling the whole frame, the same soft key light from the upper left, the same soft contact shadow, and the same framing, the vial the same size and in the same position as in the second reference";;
   esac
   (
-    for i in 1 2 3 4; do higgsfield generate create nano_banana_2 --image img/ref2/cat/$slug.png --image $ref --aspect_ratio $a --wait --prompt "$scene; the only change is the product itself: $LABEL" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 12; done
+    for i in 1 2 3 4; do higgsfield generate create nano_banana_2 --resolution 4k --image img/ref2/cat/$slug.png --image $ref --aspect_ratio $a --wait --prompt "$scene; the only change is the product itself: $LABEL" > img/products/logs/$slug-$kind.log 2>&1 < /dev/null; url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/$slug-$kind.log | head -1); echo "$slug $kind $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$slug-$kind.png" && break; sleep 12; done
   ) &
   while [ $(jobs -r | wc -l) -ge 4 ]; do sleep 2; done
 done < img/products/redo.txt; wait; echo DONE

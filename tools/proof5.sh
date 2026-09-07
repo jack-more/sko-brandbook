@@ -4,7 +4,7 @@ R=img/ref2; O=img/proof
 LABEL="the label exactly as in the first reference image: navy label, holographic shield with a helix, the white wordmark SKO above COMPOUNDS, then 99% Purity and Research Use Only, holographic bands top and bottom, faint molecular linework on the label; every letter fully visible and unchanged; silver crimp cap with a blue flip-off top; clear glass vial"
 gen() { n=$1; a=$2; p=$3; shift 3
   args=(); for r in "$@"; do args+=(--image "$r"); done
-  url=$(higgsfield generate create nano_banana_2 "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
+  url=$(higgsfield generate create nano_banana_2 --resolution 4k "${args[@]}" --aspect_ratio "$a" --wait --prompt "$p" 2>&1 | grep -oE 'https://[^ "]+\.png' | head -1)
   echo "$n $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/$n.png"; }
 MOTOR="a compact cast chrome motor block: a small V-twin engine sculpture in mirror-polished chrome, cylinder heads, cooling fins, a crank pulley and hex bolts, every edge bevelled and the covers engraved with a double-helix relief, finished like heavy silver jewellery rather than a car part"
 gen widget 3:4 "Studio product photograph. $MOTOR, about the size of the vial, sits on a flat matte ultramarine blue ground (International Klein Blue) that fills the whole frame; this exact glass vial stands upright beside it, the two objects touching, the vial seated against the motor's side like a cartridge. Both small in the frame with air around them. The chrome reflects the blue ground, deep blue in its shadows, white in its highlights. Hard single key light from upper left, crisp shadows. $LABEL. No text anywhere except the label. No other objects." $R/vial.png $R/pin-engine.jpg &
