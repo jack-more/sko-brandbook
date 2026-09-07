@@ -1,3 +1,14 @@
 __pycache__/
 *.pyc
 img/gen/bundles/
+# originals stay local; only web/ and edition3 plates are published (Pages has a 1 GB limit)
+img/products/*.png
+img/products/*.log
+img/products/*.txt
+img/products/*.json
+img/products/_drift/
+img/products/logs/
+img/cut/
+img/gen/
+img/ref2/
+img/hd/
