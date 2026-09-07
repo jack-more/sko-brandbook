@@ -70,6 +70,15 @@ if(shop){load().then(({prods,man})=>{const cats=document.getElementById('cats'),
     const reg=REG[slug];if(reg){const src=`https://jackmorello.com/skoembed?c=${reg}&cycle=0&z=${ZOOM[reg]||1.2}&ox=0&spin=0&label=0`;if(mol.src!==src)mol.src=src;mol.hidden=false;document.getElementById('phint').textContent='EVERY COMPOUND FROM ITS PUBLISHED COORDINATES · DRAG TO TURN'}else{mol.hidden=true;document.getElementById('phint').textContent='NO PUBLIC COORDINATES FOR THIS COMPOUND · THE BOTTLE STANDS ALONE'}
     document.getElementById('pname').textContent=p.name;document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
     document.getElementById('padd').href=`product.html?s=${slug}&add=1`;document.getElementById('pview').href=`product.html?s=${slug}`}
-  cats.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
-  cats.querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;cats.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));options()});
-  pick.onchange=()=>choose(pick.value);options()})}
+  if(cats){cats.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
+  cats.querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;cats.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));options()})}else cat='All';
+  pick.onchange=()=>choose(pick.value);options();const first=prods.find(p=>p.slug==='bpc-157');if(first)choose('bpc-157')})}
+
+// the category band: one card per research category, its lead compound floating, a click filters the grid
+const cg=document.querySelector('#catgrid');
+if(cg){load().then(({prods,man})=>{const lead={'Recovery':'bpc-157','Skin & hair':'ghk-cu','Cognitive':'semax','Cellular & longevity':'nad','Growth & performance':'cjc-1295','Metabolic':'sko-3-rt','Pigment':'mt-2','Libido':'pt-141','Supplies':'bac-water'};
+  cg.innerHTML=Object.entries(CATS).map(([c,slugs])=>{const l=lead[c]||slugs[0];const k=man[l]||[];const src=k.includes('cut')?`../img/products/web/${l}-cut.png`:`../img/products/web/${l}-white.jpg`;return `<a class="catcard rv" href="#grid-sec" data-c="${c}"><div class="cim"><img src="${src}" alt="${c}" loading="lazy"></div><div class="cname disp">${c}</div><div class="mono mute">${slugs.length} COMPOUND${slugs.length>1?'S':''}</div></a>`}).join('');
+  cg.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const grid=document.querySelector('#grid');
+  cg.querySelectorAll('.catcard').forEach(a=>a.onclick=e=>{e.preventDefault();const c=a.dataset.c;const list=(CATS[c]||[]).map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean);if(grid){grid.innerHTML=list.map(p=>card(p,man)).join('');fitAll(grid);grid.querySelectorAll('.rv').forEach(el=>{el.classList.add('in')});const t=document.querySelector('#gridtitle');if(t)t.textContent=c;const n=document.querySelector('#count');if(n)n.textContent=`${list.length} SKUs`;cg.querySelectorAll('.catcard').forEach(x=>x.classList.toggle('on',x===a));grid.scrollIntoView({behavior:'smooth',block:'start'})}})})}
+
