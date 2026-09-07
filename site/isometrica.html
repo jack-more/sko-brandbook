@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"><link rel="stylesheet" href="site.css?v=14"><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 /* the module: one snow world, frames crossfade, the molecule and the vial arrive separately, the name sets last */
-.iso{position:relative;width:100%;aspect-ratio:16/9;background:var(--navy);overflow:hidden}
-.iso.square{aspect-ratio:1}
+.iso{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;background:var(--navy);overflow:hidden}
+.iso.square{aspect-ratio:1;max-width:min(100%,78vh);margin:0 auto}
 .iso .frame{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease}
 .iso .frame.on{opacity:1}
 .iso .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
