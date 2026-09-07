@@ -23,7 +23,7 @@
   let cur=0;
   function src(s){return '../img/products/web/'+s+'-structure.jpg'}
   LP.forEach((s,i)=>{const b=document.createElement('button');b.style.cssText='width:52px;height:52px;border:0;padding:0;border-radius:14px;overflow:hidden;background:#173384;cursor:pointer;transition:transform .25s';b.innerHTML='<img src="../img/products/web/'+s+'-white.jpg" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.src=\'../img/products/web/'+s+'-primary.jpg\'">';b.onclick=e=>{e.stopPropagation();show(i)};tiles.appendChild(b)});
-  function show(i){cur=(i+LP.length)%LP.length;const s=LP[cur];stage.hidden=false;img.src=src(s);img.onerror=()=>{img.onerror=null;img.src='../img/products/web/'+s+'-frost.jpg'};cap.textContent='THE STRUCTURE · '+(cur+1)+' / '+LP.length;nm.textContent=NAMES[s];[...tiles.children].forEach((b,j)=>b.style.transform=j===cur?'scale(1.15)':'scale(1)');stage.scrollIntoView({block:'nearest',behavior:'smooth'})}
+  function show(i){cur=(i+LP.length)%LP.length;const s=LP[cur];stage.hidden=false;img.src=src(s);img.onerror=()=>{img.onerror=null;img.src='../img/products/web/'+s+'-frost.jpg'};cap.textContent='ISOMETRICA · '+(cur+1)+' / '+LP.length;nm.textContent=NAMES[s];[...tiles.children].forEach((b,j)=>b.style.transform=j===cur?'scale(1.15)':'scale(1)');stage.scrollIntoView({block:'nearest',behavior:'smooth'})}
   document.getElementById('prev').onclick=e=>{e.stopPropagation();show(cur-1)};document.getElementById('next').onclick=e=>{e.stopPropagation();show(cur+1)};
   document.getElementById('apply').onclick=e=>{e.stopPropagation();const p=document.getElementById('pop');if(p){p.hidden=false;const f=document.getElementById('flip');if(f)f.click()}};
 })();
