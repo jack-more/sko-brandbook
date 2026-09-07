@@ -56,7 +56,7 @@ const stage=document.getElementById('stage'),dots=document.getElementById('dots'
 const portrait=matchMedia('(max-aspect-ratio: 1/1)').matches;
 FRAMES.forEach((f,i)=>{const d=document.createElement('div');d.className='frame';d.innerHTML=`<img src="${portrait?f.square:f.wide}" alt="${f.name}"><div class="veil"></div><div class="sweep"></div>`;stage.appendChild(d);const o=document.createElement('i');dots.appendChild(o)});
 const frames=[...stage.children],ds=[...dots.children];let cur=0,timer;
-function show(i){cur=(i+frames.length)%frames.length;frames.forEach((f,j)=>f.classList.toggle('on',j===cur));ds.forEach((d,j)=>d.classList.toggle('on',j===cur));cap.classList.remove('on');const f=FRAMES[cur];document.getElementById('k').textContent='0'+(cur+1)+' / '+frames.length;document.getElementById('name').textContent=f.name;document.getElementById('add').href=CART+f.slug+'?'+qs+'&add=1';requestAnimationFrame(()=>cap.classList.add('on'))}
+function show(i){cur=(i+frames.length)%frames.length;frames.forEach((f,j)=>f.classList.toggle('on',j===cur));ds.forEach((d,j)=>d.classList.toggle('on',j===cur));cap.classList.remove('on');const f=FRAMES[cur];document.getElementById('k').textContent='0'+(cur+1)+' / '+frames.length;document.getElementById('name').textContent=f.name;document.getElementById('add').href=CART+f.slug+'?'+qs+'&add=1';setTimeout(()=>cap.classList.add('on'),40)}
 function auto(){clearInterval(timer);timer=setInterval(()=>show(cur+1),4200)}
 show(0);auto();
 // a click anywhere that isn't Add to cart goes to the best sellers page with the code
