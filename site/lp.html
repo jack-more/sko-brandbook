@@ -2,87 +2,88 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="description" content="Third-party tested research peptides. 15% off with code TIKTOK15."><meta property="og:title" content="SKO Compounds – Research Peptides"><meta property="og:description" content="Third-party tested research peptides. 15% off with code TIKTOK15.">
 <style>
-:root{--navy:#173384;--ink:#020B77;--frost:#88A9E3}
+:root{--navy:#173384;--ink:#020B77;--frost:#88A9E3;--pig:#0130C0}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;background:var(--ink);color:#fff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
-body{cursor:pointer;background:radial-gradient(120% 90% at 50% 110%,#1d3f9c 0%,var(--navy) 45%,var(--ink) 100%)}
-.disp{font:700 1em Syncopate,ui-sans-serif,sans-serif;text-transform:uppercase;letter-spacing:0}
+.disp{font:700 1em Syncopate,ui-sans-serif,sans-serif;text-transform:uppercase}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+/* backdrop: the Isometrica plate, slow drift, dimmed under the card */
+.bg{position:fixed;inset:0;overflow:hidden;background:var(--ink)}
+.bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);animation:bg 1.6s ease forwards,drift 26s ease-in-out 1.6s infinite alternate}
+@keyframes bg{to{opacity:1}}
+@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1.5%,1%)}}
+.bg:after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}
 .top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,48px);z-index:3}
 .top img{height:24px}
 /* the pop-up */
-.wrap{position:fixed;inset:0;display:grid;place-items:center;padding:72px 16px 24px}
-.pop{position:relative;width:min(92vw,calc((100vh - 250px) * 1.7778),1080px);background:var(--navy);box-shadow:0 40px 120px rgba(0,0,0,.55),0 0 0 1px rgba(136,169,227,.25);opacity:0;transform:translateY(24px) scale(.94);transition:opacity .7s cubic-bezier(.2,.8,.2,1) .15s,transform .7s cubic-bezier(.2,.8,.2,1) .15s}
-.pop.in{opacity:1;transform:none}
-.stage{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--navy)}
-.frame{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
-.frame.on{opacity:1}
-.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 45%,rgba(255,255,255,.14) 50%,transparent 55%);transform:translateX(-130%);pointer-events:none}
-.frame.on .sweep{animation:sw 1.4s .1s ease-out forwards}
-@keyframes sw{to{transform:translateX(130%)}}
-.dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:5px;z-index:2}
-.dots i{width:12px;height:2px;background:rgba(255,255,255,.35)}
-.dots i.on{background:#fff}
-.cap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px clamp(18px,3vw,36px) 26px;flex-wrap:wrap}
-.cap .k{color:var(--frost);margin-bottom:8px}
-.cap .k b{color:#fff;font:inherit}
-.cap .name{font-size:clamp(18px,2.6vw,34px);line-height:1.04;transform:translateY(14px);opacity:0;transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s}
-.cap.on .name{transform:none;opacity:1}
-.act{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.btn{display:inline-block;background:#fff;color:var(--navy);padding:18px 26px;font:700 11px Syncopate,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap}
-.alt{color:var(--frost);text-decoration:none;font-size:12px}
-.alt u{text-decoration-color:rgba(136,169,227,.5)}
-.prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12)}
-.prog i{display:block;height:100%;width:0;background:#fff;transition:width linear}
-.foot{position:fixed;left:0;right:0;bottom:0;text-align:center;padding:10px 16px;color:var(--frost);z-index:3}
-.foot b{color:#fff;font:inherit}
-@media (prefers-reduced-motion:reduce){.pop,.frame,.cap .name{transition:none}.frame.on .sweep{animation:none}.pop{opacity:1;transform:none}}
-/* phones: the 1:1 frame whole, caption stacked under it */
-@media (max-aspect-ratio:1/1){
-  .wrap{padding:64px 12px 40px;align-items:start}
-  .pop{width:min(94vw,calc(100vh - 300px))}
-  .stage{aspect-ratio:1/1}
-  .cap{flex-direction:column;align-items:stretch;padding:18px 18px 24px}
-  .cap .name{font-size:24px}
-  .act{align-items:stretch;text-align:center}
-  .btn{text-align:center}
-}
+.wrap{position:fixed;inset:0;display:grid;place-items:center;padding:72px 16px 40px;z-index:2}
+.card{position:relative;width:min(92vw,540px);background:linear-gradient(170deg,#1b3b96,#12296e 60%,#0d2160);box-shadow:0 60px 140px rgba(0,0,0,.6),0 0 0 1px rgba(136,169,227,.35),inset 0 1px 0 rgba(255,255,255,.18);opacity:0;transform:translateY(28px) scale(.96);transition:opacity .8s cubic-bezier(.2,.8,.2,1) .5s,transform .8s cubic-bezier(.2,.8,.2,1) .5s}
+.card.in{opacity:1;transform:none}
+.card:before{content:"";position:absolute;inset:8px;border:1px solid rgba(136,169,227,.22);pointer-events:none}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:22px 28px 0;color:var(--frost)}
+.hd b{color:#fff;font:inherit;background:var(--pig);padding:5px 8px}
+.h1{padding:26px 28px 0;font-size:clamp(22px,5vw,30px);line-height:1.05}
+.h1 small{display:block;font:500 13px/1.5 Inter,sans-serif;text-transform:none;color:var(--frost);margin-top:12px;max-width:34ch}
+/* the code chip: a machined plate with the code in chrome */
+.chip{position:relative;margin:24px 28px 0;padding:22px 20px 20px;background:linear-gradient(180deg,#0b1c58,#081547);box-shadow:inset 0 2px 8px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12);overflow:hidden}
+.chip i{position:absolute;width:10px;height:10px;border-color:var(--frost);border-style:solid;opacity:.7}
+.chip i:nth-child(1){top:6px;left:6px;border-width:1px 0 0 1px}.chip i:nth-child(2){top:6px;right:6px;border-width:1px 1px 0 0}.chip i:nth-child(3){bottom:6px;left:6px;border-width:0 0 1px 1px}.chip i:nth-child(4){bottom:6px;right:6px;border-width:0 1px 1px 0}
+.chip .lab{display:flex;justify-content:space-between;color:var(--frost);margin-bottom:12px}
+.chip .lab b{font:inherit;color:#fff}
+.code{font-size:clamp(34px,9.5vw,54px);line-height:1;letter-spacing:.04em;display:flex;gap:.02em}
+.code span{display:inline-block;background:linear-gradient(180deg,#ffffff 0%,#dfe8f7 38%,#8fa6cf 52%,#ffffff 70%,#b9c9e8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(12px);animation:ltr .5s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes ltr{to{opacity:1;transform:none}}
+.glint{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-140%);animation:gl 4.5s ease-in-out 1.8s infinite}
+@keyframes gl{0%{transform:translateX(-140%)}45%,100%{transform:translateX(140%)}}
+/* perforation: the stub line */
+.perf{position:relative;height:0;margin:26px 0 0;border-top:1px dashed rgba(136,169,227,.45)}
+.perf:before,.perf:after{content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 1px rgba(136,169,227,.35)}
+.perf:before{left:-9px}.perf:after{right:-9px}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:20px 28px 0;color:var(--frost)}
+.spec b{display:block;color:#fff;font:inherit;margin-top:4px}
+.act{padding:24px 28px 26px}
+.btn{position:relative;display:block;width:100%;background:#fff;color:var(--navy);padding:20px 22px;font:700 12px Syncopate,sans-serif;text-transform:uppercase;text-align:center;text-decoration:none;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s}
+.btn:active{transform:scale(.985)}
+.btn .glint{animation-delay:3s}
+.skip{display:block;text-align:center;margin-top:14px;color:var(--frost);text-decoration:none}
+.skip u{text-decoration-color:rgba(136,169,227,.45)}
+/* applied state */
+.card.ok .chip{background:linear-gradient(180deg,#e9eff9,#c9d6ee 60%,#e9eff9);box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
+.card.ok .chip .lab,.card.ok .chip .lab b{color:var(--navy)}
+.card.ok .code span{background:linear-gradient(180deg,#0f2a7a,#173384 60%,#0130C0);-webkit-background-clip:text;background-clip:text}
+.card.ok .btn{background:var(--pig);color:#fff}
+.card.ok .glint{animation:none}
+.foot{position:fixed;left:0;right:0;bottom:0;text-align:center;padding:12px 16px;color:var(--frost);z-index:3}
+@media (prefers-reduced-motion:reduce){.card,.bg img,.code span{animation:none;transition:none;opacity:1;transform:none}.glint{display:none}}
+@media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;align-items:start}.hd,.h1,.chip,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
 </style>
+<div class="bg"><img id="bg" src="../img/edition3/hero-structure.jpg" alt=""></div>
 <div class="top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
-<div class="wrap"><div class="pop" id="pop">
-  <div class="stage" id="stage"></div><div class="dots" id="dots"></div>
-  <div class="cap" id="cap">
-    <div><div class="mono k">CODE <b id="code"></b> APPLIED · <b id="offer"></b></div><div class="disp name" id="name"></div></div>
-    <div class="act"><a class="btn" id="go" href="#">Shop best sellers</a><a class="alt" id="add" href="#">or add <u id="addname"></u> to cart</a></div>
-  </div>
-  <div class="prog"><i id="prog"></i></div>
+<div class="wrap"><div class="card" id="card">
+  <div class="hd mono"><span>TikTok offer</span><b id="offer"></b></div>
+  <div class="h1 disp">Your code is ready.<small>Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
+  <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span>Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
+  <div class="perf"></div>
+  <div class="spec mono"><div>Applies to<b>Every compound</b></div><div>Ships<b>3–5 business days</b></div><div>Testing<b>COA on every batch</b></div><div>Use<b>Research only</b></div></div>
+  <div class="act"><a class="btn disp" id="go" href="#"><span id="gotxt">Apply code</span><div class="glint"></div></a><a class="skip mono" id="skip" href="#">Or <u>go straight to top sellers</u></a></div>
 </div></div>
-<div class="foot mono">Taking you to best sellers in <b id="sec"></b></div>
+<div class="foot mono">Code <b id="code2"></b> · <b id="offer2"></b></div>
 <script>
 // the whole page is the funnel. edit these lines for the next offer.
-const CODE='TIKTOK15', OFFER='15% OFF YOUR ORDER';
-const BEST='https://skocompounds.com/products?sort=best';   // where everyone ends up
-const CART='https://skocompounds.com/products/';            // product page base; slug appended
-const HOLD=9;                                               // seconds the pop-up stays before it forwards on its own
-const FRAMES=[{"slug": "bpc-157", "name": "BPC-157", "wide": "../img/products/web/bpc-157-wide.jpg", "square": "../img/products/web/bpc-157-square.jpg"}, {"slug": "tb-500", "name": "TB-500", "wide": "../img/products/web/tb-500-wide.jpg", "square": "../img/products/web/tb-500-square.jpg"}, {"slug": "ghk-cu", "name": "GHK-Cu", "wide": "../img/products/web/ghk-cu-wide.jpg", "square": "../img/products/web/ghk-cu-square.jpg"}, {"slug": "nad", "name": "SKO-NAD", "wide": "../img/products/web/nad-wide.jpg", "square": "../img/products/web/nad-square.jpg"}, {"slug": "mt-2", "name": "MT-2", "wide": "../img/products/web/mt-2-wide.jpg", "square": "../img/products/web/mt-2-square.jpg"}, {"slug": "cjc-1295", "name": "CJC 1295 no DAC + Ipamorelin", "wide": "../img/products/web/cjc-1295-wide.jpg", "square": "../img/products/web/cjc-1295-square.jpg"}, {"slug": "semax", "name": "Semax", "wide": "../img/products/web/semax-wide.jpg", "square": "../img/products/web/semax-square.jpg"}, {"slug": "klow", "name": "KLOW", "wide": "../img/products/web/klow-wide.jpg", "square": "../img/products/web/klow-square.jpg"}, {"slug": "igf1-lr3", "name": "IGF1-LR3", "wide": "../img/products/web/igf1-lr3-wide.jpg", "square": "../img/products/web/igf1-lr3-square.jpg"}, {"slug": "glutathione", "name": "Glutathione", "wide": "../img/products/web/glutathione-wide.jpg", "square": "../img/products/web/glutathione-square.jpg"}, {"slug": "tesamorelin", "name": "Tesamorelin", "wide": "../img/products/web/tesamorelin-wide.jpg", "square": "../img/products/web/tesamorelin-square.jpg"}, {"slug": "bac-water", "name": "Bacteriostatic Water", "wide": "../img/products/web/bac-water-wide.jpg", "square": "../img/products/web/bac-water-square.jpg"}];
+const CODE='TIKTOK15', OFFER='15% off your order';
+const BEST='https://skocompounds.com/products?sort=best';   // top sellers; where everyone ends up
 const q=new URLSearchParams(location.search);q.set('lp_code',CODE);const qs=q.toString();
 const BESTURL=BEST+(BEST.includes('?')?'&':'?')+qs;
-document.getElementById('code').textContent=CODE;document.getElementById('offer').textContent=OFFER;document.getElementById('go').href=BESTURL;
-const stage=document.getElementById('stage'),dots=document.getElementById('dots'),cap=document.getElementById('cap');
-const mq=matchMedia('(max-aspect-ratio: 1/1)');const portrait=mq.matches;
-mq.addEventListener('change',e=>[...stage.querySelectorAll('img')].forEach((im,i)=>im.src=e.matches?FRAMES[i].square:FRAMES[i].wide));
-FRAMES.forEach((f,i)=>{const d=document.createElement('div');d.className='frame';d.innerHTML=`<img src="${portrait?f.square:f.wide}" alt="${f.name}"><div class="sweep"></div>`;stage.appendChild(d);const o=document.createElement('i');dots.appendChild(o)});
-const frames=[...stage.children],ds=[...dots.children];let cur=0,timer;
-function show(i){cur=(i+frames.length)%frames.length;frames.forEach((f,j)=>f.classList.toggle('on',j===cur));ds.forEach((d,j)=>d.classList.toggle('on',j===cur));cap.classList.remove('on');const f=FRAMES[cur];document.getElementById('name').textContent=f.name;document.getElementById('addname').textContent=f.name;document.getElementById('add').href=CART+f.slug+'?'+qs+'&add=1';setTimeout(()=>cap.classList.add('on'),40)}
-function auto(){clearInterval(timer);timer=setInterval(()=>show(cur+1),2600)}
-show(0);auto();
-// pop in, count down, forward
-let gone=false;function go(){if(gone)return;gone=true;location.href=BESTURL}
-requestAnimationFrame(()=>setTimeout(()=>document.getElementById('pop').classList.add('in'),30));
-const prog=document.getElementById('prog'),sec=document.getElementById('sec');let left=HOLD;sec.textContent=left;
-setTimeout(()=>{prog.style.transitionDuration=HOLD+'s';prog.style.width='100%'},900);
-const tick=setInterval(()=>{left--;sec.textContent=Math.max(left,0);if(left<=0){clearInterval(tick);go()}},1000);
-// a click anywhere that isn't the add link forwards now
-document.addEventListener('click',e=>{if(e.target.closest('#add'))return;e.preventDefault();go()},true);
+if(matchMedia('(max-aspect-ratio: 1/1)').matches)document.getElementById('bg').src='../img/edition3/hero-snowchrome-portrait.jpg';
+for(const id of['offer','offer2'])document.getElementById(id).textContent=OFFER;
+document.getElementById('code2').textContent=CODE;
+document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${1.1+i*.06}s">${c}</span>`).join('');
+document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
+requestAnimationFrame(()=>setTimeout(()=>document.getElementById('card').classList.add('in'),30));
+let gone=false;
+function apply(){if(gone)return;gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
+document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
+document.getElementById('skip').addEventListener('click',e=>{e.preventDefault();location.href=BESTURL});
+// a tap on the backdrop also forwards, with the code
+document.querySelector('.bg').addEventListener('click',()=>location.href=BESTURL);
 </script>
