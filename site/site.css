@@ -126,3 +126,35 @@ footer .mono{color:var(--frost)}
 .card .im img.alt{position:absolute;inset:0;opacity:0;transition:opacity .3s ease}
 .card:hover .im img.alt,.card.flip .im img.alt{opacity:1}
 .card:hover .im::after,.card.flip .im::after{display:none}
+
+/* phone layout: one column, portrait hero, type sized to the width */
+@media (max-width:640px){
+  nav{height:56px}
+  nav img{height:22px}
+  nav .lk{gap:14px}
+  nav .lk a{display:inline-block;font-size:9px}
+  nav .lk a:nth-child(n+4):not(.keep){display:none}
+  .hero{aspect-ratio:3/4}
+  .hero .t{left:18px;right:18px;top:auto;bottom:22px;transform:none;max-width:none}
+  .hero h1{font-size:clamp(26px,9vw,40px)}
+  .hero p{font-size:13px;max-width:none;margin-top:12px}
+  .hero .btn{margin-top:18px;padding:14px 18px;font-size:10px}
+  .marq span{font-size:9px;margin:0 18px}
+  .power span{font-size:clamp(22px,9vw,40px)}
+  section{padding-top:28px;padding-bottom:28px}
+  .sec-h{margin-bottom:16px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .card .meta{padding:10px 10px 12px}
+  .card .name{font-size:9.5px}
+  .card .dose{font-size:11px}
+  .card .row{font-size:12px}
+  .two{grid-template-columns:1fr}
+  .tile .cap{left:14px;bottom:12px}
+  .plate-wide .cap{left:18px;bottom:14px}
+  .plate-wide .cap h3{font-size:clamp(16px,6vw,26px)}
+  .pdp{gap:18px}
+  .info h1{font-size:clamp(20px,7vw,30px)}
+  .hood{font-size:10px;padding:14px}
+  footer .big{font-size:clamp(20px,8vw,34px)}
+  .note{font-size:8px;padding:6px 8px}
+}

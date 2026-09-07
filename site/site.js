@@ -3,7 +3,7 @@
 // fit rule: a box takes its image's exact ratio, so cover never crops and never pads
 function fitBox(box,im){const a=()=>{if(im.naturalWidth)box.style.aspectRatio=im.naturalWidth+'/'+im.naturalHeight};im.complete&&im.naturalWidth?a():im.addEventListener('load',a)}
 function fitAll(root=document){root.querySelectorAll('.hero,.plate-wide,.tile,.card .im,.thumbs button').forEach(b=>{const im=b.querySelector('img');if(im)fitBox(b,im)})}
-fitAll();
+fitAll();addEventListener('resize',()=>fitAll(),{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const plates=[...document.querySelectorAll('.plate-wide img')];
