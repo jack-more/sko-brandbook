@@ -212,7 +212,7 @@ footer .mono{color:var(--mute)}
 .hero.shop .pname{font-size:clamp(20px,2.2vw,34px);line-height:1.05}.hero.shop .pprice{font-size:clamp(18px,1.8vw,26px)}
 .hero.shop .pbtns{display:flex;align-items:center;gap:18px}.hero.shop .pbtns .btn{padding:16px 26px}.hero.shop .alt{color:var(--mute)}
 .hero.shop .hint{margin-top:4px}
-@media(max-width:800px){.hero.shop{height:auto!important;min-height:0;aspect-ratio:auto!important;overflow:visible;display:flex;flex-direction:column}.hero.shop .t{position:relative!important;top:auto;left:auto}.hero.shop .mod{position:relative;aspect-ratio:1;inset:auto}.hero.shop .vial{right:auto;left:50%;transform:translateX(-50%);height:74%;max-width:70vw;bottom:auto;top:13vw}.hero.shop .t{position:static;transform:none;width:auto;padding:18px 18px 26px}}
+@media(max-width:800px){.hero.shop{height:auto!important;min-height:0;aspect-ratio:auto!important;overflow:visible;display:flex;flex-direction:column}.hero.shop .t{position:relative!important;top:auto!important;left:0!important;right:auto!important;transform:none!important}.hero.shop .vial,.hero.shop .vial.cut{height:80vw!important;top:5vw!important;bottom:auto!important;max-width:80vw}.hero.shop .mod{position:relative;aspect-ratio:1;inset:auto}.hero.shop .vial{right:auto;left:50%;transform:translateX(-50%);height:74%;max-width:70vw;bottom:auto;top:13vw}.hero.shop .t{position:static;transform:none;width:auto;padding:18px 18px 26px}}
 
 /* bundles and tiles: the vials lift and glow on hover, clean and short */
 .card .im{position:relative}
