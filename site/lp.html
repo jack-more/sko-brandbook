@@ -7,62 +7,66 @@
 html,body{height:100%;background:var(--ink);color:#fff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
 .disp{font:700 1em Syncopate,ui-sans-serif,sans-serif;text-transform:uppercase}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
-/* backdrop: the Isometrica plate, slow drift, dimmed under the card */
+/* backdrop: the Isometrica plate, slow drift; dim pulls toward the card side */
 .bg{position:fixed;inset:0;overflow:hidden;background:var(--ink)}
-.bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);animation:bg 1.6s ease forwards,drift 26s ease-in-out 1.6s infinite alternate}
+.bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:38% 50%;opacity:0;transform:scale(1.04);animation:bg 1.4s ease forwards,drift 26s ease-in-out 1.4s infinite alternate}
 @keyframes bg{to{opacity:1}}
-@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1.5%,1%)}}
-.bg:after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}
+@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1.2%,.8%)}}
+.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,11,119,.15) 0%,rgba(2,11,119,.35) 45%,rgba(2,11,119,.78) 100%)}
 .top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,48px);z-index:3}
 .top img{height:24px}
-/* the pop-up */
-.wrap{position:fixed;inset:0;display:grid;place-items:center;padding:72px 16px 40px;z-index:2}
-.card{position:relative;width:min(92vw,540px);background:linear-gradient(170deg,#1b3b96,#12296e 60%,#0d2160);box-shadow:0 60px 140px rgba(0,0,0,.6),0 0 0 1px rgba(136,169,227,.35),inset 0 1px 0 rgba(255,255,255,.18);opacity:0;transform:translateY(28px) scale(.96);transition:opacity .8s cubic-bezier(.2,.8,.2,1) .5s,transform .8s cubic-bezier(.2,.8,.2,1) .5s}
+/* the pop-up, anchored right so the vial stays in view */
+.wrap{position:fixed;inset:0;display:grid;place-items:center end;padding:72px clamp(16px,7vw,120px) 48px 16px;z-index:2}
+.card{position:relative;width:min(92vw,560px);background:linear-gradient(170deg,#1b3b96,#12296e 60%,#0d2160);box-shadow:0 60px 140px rgba(0,0,0,.6),0 0 0 1px rgba(136,169,227,.35),inset 0 1px 0 rgba(255,255,255,.18);opacity:0;transform:translateY(28px) scale(.96);transition:opacity .8s cubic-bezier(.2,.8,.2,1) .2s,transform .8s cubic-bezier(.2,.8,.2,1) .2s}
 .card.in{opacity:1;transform:none}
 .card:before{content:"";position:absolute;inset:8px;border:1px solid rgba(136,169,227,.22);pointer-events:none}
-.hd{display:flex;justify-content:space-between;align-items:center;padding:22px 28px 0;color:var(--frost)}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:22px 30px 0;color:var(--frost)}
 .hd b{color:#fff;font:inherit;background:var(--pig);padding:5px 8px}
-.h1{padding:26px 28px 0;font-size:clamp(22px,5vw,30px);line-height:1.05}
-.h1 small{display:block;font:500 13px/1.5 Inter,sans-serif;text-transform:none;color:var(--frost);margin-top:12px;max-width:34ch}
-/* the code chip: a machined plate with the code in chrome */
-.chip{position:relative;margin:24px 28px 0;padding:22px 20px 20px;background:linear-gradient(180deg,#0b1c58,#081547);box-shadow:inset 0 2px 8px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12);overflow:hidden}
-.chip i{position:absolute;width:10px;height:10px;border-color:var(--frost);border-style:solid;opacity:.7}
+.h1{padding:26px 30px 0;font-size:clamp(22px,5vw,30px);line-height:1.05}
+.h1 small{display:block;font:500 13px/1.5 Inter,sans-serif;text-transform:none;color:var(--frost);margin-top:12px;max-width:36ch}
+/* the code chip: a machined plate; the letters are cut from the chrome plate itself */
+.chip{position:relative;margin:24px 30px 0;padding:20px 22px 22px;background:linear-gradient(180deg,#0b1c58,#081547);box-shadow:inset 0 2px 8px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12);overflow:hidden;transition:background .5s}
+.chip i{position:absolute;width:10px;height:10px;border-color:var(--frost);border-style:solid;opacity:.7;z-index:2}
 .chip i:nth-child(1){top:6px;left:6px;border-width:1px 0 0 1px}.chip i:nth-child(2){top:6px;right:6px;border-width:1px 1px 0 0}.chip i:nth-child(3){bottom:6px;left:6px;border-width:0 0 1px 1px}.chip i:nth-child(4){bottom:6px;right:6px;border-width:0 1px 1px 0}
-.chip .lab{display:flex;justify-content:space-between;color:var(--frost);margin-bottom:12px}
+.chip .lab{display:flex;justify-content:space-between;align-items:center;color:var(--frost);margin-bottom:14px;position:relative;z-index:2}
 .chip .lab b{font:inherit;color:#fff}
-.code{font-size:clamp(34px,9.5vw,54px);line-height:1;letter-spacing:.04em;display:flex;gap:.02em}
-.code span{display:inline-block;background:linear-gradient(180deg,#ffffff 0%,#dfe8f7 38%,#8fa6cf 52%,#ffffff 70%,#b9c9e8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(12px);animation:ltr .5s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes ltr{to{opacity:1;transform:none}}
-.glint{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-140%);animation:gl 4.5s ease-in-out 1.8s infinite}
+.chip .lab img{height:14px;margin-right:8px;vertical-align:-3px;opacity:.9}
+.code{position:relative;z-index:2;font-size:clamp(36px,9.8vw,58px);line-height:1;letter-spacing:.04em;display:flex;gap:.02em}
+.code span{display:inline-block;background-image:url(../img/edition3/tex-chrome-chip.jpg);background-size:560px auto;background-position:0 40%;-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(12px);animation:ltr .5s cubic-bezier(.2,.8,.2,1) forwards,pan 14s ease-in-out infinite alternate;filter:drop-shadow(0 1px 0 rgba(255,255,255,.35)) drop-shadow(0 6px 14px rgba(0,0,0,.45))}
+@keyframes ltr{to{opacity:1;transform:translateY(0)}}
+@keyframes pan{from{background-position:0 40%}to{background-position:-260px 60%}}
+.glint{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-140%);animation:gl 4.5s ease-in-out 1.6s infinite;z-index:3;pointer-events:none}
 @keyframes gl{0%{transform:translateX(-140%)}45%,100%{transform:translateX(140%)}}
 /* perforation: the stub line */
 .perf{position:relative;height:0;margin:26px 0 0;border-top:1px dashed rgba(136,169,227,.45)}
 .perf:before,.perf:after{content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 1px rgba(136,169,227,.35)}
 .perf:before{left:-9px}.perf:after{right:-9px}
-.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:20px 28px 0;color:var(--frost)}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;padding:20px 30px 0;color:var(--frost)}
 .spec b{display:block;color:#fff;font:inherit;margin-top:4px}
-.act{padding:24px 28px 26px}
-.btn{position:relative;display:block;width:100%;background:#fff;color:var(--navy);padding:20px 22px;font:700 12px Syncopate,sans-serif;text-transform:uppercase;text-align:center;text-decoration:none;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s}
+.act{padding:24px 30px 26px}
+.btn{position:relative;display:block;width:100%;background:#fff;color:var(--navy);padding:20px 22px;font:700 12px Syncopate,sans-serif;text-transform:uppercase;text-align:center;text-decoration:none;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s,background .3s,color .3s}
 .btn:active{transform:scale(.985)}
 .btn .glint{animation-delay:3s}
 .skip{display:block;text-align:center;margin-top:14px;color:var(--frost);text-decoration:none}
 .skip u{text-decoration-color:rgba(136,169,227,.45)}
-/* applied state */
-.card.ok .chip{background:linear-gradient(180deg,#e9eff9,#c9d6ee 60%,#e9eff9);box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
+/* applied: the chip becomes the chrome plate, the letters go Pigment */
+.card.ok .chip{background:url(../img/edition3/tex-chrome-chip.jpg) center/cover;box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
 .card.ok .chip .lab,.card.ok .chip .lab b{color:var(--navy)}
-.card.ok .code span{background:linear-gradient(180deg,#0f2a7a,#173384 60%,#0130C0);-webkit-background-clip:text;background-clip:text}
+.card.ok .chip i{border-color:var(--navy)}
+.card.ok .code span{background-image:linear-gradient(180deg,#0f2a7a,#173384 55%,#0130C0);animation:none;opacity:1;transform:none;filter:drop-shadow(0 1px 0 rgba(255,255,255,.5))}
 .card.ok .btn{background:var(--pig);color:#fff}
 .card.ok .glint{animation:none}
 .foot{position:fixed;left:0;right:0;bottom:0;text-align:center;padding:12px 16px;color:var(--frost);z-index:3}
+.foot b{color:#fff;font:inherit}
 @media (prefers-reduced-motion:reduce){.card,.bg img,.code span{animation:none;transition:none;opacity:1;transform:none}.glint{display:none}}
-@media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;align-items:start}.hd,.h1,.chip,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
+@media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;place-items:start center}.bg:after{background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}.bg img{object-position:50% 50%}.hd,.h1,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
 </style>
 <div class="bg"><img id="bg" src="../img/edition3/hero-structure.jpg" alt=""></div>
 <div class="top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
 <div class="wrap"><div class="card" id="card">
   <div class="hd mono"><span>TikTok offer</span><b id="offer"></b></div>
   <div class="h1 disp">Your code is ready.<small>Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
-  <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span>Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
+  <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span><img src="../img/mark-silver.png" alt="">Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
   <div class="perf"></div>
   <div class="spec mono"><div>Applies to<b>Every compound</b></div><div>Ships<b>3–5 business days</b></div><div>Testing<b>COA on every batch</b></div><div>Use<b>Research only</b></div></div>
   <div class="act"><a class="btn disp" id="go" href="#"><span id="gotxt">Apply code</span><div class="glint"></div></a><a class="skip mono" id="skip" href="#">Or <u>go straight to top sellers</u></a></div>
@@ -77,9 +81,9 @@ const BESTURL=BEST+(BEST.includes('?')?'&':'?')+qs;
 if(matchMedia('(max-aspect-ratio: 1/1)').matches)document.getElementById('bg').src='../img/edition3/hero-snowchrome-portrait.jpg';
 for(const id of['offer','offer2'])document.getElementById(id).textContent=OFFER;
 document.getElementById('code2').textContent=CODE;
-document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${1.1+i*.06}s">${c}</span>`).join('');
+document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${.8+i*.06}s,0s">${c}</span>`).join('');
 document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
-setTimeout(()=>document.getElementById('card').classList.add('in'),80);
+setTimeout(()=>document.getElementById('card').classList.add('in'),60);
 let gone=false;
 function apply(){if(gone)return;gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
 document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
