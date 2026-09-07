@@ -29,6 +29,14 @@ html,body{height:100%;background:var(--navy);color:#fff;font-family:Inter,ui-san
 .bar b{font:inherit;color:#fff}
 @media (max-width:640px){.cap{flex-direction:column;align-items:flex-start}.cap .btn{width:100%;text-align:center}}
 @media (prefers-reduced-motion:reduce){.frame,.cap .name{transition:none}.frame.on .sweep{animation:none}}
+/* phones: the 1:1 frame whole under the header, name + button below it */
+@media (max-aspect-ratio:1/1){
+  .frame img{top:56px;bottom:auto;height:100vw;object-fit:cover}
+  .frame .veil{background:linear-gradient(180deg,rgba(2,11,119,.25),transparent 20%,transparent 85%,rgba(2,11,119,.5))}
+  .cap{top:calc(56px + 100vw + 18px);bottom:auto;flex-direction:column;align-items:flex-start;gap:14px}
+  .cap .btn{width:100%;text-align:center}
+  .dots{bottom:auto;top:calc(56px + 100vw - 14px)}
+}
 </style>
 <div id="stage"></div>
 <div class="top"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
