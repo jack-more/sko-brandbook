@@ -196,23 +196,28 @@ footer .mono{color:var(--mute)}
 
 /* the hero is the shop: two columns. The picker left, the bottle in front of its structure right. Nothing overlaps. */
 .hero.shop{aspect-ratio:auto;display:grid;grid-template-columns:minmax(340px,520px) minmax(0,1fr);grid-template-rows:100%;gap:clamp(20px,4vw,64px);align-items:center;position:relative;background:#fff;height:min(82vh,820px);min-height:600px;padding:clamp(24px,4vw,56px) clamp(20px,5vw,80px);overflow:hidden;box-sizing:border-box}
-.hero.shop .t{position:static;transform:none;width:auto;max-width:none;display:grid;gap:14px}
+.hero.shop .t{position:static;transform:none;width:auto;max-width:none;display:grid;gap:14px;align-content:center}
+.hero.shop h1{font-size:clamp(30px,3.6vw,58px);line-height:1;overflow:visible;margin-top:4px}
+.hero.shop .t>p{max-width:40ch;color:var(--mute);font-size:clamp(13px,1vw,16px);opacity:1;animation:none;margin:0}
+.hero.shop .picker{border:1px solid var(--line);padding:16px;display:grid;gap:10px;margin-top:6px}
+.hero.shop .pickrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.hero.shop .pickrow .pprice{font-size:clamp(16px,1.5vw,22px)}
 .hero.shop .stage{position:relative;width:100%;height:100%;max-height:100%;overflow:hidden}
 .hero.shop .mod{position:absolute;inset:0}
 .hero.shop .mod iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
 .hero.shop .mod iframe[hidden]{display:none}
 .hero.shop .vial{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);height:76%;width:auto;max-width:70%;object-fit:contain;object-position:bottom;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(2,11,119,.16));transition:opacity .35s}
 .hero.shop .cats{display:flex;flex-wrap:wrap;gap:6px}
-.hero.shop .cats button{background:#fff;border:1px solid var(--line);color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 10px;cursor:pointer}
+.hero.shop .cats button{background:#fff;border:1px solid var(--line);color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:6px 8px;cursor:pointer}
 .hero.shop .cats button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .hero.shop label{margin-top:6px}
 .pickwrap{position:relative}.pickwrap:after{content:"▾";position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--navy);pointer-events:none}
-.hero.shop select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid var(--navy);color:var(--navy);font:600 14px Inter,sans-serif;padding:14px 40px 14px 14px;border-radius:0;cursor:pointer}
+.hero.shop select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid var(--navy);color:var(--navy);font:600 13px Inter,sans-serif;padding:11px 36px 11px 12px;border-radius:0;cursor:pointer}
 .hero.shop .prow{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:4px}
-.hero.shop .pname{font-size:clamp(20px,2.2vw,34px);line-height:1.05}.hero.shop .pprice{font-size:clamp(18px,1.8vw,26px)}
-.hero.shop .pbtns{display:flex;align-items:center;gap:18px}.hero.shop .pbtns .btn{padding:16px 26px}.hero.shop .alt{color:var(--mute)}
+.hero.shop .pname{font-size:clamp(16px,1.5vw,22px);line-height:1.05}.hero.shop .prow .mute{font-size:12px;margin-top:3px}
+.hero.shop .pbtns{display:flex;align-items:center;gap:16px}.hero.shop .pbtns .btn{padding:13px 20px;font-size:10px}.hero.shop .alt{color:var(--mute)}
 .hero.shop .hint{margin-top:4px}
-@media(max-width:800px){.hero.shop{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto;padding:0 0 26px;min-height:0;gap:8px}.hero.shop .stage{order:-1;aspect-ratio:1;height:auto;max-height:none}.hero.shop .t{padding:0 18px}}
+@media(max-width:800px){.hero.shop{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto;padding:0 0 26px;min-height:0;gap:8px}.hero.shop .stage{order:-1;aspect-ratio:1;height:auto;max-height:none}.hero.shop .t{padding:0 18px}.hero.shop h1{font-size:clamp(26px,8.5vw,40px)}}
 
 /* bundles and tiles: the vials lift and glow on hover, clean and short */
 .card .im{position:relative}
