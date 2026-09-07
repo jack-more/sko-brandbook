@@ -79,7 +79,7 @@ for(const id of['offer','offer2'])document.getElementById(id).textContent=OFFER;
 document.getElementById('code2').textContent=CODE;
 document.getElementById('code').innerHTML=[...CODE].map((c,i)=>`<span style="animation-delay:${1.1+i*.06}s">${c}</span>`).join('');
 document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
-requestAnimationFrame(()=>setTimeout(()=>document.getElementById('card').classList.add('in'),30));
+setTimeout(()=>document.getElementById('card').classList.add('in'),80);
 let gone=false;
 function apply(){if(gone)return;gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
 document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
