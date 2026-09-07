@@ -176,3 +176,6 @@ footer .mono{color:var(--mute)}
 .routes{margin-top:18px;border-top:1px solid var(--line)}.routes a{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
 .routes b{font-family:Syncopate,sans-serif;font-weight:700;font-size:10px;text-transform:uppercase}.routes span{color:var(--mute)}
 @media(max-width:560px){.tiers{grid-template-columns:repeat(3,1fr);gap:6px}.tiers button{padding:10px 8px}.pairc,.routes a{grid-template-columns:90px 1fr}}
+
+.grid.three{grid-template-columns:repeat(3,1fr)}.tile.g{aspect-ratio:3/4;background:#fff}
+@media(max-width:560px){.grid.three{grid-template-columns:repeat(3,1fr);gap:8px}}

@@ -22,7 +22,8 @@ if(grid){load().then(({prods,man})=>{const lim=+grid.dataset.limit||999;const li
 const pdp=document.querySelector('#pdp');
 if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search).get('s')||'bpc-157';const p=prods.find(x=>x.slug===s)||prods[0];const have=man[p.slug]||[];
   // the gallery: every frame is the image's own ratio, never cropped. The 1:1 Isometrica frame is slide two.
-  const kinds=['primary','square','white','frost','pigment','water'].filter(k=>have.includes(k));const srcs=kinds.map(k=>`../img/products/web/${p.slug}-${k}.jpg`);
+  const kinds=['primary','square','white'].filter(k=>have.includes(k)); // the gallery is 1:1 only, so it never changes shape
+  const grounds=['frost','pigment','water'].filter(k=>have.includes(k));const srcs=kinds.map(k=>`../img/products/web/${p.slug}-${k}.jpg`);
   const price=PRICE[p.slug]||49;
   document.title=`${p.name} — SKO Compounds`;pdp.querySelector('h1').textContent=p.name;pdp.querySelector('.sub').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;pdp.querySelector('.p').textContent=`$${price}.00`;
   const car=pdp.querySelector('.car'),th=pdp.querySelector('.thumbs');car.querySelectorAll('img').forEach(i=>i.remove());th.innerHTML='';
@@ -32,6 +33,8 @@ if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search)
   car.querySelector('.arr.l').onclick=()=>go(cur-1);car.querySelector('.arr.r').onclick=()=>go(cur+1);
   if(imgs.length>1&&!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>go(cur+1),4500);
   addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
+  // the grounds strip: the 3:4 frames, each in its own ratio, under the fold
+  const gs=document.querySelector('#grounds');if(gs){gs.innerHTML=grounds.map(k=>`<div class="tile g"><img src="../img/products/web/${p.slug}-${k}.jpg" alt="${p.name} on ${k}"><div class="cap"><div class="mono">${k.toUpperCase()}</div></div></div>`).join('');fitAll(gs)}
   // the wide Isometrica frame under the fold
   const wide=document.querySelector('#wide');if(wide&&have.includes('wide')){wide.querySelector('img').src=`../img/products/web/${p.slug}-wide.jpg`;wide.hidden=false;fitBox(wide,wide.querySelector('img'))}
   // upsell layer 1: quantity tiers
