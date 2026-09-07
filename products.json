@@ -4,265 +4,303 @@
   "name": "5-Amino-1MQ",
   "file": "5-amino-1mq.png",
   "spray": false,
-  "label": "5-AMINO-1MQ"
+  "label": "5-AMINO-1MQ",
+  "dose": "5 mg"
  },
  {
   "slug": "cjc-1295",
   "name": "CJC-1295 no DAC",
   "file": "cjc1295-new.png",
   "spray": false,
-  "label": "CJC+IPA"
+  "label": "CJC+IPA",
+  "dose": "10 mg"
  },
  {
   "slug": "ghk-cu",
   "name": "GHK-Cu",
   "file": "ghkcu-new.png",
   "spray": false,
-  "label": "GHK-Cu"
+  "label": "GHK-Cu",
+  "dose": "50 mg"
  },
  {
   "slug": "glow",
   "name": "GLOW",
   "file": "glow-new.png",
   "spray": false,
-  "label": "GLOW"
+  "label": "GLOW",
+  "dose": "70 mg"
  },
  {
   "slug": "glutathione",
   "name": "Glutathione",
   "file": "glutathione-new.png",
   "spray": false,
-  "label": "GLUTA"
+  "label": "GLUTA",
+  "dose": "600 mg"
  },
  {
   "slug": "mots-c",
   "name": "MOTS-c",
   "file": "mots-c-new.png",
   "spray": false,
-  "label": "MOTS-c"
+  "label": "MOTS-c",
+  "dose": "10 mg"
  },
  {
   "slug": "adamax",
   "name": "Adamax",
   "file": "product-adamax.png",
   "spray": false,
-  "label": "ADAMAX"
+  "label": "ADAMAX",
+  "dose": "10 mg"
  },
  {
   "slug": "aod-9604",
   "name": "AOD-9604",
   "file": "product-aod-9604.png",
   "spray": false,
-  "label": "AOD"
+  "label": "AOD",
+  "dose": "10 mg"
  },
  {
   "slug": "ara-290",
   "name": "ARA-290",
   "file": "product-ara290.png",
   "spray": false,
-  "label": "ARA-290"
+  "label": "ARA-290",
+  "dose": "10 mg"
  },
  {
   "slug": "bpc-157",
   "name": "BPC-157",
   "file": "product-bpc157-B3DMlXLe.png",
   "spray": false,
-  "label": "BPC-157"
+  "label": "BPC-157",
+  "dose": "10 mg"
  },
  {
   "slug": "cagrilintide",
   "name": "Cagrilintide",
   "file": "product-cagrilintide.png",
   "spray": false,
-  "label": "CAG"
+  "label": "CAG",
+  "dose": "10 mg"
  },
  {
   "slug": "dsip",
   "name": "DSIP",
   "file": "product-dsip.png",
   "spray": false,
-  "label": "DSIP"
+  "label": "DSIP",
+  "dose": "10 mg"
  },
  {
   "slug": "igf1-lr3",
   "name": "IGF1-LR3",
   "file": "product-igf1-lr3-new.png",
   "spray": false,
-  "label": "IGF1-LR3"
+  "label": "IGF1-LR3",
+  "dose": "1 mg"
  },
  {
   "slug": "ipamorelin",
   "name": "Ipamorelin",
   "file": "product-ipamorelin-new.png",
   "spray": false,
-  "label": "IPAMORELIN"
+  "label": "IPAMORELIN",
+  "dose": "10 mg"
  },
  {
   "slug": "kisspeptin",
   "name": "Kisspeptin-10",
   "file": "product-kisspeptin.png",
   "spray": false,
-  "label": "KISSPEPTIN"
+  "label": "KISSPEPTIN",
+  "dose": "10 mg"
  },
  {
   "slug": "kpv",
   "name": "KPV",
   "file": "product-kpv.png",
   "spray": false,
-  "label": "KPV"
+  "label": "KPV",
+  "dose": "10 mg"
  },
  {
   "slug": "mt-1",
   "name": "MT-1",
   "file": "product-mt1-BDr9K4qu.png",
   "spray": false,
-  "label": "MT-1"
+  "label": "MT-1",
+  "dose": "10 mg"
  },
  {
   "slug": "mt-2",
   "name": "MT-2",
   "file": "product-mt2-Bw_Ky05C.png",
   "spray": false,
-  "label": "MT-2"
+  "label": "MT-2",
+  "dose": "10 mg"
  },
  {
   "slug": "nad",
   "name": "NAD+",
   "file": "product-nad-new.png",
   "spray": false,
-  "label": "NAD"
+  "label": "NAD",
+  "dose": "500 mg"
  },
  {
   "slug": "pt-141",
   "name": "PT-141",
   "file": "product-pt141.png",
   "spray": false,
-  "label": "PT-141"
+  "label": "PT-141",
+  "dose": "10 mg"
  },
  {
   "slug": "selank",
   "name": "Selank",
   "file": "product-selank.png",
   "spray": false,
-  "label": "SELANK"
+  "label": "SELANK",
+  "dose": "10 mg"
  },
  {
   "slug": "semax",
   "name": "Semax",
   "file": "product-semax-GAtACDa-.png",
   "spray": false,
-  "label": "SEMAX"
+  "label": "SEMAX",
+  "dose": "10 mg"
  },
  {
   "slug": "sermorelin",
   "name": "Sermorelin",
   "file": "product-sermorelin.png",
   "spray": false,
-  "label": "SERM"
+  "label": "SERM",
+  "dose": "5 mg"
  },
  {
   "slug": "ss-31",
   "name": "SS-31",
   "file": "product-ss31-new.png",
   "spray": false,
-  "label": "SS-31"
+  "label": "SS-31",
+  "dose": "10 mg"
  },
  {
   "slug": "thymosin-alpha-1",
   "name": "Thymosin Alpha-1",
   "file": "product-ta1.png",
   "spray": false,
-  "label": "TA1"
+  "label": "TA1",
+  "dose": "10 mg"
  },
  {
   "slug": "tb-500",
   "name": "TB-500",
   "file": "product-tb500-C7fPiVPG.png",
   "spray": false,
-  "label": "TB-500"
+  "label": "TB-500",
+  "dose": "10 mg"
  },
  {
   "slug": "tesa-ipa",
   "name": "Tesamorelin + Ipamorelin",
   "file": "product-tesa-ipa-new.png",
   "spray": false,
-  "label": "TESA/IPA"
+  "label": "TESA/IPA",
+  "dose": "13 mg"
  },
  {
   "slug": "ghk-cu-spray",
   "name": "GHK-Cu Spray",
   "file": "spray-ghk-cu-cRPkFf7n.png",
   "spray": true,
-  "label": "GHK-Cu SPRAY"
+  "label": "GHK-Cu SPRAY",
+  "dose": "100 mg"
  },
  {
   "slug": "mt-2-spray",
   "name": "MT-2 Spray",
   "file": "spray-mt-2-CHfPPrtx.png",
   "spray": true,
-  "label": "MT-2"
+  "label": "MT-2",
+  "dose": "10 mg"
  },
  {
   "slug": "nad-spray",
   "name": "NAD+ Spray",
   "file": "spray-nad-DIBRzmeD.png",
   "spray": true,
-  "label": "NAD+ Spray"
+  "label": "NAD+ Spray",
+  "dose": "500 mg"
  },
  {
   "slug": "selank-spray",
   "name": "Selank Spray",
   "file": "spray-selank-D_OUA_LF.png",
   "spray": true,
-  "label": "SELANK"
+  "label": "SELANK",
+  "dose": "10 mg"
  },
  {
   "slug": "semax-spray",
   "name": "Semax Spray",
   "file": "spray-semax-BRY66jNO.png",
   "spray": true,
-  "label": "SEMAX"
+  "label": "SEMAX",
+  "dose": "10 mg"
  },
  {
   "slug": "tesamorelin",
   "name": "Tesamorelin",
   "file": "tesamorelin.png",
   "spray": false,
-  "label": "TESA"
+  "label": "TESA",
+  "dose": "10 mg"
  },
  {
   "slug": "wolverine",
   "name": "Wolverine Blend",
   "file": "wolverine-new.png",
   "spray": false,
-  "label": "WOLVERINE"
+  "label": "WOLVERINE",
+  "dose": "10 mg"
  },
  {
   "slug": "klow",
   "name": "KLOW",
   "file": "product-klow-new.png",
   "spray": false,
-  "label": "KLOW"
+  "label": "KLOW",
+  "dose": "80 mg"
  },
  {
   "slug": "bac-water",
   "name": "Bacteriostatic Water",
   "file": "product-bacwater.png",
   "spray": false,
-  "label": "BAC WATER"
+  "label": "BAC WATER",
+  "dose": "30 mL"
  },
  {
   "slug": "sko-3-rt",
   "name": "SKO-3 RT",
   "file": "sko3rt-vial.png",
   "spray": false,
-  "label": "SKO-3 RT"
+  "label": "SKO-3 RT",
+  "dose": "10 mg"
  },
  {
   "slug": "sko-trz",
   "name": "SKO-TRZ",
   "file": "sko-trz-vial.png",
   "spray": false,
-  "label": "SKO-TRZ"
+  "label": "SKO-TRZ",
+  "dose": "15 mg"
  }
 ]
