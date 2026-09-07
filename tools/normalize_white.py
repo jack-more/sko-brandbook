@@ -3,9 +3,10 @@
 img/products/<slug>-white2.png -> img/products/web/<slug>-white.jpg (2000px 1:1). Sprays are taller, so they get a taller target."""
 import json,os,sys
 from PIL import Image, ImageFilter
-P=json.load(open('products.json')); OUT=2000; done=[]
+P=json.load(open('products.json')); OUT=4000; done=[]
 for p in P:
-    src=f"img/products/{p['slug']}-white2.png"
+    src=f"img/hd/{p['slug']}-white2.png"
+    if not os.path.exists(src): src=f"img/products/{p['slug']}-white2.png"
     if not os.path.exists(src): continue
     im=Image.open(src).convert('RGB'); w,h=im.size
     # the product is whatever is darker than the studio; the soft shadow is excluded by the threshold
