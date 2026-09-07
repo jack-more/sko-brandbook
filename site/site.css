@@ -223,7 +223,7 @@ footer .mono{color:var(--mute)}
 .card:hover .im::before{opacity:1}
 
 /* the tile: the bottle alone, cut out, floating on white at one height for every SKU. The Pigment primary is the flip. */
-.card .im.float{background:#fff;display:grid;place-items:center}
+.card .im.float{background:#fff;display:grid;place-items:center;aspect-ratio:1!important}
 .card .im.float>img:first-child{position:absolute;left:50%;top:50%;width:auto;height:72%;max-width:80%;object-fit:contain;transform:translate(-50%,-52%);filter:drop-shadow(0 22px 26px rgba(2,11,119,.14));transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .55s}
 .card .im.float.spray>img:first-child{height:82%}
 .card:hover .im.float>img:first-child,.card.flip .im.float>img:first-child{transform:translate(-50%,-58%) scale(1.03);filter:drop-shadow(0 34px 34px rgba(2,11,119,.18))}
