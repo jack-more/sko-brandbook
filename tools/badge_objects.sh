@@ -1,0 +1,13 @@
+#!/bin/zsh
+# the badge as an object: the shield-helix mark rendered as brand hardware, white studio, 3:4
+cd ~/sko-brandbook-site; O=img/edition3; mkdir -p img/products/logs
+M="The mark is exactly the shield with the double helix from the first reference, its exact outline and its exact helix, nothing added, no letters."
+run(){ local name=$1 P=$2
+  for i in 1 2 3; do higgsfield generate create nano_banana_2 --image img/ref2/scene/mark-flat.jpg --image img/ref2/scene/badge-mark.jpg --image img/ref2/scene/white-vial.jpg --aspect_ratio 3:4 --wait --prompt "$P" > img/products/logs/badge-$name.log 2>&1 < /dev/null
+    url=$(grep -oE 'https://[^ "]+\.png' img/products/logs/badge-$name.log | head -1); echo "$name $url"; [ -n "$url" ] && curl -sL "$url" -o "$O/badge-$name.png" && break; sleep 12; done; }
+run cast "Product photograph in a seamless white studio, soft key from the upper left, soft grey contact shadow. A single object: the badge, the shield-helix mark cast as a solid piece of polished mirror chrome about the size of a hand, standing upright on the white floor, the helix in relief inside the shield, a faint trace of deep blue in its reflections from off-frame. $M Nothing else in the frame, no text." &
+run cap "Macro photograph in a seamless white studio, soft key from the upper left. The top of a deep navy flip-off vial cap fills the lower two thirds of the frame, seen from slightly above, and the shield-helix mark is pressed into the navy plastic as a crisp debossed relief, the same navy, catching the light on its edges. $M No text, no other objects." &
+run emboss "Macro photograph in a seamless white studio with hard raking light from the left. A sheet of thick white uncoated box board fills the frame, and the shield-helix mark is blind-embossed into it: raised, white on white, read only by its shadows. $M No ink, no text, nothing else." &
+run foil "Macro photograph in a seamless white studio, soft key from the upper left. A sheet of thick white paper fills the frame, and the shield-helix mark is foil-stamped into it in mirror silver, flat and crisp with a faint deboss, reflecting a trace of deep blue from off-frame. $M No other text, nothing else." &
+run pigment "Product photograph in a seamless warm white paper studio, soft key from the upper left. A rough lump of matte ultramarine pigment sits on the paper with a scatter of blue powder around it, and the badge, the shield-helix mark cast in polished mirror chrome, is pressed into the top of the pigment so the blue dust clings to its lower edge. $M Nothing else, no text." &
+wait; echo DONE

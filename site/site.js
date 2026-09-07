@@ -15,14 +15,14 @@ const TIERS=[[1,0],[2,.10],[3,.15]];
 const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathione':45,'semax':54,'selank':54,'kpv':49,'dsip':39,'cagrilintide':129,'tesamorelin':79,'ipamorelin':39,'sermorelin':49,'igf1-lr3':89,'mt-1':39,'mt-2':39,'pt-141':44,'ss-31':79,'thymosin-alpha-1':69,'ara-290':59,'aod-9604':49,'kisspeptin':49,'5-amino-1mq':59,'adamax':64,'glow':99,'wolverine':89,'tesa-ipa':99,'cjc-1295':54};
 async function load(){const [prods,man]=await Promise.all([fetch('../products.json?v='+Date.now()).then(r=>r.json()),fetch('manifest.json?v='+Date.now()).then(r=>r.json()).catch(()=>({}))]);return {prods,man}}
 let nth=0;
-function card(p,man){const k=man[p.slug]||[];const has=k.includes('primary');const useWhite=k.includes('white');const price=PRICE[p.slug]||49;
+function card(p,man){const k=man[p.slug]||[];const has=k.includes('primary');const useWhite=k.includes('white');const tileKind=k.includes('badge')?'badge':'white';const price=PRICE[p.slug]||49;
   return `<a class="card rv ${has?'':'pending'}" href="product.html?s=${p.slug}"><div class="im"${useWhite?' style="background:#fff"':''}>${has?`<img src="../img/products/web/${p.slug}-${useWhite?'white':'primary'}.jpg" alt="${p.name}">${(man[p.slug]||[]).includes('white')&&!useWhite?`<img class="alt" src="../img/products/web/${p.slug}-white.jpg" alt="" loading="lazy">`:''}`:`<span>RENDERING</span>`}</div><div class="meta"><div class="name">${p.name}</div><div class="dose">${p.spray?'nasal spray':'lyophilised vial'} · 99% purity</div><div class="row"><span>$${price}.00</span><span class="buy">Add →</span></div></div></a>`}
 const grid=document.querySelector('#grid');
 if(grid){load().then(({prods,man})=>{const lim=+grid.dataset.limit||999;const list=prods.filter(p=>grid.dataset.spray?p.spray:!p.spray).slice(0,lim);grid.innerHTML=list.map(p=>card(p,man)).join('');fitAll(grid);grid.querySelectorAll('.rv').forEach(el=>io.observe(el));const c=document.querySelector('#count');if(c)c.textContent=`${list.length} SKUs`})}
 const pdp=document.querySelector('#pdp');
 if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search).get('s')||'bpc-157';const p=prods.find(x=>x.slug===s)||prods[0];const have=man[p.slug]||[];
   // the gallery: every frame is the image's own ratio, never cropped. The 1:1 Isometrica frame is slide two.
-  const kinds=['primary','square','white'].filter(k=>have.includes(k)); // the gallery is 1:1 only, so it never changes shape
+  const kinds=['primary','square','badge','white','rock'].filter(k=>have.includes(k)); // the gallery is 1:1 only, so it never changes shape
   const grounds=['frost','pigment','water'].filter(k=>have.includes(k));const srcs=kinds.map(k=>`../img/products/web/${p.slug}-${k}.jpg`);
   const price=PRICE[p.slug]||49;
   document.title=`${p.name} — SKO Compounds`;pdp.querySelector('h1').textContent=p.name;pdp.querySelector('.sub').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;pdp.querySelector('.p').textContent=`$${price}.00`;

@@ -7,7 +7,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "cjc-1295": [
   "primary",
@@ -16,7 +19,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome",
+  "rock"
  ],
  "ghk-cu": [
   "primary",
@@ -26,7 +32,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome",
+  "badge"
  ],
  "glow": [
   "primary",
@@ -35,7 +44,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "glutathione": [
   "primary",
@@ -45,7 +57,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "badge",
+  "chrome"
  ],
  "mots-c": [
   "primary",
@@ -55,7 +70,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "rock",
+  "badge"
  ],
  "adamax": [
   "primary",
@@ -64,7 +82,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "rock",
+  "badge"
  ],
  "aod-9604": [
   "primary",
@@ -74,7 +95,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome",
+  "rock"
  ],
  "ara-290": [
   "primary",
@@ -84,7 +108,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "bpc-157": [
   "primary",
@@ -94,7 +121,11 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "detail",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "cagrilintide": [
   "primary",
@@ -104,7 +135,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "dsip": [
   "primary",
@@ -114,7 +148,9 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge"
  ],
  "igf1-lr3": [
   "primary",
@@ -124,7 +160,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "ipamorelin": [
   "primary",
@@ -134,7 +173,9 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome"
  ],
  "kisspeptin": [
   "primary",
@@ -144,7 +185,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "kpv": [
   "primary",
@@ -154,7 +198,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "mt-1": [
   "primary",
@@ -164,7 +211,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "badge",
+  "chrome"
  ],
  "mt-2": [
   "primary",
@@ -174,7 +224,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome",
+  "rock"
  ],
  "nad": [
   "primary",
@@ -184,7 +237,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "badge",
+  "chrome"
  ],
  "pt-141": [
   "primary",
@@ -194,7 +250,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "selank": [
   "primary",
@@ -204,7 +263,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "semax": [
   "primary",
@@ -214,7 +276,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome",
+  "badge"
  ],
  "sermorelin": [
   "primary",
@@ -224,7 +289,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "ss-31": [
   "primary",
@@ -234,7 +302,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "thymosin-alpha-1": [
   "primary",
@@ -244,7 +315,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "badge",
+  "chrome"
  ],
  "tb-500": [
   "primary",
@@ -254,7 +328,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "tesa-ipa": [
   "primary",
@@ -263,7 +340,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome",
+  "badge"
  ],
  "ghk-cu-spray": [
   "primary",
@@ -273,7 +353,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "mt-2-spray": [
   "primary",
@@ -283,7 +366,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "rock"
  ],
  "nad-spray": [
   "primary",
@@ -293,7 +379,8 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome"
  ],
  "selank-spray": [
   "primary",
@@ -303,7 +390,9 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome"
  ],
  "semax-spray": [
   "primary",
@@ -313,7 +402,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome",
+  "badge"
  ],
  "tesamorelin": [
   "primary",
@@ -323,7 +415,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome",
+  "rock"
  ],
  "wolverine": [
   "primary",
@@ -332,7 +427,9 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "rock",
+  "chrome"
  ],
  "klow": [
   "primary",
@@ -341,7 +438,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "chrome",
+  "rock"
  ],
  "bac-water": [
   "primary",
@@ -351,7 +451,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "rock",
+  "badge"
  ],
  "sko-3-rt": [
   "primary",
@@ -360,7 +463,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "badge",
+  "rock",
+  "chrome"
  ],
  "sko-trz": [
   "primary",
@@ -370,6 +476,10 @@
   "pigment",
   "water",
   "wide",
-  "square"
+  "square",
+  "chrome",
+  "badge",
+  "detail",
+  "rock"
  ]
 }
