@@ -53,7 +53,8 @@ const FRAMES=[{"slug": "bpc-157", "name": "BPC-157", "wide": "../img/products/we
 const q=new URLSearchParams(location.search);q.set('lp_code',CODE);const qs=q.toString();
 document.getElementById('code').textContent=CODE;document.getElementById('offer').textContent=OFFER;
 const stage=document.getElementById('stage'),dots=document.getElementById('dots'),cap=document.getElementById('cap');
-const portrait=matchMedia('(max-aspect-ratio: 1/1)').matches;
+const mq=matchMedia('(max-aspect-ratio: 1/1)');const portrait=mq.matches;
+mq.addEventListener('change',e=>[...stage.querySelectorAll('img')].forEach((im,i)=>im.src=e.matches?FRAMES[i].square:FRAMES[i].wide));
 FRAMES.forEach((f,i)=>{const d=document.createElement('div');d.className='frame';d.innerHTML=`<img src="${portrait?f.square:f.wide}" alt="${f.name}"><div class="veil"></div><div class="sweep"></div>`;stage.appendChild(d);const o=document.createElement('i');dots.appendChild(o)});
 const frames=[...stage.children],ds=[...dots.children];let cur=0,timer;
 function show(i){cur=(i+frames.length)%frames.length;frames.forEach((f,j)=>f.classList.toggle('on',j===cur));ds.forEach((d,j)=>d.classList.toggle('on',j===cur));cap.classList.remove('on');const f=FRAMES[cur];document.getElementById('k').textContent='0'+(cur+1)+' / '+frames.length;document.getElementById('name').textContent=f.name;document.getElementById('add').href=CART+f.slug+'?'+qs+'&add=1';setTimeout(()=>cap.classList.add('on'),40)}
