@@ -150,7 +150,8 @@
   "wide",
   "square",
   "chrome",
-  "badge"
+  "badge",
+  "rock"
  ],
  "igf1-lr3": [
   "primary",
@@ -175,7 +176,8 @@
   "wide",
   "square",
   "rock",
-  "chrome"
+  "chrome",
+  "badge"
  ],
  "kisspeptin": [
   "primary",
@@ -380,7 +382,9 @@
   "water",
   "wide",
   "square",
-  "chrome"
+  "chrome",
+  "badge",
+  "rock"
  ],
  "selank-spray": [
   "primary",
@@ -392,7 +396,8 @@
   "wide",
   "square",
   "badge",
-  "chrome"
+  "chrome",
+  "rock"
  ],
  "semax-spray": [
   "primary",
@@ -429,7 +434,8 @@
   "wide",
   "square",
   "rock",
-  "chrome"
+  "chrome",
+  "badge"
  ],
  "klow": [
   "primary",
