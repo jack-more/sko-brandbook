@@ -1,23 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>SKO Compounds — The Blue Bottle</title>
-<meta property="og:title" content="SKO Compounds — The Blue Bottle">
-<link rel="icon" type="image/png" href="img/shield/shield-blue-128.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
 <style>
 :root{
-  --blue:#173384; --deep:#092266; --field:#244399; --halo:#9DBFD9;
+  --blue:#173384; --deep:#020B77; --field:#0130C0; --halo:#88A9E3; --sky:#0148FE; --paperw:#EFEEEC;
   --ink:#111318; --mid:#6B7280; --line:#E4E7EC; --paper:#fff; --wash:#F4F5F7;
   --bad:#C0392B;
   --foil:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#7578B0,#C3AFD7);
 }
 *{box-sizing:border-box;margin:0}
-body{background:#D9DCE2;color:var(--ink);font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+body{background:#D9DCE2;color:var(--ink);font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;padding:28px 0}
 img{display:block;max-width:100%}
 .mono{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
@@ -244,593 +234,253 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
   .t5,.t3{grid-template-columns:repeat(2,1fr)}
   .swatches{grid-template-columns:repeat(2,1fr)}
 }
-</style>
-</head>
-<body>
 
-<!-- 01 cover -->
+/* edition three additions */
+.disp{font-family:'Syncopate',ui-sans-serif,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;line-height:1.02}
+.col h2{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;font-size:14px;line-height:1.25}
+.cover h1{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;font-size:clamp(26px,4.6vw,72px);line-height:1.05}
+.sentence{background:var(--field);color:#fff;display:grid;place-items:center;text-align:left;
+  padding:clamp(40px,7vw,120px) clamp(28px,6vw,100px);min-height:clamp(320px,44vw,640px)}
+.sentence .disp{font-size:clamp(22px,4vw,64px);max-width:22ch;text-wrap:balance}
+.sentence small{display:block;font-family:'JetBrains Mono',monospace;font-size:clamp(8px,.8vw,11px);
+  letter-spacing:.2em;color:rgba(255,255,255,.7);margin-top:clamp(18px,2.4vw,36px)}
+.plate{position:relative;overflow:hidden;background:var(--field)}
+.plate img{width:100%;height:100%;object-fit:cover;display:block}
+.rules{list-style:none;padding:0;margin:0}
+.rules li{font-size:11px;line-height:1.5;color:var(--mid);padding:7px 0;border-top:1px solid var(--line)}
+.rules li b{color:var(--ink)}
+.hood{background:var(--deep);color:#8FB0FF;font-family:'JetBrains Mono',monospace;font-size:clamp(9px,.95vw,13px);
+  line-height:1.7;padding:clamp(18px,2.6vw,40px);white-space:pre;overflow:auto;border-radius:5px;min-height:clamp(220px,30vw,420px)}
+.hood b{color:#fff;font-weight:400}
+.poster{background:var(--field);color:#fff;padding:clamp(20px,3vw,44px);border-radius:5px;display:flex;
+  flex-direction:column;justify-content:flex-end;min-height:clamp(200px,26vw,380px)}
+.poster .disp{font-size:clamp(24px,4.2vw,66px)}
+.poster .mono{font-family:'JetBrains Mono',monospace;font-size:clamp(8px,.8vw,11px);letter-spacing:.18em;opacity:.75;margin-top:12px}
+.tok{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.tok .chip{height:110px;border-radius:5px;border:1px solid var(--line)}
+.tok b{display:block;font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;font-size:9.5px;margin:8px 0 2px}
+.tok i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--mid);letter-spacing:.06em}
+.tok p{font-size:9.5px;color:var(--mid);line-height:1.45;margin-top:4px}
+@media (max-width:900px){.tok{grid-template-columns:repeat(3,1fr)}}
+
+/* the system board */
+.board{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(110px,11.5vw,180px);gap:12px}
+.bt{position:relative;overflow:hidden;border-radius:6px;min-height:0}
+.bt>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bt.pad{padding:clamp(14px,1.6vw,26px)}
+.bt .lbl{position:absolute;left:12px;bottom:10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;color:rgba(255,255,255,.7)}
+.bt.paper{background:#EFEEEC;color:#173384}
+.bt.navy{background:#173384;color:#fff}
+.bt.pig{background:#0130C0;color:#fff}
+.bt.white{background:#fff;border:1px solid var(--line)}
+.sw{display:grid;grid-template-rows:repeat(6,1fr);height:100%}
+.sw div{display:flex;justify-content:space-between;align-items:flex-end;padding:8px 12px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.06em}
+.sw b{font-family:Syncopate,sans-serif;font-weight:700;font-size:10px;text-transform:uppercase}
+.icon{width:38%;aspect-ratio:1;border-radius:22%;background:#173384;display:grid;place-items:center;margin:auto}
+.icon img{width:52%;height:auto}
+.phone{position:relative;width:min(70%,260px);aspect-ratio:9/19.2;margin:auto;border-radius:38px;background:linear-gradient(160deg,#e9ecf3,#9aa3b8);padding:9px;box-shadow:0 30px 60px rgba(2,11,119,.35),inset 0 0 0 2px #0a0f2a}
+.phone::after{content:'';position:absolute;left:50%;top:14px;transform:translateX(-50%);width:34%;height:16px;border-radius:10px;background:#0a0f2a;z-index:2}
+.phone iframe{width:100%;height:100%;border:0;border-radius:30px;background:#fff;display:block}
+.bt .big{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(14px,1.9vw,30px);line-height:1.1}
+.bt .glint{position:absolute;inset:0;background:linear-gradient(105deg,transparent 45%,rgba(255,255,255,.25) 50%,transparent 55%);transform:translateX(-130%);animation:sweep 6s ease-in-out infinite;pointer-events:none}
+@keyframes sweep{0%{transform:translateX(-130%)}60%{transform:translateX(130%)}100%{transform:translateX(130%)}}
+@media (max-width:900px){.board{grid-template-columns:repeat(3,1fr)}}
+</style>
+<title>SKO Brand Book</title>
+
 <div class="page cover">
   <div class="art">
-    <img class="plate" src="img/gen/cover-bottle-2400.jpg" alt="The blue bottle, wet, on the flat field, chrome structure at the edge">
+    <img class="plate" src="img/edition3/hero-snowchrome.jpg" alt="The vial in the chrome cradle, in the snow">
     <div class="ctype">
       <img class="clogo" src="img/lockup-3x1-white.png" alt="SKO Compounds">
       <h1>Brand Book</h1>
-      <p class="ctag">The blue bottle.</p>
+      <p class="ctag">Chrome first. Snow second.</p>
     </div>
-    <div class="stamp"><span>V2.0</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span>
-      <a href="#assets">ASSETS &rarr;</a></div>
+    <div class="stamp"><span>V3.0</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span><a href="#assets">ASSETS &rarr;</a></div>
     <div class="seal"></div>
   </div>
 </div>
 
-<!-- the blue bottle -->
-<div class="page" id="bottle">
-  <div class="col">
-    <h2>The blue bottle</h2>
-    <p><b>That is the brand.</b> Navy label, chrome band, wet glass, the liquid behind it. Everything
-    SKO puts into the world is that object or a consequence of it, and this book is built in that
-    order.</p>
-    <p><b>Three roles, three materials.</b> The ground is Field blue: flat, edge to edge, nothing
-    behind it. The structure is chrome: the helix and the compound, one machined material. The
-    subject is the bottle, the only thing that is ever photographed. Nothing else gets a material.</p>
-    <p><b>Power, not playfulness.</b> Clinical, exact, expensive. Nothing soft, nothing warm, nothing
-    cute. If a frame could belong to a sports drink, it does not belong to SKO.</p>
-    <p class="mono note">Every page that follows is one of the three roles. Anything that was not is
-    in the archive.</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(240px,34vw,500px)">
-      <a class="tile" style="background:#244399" href="img/gen/thesis-structure-1.png" download><img class="fill" src="img/gen/thesis-structure-2400.jpg" alt="Ground, structure and subject in one frame"><span class="cap">GROUND &middot; STRUCTURE &middot; SUBJECT</span></a>
-    </div>
-    <div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,20vw,290px);margin-top:12px">
-      <div class="tile" style="background:#244399"><span class="cap">GROUND &middot; FIELD #244399 &middot; FLAT</span></div>
-      <div class="tile" style="background:#111318"><img class="fill" src="img/gen/cuts/helix-metal-web.jpg" alt="The chrome helix"><span class="cap">STRUCTURE &middot; CHROME</span></div>
-      <div class="tile"><img class="fill" src="img/photo/studio-vial-wet.jpg" alt="The bottle, wet"><span class="cap">SUBJECT &middot; THE BOTTLE</span></div>
-    </div>
-  </div>
+<div class="page" id="system" style="grid-template-columns:1fr;grid-template-rows:auto auto">
+  <div class="body"><div class="board">
+    <div class="bt paper pad" style="grid-column:span 3;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between"><div><img src="img/lockup-3x1-navy.png" alt="SKO Compounds" style="width:min(62%,420px);height:auto"></div><div class="big" style="color:#173384;max-width:14ch">Research,<br>refined.</div><span class="lbl" style="color:#4a5680">WORDMARK · PAPER</span></div>
+    <div class="bt" style="grid-column:span 1;grid-row:span 2"><div class="sw"><div style="background:#173384;color:#fff"><b>Navy</b><span>#173384</span></div><div style="background:#0130C0;color:#fff"><b>Pigment</b><span>#0130C0</span></div><div style="background:#020B77;color:#fff"><b>Ink</b><span>#020B77</span></div><div style="background:#0148FE;color:#fff"><b>Sky</b><span>#0148FE</span></div><div style="background:#88A9E3;color:#020B77"><b>Frost</b><span>#88A9E3</span></div><div style="background:#fff;color:#173384;border:1px solid var(--line)"><b>White</b><span>#FFFFFF</span></div></div></div>
+    <div class="bt paper pad" style="grid-column:span 2;grid-row:span 1;display:grid;place-items:center"><div class="icon"><img src="img/shield/shield-white-2000.png" alt="App icon"></div><span class="lbl" style="color:#4a5680">ICON · NAVY</span></div>
+    <div class="bt navy pad" style="grid-column:span 2;grid-row:span 1;display:flex;align-items:flex-end"><div class="big">Chrome first.<br>Snow second.</div><div class="glint"></div><span class="lbl">TAGLINE · SYNCOPATE</span></div>
+    <div class="bt pig" style="grid-column:span 2;grid-row:span 2"><img src="img/edition3/device-molecule.jpg" alt="The molecule, cast in chrome"><span class="lbl">THE DEVICE · THE MOLECULE IN CHROME</span></div>
+    <div class="bt" style="grid-column:span 2;grid-row:span 2"><img src="img/edition3/mock-shelter.jpg" alt="Street poster" id="mockShelter"><span class="lbl">THE STREET · BUS SHELTER</span></div>
+    <div class="bt white pad" style="grid-column:span 2;grid-row:span 3;display:grid;place-items:center"><div class="phone"><iframe src="site/index.html" title="The site on a phone" loading="lazy"></iframe></div><span class="lbl" style="color:#4a5680">THE SITE · LIVE</span></div>
+    <div class="bt" style="grid-column:span 2;grid-row:span 1"><img src="img/edition3/board-bundle.jpg" alt="The bundle machine"><span class="lbl">THE MACHINE · TWO SEATS</span></div>
+    <div class="bt navy pad" style="grid-column:span 2;grid-row:span 1"><div class="hood" style="margin:0;min-height:0;padding:0;background:transparent;color:var(--halo)"><b>SKO/HOOD</b>  batch 2609-A  purity 99.1%
+lot 2026-09  <b>RESEARCH USE ONLY</b></div><span class="lbl">THE HOOD · MONO</span></div>
+    <div class="bt" style="grid-column:span 2;grid-row:span 2"><img src="img/edition3/board-drip.jpg" alt="The drip"><span class="lbl">THE AIR · SNOW CHROME</span></div>
+    <div class="bt" style="grid-column:span 2;grid-row:span 2"><img src="img/edition3/mock-billboard.jpg" alt="Billboard" id="mockBillboard"><span class="lbl">THE ROAD · BILLBOARD</span></div>
+  </div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE SYSTEM</span></div>
+</div>
+
+<div class="page" id="sentence" style="padding:0;grid-template-columns:1fr;grid-template-rows:1fr auto">
+  <div class="sentence"><div><p class="disp">Blue is the pigment. Chrome is the machine. The vial is what it holds.</p>
+  <small>THE AIR IS ALPINE &middot; THE GLINT IS THE SIGNATURE &middot; ONE OBJECT PER FRAME</small></div></div>
+  <div class="foot" style="padding-left:46px;padding-right:46px;margin-top:0"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE SENTENCE</span></div>
+</div>
+
+<div class="page" id="idea">
+  <div class="col"><h2>The idea</h2><p><b>Three materials, three roles.</b> The blue is a pigment: dry, matte, absolute, something you pour, dust and carve. The chrome is a machine: a cradle, a badge, a clamp, a turbine, cast and polished like jewellery, never a person. The vial is the only subject, the only thing that is ever photographed.</p>
+<p><b>The air is alpine.</b> Snow, ice, frost, a frozen lake, hard mountain sun. Cold and clean. This is what keeps the chrome from becoming a car ad and the blue from becoming a paint chip.</p>
+<p><b>Power comes from stillness.</b> One big object per frame, hard light, flat ground. Not from more objects, more colours or more motion. If a frame has two subjects it has none.</p>
+<p class="mono note">The site follows the book. One object per screen, navy or white, heavy type under it, nothing else. The bright blue is in the pictures, not the chrome of the page.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(220px,30vw,460px);"><a class="tile" style="background:#0130C0" href="img/edition3/powder.jpg" download><img class="fill" src="img/edition3/powder-w.jpg" alt="PIGMENT"><span class="cap">PIGMENT</span></a><a class="tile" style="background:#0130C0" href="img/edition3/cradle.jpg" download><img class="fill" src="img/edition3/cradle-w.jpg" alt="THE MACHINE"><span class="cap">THE MACHINE</span></a><a class="tile" style="background:#0130C0" href="img/edition3/frost.jpg" download><img class="fill" src="img/edition3/frost-w.jpg" alt="THE AIR"><span class="cap">THE AIR</span></a></div></div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE IDEA</span></div>
 </div>
 
-<!-- the label -->
 <div class="page" id="logo">
-  <div class="col">
-    <h2>The label</h2>
-    <p><b>The label is the logo.</b> The shield and the wordmark exist because they are printed on
-    the bottle; off the bottle they are used exactly as they appear on it. Three shapes, and the
-    names matter because the filename is what the next person trusts.</p>
-    <p><span class="mono kw">3&times;1</span> is the horizontal lockup &mdash; shield left, wordmark
-    right. It is the default wherever there is width for it.</p>
-    <p><span class="mono kw">1&times;1</span> is the stacked lockup &mdash; <b>shield on top</b>,
-    SKO COMPOUNDS beneath. Roughly square. This is the app icon and the avatar.</p>
-    <p><span class="mono kw">SHIELD</span> is the mark on its own, taller than wide. It is not the
-    1&times;1 &mdash; the 1&times;1 still carries the wordmark.</p>
-    <p>Clear space on all four sides equals the height of the shield. White on coloured grounds and
-    photography, navy on light. <b>Disclaimers always take the flat white shield.</b></p>
-    <p class="mono note">Below roughly 48&nbsp;px, and over any image, drop to a flat shield. The
-    full&#8209;colour lockup is a render and does not survive either.</p>
-  </div>
-  <div class="body">
-    <div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(120px,14vw,190px)">
-      <div class="tile"><img class="mark" src="img/lockup-3x1-navy.png" alt="Lockup, navy on light"><span class="cap">3&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
-      <div class="tile blue"><img class="mark" src="img/lockup-3x1-white.png" alt="Lockup, white on blue"><span class="cap">3&times;1 LOCKUP &middot; WHITE ON BLUE</span></div>
-    </div>
-    <div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(220px,27vw,360px)">
-      <div class="tile blue"><img class="mark" style="width:auto;height:74%;max-height:74%;max-width:60%" src="img/vector/lockup-1x1-white-2000.png" alt="1x1 lockup, white on blue"><span class="cap">1&times;1 LOCKUP &middot; WHITE ON BLUE &middot; SHIELD ON TOP</span></div>
-      <div class="tile"><img class="mark" style="width:auto;height:74%;max-height:74%;max-width:60%" src="img/vector/lockup-1x1-navy-2000.png" alt="1x1 lockup, navy on light"><span class="cap">1&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
-    </div>
-    <div class="tiles badges" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,19vw,250px)">
-      <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield on blue"><span class="cap">FLAT WHITE &middot; DISCLAIMERS</span></div>
-      <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield on light"><span class="cap">FLAT BLUE &middot; #173384</span></div>
-      <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield on light"><span class="cap">FLAT DEEP &middot; #092266</span></div>
-    </div>
-  </div>
+  <div class="col"><h2>The label</h2><p><b>Unchanged.</b> The shield and the wordmark are what is printed on the bottle and they are used exactly as they appear on it. The pack keeps the measured label blue, #173384. Everything else in this book is what surrounds the label, not the label.</p>
+<p><b>The badge is the shield, cast.</b> Off the bottle the shield may be rendered as a chrome emblem with the helix in relief, on its own, as a mark. It is the one piece of brand hardware. With the vial it becomes a product shot and lives on the machine page, never here.</p>
+<p><span class="mono kw">3&times;1</span> horizontal lockup, the default. <span class="mono kw">1&times;1</span> stacked, shield on top, the avatar. <span class="mono kw">SHIELD</span> alone, taller than wide.</p>
+<p>White on Pigment and on photography, navy on Paper. Clear space on all sides equals the shield height. Below 48&nbsp;px, and over any image, use the flat white shield.</p></div>
+  <div class="body"><div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(120px,14vw,190px)">
+  <div class="tile" style="background:#0130C0"><img class="mark" src="img/lockup-3x1-white.png" alt="Lockup white on Pigment"><span class="cap">3&times;1 &middot; WHITE ON PIGMENT</span></div>
+  <div class="tile" style="background:#EFEEEC"><img class="mark" src="img/lockup-3x1-navy.png" alt="Lockup navy on Paper"><span class="cap">3&times;1 &middot; NAVY ON PAPER</span></div></div>
+<div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(190px,25vw,340px)">
+  <div class="tile" style="background:#0130C0"><img class="mark" style="width:auto;height:72%;max-height:72%;max-width:60%" src="img/vector/lockup-1x1-white-2000.png" alt="1x1 lockup"><span class="cap">1&times;1 &middot; WHITE ON PIGMENT</span></div>
+  <div class="tile" style="background:#0130C0"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield"><span class="cap">FLAT WHITE SHIELD &middot; DISCLAIMERS</span></div>
+  <a class="tile" style="background:#0130C0" href="img/edition3/badge-mark.jpg" download><img class="fill" src="img/edition3/badge-mark-w.jpg" alt="The badge, the shield cast in chrome"><span class="cap">THE BADGE &middot; SHIELD CAST IN CHROME</span></a></div></div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
 </div>
 
-<!-- 02b the flat shield -->
-<div class="page" id="flat-shield">
-  <div class="col">
-    <h2>The Flat Shield</h2>
-    <p>Two cuts, and they are not interchangeable.</p>
-    <p><b>PLAIN</b> is the solid silhouette &mdash; no helix, nothing inside it. It is the badge:
-    reach for it to contain something, to sit over a photograph, or anywhere the mark would be too
-    busy to read.</p>
-    <p><b>MARK</b> is the shield with the helix knocked out. Because the helix is a hole, it takes
-    the colour of whatever is behind it &mdash; which is right on a flat ground and wrong on a busy
-    one. On a photograph, use PLAIN.</p>
-    <p>Both are one colour, cut from the vector: no gradient, no bevel. White for coloured grounds
-    and every disclaimer; blue and deep for light grounds.</p>
-    <p class="mono note">Below roughly 48&nbsp;px, and over any image, these are the only cuts. The
-    full&#8209;colour mark is a render and does not survive either.</p>
-  </div>
-  <div class="body">
-    <div class="shieldset">
-      <div class="srow">
-        <span class="slab mono">PLAIN &mdash; SOLID, NO HELIX</span>
-        <div class="tiles t3">
-          <div class="tile blue"><img class="mark" src="img/shield/shield-plain-white-2000.png" alt="Plain white shield"><span class="cap">PLAIN WHITE</span></div>
-          <div class="tile"><img class="mark" src="img/shield/shield-plain-blue-2000.png" alt="Plain luxury blue shield"><span class="cap">PLAIN BLUE &middot; #173384</span></div>
-          <div class="tile"><img class="mark" src="img/shield/shield-plain-deep-2000.png" alt="Plain deep shield"><span class="cap">PLAIN DEEP &middot; #092266</span></div>
-        </div>
-      </div>
-      <div class="srow">
-        <span class="slab mono">MARK &mdash; HELIX KNOCKED OUT</span>
-        <div class="tiles t3">
-          <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield mark"><span class="cap">MARK WHITE</span></div>
-          <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield mark"><span class="cap">MARK BLUE &middot; #173384</span></div>
-          <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield mark"><span class="cap">MARK DEEP &middot; #092266</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="ladder">
-      <span>Holds all the way down &mdash;</span>
-      <img src="img/shield/shield-blue-128.png" alt="128px"><i>128</i>
-      <img src="img/shield/shield-blue-64.png" alt="64px"><i>64</i>
-      <img src="img/shield/shield-blue-32.png" alt="32px"><i>32</i>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+<div class="page" id="colour">
+  <div class="col"><h2>Colour</h2><p><b>Navy is the primary. Pigment is the accent.</b> Navy is the label's measured blue, #173384, and it is every interface surface: navigation, buttons, footers, the grounds behind plates. Pigment is International Klein Blue as it photographs, and it lives in the photography and in accents, glints, links, small type, never as a page colour. Ink is the shadow blue, Sky the lit blue of the alpine frames, Frost the one pale blue for highlights.</p>
+<p><b>Chrome is not a colour.</b> It is white to Frost with Pigment in its shadows. Any chrome that does not reflect the blue is wrong.</p>
+<p><b>White is the second ground.</b> Pure white, equal in rank to Pigment. The vial alone, the machine, the badge and the pigment all work on it, and the chrome carries a trace of blue from off-frame so the frame is still SKO. The site alternates the two: blue screens and white screens, never a third.</p>
+<p><b>Paper</b> is the off-white for text pages and the rock shot.</p>
+<p class="mono note">Paper #EFEEEC stays for text pages. The pack and the screen now share #173384.</p></div>
+  <div class="body"><div class="tok">
+<div><div class="chip" style="background:#173384"></div><b>Navy</b><i>#173384</i><p>The primary. Every interface surface. The label's own blue.</p></div><div><div class="chip" style="background:#0130C0"></div><b>Pigment</b><i>#0130C0</i><p>The accent. Photography, glints, links. Never a page colour.</p></div>
+<div><div class="chip" style="background:#020B77"></div><b>Ink</b><i>#020B77</i><p>Shadow blue. The hood, the dark set, type on Frost.</p></div>
+<div><div class="chip" style="background:#0148FE"></div><b>Sky</b><i>#0148FE</i><p>The lit blue. Alpine sky, the frost burst, poster grounds.</p></div>
+<div><div class="chip" style="background:#88A9E3"></div><b>Frost</b><i>#88A9E3</i><p>Snow highlight. Captions on Pigment. Never a fill.</p></div>
+<div><div class="chip" style="background:linear-gradient(135deg,#fff 0%,#99A9CD 45%,#0130C0 100%)"></div><b>Chrome</b><i>WHITE &rarr; PIGMENT</i><p>The machine. Always reflecting the ground.</p></div>
+<div><div class="chip" style="background:#FFFFFF"></div><b>White</b><i>#FFFFFF</i><p>The second ground. Equal to Pigment.</p></div>
+</div>
+<div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,20vw,290px);margin-top:14px">
+  <div class="tile" style="background:#173384"><span class="cap">NAVY &middot; PRIMARY</span></div>
+  <div class="tile" style="background:#0130C0"><span class="cap">PIGMENT &middot; ACCENT</span></div>
+  <div class="tile" style="background:#FFFFFF;border:1px solid var(--line)"><span class="cap">WHITE &middot; THE SECOND GROUND</span></div></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>COLOUR</span></div>
 </div>
 
-<!-- 03 colour -->
-<div class="page">
-  <div class="col">
-    <h2>Colour</h2>
-    <p>One blue at three values. SKO Blue is the primary, measured off the label. <b>Field</b> is
-    the same blue held brighter &mdash; what blue becomes when blue is the whole surface. Foil is a
-    material, not a colour: two bands on the label, and it appears only where it physically exists.</p>
-    <p><b>The blue is already Yves Klein Blue.</b> IKB is #002FA7, hue 223. SKO Blue is #173384,
-    hue 224 &mdash; the same hue, ours darker. Nothing to chase. But Klein&rsquo;s blue was never a
-    backdrop, it was the work, and that is the rule we take.</p>
-    <p><b>Measured 29 Aug 2026</b> off the label artwork. #26379B, #1B2A7A and the store&rsquo;s
-    #1447D6 were read off photographs, not the pack, and are retired.</p>
-  </div>
-  <div class="body">
-    <div class="swatches">
-      <div class="sw"><div class="chip" style="background:#173384"></div><b>SKO Blue</b>
-        <table><tr><td>HEX</td><td>#173384</td></tr><tr><td>RGB</td><td>23 51 132</td></tr><tr><td>USE</td><td>Primary</td></tr></table></div>
-      <div class="sw"><div class="chip" style="background:#092266"></div><b>Deep</b>
-        <table><tr><td>HEX</td><td>#092266</td></tr><tr><td>RGB</td><td>9 34 102</td></tr><tr><td>USE</td><td>Ground</td></tr></table></div>
-      <div class="sw"><div class="chip" style="background:#244399"></div><b>Field</b>
-        <table><tr><td>HEX</td><td>#244399</td></tr><tr><td>RGB</td><td>36 67 153</td></tr><tr><td>USE</td><td>Flat field</td></tr></table></div>
-      <div class="sw"><div class="chip" style="background:#9DBFD9"></div><b>Halo</b>
-        <table><tr><td>HEX</td><td>#9DBFD9</td></tr><tr><td>RGB</td><td>157 191 217</td></tr><tr><td>USE</td><td>Secondary</td></tr></table></div>
-      <div class="sw"><div class="chip" style="background:#F4F5F7"></div><b>Paper</b>
-        <table><tr><td>HEX</td><td>#F4F5F7</td></tr><tr><td>RGB</td><td>244 245 247</td></tr><tr><td>USE</td><td>Surface</td></tr></table></div>
-      <div class="sw"><div class="chip" style="background:linear-gradient(100deg,#6E9EB6,#BAC7F2,#5BAEE5,#C3AFD7)"></div><b>Foil</b>
-        <table><tr><td>TYPE</td><td>Material</td></tr><tr><td>USE</td><td>Seal / edge</td></tr><tr><td>RULE</td><td>Only where real</td></tr></table></div>
-    </div>
-    <div class="field-rule">
-      <div class="fr-copy"><b>The field.</b> When the blue runs large it runs flat &mdash; edge to edge,
-      nothing behind it, no gradient inside it &mdash; and one machined object sits in it. A blue that
-      fades out behind a product is a backdrop, and it reads cheap. A blue that <i>is</i> the surface
-      reads expensive. Blue against polished steel is the whole composition.</div>
-      <div class="fr-pair">
-        <figure><div class="fr-tile" style="background:#244399"><img src="img/vector/lockup-1x1-white-2000.png" alt="White lockup on a flat blue field"></div>
-          <figcaption><span class="ok">DO</span> Flat field #244399. One object in it.</figcaption></figure>
-        <figure><div class="fr-tile" style="background:radial-gradient(120% 90% at 50% 38%,#3E63C8 0%,#244399 45%,#0B1E58 100%)"><img src="img/vector/lockup-1x1-white-2000.png" alt="White lockup on a gradient blue backdrop"></div>
-          <figcaption><span class="no">DON&rsquo;T</span> Gradient backdrop, lit vignette, falloff.</figcaption></figure>
-      </div>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+<div class="page" id="type">
+  <div class="col"><h2>Type</h2><p><b>Wide and squared, like the wordmark.</b> Syncopate Bold is the display face: an extended geometric in the Eurostile family, the Swiss space-age face, which is also where the SKO letters come from. Caps only, set big and left, white on Pigment or Ink on white. No tracking beyond its own width, no outlines, no gradients, no italics.</p>
+<p><b>Inter</b> carries everything that has to be read: body, captions, labels, the site.</p>
+<p><b>JetBrains Mono</b> is the hood. Readouts, batch numbers, the Array, anything that is data. It is the only place the brand is allowed to look like a machine in type.</p>
+<p class="mono note">Display is caps, never mixed case, and never smaller than 48&nbsp;px on a 350&nbsp;px slot. If it has to be small or lowercase, it is Inter.</p></div>
+  <div class="body"><div class="poster"><p class="disp">SKO<br>COMPOUNDS</p><p class="mono">SYNCOPATE BOLD &middot; CAPS &middot; WHITE ON PIGMENT &middot; LEFT</p></div>
+<div class="typespec" style="margin-top:12px">
+  <div class="face"><div class="fname">Syncopate Bold <i>DISPLAY</i></div><p class="fsample disp" style="font-size:clamp(18px,2.2vw,30px)">Research, refined.<br>BPC-157 &middot; 10 mg</p><div class="wts"><span>One weight, caps only. Set it big or not at all.</span></div></div>
+  <div class="face"><div class="fname">Inter <i>BODY</i></div><p class="fsample in" style="font-weight:500">Research-grade compounds, verified by third-party analysis, shipped cold from Los Angeles.</p><div class="wts"><span>400</span><span>500</span><span>600</span><span>700</span></div></div>
+</div>
+<div class="hood" style="margin-top:12px;min-height:0"><b>SKO/HOOD</b>   batch  0x79CE   purity  99.1%   mass  10.00 mg   lot  2026-09   <b>RESEARCH USE ONLY</b>
+JetBrains Mono. Ink ground, Frost text. Data only. Never a headline.</div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>TYPE</span></div>
 </div>
 
-<div class="page" id="typography">
-  <div class="col">
-    <h2>Typography</h2>
-    <p>Two faces. <b>DM Sans</b> does the talking, <b>Inter</b> does the work, and nothing else is
-    added without replacing one of them.</p>
-    <p>Both load from Google, so what this page shows is what ships &mdash; there is no licensed file
-    to chase before artwork can be approved.</p>
-    <p>Labels are uppercase at 0.18em. Nothing else is uppercase. Set tabular figures wherever
-    numbers line up in a column.</p>
-    <p class="mono note">Manrope stays in exactly one place &mdash; the Machine Vision readouts,
-    because that is the face the overlay system renders its labels in. It is not a brand face.</p>
-  </div>
-  <div class="body">
-    <div class="typespec">
-      <div class="face">
-        <div class="fname">DM&nbsp;Sans<i>Display</i></div>
-        <div class="fsample dm w700">High tech. High class.</div>
-        <div class="wts"><span class="w500">Medium 500</span><span class="w700">Bold 700</span></div>
-      </div>
-      <div class="face">
-        <div class="fname">Inter<i>Text</i></div>
-        <div class="fsample in w400">Read the certificate. Then decide.</div>
-        <div class="wts"><span class="in w400">Regular 400</span><span class="in w500">Medium 500</span><span class="in w600">Semibold 600</span></div>
-      </div>
-    </div>
-
-    <div class="tester">
-      <label class="mono lbl">TYPE HERE</label>
-      <input id="typeIn" value="High tech. High class. High design." spellcheck="false">
-      <div id="typeOut" class="dm w700">High tech. High class. High design.</div>
-    </div>
-
-    <table class="scale">
-      <tr><th>ROLE</th><th>FACE</th><th>SIZE</th><th>LINE</th><th>WEIGHT</th><th>TRACKING</th></tr>
-      <tr><td>Display</td><td>DM Sans</td><td>72</td><td>0.94</td><td>700</td><td>&minus;0.038</td></tr>
-      <tr><td>Section title</td><td>DM Sans</td><td>34</td><td>1.05</td><td>500</td><td>&minus;0.020</td></tr>
-      <tr><td>Lead</td><td>Inter</td><td>18</td><td>1.55</td><td>400</td><td>&minus;0.005</td></tr>
-      <tr><td>Body</td><td>Inter</td><td>15</td><td>1.60</td><td>400</td><td>0</td></tr>
-      <tr><td>Caption</td><td>Inter</td><td>12</td><td>1.45</td><td>500</td><td>0</td></tr>
-      <tr><td>Label</td><td>Inter</td><td>10</td><td>1.20</td><td>500</td><td>0.180</td></tr>
-    </table>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+<div class="page" id="grounds">
+  <div class="col"><h2>The grounds</h2><p><b>Six blue grounds and one white.</b> Pigment powder, blue water, blue-lit snow, the frost burst, alpine ice, and Paper with a pigment rock; then white, on the next page. Every product shot stands on one of these. Nothing else is a ground.</p>
+<p><b>Pigment</b> is the cover and the primary. <b>Frost</b> is the sleekest frame in the set and the one that says altitude in half a second. <b>Alpine</b> is the only ground with a horizon, and the only one shot outdoors.</p>
+<p><b>Water</b> is hard sun, caustics, a broken reflection. <b>Snow</b> is dusk. <b>Paper</b> is the only light ground, and the pigment always comes with it.</p>
+<p class="mono note">Wet stays optional. Water and frost are the two places it is expected.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(200px,26vw,400px);margin-bottom:12px"><a class="tile" style="background:#0130C0" href="img/edition3/powder.jpg" download><img class="fill" src="img/edition3/powder-w.jpg" alt="PIGMENT"><span class="cap">PIGMENT</span></a><a class="tile" style="background:#0148FE" href="img/edition3/frost.jpg" download><img class="fill" src="img/edition3/frost-w.jpg" alt="FROST"><span class="cap">FROST</span></a><a class="tile" style="background:#0148FE" href="img/edition3/alpine.jpg" download><img class="fill" src="img/edition3/alpine-w.jpg" alt="ALPINE"><span class="cap">ALPINE</span></a></div><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(200px,26vw,400px);"><a class="tile" style="background:#0130C0" href="img/edition3/water.jpg" download><img class="fill" src="img/edition3/water-w.jpg" alt="WATER"><span class="cap">WATER</span></a><a class="tile" style="background:#0130C0" href="img/edition3/snow.jpg" download><img class="fill" src="img/edition3/snow-w.jpg" alt="SNOW"><span class="cap">SNOW</span></a><a class="tile" style="background:#EFEEEC" href="img/edition3/rock.jpg" download><img class="fill" src="img/edition3/rock-w.jpg" alt="PAPER AND PIGMENT"><span class="cap">PAPER AND PIGMENT</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>GROUNDS</span></div>
 </div>
 
-<!-- 06 helix -->
-<div class="page" id="helix">
-  <div class="col">
-    <h2>Helix</h2>
-    <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
-    iridescence, the same physics as the foil on the label. It is never line art and it is never a
-    glyph. What is on the page is a machined object standing in the Field.</p>
-    <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
-    B&#8209;DNA its wide major groove and narrow minor one. Two and a half turns at this radius; tighter
-    reads as a spring.</p>
-    <p><b>It joins the compound.</b> Where the helix meets the label&rsquo;s molecular linework the two
-    are the same chrome, bond for bond, and the linework fades into the blue. One material, two forms:
-    the helix is the structure, the compound is what it is made of.</p>
-    <p><b>Seven cuts, one geometry.</b> All seven are rendered off the same reference. Three are
-    material &mdash; chrome, soft white, matte blue &mdash; and three are flat for print, small sizes
-    and embroidery. The seventh is the mark&rsquo;s own ombr&eacute;.</p>
-    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(260px,36vw,540px)">
-      <a class="tile" style="background:#244399" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="Liquid chrome helix fused into the molecular linework on a flat blue field"><span class="cap">HELIX INTO THE COMPOUND &middot; LIQUID CHROME ON FIELD</span></a>
-    </div>
-    <div style="height:12px"></div>
-    <div class="tiles" style="flex:none;grid-template-columns:repeat(7,1fr);height:clamp(200px,26vw,380px)">
-      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-metal.png" download><img class="fill" src="img/gen/cuts/helix-metal-web.jpg" alt="Liquid chrome helix on carbon"></a>
-      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-white3.png" download><img class="fill" src="img/gen/cuts/helix-white3-web.jpg" alt="Soft white helix on blue"></a>
-      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-blue3.png" download><img class="fill" src="img/gen/cuts/helix-blue3-web.jpg" alt="Matte blue helix on paper"></a>
-      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-flatw.png" download><img class="fill" src="img/gen/cuts/helix-flatw-web.jpg" alt="Flat white helix on blue"></a>
-      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-flatb.png" download><img class="fill" src="img/gen/cuts/helix-flatb-web.jpg" alt="Flat blue helix on paper"></a>
-      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-flatl.png" download><img class="fill" src="img/gen/cuts/helix-flatl-web.jpg" alt="Flat light blue helix on carbon"></a>
-      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-ombre.png" download><img class="fill" src="img/gen/cuts/helix-ombre-web.jpg" alt="Logo ombre helix on paper"></a>
-    </div>
-    <div class="cutcaps">
-      <span><b>Liquid chrome</b>rendered &middot; thin film</span>
-      <span><b>White</b>rendered &middot; soft</span>
-      <span><b>Matte blue</b>rendered &middot; unpolished</span>
-      <span><b>Flat white</b>#FFFFFF</span>
-      <span><b>Flat blue</b>#173384</span>
-      <span><b>Flat light blue</b>#9DBFD9</span>
-      <span><b>Logo ombr&eacute;</b>the mark&rsquo;s own blues</span>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>STRUCTURE</span></div>
+<div class="page" id="white">
+  <div class="col"><h2>The white ground</h2><p><b>Half the site is white.</b> Pure white, seamless, soft grey contact shadow, one soft key from the upper left. Nothing else in the frame. It is where the vial is quietest and the chrome is loudest.</p>
+<p><b>The blue comes with it.</b> On white, the chrome carries a trace of Pigment from off-frame, the pigment block under the vial is the one colour in the picture, and the label is the label. The vial stands on the pigment, never in it. That trace is what makes a white frame SKO and not a stock photo.</p>
+<p><b>The primary lives here too.</b> Every SKU gets a 1:1 primary on white as well as on Pigment. The site decides which it shows by what sits next to it.</p>
+<p class="mono note">White is never warm, never grey. #FFFFFF, lit flat.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(200px,26vw,400px)"><a class="tile" style="background:#fff" href="img/edition3/white-vial.jpg" download><img class="fill" src="img/edition3/white-vial-w.jpg" alt="THE VIAL ON WHITE"><span class="cap">THE VIAL &middot; PRIMARY</span></a><a class="tile" style="background:#fff" href="img/edition3/white-cradle.jpg" download><img class="fill" src="img/edition3/white-cradle-w.jpg" alt="THE CRADLE ON WHITE"><span class="cap">THE CRADLE</span></a><a class="tile" style="background:#fff" href="img/edition3/white-badge.jpg" download><img class="fill" src="img/edition3/white-badge-w.jpg" alt="THE BADGE ON WHITE"><span class="cap">THE BADGE</span></a><a class="tile" style="background:#EFEEEC" href="img/edition3/rock.jpg" download><img class="fill" src="img/edition3/rock-w.jpg" alt="THE PIGMENT BLOCK"><span class="cap">THE PIGMENT BLOCK</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>WHITE</span></div>
 </div>
 
-<!-- the compound -->
-<div class="page" id="compound">
-  <div class="col">
-    <h2>The Compound</h2>
-    <p>The linework on the label is a molecule. A column of fused rings up one edge, a branching
-    chain with its atoms down the other, both fading toward the centre so the type sits on clear
-    ground. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the
-    helix.</p>
-    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one. There is
-    no honeycomb cut, and there will not be one. Two fragments at the margins, fading in, and never
-    behind type.</p>
-    <p><b>Four grounds.</b> Field is the default. Deep for dark work, Halo for light, and white for
-    print and paper. The chrome is the same in all four; only the ground changes, so the reflections
-    change with it.</p>
-    <p><b>Three frames.</b> 16:9, 9:16 and 1:1, each composed for its shape rather than cropped from
-    the wide one. In print it runs as a foil deboss along the edges of the box and the card.</p>
-    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.6fr 1fr 1fr">
-      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome on a flat blue field"><span class="cap">FIELD #244399 &middot; THE DEFAULT</span></a>
-      <a class="tile" style="background:#092266" href="img/gen/compound-deep-1.png" download><img class="fill" src="img/gen/compound-deep-web.jpg" alt="The compound on deep"><span class="cap">DEEP #092266</span></a>
-      <a class="tile" style="background:#9DBFD9" href="img/gen/compound-halo-1.png" download><img class="fill" src="img/gen/compound-halo-web.jpg" alt="The compound on halo"><span class="cap">HALO #9DBFD9</span></a>
-      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/gen/compound-white-1.png" download><img class="fill" src="img/gen/compound-white-web.jpg" alt="The compound on white"><span class="cap">WHITE &middot; PRINT</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-9x16-1.png" download><img class="fill" src="img/gen/compound-9x16-web.jpg" alt="The compound composed 9:16"><span class="cap">9:16</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-1x1-1.png" download><img class="fill" src="img/gen/compound-1x1-web.jpg" alt="The compound composed 1:1"><span class="cap">1:1</span></a>
-      <a class="tile" style="background:#244399" href="img/gen/compound-usage-1.png" download><img class="fill" src="img/gen/compound-usage-web.jpg" alt="The compound as a foil deboss on the box and the card"><span class="cap">IN PRINT &middot; FOIL DEBOSS</span></a>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+<div class="page" id="machine">
+  <div class="col"><h2>The machine</h2><p><b>Chrome is a machine, cast like jewellery.</b> The gimbal, a cradle, a turbine, a clamp, the helix rails, the badge. Mirror-polished, reflecting Pigment in its shadows, white in its highlights. It holds the vial. It never competes with it.</p>
+<p><b>Sleek by default.</b> One continuous form, no seams, no visible hardware, the surface of a car body. The gimbal is the instrument, three times the vial's height, rings inside rings; the cradle and the turbine are the small versions. All of it works on both grounds.</p>
+<p><b>Heavy when it has to be.</b> The clamp and the rails carry bolts and milled edges. They are for the moments that need weight: a hero, a launch, a cover. Never a product card.</p>
+<p><b>The bundle machine.</b> The cradle with two or three seats, one form. Every bundle is shot in it, in the snow, each product from its own label.</p>
+<p class="mono note">No hands, no figures, no statues. If the chrome has a face it is wrong. And nothing is ever cropped: the container takes the image's ratio, never the other way round.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(200px,26vw,400px);margin-bottom:12px"><a class="tile" style="background:#0130C0" href="img/edition3/gimbal.jpg" download><img class="fill" src="img/edition3/gimbal-w.jpg" alt="GIMBAL &middot; THE INSTRUMENT"><span class="cap">GIMBAL &middot; THE INSTRUMENT</span></a><a class="tile" style="background:#0130C0" href="img/edition3/cradle.jpg" download><img class="fill" src="img/edition3/cradle-w.jpg" alt="CRADLE &middot; SLEEK"><span class="cap">CRADLE &middot; SLEEK</span></a><a class="tile" style="background:#0130C0" href="img/edition3/turbine.jpg" download><img class="fill" src="img/edition3/turbine-w.jpg" alt="TURBINE &middot; SLEEK"><span class="cap">TURBINE &middot; SLEEK</span></a></div><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(200px,26vw,400px);"><a class="tile" style="background:#0130C0" href="img/edition3/badge.jpg" download><img class="fill" src="img/edition3/badge-w.jpg" alt="THE BADGE"><span class="cap">THE BADGE</span></a><a class="tile" style="background:#0130C0" href="img/edition3/clamp.jpg" download><img class="fill" src="img/edition3/clamp-w.jpg" alt="CLAMP &middot; HEAVY"><span class="cap">CLAMP &middot; HEAVY</span></a><a class="tile" style="background:#0130C0" href="img/edition3/helixmachine.jpg" download><img class="fill" src="img/edition3/helixmachine-w.jpg" alt="HELIX RAILS &middot; HEAVY"><span class="cap">HELIX RAILS &middot; HEAVY</span></a></div><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(170px,22vw,340px);margin-top:12px"><a class="tile" style="background:#0148FE" href="img/edition3/bundle-2-snow.jpg" download><img class="fill" src="img/edition3/bundle-2-snow-w.jpg" alt="Double cradle in snow"><span class="cap">THE BUNDLE MACHINE &middot; TWO SEATS</span></a><a class="tile" style="background:#0148FE" href="img/edition3/bundle-3-snow.jpg" download><img class="fill" src="img/edition3/bundle-3-snow-w.jpg" alt="Triple cradle in snow"><span class="cap">THREE SEATS</span></a><a class="tile" style="background:#0130C0" href="img/edition3/bundle-2-studio.jpg" download><img class="fill" src="img/edition3/bundle-2-studio-w.jpg" alt="Double cradle on Pigment"><span class="cap">TWO SEATS &middot; PIGMENT</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE MACHINE</span></div>
 </div>
 
-<!-- 07 photography: the studio -->
-<div class="page" id="photo-studio">
-  <div class="col">
-    <h2>Photography &mdash; the studio</h2>
-    <p>The product is in every piece of content we put out, so this is the most-used page in the
-    book. Every image starts from the catalogue render, which means the label is always the real
-    label: right SKU, right dose, both foil bands. What changes is the world around it, and that
-    world has four rules.</p>
-    <p><b>One light,</b> high and to the left. <b>The shadow falls on the seamless,</b> never on a
-    floor with an edge in it. <b>The label reads:</b> nothing crosses it, nothing tints it, the bottle
-    is never warped, flipped or re-lettered.</p>
-    <p><b>Dry or wet &mdash; both are approved.</b> The studio plates are dry glass. The wet cut is
-    the same plate with condensation on the glass and cap, the foil catching the key; it is an
-    option, not a rule. Use it when the frame wants cold and fresh, and the dry plate when it wants
-    clean and clinical. Every plate on this page has both.</p>
-    <p>The studio masters on the warm seamless are for listings and product pages. Bundles sit on
-    white to match the site. The Field and the floats are for ads and social.</p>
-    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(420px,54vw,720px)">
-      <a class="tile" href="img/photo/studio-vial.jpg" download><img class="fill" src="img/photo/studio-vial.jpg" alt="Studio master, vial"><span class="cap">STUDIO MASTER &middot; VIAL</span></a>
-      <a class="tile" href="img/photo/studio-spray.jpg" download><img class="fill" src="img/photo/studio-spray.jpg" alt="Studio master, nasal spray"><span class="cap">STUDIO MASTER &middot; SPRAY</span></a>
-      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/photo/bundle-01-nad-motsc.jpg" download><img class="fill" src="img/photo/bundle-01-nad-motsc.jpg" alt="Bundle on white"><span class="cap">BUNDLE &middot; ON WHITE, FOR THE SITE</span></a>
-      <a class="tile" href="img/photo/on-field.jpg" download><img class="fill" src="img/photo/on-field.jpg" alt="Vial on the flat Field"><span class="cap">ON THE FIELD</span></a>
-      <a class="tile" href="img/photo/float-halo.jpg" download><img class="fill" src="img/photo/float-halo.jpg" alt="Vial floating over Halo"><span class="cap">THE FLOAT &middot; HALO</span></a>
-      <a class="tile" href="img/photo/float-deep.jpg" download><img class="fill" src="img/photo/float-deep.jpg" alt="Vial floating over Deep"><span class="cap">THE FLOAT &middot; DEEP</span></a>
-    </div>
-    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(210px,27vw,360px);margin-top:12px">
-      <a class="tile" href="img/photo/studio-vial-wet.jpg" download><img class="fill" src="img/photo/studio-vial-wet.jpg" alt="Studio master, wet"><span class="cap">WET &middot; STUDIO MASTER</span></a>
-      <a class="tile" href="img/photo/on-field-wet.jpg" download><img class="fill" src="img/photo/on-field-wet.jpg" alt="On the Field, wet"><span class="cap">WET &middot; ON THE FIELD</span></a>
-      <a class="tile" href="img/photo/lift-halo-wet.jpg" download><img class="fill" src="img/photo/lift-halo-wet.jpg" alt="The lift over Halo, wet"><span class="cap">WET &middot; THE LIFT, HALO</span></a>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PHOTOGRAPHY</span></div>
+<div class="page" id="snowchrome">
+  <div class="col"><h2>Snow chrome</h2><p><b>Where the two halves meet.</b> The chrome machine out in the alpine air. Blue-lit dunes at dusk, a sky that runs Ink at the top to Sky at the horizon, and the chrome reflecting all of it.</p>
+<p><b>The glint is the signature.</b> One hard, low winter sun from the right, throwing small star-shaped speculars off every chrome edge and off the snow crystals. It is the one flourish the brand allows, and it is a lighting decision, never an added sparkle.</p>
+<p><b>Liquid chrome is allowed here.</b> A drip over the cap, a helix drawn out to points. Chrome can flow in the snow; it stays solid and machined on Pigment.</p>
+<p class="mono note">This is the hero world for video. Everything in it moves: snow bursts, chrome pours, the helix rises, the glints travel.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(4,1fr);flex:none;height:clamp(200px,26vw,400px)"><a class="tile" style="background:#0148FE" href="img/edition3/snow-drip.jpg" download><img class="fill" src="img/edition3/snow-drip-w.jpg" alt="THE DRIP"><span class="cap">THE DRIP</span></a><a class="tile" style="background:#0148FE" href="img/edition3/snow-cradle.jpg" download><img class="fill" src="img/edition3/snow-cradle-w.jpg" alt="THE CRADLE IN SNOW"><span class="cap">THE CRADLE IN SNOW</span></a><a class="tile" style="background:#0148FE" href="img/edition3/snow-helix.jpg" download><img class="fill" src="img/edition3/snow-helix-w.jpg" alt="THE LIQUID HELIX"><span class="cap">THE LIQUID HELIX</span></a><a class="tile" style="background:#0148FE" href="img/edition3/snow-badge.jpg" download><img class="fill" src="img/edition3/snow-badge-w.jpg" alt="THE BADGE IN SNOW"><span class="cap">THE BADGE IN SNOW</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>SNOW CHROME</span></div>
 </div>
 
-<!-- 07b photography: the moments -->
-<div class="page" id="photo-moments">
-  <div class="col">
-    <h2>Photography &mdash; the moments</h2>
-    <p>Four editorial set-ups for when the product needs a world: the helix drawn in sand with the
-    vial resting on it; the vial in a fine light-blue powder; the vial with light moving behind it;
-    and the plush set, where the helix and the shield are soft objects beside it.</p>
-    <p><b>In every one the brand asset is in the world and the vial is on top of it.</b> The helix,
-    the shield and the compound appear as things &mdash; drawn, poured, sewn &mdash; and they never
-    compete with the label. The palette holds: sand and powder are Halo, the plush is Deep and
-    Halo, the light is white.</p>
-    <p>Nothing candid, nothing lifestyle. No hands, no kitchens, no gym bags. The marble and Halo
-    lifts round out the set for the site. Each moment also has a wet cut on the Assets page.</p>
-    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
-  </div>
-  <div class="body">
-    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(420px,54vw,720px)">
-      <a class="tile" href="img/photo/sand-helix.jpg" download><img class="fill" src="img/photo/sand-helix.jpg" alt="The helix drawn in sand, vial on top"><span class="cap">THE HELIX, IN SAND</span></a>
-      <a class="tile" href="img/photo/powder.jpg" download><img class="fill" src="img/photo/powder.jpg" alt="Vial in light-blue powder"><span class="cap">POWDER</span></a>
-      <a class="tile" href="img/photo/blur.jpg" download><img class="fill" src="img/photo/blur.jpg" alt="Vial with light moving behind it"><span class="cap">THE BLUR</span></a>
-      <a class="tile" href="img/photo/plush.jpg" download><img class="fill" src="img/photo/plush.jpg" alt="Vial with the plush helix and shield"><span class="cap">PLUSH</span></a>
-      <a class="tile" href="img/photo/lift-marble.jpg" download><img class="fill" src="img/photo/lift-marble.jpg" alt="Vial lifted over marble"><span class="cap">THE LIFT &middot; MARBLE</span></a>
-      <a class="tile" href="img/photo/lift-halo.jpg" download><img class="fill" src="img/photo/lift-halo.jpg" alt="Vial lifted over Halo"><span class="cap">THE LIFT &middot; HALO</span></a>
-    </div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PHOTOGRAPHY</span></div>
+<div class="page" id="dark">
+  <div class="col"><h2>The dark set</h2><p><b>For ads and video, not for the book.</b> Frames where the blue becomes a light and the chrome becomes a body or a set: the liquid glowing inside the glass, the vial frozen in ice, the pigment cliff, the chrome hand holding the vial, and the chrome vending machine, which is an ad in itself: the whole catalogue behind glass, one slot, and a story about what comes out of it.</p>
+<p>They are louder than the grounds and they earn their place in paid media, where a frame has half a second, and in motion, where a chrome hand can move. On the site they are used once, if at all. The hand never appears on a product page. No robots, no figures.</p>
+<p class="mono note">The glow is the liquid, never a halo behind the vial.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(200px,26vw,400px);margin-bottom:12px"><a class="tile" style="background:#000" href="img/edition3/glow.jpg" download><img class="fill" src="img/edition3/glow-w.jpg" alt="GLOW"><span class="cap">GLOW</span></a><a class="tile" style="background:#0130C0" href="img/edition3/ice.jpg" download><img class="fill" src="img/edition3/ice-w.jpg" alt="ICE"><span class="cap">ICE</span></a><a class="tile" style="background:#EFEEEC" href="img/edition3/cliff.jpg" download><img class="fill" src="img/edition3/cliff-w.jpg" alt="THE CLIFF"><span class="cap">THE CLIFF</span></a></div><div class="tiles" style="grid-template-columns:repeat(2,1fr);flex:none;height:clamp(220px,30vw,460px);"><a class="tile" style="background:#0130C0" href="img/edition3/hand.jpg" download><img class="fill" src="img/edition3/hand-w.jpg" alt="THE HAND &middot; ADS ONLY"><span class="cap">THE HAND &middot; ADS ONLY</span></a><a class="tile" style="background:#0130C0" href="img/edition3/palm.jpg" download><img class="fill" src="img/edition3/palm-w.jpg" alt="THE PALM &middot; ADS ONLY"><span class="cap">THE PALM &middot; ADS ONLY</span></a></div>
+<div class="tiles" style="grid-template-columns:repeat(2,1fr);flex:none;height:clamp(260px,36vw,560px);margin-top:12px"><a class="tile" style="background:#0130C0" href="img/edition3/vending-snow.jpg" download><img class="fill" src="img/edition3/vending-snow-w.jpg" alt="THE VENDING MACHINE IN SNOW"><span class="cap">THE VENDING MACHINE &middot; AD</span></a><a class="tile" style="background:#0130C0" href="img/edition3/vending-studio.jpg" download><img class="fill" src="img/edition3/vending-studio-w.jpg" alt="THE VENDING MACHINE ON PIGMENT"><span class="cap">THE VENDING MACHINE &middot; AD</span></a></div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE DARK SET</span></div>
 </div>
 
-<!-- 04 the array -->
-<div class="page" id="array">
-  <div class="col">
-    <h2>The Array</h2>
-    <p><b>Every offering, as the bottle it is.</b> All thirty-nine listings, each one its own
-    catalogue render with the name, size and price read off the live store, held in a cloud over
-    the flat Field. Nothing sits in the middle of it. The blue bottle is the brand, so the bottles
-    are the whole object.</p>
-    <p>The ground is <b>Field #244399, flat</b>. No gradient, no vignette. Depth comes from the
-    bottles themselves: the near ones large and solid, the far ones small and faint.</p>
-    <p><b>Drag to spin it.</b> It carries momentum and settles. <b>Wheel to zoom.</b> Hovering
-    lifts a bottle and holds the cloud still. <b>Click</b> brings that bottle to the centre and dims
-    the rest; click it again to open the product, or click away to release it.</p>
-    <p class="mono note">Used as the catalogue on the site, and as the closing frame of any spot
-    that shows the range.</p>
-  </div>
-  <div class="body">
-    <div id="arraySphere" style="width:100%;border-radius:5px;overflow:hidden;background:#244399"></div>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>SUBJECT</span></div>
+<div class="page" id="hood">
+  <div class="col"><h2>The hood</h2><p><b>Where cyber lives.</b> The brand's technical edge is under the surface: mono readouts, the Array, batch data. It is text and data, never imagery. No HUD lines, no grids, no neon, no warp.</p>
+<p>Ink ground, Frost text, JetBrains Mono. It reads like an instrument panel and it is the only place the brand is allowed to.</p></div>
+  <div class="body"><div class="hood"><b>SKO/ARRAY</b>                                    <b>36 COMPOUNDS</b>
+
+  BPC-157        10 mg    99.1%    lot 2609-A    <b>●</b>
+  TB-500          5 mg    99.3%    lot 2609-A    <b>●</b>
+  GHK-Cu         50 mg    99.0%    lot 2608-C    <b>●</b>
+  MOTS-c         10 mg    99.2%    lot 2609-B    <b>●</b>
+  Semax          10 mg    98.9%    lot 2608-D    <b>●</b>
+
+  ground  PIGMENT #0130C0      machine  CHROME      subject  THE VIAL
+  <b>RESEARCH USE ONLY</b>                             ORDERS 38,000+</div></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE HOOD</span></div>
 </div>
 
-<script defer src="js/array-cloud.js?v=4"></script>
-
-<!-- 06 claims -->
-<div class="page">
-  <div class="col">
-    <h2>Claims</h2>
-    <p>This is the complete approved vocabulary. A claim not on this list does not go into an asset
-    until ownership adds it here.</p>
-    <p>Figures are re-verified before each flight, never copied forward.</p>
-  </div>
-  <div class="body">
-    <table style="width:100%;border-collapse:collapse">
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">99% Purity</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">PRINTED ON LABEL</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Research Use Only</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">MANDATORY</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">8× Tested</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Beverly Hills</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Over 38k orders shipped</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CONFIRMED BY OWNERSHIP</td></tr>
-      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Out the door in 24 hours</td>
-          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CARRIES ITS OWN REMEDY</td></tr>
-    </table>
-  </div>
-  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>LANGUAGE</span></div>
+<div class="page" id="carousel">
+  <div class="col"><h2>The carousel</h2><p><b>Six shots per SKU, always in this order.</b> Primary, chrome in the snow, frost, white, pigment, water. The primaries are the card images, Pigment on blue screens and white on white screens. All six are the product page.</p>
+<p><b>Made from the label, never from a template.</b> Each shot is rendered from that SKU's own catalogue image as the first reference and the master plate as the second, so the name and the dose pill are that product's, and every label is checked at zoom before it goes live. Sprays run the same five with the spray bottle.</p>
+<p><b>What is not in it.</b> The gimbal: at 1:1 it read as a trophy, so the chrome slot is the sleek cradle. No dark frame: the glow is an ad. No people, no illustration.</p>
+<p class="mono note">Files: img/products/web/&lt;slug&gt;-&lt;shot&gt;.jpg, shots primary, chrome, frost, white, pigment, water. Map: products.json and site/manifest.json.</p></div>
+  <div class="body"><div class="tiles" style="grid-template-columns:repeat(6,1fr);flex:none;height:clamp(130px,16vw,250px)"><a class="tile" style="background:#0130C0" href="img/products/web/bpc-157-primary.jpg" download><img class="fill" src="img/products/web/bpc-157-primary.jpg" alt="BPC-157 primary"><span class="cap">01 PRIMARY</span></a><a class="tile" style="background:#0148FE" href="img/products/web/bpc-157-chrome.jpg" download><img class="fill" src="img/products/web/bpc-157-chrome.jpg" alt="BPC-157 chrome"><span class="cap">02 CHROME</span></a><a class="tile" style="background:#0148FE" href="img/products/web/bpc-157-frost.jpg" download><img class="fill" src="img/products/web/bpc-157-frost.jpg" alt="BPC-157 frost"><span class="cap">03 FROST</span></a><a class="tile" style="background:#fff" href="img/products/web/bpc-157-white.jpg" download><img class="fill" src="img/products/web/bpc-157-white.jpg" alt="BPC-157 white"><span class="cap">04 WHITE</span></a><a class="tile" style="background:#0130C0" href="img/products/web/bpc-157-pigment.jpg" download><img class="fill" src="img/products/web/bpc-157-pigment.jpg" alt="BPC-157 pigment"><span class="cap">05 PIGMENT</span></a><a class="tile" style="background:#0130C0" href="img/products/web/bpc-157-water.jpg" download><img class="fill" src="img/products/web/bpc-157-water.jpg" alt="BPC-157 water"><span class="cap">06 WATER</span></a></div><p class="mono" style="margin-top:10px;font-size:8.5px;letter-spacing:.14em;color:var(--mid)">BPC-157 · 10 MG · THE FIRST COMPLETE SET</p></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE CAROUSEL</span></div>
 </div>
 
+<div class="page" id="products">
+  <div class="col"><h2>The product set</h2><p><b>Every SKU gets the same six.</b> The 1:1 primary on Pigment, then chrome in the snow, frost, the primary on white, pigment and water. The two primaries are the card images, Pigment on blue screens, white on white screens; all six are the carousel. Chrome leads because it is the brand's first favourite and snow its second. The dark frame is for ads only.</p>
+<p>Sprays use the spray master, bundles slot in as a pairs-with slide. Labels are checked at zoom before anything goes live.</p>
+<p class="mono note">Rendered: 34 SKUs, six shots each, 204 images, every label checked. Gallery: site/compounds.html. The Structures, each compound's real molecule cast in chrome in the snow, is the book that follows.</p></div>
+  <div class="body"><ul class="rules">
+<li><b>01 Primary</b> &middot; 1:1 &middot; upright on Pigment, soft contact shadow, label square to camera.</li>
+<li><b>02 Chrome</b> &middot; 3:4 &middot; held in the chrome cradle, in the snow. Chrome first, snow second: the two favourites in one frame.</li>
+<li><b>03 Frost</b> &middot; 3:4 &middot; pressed into powder snow, snow bursting, frost on the cap.</li>
+<li><b>04 White</b> &middot; 1:1 &middot; the same primary on pure white, the card on white screens.</li>
+<li><b>05 Pigment</b> &middot; 3:4 &middot; lying in the powder, dust on the cap, label clean.</li>
+<li><b>06 Water</b> &middot; 3:4 &middot; standing in blue water, hard sun, broken reflection.</li>
+<li><b>06 Dark</b> &middot; 3:4 &middot; glow, ice or cliff, one per SKU.</li>
+</ul></div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PRODUCTS</span></div>
+</div>
 
-<!-- assets -->
 <div class="page tall" id="assets">
-  <div class="col">
-    <h2>Assets</h2>
-    <p>Everything the team needs, on the page that documents it. Click any row to download.</p>
-    <p><b>Start from the vector.</b> Every flat cut on this page was rendered from it, so if a size
-    or a colour is missing, render it &mdash; do not redraw it and do not upscale a PNG.</p>
-    <p>The system plates &mdash; field, bar, bleed, mark, woven shield &mdash; download from their own
-    pages, where the rule that governs them is written.</p>
-    <p class="mono note">The first edition of this book is kept whole at v1.html. Product imagery is not here. It lives in the catalogue and the stills
-    folders and is pulled from there, never redrawn.</p>
-  </div>
+  <div class="col"><h2>Assets</h2><p>Every plate in this edition at 2000&nbsp;px. PNG masters are held with the source files.</p></div>
   <div class="body">
-    <div class="agroup">
-      <h3>Start here — the vector master</h3><p>One path, every subpath, even-odd fill. Scales without limit, recolours to anything, prints and embroiders flat. Never re-trace the mark from a raster.</p>
-      <a class="ass" href="img/vector/sko-mark-1c.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark-1c.svg" alt=""></span><span class="meta"><b>One colour — takes currentColor</b><i>sko-mark-1c.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    <div class="agroup"><h3>Plates</h3>
+    <a class="ass dk" href="img/edition3/hero-snowchrome.jpg" download><span class="th"><img src="img/edition3/hero-snowchrome-w.jpg" alt=""></span><span class="meta"><b>hero-snowchrome.jpg</b><i>2400 PX · 16:9 · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/cover-wide.jpg" download><span class="th"><img src="img/edition3/cover-wide-w.jpg" alt=""></span><span class="meta"><b>cover-wide.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/powder.jpg" download><span class="th"><img src="img/edition3/powder-w.jpg" alt=""></span><span class="meta"><b>powder.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/frost.jpg" download><span class="th"><img src="img/edition3/frost-w.jpg" alt=""></span><span class="meta"><b>frost.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/alpine.jpg" download><span class="th"><img src="img/edition3/alpine-w.jpg" alt=""></span><span class="meta"><b>alpine.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/water.jpg" download><span class="th"><img src="img/edition3/water-w.jpg" alt=""></span><span class="meta"><b>water.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow.jpg" download><span class="th"><img src="img/edition3/snow-w.jpg" alt=""></span><span class="meta"><b>snow.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/rock.jpg" download><span class="th"><img src="img/edition3/rock-w.jpg" alt=""></span><span class="meta"><b>rock.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/vending-snow.jpg" download><span class="th"><img src="img/edition3/vending-snow-w.jpg" alt=""></span><span class="meta"><b>vending-snow.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/vending-studio.jpg" download><span class="th"><img src="img/edition3/vending-studio-w.jpg" alt=""></span><span class="meta"><b>vending-studio.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/gimbal.jpg" download><span class="th"><img src="img/edition3/gimbal-w.jpg" alt=""></span><span class="meta"><b>gimbal.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/cradle.jpg" download><span class="th"><img src="img/edition3/cradle-w.jpg" alt=""></span><span class="meta"><b>cradle.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/turbine.jpg" download><span class="th"><img src="img/edition3/turbine-w.jpg" alt=""></span><span class="meta"><b>turbine.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/badge.jpg" download><span class="th"><img src="img/edition3/badge-w.jpg" alt=""></span><span class="meta"><b>badge.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/badge-mark.jpg" download><span class="th"><img src="img/edition3/badge-mark-w.jpg" alt=""></span><span class="meta"><b>badge-mark.jpg</b><i>2000 PX · 1:1 · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/clamp.jpg" download><span class="th"><img src="img/edition3/clamp-w.jpg" alt=""></span><span class="meta"><b>clamp.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/helixmachine.jpg" download><span class="th"><img src="img/edition3/helixmachine-w.jpg" alt=""></span><span class="meta"><b>helixmachine.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/glow.jpg" download><span class="th"><img src="img/edition3/glow-w.jpg" alt=""></span><span class="meta"><b>glow.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/ice.jpg" download><span class="th"><img src="img/edition3/ice-w.jpg" alt=""></span><span class="meta"><b>ice.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/cliff.jpg" download><span class="th"><img src="img/edition3/cliff-w.jpg" alt=""></span><span class="meta"><b>cliff.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow-drip.jpg" download><span class="th"><img src="img/edition3/snow-drip-w.jpg" alt=""></span><span class="meta"><b>snow-drip.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow-cradle.jpg" download><span class="th"><img src="img/edition3/snow-cradle-w.jpg" alt=""></span><span class="meta"><b>snow-cradle.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow-helix.jpg" download><span class="th"><img src="img/edition3/snow-helix-w.jpg" alt=""></span><span class="meta"><b>snow-helix.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/snow-badge.jpg" download><span class="th"><img src="img/edition3/snow-badge-w.jpg" alt=""></span><span class="meta"><b>snow-badge.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/hand.jpg" download><span class="th"><img src="img/edition3/hand-w.jpg" alt=""></span><span class="meta"><b>hand.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass dk" href="img/edition3/palm.jpg" download><span class="th"><img src="img/edition3/palm-w.jpg" alt=""></span><span class="meta"><b>palm.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass" href="img/edition3/white-vial.jpg" download><span class="th"><img src="img/edition3/white-vial-w.jpg" alt=""></span><span class="meta"><b>white-vial.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass" href="img/edition3/white-cradle.jpg" download><span class="th"><img src="img/edition3/white-cradle-w.jpg" alt=""></span><span class="meta"><b>white-cradle.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a><a class="ass" href="img/edition3/white-badge.jpg" download><span class="th"><img src="img/edition3/white-badge-w.jpg" alt=""></span><span class="meta"><b>white-badge.jpg</b><i>2000 PX · JPG</i></span><span class="dl">DOWNLOAD</span></a>
     </div>
-    <div class="agroup">
-      <h3>Helix — the cuts</h3><p>Seven cuts off the cover helix, 9:16 at 1536&times;2752. Same geometry in all seven; only the material changes.</p>
-      <a class="ass dk" href="img/gen/cuts/helix-metal.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-metal-web.jpg" alt=""></span><span class="meta"><b>Helix — Liquid chrome on carbon</b><i>helix-metal.png &middot; 1536&times;2752 &middot; 6158 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/cuts/helix-white3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-white3-web.jpg" alt=""></span><span class="meta"><b>Helix — Soft white on blue</b><i>helix-white3.png &middot; 1536&times;2752 &middot; 4682 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/gen/cuts/helix-blue3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-blue3-web.jpg" alt=""></span><span class="meta"><b>Helix — Matte blue on paper</b><i>helix-blue3.png &middot; 1536&times;2752 &middot; 5084 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/cuts/helix-flatw.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatw-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat white on blue</b><i>helix-flatw.png &middot; 1536&times;2752 &middot; 4238 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/gen/cuts/helix-flatb.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatb-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat blue on paper</b><i>helix-flatb.png &middot; 1536&times;2752 &middot; 5289 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/cuts/helix-flatl.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatl-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat light blue on carbon</b><i>helix-flatl.png &middot; 1536&times;2752 &middot; 4465 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/gen/cuts/helix-ombre.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-ombre-web.jpg" alt=""></span><span class="meta"><b>Helix — Logo ombré on paper</b><i>helix-ombre.png &middot; 1536&times;2752 &middot; 5270 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Photography</h3><p>The studio masters and the moments, web weight. The 2048 masters live in the product-masters folder. Bundles are on white for the site.</p>
-      <a class="ass" href="img/photo/studio-vial.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-vial.jpg" alt=""></span><span class="meta"><b>Studio master — vial</b><i>studio-vial.jpg &middot; 1800&times;1800 &middot; 359 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/studio-spray.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-spray.jpg" alt=""></span><span class="meta"><b>Studio master — nasal spray</b><i>studio-spray.jpg &middot; 1800&times;1800 &middot; 326 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/on-field.jpg" download><span class="th"><img loading="lazy" src="img/photo/on-field.jpg" alt=""></span><span class="meta"><b>On the Field</b><i>on-field.jpg &middot; 1800&times;1800 &middot; 394 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/float-halo.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-halo.jpg" alt=""></span><span class="meta"><b>The float — Halo</b><i>float-halo.jpg &middot; 1800&times;1800 &middot; 296 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/float-deep.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-deep.jpg" alt=""></span><span class="meta"><b>The float — Deep</b><i>float-deep.jpg &middot; 1800&times;1800 &middot; 305 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/lift-halo.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-halo.jpg" alt=""></span><span class="meta"><b>The lift — Halo</b><i>lift-halo.jpg &middot; 1800&times;1800 &middot; 372 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/lift-marble.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-marble.jpg" alt=""></span><span class="meta"><b>The lift — marble</b><i>lift-marble.jpg &middot; 1800&times;1800 &middot; 341 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/sand-helix.jpg" download><span class="th"><img loading="lazy" src="img/photo/sand-helix.jpg" alt=""></span><span class="meta"><b>The helix, in sand</b><i>sand-helix.jpg &middot; 1500&times;1862 &middot; 947 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/powder.jpg" download><span class="th"><img loading="lazy" src="img/photo/powder.jpg" alt=""></span><span class="meta"><b>Powder</b><i>powder.jpg &middot; 1500&times;1862 &middot; 906 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/blur.jpg" download><span class="th"><img loading="lazy" src="img/photo/blur.jpg" alt=""></span><span class="meta"><b>The blur</b><i>blur.jpg &middot; 1500&times;1862 &middot; 320 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/plush.jpg" download><span class="th"><img loading="lazy" src="img/photo/plush.jpg" alt=""></span><span class="meta"><b>Plush</b><i>plush.jpg &middot; 1500&times;1862 &middot; 346 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-01-nad-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-01-nad-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — NAD / MOTSC</b><i>bundle-01-nad-motsc.jpg &middot; 1800&times;1800 &middot; 531 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-02-ss31-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-02-ss31-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — SS31 / MOTSC</b><i>bundle-02-ss31-motsc.jpg &middot; 1800&times;1800 &middot; 516 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-03-semax-selank.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-03-semax-selank.jpg" alt=""></span><span class="meta"><b>Bundle — SEMAX / SELANK</b><i>bundle-03-semax-selank.jpg &middot; 1800&times;1800 &middot; 522 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-04-kpv-ghkcu.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-04-kpv-ghkcu.jpg" alt=""></span><span class="meta"><b>Bundle — KPV / GHKCU</b><i>bundle-04-kpv-ghkcu.jpg &middot; 1800&times;1800 &middot; 514 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-05-kpv-ghkcu-glutathione.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-05-kpv-ghkcu-glutathione.jpg" alt=""></span><span class="meta"><b>Bundle — KPV / GHKCU / GLUTATHIONE</b><i>bundle-05-kpv-ghkcu-glutathione.jpg &middot; 1800&times;1800 &middot; 585 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/bundle-06-trz-tesamorelin-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-06-trz-tesamorelin-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — TRZ / TESAMORELIN / MOTSC</b><i>bundle-06-trz-tesamorelin-motsc.jpg &middot; 1800&times;1800 &middot; 608 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Photography — the wet cut</h3><p>The same plates with condensation on the glass. An option, not a rule.</p>
-      <a class="ass" href="img/photo/studio-vial-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-vial-wet.jpg" alt=""></span><span class="meta"><b>Studio master — vial — wet</b><i>studio-vial-wet.jpg &middot; 1800&times;1800 &middot; 447 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/on-field-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/on-field-wet.jpg" alt=""></span><span class="meta"><b>On the Field — wet</b><i>on-field-wet.jpg &middot; 1800&times;1800 &middot; 528 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/float-halo-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-halo-wet.jpg" alt=""></span><span class="meta"><b>The float — Halo — wet</b><i>float-halo-wet.jpg &middot; 1800&times;1800 &middot; 354 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/float-deep-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-deep-wet.jpg" alt=""></span><span class="meta"><b>The float — Deep — wet</b><i>float-deep-wet.jpg &middot; 1800&times;1800 &middot; 371 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/lift-halo-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-halo-wet.jpg" alt=""></span><span class="meta"><b>The lift — Halo — wet</b><i>lift-halo-wet.jpg &middot; 1800&times;1800 &middot; 499 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/lift-marble-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-marble-wet.jpg" alt=""></span><span class="meta"><b>The lift — marble — wet</b><i>lift-marble-wet.jpg &middot; 1800&times;1800 &middot; 404 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/sand-helix-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/sand-helix-wet.jpg" alt=""></span><span class="meta"><b>The helix, in sand — wet</b><i>sand-helix-wet.jpg &middot; 1500&times;1862 &middot; 1001 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/powder-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/powder-wet.jpg" alt=""></span><span class="meta"><b>Powder — wet</b><i>powder-wet.jpg &middot; 1500&times;1862 &middot; 975 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/blur-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/blur-wet.jpg" alt=""></span><span class="meta"><b>The blur — wet</b><i>blur-wet.jpg &middot; 1500&times;1862 &middot; 458 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/photo/plush-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/plush-wet.jpg" alt=""></span><span class="meta"><b>Plush — wet</b><i>plush-wet.jpg &middot; 1500&times;1862 &middot; 418 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>The compound</h3><p>The two rendered masters first. Then the flat cuts, drawn to the grid for print and small sizes: the composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
-      <a class="ass dk" href="img/gen/compound-chrome-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-chrome-2400.jpg" alt=""></span><span class="meta"><b>Compound — liquid chrome on Field, the master</b><i>compound-chrome-1.png &middot; 2752&times;1536 &middot; 4217 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/helix-compound-1.png" download><span class="th"><img loading="lazy" src="img/gen/helix-compound-2400.jpg" alt=""></span><span class="meta"><b>Helix into the compound — liquid chrome on Field</b><i>helix-compound-1.png &middot; 2752&times;1536 &middot; 5479 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/compound-deep-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-deep-web.jpg" alt=""></span><span class="meta"><b>Compound on Deep</b><i>compound-deep-1.png &middot; 2752&times;1536 &middot; 4907 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/gen/compound-halo-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-halo-web.jpg" alt=""></span><span class="meta"><b>Compound on Halo</b><i>compound-halo-1.png &middot; 2752&times;1536 &middot; 4961 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/gen/compound-white-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-white-web.jpg" alt=""></span><span class="meta"><b>Compound on white — print</b><i>compound-white-1.png &middot; 2752&times;1536 &middot; 6116 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/compound-9x16-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-9x16-web.jpg" alt=""></span><span class="meta"><b>Compound — 9:16</b><i>compound-9x16-1.png &middot; 1536&times;2752 &middot; 5429 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/compound-1x1-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-1x1-web.jpg" alt=""></span><span class="meta"><b>Compound — 1:1</b><i>compound-1x1-1.png &middot; 2048&times;2048 &middot; 3898 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/gen/compound-usage-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-usage-web.jpg" alt=""></span><span class="meta"><b>Compound in print — foil deboss on box and card</b><i>compound-usage-1.png &middot; 2752&times;1536 &middot; 6107 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/sko-compound.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound.svg" alt=""></span><span class="meta"><b>Composition — 16:9, faded, takes currentColor</b><i>sko-compound.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/sko-compound-fragments.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound-fragments.svg" alt=""></span><span class="meta"><b>Fragments — the column and the branch, unfaded</b><i>sko-compound-fragments.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/pattern/compound-white-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-white-2400.png" alt=""></span><span class="meta"><b>White — transparent overlay for Field and Deep</b><i>compound-white-2400.png &middot; 2400&times;1500 &middot; 76 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/pattern/compound-halo-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-halo-2400.png" alt=""></span><span class="meta"><b>Halo — transparent overlay for Deep</b><i>compound-halo-2400.png &middot; 2400&times;1500 &middot; 117 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/pattern/compound-blue-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-blue-2400.png" alt=""></span><span class="meta"><b>SKO Blue — transparent overlay for paper</b><i>compound-blue-2400.png &middot; 2400&times;1500 &middot; 114 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/pattern/compound-deep-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-deep-2400.png" alt=""></span><span class="meta"><b>Deep — transparent overlay for paper</b><i>compound-deep-2400.png &middot; 2400&times;1500 &middot; 112 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/pattern/compound-on-field-2400.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-2400.jpg" alt=""></span><span class="meta"><b>On Field with the white lockup — 8:5</b><i>compound-on-field-2400.jpg &middot; 2400&times;1500 &middot; 246 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/pattern/compound-on-field-1x1.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-1x1.jpg" alt=""></span><span class="meta"><b>On Field — 1&times;1</b><i>compound-on-field-1x1.jpg &middot; 1200&times;1200 &middot; 153 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/pattern/compound-on-field-9x16.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-9x16.jpg" alt=""></span><span class="meta"><b>On Field — 9:16</b><i>compound-on-field-9x16.jpg &middot; 1080&times;1920 &middot; 173 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Flat shields</h3><p>Two cuts. PLAIN is the solid silhouette with no helix &mdash; the badge, and the one to use over a photograph. MARK has the helix knocked out, so the helix takes the ground colour. Both one colour, cut from the vector. Use these below ~48px and anywhere the mark sits on an image.</p>
-      <a class="ass dk" href="img/shield/shield-plain-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-white-2000.png" alt=""></span><span class="meta"><b>PLAIN white — solid, no helix</b><i>shield-plain-white-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-plain-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-blue-2000.png" alt=""></span><span class="meta"><b>PLAIN luxury blue — solid, no helix</b><i>shield-plain-blue-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-plain-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-deep-2000.png" alt=""></span><span class="meta"><b>PLAIN deep — solid, no helix</b><i>shield-plain-deep-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/shield/shield-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-2000.png" alt=""></span><span class="meta"><b>White — disclaimers, colour, photography</b><i>shield-white-2000.png &middot; 1765&times;2000 &middot; 238 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-2000.png" alt=""></span><span class="meta"><b>Blue #173384 — light grounds</b><i>shield-blue-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-deep-2000.png" alt=""></span><span class="meta"><b>Deep #092266 — light grounds, more weight</b><i>shield-deep-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/shield/shield-white-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>White — 512</b><i>shield-white-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-blue-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Blue — 512</b><i>shield-blue-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/shield/shield-blue-128.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-128.png" alt=""></span><span class="meta"><b>Blue — 128, favicons and chips</b><i>shield-blue-128.png &middot; 113&times;128 &middot; 8 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Lockups</h3><p>Shield and wordmark together. 3&times;1 is horizontal, 1&times;1 is stacked with the shield on top &mdash; neither is the shield alone. White is the only cut for coloured grounds; full colour is white-ground-only, at size only.</p>
-      <a class="ass" href="img/logo/clean/lockup-3x1-fullcolour-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-3x1-fullcolour-2000.png" alt=""></span><span class="meta"><b>3×1 lockup — full colour, white ground, at size</b><i>lockup-3x1-fullcolour-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/lockup-3x1-white.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-white.png" alt=""></span><span class="meta"><b>3×1 lockup — white, flat</b><i>lockup-3x1-white.png &middot; 700&times;235 &middot; 41 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/lockup-3x1-navy.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-navy.png" alt=""></span><span class="meta"><b>3×1 lockup — navy, flat</b><i>lockup-3x1-navy.png &middot; 700&times;235 &middot; 70 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/vector/lockup-1x1-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — white, flat, from the vector</b><i>lockup-1x1-white-2000.png &middot; 2000&times;2000 &middot; 128 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/lockup-1x1-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, flat, from the vector</b><i>lockup-1x1-navy-2000.png &middot; 2000&times;2000 &middot; 130 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/lockup-1x1-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-deep-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — deep, flat, from the vector</b><i>lockup-1x1-deep-2000.png &middot; 2000&times;2000 &middot; 129 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass dk" href="img/vector/lockup-1x1-white-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-512.png" alt=""></span><span class="meta"><b>1×1 lockup — white, 512</b><i>lockup-1x1-white-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
-      <a class="ass" href="img/vector/lockup-1x1-navy-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-512.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, 512</b><i>lockup-1x1-navy-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
-    </div>
-    <div class="agroup">
-      <h3>Archive — not in use</h3><p>Pages and plates from the first edition that are not one of the three roles. Kept so nobody finds one in an old folder and assumes it is live.</p>
-      <a class="ass" href="v1.html#sys-field"><span class="th"><img loading="lazy" src="img/system/mark-on-field-2400.jpg" alt=""></span><span class="meta"><b>The Field, The Bar, The Bleed, The Mark, The Woven Shield</b><i>system plates · first edition</i></span><span class="dl">OPEN V1</span></a>
-      <a class="ass" href="v1.html#motion"><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Motion — hard cuts, clocks, flash, orbit</b><i>first edition</i></span><span class="dl">OPEN V1</span></a>
-      <a class="ass" href="v1.html#alternates"><span class="th"><img loading="lazy" src="img/logo/clean/lockup-silver-2000.png" alt=""></span><span class="meta"><b>Alternates — silver, chrome, moss, pool, vintage, embossed</b><i>never live</i></span><span class="dl">OPEN V1</span></a>
-    </div>
+    <div class="agroup"><h3>Previous editions</h3><p>The blue bottle (V2) and the first edition (V1) stay online for reference.</p>
+    <a class="ass" href="v2.html"><span class="th"><img src="img/shield.png" alt=""></span><span class="meta"><b>V2 · The blue bottle</b><i>V2.HTML</i></span><span class="dl">OPEN</span></a>
+    <a class="ass" href="v1.html"><span class="th"><img src="img/shield.png" alt=""></span><span class="meta"><b>V1</b><i>V1.HTML</i></span><span class="dl">OPEN</span></a></div>
   </div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
 </div>
-
-<script>
-/* Typography — the tester types in the display face, live. */
-(function () {
-  const i = document.getElementById('typeIn'), o = document.getElementById('typeOut');
-  if (!i || !o) return;
-  i.addEventListener('input', () => { o.textContent = i.value || '\u00a0'; });
-})();
-
-/* Motion — the documented values, running. Everything here is a hard cut:
-   no CSS transitions, because a dissolve would contradict the rule the
-   page is stating. */
-(function () {
-  const R = (a, b) => a + Math.random() * (b - a);
-  const box = document.querySelector('#mCut .mbox');
-  if (box) {
-    const COL = ['#173384', '#092266', '#244399', '#9DBFD9'];
-    let n = 0;
-    (function step() {
-      box.style.background = COL[n++ % COL.length];      /* single frame */
-      setTimeout(step, R(300, 720));                     /* structure hold */
-    })();
-  }
-
-  const rows = document.querySelectorAll('#mClocks .mrow');
-  if (rows.length === 2) {
-    const run = (row, lo, hi) => (function step() {
-      row.querySelectorAll('i').forEach(el => {
-        el.style.opacity = Math.random() < 0.5 ? 0.18 : 1;
-      });
-      setTimeout(step, R(lo, hi));
-    })();
-    run(rows[0], 300, 720);        /* structure */
-    run(rows[1], 60, 320);         /* accretion, its own clock */
-  }
-
-  const flash = document.getElementById('mFlash');
-  if (flash) {
-    (function step() {
-      const hit = Math.random() < 1 / 6;                  /* about one in six */
-      if (hit) {
-        flash.style.background = '#244399';
-        setTimeout(() => { flash.style.background = ''; }, 42);
-      }
-      setTimeout(step, R(300, 720));
-    })();
-  }
-
-  const dot = document.querySelector('#mOrbit .odot');
-  if (dot) {
-    let a = 0, v = 0.0016 * 60;                           /* idle rad/frame */
-    let kick = 0;
-    (function frame() {
-      requestAnimationFrame(frame);
-      if (dot.offsetParent === null) return;
-      if (--kick <= 0) { v += 0.05; kick = 180; }         /* a drag, then it settles */
-      v += (0.0016 * 60 - v) * 0.02;
-      a += v * 0.06;
-      const st = dot.parentElement, r = st.clientWidth * 0.31;
-      dot.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r * 0.62}px)`;
-    })();
-  }
-})();
-</script>
-</body>
-</html>

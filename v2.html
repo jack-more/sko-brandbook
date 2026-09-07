@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SKO Compounds — The Blue Bottle</title>
+<meta property="og:title" content="SKO Compounds — The Blue Bottle">
+<link rel="icon" type="image/png" href="img/shield/shield-blue-128.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --blue:#173384; --deep:#092266; --field:#244399; --halo:#9DBFD9;
+  --ink:#111318; --mid:#6B7280; --line:#E4E7EC; --paper:#fff; --wash:#F4F5F7;
+  --bad:#C0392B;
+  --foil:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#7578B0,#C3AFD7);
+}
+*{box-sizing:border-box;margin:0}
+body{background:#D9DCE2;color:var(--ink);font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;padding:28px 0}
+img{display:block;max-width:100%}
+.mono{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* one page = one topic. A page is as tall as what is on it — a fixed 16:9
+   left dead space under short pages and cut the footer off tall ones. The
+   pages whose plates fill the frame keep the 16:9 spread. */
+.page{width:min(1400px,94vw);margin:0 auto 26px;aspect-ratio:auto;background:var(--paper);
+  display:grid;grid-template-columns:19% 1fr;grid-template-rows:1fr auto;
+  padding:44px 46px 0;position:relative;overflow:hidden}
+.page.fill,.page.cover{aspect-ratio:16/9}
+.col{padding-right:30px}
+.col h2{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px}
+.col p{font-size:11.5px;line-height:1.55;color:var(--mid);max-width:30ch;margin-bottom:9px}
+.body{min-width:0}
+.foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--line);margin-top:26px;padding:12px 0 16px;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9.5px;letter-spacing:.14em;color:var(--mid)}
+.foot .l{display:flex;align-items:center;gap:12px}
+.foot img{height:13px;width:auto}
+
+/* specimen tiles — equal, gridded, never ragged */
+.tiles{display:grid;gap:12px;height:100%}
+.t2{grid-template-columns:1fr 1fr}
+.t3{grid-template-columns:repeat(3,1fr)}
+.t5{grid-template-columns:repeat(5,1fr)}
+.tile{background:var(--wash);border-radius:5px;display:grid;place-items:center;overflow:hidden;
+  position:relative}
+.tile.dark{background:var(--ink)}
+.tile.blue{background:var(--blue)}
+.tile img.fill{width:100%;height:100%;object-fit:cover}
+.tile img.mark{width:56%;max-height:52%;object-fit:contain}
+.cap{position:absolute;left:10px;bottom:8px;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8.5px;
+  letter-spacing:.12em;color:var(--mid)}
+.tile.dark .cap,.tile.blue .cap{color:rgba(255,255,255,.72)}
+
+/* cover — the flat-field rule, executed */
+.cover{padding:0;grid-template-columns:1fr;grid-template-rows:1fr}
+.cover .art{position:relative;width:100%;height:100%;min-height:clamp(300px,46vw,760px);
+  aspect-ratio:16/9;overflow:hidden;background:var(--field)}
+.cover .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
+.cover .ctype{position:absolute;left:clamp(28px,4.2vw,64px);top:50%;transform:translateY(-54%);
+  max-width:52%;z-index:2}
+.cover .clogo{display:block;width:clamp(150px,19vw,300px);height:auto;margin-bottom:clamp(16px,2vw,30px)}
+.cover .eyebrow{display:block;font-family:'Inter',sans-serif;font-size:clamp(8px,.78vw,10.5px);
+  letter-spacing:.30em;color:rgba(255,255,255,.72);margin-bottom:clamp(10px,1.3vw,18px)}
+.cover h1{font-size:clamp(38px,6.6vw,104px);font-weight:700;letter-spacing:-.045em;line-height:.9;
+  color:#fff}
+.cover .ctag{margin-top:clamp(10px,1.4vw,20px);font-family:'Inter',sans-serif;
+  font-size:clamp(11px,1.15vw,17px);letter-spacing:-.005em;color:rgba(255,255,255,.8)}
+.cover .stamp{position:absolute;left:clamp(28px,4.2vw,64px);bottom:clamp(26px,3vw,40px);
+  display:flex;gap:clamp(16px,2.2vw,34px);align-items:center;flex-wrap:wrap;z-index:2;
+  font-family:'Inter',sans-serif;font-size:clamp(7.5px,.72vw,9.5px);letter-spacing:.18em;
+  color:rgba(255,255,255,.78)}
+.cover .stamp a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);
+  padding-bottom:2px}
+.cover .stamp a:hover{border-color:#fff}
+.cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil);z-index:2}
+@media (max-width:900px){
+  .cover .ctype{max-width:82%;top:auto;bottom:96px;transform:none}
+}
+
+/* colour spec table */
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-content:start}
+.sw .chip{height:104px;border-radius:5px;border:1px solid var(--line)}
+.sw table{width:100%;margin-top:9px;border-collapse:collapse}
+.sw td{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:8.5px;color:var(--mid);padding:1px 0;
+  letter-spacing:.04em}
+.sw td:first-child{color:var(--ink);width:34px}
+.sw b{display:block;font-size:11.5px;font-family:'DM Sans';letter-spacing:-.01em;margin-bottom:4px}
+
+/* assets — the team download list */
+.page.tall{aspect-ratio:auto;min-height:0}
+.agroup{margin-bottom:16px}
+.agroup h3{font-size:12px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px}
+.agroup>p{font-size:9.5px;line-height:1.5;color:var(--mid);margin-bottom:8px;max-width:78ch}
+.ass{display:flex;align-items:center;gap:12px;padding:6px 10px;border-radius:4px;
+  text-decoration:none;color:inherit;border:1px solid var(--line);margin-bottom:5px;background:#fff}
+.ass:hover{border-color:var(--blue)}
+.ass .th{width:42px;height:34px;flex:none;display:grid;place-items:center;
+  background:var(--wash);border-radius:3px;overflow:hidden}
+.ass.dk .th{background:var(--blue)}
+.ass .th img{max-width:82%;max-height:82%;width:auto;height:auto;object-fit:contain}
+.ass .meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.ass .meta b{font-size:10.5px;font-weight:500;letter-spacing:-.005em}
+.ass .meta i{font-style:normal;font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;
+  font-size:8px;letter-spacing:.06em;color:var(--mid)}
+.ass .dl{font-family:'Inter',sans-serif;font-size:8px;letter-spacing:.14em;color:var(--blue);flex:none}
+
+/* typography specimen */
+.dm{font-family:'DM Sans',ui-sans-serif,system-ui,sans-serif}
+.in{font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+.w400{font-weight:400}.w500{font-weight:500}.w600{font-weight:600}.w700{font-weight:700}
+.typespec{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.face{background:var(--wash);border-radius:5px;padding:16px 18px;min-width:0}
+.fname{font-size:11.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px;display:flex;
+  justify-content:space-between;align-items:baseline}
+.fname i{font-style:normal;font-family:'Inter',sans-serif;font-size:8.5px;letter-spacing:.16em;
+  color:var(--mid);font-weight:500}
+.fsample{font-size:clamp(17px,2.1vw,27px);line-height:1.06;letter-spacing:-.032em;color:var(--ink);
+  margin-bottom:11px;overflow-wrap:anywhere}
+.face .in.fsample{letter-spacing:-.005em;line-height:1.28}
+.wts{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--mid)}
+.wts span{font-family:'DM Sans',sans-serif}
+.tester{margin-top:13px;background:var(--wash);border-radius:5px;padding:13px 18px 16px}
+.tester .lbl{display:block;font-size:8px;letter-spacing:.18em;color:var(--mid);margin-bottom:7px}
+.tester input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;
+  font:400 11px/1.4 'Inter',sans-serif;color:var(--ink);padding:0 0 6px;outline:none}
+.tester input:focus{border-bottom-color:var(--blue)}
+#typeOut{margin-top:11px;font-size:clamp(19px,2.6vw,34px);line-height:1.02;letter-spacing:-.036em;
+  color:var(--blue);overflow-wrap:anywhere}
+.scale{width:100%;border-collapse:collapse;margin-top:13px;
+  font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;font-size:9px}
+.scale th{text-align:left;color:var(--mid);font-weight:500;letter-spacing:.14em;font-size:7.5px;
+  padding:0 0 5px;border-bottom:1px solid var(--line)}
+.scale td{padding:3.5px 0;color:var(--mid);border-bottom:1px solid var(--line)}
+.scale td:first-child{color:var(--ink)}
+.col .note{font-size:9.5px;letter-spacing:.01em;color:var(--mid);border-left:2px solid var(--line);
+  padding-left:9px;margin-top:12px}
+
+/* motion demos */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mdemo{margin:0}
+.mstage{aspect-ratio:4/3;background:var(--wash);border-radius:5px;position:relative;overflow:hidden;
+  display:grid;place-items:center;gap:5px}
+.mstage.dark{background:var(--ink)}
+.mbox{width:34%;aspect-ratio:1;background:var(--blue);border-radius:3px}
+.mrow{display:flex;gap:4px}
+.mrow i{width:7px;height:16px;background:var(--blue);border-radius:1px;opacity:.18}
+.mrow.alt i{background:var(--halo);height:9px}
+.odot{width:11px;height:11px;border-radius:50%;background:var(--blue);position:absolute}
+.mdemo figcaption{margin-top:6px;display:flex;flex-direction:column;gap:1px}
+.mdemo figcaption b{font-size:10.5px;letter-spacing:-.01em}
+.mdemo figcaption .mono{font-size:8px;letter-spacing:.08em;color:var(--mid)}
+.mfoot{margin-top:12px;font-size:8px;letter-spacing:.16em;color:var(--mid);text-align:center}
+@media (max-width:900px){.typespec{grid-template-columns:1fr}.mgrid{grid-template-columns:repeat(2,1fr)}}
+
+.tiles.badges .tile{padding-bottom:26px}
+.tiles.badges img.mark{width:auto;max-height:47%;max-width:40%;margin-bottom:6px}
+.col .kw{background:var(--blue);color:#fff;padding:1px 5px;border-radius:2px;
+  font-size:8.5px;letter-spacing:.12em}
+
+/* the compound — edge fragments, and the two verdict badges */
+a.tile{text-decoration:none;color:inherit;cursor:pointer}
+a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
+.tile.ok::after,.tile.no::after{position:absolute;top:8px;right:8px;font-family:'Inter',sans-serif;
+  font-size:7.5px;letter-spacing:.16em;color:#fff;padding:2px 6px;border-radius:2px}
+.tile.ok::after{content:'DO';background:var(--blue)}
+.tile.no::after{content:'DON\'T';background:var(--bad)}
+.tile img.edge{width:100%;height:100%;object-fit:cover}
+/* on this page the plates are absolutely placed so their intrinsic height
+   cannot push the body past the 16:9 page — that is what cut the footer off */
+#helix .tile img,#helix-cuts .tile img,#compound .tile img,#photo-studio .tile img,#photo-moments .tile img{position:absolute;inset:0;width:100%;height:100%}
+/* and when the page is stacked (narrow screens) the plates need a height of their own */
+#compound .tiles{min-height:62vw;max-height:900px}
+@media (max-width:900px){#compound .tiles{min-height:170vw;max-height:none}}
+
+/* alternates — fenced off so they cannot be mistaken for live cuts */
+.tile.dontuse{position:relative;opacity:.62}
+.tile.dontuse::after{content:'NOT IN USE';position:absolute;top:8px;right:8px;
+  font-family:'Inter',sans-serif;font-size:7.5px;letter-spacing:.16em;color:#fff;
+  background:var(--bad);padding:2px 6px;border-radius:2px}
+
+/* the two shield cuts, stacked and labelled */
+.shieldset{display:flex;flex-direction:column;gap:11px}
+.srow{display:flex;flex-direction:column;gap:5px;min-height:0}
+.slab{font-size:8px;letter-spacing:.18em;color:var(--blue)}
+.srow .tiles{min-height:0}
+
+/* the flat shield ladder */
+.ladder{display:flex;align-items:flex-end;gap:11px;margin-top:14px;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:9px;letter-spacing:.12em;color:var(--mid)}
+.ladder span{margin-right:4px}
+.ladder img{height:auto}
+.ladder img[alt="128px"]{width:52px}
+.ladder img[alt="64px"]{width:26px}
+.ladder img[alt="32px"]{width:13px}
+.ladder i{font-style:normal;margin-right:10px}
+.body{display:flex;flex-direction:column}
+.body .tiles{flex:1;min-height:0}
+
+/* helix cut captions */
+.cutcaps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:9px}
+.cutcaps span{display:flex;flex-direction:column;gap:2px;text-align:center;
+  font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:8px;letter-spacing:.1em;color:var(--mid)}
+.cutcaps b{font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:-.01em;color:var(--ink)}
+@media (max-width:900px){.cutcaps{grid-template-columns:repeat(3,1fr);gap:8px 0}}
+
+/* system asset plates */
+.assets{display:grid;gap:11px;align-content:start}
+.assets.a3{grid-template-columns:repeat(3,1fr)}
+.ast{margin:0;display:flex;flex-direction:column}
+.ast a{display:block;background:var(--wash);border-radius:4px;overflow:hidden;height:150px;
+  display:flex;align-items:center;justify-content:center;padding:9px;transition:box-shadow .16s}
+.ast a:hover{box-shadow:0 0 0 2px var(--blue)}
+.ast img{max-height:132px;max-width:100%;width:auto;height:auto;object-fit:contain}
+.ast figcaption{display:flex;justify-content:space-between;gap:8px;margin-top:6px;
+  font-size:8.5px;letter-spacing:.1em;color:var(--mid);font-family:'Inter',ui-sans-serif,system-ui,sans-serif}
+.col .dl{font-size:8.5px;letter-spacing:.14em;color:var(--blue);margin-top:14px}
+@media (max-width:900px){.assets.a3{grid-template-columns:repeat(2,1fr)}.ast a{height:120px}.ast img{max-height:102px}}
+
+/* the field specimen */
+.field-rule{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.fr-copy{font-size:11.5px;line-height:1.6;color:var(--mid);max-width:88ch;margin-bottom:14px}
+.fr-copy b{color:var(--ink)}
+.fr-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fr-pair figure{margin:0}
+.fr-tile{aspect-ratio:16/9;border-radius:5px;display:grid;place-items:center;overflow:hidden}
+.fr-tile img{width:46%;height:auto}
+.fr-pair figcaption{margin-top:6px;font-size:9.5px;line-height:1.4;color:var(--mid);display:flex;gap:6px}
+.fr-pair .ok{color:var(--blue);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
+.fr-pair .no{color:var(--bad);font-weight:700;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:.1em}
+
+/* don'ts */
+.dont .tile{border:1px solid rgba(192,57,43,.55);background:#fff}
+.dont figcaption{display:flex;gap:6px;font-size:9.5px;color:var(--mid);margin-top:7px;line-height:1.4}
+.dont .x{color:var(--bad);font-weight:700}
+.dont .cell{display:flex;flex-direction:column}
+.dont .cell .tile{aspect-ratio:16/10}
+
+@media (max-width:900px){
+  .page{aspect-ratio:auto;grid-template-columns:1fr;padding:26px 22px 0}
+  .col{padding-right:0;margin-bottom:18px}
+  .t5,.t3{grid-template-columns:repeat(2,1fr)}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- 01 cover -->
+<div class="page cover">
+  <div class="art">
+    <img class="plate" src="img/gen/cover-bottle-2400.jpg" alt="The blue bottle, wet, on the flat field, chrome structure at the edge">
+    <div class="ctype">
+      <img class="clogo" src="img/lockup-3x1-white.png" alt="SKO Compounds">
+      <h1>Brand Book</h1>
+      <p class="ctag">The blue bottle.</p>
+    </div>
+    <div class="stamp"><span>V2.0</span><span>SEP 2026</span><span>RESEARCH USE ONLY</span>
+      <a href="#assets">ASSETS &rarr;</a></div>
+    <div class="seal"></div>
+  </div>
+</div>
+
+<!-- the blue bottle -->
+<div class="page" id="bottle">
+  <div class="col">
+    <h2>The blue bottle</h2>
+    <p><b>That is the brand.</b> Navy label, chrome band, wet glass, the liquid behind it. Everything
+    SKO puts into the world is that object or a consequence of it, and this book is built in that
+    order.</p>
+    <p><b>Three roles, three materials.</b> The ground is Field blue: flat, edge to edge, nothing
+    behind it. The structure is chrome: the helix and the compound, one machined material. The
+    subject is the bottle, the only thing that is ever photographed. Nothing else gets a material.</p>
+    <p><b>Power, not playfulness.</b> Clinical, exact, expensive. Nothing soft, nothing warm, nothing
+    cute. If a frame could belong to a sports drink, it does not belong to SKO.</p>
+    <p class="mono note">Every page that follows is one of the three roles. Anything that was not is
+    in the archive.</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(240px,34vw,500px)">
+      <a class="tile" style="background:#244399" href="img/gen/thesis-structure-1.png" download><img class="fill" src="img/gen/thesis-structure-2400.jpg" alt="Ground, structure and subject in one frame"><span class="cap">GROUND &middot; STRUCTURE &middot; SUBJECT</span></a>
+    </div>
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,20vw,290px);margin-top:12px">
+      <div class="tile" style="background:#244399"><span class="cap">GROUND &middot; FIELD #244399 &middot; FLAT</span></div>
+      <div class="tile" style="background:#111318"><img class="fill" src="img/gen/cuts/helix-metal-web.jpg" alt="The chrome helix"><span class="cap">STRUCTURE &middot; CHROME</span></div>
+      <div class="tile"><img class="fill" src="img/photo/studio-vial-wet.jpg" alt="The bottle, wet"><span class="cap">SUBJECT &middot; THE BOTTLE</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>THE IDEA</span></div>
+</div>
+
+<!-- the label -->
+<div class="page" id="logo">
+  <div class="col">
+    <h2>The label</h2>
+    <p><b>The label is the logo.</b> The shield and the wordmark exist because they are printed on
+    the bottle; off the bottle they are used exactly as they appear on it. Three shapes, and the
+    names matter because the filename is what the next person trusts.</p>
+    <p><span class="mono kw">3&times;1</span> is the horizontal lockup &mdash; shield left, wordmark
+    right. It is the default wherever there is width for it.</p>
+    <p><span class="mono kw">1&times;1</span> is the stacked lockup &mdash; <b>shield on top</b>,
+    SKO COMPOUNDS beneath. Roughly square. This is the app icon and the avatar.</p>
+    <p><span class="mono kw">SHIELD</span> is the mark on its own, taller than wide. It is not the
+    1&times;1 &mdash; the 1&times;1 still carries the wordmark.</p>
+    <p>Clear space on all four sides equals the height of the shield. White on coloured grounds and
+    photography, navy on light. <b>Disclaimers always take the flat white shield.</b></p>
+    <p class="mono note">Below roughly 48&nbsp;px, and over any image, drop to a flat shield. The
+    full&#8209;colour lockup is a render and does not survive either.</p>
+  </div>
+  <div class="body">
+    <div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(120px,14vw,190px)">
+      <div class="tile"><img class="mark" src="img/lockup-3x1-navy.png" alt="Lockup, navy on light"><span class="cap">3&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
+      <div class="tile blue"><img class="mark" src="img/lockup-3x1-white.png" alt="Lockup, white on blue"><span class="cap">3&times;1 LOCKUP &middot; WHITE ON BLUE</span></div>
+    </div>
+    <div class="tiles t2" style="margin-bottom:12px;flex:none;height:clamp(220px,27vw,360px)">
+      <div class="tile blue"><img class="mark" style="width:auto;height:74%;max-height:74%;max-width:60%" src="img/vector/lockup-1x1-white-2000.png" alt="1x1 lockup, white on blue"><span class="cap">1&times;1 LOCKUP &middot; WHITE ON BLUE &middot; SHIELD ON TOP</span></div>
+      <div class="tile"><img class="mark" style="width:auto;height:74%;max-height:74%;max-width:60%" src="img/vector/lockup-1x1-navy-2000.png" alt="1x1 lockup, navy on light"><span class="cap">1&times;1 LOCKUP &middot; NAVY ON LIGHT</span></div>
+    </div>
+    <div class="tiles badges" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(150px,19vw,250px)">
+      <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield on blue"><span class="cap">FLAT WHITE &middot; DISCLAIMERS</span></div>
+      <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield on light"><span class="cap">FLAT BLUE &middot; #173384</span></div>
+      <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield on light"><span class="cap">FLAT DEEP &middot; #092266</span></div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- 02b the flat shield -->
+<div class="page" id="flat-shield">
+  <div class="col">
+    <h2>The Flat Shield</h2>
+    <p>Two cuts, and they are not interchangeable.</p>
+    <p><b>PLAIN</b> is the solid silhouette &mdash; no helix, nothing inside it. It is the badge:
+    reach for it to contain something, to sit over a photograph, or anywhere the mark would be too
+    busy to read.</p>
+    <p><b>MARK</b> is the shield with the helix knocked out. Because the helix is a hole, it takes
+    the colour of whatever is behind it &mdash; which is right on a flat ground and wrong on a busy
+    one. On a photograph, use PLAIN.</p>
+    <p>Both are one colour, cut from the vector: no gradient, no bevel. White for coloured grounds
+    and every disclaimer; blue and deep for light grounds.</p>
+    <p class="mono note">Below roughly 48&nbsp;px, and over any image, these are the only cuts. The
+    full&#8209;colour mark is a render and does not survive either.</p>
+  </div>
+  <div class="body">
+    <div class="shieldset">
+      <div class="srow">
+        <span class="slab mono">PLAIN &mdash; SOLID, NO HELIX</span>
+        <div class="tiles t3">
+          <div class="tile blue"><img class="mark" src="img/shield/shield-plain-white-2000.png" alt="Plain white shield"><span class="cap">PLAIN WHITE</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-plain-blue-2000.png" alt="Plain luxury blue shield"><span class="cap">PLAIN BLUE &middot; #173384</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-plain-deep-2000.png" alt="Plain deep shield"><span class="cap">PLAIN DEEP &middot; #092266</span></div>
+        </div>
+      </div>
+      <div class="srow">
+        <span class="slab mono">MARK &mdash; HELIX KNOCKED OUT</span>
+        <div class="tiles t3">
+          <div class="tile blue"><img class="mark" src="img/shield/shield-white-2000.png" alt="Flat white shield mark"><span class="cap">MARK WHITE</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-blue-2000.png" alt="Flat blue shield mark"><span class="cap">MARK BLUE &middot; #173384</span></div>
+          <div class="tile"><img class="mark" src="img/shield/shield-deep-2000.png" alt="Flat deep shield mark"><span class="cap">MARK DEEP &middot; #092266</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ladder">
+      <span>Holds all the way down &mdash;</span>
+      <img src="img/shield/shield-blue-128.png" alt="128px"><i>128</i>
+      <img src="img/shield/shield-blue-64.png" alt="64px"><i>64</i>
+      <img src="img/shield/shield-blue-32.png" alt="32px"><i>32</i>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- 03 colour -->
+<div class="page">
+  <div class="col">
+    <h2>Colour</h2>
+    <p>One blue at three values. SKO Blue is the primary, measured off the label. <b>Field</b> is
+    the same blue held brighter &mdash; what blue becomes when blue is the whole surface. Foil is a
+    material, not a colour: two bands on the label, and it appears only where it physically exists.</p>
+    <p><b>The blue is already Yves Klein Blue.</b> IKB is #002FA7, hue 223. SKO Blue is #173384,
+    hue 224 &mdash; the same hue, ours darker. Nothing to chase. But Klein&rsquo;s blue was never a
+    backdrop, it was the work, and that is the rule we take.</p>
+    <p><b>Measured 29 Aug 2026</b> off the label artwork. #26379B, #1B2A7A and the store&rsquo;s
+    #1447D6 were read off photographs, not the pack, and are retired.</p>
+  </div>
+  <div class="body">
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#173384"></div><b>SKO Blue</b>
+        <table><tr><td>HEX</td><td>#173384</td></tr><tr><td>RGB</td><td>23 51 132</td></tr><tr><td>USE</td><td>Primary</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:#092266"></div><b>Deep</b>
+        <table><tr><td>HEX</td><td>#092266</td></tr><tr><td>RGB</td><td>9 34 102</td></tr><tr><td>USE</td><td>Ground</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:#244399"></div><b>Field</b>
+        <table><tr><td>HEX</td><td>#244399</td></tr><tr><td>RGB</td><td>36 67 153</td></tr><tr><td>USE</td><td>Flat field</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:#9DBFD9"></div><b>Halo</b>
+        <table><tr><td>HEX</td><td>#9DBFD9</td></tr><tr><td>RGB</td><td>157 191 217</td></tr><tr><td>USE</td><td>Secondary</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:#F4F5F7"></div><b>Paper</b>
+        <table><tr><td>HEX</td><td>#F4F5F7</td></tr><tr><td>RGB</td><td>244 245 247</td></tr><tr><td>USE</td><td>Surface</td></tr></table></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(100deg,#6E9EB6,#BAC7F2,#5BAEE5,#C3AFD7)"></div><b>Foil</b>
+        <table><tr><td>TYPE</td><td>Material</td></tr><tr><td>USE</td><td>Seal / edge</td></tr><tr><td>RULE</td><td>Only where real</td></tr></table></div>
+    </div>
+    <div class="field-rule">
+      <div class="fr-copy"><b>The field.</b> When the blue runs large it runs flat &mdash; edge to edge,
+      nothing behind it, no gradient inside it &mdash; and one machined object sits in it. A blue that
+      fades out behind a product is a backdrop, and it reads cheap. A blue that <i>is</i> the surface
+      reads expensive. Blue against polished steel is the whole composition.</div>
+      <div class="fr-pair">
+        <figure><div class="fr-tile" style="background:#244399"><img src="img/vector/lockup-1x1-white-2000.png" alt="White lockup on a flat blue field"></div>
+          <figcaption><span class="ok">DO</span> Flat field #244399. One object in it.</figcaption></figure>
+        <figure><div class="fr-tile" style="background:radial-gradient(120% 90% at 50% 38%,#3E63C8 0%,#244399 45%,#0B1E58 100%)"><img src="img/vector/lockup-1x1-white-2000.png" alt="White lockup on a gradient blue backdrop"></div>
+          <figcaption><span class="no">DON&rsquo;T</span> Gradient backdrop, lit vignette, falloff.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<div class="page" id="typography">
+  <div class="col">
+    <h2>Typography</h2>
+    <p>Two faces. <b>DM Sans</b> does the talking, <b>Inter</b> does the work, and nothing else is
+    added without replacing one of them.</p>
+    <p>Both load from Google, so what this page shows is what ships &mdash; there is no licensed file
+    to chase before artwork can be approved.</p>
+    <p>Labels are uppercase at 0.18em. Nothing else is uppercase. Set tabular figures wherever
+    numbers line up in a column.</p>
+    <p class="mono note">Manrope stays in exactly one place &mdash; the Machine Vision readouts,
+    because that is the face the overlay system renders its labels in. It is not a brand face.</p>
+  </div>
+  <div class="body">
+    <div class="typespec">
+      <div class="face">
+        <div class="fname">DM&nbsp;Sans<i>Display</i></div>
+        <div class="fsample dm w700">High tech. High class.</div>
+        <div class="wts"><span class="w500">Medium 500</span><span class="w700">Bold 700</span></div>
+      </div>
+      <div class="face">
+        <div class="fname">Inter<i>Text</i></div>
+        <div class="fsample in w400">Read the certificate. Then decide.</div>
+        <div class="wts"><span class="in w400">Regular 400</span><span class="in w500">Medium 500</span><span class="in w600">Semibold 600</span></div>
+      </div>
+    </div>
+
+    <div class="tester">
+      <label class="mono lbl">TYPE HERE</label>
+      <input id="typeIn" value="High tech. High class. High design." spellcheck="false">
+      <div id="typeOut" class="dm w700">High tech. High class. High design.</div>
+    </div>
+
+    <table class="scale">
+      <tr><th>ROLE</th><th>FACE</th><th>SIZE</th><th>LINE</th><th>WEIGHT</th><th>TRACKING</th></tr>
+      <tr><td>Display</td><td>DM Sans</td><td>72</td><td>0.94</td><td>700</td><td>&minus;0.038</td></tr>
+      <tr><td>Section title</td><td>DM Sans</td><td>34</td><td>1.05</td><td>500</td><td>&minus;0.020</td></tr>
+      <tr><td>Lead</td><td>Inter</td><td>18</td><td>1.55</td><td>400</td><td>&minus;0.005</td></tr>
+      <tr><td>Body</td><td>Inter</td><td>15</td><td>1.60</td><td>400</td><td>0</td></tr>
+      <tr><td>Caption</td><td>Inter</td><td>12</td><td>1.45</td><td>500</td><td>0</td></tr>
+      <tr><td>Label</td><td>Inter</td><td>10</td><td>1.20</td><td>500</td><td>0.180</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- 06 helix -->
+<div class="page" id="helix">
+  <div class="col">
+    <h2>Helix</h2>
+    <p>The connective asset, and it is one material: polished liquid chrome with thin&#8209;film
+    iridescence, the same physics as the foil on the label. It is never line art and it is never a
+    glyph. What is on the page is a machined object standing in the Field.</p>
+    <p>The geometry stays honest. Strands are offset 0.42 of a turn, not half, which is what gives
+    B&#8209;DNA its wide major groove and narrow minor one. Two and a half turns at this radius; tighter
+    reads as a spring.</p>
+    <p><b>It joins the compound.</b> Where the helix meets the label&rsquo;s molecular linework the two
+    are the same chrome, bond for bond, and the linework fades into the blue. One material, two forms:
+    the helix is the structure, the compound is what it is made of.</p>
+    <p><b>Seven cuts, one geometry.</b> All seven are rendered off the same reference. Three are
+    material &mdash; chrome, soft white, matte blue &mdash; and three are flat for print, small sizes
+    and embroidery. The seventh is the mark&rsquo;s own ombr&eacute;.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:1fr;flex:none;height:clamp(260px,36vw,540px)">
+      <a class="tile" style="background:#244399" href="img/gen/helix-compound-1.png" download><img class="fill" src="img/gen/helix-compound-2400.jpg" alt="Liquid chrome helix fused into the molecular linework on a flat blue field"><span class="cap">HELIX INTO THE COMPOUND &middot; LIQUID CHROME ON FIELD</span></a>
+    </div>
+    <div style="height:12px"></div>
+    <div class="tiles" style="flex:none;grid-template-columns:repeat(7,1fr);height:clamp(200px,26vw,380px)">
+      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-metal.png" download><img class="fill" src="img/gen/cuts/helix-metal-web.jpg" alt="Liquid chrome helix on carbon"></a>
+      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-white3.png" download><img class="fill" src="img/gen/cuts/helix-white3-web.jpg" alt="Soft white helix on blue"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-blue3.png" download><img class="fill" src="img/gen/cuts/helix-blue3-web.jpg" alt="Matte blue helix on paper"></a>
+      <a class="tile" style="background:#244399" href="img/gen/cuts/helix-flatw.png" download><img class="fill" src="img/gen/cuts/helix-flatw-web.jpg" alt="Flat white helix on blue"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-flatb.png" download><img class="fill" src="img/gen/cuts/helix-flatb-web.jpg" alt="Flat blue helix on paper"></a>
+      <a class="tile" style="background:#111318" href="img/gen/cuts/helix-flatl.png" download><img class="fill" src="img/gen/cuts/helix-flatl-web.jpg" alt="Flat light blue helix on carbon"></a>
+      <a class="tile" style="background:#F4F5F7" href="img/gen/cuts/helix-ombre.png" download><img class="fill" src="img/gen/cuts/helix-ombre-web.jpg" alt="Logo ombre helix on paper"></a>
+    </div>
+    <div class="cutcaps">
+      <span><b>Liquid chrome</b>rendered &middot; thin film</span>
+      <span><b>White</b>rendered &middot; soft</span>
+      <span><b>Matte blue</b>rendered &middot; unpolished</span>
+      <span><b>Flat white</b>#FFFFFF</span>
+      <span><b>Flat blue</b>#173384</span>
+      <span><b>Flat light blue</b>#9DBFD9</span>
+      <span><b>Logo ombr&eacute;</b>the mark&rsquo;s own blues</span>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>STRUCTURE</span></div>
+</div>
+
+<!-- the compound -->
+<div class="page" id="compound">
+  <div class="col">
+    <h2>The Compound</h2>
+    <p>The linework on the label is a molecule. A column of fused rings up one edge, a branching
+    chain with its atoms down the other, both fading toward the centre so the type sits on clear
+    ground. On the pack it is foil. Rendered, it is liquid chrome &mdash; the same material as the
+    helix.</p>
+    <p><b>It lives at the edge.</b> The compound frames a composition; it never fills one. There is
+    no honeycomb cut, and there will not be one. Two fragments at the margins, fading in, and never
+    behind type.</p>
+    <p><b>Four grounds.</b> Field is the default. Deep for dark work, Halo for light, and white for
+    print and paper. The chrome is the same in all four; only the ground changes, so the reflections
+    change with it.</p>
+    <p><b>Three frames.</b> 16:9, 9:16 and 1:1, each composed for its shape rather than cropped from
+    the wide one. In print it runs as a foil deboss along the edges of the box and the card.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="grid-template-columns:repeat(3,1fr);grid-template-rows:1.6fr 1fr 1fr">
+      <a class="tile ok" style="grid-column:1/-1;background:#244399" href="img/gen/compound-chrome-1.png" download><img class="fill" src="img/gen/compound-chrome-2400.jpg" alt="The compound in liquid chrome on a flat blue field"><span class="cap">FIELD #244399 &middot; THE DEFAULT</span></a>
+      <a class="tile" style="background:#092266" href="img/gen/compound-deep-1.png" download><img class="fill" src="img/gen/compound-deep-web.jpg" alt="The compound on deep"><span class="cap">DEEP #092266</span></a>
+      <a class="tile" style="background:#9DBFD9" href="img/gen/compound-halo-1.png" download><img class="fill" src="img/gen/compound-halo-web.jpg" alt="The compound on halo"><span class="cap">HALO #9DBFD9</span></a>
+      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/gen/compound-white-1.png" download><img class="fill" src="img/gen/compound-white-web.jpg" alt="The compound on white"><span class="cap">WHITE &middot; PRINT</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-9x16-1.png" download><img class="fill" src="img/gen/compound-9x16-web.jpg" alt="The compound composed 9:16"><span class="cap">9:16</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-1x1-1.png" download><img class="fill" src="img/gen/compound-1x1-web.jpg" alt="The compound composed 1:1"><span class="cap">1:1</span></a>
+      <a class="tile" style="background:#244399" href="img/gen/compound-usage-1.png" download><img class="fill" src="img/gen/compound-usage-web.jpg" alt="The compound as a foil deboss on the box and the card"><span class="cap">IN PRINT &middot; FOIL DEBOSS</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>IDENTITY</span></div>
+</div>
+
+<!-- 07 photography: the studio -->
+<div class="page" id="photo-studio">
+  <div class="col">
+    <h2>Photography &mdash; the studio</h2>
+    <p>The product is in every piece of content we put out, so this is the most-used page in the
+    book. Every image starts from the catalogue render, which means the label is always the real
+    label: right SKU, right dose, both foil bands. What changes is the world around it, and that
+    world has four rules.</p>
+    <p><b>One light,</b> high and to the left. <b>The shadow falls on the seamless,</b> never on a
+    floor with an edge in it. <b>The label reads:</b> nothing crosses it, nothing tints it, the bottle
+    is never warped, flipped or re-lettered.</p>
+    <p><b>Dry or wet &mdash; both are approved.</b> The studio plates are dry glass. The wet cut is
+    the same plate with condensation on the glass and cap, the foil catching the key; it is an
+    option, not a rule. Use it when the frame wants cold and fresh, and the dry plate when it wants
+    clean and clinical. Every plate on this page has both.</p>
+    <p>The studio masters on the warm seamless are for listings and product pages. Bundles sit on
+    white to match the site. The Field and the floats are for ads and social.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(420px,54vw,720px)">
+      <a class="tile" href="img/photo/studio-vial.jpg" download><img class="fill" src="img/photo/studio-vial.jpg" alt="Studio master, vial"><span class="cap">STUDIO MASTER &middot; VIAL</span></a>
+      <a class="tile" href="img/photo/studio-spray.jpg" download><img class="fill" src="img/photo/studio-spray.jpg" alt="Studio master, nasal spray"><span class="cap">STUDIO MASTER &middot; SPRAY</span></a>
+      <a class="tile" style="background:#fff;border:1px solid var(--line)" href="img/photo/bundle-01-nad-motsc.jpg" download><img class="fill" src="img/photo/bundle-01-nad-motsc.jpg" alt="Bundle on white"><span class="cap">BUNDLE &middot; ON WHITE, FOR THE SITE</span></a>
+      <a class="tile" href="img/photo/on-field.jpg" download><img class="fill" src="img/photo/on-field.jpg" alt="Vial on the flat Field"><span class="cap">ON THE FIELD</span></a>
+      <a class="tile" href="img/photo/float-halo.jpg" download><img class="fill" src="img/photo/float-halo.jpg" alt="Vial floating over Halo"><span class="cap">THE FLOAT &middot; HALO</span></a>
+      <a class="tile" href="img/photo/float-deep.jpg" download><img class="fill" src="img/photo/float-deep.jpg" alt="Vial floating over Deep"><span class="cap">THE FLOAT &middot; DEEP</span></a>
+    </div>
+    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(210px,27vw,360px);margin-top:12px">
+      <a class="tile" href="img/photo/studio-vial-wet.jpg" download><img class="fill" src="img/photo/studio-vial-wet.jpg" alt="Studio master, wet"><span class="cap">WET &middot; STUDIO MASTER</span></a>
+      <a class="tile" href="img/photo/on-field-wet.jpg" download><img class="fill" src="img/photo/on-field-wet.jpg" alt="On the Field, wet"><span class="cap">WET &middot; ON THE FIELD</span></a>
+      <a class="tile" href="img/photo/lift-halo-wet.jpg" download><img class="fill" src="img/photo/lift-halo-wet.jpg" alt="The lift over Halo, wet"><span class="cap">WET &middot; THE LIFT, HALO</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PHOTOGRAPHY</span></div>
+</div>
+
+<!-- 07b photography: the moments -->
+<div class="page" id="photo-moments">
+  <div class="col">
+    <h2>Photography &mdash; the moments</h2>
+    <p>Four editorial set-ups for when the product needs a world: the helix drawn in sand with the
+    vial resting on it; the vial in a fine light-blue powder; the vial with light moving behind it;
+    and the plush set, where the helix and the shield are soft objects beside it.</p>
+    <p><b>In every one the brand asset is in the world and the vial is on top of it.</b> The helix,
+    the shield and the compound appear as things &mdash; drawn, poured, sewn &mdash; and they never
+    compete with the label. The palette holds: sand and powder are Halo, the plush is Deep and
+    Halo, the light is white.</p>
+    <p>Nothing candid, nothing lifestyle. No hands, no kitchens, no gym bags. The marble and Halo
+    lifts round out the set for the site. Each moment also has a wet cut on the Assets page.</p>
+    <p class="mono dl">CLICK ANY PLATE TO DOWNLOAD</p>
+  </div>
+  <div class="body">
+    <div class="tiles" style="flex:none;grid-template-columns:repeat(3,1fr);height:clamp(420px,54vw,720px)">
+      <a class="tile" href="img/photo/sand-helix.jpg" download><img class="fill" src="img/photo/sand-helix.jpg" alt="The helix drawn in sand, vial on top"><span class="cap">THE HELIX, IN SAND</span></a>
+      <a class="tile" href="img/photo/powder.jpg" download><img class="fill" src="img/photo/powder.jpg" alt="Vial in light-blue powder"><span class="cap">POWDER</span></a>
+      <a class="tile" href="img/photo/blur.jpg" download><img class="fill" src="img/photo/blur.jpg" alt="Vial with light moving behind it"><span class="cap">THE BLUR</span></a>
+      <a class="tile" href="img/photo/plush.jpg" download><img class="fill" src="img/photo/plush.jpg" alt="Vial with the plush helix and shield"><span class="cap">PLUSH</span></a>
+      <a class="tile" href="img/photo/lift-marble.jpg" download><img class="fill" src="img/photo/lift-marble.jpg" alt="Vial lifted over marble"><span class="cap">THE LIFT &middot; MARBLE</span></a>
+      <a class="tile" href="img/photo/lift-halo.jpg" download><img class="fill" src="img/photo/lift-halo.jpg" alt="Vial lifted over Halo"><span class="cap">THE LIFT &middot; HALO</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>PHOTOGRAPHY</span></div>
+</div>
+
+<!-- 04 the array -->
+<div class="page" id="array">
+  <div class="col">
+    <h2>The Array</h2>
+    <p><b>Every offering, as the bottle it is.</b> All thirty-nine listings, each one its own
+    catalogue render with the name, size and price read off the live store, held in a cloud over
+    the flat Field. Nothing sits in the middle of it. The blue bottle is the brand, so the bottles
+    are the whole object.</p>
+    <p>The ground is <b>Field #244399, flat</b>. No gradient, no vignette. Depth comes from the
+    bottles themselves: the near ones large and solid, the far ones small and faint.</p>
+    <p><b>Drag to spin it.</b> It carries momentum and settles. <b>Wheel to zoom.</b> Hovering
+    lifts a bottle and holds the cloud still. <b>Click</b> brings that bottle to the centre and dims
+    the rest; click it again to open the product, or click away to release it.</p>
+    <p class="mono note">Used as the catalogue on the site, and as the closing frame of any spot
+    that shows the range.</p>
+  </div>
+  <div class="body">
+    <div id="arraySphere" style="width:100%;border-radius:5px;overflow:hidden;background:#244399"></div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>SUBJECT</span></div>
+</div>
+
+<script defer src="js/array-cloud.js?v=4"></script>
+
+<!-- 06 claims -->
+<div class="page">
+  <div class="col">
+    <h2>Claims</h2>
+    <p>This is the complete approved vocabulary. A claim not on this list does not go into an asset
+    until ownership adds it here.</p>
+    <p>Figures are re-verified before each flight, never copied forward.</p>
+  </div>
+  <div class="body">
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">99% Purity</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">PRINTED ON LABEL</td></tr>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Research Use Only</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">MANDATORY</td></tr>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">8× Tested</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Beverly Hills</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">OVERLAY STRIP</td></tr>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Over 38k orders shipped</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CONFIRMED BY OWNERSHIP</td></tr>
+      <tr><td style="padding:11px 0;border-bottom:1px solid var(--line);font-size:14px">Out the door in 24 hours</td>
+          <td class="mono" style="padding:11px 0;border-bottom:1px solid var(--line);font-size:9.5px;color:var(--mid);text-align:right">CARRIES ITS OWN REMEDY</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>LANGUAGE</span></div>
+</div>
+
+
+<!-- assets -->
+<div class="page tall" id="assets">
+  <div class="col">
+    <h2>Assets</h2>
+    <p>Everything the team needs, on the page that documents it. Click any row to download.</p>
+    <p><b>Start from the vector.</b> Every flat cut on this page was rendered from it, so if a size
+    or a colour is missing, render it &mdash; do not redraw it and do not upscale a PNG.</p>
+    <p>The system plates &mdash; field, bar, bleed, mark, woven shield &mdash; download from their own
+    pages, where the rule that governs them is written.</p>
+    <p class="mono note">The first edition of this book is kept whole at v1.html. Product imagery is not here. It lives in the catalogue and the stills
+    folders and is pulled from there, never redrawn.</p>
+  </div>
+  <div class="body">
+    <div class="agroup">
+      <h3>Start here — the vector master</h3><p>One path, every subpath, even-odd fill. Scales without limit, recolours to anything, prints and embroiders flat. Never re-trace the mark from a raster.</p>
+      <a class="ass" href="img/vector/sko-mark-1c.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark-1c.svg" alt=""></span><span class="meta"><b>One colour — takes currentColor</b><i>sko-mark-1c.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/sko-mark.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-mark.svg" alt=""></span><span class="meta"><b>Two colour — ink and knockout</b><i>sko-mark.svg &middot; vector &middot; 15 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Helix — the cuts</h3><p>Seven cuts off the cover helix, 9:16 at 1536&times;2752. Same geometry in all seven; only the material changes.</p>
+      <a class="ass dk" href="img/gen/cuts/helix-metal.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-metal-web.jpg" alt=""></span><span class="meta"><b>Helix — Liquid chrome on carbon</b><i>helix-metal.png &middot; 1536&times;2752 &middot; 6158 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-white3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-white3-web.jpg" alt=""></span><span class="meta"><b>Helix — Soft white on blue</b><i>helix-white3.png &middot; 1536&times;2752 &middot; 4682 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-blue3.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-blue3-web.jpg" alt=""></span><span class="meta"><b>Helix — Matte blue on paper</b><i>helix-blue3.png &middot; 1536&times;2752 &middot; 5084 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-flatw.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatw-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat white on blue</b><i>helix-flatw.png &middot; 1536&times;2752 &middot; 4238 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-flatb.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatb-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat blue on paper</b><i>helix-flatb.png &middot; 1536&times;2752 &middot; 5289 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/cuts/helix-flatl.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-flatl-web.jpg" alt=""></span><span class="meta"><b>Helix — Flat light blue on carbon</b><i>helix-flatl.png &middot; 1536&times;2752 &middot; 4465 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/cuts/helix-ombre.png" download><span class="th"><img loading="lazy" src="img/gen/cuts/helix-ombre-web.jpg" alt=""></span><span class="meta"><b>Helix — Logo ombré on paper</b><i>helix-ombre.png &middot; 1536&times;2752 &middot; 5270 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Photography</h3><p>The studio masters and the moments, web weight. The 2048 masters live in the product-masters folder. Bundles are on white for the site.</p>
+      <a class="ass" href="img/photo/studio-vial.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-vial.jpg" alt=""></span><span class="meta"><b>Studio master — vial</b><i>studio-vial.jpg &middot; 1800&times;1800 &middot; 359 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/studio-spray.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-spray.jpg" alt=""></span><span class="meta"><b>Studio master — nasal spray</b><i>studio-spray.jpg &middot; 1800&times;1800 &middot; 326 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/on-field.jpg" download><span class="th"><img loading="lazy" src="img/photo/on-field.jpg" alt=""></span><span class="meta"><b>On the Field</b><i>on-field.jpg &middot; 1800&times;1800 &middot; 394 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/float-halo.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-halo.jpg" alt=""></span><span class="meta"><b>The float — Halo</b><i>float-halo.jpg &middot; 1800&times;1800 &middot; 296 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/float-deep.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-deep.jpg" alt=""></span><span class="meta"><b>The float — Deep</b><i>float-deep.jpg &middot; 1800&times;1800 &middot; 305 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/lift-halo.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-halo.jpg" alt=""></span><span class="meta"><b>The lift — Halo</b><i>lift-halo.jpg &middot; 1800&times;1800 &middot; 372 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/lift-marble.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-marble.jpg" alt=""></span><span class="meta"><b>The lift — marble</b><i>lift-marble.jpg &middot; 1800&times;1800 &middot; 341 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/sand-helix.jpg" download><span class="th"><img loading="lazy" src="img/photo/sand-helix.jpg" alt=""></span><span class="meta"><b>The helix, in sand</b><i>sand-helix.jpg &middot; 1500&times;1862 &middot; 947 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/powder.jpg" download><span class="th"><img loading="lazy" src="img/photo/powder.jpg" alt=""></span><span class="meta"><b>Powder</b><i>powder.jpg &middot; 1500&times;1862 &middot; 906 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/blur.jpg" download><span class="th"><img loading="lazy" src="img/photo/blur.jpg" alt=""></span><span class="meta"><b>The blur</b><i>blur.jpg &middot; 1500&times;1862 &middot; 320 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/plush.jpg" download><span class="th"><img loading="lazy" src="img/photo/plush.jpg" alt=""></span><span class="meta"><b>Plush</b><i>plush.jpg &middot; 1500&times;1862 &middot; 346 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-01-nad-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-01-nad-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — NAD / MOTSC</b><i>bundle-01-nad-motsc.jpg &middot; 1800&times;1800 &middot; 531 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-02-ss31-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-02-ss31-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — SS31 / MOTSC</b><i>bundle-02-ss31-motsc.jpg &middot; 1800&times;1800 &middot; 516 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-03-semax-selank.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-03-semax-selank.jpg" alt=""></span><span class="meta"><b>Bundle — SEMAX / SELANK</b><i>bundle-03-semax-selank.jpg &middot; 1800&times;1800 &middot; 522 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-04-kpv-ghkcu.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-04-kpv-ghkcu.jpg" alt=""></span><span class="meta"><b>Bundle — KPV / GHKCU</b><i>bundle-04-kpv-ghkcu.jpg &middot; 1800&times;1800 &middot; 514 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-05-kpv-ghkcu-glutathione.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-05-kpv-ghkcu-glutathione.jpg" alt=""></span><span class="meta"><b>Bundle — KPV / GHKCU / GLUTATHIONE</b><i>bundle-05-kpv-ghkcu-glutathione.jpg &middot; 1800&times;1800 &middot; 585 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/bundle-06-trz-tesamorelin-motsc.jpg" download><span class="th"><img loading="lazy" src="img/photo/bundle-06-trz-tesamorelin-motsc.jpg" alt=""></span><span class="meta"><b>Bundle — TRZ / TESAMORELIN / MOTSC</b><i>bundle-06-trz-tesamorelin-motsc.jpg &middot; 1800&times;1800 &middot; 608 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Photography — the wet cut</h3><p>The same plates with condensation on the glass. An option, not a rule.</p>
+      <a class="ass" href="img/photo/studio-vial-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/studio-vial-wet.jpg" alt=""></span><span class="meta"><b>Studio master — vial — wet</b><i>studio-vial-wet.jpg &middot; 1800&times;1800 &middot; 447 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/on-field-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/on-field-wet.jpg" alt=""></span><span class="meta"><b>On the Field — wet</b><i>on-field-wet.jpg &middot; 1800&times;1800 &middot; 528 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/float-halo-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-halo-wet.jpg" alt=""></span><span class="meta"><b>The float — Halo — wet</b><i>float-halo-wet.jpg &middot; 1800&times;1800 &middot; 354 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/float-deep-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/float-deep-wet.jpg" alt=""></span><span class="meta"><b>The float — Deep — wet</b><i>float-deep-wet.jpg &middot; 1800&times;1800 &middot; 371 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/lift-halo-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-halo-wet.jpg" alt=""></span><span class="meta"><b>The lift — Halo — wet</b><i>lift-halo-wet.jpg &middot; 1800&times;1800 &middot; 499 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/lift-marble-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/lift-marble-wet.jpg" alt=""></span><span class="meta"><b>The lift — marble — wet</b><i>lift-marble-wet.jpg &middot; 1800&times;1800 &middot; 404 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/sand-helix-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/sand-helix-wet.jpg" alt=""></span><span class="meta"><b>The helix, in sand — wet</b><i>sand-helix-wet.jpg &middot; 1500&times;1862 &middot; 1001 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/powder-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/powder-wet.jpg" alt=""></span><span class="meta"><b>Powder — wet</b><i>powder-wet.jpg &middot; 1500&times;1862 &middot; 975 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/blur-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/blur-wet.jpg" alt=""></span><span class="meta"><b>The blur — wet</b><i>blur-wet.jpg &middot; 1500&times;1862 &middot; 458 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/photo/plush-wet.jpg" download><span class="th"><img loading="lazy" src="img/photo/plush-wet.jpg" alt=""></span><span class="meta"><b>Plush — wet</b><i>plush-wet.jpg &middot; 1500&times;1862 &middot; 418 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>The compound</h3><p>The two rendered masters first. Then the flat cuts, drawn to the grid for print and small sizes: the composition is the two fragments at the edges of a 16:9 frame, already fading; the fragments file is the same two drawn whole, for placing by hand. Both take currentColor.</p>
+      <a class="ass dk" href="img/gen/compound-chrome-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-chrome-2400.jpg" alt=""></span><span class="meta"><b>Compound — liquid chrome on Field, the master</b><i>compound-chrome-1.png &middot; 2752&times;1536 &middot; 4217 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/helix-compound-1.png" download><span class="th"><img loading="lazy" src="img/gen/helix-compound-2400.jpg" alt=""></span><span class="meta"><b>Helix into the compound — liquid chrome on Field</b><i>helix-compound-1.png &middot; 2752&times;1536 &middot; 5479 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-deep-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-deep-web.jpg" alt=""></span><span class="meta"><b>Compound on Deep</b><i>compound-deep-1.png &middot; 2752&times;1536 &middot; 4907 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/compound-halo-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-halo-web.jpg" alt=""></span><span class="meta"><b>Compound on Halo</b><i>compound-halo-1.png &middot; 2752&times;1536 &middot; 4961 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/gen/compound-white-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-white-web.jpg" alt=""></span><span class="meta"><b>Compound on white — print</b><i>compound-white-1.png &middot; 2752&times;1536 &middot; 6116 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-9x16-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-9x16-web.jpg" alt=""></span><span class="meta"><b>Compound — 9:16</b><i>compound-9x16-1.png &middot; 1536&times;2752 &middot; 5429 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-1x1-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-1x1-web.jpg" alt=""></span><span class="meta"><b>Compound — 1:1</b><i>compound-1x1-1.png &middot; 2048&times;2048 &middot; 3898 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/gen/compound-usage-1.png" download><span class="th"><img loading="lazy" src="img/gen/compound-usage-web.jpg" alt=""></span><span class="meta"><b>Compound in print — foil deboss on box and card</b><i>compound-usage-1.png &middot; 2752&times;1536 &middot; 6107 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/sko-compound.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound.svg" alt=""></span><span class="meta"><b>Composition — 16:9, faded, takes currentColor</b><i>sko-compound.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/sko-compound-fragments.svg" download><span class="th"><img loading="lazy" src="img/vector/sko-compound-fragments.svg" alt=""></span><span class="meta"><b>Fragments — the column and the branch, unfaded</b><i>sko-compound-fragments.svg &middot; vector &middot; 3 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/pattern/compound-white-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-white-2400.png" alt=""></span><span class="meta"><b>White — transparent overlay for Field and Deep</b><i>compound-white-2400.png &middot; 2400&times;1500 &middot; 76 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/pattern/compound-halo-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-halo-2400.png" alt=""></span><span class="meta"><b>Halo — transparent overlay for Deep</b><i>compound-halo-2400.png &middot; 2400&times;1500 &middot; 117 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-blue-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-blue-2400.png" alt=""></span><span class="meta"><b>SKO Blue — transparent overlay for paper</b><i>compound-blue-2400.png &middot; 2400&times;1500 &middot; 114 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-deep-2400.png" download><span class="th"><img loading="lazy" src="img/pattern/compound-deep-2400.png" alt=""></span><span class="meta"><b>Deep — transparent overlay for paper</b><i>compound-deep-2400.png &middot; 2400&times;1500 &middot; 112 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-2400.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-2400.jpg" alt=""></span><span class="meta"><b>On Field with the white lockup — 8:5</b><i>compound-on-field-2400.jpg &middot; 2400&times;1500 &middot; 246 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-1x1.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-1x1.jpg" alt=""></span><span class="meta"><b>On Field — 1&times;1</b><i>compound-on-field-1x1.jpg &middot; 1200&times;1200 &middot; 153 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/pattern/compound-on-field-9x16.jpg" download><span class="th"><img loading="lazy" src="img/pattern/compound-on-field-9x16.jpg" alt=""></span><span class="meta"><b>On Field — 9:16</b><i>compound-on-field-9x16.jpg &middot; 1080&times;1920 &middot; 173 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Flat shields</h3><p>Two cuts. PLAIN is the solid silhouette with no helix &mdash; the badge, and the one to use over a photograph. MARK has the helix knocked out, so the helix takes the ground colour. Both one colour, cut from the vector. Use these below ~48px and anywhere the mark sits on an image.</p>
+      <a class="ass dk" href="img/shield/shield-plain-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-white-2000.png" alt=""></span><span class="meta"><b>PLAIN white — solid, no helix</b><i>shield-plain-white-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-plain-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-blue-2000.png" alt=""></span><span class="meta"><b>PLAIN luxury blue — solid, no helix</b><i>shield-plain-blue-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-plain-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-plain-deep-2000.png" alt=""></span><span class="meta"><b>PLAIN deep — solid, no helix</b><i>shield-plain-deep-2000.png &middot; 1765&times;2000</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/shield/shield-white-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-2000.png" alt=""></span><span class="meta"><b>White — disclaimers, colour, photography</b><i>shield-white-2000.png &middot; 1765&times;2000 &middot; 238 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-2000.png" alt=""></span><span class="meta"><b>Blue #173384 — light grounds</b><i>shield-blue-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-deep-2000.png" download><span class="th"><img loading="lazy" src="img/shield/shield-deep-2000.png" alt=""></span><span class="meta"><b>Deep #092266 — light grounds, more weight</b><i>shield-deep-2000.png &middot; 1765&times;2000 &middot; 240 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/shield/shield-white-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-white-512.png" alt=""></span><span class="meta"><b>White — 512</b><i>shield-white-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-512.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Blue — 512</b><i>shield-blue-512.png &middot; 452&times;512 &middot; 38 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/shield/shield-blue-128.png" download><span class="th"><img loading="lazy" src="img/shield/shield-blue-128.png" alt=""></span><span class="meta"><b>Blue — 128, favicons and chips</b><i>shield-blue-128.png &middot; 113&times;128 &middot; 8 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Lockups</h3><p>Shield and wordmark together. 3&times;1 is horizontal, 1&times;1 is stacked with the shield on top &mdash; neither is the shield alone. White is the only cut for coloured grounds; full colour is white-ground-only, at size only.</p>
+      <a class="ass" href="img/logo/clean/lockup-3x1-fullcolour-2000.png" download><span class="th"><img loading="lazy" src="img/logo/clean/lockup-3x1-fullcolour-2000.png" alt=""></span><span class="meta"><b>3×1 lockup — full colour, white ground, at size</b><i>lockup-3x1-fullcolour-2000.png &middot; 2000&times;673 &middot; 655 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/lockup-3x1-white.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-white.png" alt=""></span><span class="meta"><b>3×1 lockup — white, flat</b><i>lockup-3x1-white.png &middot; 700&times;235 &middot; 41 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/lockup-3x1-navy.png" download><span class="th"><img loading="lazy" src="img/lockup-3x1-navy.png" alt=""></span><span class="meta"><b>3×1 lockup — navy, flat</b><i>lockup-3x1-navy.png &middot; 700&times;235 &middot; 70 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/lockup-1x1-white-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — white, flat, from the vector</b><i>lockup-1x1-white-2000.png &middot; 2000&times;2000 &middot; 128 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-navy-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, flat, from the vector</b><i>lockup-1x1-navy-2000.png &middot; 2000&times;2000 &middot; 130 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-deep-2000.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-deep-2000.png" alt=""></span><span class="meta"><b>1×1 lockup — deep, flat, from the vector</b><i>lockup-1x1-deep-2000.png &middot; 2000&times;2000 &middot; 129 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass dk" href="img/vector/lockup-1x1-white-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-white-512.png" alt=""></span><span class="meta"><b>1×1 lockup — white, 512</b><i>lockup-1x1-white-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
+      <a class="ass" href="img/vector/lockup-1x1-navy-512.png" download><span class="th"><img loading="lazy" src="img/vector/lockup-1x1-navy-512.png" alt=""></span><span class="meta"><b>1×1 lockup — navy, 512</b><i>lockup-1x1-navy-512.png &middot; 512&times;512 &middot; 26 KB</i></span><span class="dl">DOWNLOAD</span></a>
+    </div>
+    <div class="agroup">
+      <h3>Archive — not in use</h3><p>Pages and plates from the first edition that are not one of the three roles. Kept so nobody finds one in an old folder and assumes it is live.</p>
+      <a class="ass" href="v1.html#sys-field"><span class="th"><img loading="lazy" src="img/system/mark-on-field-2400.jpg" alt=""></span><span class="meta"><b>The Field, The Bar, The Bleed, The Mark, The Woven Shield</b><i>system plates · first edition</i></span><span class="dl">OPEN V1</span></a>
+      <a class="ass" href="v1.html#motion"><span class="th"><img loading="lazy" src="img/shield/shield-blue-512.png" alt=""></span><span class="meta"><b>Motion — hard cuts, clocks, flash, orbit</b><i>first edition</i></span><span class="dl">OPEN V1</span></a>
+      <a class="ass" href="v1.html#alternates"><span class="th"><img loading="lazy" src="img/logo/clean/lockup-silver-2000.png" alt=""></span><span class="meta"><b>Alternates — silver, chrome, moss, pool, vintage, embossed</b><i>never live</i></span><span class="dl">OPEN V1</span></a>
+    </div>
+  </div>
+  <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>ASSETS</span></div>
+</div>
+
+<script>
+/* Typography — the tester types in the display face, live. */
+(function () {
+  const i = document.getElementById('typeIn'), o = document.getElementById('typeOut');
+  if (!i || !o) return;
+  i.addEventListener('input', () => { o.textContent = i.value || '\u00a0'; });
+})();
+
+/* Motion — the documented values, running. Everything here is a hard cut:
+   no CSS transitions, because a dissolve would contradict the rule the
+   page is stating. */
+(function () {
+  const R = (a, b) => a + Math.random() * (b - a);
+  const box = document.querySelector('#mCut .mbox');
+  if (box) {
+    const COL = ['#173384', '#092266', '#244399', '#9DBFD9'];
+    let n = 0;
+    (function step() {
+      box.style.background = COL[n++ % COL.length];      /* single frame */
+      setTimeout(step, R(300, 720));                     /* structure hold */
+    })();
+  }
+
+  const rows = document.querySelectorAll('#mClocks .mrow');
+  if (rows.length === 2) {
+    const run = (row, lo, hi) => (function step() {
+      row.querySelectorAll('i').forEach(el => {
+        el.style.opacity = Math.random() < 0.5 ? 0.18 : 1;
+      });
+      setTimeout(step, R(lo, hi));
+    })();
+    run(rows[0], 300, 720);        /* structure */
+    run(rows[1], 60, 320);         /* accretion, its own clock */
+  }
+
+  const flash = document.getElementById('mFlash');
+  if (flash) {
+    (function step() {
+      const hit = Math.random() < 1 / 6;                  /* about one in six */
+      if (hit) {
+        flash.style.background = '#244399';
+        setTimeout(() => { flash.style.background = ''; }, 42);
+      }
+      setTimeout(step, R(300, 720));
+    })();
+  }
+
+  const dot = document.querySelector('#mOrbit .odot');
+  if (dot) {
+    let a = 0, v = 0.0016 * 60;                           /* idle rad/frame */
+    let kick = 0;
+    (function frame() {
+      requestAnimationFrame(frame);
+      if (dot.offsetParent === null) return;
+      if (--kick <= 0) { v += 0.05; kick = 180; }         /* a drag, then it settles */
+      v += (0.0016 * 60 - v) * 0.02;
+      a += v * 0.06;
+      const st = dot.parentElement, r = st.clientWidth * 0.31;
+      dot.style.transform = `translate(${Math.cos(a) * r}px, ${Math.sin(a) * r * 0.62}px)`;
+    })();
+  }
+})();
+</script>
+</body>
+</html>
