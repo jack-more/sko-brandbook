@@ -194,18 +194,21 @@ footer .mono{color:var(--mute)}
 .card .row s{font-size:11px;margin-left:6px}
 @media(max-width:640px){.rungs{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:1fr}}
 
-/* the hero is the scene: the structure in the snow, the bottle small on the snow in front of it, the copy over the sky */
-.hero.scene{aspect-ratio:auto;display:block;position:relative;background:#1b4fd0;height:min(78vh,760px);min-height:460px;overflow:hidden;color:#fff}
-.hero.scene .mod{position:absolute;inset:0}
-.hero.scene .mod iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
-.hero.scene .mod iframe[hidden]{display:none}
-.hero.scene .vial{position:absolute;left:62%;bottom:16%;height:34%;width:auto;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(2,11,60,.35))}
-.hero.scene .vshadow{position:absolute;left:62%;bottom:15%;width:14%;height:3.5%;transform:translateX(12%);background:radial-gradient(ellipse at 50% 50%,rgba(4,12,60,.55),rgba(4,12,60,.22) 45%,transparent 72%);pointer-events:none}
-.hero.scene .copy{position:absolute;left:clamp(20px,5vw,80px);top:clamp(28px,7vh,72px);max-width:min(46%,600px);pointer-events:none}
-.hero.scene .copy .mono{color:var(--frost)}
-.hero.scene h1{font-size:clamp(30px,4.6vw,72px);line-height:1;margin-top:10px;overflow:visible;white-space:nowrap}
-.hero.scene .copy p{margin-top:14px;color:rgba(255,255,255,.85);font-size:clamp(13px,1.05vw,16px);opacity:1;animation:none}
-.hero.scene .scroll{position:absolute;left:clamp(20px,5vw,80px);bottom:18px;color:var(--frost);pointer-events:none}
+/* the hero: the compound's own plate, full bleed, crossfading. Real photographs, no composite. */
+.hero.plate{aspect-ratio:auto;display:block;position:relative;background:#0b2a86;height:min(78vh,780px);min-height:460px;overflow:hidden;color:#fff}
+.hero.plate .frames{position:absolute;inset:0}
+.hero.plate .hf{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .85s ease}
+.hero.plate .hf.on{opacity:1}
+.hero.plate .hsweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.16) 50%,transparent 58%);transform:translateX(-130%)}
+.hero.plate .hsweep.go{animation:hsw 1.1s cubic-bezier(.3,.7,.3,1) forwards}
+@keyframes hsw{to{transform:translateX(130%)}}
+.hero.plate .copy{position:absolute;left:clamp(20px,5vw,80px);top:50%;transform:translateY(-50%);max-width:min(42%,560px);pointer-events:none;text-shadow:0 2px 30px rgba(2,11,60,.35)}
+.hero.plate .copy .mono{color:var(--frost)}
+.hero.plate h1{font-size:clamp(30px,4.4vw,70px);line-height:1;margin-top:10px;overflow:visible;white-space:nowrap}
+.hero.plate .copy p{margin-top:14px;color:rgba(255,255,255,.9);font-size:clamp(13px,1.05vw,16px);opacity:1;animation:none;max-width:34ch}
+.hero.plate .scroll{position:absolute;left:clamp(20px,5vw,80px);bottom:18px;color:var(--frost);pointer-events:none}
+@media(max-width:800px){.hero.plate{height:auto;aspect-ratio:4/3;min-height:0}.hero.plate .copy{max-width:78%;top:auto;bottom:44px;transform:none}.hero.plate h1{font-size:clamp(26px,8vw,40px);white-space:normal}.hero.plate .copy p{display:none}.hero.plate .scroll{display:none}}
+
 /* the product row: what you are looking at, and how to buy it */
 .prow{padding-top:0;padding-bottom:0}
 .pr{display:grid;grid-template-columns:auto 1fr auto auto auto;gap:clamp(14px,2vw,32px);align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
@@ -263,3 +266,54 @@ footer .mono{color:var(--mute)}
 .catcard .cname{font-size:11px;margin-top:8px;line-height:1.2}
 .catcard .mono{font-size:9px;margin-top:4px}
 @media(max-width:640px){.catgrid{grid-template-columns:repeat(2,1fr);gap:8px}.catcard{padding:10px}.catcard .cname{font-size:9px}}
+
+/* ── The Badge: the loyalty ladder ───────────────────────────────── */
+.lhero{display:grid;grid-template-columns:1fr minmax(0,520px);gap:clamp(24px,5vw,72px);align-items:center;padding-top:clamp(30px,5vw,72px)}
+.lhero h1{font-size:clamp(28px,4vw,62px);line-height:1.02;margin-top:12px}
+.lhero p{margin-top:18px;color:var(--mute);max-width:44ch;font-size:clamp(14px,1.1vw,17px)}
+.lhbtn{display:flex;align-items:center;gap:20px;margin-top:26px}.lhbtn .alt{color:var(--mute)}
+.lheroimg{width:100%;height:auto}
+/* the card */
+.lcard{display:grid;grid-template-columns:132px 1fr;gap:clamp(18px,3vw,36px);align-items:center;border:1px solid var(--line);padding:clamp(18px,3vw,30px);background:#fff}
+.lbadge{width:132px;height:132px;object-fit:cover;transition:opacity .5s}
+.lrow{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.lpts{font-size:clamp(24px,3vw,44px);line-height:1;margin-top:6px}.lpts em{font-style:normal;font-size:.4em;color:var(--mute);letter-spacing:.12em}
+.lnext{color:var(--pig)}
+.lmeter{position:relative;height:6px;background:#e6ecf7;margin:18px 0 12px;overflow:hidden}
+.lmeter i{display:block;height:100%;width:0;background:var(--navy);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.lmark{position:absolute;top:0;width:1px;height:100%;background:#fff}
+.lunlock{color:var(--mute)}
+.lsim{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.lsim button{background:#fff;border:1px solid var(--line);color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;padding:9px 12px;cursor:pointer}
+.lsim button:hover{border-color:var(--navy)}
+/* the ladder */
+.lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.lstep{border:1px solid var(--line);padding:0 0 16px;background:#fff;position:relative;overflow:hidden}
+.lstep img{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.lstep:hover img{transform:scale(1.03)}
+.lstep .lt{padding:14px 16px 0}
+.lstep .lvl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;color:var(--mute)}
+.lstep h3{font-family:Syncopate,sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;margin-top:6px}
+.lstep .lat{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--pig);margin-top:6px;letter-spacing:.1em}
+.lstep ul{list-style:none;padding:0 16px;margin:12px 0 0}
+.lstep li{font-size:12.5px;color:var(--mute);padding:6px 0;border-top:1px solid var(--line);line-height:1.4}
+.lstep.on{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+/* the earn table */
+.ltable{border-top:1px solid var(--line)}
+.ltable>div{display:grid;grid-template-columns:minmax(160px,1fr) 2fr auto;gap:20px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.ltable b{font-family:Syncopate,sans-serif;font-weight:700;font-size:10.5px;text-transform:uppercase}
+.ltable span{color:var(--mute);font-size:13px}.ltable i{font-style:normal;color:var(--pig);font-size:11px;letter-spacing:.12em}
+.lnote{margin-top:16px;line-height:1.9}
+/* referral */
+.lref{border:1px solid var(--line);padding:clamp(18px,3vw,30px);display:flex;flex-direction:column}
+.lreflink{display:flex;align-items:center;gap:12px;border:1px solid var(--navy);padding:14px 14px 14px 16px;margin-top:10px;font-size:12px;flex-wrap:wrap}
+.lreflink b{font:inherit;color:var(--navy)}
+.lreflink button{margin-left:auto;background:var(--navy);color:#fff;border:0;padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;cursor:pointer}
+.lref p{margin-top:16px;color:var(--mute);font-size:13.5px;max-width:46ch}
+.lrefsplit{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:auto;padding-top:22px}
+.lrefsplit .disp{font-size:clamp(22px,2.6vw,38px);line-height:1}.lrefsplit .mono{margin-top:6px}
+/* where it runs */
+.lwhere{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.lwhere b{font-size:12px;display:block}.lwhere p{margin-top:10px;color:var(--mute);font-size:13px;line-height:1.6}
+@media(max-width:900px){.lhero{grid-template-columns:1fr}.lgrid{grid-template-columns:repeat(2,1fr)}.lwhere{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.lcard{grid-template-columns:1fr}.lbadge{width:96px;height:96px}.lgrid{grid-template-columns:1fr}.lwhere{grid-template-columns:1fr}.ltable>div{grid-template-columns:1fr auto;gap:6px 16px}.ltable span{grid-column:1/3}.lrefsplit{grid-template-columns:1fr}}

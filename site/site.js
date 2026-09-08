@@ -62,30 +62,54 @@ if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search)
 document.addEventListener('touchend',e=>{const c=e.target.closest('.card');if(c&&c.querySelector('img.alt')&&!c.classList.contains('flip')){c.classList.add('flip');e.preventDefault()}},{passive:false});
 
 
-// the hero scene and the product row: the structure stands in the snow, the bottle sits small in front of it,
-// the row below carries the compound, a brand-styled selector, the price and Add. Add opens Commonly researched with.
-const scene=document.querySelector('.hero.scene');
-if(scene){load().then(({prods,man})=>{const mol=document.getElementById('mol'),vial=document.getElementById('vial'),thumb=document.getElementById('pthumb');let cur='bpc-157';let cart=[];
+// the hero: the compound's own rendered plate, full bleed, crossfading on change.
+// Every frame is a finished photograph, so nothing is composited and nothing can mismatch.
+// The live 3D viewer stays on the Isometrica page, where it is the instrument and not a fake composite.
+const scene=document.querySelector('.hero.plate');
+if(scene){load().then(({prods,man})=>{const frames=document.getElementById('hframes'),sweep=document.getElementById('hsweep'),thumb=document.getElementById('pthumb');
+  let cur='bpc-157',layer=0,cart=[];
   const catOf=slug=>Object.entries(CATS).find(([c,l])=>l.includes(slug))?.[0]||'';
-  const img=slug=>{const k=man[slug]||[];return k.includes('cut')?`../img/products/web/${slug}-cut.png`:`../img/products/web/${slug}-white.jpg`};
-  function choose(slug){const p=prods.find(x=>x.slug===slug);if(!p)return;cur=slug;vial.src=img(slug);thumb.src=img(slug);vial.alt=thumb.alt=p.name;
-    const reg=REG[slug];if(reg){const src=`https://jackmorello.com/skoembed?c=${reg}&cycle=0&z=${ZOOM[reg]||1.2}&ox=-0.08&spin=0&label=0&t=snow`;if(mol.src!==src)mol.src=src;mol.hidden=false}else mol.hidden=true;
-    document.getElementById('pcat').textContent=(catOf(slug)||'COMPOUND').toUpperCase();document.getElementById('pname').textContent=p.name;document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
+  const bottle=slug=>{const k=man[slug]||[];return k.includes('cut')?`../img/products/web/${slug}-cut.png`:`../img/products/web/${slug}-white.jpg`};
+  const plate=slug=>{const k=man[slug]||[];return k.includes('wide')?`../img/products/web/hd/${slug}-wide.jpg`:`../img/products/web/hd/bpc-157-wide.jpg`};
+  const a=document.createElement('img'),b=document.createElement('img');
+  a.className='hf on';b.className='hf';frames.append(a,b);
+  const seen=new Set();
+  function preload(slug){if(seen.has(slug))return;seen.add(slug);const i=new Image();i.src=plate(slug)}
+  function show(slug){const next=layer?a:b,curEl=layer?b:a;
+    next.onload=()=>{next.classList.add('on');curEl.classList.remove('on');layer^=1;
+      sweep.classList.remove('go');void sweep.offsetWidth;sweep.classList.add('go')};
+    next.src=plate(slug);next.alt='';}
+  function choose(slug){const p=prods.find(x=>x.slug===slug);if(!p)return;cur=slug;show(slug);
+    thumb.src=bottle(slug);thumb.alt=p.name;
+    document.getElementById('pcat').textContent=(catOf(slug)||'COMPOUND').toUpperCase();
+    document.getElementById('pname').textContent=p.name;
+    document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;
+    document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
     document.getElementById('cbtn').querySelector('span').textContent=p.name.toUpperCase()+' · CHANGE';closePanel()}
-  // the selector: a panel in the brand, category tabs on top, compounds with their bottles below
   const panel=document.getElementById('cpanel'),tabs=document.getElementById('ctabs'),list=document.getElementById('clist'),btn=document.getElementById('cbtn');let tab='All';
-  function renderList(){const slugs=tab==='All'?prods.map(p=>p.slug):(CATS[tab]||[]);list.innerHTML=slugs.map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean).map(p=>`<button role="option" data-s="${p.slug}" class="${p.slug===cur?'on':''}"><img src="${img(p.slug)}" alt="" loading="lazy"><span class="n">${p.name}</span><span class="d mono">${p.dose||''}</span><span class="p">$${PRICE[p.slug]||49}</span></button>`).join('');list.querySelectorAll('button').forEach(b=>b.onclick=()=>choose(b.dataset.s))}
-  tabs.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===tab?'on':''}" data-c="${c}">${c}</button>`).join('');tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.c;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));renderList()});
-  function openPanel(){renderList();panel.hidden=false;btn.setAttribute('aria-expanded','true')}function closePanel(){panel.hidden=true;btn.setAttribute('aria-expanded','false')}
-  btn.onclick=()=>panel.hidden?openPanel():closePanel();document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});document.addEventListener('click',e=>{if(!e.target.closest('#csel'))closePanel()});
-  // add to cart: count it, then commonly researched with
+  function renderList(){const slugs=tab==='All'?prods.map(p=>p.slug):(CATS[tab]||[]);
+    list.innerHTML=slugs.map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean).map(p=>`<button role="option" data-s="${p.slug}" class="${p.slug===cur?'on':''}"><img src="${bottle(p.slug)}" alt="" loading="lazy"><span class="n">${p.name}</span><span class="d mono">${p.dose||''}</span><span class="p">$${PRICE[p.slug]||49}</span></button>`).join('');
+    list.querySelectorAll('button').forEach(el=>{el.onclick=()=>choose(el.dataset.s);el.onmouseenter=()=>preload(el.dataset.s)})}
+  tabs.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===tab?'on':''}" data-c="${c}">${c}</button>`).join('');
+  tabs.querySelectorAll('button').forEach(el=>el.onclick=()=>{tab=el.dataset.c;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===el));renderList()});
+  function openPanel(){renderList();panel.hidden=false;btn.setAttribute('aria-expanded','true')}
+  function closePanel(){panel.hidden=true;btn.setAttribute('aria-expanded','false')}
+  btn.onclick=()=>panel.hidden?openPanel():closePanel();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
+  document.addEventListener('click',e=>{if(!e.target.closest('#csel'))closePanel()});
   const xs=document.getElementById('xsell');
   function addToCart(slug){cart.push(slug);const c=document.getElementById('cartlink');if(c)c.textContent=`Cart (${cart.length})`}
-  function xsell(slug){const p=prods.find(x=>x.slug===slug);const pairs=Object.values(BUNDLES).filter(b=>b.members.includes(slug)).flatMap(b=>b.members).filter(m=>m!==slug);const mates=(CATS[catOf(slug)]||[]).filter(m=>m!==slug);const picks=[...new Set([...pairs,...mates])].map(m=>prods.find(x=>x.slug===m)).filter(Boolean).slice(0,3);
-    document.getElementById('xtitle').textContent=`Commonly researched with ${p.name}`;document.getElementById('xgrid').innerHTML=picks.map(q=>`<div class="xc"><img src="${img(q.slug)}" alt="${q.name}"><div class="n disp">${q.name}</div><div class="mute">${q.dose||''} · 99% purity</div><div class="r"><span>$${PRICE[q.slug]||49}.00</span><button class="btn small" data-s="${q.slug}">Add</button></div></div>`).join('');
-    xs.querySelectorAll('button[data-s]').forEach(b=>b.onclick=()=>{addToCart(b.dataset.s);b.textContent='Added';b.disabled=true});xs.hidden=false;xs.scrollIntoView({behavior:'smooth',block:'nearest'})}
-  document.getElementById('padd').onclick=e=>{e.preventDefault();addToCart(cur);xsell(cur)};document.getElementById('xkeep').onclick=e=>{e.preventDefault();xs.hidden=true};
-  choose('bpc-157')})}
+  function xsell(slug){const p=prods.find(x=>x.slug===slug);
+    const pairs=Object.values(BUNDLES).filter(bn=>bn.members.includes(slug)).flatMap(bn=>bn.members).filter(m=>m!==slug);
+    const mates=(CATS[catOf(slug)]||[]).filter(m=>m!==slug);
+    const picks=[...new Set([...pairs,...mates])].map(m=>prods.find(x=>x.slug===m)).filter(Boolean).slice(0,3);
+    document.getElementById('xtitle').textContent=`Commonly researched with ${p.name}`;
+    document.getElementById('xgrid').innerHTML=picks.map(q=>`<div class="xc"><img src="${bottle(q.slug)}" alt="${q.name}"><div class="n disp">${q.name}</div><div class="mute">${q.dose||''} · 99% purity</div><div class="r"><span>$${PRICE[q.slug]||49}.00</span><button class="btn small" data-s="${q.slug}">Add</button></div></div>`).join('');
+    xs.querySelectorAll('button[data-s]').forEach(el=>el.onclick=()=>{addToCart(el.dataset.s);el.textContent='Added';el.disabled=true});
+    xs.hidden=false;xs.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  document.getElementById('padd').onclick=e=>{e.preventDefault();addToCart(cur);xsell(cur)};
+  document.getElementById('xkeep').onclick=e=>{e.preventDefault();xs.hidden=true};
+  a.src=plate('bpc-157');choose('bpc-157')})}
 
 // the category band: one card per research category, its lead compound floating, a click filters the grid
 const cg=document.querySelector('#catgrid');
@@ -95,3 +119,37 @@ if(cg){load().then(({prods,man})=>{const lead={'Recovery':'bpc-157','Skin & hair
   const grid=document.querySelector('#grid');
   cg.querySelectorAll('.catcard').forEach(a=>a.onclick=e=>{e.preventDefault();const c=a.dataset.c;const list=(CATS[c]||[]).map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean);if(grid){grid.innerHTML=list.map(p=>card(p,man)).join('');fitAll(grid);grid.querySelectorAll('.rv').forEach(el=>{el.classList.add('in')});const t=document.querySelector('#gridtitle');if(t)t.textContent=c;const n=document.querySelector('#count');if(n)n.textContent=`${list.length} SKUs`;cg.querySelectorAll('.catcard').forEach(x=>x.classList.toggle('on',x===a));grid.scrollIntoView({behavior:'smooth',block:'start'})}})})}
 
+
+
+// ── The Badge: five levels, the card, the simulator ────────────────
+// Thresholds and rewards are a first pass. Billy sets the real ones.
+const LEVELS=[
+ {k:'emboss', n:'Embossed', at:0,    img:'badge-emboss',  u:['Points on every order','Order history and tracking','The badge sticker in your first box']},
+ {k:'cap',    n:'Pressed',  at:250,  img:'badge-cap',     u:['Free shipping, every order','Your referral link unlocks','Early notice when a batch lands']},
+ {k:'foil',   n:'Foil',     at:750,  img:'badge-foil',    u:['5% back in points','First access to new compounds','Foil badge sticker in the box']},
+ {k:'cast',   n:'Chrome',   at:1500, img:'badge-cast',    u:['10% back in points','Batch COAs before they are public','A cast chrome badge, shipped to you']},
+ {k:'pigment',n:'Pigment',  at:3000, img:'badge-pigment', u:['15% back in points','Reserve a vial from a batch before release','The Isometrica print of your most-ordered compound']},
+];
+const lgrid=document.querySelector('#lgrid');
+if(lgrid){
+  const HD=k=>`../img/products/web/hd/${k}.jpg`;
+  let pts=980; // where the demo starts, so the bar is never empty
+  lgrid.innerHTML=LEVELS.map((t,i)=>`<div class="lstep" data-k="${t.k}"><img src="${HD(t.img)}" alt="${t.n}"><div class="lt"><div class="lvl">LEVEL ${String(i+1).padStart(2,'0')}</div><h3>${t.n}</h3><div class="lat">${t.at?t.at.toLocaleString()+' PTS':'ON SIGN-UP'}</div></div><ul>${t.u.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+  const badge=document.getElementById('lbadge'),name=document.getElementById('ltiername'),ptsEl=document.getElementById('lpts'),fill=document.getElementById('lfill'),nextL=document.getElementById('lnextlabel'),unlock=document.getElementById('lunlock');
+  function render(){
+    let i=0; LEVELS.forEach((t,j)=>{if(pts>=t.at)i=j});
+    const t=LEVELS[i],nx=LEVELS[i+1];
+    badge.src=`../img/edition3/${t.img}.jpg`;
+    name.textContent=`${t.n.toUpperCase()} · LEVEL ${String(i+1).padStart(2,'0')}`;
+    ptsEl.textContent=pts.toLocaleString();
+    const top=LEVELS[LEVELS.length-1].at;
+    fill.style.width=Math.min(100,(pts/top)*100)+'%';
+    nextL.textContent=nx?`${(nx.at-pts).toLocaleString()} POINTS TO ${nx.n.toUpperCase()}`:'TOP LEVEL · EVERY UNLOCK IS YOURS';
+    unlock.textContent=nx?'NEXT: '+nx.u.join(' · ').toUpperCase():t.u.join(' · ').toUpperCase();
+    lgrid.querySelectorAll('.lstep').forEach(el=>el.classList.toggle('on',el.dataset.k===t.k));
+  }
+  document.querySelectorAll('.lsim button').forEach(b=>b.onclick=()=>{pts=b.id==='lreset'?100:pts+ +b.dataset.p;render()});
+  const copy=document.querySelector('.lreflink button');
+  if(copy)copy.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');copy.textContent='COPIED'};
+  render();
+}
