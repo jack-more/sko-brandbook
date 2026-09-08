@@ -155,20 +155,23 @@ const EARN=[
 ];
 const SPEND=[
  {p:150, n:'Bacteriostatic water', img:'sealed', w:'Free with your next order, boxed'},
- {p:400, n:'One peptide, free',     img:'ribbon', w:'Any vial under $50 — BPC-157, GHK-Cu, Ipamorelin, DSIP, MT-1, MT-2'},
- {p:700, n:'One peptide, free',     img:'ribbon', w:'Any vial under $70 — TB-500, KPV, AOD-9604, Glutathione, Semax, Selank, CJC+IPA, MOTS-c, ARA-290, 5-Amino'},
+ {p:400, n:'One peptide, free',     img:'ribbon', w:'Any vial under $50 — BPC-157, GHK-Cu, Ipamorelin, DSIP, MT-1, MT-2 and seven more'},
+ {p:700, n:'One peptide, free',     img:'ribbon', w:'Any vial under $70 — TB-500, KPV, AOD-9604, Glutathione, Semax, Selank, CJC+IPA, MOTS-c and more'},
  {p:1100,n:'One peptide, free',     img:'ribbon', w:'Any vial under $100 — Adamax, SKO-NAD, SS-31, Tesamorelin, Wolverine, IGF1-LR3'},
+ {p:1300,n:'Any bundle under $130', img:'open',   w:'KPV · GHK-Cu, Semax · Selank, KPV · GHK-Cu · Glutathione, NAD+ · MOTS-c'},
  {p:1800,n:'Two peptides, free',    img:'open',   w:'Any two vials, up to $100 each, seated in foam'},
- {p:2500,n:'Any bundle, free',      img:'open',   w:'Whichever pair or trio you want, boxed'},
+ {p:2300,n:'Any bundle, any price', img:'open',   w:'Including the dearest one on the shelf'},
  {p:4000,n:'A full box cycle, free',img:'stack',  w:'A whole Build a Box cycle, however you filled it'},
 ];
 // the programme page shows the shape of the shelf; the account page lists every rung
 const SHELF=[
- {p:'150',   n:'The Water Box', img:'sealed', w:'Bacteriostatic water, free with your next order. The first thing almost everyone earns.'},
- {p:'FROM 400',n:'The Vial Box', img:'ribbon', w:'One peptide, free, chrome ribbon tied. 400 points under $50 · 700 under $70 · 1,100 under $100.'},
- {p:'1,800', n:'The Pair Box',  img:'open',   w:'Two peptides free, or any bundle at 2,500, seated in navy foam with the embossed card.'},
- {p:'4,000', n:'The Full Box',  img:'stack',  w:'A whole Build a Box cycle, free, however you filled it.'},
+ {p:'150',     n:'The Water Box', img:'sealed', w:'Bacteriostatic water, free with your next order. Two orders in. The first thing almost everyone earns.'},
+ {p:'FROM 400',n:'The Vial Box',  img:'ribbon', w:'One peptide, free, chrome ribbon tied. 400 points under $50 · 700 under $70 · 1,100 under $100.'},
+ {p:'FROM 1,300',n:'The Pair Box',img:'open',   w:'A bundle from 1,300, two vials of your own at 1,800, or any bundle on the shelf at 2,300.'},
+ {p:'4,000',   n:'The Full Box',  img:'stack',  w:'A whole Build a Box cycle, free, however you filled it.'},
 ];
+
+// the programme page shows the shape of the shelf; the account page lists every rung
 
 // boxes that arrive unbought. These are the ones that actually feel like gifts.
 const GIFTS=[
