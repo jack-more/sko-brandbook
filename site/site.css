@@ -568,3 +568,5 @@ footer .mono{color:var(--mute)}
 .ctac span{display:block;color:var(--mute);font-size:12px;margin-top:6px;line-height:1.45}
 .ctac em{display:block;font-style:normal;color:var(--navy);font-size:8.5px;letter-spacing:.14em;margin-top:8px}
 @media(max-width:900px){.cta3{grid-template-columns:1fr}.railtrack{height:120px;margin:22px 20px 0}.rn{width:70px}.rn img{width:44px;height:44px}.rn em{display:none}.rn span{font-size:7px}.railwhat{text-align:left}}
+
+.rstrip{margin-top:14px}.llog>div:first-child{border-top:0}

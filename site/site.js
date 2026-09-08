@@ -362,7 +362,7 @@ if(rail){
     nodes.querySelectorAll('.rn').forEach((el,j)=>{el.classList.toggle('done',j<=levelAt(cur));el.classList.toggle('peek',j<=i&&j>levelAt(cur))});
     nodes.querySelectorAll('.rm').forEach(el=>{const at=+el.querySelector('span').textContent.replace(/[^0-9]/g,'').slice(0,6);});
   }
-  thumb.addEventListener('input',()=>paint(railSpend(+thumb.value)));
+  thumb.addEventListener('input',()=>paint(railSpend(+thumb.value/10)));
   const snap=()=>{thumb.value=Math.round(railPos(spendOf())*10);paint(null)};
   thumb.addEventListener('change',snap);thumb.addEventListener('pointerup',()=>setTimeout(snap,900));
   document.querySelectorAll('.lsim button').forEach(b=>b.addEventListener('click',()=>setTimeout(snap,50)));
