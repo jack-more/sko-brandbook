@@ -154,10 +154,19 @@ const EARN=[
  ['Ordering during a live','The Live Deal, every week on TikTok','2×'],
 ];
 const SPEND=[
- [250,'$25 off any order'],[500,'Bacteriostatic water, free, any order'],
- [1000,'$110 off, or any single vial under $110'],[2000,'A bundle of your choice, free'],
- [3500,'A Build a Box cycle, free'],
+ {p:500, n:'The Water Box',  img:'sealed', w:'Bacteriostatic water and a foil badge sticker, boxed, free with your next order'},
+ {p:1000,n:'The Single Box', img:'ribbon', w:'Any single vial under $110, in the navy box, chrome ribbon tied'},
+ {p:2000,n:'The Pair Box',   img:'open',   w:'Any bundle, free, seated in foam with the embossed card'},
+ {p:3500,n:'The Full Box',   img:'stack',  w:'A whole Build a Box cycle, free, however you filled it'},
 ];
+// boxes that arrive unbought. These are the ones that actually feel like gifts.
+const GIFTS=[
+ {n:'The Level Box',    img:'sealed', when:'When you level up',        w:'Your badge in the new material, boxed and sealed, with the card that says which level you just reached.'},
+ {n:'The Make-Good Box',img:'ribbon', when:'When we get it wrong',      w:'Late, short, or damaged: this ships before you ask, with the compound replaced and something added.'},
+ {n:'The Live Box',     img:'open',   when:'The Live Deal, boxed',      w:'Whatever the live deal is that week, packed as a gift instead of an order. Only during the live.'},
+ {n:'The Bracelet Case',img:'stack',  when:'Level 06, once',            w:'The championship bracelet does not ship in a mailer. It comes in its own case, by hand.'},
+];
+
 const fmt=n=>n.toLocaleString('en-US');
 const levelAt=spend=>{let i=0;LEVELS.forEach((t,j)=>{if(spend>=t.at)i=j});return i};
 const badgeSrc=(k,hd)=>k==='bracelet'?`../img/loyalty/bracelet${hd?'':'-w'}.jpg`:`../img/${hd?'products/web/hd':'edition3'}/${k}.jpg`;
@@ -175,7 +184,9 @@ if(lgrid){
 const etab=document.querySelector('#etable');
 if(etab)etab.innerHTML=EARN.map(([a,b,c])=>`<div><b>${a}</b><span>${b}</span><i class="mono">${c}</i></div>`).join('');
 const stab=document.querySelector('#stable');
-if(stab)stab.innerHTML=SPEND.map(([p,w])=>`<div><b class="mono">${fmt(p)} PTS</b><span>${w}</span></div>`).join('');
+if(stab)stab.innerHTML=SPEND.map(x=>`<div class="sbox"><img src="../img/loyalty/box-${x.img}-w.jpg" alt="${x.n}"><div class="sbt"><div class="mono">${fmt(x.p)} POINTS</div><h3 class="disp">${x.n}</h3><p>${x.w}</p></div></div>`).join('');
+const gtab=document.querySelector('#gtable');
+if(gtab)gtab.innerHTML=GIFTS.map(x=>`<div class="gbox"><img src="../img/loyalty/box-${x.img}-w.jpg" alt="${x.n}"><div class="gbt"><div class="mono mute">${x.when.toUpperCase()}</div><h3 class="disp">${x.n}</h3><p>${x.w}</p></div></div>`).join('');
 
 // the card and the progress page
 const lcardEl=document.querySelector('#lcard');
@@ -210,10 +221,11 @@ if(lcardEl){
   const log=document.querySelector('#llog');
   if(log)log.innerHTML=U.log.map(([d,w,p])=>`<div><i class="mono">${d}</i><span>${w}</span><b class="mono">${p}</b></div>`).join('');
   const shelf=document.querySelector('#lshelf');
-  if(shelf)shelf.innerHTML=SPEND.map(([p,w])=>`<div class="sh${U.points>=p?' ok':''}"><div class="mono">${fmt(p)} PTS</div><div class="shw">${w}</div><button class="btn small"${U.points>=p?'':' disabled'}>${U.points>=p?'Redeem':fmt(p-U.points)+' to go'}</button></div>`).join('');
+  const drawShelf=()=>{if(shelf)shelf.innerHTML=SPEND.map(x=>`<div class="sh${U.points>=x.p?' ok':''}"><img src="../img/loyalty/box-${x.img}-w.jpg" alt=""><div class="shw"><div class="mono">${fmt(x.p)} PTS</div><b>${x.n}</b><span>${x.w}</span></div><button class="btn small"${U.points>=x.p?'':' disabled'}>${U.points>=x.p?'Redeem':fmt(x.p-U.points)+' to go'}</button></div>`).join('')};
+  drawShelf();
   document.querySelectorAll('.lsim button').forEach(b=>b.onclick=()=>{
     if(b.id==='lreset'){U.points=100;U.spend=0}else{U.spend+= +b.dataset.p;U.points+=Math.round(+b.dataset.p*(b.dataset.m||1))}
-    render();if(shelf)shelf.innerHTML=SPEND.map(([p,w])=>`<div class="sh${U.points>=p?' ok':''}"><div class="mono">${fmt(p)} PTS</div><div class="shw">${w}</div><button class="btn small"${U.points>=p?'':' disabled'}>${U.points>=p?'Redeem':fmt(p-U.points)+' to go'}</button></div>`).join('')});
+    render();drawShelf()});
   const copy=document.querySelector('.lreflink button');
   if(copy)copy.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/'+U.ref);copy.textContent='COPIED'};
   render();
