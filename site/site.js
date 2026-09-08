@@ -268,3 +268,66 @@ if(rtable){
 }
 const rc=document.querySelector('#rcopy');
 if(rc)rc.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');rc.textContent='COPIED'};
+
+
+// ── The engines: missions, the live stamp card, the code vault, the affiliate ladder, the draw ──
+// Every number here is a first pass for Billy. The mechanics are the point.
+const MISSIONS=[
+ {k:'review', c:'ORDERS', n:'Leave a review with a photo', r:'+75 points',        have:1, need:1},
+ {k:'three',  c:'ORDERS', n:'Three orders in ninety days', r:'A free vial under $50', have:2, need:3},
+ {k:'lives',  c:'LIVE',   n:'Four lives in a row',          r:'Bacteriostatic water, boxed', have:3, need:4},
+ {k:'livebuy',c:'LIVE',   n:'Order during two lives',       r:'+300 points',       have:1, need:2},
+ {k:'ref3',   c:'REFER',  n:'Three referrals who order',    r:'Any vial under $70, free', have:2, need:3},
+ {k:'post',   c:'SHARE',  n:'Post your badge, tag us',      r:'+150 points',       have:0, need:1},
+ {k:'codes',  c:'CODES',  n:'Redeem five codes',            r:'A mystery box',     have:2, need:5},
+ {k:'golden', c:'DROP',   n:'Find the Golden Vial',         r:'A Full Box, free',  have:0, need:1},
+];
+// the referral ladder: what referrals earn on top of the 350 each
+const REFLADDER=[
+ {n:1, r:'+350 points, every time'},
+ {n:3, r:'Any vial under $70, free'},
+ {n:5, r:'Any bundle under $130, free'},
+ {n:10,r:'Your own creator code: 15% for them, 10% of every order back to you in points'},
+ {n:25,r:'The cast chrome badge, and a shout-out on the live'},
+ {n:50,r:'A Full Box every quarter, for as long as you stay above fifty'},
+];
+// codes: five kinds, five behaviours. The vault reveals what a code did.
+const CODES={
+ 'LIVE0911':  {kind:'LIVE',    what:'+200 points · this week\'s live code', pts:200},
+ 'PIGMENT':   {kind:'MULTIPLIER',what:'Double points on your next order', pts:0},
+ 'BOX-4F2A':  {kind:'IN THE BOX', what:'Bacteriostatic water, free, boxed', pts:0},
+ 'KAI15':     {kind:'CREATOR', what:'15% off this order · 10% back to Kai in points', pts:0},
+ 'MYSTERY':   {kind:'MYSTERY', what:null, pts:0},
+};
+const MYSTERY=['+100 points','+250 points','A foil badge sticker','Bacteriostatic water, free','Any vial under $50, free','Double points on your next order'];
+const LEADERBOARD=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Foil',4],['A. Chen','Pressed',3]];
+
+function chip(c){return `<span class="mchip mono">${c}</span>`}
+const mboard=document.querySelector('#mboard');
+if(mboard){
+  mboard.innerHTML=MISSIONS.map(m=>{const pct=Math.round(m.have/m.need*100),done=m.have>=m.need;return `<div class="mis${done?' done':''}">${chip(m.c)}<div class="mn">${m.n}</div><div class="mr mono">${done?'CLAIMED · ':''}${m.r.toUpperCase()}</div><div class="mbar"><i style="width:${pct}%"></i></div><div class="mcount mono">${m.have} / ${m.need}${done?' · DONE':''}</div></div>`}).join('');
+}
+const stamps=document.querySelector('#stamps');
+if(stamps){
+  const have=3,need=4;
+  stamps.innerHTML=Array.from({length:6},(_,i)=>`<div class="stamp${i<have?' on':''}${i===need-1?' goal':''}"><img src="../img/edition3/badge-hood.jpg" alt=""><span class="mono">${i<have?'LIVE '+(i+1):i===need-1?'FREE WATER':'—'}</span></div>`).join('');
+  const nxt=document.getElementById('stampnext'); if(nxt)nxt.textContent=`${need-have} MORE LIVE${need-have>1?'S':''} TO A FREE BOX · NEXT LIVE THURSDAY 6PM PT`;
+}
+const vault=document.querySelector('#vault');
+if(vault){
+  const inp=vault.querySelector('input'),btn=vault.querySelector('button'),out=vault.querySelector('.vout');
+  const used=[];
+  function reveal(code){const k=code.trim().toUpperCase();const c=CODES[k];
+    if(!c){out.className='vout bad';out.innerHTML=`<div class="mono">NOT A CODE</div><p>Check the box, the live, or your email.</p>`;return}
+    if(used.includes(k)){out.className='vout bad';out.innerHTML=`<div class="mono">ALREADY USED</div><p>${k} has been redeemed on this account.</p>`;return}
+    used.push(k);const what=c.what||MYSTERY[Math.floor(Math.random()*MYSTERY.length)];
+    out.className='vout';void out.offsetWidth;out.className='vout go';
+    out.innerHTML=`<div class="mono">${c.kind} CODE · ${k}</div><div class="disp vwhat">${what}</div><p class="mono mute">ADDED TO YOUR ACCOUNT · ${used.length} OF 5 TOWARD THE MYSTERY BOX</p>`;
+    const p=document.getElementById('lpts');if(p&&c.pts){p.textContent=fmt((+p.textContent.replace(/,/g,''))+c.pts)}}
+  btn.onclick=()=>reveal(inp.value);inp.addEventListener('keydown',e=>{if(e.key==='Enter')reveal(inp.value)});
+  vault.querySelectorAll('.vtry').forEach(b=>b.onclick=()=>{inp.value=b.dataset.c;reveal(b.dataset.c)});
+}
+const rlad=document.querySelector('#rladder');
+if(rlad){const have=4;rlad.innerHTML=REFLADDER.map(x=>`<div class="rl${have>=x.n?' done':''}"><b class="mono">${x.n}</b><span>${x.r}</span><i class="mono">${have>=x.n?'EARNED':(x.n-have)+' TO GO'}</i></div>`).join('')}
+const lb=document.querySelector('#leaderboard');
+if(lb)lb.innerHTML=LEADERBOARD.map(([n,l,c],i)=>`<div class="${n==='J. Morello'?'me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${l.toUpperCase()}</span><em class="mono">${c} ORDERED</em></div>`).join('');
