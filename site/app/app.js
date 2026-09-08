@@ -34,21 +34,21 @@ const SHELF=[
  {p:4000,n:'A full box cycle, free',img:'loyalty/box-stack-w.jpg',w:'However you filled it'},
 ];
 const MISSIONS=[
- {k:'review', c:'ORDERS',n:'Leave a review with a photo', r:75,  rt:'+75 tokens', have:1,need:1,claimed:false},
- {k:'three',  c:'ORDERS',n:'Three orders in ninety days',  r:0,   rt:'A free vial under $50', have:2,need:3},
- {k:'lives',  c:'LIVE',  n:'Four lives in a row',          r:0,   rt:'Bacteriostatic water, boxed', have:3,need:4},
- {k:'livebuy',c:'LIVE',  n:'Order during two lives',       r:300, rt:'+300 tokens', have:1,need:2},
- {k:'ref3',   c:'REFER', n:'Three referrals who order',    r:0,   rt:'Any vial under $70, free', have:2,need:3},
+ {k:'review', c:'ORDERS',n:'Leave a review with a photo', r:75,  rt:'+75 tokens', have:0,need:1,claimed:false},
+ {k:'three',  c:'ORDERS',n:'Three orders in ninety days',  r:0,   rt:'A free vial under $50', have:0,need:3},
+ {k:'lives',  c:'LIVE',  n:'Four lives in a row',          r:0,   rt:'Bacteriostatic water, boxed', have:0,need:4},
+ {k:'livebuy',c:'LIVE',  n:'Order during two lives',       r:300, rt:'+300 tokens', have:0,need:2},
+ {k:'ref3',   c:'REFER', n:'Three referrals who order',    r:0,   rt:'Any vial under $70, free', have:0,need:3},
  {k:'post',   c:'SHARE', n:'Post your badge, tag us',      r:150, rt:'+150 tokens', have:0,need:1},
- {k:'codes',  c:'CODES', n:'Redeem five codes',            r:0,   rt:'A mystery box', have:2,need:5},
+ {k:'codes',  c:'CODES', n:'Redeem five codes',            r:0,   rt:'A mystery box', have:0,need:5},
  {k:'golden', c:'DROP',  n:'Find the Golden Vial',         r:0,   rt:'A Full Box, free', have:0,need:1},
 ];
 const CODES={'LIVE0911':{k:'LIVE',w:'+200 tokens · this week\'s live code',t:200},'PIGMENT':{k:'MULTIPLIER',w:'Double tokens on your next order',t:0},'BOX-4F2A':{k:'IN THE BOX',w:'Bacteriostatic water, free, boxed',t:0},'KAI15':{k:'CREATOR',w:'15% off this order · 10% back to Kai',t:0},'MYSTERY':{k:'MYSTERY',w:null,t:0}};
 const MYST=[['+100 tokens',100],['+250 tokens',250],['A foil badge sticker',0],['Bacteriostatic water, free',0],['Any vial under $50, free',0],['Double tokens on your next order',0]];
 const LADDER=[[1,'+350 tokens, every time'],[3,'Any vial under $70, free'],[5,'Any bundle under $130, free'],[10,'Your own creator code · 10% of every order back to you'],[25,'The cast chrome badge · a shout-out on the live'],[50,'A Full Box every quarter']];
-const LB=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Foil',2],['A. Chen','Pressed',3]];
+const LB=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Embossed',0],['A. Chen','Pressed',3]];
 
-const U={spend:3180,tokens:1240,streak:41,refs:2,stamps:3,used:[],mult:1,spins:2};
+const U={spend:0,tokens:0,streak:0,refs:0,stamps:0,used:[],mult:1,spins:0,welcomed:false};
 let view='road';
 
 // ── tokens flying ──
@@ -62,7 +62,7 @@ function tick(el,from,to,ms=900,pre='',post=''){const t0=performance.now();const
 function centerOf(el){const r=el.getBoundingClientRect(),a=$('#app').getBoundingClientRect();return [r.left-a.left+r.width/2,r.top-a.top+r.height/2]}
 
 // ── header ──
-function header(){const l=levelOf(U.spend),t=tierOf(l);$('#hlvl').textContent=`LEVEL ${l} · ${t.n.toUpperCase()}`;$('#hbadge').src=ICO(TIERICO[t.n]);$('#btok').textContent=fmt(U.tokens)}
+function header(){const l=levelOf(U.spend),t=tierOf(l);$('#hlvl').textContent=`LEVEL ${l} · ${t.n.toUpperCase()}`;const st=$('#hstreak');if(st)st.textContent=U.streak?`STREAK ${U.streak} DAYS`:'';$('#hbadge').src=ICO(TIERICO[t.n]);$('#btok').textContent=fmt(U.tokens)}
 
 // ── earning: an order ──
 function order(amount,mult=1){const before=levelOf(U.spend),bt=tierOf(before);const got=Math.round(amount*mult*U.mult);U.mult=1;
@@ -176,7 +176,7 @@ function live(){const have=U.stamps,need=4;return `${band('The live','THURSDAY 6
 function wireLive(){$('#stamp').onclick=e=>{U.stamps=Math.min(8,U.stamps+1);const [x,y]=centerOf(e.target);burst(x,y,16,false);render()};$('#remind').onclick=e=>{e.target.textContent='Reminder set';}}
 
 function refer(){return `${band('Refer','THEY GET 15% · YOU GET 350')}
-  <div class="card"><div class="mono mute">YOUR LINK</div><div class="link mono" style="margin-top:8px">skocompounds.com/r/<b>J-MORELLO-8F2</b><button id="copy">COPY</button></div><div class="mono mute" style="margin-top:10px">4 JOINED · 2 ORDERED · 700 TOKENS EARNED</div></div>
+  <div class="card"><div class="mono mute">YOUR LINK</div><div class="link mono" style="margin-top:8px">skocompounds.com/r/<b>J-MORELLO-8F2</b><button id="copy">COPY</button></div><div class="mono mute" style="margin-top:10px">${U.refs} ORDERED · ${U.refs*350} TOKENS EARNED · IT PAYS WHEN THEIR ORDER SHIPS</div></div>
   <div class="card"><div class="h"><div class="disp">The ladder</div><span class="mono mute">BY REFERRALS WHO ORDER</span></div><div class="lad">${LADDER.map(([n,r])=>`<div class="${U.refs>=n?'done':''}"><b>${n}</b><span><img class="lico" src="${ICO(iconFor(r))}" alt="">${r}</span><i>${U.refs>=n?'EARNED':(n-U.refs)+' TO GO'}</i></div>`).join('')}</div></div>
   <div class="card"><div class="h"><div class="disp">This month</div><span class="mono mute">READ OUT ON THE LIVE</span></div><div class="lb">${LB.map(([n,l,c],i)=>`<div><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${c} ORDERED</span></div>`).join('')}</div></div>`}
 function wireRefer(){$('#copy').onclick=e=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');e.target.textContent='COPIED'}}
@@ -187,3 +187,7 @@ function go(v){view=v;render();$('main').scrollTo(0,0)}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.t));
 $('#bal').onclick=()=>go('shelf');
 render();
+if(!U.welcomed){U.welcomed=true;setTimeout(()=>{const ov=$('#overlay');ov.hidden=false;ov.className='overlay';
+  ov.innerHTML=`<div class="sweep"></div><div class="ov"><img class="bigtoken" src="${IMG}loyalty/token.png" alt=""><div class="mono">WELCOME TO THE BADGE</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>You start on the board, never at zero. Every dollar from here is a token, and tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
+  const cnt=$('#cnt');setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(cnt);burst(x,y,50,false);const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(100*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)},120);
+  $('#okc').onclick=()=>{const [bx,by]=centerOf($('#okc'));burst(bx,by,30,true);U.tokens+=100;ov.hidden=true;header();render()}},600)}
