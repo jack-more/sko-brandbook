@@ -154,11 +154,22 @@ const EARN=[
  ['Ordering during a live','The Live Deal, every week on TikTok','2×'],
 ];
 const SPEND=[
- {p:500, n:'The Water Box',  img:'sealed', w:'Bacteriostatic water and a foil badge sticker, boxed, free with your next order'},
- {p:1000,n:'The Single Box', img:'ribbon', w:'Any single vial under $110, in the navy box, chrome ribbon tied'},
- {p:2000,n:'The Pair Box',   img:'open',   w:'Any bundle, free, seated in foam with the embossed card'},
- {p:3500,n:'The Full Box',   img:'stack',  w:'A whole Build a Box cycle, free, however you filled it'},
+ {p:150, n:'Bacteriostatic water', img:'sealed', w:'Free with your next order, boxed'},
+ {p:400, n:'One peptide, free',     img:'ribbon', w:'Any vial under $50 — BPC-157, GHK-Cu, Ipamorelin, DSIP, MT-1, MT-2'},
+ {p:700, n:'One peptide, free',     img:'ribbon', w:'Any vial under $70 — TB-500, KPV, AOD-9604, Glutathione, Semax, Selank, CJC+IPA, MOTS-c, ARA-290, 5-Amino'},
+ {p:1100,n:'One peptide, free',     img:'ribbon', w:'Any vial under $100 — Adamax, SKO-NAD, SS-31, Tesamorelin, Wolverine, IGF1-LR3'},
+ {p:1800,n:'Two peptides, free',    img:'open',   w:'Any two vials, up to $100 each, seated in foam'},
+ {p:2500,n:'Any bundle, free',      img:'open',   w:'Whichever pair or trio you want, boxed'},
+ {p:4000,n:'A full box cycle, free',img:'stack',  w:'A whole Build a Box cycle, however you filled it'},
 ];
+// the programme page shows the shape of the shelf; the account page lists every rung
+const SHELF=[
+ {p:'150',   n:'The Water Box', img:'sealed', w:'Bacteriostatic water, free with your next order. The first thing almost everyone earns.'},
+ {p:'FROM 400',n:'The Vial Box', img:'ribbon', w:'One peptide, free, chrome ribbon tied. 400 points under $50 · 700 under $70 · 1,100 under $100.'},
+ {p:'1,800', n:'The Pair Box',  img:'open',   w:'Two peptides free, or any bundle at 2,500, seated in navy foam with the embossed card.'},
+ {p:'4,000', n:'The Full Box',  img:'stack',  w:'A whole Build a Box cycle, free, however you filled it.'},
+];
+
 // boxes that arrive unbought. These are the ones that actually feel like gifts.
 const GIFTS=[
  {n:'The Level Box',    img:'sealed', when:'When you level up',        w:'Your badge in the new material, boxed and sealed, with the card that says which level you just reached.'},
@@ -184,7 +195,7 @@ if(lgrid){
 const etab=document.querySelector('#etable');
 if(etab)etab.innerHTML=EARN.map(([a,b,c])=>`<div><b>${a}</b><span>${b}</span><i class="mono">${c}</i></div>`).join('');
 const stab=document.querySelector('#stable');
-if(stab)stab.innerHTML=SPEND.map(x=>`<div class="sbox"><img src="../img/loyalty/box-${x.img}-w.jpg" alt="${x.n}"><div class="sbt"><div class="mono">${fmt(x.p)} POINTS</div><h3 class="disp">${x.n}</h3><p>${x.w}</p></div></div>`).join('');
+if(stab)stab.innerHTML=SHELF.map(x=>`<div class="sbox"><img src="../img/loyalty/box-${x.img}-w.jpg" alt="${x.n}"><div class="sbt"><div class="mono">${x.p} POINTS</div><h3 class="disp">${x.n}</h3><p>${x.w}</p></div></div>`).join('');
 const gtab=document.querySelector('#gtable');
 if(gtab)gtab.innerHTML=GIFTS.map(x=>`<div class="gbox"><img src="../img/loyalty/box-${x.img}-w.jpg" alt="${x.n}"><div class="gbt"><div class="mono mute">${x.when.toUpperCase()}</div><h3 class="disp">${x.n}</h3><p>${x.w}</p></div></div>`).join('');
 
