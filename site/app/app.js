@@ -19,7 +19,7 @@ const TIERS=[
 const LEVELS=(()=>{const L=[];const A=[[1,0],[2,40],[9,500],[17,2500],[25,10000],[33,40000],[50,150000]];
  for(let i=0;i<A.length-1;i++){const [l0,s0]=A[i],[l1,s1]=A[i+1];for(let l=l0;l<l1;l++){const f=(l-l0)/(l1-l0);L[l]=s0>0?Math.round(s0*Math.pow(s1/s0,f)):Math.round(s0+(s1-s0)*f)}}
  L[50]=150000;return L})();
-const SMALL=['+100 tokens','A foil badge sticker','+150 tokens','Bacteriostatic water, free','A mystery code','+200 tokens','Priority cold shipping on your next order','A vial under $50, free','Double tokens on your next order','+300 tokens','A vial under $70, free','A pair of foil stickers','An early look at the next batch','A vial under $100, free','+500 tokens','A bundle under $130, free'];
+const SMALL=['+100 tokens','A foil badge sticker','+150 tokens','Bacteriostatic water, free','A mystery code','+200 tokens','Free shipping on your next order','A vial under $50, free','Double tokens on your next order','+300 tokens','A vial under $70, free','A pair of foil stickers','A chrome token pin','A vial under $100, free','+500 tokens','A bundle under $130, free'];
 function rewardFor(l){const t=TIERS.find(t=>t.from===l);if(t)return {big:true,txt:t.keep};return {big:false,txt:SMALL[(l*7)%SMALL.length]}}
 const levelOf=s=>{let l=1;for(let i=1;i<=50;i++)if(s>=LEVELS[i])l=i;return l};
 const tierOf=l=>{let t=TIERS[0];TIERS.forEach(x=>{if(l>=x.from)t=x});return t};

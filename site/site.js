@@ -135,13 +135,13 @@ const LEVELS=[
  {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The badge, pressed into the cap',
   u:['Free shipping, every order, forever','Your referral link unlocks','A reminder before every live, and the streak that comes with it']},
  {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The badge, foil-stamped, in the box',
-  u:['5% back in points','The Live Deal code, ten minutes before the live opens','First access to a new compound before launch']},
+  u:['5% back in points','The Live Deal code, ten minutes before the live opens','A foil sticker pack and the chrome token pin']},
  {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'A cast chrome badge, shipped to you',
-  u:['10% back in points','Claim the Live Deal even if you missed the live','Batch COAs before they go public']},
+  u:['10% back in points','Claim the Live Deal even if you missed the live','The cast chrome badge, the real object']},
  {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed',
-  u:['15% back in points','Reserve a vial from a batch before release','The Isometrica print of your most-ordered compound']},
+  u:['15% back in points','A Full Box on your birthday, every year','The Isometrica print of your most-ordered compound']},
  {k:'bracelet',n:'The Bracelet',at:150000,img:'bracelet',   keep:'The championship bracelet',
-  u:['20% back in points','A standing reservation on every batch','The chrome championship bracelet, made once, for you']},
+  u:['20% back in points','Your name read out on the live, every week you order','The chrome championship bracelet, made once, for you']},
 ];
 const EARN=[
  ['Every order','1 point per $1 spent','1×'],
@@ -339,8 +339,8 @@ if(lb)lb.innerHTML=LEADERBOARD.map(([n,l,c],i)=>`<div class="${n==='J. Morello'?
 // MARKERS are the small rewards between levels. Adding one is one line here.
 const MARKERS=[
  {at:1000, n:'A foil sticker pack'},
- {at:5000, n:'Priority cold shipping'},
- {at:20000,n:'A named batch reservation'},
+ {at:5000, n:'A birthday box, every year'},
+ {at:20000,n:'The SKO chrome cap'},
  {at:80000,n:'Your compound, printed at 60 inches'},
 ];
 function railPos(spend){const L=LEVELS;for(let i=L.length-1;i>=0;i--){if(spend>=L[i].at){if(i===L.length-1)return 100;const a=L[i].at,b=L[i+1].at;return (i+(spend-a)/(b-a))/(L.length-1)*100}}return 0}
