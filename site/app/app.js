@@ -76,12 +76,22 @@ function collect(got,then){const ov=$('#overlay');ov.hidden=false;ov.className='
   ov.querySelector('#cnt').innerHTML='0 <em>TOKENS</em>';
   const cnt=ov.querySelector('#cnt');const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(got*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};setTimeout(()=>requestAnimationFrame(f),80);
   $('#okc').onclick=()=>{const [bx,by]=centerOf($('#okc'));burst(bx,by,30,true);ov.hidden=true;then()}}
-function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';const t=tierOf(to);const rw=rewardFor(to);
+function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.className='overlay lvlup';const t=tierOf(to);const rw=rewardFor(to);
   const row=TIERS.map(x=>`<img src="${ICO(TIERICO[x.n])}" class="${x.from<=to?(x.n===t.n&&tierChanged?'new':'done'):''}" alt="${x.n}">`).join('');
-  ov.innerHTML=`<div class="sweep"></div><div class="ov"><div class="mono">${tierChanged?'YOU MOVED UP':'LEVEL UP'}</div><div class="rowwrap"><div class="row">${row}</div></div><div class="disp h1">${tierChanged?`You are ${t.n}.`:`Level ${to}.`}</div><p>${tierChanged?t.keep+'. It ships this week.':'Unlocked: '+rw.txt+'.'}${to-from>1?` And ${to-from-1} more level${to-from>2?'s':''} on the way up.`:''}</p><button class="btn" id="okl">Continue</button></div>`;
-  const rowEl=ov.querySelector('.row');const idx=TIERS.findIndex(x=>x.n===t.n);
-  requestAnimationFrame(()=>{const imgs=[...rowEl.children];const target=imgs[idx];const off=target.offsetLeft+target.offsetWidth/2;rowEl.style.transform=`translateX(${-off}px)`});
-  setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(ov.querySelector('.row'));burst(x,y,60,false)},350);
+  ov.innerHTML=`<div class="rays"></div><div class="sweep"></div><div class="ov">
+    <div class="lvjump"><span class="from">${from}</span><span class="arw">&rarr;</span><span class="to" id="lvto">${to}</span></div>
+    <div class="mono big-eyebrow">${tierChanged?'NEW MATERIAL':'LEVEL UP'}</div>
+    <div class="medal${tierChanged?' turn':''}"><img src="${ICO(TIERICO[t.n])}" alt=""></div>
+    ${tierChanged?`<div class="rowwrap"><div class="row">${row}</div></div>`:''}
+    <div class="disp h1">${tierChanged?`You are ${t.n}.`:`Level ${to}.`}</div>
+    <div class="prize"><img src="${ICO(iconFor(tierChanged?t.keep:rw.txt))}" alt=""><div><span class="mono">UNLOCKED</span><b>${tierChanged?t.keep:rw.txt}</b></div></div>
+    ${to-from>1?`<p>And ${to-from-1} more level${to-from>2?'s':''} on the way up.</p>`:''}
+    <button class="btn pig wide" id="okl">Continue</button></div>`;
+  if(tierChanged){const rowEl=ov.querySelector('.row');const idx=TIERS.findIndex(x=>x.n===t.n);
+    requestAnimationFrame(()=>{const imgs=[...rowEl.children];const target=imgs[idx];const off=target.offsetLeft+target.offsetWidth/2;rowEl.style.transform=`translateX(${-off}px)`})}
+  const lvto=$('#lvto');const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/700);lvto.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f);
+  setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');ov.querySelector('.rays').classList.add('go');const [x,y]=centerOf(ov.querySelector('.medal'));burst(x,y,tierChanged?90:60,false)},300);
+  setTimeout(()=>{const [x,y]=centerOf(ov.querySelector('.prize'));burst(x,y,24,false)},1100);
   $('#okl').onclick=()=>{ov.hidden=true;render()}}
 
 // ── The Spin: one per order. Always lands on something. ──

@@ -12,3 +12,8 @@ img/cut/
 img/gen/
 img/ref2/
 img/hd/
+
+# icon render originals stay local
+img/icons/_src/
+img/icons/_v1/
+fonts/try2/
