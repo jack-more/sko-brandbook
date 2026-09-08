@@ -46,8 +46,8 @@ const U={spend:3180,tokens:1240,streak:41,refs:2,stamps:3,used:[],mult:1};
 let view='road';
 
 // ── tokens flying ──
-function burst(x,y,n=26,toBal=true){const b=$('#burst');const app=$('#app').getBoundingClientRect();const bal=$('#bal').getBoundingClientRect();const tx=bal.left-app.left+bal.width/2,ty=bal.top-app.top+bal.height/2;
-  for(let i=0;i<n;i++){const im=document.createElement('img');im.src=IMG+'loyalty/token.png';b.appendChild(im);
+function burst(x,y,n=40,toBal=true){const b=$('#burst');const app=$('#app').getBoundingClientRect();const bal=$('#bal').getBoundingClientRect();const tx=bal.left-app.left+bal.width/2,ty=bal.top-app.top+bal.height/2;
+  for(let i=0;i<n;i++){const im=document.createElement('img');im.src=IMG+'loyalty/token.png';im.style.width=im.style.height=(22+Math.random()*22)+'px';b.appendChild(im);
     const a=Math.random()*Math.PI*2,sp=4+Math.random()*9;let px=x,py=y,vx=Math.cos(a)*sp,vy=Math.sin(a)*sp-6,rot=Math.random()*360,t=0;const life=42+Math.random()*20;
     const step=()=>{t++;if(t<life){vy+=.42;px+=vx;py+=vy;rot+=vx*3;im.style.transform=`translate(${px}px,${py}px) rotate(${rot}deg)`;im.style.opacity=1;requestAnimationFrame(step)}
       else if(toBal&&t<life+22){const k=(t-life)/22;const e=k*k;px+=(tx-px)*e*.5;py+=(ty-py)*e*.5;im.style.transform=`translate(${px}px,${py}px) scale(${1-k*.6})`;im.style.opacity=1-k*.4;requestAnimationFrame(step)}
@@ -63,15 +63,17 @@ function order(amount,mult=1){const before=levelOf(U.spend),bt=tierOf(before);co
   U.spend+=amount;const after=levelOf(U.spend),at=tierOf(after);
   collect(got,()=>{U.tokens+=got;header();if(after>before){levelUp(before,after,bt!==at)}else render()})}
 function collect(got,then){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';
-  ov.innerHTML=`<div class="sweep"></div><div class="ov"><div class="mono">TOKENS EARNED</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>Every dollar is a token. Tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
+  ov.innerHTML=`<div class="sweep"></div><div class="ov"><img class="bigtoken" src="${IMG}loyalty/token.png" alt=""><div class="mono">TOKENS EARNED</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>Every dollar is a token. Tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
   const [x,y]=centerOf(ov.querySelector('#cnt'));setTimeout(()=>{burst(x,y,44,false);ov.querySelector('.sweep').classList.add('go');tick(ov.querySelector('#cnt'),0,got,1100,'',' ')},80);
   ov.querySelector('#cnt').innerHTML='0 <em>TOKENS</em>';
   const cnt=ov.querySelector('#cnt');const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(got*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};setTimeout(()=>requestAnimationFrame(f),80);
   $('#okc').onclick=()=>{const [bx,by]=centerOf($('#okc'));burst(bx,by,30,true);ov.hidden=true;then()}}
 function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';const t=tierOf(to);const rw=rewardFor(to);
   const row=TIERS.map(x=>`<img src="${IMG+x.img}" class="${x.from<=to?(x.n===t.n&&tierChanged?'new':'done'):''}" alt="${x.n}">`).join('');
-  ov.innerHTML=`<div class="sweep"></div><div class="ov"><div class="mono">${tierChanged?'YOU MOVED UP':'LEVEL UP'}</div><div class="row">${row}</div><div class="disp h1">${tierChanged?`You are ${t.n}.`:`Level ${to}.`}</div><p>${tierChanged?t.keep+'. It ships this week.':'Unlocked: '+rw.txt+'.'}${to-from>1?` And ${to-from-1} more level${to-from>2?'s':''} on the way up.`:''}</p><button class="btn" id="okl">Continue</button></div>`;
-  setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(ov.querySelector('.row'));burst(x,y,40,false)},350);
+  ov.innerHTML=`<div class="sweep"></div><div class="ov"><div class="mono">${tierChanged?'YOU MOVED UP':'LEVEL UP'}</div><div class="rowwrap"><div class="row">${row}</div></div><div class="disp h1">${tierChanged?`You are ${t.n}.`:`Level ${to}.`}</div><p>${tierChanged?t.keep+'. It ships this week.':'Unlocked: '+rw.txt+'.'}${to-from>1?` And ${to-from-1} more level${to-from>2?'s':''} on the way up.`:''}</p><button class="btn" id="okl">Continue</button></div>`;
+  const rowEl=ov.querySelector('.row');const idx=TIERS.findIndex(x=>x.n===t.n);
+  requestAnimationFrame(()=>{const imgs=[...rowEl.children];const target=imgs[idx];const off=target.offsetLeft+target.offsetWidth/2;rowEl.style.transform=`translateX(${-off}px)`});
+  setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(ov.querySelector('.row'));burst(x,y,60,false)},350);
   $('#okl').onclick=()=>{ov.hidden=true;render()}}
 
 // ── views ──

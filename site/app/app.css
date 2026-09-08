@@ -94,14 +94,15 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 /* overlays: collect and level up */
 .overlay{position:absolute;inset:0;z-index:20;background:#fff;display:grid;place-items:center;text-align:center;padding:24px}
 .overlay[hidden]{display:none}
-.ov{display:grid;justify-items:center;gap:14px;max-width:360px}
+.ov{display:grid;justify-items:center;gap:14px;width:100%;max-width:380px}
 .ov .mono{color:var(--pig)}
-.ov .disp.h1{font-size:22px;line-height:1.05}
+.ov .disp.h1{font-size:20px;line-height:1.1;max-width:100%;overflow-wrap:anywhere}
 .ov .cnt{font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
 .ov .cnt em{font-style:normal;font-size:.3em;color:var(--mute);letter-spacing:.14em}
 .ov p{color:var(--mute);font-size:13px;line-height:1.55}
-.ov .row{display:flex;gap:10px;align-items:flex-end;justify-content:center;height:120px}
-.ov .row img{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line);opacity:.35;filter:grayscale(1);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.ov .rowwrap{width:100%;overflow:hidden;height:124px}
+.ov .row{display:flex;gap:12px;align-items:flex-end;justify-content:flex-start;height:120px;padding:0 0 4px;transition:transform .7s cubic-bezier(.2,.8,.2,1);will-change:transform;width:max-content;margin-left:50%}
+.ov .row img{flex:none;width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line);opacity:.35;filter:grayscale(1);transition:all .5s cubic-bezier(.2,.8,.2,1)}
 .ov .row img.done{opacity:1;filter:none}
 .ov .row img.new{width:104px;height:104px;opacity:1;filter:none;box-shadow:0 0 0 3px var(--navy),0 24px 60px rgba(2,11,119,.35);animation:land .7s cubic-bezier(.2,.9,.2,1.2)}
 @keyframes land{from{transform:translateY(-140px) scale(.6);opacity:0}to{transform:none;opacity:1}}
@@ -119,3 +120,7 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 .band{background:var(--navy);color:#fff;padding:12px 14px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .band .disp{font-size:12px}.band .mono{color:var(--frost);font-size:8.5px;text-align:right}
 .band+.card{margin-top:0}
+
+.bigtoken{width:150px;height:150px;object-fit:contain;filter:drop-shadow(0 26px 40px rgba(2,11,119,.3));animation:spin 6s linear infinite}
+@keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.burst img{filter:drop-shadow(0 6px 10px rgba(2,11,119,.35))}
