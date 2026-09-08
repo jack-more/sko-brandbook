@@ -130,18 +130,18 @@ if(cg){load().then(({prods,man})=>{const lead={'Recovery':'bpc-157','Skin & hair
 // Keeping them apart is what lets the top level sit at $150,000 without breaking the ladder.
 // Every threshold and reward below is a first pass. Billy sets the real ones.
 const LEVELS=[
- {k:'emboss', n:'Embossed', at:0,      img:'badge-emboss',  keep:'The badge, blind-embossed, on the box',
-  u:['Points on every order, 1 per $1','Order history and batch tracking','Your first badge sticker in the box']},
- {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The badge, pressed into the cap',
-  u:['Free shipping, every order, forever','Your referral link unlocks','A reminder before every live, and the streak that comes with it']},
- {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The badge, foil-stamped, in the box',
-  u:['5% back in points','The Live Deal code, ten minutes before the live opens','A foil sticker pack and the chrome token pin']},
- {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'A cast chrome badge, shipped to you',
-  u:['10% back in points','Claim the Live Deal even if you missed the live','The cast chrome badge, the real object']},
- {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed',
-  u:['15% back in points','A Full Box on your birthday, every year','The Isometrica print of your most-ordered compound']},
- {k:'bracelet',n:'The Bracelet',at:150000,img:'bracelet',   keep:'The championship bracelet',
-  u:['20% back in points','Your name read out on the live, every week you order','The chrome championship bracelet, made once, for you']},
+ {k:'emboss', n:'Embossed', at:0,      img:'badge-emboss',  keep:'A foil sticker sheet, day one',
+  u:['100 tokens on the board, day one','1 token per $1, every order','A foil badge sticker sheet in your first box']},
+ {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The chrome token pin, shipped',
+  u:['Free shipping, every order, forever','Your referral link unlocks','The chrome token pin, shipped to you']},
+ {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The SKO chrome cap',
+  u:['5% back in tokens','The Live Deal code ten minutes early','The SKO chrome cap, shipped']},
+ {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'The cast chrome badge for your desk',
+  u:['10% back in tokens','Claim the Live Deal even if you missed the live','The cast chrome badge, the real object']},
+ {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed at 60 inches',
+  u:['15% back in tokens','A Full Box every birthday','The Isometrica print of your most-ordered compound']},
+ {k:'bracelet',n:'The Bracelet',at:150000,img:'bracelet',   keep:'The championship bracelet, by hand',
+  u:['20% back in tokens, for life','Dinner in Los Angeles with the founders','The chrome championship bracelet, made once, delivered by hand']},
 ];
 const EARN=[
  ['Every order','1 point per $1 spent','1×'],

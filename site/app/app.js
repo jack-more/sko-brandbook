@@ -8,12 +8,12 @@ function iconFor(txt){const t=txt.toLowerCase();
   if(/bundle|pair/.test(t))return 'box-open';if(/box cycle|full box/.test(t))return 'shelf';if(/mystery/.test(t))return 'mystery';if(/code/.test(t))return 'code';if(/shipping/.test(t))return 'shipping';
   if(/batch|early/.test(t))return 'ticket';if(/double|multiplier/.test(t))return 'token';if(/live|stamp/.test(t))return 'stamp';if(/refer|creator|shout/.test(t))return 'refer';return 'box'}
 const TIERS=[
- {n:'Embossed',from:1, at:0,     img:'edition3/badge-emboss.jpg',  keep:'The badge, blind-embossed on the box'},
- {n:'Pressed', from:9, at:500,   img:'edition3/badge-cap.jpg',     keep:'The badge, pressed into the cap'},
- {n:'Foil',    from:17,at:2500,  img:'edition3/badge-foil.jpg',    keep:'The foil badge, in the box'},
- {n:'Chrome',  from:25,at:10000, img:'edition3/badge-cast.jpg',    keep:'A cast chrome badge, shipped'},
- {n:'Pigment', from:33,at:40000, img:'edition3/badge-pigment.jpg', keep:'Your compound, printed'},
- {n:'The Bracelet',from:50,at:150000,img:'loyalty/bracelet-w.jpg', keep:'The championship bracelet'},
+ {n:'Embossed',from:1, at:0,     img:'edition3/badge-emboss.jpg',  keep:'A foil sticker sheet and 100 tokens, day one'},
+ {n:'Pressed', from:9, at:500,   img:'edition3/badge-cap.jpg',     keep:'The chrome token pin, shipped'},
+ {n:'Foil',    from:17,at:2500,  img:'edition3/badge-foil.jpg',    keep:'The SKO chrome cap'},
+ {n:'Chrome',  from:25,at:10000, img:'edition3/badge-cast.jpg',    keep:'The cast chrome badge for your desk'},
+ {n:'Pigment', from:33,at:40000, img:'edition3/badge-pigment.jpg', keep:'Your compound printed at 60 inches, and a Full Box every birthday'},
+ {n:'The Bracelet',from:50,at:150000,img:'loyalty/bracelet-w.jpg', keep:'The championship bracelet, delivered by hand'},
 ];
 // 50 levels. Thresholds interpolate geometrically between the tier anchors, so every early order levels you up.
 const LEVELS=(()=>{const L=[];const A=[[1,0],[2,40],[9,500],[17,2500],[25,10000],[33,40000],[50,150000]];
