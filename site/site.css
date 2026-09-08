@@ -238,12 +238,13 @@ footer .mono{color:var(--mute)}
 
 /* the category band: a way in, right under the hero */
 .catband{padding-top:clamp(28px,4vw,56px)}
-.catgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.catgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+@media(max-width:1100px){.catgrid{grid-template-columns:repeat(4,1fr)}}
 .catcard{display:block;border:1px solid var(--line);padding:14px 14px 16px;background:#fff;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
 .catcard:hover,.catcard.on{transform:translateY(-4px);box-shadow:0 18px 40px rgba(2,11,119,.12);border-color:var(--navy)}
 .catcard .cim{aspect-ratio:1;position:relative;display:grid;place-items:center;overflow:hidden}
-.catcard .cim img{height:78%;width:auto;max-width:80%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(2,11,119,.14));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.catcard .cim img{max-height:78%;max-width:80%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(2,11,119,.14));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .catcard:hover .cim img{transform:translateY(-6px)}
 .catcard .cname{font-size:11px;margin-top:8px;line-height:1.2}
 .catcard .mono{font-size:9px;margin-top:4px}
-@media(max-width:640px){.catgrid{grid-template-columns:repeat(3,1fr);gap:8px}.catcard{padding:10px}.catcard .cname{font-size:9px}}
+@media(max-width:640px){.catgrid{grid-template-columns:repeat(2,1fr);gap:8px}.catcard{padding:10px}.catcard .cname{font-size:9px}}
