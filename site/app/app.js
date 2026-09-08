@@ -155,9 +155,16 @@ function wireRoad(){const tr=$('#track'),knob=$('#knob'),fill=$('#sfill'),what=$
   $('#reset').onclick=()=>{U.spend=0;U.tokens=100;U.spins=1;header();render()};
   const ts=$('#tospin');if(ts)ts.onclick=()=>spinView()}
 
-function shelf(){return `${band('The shelf','TOKENS BUY PEPTIDES · A BOX ARRIVES')}${SHELF.map((x,i)=>`<div class="sh${U.tokens>=x.p?' ok':''}"><img src="${ICO(iconFor(x.n+' '+x.w))}" alt=""><div class="t"><div class="mono">${fmt(x.p)} TOKENS</div><b>${x.n}</b>${x.w}</div><button class="btn" data-r="${i}"${U.tokens>=x.p?'':' disabled'}>${U.tokens>=x.p?'Redeem':fmt(x.p-U.tokens)+' to go'}</button></div>`).join('')}
-  ${band('The vault','FIVE KINDS OF CODE')}<div class="card"><div class="vin"><input id="vin" placeholder="ENTER A CODE" spellcheck="false"><button class="btn" id="vgo">Reveal</button></div><div class="vout" id="vout"><div class="mono mute">LIVE · CREATOR · IN THE BOX · MULTIPLIER · MYSTERY</div></div><div class="tries">${Object.keys(CODES).map(c=>`<button data-c="${c}">${c}</button>`).join('')}</div></div>`}
-function wireShelf(){document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>redeem(SHELF[+b.dataset.r]));
+function shelf(){const can=SHELF.filter(x=>U.tokens>=x.p),cant=SHELF.filter(x=>U.tokens<x.p);
+  const next=cant[0];
+  const row=(x,ok)=>{const i=SHELF.indexOf(x);const pc=ok?100:Math.round(U.tokens/x.p*100);
+    return `<div class="sh${ok?' ok':''}"><img src="${ICO(iconFor(x.n+' '+x.w))}" alt=""><div class="t"><b>${x.n}</b><span>${x.w}</span><div class="shbar"><i style="width:${pc}%"></i></div><div class="mono cost">${fmt(x.p)} TOKENS${ok?'':' · '+fmt(x.p-U.tokens)+' TO GO'}</div></div><button class="btn${ok?' pig':''}" data-r="${i}"${ok?'':' disabled'}>${ok?'Redeem':'Locked'}</button></div>`};
+  return `<div class="card balcard"><img src="${IMG}loyalty/token.png" alt=""><div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="mono strong pig">${can.length?`${can.length} REWARD${can.length===1?'':'S'} READY TO REDEEM`:next?`${fmt(next.p-U.tokens)} MORE TO YOUR FIRST REWARD`:'TOKENS NEVER EXPIRE'}</div></div></div>
+  ${can.length?band('Redeem now','TOKENS NEVER EXPIRE')+can.map(x=>row(x,true)).join(''):''}
+  ${cant.length?band('Keep earning','$1 SPENT = 1 TOKEN')+cant.slice(0,3).map(x=>row(x,false)).join('')+(cant.length>3?`<div id="rest" hidden>${cant.slice(3).map(x=>row(x,false)).join('')}</div><button class="more" id="showall">Show the other ${cant.length-3} rewards · up to ${fmt(cant[cant.length-1].p)} tokens</button>`:''):''}
+  ${band('The vault','ENTER A CODE')}<div class="card"><div class="vin"><input id="vin" placeholder="ENTER A CODE" spellcheck="false"><button class="btn" id="vgo">Reveal</button></div><div class="vout" id="vout"><div class="mono mute">LIVE · CREATOR · IN THE BOX · MULTIPLIER · MYSTERY</div></div><div class="tries">${Object.keys(CODES).map(c=>`<button data-c="${c}">${c}</button>`).join('')}</div></div>`}
+function wireShelf(){const sa=$('#showall');if(sa)sa.onclick=()=>{$('#rest').hidden=false;sa.remove()};
+  document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>redeem(SHELF[+b.dataset.r]));
   const rv=code=>{const k=code.trim().toUpperCase(),c=CODES[k],o=$('#vout');if(!c){o.innerHTML='<div class="mono mute">NOT A CODE</div><p style="font-size:12px;margin-top:6px">Check the box, the live, or your email.</p>';return}
     if(U.used.includes(k)){o.innerHTML='<div class="mono mute">ALREADY USED</div>';return}U.used.push(k);let w=c.w,t=c.t;if(!w){const m=MYST[Math.floor(Math.random()*MYST.length)];w=m[0];t=m[1]}
     o.innerHTML=`<div class="mono" style="color:var(--pig)">${c.k} CODE · ${k}</div><div class="disp">${w}</div><div class="mono mute" style="margin-top:6px">${U.used.length} OF 5 TOWARD THE MYSTERY BOX</div>`;
@@ -176,7 +183,10 @@ function redeem(item){const m=$('#view');m.innerHTML=`${band('Redeem','DRAG THE 
       const [x,y]=centerOf(ov.querySelector('.h1'));burst(x,y,36,false);$('#okr').onclick=()=>{ov.hidden=true;go('shelf')}},700)}
   $('#rback').onclick=()=>go('shelf')}
 
-function missions(){return `${band('Missions','DO THIS, GET THAT')}${MISSIONS.map((m,i)=>{const done=m.have>=m.need;return `<div class="mis${done?' done':''}"><img class="mico" src="${ICO(iconFor(m.rt))}" alt=""><span class="chip mono">${m.c}</span><div class="n">${m.n}</div><div class="mono r">${m.rt.toUpperCase()}</div><div class="bar"><i style="width:${Math.round(m.have/m.need*100)}%"></i></div><div class="row"><span class="mono mute">${m.have} / ${m.need}</span>${done?(m.claimed?'<span class="mono" style="color:var(--pig)">CLAIMED</span>':`<button class="btn" data-m="${i}">Claim</button>`):`<button class="btn ghost" data-do="${i}">Do it</button>`}</div></div>`}).join('')}`}
+function missions(){const cats=[...new Set(MISSIONS.map(m=>m.c))];
+  const card=m=>{const i=MISSIONS.indexOf(m),done=m.have>=m.need,pc=Math.round(m.have/m.need*100);
+    return `<div class="mis${done?' done':''}"><img class="mico" src="${ICO(iconFor(m.rt))}" alt=""><div class="mt"><div class="n">${m.n}</div><div class="mono r">${m.rt.toUpperCase()}</div><div class="bar"><i style="width:${pc}%"></i></div><div class="mono cnt">${m.have} OF ${m.need}</div></div>${done?(m.claimed?'<span class="mono claimed">CLAIMED</span>':`<button class="btn pig" data-m="${i}">Claim</button>`):`<button class="btn ghost" data-do="${i}">Do it</button>`}</div>`};
+  return cats.map(c=>{const g=MISSIONS.filter(m=>m.c===c),open=g.filter(m=>!m.claimed).length;return band(c.charAt(0)+c.slice(1).toLowerCase(),`${open} OPEN`)+g.map(card).join('')}).join('')}
 function wireMissions(){document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=MISSIONS[+b.dataset.m];m.claimed=true;const [x,y]=centerOf(b);burst(x,y,30,!!m.r);if(m.r){U.tokens+=m.r;header()}render()});
   document.querySelectorAll('[data-do]').forEach(b=>b.onclick=()=>{const m=MISSIONS[+b.dataset.do];m.have=Math.min(m.need,m.have+1);const [x,y]=centerOf(b);burst(x,y,10,false);render()})}
 
@@ -189,7 +199,7 @@ function wireLive(){$('#stamp').onclick=e=>{U.stamps=Math.min(8,U.stamps+1);cons
 function refer(){return `${band('Refer','THEY GET 15% · YOU GET 350')}
   <div class="card"><div class="mono mute">YOUR LINK</div><div class="link mono" style="margin-top:8px">skocompounds.com/r/<b>J-MORELLO-8F2</b><button id="copy">COPY</button></div><div class="mono mute" style="margin-top:10px">${U.refs} ORDERED · ${U.refs*350} TOKENS EARNED · IT PAYS WHEN THEIR ORDER SHIPS</div></div>
   <div class="card"><div class="h"><div class="disp">The ladder</div><span class="mono mute">BY REFERRALS WHO ORDER</span></div><div class="lad">${LADDER.map(([n,r])=>`<div class="${U.refs>=n?'done':''}"><b>${n}</b><span><img class="lico" src="${ICO(iconFor(r))}" alt="">${r}</span><i>${U.refs>=n?'EARNED':(n-U.refs)+' TO GO'}</i></div>`).join('')}</div></div>
-  <div class="card"><div class="h"><div class="disp">This month</div><span class="mono mute">READ OUT ON THE LIVE</span></div><div class="lb">${LB.map(([n,l,c],i)=>`<div><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${c} ORDERED</span></div>`).join('')}</div></div>`}
+  <div class="card"><div class="h"><div class="disp">This month</div><span class="mono mute">READ OUT ON THE LIVE</span></div><div class="lb">${[...LB,['J. Morello',tierOf(levelOf(U.spend)).n,U.refs]].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).sort((a,b)=>b[2]-a[2]).map(([n,l,c],i)=>`<div class="${n==='J. Morello'?'me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${c} ORDERED</span></div>`).join('')}</div></div>`}
 function wireRefer(){$('#copy').onclick=e=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');e.target.textContent='COPIED'}}
 
 const V={road:[road,wireRoad],shelf:[shelf,wireShelf],missions:[missions,wireMissions],live:[live,wireLive],refer:[refer,wireRefer]};
