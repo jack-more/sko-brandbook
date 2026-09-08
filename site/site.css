@@ -570,3 +570,5 @@ footer .mono{color:var(--mute)}
 @media(max-width:900px){.cta3{grid-template-columns:1fr}.railtrack{height:120px;margin:22px 20px 0}.rn{width:70px}.rn img{width:44px;height:44px}.rn em{display:none}.rn span{font-size:7px}.railwhat{text-align:left}}
 
 .rstrip{margin-top:14px}.llog>div:first-child{border-top:0}
+
+@media(max-width:900px){.railme span{display:none}.railme:before{width:20px;height:20px}.railme{top:26px}.railfoot{font-size:8px}.railfoot span:nth-child(2){display:none}.rail .lsim{gap:6px}.rail .lsim button{padding:8px 9px;font-size:9px}}
