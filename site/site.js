@@ -121,35 +121,99 @@ if(cg){load().then(({prods,man})=>{const lead={'Recovery':'bpc-157','Skin & hair
 
 
 
-// ── The Badge: five levels, the card, the simulator ────────────────
-// Thresholds and rewards are a first pass. Billy sets the real ones.
+
+// ── The Badge ─────────────────────────────────────────────────────
+// Two separate things, on purpose:
+//   POINTS are the currency. 1 per $1. You spend them.
+//   LEVEL is lifetime spend. It is status, it is permanent, and it is never spent.
+// Keeping them apart is what lets the top level sit at $150,000 without breaking the ladder.
+// Every threshold and reward below is a first pass. Billy sets the real ones.
 const LEVELS=[
- {k:'emboss', n:'Embossed', at:0,    img:'badge-emboss',  u:['Points on every order','Order history and tracking','The badge sticker in your first box']},
- {k:'cap',    n:'Pressed',  at:250,  img:'badge-cap',     u:['Free shipping, every order','Your referral link unlocks','Early notice when a batch lands']},
- {k:'foil',   n:'Foil',     at:750,  img:'badge-foil',    u:['5% back in points','First access to new compounds','Foil badge sticker in the box']},
- {k:'cast',   n:'Chrome',   at:1500, img:'badge-cast',    u:['10% back in points','Batch COAs before they are public','A cast chrome badge, shipped to you']},
- {k:'pigment',n:'Pigment',  at:3000, img:'badge-pigment', u:['15% back in points','Reserve a vial from a batch before release','The Isometrica print of your most-ordered compound']},
+ {k:'emboss', n:'Embossed', at:0,      img:'badge-emboss',  keep:'The badge, blind-embossed, on the box',
+  u:['Points on every order, 1 per $1','Order history and batch tracking','Your first badge sticker in the box']},
+ {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The badge, pressed into the cap',
+  u:['Free shipping, every order, forever','Your referral link unlocks','First notice when a batch lands']},
+ {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The badge, foil-stamped, in the box',
+  u:['5% back in points','First access to a new compound before launch','A second badge sticker, foil']},
+ {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'A cast chrome badge, shipped to you',
+  u:['10% back in points','Batch COAs before they go public','The cast chrome badge, the real object']},
+ {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed',
+  u:['15% back in points','Reserve a vial from a batch before release','The Isometrica print of your most-ordered compound']},
+ {k:'bracelet',n:'The Bracelet',at:150000,img:'bracelet',   keep:'The championship bracelet',
+  u:['20% back in points','A standing reservation on every batch','The chrome championship bracelet, made once, for you']},
 ];
+const EARN=[
+ ['Every order','1 point per $1 spent','1×'],
+ ['Account created','You start on the board, never at zero','+100'],
+ ['First order','Once','+50'],
+ ['A box on a cadence','Every cycle, while the box is active','1.5×'],
+ ['A review with a photo','One per compound','+75'],
+ ['A referral joins','They open an account from your link','+100'],
+ ['Their first order ships','The one that pays for the programme','+250'],
+ ['Ordering inside 60 days','Keeps the streak, and the multiplier on it','1.25×'],
+];
+const SPEND=[
+ [250,'$25 off any order'],[500,'Bacteriostatic water, free, any order'],
+ [1000,'$110 off, or any single vial under $110'],[2000,'A bundle of your choice, free'],
+ [3500,'A Build a Box cycle, free'],
+];
+const fmt=n=>n.toLocaleString('en-US');
+const levelAt=spend=>{let i=0;LEVELS.forEach((t,j)=>{if(spend>=t.at)i=j});return i};
+const badgeSrc=(k,hd)=>k==='bracelet'?`../img/loyalty/bracelet${hd?'':'-w'}.jpg`:`../img/${hd?'products/web/hd':'edition3'}/${k}.jpg`;
+
+// the ladder, on the programme page
 const lgrid=document.querySelector('#lgrid');
 if(lgrid){
-  const HD=k=>`../img/products/web/hd/${k}.jpg`;
-  let pts=980; // where the demo starts, so the bar is never empty
-  lgrid.innerHTML=LEVELS.map((t,i)=>`<div class="lstep" data-k="${t.k}"><img src="${HD(t.img)}" alt="${t.n}"><div class="lt"><div class="lvl">LEVEL ${String(i+1).padStart(2,'0')}</div><h3>${t.n}</h3><div class="lat">${t.at?t.at.toLocaleString()+' PTS':'ON SIGN-UP'}</div></div><ul>${t.u.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
-  const badge=document.getElementById('lbadge'),name=document.getElementById('ltiername'),ptsEl=document.getElementById('lpts'),fill=document.getElementById('lfill'),nextL=document.getElementById('lnextlabel'),unlock=document.getElementById('lunlock');
+  lgrid.innerHTML=LEVELS.map((t,i)=>`<div class="lstep${t.k==='bracelet'?' apex':''}" data-k="${t.k}">
+    <div class="lsim2"><img src="${badgeSrc(t.img,true)}" alt="${t.n}"></div>
+    <div class="lt"><div class="lvl">LEVEL ${String(i+1).padStart(2,'0')}</div><h3>${t.n}</h3>
+    <div class="lat">${t.at?'$'+fmt(t.at)+' LIFETIME':'ON SIGN-UP'}</div></div>
+    <ul>${t.u.map(x=>`<li>${x}</li>`).join('')}</ul>
+    <div class="lkeep mono"><b>YOU KEEP</b>${t.keep}</div></div>`).join('');
+}
+const etab=document.querySelector('#etable');
+if(etab)etab.innerHTML=EARN.map(([a,b,c])=>`<div><b>${a}</b><span>${b}</span><i class="mono">${c}</i></div>`).join('');
+const stab=document.querySelector('#stable');
+if(stab)stab.innerHTML=SPEND.map(([p,w])=>`<div><b class="mono">${fmt(p)} PTS</b><span>${w}</span></div>`).join('');
+
+// the card and the progress page
+const lcardEl=document.querySelector('#lcard');
+if(lcardEl){
+  // the demo account. A real one comes from the store.
+  const U={name:'J. Morello',points:1240,spend:3180,streak:41,ref:'J-MORELLO-8F2',
+    log:[['08 SEP','Order · GHK-Cu, TB-500','+88'],['02 SEP','Referral first order · A. Chen','+250'],
+         ['02 SEP','Referral joined · A. Chen','+100'],['24 AUG','Box cycle 04 · 1.5×','+207'],
+         ['24 AUG','Review with photo · BPC-157','+75'],['11 AUG','Order · Semax','+54']]};
+  const badge=document.getElementById('lbadge'),name=document.getElementById('ltiername'),ptsEl=document.getElementById('lpts'),
+        fill=document.getElementById('lfill'),nextL=document.getElementById('lnextlabel'),unlock=document.getElementById('lunlock'),
+        spendEl=document.getElementById('lspend'),ring=document.getElementById('lring');
   function render(){
-    let i=0; LEVELS.forEach((t,j)=>{if(pts>=t.at)i=j});
-    const t=LEVELS[i],nx=LEVELS[i+1];
-    badge.src=`../img/edition3/${t.img}.jpg`;
+    const i=levelAt(U.spend),t=LEVELS[i],nx=LEVELS[i+1];
+    badge.src=badgeSrc(t.img);badge.alt=t.n;
     name.textContent=`${t.n.toUpperCase()} · LEVEL ${String(i+1).padStart(2,'0')}`;
-    ptsEl.textContent=pts.toLocaleString();
-    const top=LEVELS[LEVELS.length-1].at;
-    fill.style.width=Math.min(100,(pts/top)*100)+'%';
-    nextL.textContent=nx?`${(nx.at-pts).toLocaleString()} POINTS TO ${nx.n.toUpperCase()}`:'TOP LEVEL · EVERY UNLOCK IS YOURS';
-    unlock.textContent=nx?'NEXT: '+nx.u.join(' · ').toUpperCase():t.u.join(' · ').toUpperCase();
-    lgrid.querySelectorAll('.lstep').forEach(el=>el.classList.toggle('on',el.dataset.k===t.k));
+    ptsEl.textContent=fmt(U.points);
+    if(spendEl)spendEl.textContent='$'+fmt(U.spend);
+    const from=t.at,to=nx?nx.at:t.at,pct=nx?Math.max(4,Math.min(100,((U.spend-from)/(to-from))*100)):100;
+    fill.style.width=pct+'%';
+    if(ring)ring.style.setProperty('--p',pct+'%');
+    nextL.textContent=nx?`$${fmt(nx.at-U.spend)} TO ${nx.n.toUpperCase()}`:'TOP LEVEL · EVERY UNLOCK IS YOURS';
+    unlock.textContent=nx?'UNLOCKS NEXT: '+nx.u[0].toUpperCase()+' · '+nx.keep.toUpperCase():t.keep.toUpperCase();
+    document.querySelectorAll('.ltrack .ln').forEach((el,j)=>{el.classList.toggle('done',j<=i);el.classList.toggle('now',j===i)});
+    const rl=document.getElementById('lreflock');
+    if(rl)rl.hidden=i>=1;
+    const rp=document.getElementById('lrefopen');
+    if(rp)rp.hidden=i<1;
   }
-  document.querySelectorAll('.lsim button').forEach(b=>b.onclick=()=>{pts=b.id==='lreset'?100:pts+ +b.dataset.p;render()});
+  const track=document.querySelector('.ltrack');
+  if(track)track.innerHTML=LEVELS.map((t,i)=>`<div class="ln"><img src="${badgeSrc(t.img)}" alt=""><span class="mono">${t.n}</span><em class="mono">${t.at?'$'+fmt(t.at):'JOIN'}</em></div>`).join('');
+  const log=document.querySelector('#llog');
+  if(log)log.innerHTML=U.log.map(([d,w,p])=>`<div><i class="mono">${d}</i><span>${w}</span><b class="mono">${p}</b></div>`).join('');
+  const shelf=document.querySelector('#lshelf');
+  if(shelf)shelf.innerHTML=SPEND.map(([p,w])=>`<div class="sh${U.points>=p?' ok':''}"><div class="mono">${fmt(p)} PTS</div><div class="shw">${w}</div><button class="btn small"${U.points>=p?'':' disabled'}>${U.points>=p?'Redeem':fmt(p-U.points)+' to go'}</button></div>`).join('');
+  document.querySelectorAll('.lsim button').forEach(b=>b.onclick=()=>{
+    if(b.id==='lreset'){U.points=100;U.spend=0}else{U.spend+= +b.dataset.p;U.points+=Math.round(+b.dataset.p*(b.dataset.m||1))}
+    render();if(shelf)shelf.innerHTML=SPEND.map(([p,w])=>`<div class="sh${U.points>=p?' ok':''}"><div class="mono">${fmt(p)} PTS</div><div class="shw">${w}</div><button class="btn small"${U.points>=p?'':' disabled'}>${U.points>=p?'Redeem':fmt(p-U.points)+' to go'}</button></div>`).join('')});
   const copy=document.querySelector('.lreflink button');
-  if(copy)copy.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');copy.textContent='COPIED'};
+  if(copy)copy.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/'+U.ref);copy.textContent='COPIED'};
   render();
 }
