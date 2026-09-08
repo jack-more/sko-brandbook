@@ -526,3 +526,45 @@ footer .mono{color:var(--mute)}
 .leaderboard>div.me{background:#f6f8fd;margin:0 -8px;padding:11px 8px}
 @media(max-width:1100px){.ways{grid-template-columns:repeat(3,1fr)}.mboard{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:800px){.ways{grid-template-columns:1fr}.golden{grid-template-columns:1fr}.gstats{grid-template-columns:1fr}.mboard{grid-template-columns:1fr}.stamps{grid-template-columns:repeat(3,1fr)}.vin{grid-template-columns:1fr}.leaderboard>div{grid-template-columns:28px 1fr auto}.leaderboard em{grid-column:2/4}}
+
+/* ── the rail ───────────────────────────────────────────────────── */
+.rail{border:1px solid var(--line);padding:clamp(18px,3vw,28px) clamp(18px,3vw,28px) 14px;margin-top:14px;background:#fff}
+.railh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.railtitle{font-size:clamp(16px,1.8vw,26px);margin-top:6px}
+.railwhat{color:var(--pig);text-align:right}
+.railtrack{position:relative;height:150px;margin:26px 34px 0}
+.railtrack:before{content:"";position:absolute;left:0;right:0;top:34px;height:4px;background:#e6ecf7}
+.railfill{position:absolute;left:0;top:34px;height:4px;background:var(--navy);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.railwhatif{position:absolute;top:34px;height:4px;background:var(--pig);opacity:.9}
+.railwhatif.back{background:#c9d6ee}
+.railnodes{position:absolute;inset:0;pointer-events:none}
+.rn{position:absolute;top:0;transform:translateX(-50%);display:grid;justify-items:center;gap:6px;width:110px;text-align:center}
+.rn img{width:68px;height:68px;border-radius:50%;object-fit:cover;background:#fff;filter:grayscale(1);opacity:.32;box-shadow:0 0 0 1px var(--line);transition:filter .4s,opacity .4s,box-shadow .4s,transform .4s}
+.rn.done img{filter:none;opacity:1;box-shadow:0 0 0 2px var(--navy)}
+.rn.peek img{filter:none;opacity:1;box-shadow:0 0 0 2px var(--pig);transform:scale(1.06)}
+.rn span{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}.rn.done span,.rn.peek span{color:var(--navy)}
+.rn em{font-style:normal;font-size:8.5px;color:var(--mute);letter-spacing:.1em}
+.rm{position:absolute;top:29px;transform:translateX(-50%)}
+.rm i{display:block;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--pig)}
+.rm span{position:absolute;left:50%;top:22px;transform:translateX(-50%);white-space:nowrap;font-size:7.5px;letter-spacing:.1em;color:var(--pig);text-align:center;line-height:1.5;opacity:0;transition:opacity .2s}
+.rm:hover span{opacity:1}
+.railme{position:absolute;top:22px;transform:translateX(-50%);pointer-events:none;transition:left .6s cubic-bezier(.2,.8,.2,1);display:grid;justify-items:center;gap:4px}
+.railme:before{content:"";display:block;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#fff,#c9d6ee 45%,#6f86b8);box-shadow:0 0 0 2px var(--navy),0 8px 20px rgba(2,11,119,.3)}
+.railme span{font-size:8px;letter-spacing:.16em;color:var(--navy)}
+#railthumb{position:absolute;left:-13px;right:-13px;top:22px;width:calc(100% + 26px);height:26px;margin:0;appearance:none;-webkit-appearance:none;background:transparent;cursor:grab}
+#railthumb::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:transparent;border:0;cursor:grab}
+#railthumb::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:transparent;border:0;cursor:grab}
+#railthumb:active{cursor:grabbing}
+.railfoot{display:flex;justify-content:space-between;gap:12px;color:var(--mute);font-size:9px;letter-spacing:.14em;margin-top:6px}
+.railfoot span:nth-child(2){color:var(--pig)}
+.rail .lsim{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+/* the CTA row */
+.cta3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.ctac{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;border:1px solid var(--line);padding:14px;background:#fff;transition:border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.ctac:hover{border-color:var(--navy);box-shadow:0 22px 50px rgba(2,11,119,.10);transform:translateY(-3px)}
+.ctac img{width:88px;height:100px;object-fit:contain}
+.ctac .mono{color:var(--pig);font-size:8.5px;letter-spacing:.16em}
+.ctac b{display:block;font-size:11px;margin-top:6px}
+.ctac span{display:block;color:var(--mute);font-size:12px;margin-top:6px;line-height:1.45}
+.ctac em{display:block;font-style:normal;color:var(--navy);font-size:8.5px;letter-spacing:.14em;margin-top:8px}
+@media(max-width:900px){.cta3{grid-template-columns:1fr}.railtrack{height:120px;margin:22px 20px 0}.rn{width:70px}.rn img{width:44px;height:44px}.rn em{display:none}.rn span{font-size:7px}.railwhat{text-align:left}}

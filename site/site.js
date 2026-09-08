@@ -332,3 +332,44 @@ if(rlad){const have=2; // referrals who ORDERED. Joining pays 100; the ladder co
   rlad.innerHTML=REFLADDER.map(x=>`<div class="rl${have>=x.n?' done':''}"><b class="mono">${x.n}</b><span>${x.r}</span><i class="mono">${have>=x.n?'EARNED':(x.n-have)+' TO GO'}</i></div>`).join('')}
 const lb=document.querySelector('#leaderboard');
 if(lb)lb.innerHTML=LEADERBOARD.map(([n,l,c],i)=>`<div class="${n==='J. Morello'?'me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${l.toUpperCase()}</span><em class="mono">${c} ORDERED</em></div>`).join('');
+
+
+// ── The rail: one spend scale, join to the bracelet ───────────────
+// Each level gets equal width on the rail so the early road is readable; spend interpolates inside each segment.
+// MARKERS are the small rewards between levels. Adding one is one line here.
+const MARKERS=[
+ {at:1000, n:'A foil sticker pack'},
+ {at:5000, n:'Priority cold shipping'},
+ {at:20000,n:'A named batch reservation'},
+ {at:80000,n:'Your compound, printed at 60 inches'},
+];
+function railPos(spend){const L=LEVELS;for(let i=L.length-1;i>=0;i--){if(spend>=L[i].at){if(i===L.length-1)return 100;const a=L[i].at,b=L[i+1].at;return (i+(spend-a)/(b-a))/(L.length-1)*100}}return 0}
+function railSpend(pos){const L=LEVELS;const seg=(L.length-1)*pos/100;const i=Math.min(L.length-2,Math.floor(seg));const f=seg-i;return Math.round(L[i].at+(L[i+1].at-L[i].at)*f)}
+const rail=document.querySelector('#rail');
+if(rail){
+  const nodes=document.getElementById('railnodes'),fill=document.getElementById('railfill'),whatif=document.getElementById('railwhatif'),me=document.getElementById('railme'),thumb=document.getElementById('railthumb'),title=document.getElementById('railtitle'),what=document.getElementById('railwhat'),pos=document.getElementById('railpos');
+  nodes.innerHTML=LEVELS.map((t,i)=>`<div class="rn" style="left:${i/(LEVELS.length-1)*100}%"><img src="${badgeSrc(t.img)}" alt=""><span class="mono">${t.n}</span><em class="mono">${t.at?'$'+fmt(t.at):'JOIN'}</em></div>`).join('')+
+    MARKERS.map(m=>`<div class="rm" style="left:${railPos(m.at)}%" title="${m.n}"><i></i><span class="mono">$${fmt(m.at)}<br>${m.n}</span></div>`).join('');
+  const spendOf=()=>+(document.getElementById('lspend')?.textContent||'$0').replace(/[$,]/g,'');
+  function paint(explore){const cur=spendOf();const p=railPos(cur);fill.style.width=p+'%';me.style.left=p+'%';
+    const ex=explore==null?cur:explore;const q=railPos(ex);
+    whatif.style.left=Math.min(p,q)+'%';whatif.style.width=Math.abs(q-p)+'%';whatif.classList.toggle('back',q<p);
+    const i=levelAt(ex),t=LEVELS[i],nx=LEVELS[i+1];
+    const got=[...LEVELS.slice(0,i+1).map(l=>l.keep),...MARKERS.filter(m=>ex>=m.at).map(m=>m.n)];
+    title.textContent=ex===cur?`${t.n} · $${fmt(cur)} so far`:`At $${fmt(ex)}: ${t.n}`;
+    what.textContent=(nx?`${t.n.toUpperCase()} · $${fmt(nx.at-ex)} TO ${nx.n.toUpperCase()}`:'TOP OF THE ROAD')+' · '+got.length+' REWARDS UNLOCKED';
+    pos.textContent=ex===cur?`YOU ARE HERE · $${fmt(cur)}`:`EXPLORING $${fmt(ex)} · RELEASE TO RETURN`;
+    nodes.querySelectorAll('.rn').forEach((el,j)=>{el.classList.toggle('done',j<=levelAt(cur));el.classList.toggle('peek',j<=i&&j>levelAt(cur))});
+    nodes.querySelectorAll('.rm').forEach(el=>{const at=+el.querySelector('span').textContent.replace(/[^0-9]/g,'').slice(0,6);});
+  }
+  thumb.addEventListener('input',()=>paint(railSpend(+thumb.value)));
+  const snap=()=>{thumb.value=Math.round(railPos(spendOf())*10);paint(null)};
+  thumb.addEventListener('change',snap);thumb.addEventListener('pointerup',()=>setTimeout(snap,900));
+  document.querySelectorAll('.lsim button').forEach(b=>b.addEventListener('click',()=>setTimeout(snap,50)));
+  snap();
+}
+// the CTA row: what they buy, something new, something paired
+const cta=document.querySelector('#cta3');
+if(cta){load().then(({prods,man})=>{const img=sl=>{const k=man[sl]||[];return k.includes('cut')?`../img/products/web/${sl}-cut.png`:`../img/products/web/${sl}-white.jpg`};
+  const pick=(sl,tag,line)=>{const p=prods.find(x=>x.slug===sl);return p?`<a class="ctac" href="product.html?s=${sl}"><img src="${img(sl)}" alt="${p.name}"><div><div class="mono">${tag}</div><b class="disp">${p.name}</b><span>${line}</span><em class="mono">$${PRICE[sl]||49} · EARNS ${PRICE[sl]||49} PTS →</em></div></a>`:''};
+  cta.innerHTML=pick('ghk-cu','YOUR FAVOURITE','Ordered three times. Reorder in one tap.')+pick('klow','NEW RESEARCH','Just landed. First access at Foil.')+pick('mots-c','COMMONLY PAIRED','With your last order, in the NAD+ bundle.')})}
