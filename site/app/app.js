@@ -4,13 +4,13 @@ const IMG='../../img/';const ICO=k=>`${IMG}icons/${k}.png`;
 const TIERICO={Embossed:'tier-emboss',Pressed:'tier-cap',Foil:'tier-foil',Chrome:'tier-chrome',Pigment:'tier-pigment','The Bracelet':'tier-bracelet'};
 function iconFor(txt){const t=txt.toLowerCase();
   if(/bracelet/.test(t))return 'tier-bracelet';if(/golden/.test(t))return 'golden';if(/print/.test(t))return 'print';if(/badge/.test(t)&&/chrome/.test(t))return 'tier-chrome';
-  if(/sticker/.test(t))return 'sticker';if(/token/.test(t))return 'tokens';if(/water/.test(t))return 'vial';if(/two (vials|peptides)/.test(t))return 'vials';if(/vial|peptide/.test(t))return 'vial';
+  if(/sticker/.test(t))return 'sticker';if(/hat/.test(t))return 'hat';if(/pin/.test(t))return 'pin';if(/spin/.test(t))return 'spin';if(/free shipping/.test(t))return 'freeship';if(/token/.test(t))return 'tokens';if(/water/.test(t))return 'vial';if(/two (vials|peptides)/.test(t))return 'vials';if(/vial|peptide/.test(t))return 'vial';
   if(/bundle|pair/.test(t))return 'box-open';if(/box cycle|full box/.test(t))return 'shelf';if(/mystery/.test(t))return 'mystery';if(/code/.test(t))return 'code';if(/shipping/.test(t))return 'shipping';
   if(/batch|early/.test(t))return 'ticket';if(/double|multiplier/.test(t))return 'token';if(/live|stamp/.test(t))return 'stamp';if(/refer|creator|shout/.test(t))return 'refer';return 'box'}
 const TIERS=[
  {n:'Embossed',from:1, at:0,     img:'edition3/badge-emboss.jpg',  keep:'A foil sticker sheet and 100 tokens, day one'},
  {n:'Pressed', from:9, at:500,   img:'edition3/badge-cap.jpg',     keep:'The chrome token pin, shipped'},
- {n:'Foil',    from:17,at:2500,  img:'edition3/badge-foil.jpg',    keep:'The SKO chrome cap'},
+ {n:'Foil',    from:17,at:2500,  img:'edition3/badge-foil.jpg',    keep:'The SKO hat'},
  {n:'Chrome',  from:25,at:10000, img:'edition3/badge-cast.jpg',    keep:'The cast chrome badge for your desk'},
  {n:'Pigment', from:33,at:40000, img:'edition3/badge-pigment.jpg', keep:'Your compound printed at 60 inches, and a Full Box every birthday'},
  {n:'The Bracelet',from:50,at:150000,img:'loyalty/bracelet-w.jpg', keep:'The championship bracelet, delivered by hand'},
@@ -19,7 +19,7 @@ const TIERS=[
 const LEVELS=(()=>{const L=[];const A=[[1,0],[2,40],[9,500],[17,2500],[25,10000],[33,40000],[50,150000]];
  for(let i=0;i<A.length-1;i++){const [l0,s0]=A[i],[l1,s1]=A[i+1];for(let l=l0;l<l1;l++){const f=(l-l0)/(l1-l0);L[l]=s0>0?Math.round(s0*Math.pow(s1/s0,f)):Math.round(s0+(s1-s0)*f)}}
  L[50]=150000;return L})();
-const SMALL=['+100 tokens','A foil badge sticker','+150 tokens','Bacteriostatic water, free','A mystery code','+200 tokens','Free shipping on your next order','A vial under $50, free','Double tokens on your next order','+300 tokens','A vial under $70, free','A pair of foil stickers','A chrome token pin','A vial under $100, free','+500 tokens','A bundle under $130, free'];
+const SMALL=['Free shipping on your next order','A vial under $50, free','+100 tokens','Free shipping on your next order','A vial under $70, free','A spin','Free shipping on your next order','A vial under $50, free','Double tokens on your next order','Free shipping on your next order','A vial under $100, free','A spin','Free shipping on your next two orders','A vial under $70, free','+250 tokens','Free shipping on your next order','A vial under $100, free','A spin','Free shipping on your next order','A bundle under $130, free'];
 function rewardFor(l){const t=TIERS.find(t=>t.from===l);if(t)return {big:true,txt:t.keep};return {big:false,txt:SMALL[(l*7)%SMALL.length]}}
 const levelOf=s=>{let l=1;for(let i=1;i<=50;i++)if(s>=LEVELS[i])l=i;return l};
 const tierOf=l=>{let t=TIERS[0];TIERS.forEach(x=>{if(l>=x.from)t=x});return t};
@@ -48,7 +48,7 @@ const MYST=[['+100 tokens',100],['+250 tokens',250],['A foil badge sticker',0],[
 const LADDER=[[1,'+350 tokens, every time'],[3,'Any vial under $70, free'],[5,'Any bundle under $130, free'],[10,'Your own creator code · 10% of every order back to you'],[25,'The cast chrome badge · a shout-out on the live'],[50,'A Full Box every quarter']];
 const LB=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Foil',2],['A. Chen','Pressed',3]];
 
-const U={spend:3180,tokens:1240,streak:41,refs:2,stamps:3,used:[],mult:1};
+const U={spend:3180,tokens:1240,streak:41,refs:2,stamps:3,used:[],mult:1,spins:2};
 let view='road';
 
 // ── tokens flying ──
@@ -67,7 +67,7 @@ function header(){const l=levelOf(U.spend),t=tierOf(l);$('#hlvl').textContent=`L
 // ── earning: an order ──
 function order(amount,mult=1){const before=levelOf(U.spend),bt=tierOf(before);const got=Math.round(amount*mult*U.mult);U.mult=1;
   U.spend+=amount;const after=levelOf(U.spend),at=tierOf(after);
-  collect(got,()=>{U.tokens+=got;header();if(after>before){levelUp(before,after,bt!==at)}else render()})}
+  U.spins+=1;collect(got,()=>{U.tokens+=got;header();if(after>before){levelUp(before,after,bt!==at)}else render()})}
 function collect(got,then){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';
   ov.innerHTML=`<div class="sweep"></div><div class="ov"><img class="bigtoken" src="${IMG}loyalty/token.png" alt=""><div class="mono">TOKENS EARNED</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>Every dollar is a token. Tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
   const [x,y]=centerOf(ov.querySelector('#cnt'));setTimeout(()=>{burst(x,y,44,false);ov.querySelector('.sweep').classList.add('go');tick(ov.querySelector('#cnt'),0,got,1100,'',' ')},80);
@@ -82,6 +82,34 @@ function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.
   setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(ov.querySelector('.row'));burst(x,y,60,false)},350);
   $('#okl').onclick=()=>{ov.hidden=true;render()}}
 
+// ── The Spin: one per order. Always lands on something. ──
+const WHEEL=[
+ {n:'Free shipping',      w:30, ico:'freeship', t:0},
+ {n:'+100 tokens',        w:22, ico:'tokens',   t:100},
+ {n:'A vial under $50',   w:10, ico:'vial',     t:0},
+ {n:'+250 tokens',        w:14, ico:'tokens',   t:250},
+ {n:'Double tokens next order',w:9,ico:'token', t:0},
+ {n:'Bacteriostatic water',w:8, ico:'vial',     t:0},
+ {n:'A foil sticker sheet',w:5, ico:'sticker',  t:0},
+ {n:'A mystery box',      w:2,  ico:'mystery',  t:0},
+];
+function spinView(){const m=$('#view');const n=WHEEL.length,seg=360/n;
+  const conic=WHEEL.map((x,i)=>`${i%2?'#173384':'#e6ecf7'} ${i*seg}deg ${(i+1)*seg}deg`).join(',');
+  m.innerHTML=`${band('The spin','ONE PER ORDER · IT ALWAYS LANDS ON SOMETHING')}<div class="card spinc"><div class="mono mute">YOU HAVE <b id="spinsleft" style="color:var(--pig)">${U.spins} SPIN${U.spins===1?'':'S'}</b></div>
+   <div class="wheelwrap"><div class="pointer"></div><div class="wheel" id="wheel" style="background:conic-gradient(${conic})">${WHEEL.map((x,i)=>`<div class="wedge" style="transform:rotate(${i*seg+seg/2}deg)"><img src="${ICO(x.ico)}" alt=""></div>`).join('')}<div class="hub"><img src="${IMG}loyalty/token.png" alt=""></div></div></div>
+   <div class="spinout" id="spinout"><div class="disp" style="font-size:15px">Spin the token.</div><div class="mono mute" style="margin-top:6px">FREE SHIPPING · TOKENS · A FREE VIAL · DOUBLE TOKENS · A MYSTERY BOX</div></div>
+   <button class="btn pig wide" id="spinbtn"${U.spins?'':' disabled'}>${U.spins?'Spin':'Order to earn a spin'}</button><button class="btn ghost wide" id="spinback" style="margin-top:8px">Back</button></div>`;
+  let turns=0,busy=false;
+  $('#spinbtn').onclick=()=>{if(busy||!U.spins)return;busy=true;U.spins--;
+    const total=WHEEL.reduce((a,x)=>a+x.w,0);let r=Math.random()*total,pick=0;for(let i=0;i<n;i++){r-=WHEEL[i].w;if(r<=0){pick=i;break}}
+    const target=360*5+(360-(pick*seg+seg/2))+(Math.random()*seg*.6-seg*.3);turns+=target;
+    const w=$('#wheel');w.style.transition='transform 4.2s cubic-bezier(.12,.8,.12,1)';w.style.transform=`rotate(${turns}deg)`;
+    $('#spinbtn').disabled=true;$('#spinout').innerHTML='<div class="mono" style="color:var(--pig)">SPINNING</div>';
+    setTimeout(()=>{const x=WHEEL[pick];if(x.t){U.tokens+=x.t;header()}if(/Double/.test(x.n))U.mult=2;
+      $('#spinout').innerHTML=`<div class="mono" style="color:var(--pig)">YOU WON</div><div class="disp" style="font-size:18px;margin-top:6px">${x.n}</div><div class="mono mute" style="margin-top:6px">${x.t?'ADDED TO YOUR BALANCE':'ADDED TO YOUR NEXT ORDER'}</div>`;
+      const [cx,cy]=centerOf($('#spinout'));burst(cx,cy,x.t?50:24,!!x.t);busy=false;$('#spinbtn').disabled=!U.spins;$('#spinbtn').textContent=U.spins?`Spin again (${U.spins})`:'Order to earn a spin';$('#spinsleft').textContent=`${U.spins} SPIN${U.spins===1?'':'S'}`},4300)};
+  $('#spinback').onclick=()=>go('road')}
+
 // ── views ──
 const band=(t,s)=>`<div class="band"><div class="disp">${t}</div><div class="mono">${s}</div></div>`;
 function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1),nt=TIERS.find(x=>x.from>l);
@@ -89,6 +117,7 @@ function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1),nt=TIER
   const steps=[];for(let i=Math.max(1,l-2);i<=Math.min(50,l+6);i++){const r=rewardFor(i);steps.push(`<div class="step${i<l?' done':i===l?' now':''}"><div class="n">${i}</div><img class="ico" src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${i<l?'EARNED':i===l?'YOU ARE HERE':'$'+fmt(LEVELS[i])}</b>${r.txt}</div><div class="s">${i===l?'':i<l?'✓':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' to go'}</div></div>`)}
   return `${band('The road','FIFTY LEVELS · SIX MATERIALS · ONE BRACELET')}
   <div class="card status"><div class="ring" style="--p:${pct}%"><img src="${ICO(TIERICO[t.n])}" alt=""></div><div><div class="mono next">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono mute">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl} · ${rewardFor(nl).txt.toUpperCase()}`:'TOP OF THE ROAD'}</div></div></div>
+  <a class="card spincard" id="tospin"><img src="${ICO('spin')}" alt=""><div><div class="mono" style="color:var(--pig)">THE SPIN</div><div class="disp" style="font-size:14px;margin-top:5px">${U.spins?`You have ${U.spins} spin${U.spins===1?'':'s'}.`:'Order to earn a spin.'}</div><div class="mono mute" style="margin-top:5px">FREE SHIPPING · TOKENS · A FREE VIAL · A MYSTERY BOX</div></div><span class="btn${U.spins?' pig':''}">${U.spins?'Spin':'Locked'}</span></a>
   <div class="card slide"><div class="lab"><div><div class="mono mute">WHAT WOULD IT TAKE</div><div class="disp" id="stitle" style="font-size:14px;margin-top:6px">Drag the token</div></div><div class="mono next" id="ssub"></div></div>
     <div class="track" id="track"><div class="fill" id="sfill"></div><div class="what" id="swhat"></div>${TIERS.map(x=>`<div class="tick t" style="left:${pos(x.at)}%"></div>`).join('')}<div class="knob" id="knob"></div></div>
     <div class="out"><div><div class="disp" id="sout"></div><div class="mono" id="sout2"></div></div><button class="btn pig" id="sjump">Buy it now</button></div>
@@ -112,7 +141,8 @@ function wireRoad(){const tr=$('#track'),knob=$('#knob'),fill=$('#sfill'),what=$
   $('#sjump').onclick=()=>{if(ex>U.spend)order(ex-U.spend)};
   document.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{const a=+b.dataset.j-U.spend;if(a>0)order(a);else paint(+b.dataset.j)});
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>order(+b.dataset.o,+(b.dataset.m||1)));
-  $('#reset').onclick=()=>{U.spend=0;U.tokens=100;header();render()}}
+  $('#reset').onclick=()=>{U.spend=0;U.tokens=100;U.spins=1;header();render()};
+  const ts=$('#tospin');if(ts)ts.onclick=()=>spinView()}
 
 function shelf(){return `${band('The shelf','TOKENS BUY PEPTIDES · A BOX ARRIVES')}${SHELF.map((x,i)=>`<div class="sh${U.tokens>=x.p?' ok':''}"><img src="${ICO(iconFor(x.n+' '+x.w))}" alt=""><div class="t"><div class="mono">${fmt(x.p)} TOKENS</div><b>${x.n}</b>${x.w}</div><button class="btn" data-r="${i}"${U.tokens>=x.p?'':' disabled'}>${U.tokens>=x.p?'Redeem':fmt(x.p-U.tokens)+' to go'}</button></div>`).join('')}
   ${band('The vault','FIVE KINDS OF CODE')}<div class="card"><div class="vin"><input id="vin" placeholder="ENTER A CODE" spellcheck="false"><button class="btn" id="vgo">Reveal</button></div><div class="vout" id="vout"><div class="mono mute">LIVE · CREATOR · IN THE BOX · MULTIPLIER · MYSTERY</div></div><div class="tries">${Object.keys(CODES).map(c=>`<button data-c="${c}">${c}</button>`).join('')}</div></div>`}

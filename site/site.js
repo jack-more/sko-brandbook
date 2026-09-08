@@ -134,8 +134,8 @@ const LEVELS=[
   u:['100 tokens on the board, day one','1 token per $1, every order','A foil badge sticker sheet in your first box']},
  {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The chrome token pin, shipped',
   u:['Free shipping, every order, forever','Your referral link unlocks','The chrome token pin, shipped to you']},
- {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The SKO chrome cap',
-  u:['5% back in tokens','The Live Deal code ten minutes early','The SKO chrome cap, shipped']},
+ {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The SKO hat',
+  u:['5% back in tokens','The Live Deal code ten minutes early','The SKO hat, shipped']},
  {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'The cast chrome badge for your desk',
   u:['10% back in tokens','Claim the Live Deal even if you missed the live','The cast chrome badge, the real object']},
  {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed at 60 inches',
@@ -340,7 +340,7 @@ if(lb)lb.innerHTML=LEADERBOARD.map(([n,l,c],i)=>`<div class="${n==='J. Morello'?
 const MARKERS=[
  {at:1000, n:'A foil sticker pack'},
  {at:5000, n:'A birthday box, every year'},
- {at:20000,n:'The SKO chrome cap'},
+ {at:20000,n:'The SKO hat'},
  {at:80000,n:'Your compound, printed at 60 inches'},
 ];
 function railPos(spend){const L=LEVELS;for(let i=L.length-1;i>=0;i--){if(spend>=L[i].at){if(i===L.length-1)return 100;const a=L[i].at,b=L[i+1].at;return (i+(spend-a)/(b-a))/(L.length-1)*100}}return 0}
