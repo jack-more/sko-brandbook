@@ -1,6 +1,12 @@
 /* The Badge — the loyalty app. Self-contained. Every number is a first pass for Billy; the mechanics are the point. */
 const $=s=>document.querySelector(s);const fmt=n=>Math.round(n).toLocaleString('en-US');
-const IMG='../../img/';
+const IMG='../../img/';const ICO=k=>`${IMG}icons/${k}.png`;
+const TIERICO={Embossed:'tier-emboss',Pressed:'tier-cap',Foil:'tier-foil',Chrome:'tier-chrome',Pigment:'tier-pigment','The Bracelet':'tier-bracelet'};
+function iconFor(txt){const t=txt.toLowerCase();
+  if(/bracelet/.test(t))return 'tier-bracelet';if(/golden/.test(t))return 'golden';if(/print/.test(t))return 'print';if(/badge/.test(t)&&/chrome/.test(t))return 'tier-chrome';
+  if(/sticker/.test(t))return 'sticker';if(/token/.test(t))return 'tokens';if(/water/.test(t))return 'vial';if(/two (vials|peptides)/.test(t))return 'vials';if(/vial|peptide/.test(t))return 'vial';
+  if(/bundle|pair/.test(t))return 'box-open';if(/box cycle|full box/.test(t))return 'shelf';if(/mystery/.test(t))return 'mystery';if(/code/.test(t))return 'code';if(/shipping/.test(t))return 'shipping';
+  if(/batch|early/.test(t))return 'ticket';if(/double|multiplier/.test(t))return 'token';if(/live|stamp/.test(t))return 'stamp';if(/refer|creator|shout/.test(t))return 'refer';return 'box'}
 const TIERS=[
  {n:'Embossed',from:1, at:0,     img:'edition3/badge-emboss.jpg',  keep:'The badge, blind-embossed on the box'},
  {n:'Pressed', from:9, at:500,   img:'edition3/badge-cap.jpg',     keep:'The badge, pressed into the cap'},
@@ -56,7 +62,7 @@ function tick(el,from,to,ms=900,pre='',post=''){const t0=performance.now();const
 function centerOf(el){const r=el.getBoundingClientRect(),a=$('#app').getBoundingClientRect();return [r.left-a.left+r.width/2,r.top-a.top+r.height/2]}
 
 // ── header ──
-function header(){const l=levelOf(U.spend),t=tierOf(l);$('#hlvl').textContent=`LEVEL ${l} · ${t.n.toUpperCase()}`;$('#hbadge').src=IMG+t.img;$('#btok').textContent=fmt(U.tokens)}
+function header(){const l=levelOf(U.spend),t=tierOf(l);$('#hlvl').textContent=`LEVEL ${l} · ${t.n.toUpperCase()}`;$('#hbadge').src=ICO(TIERICO[t.n]);$('#btok').textContent=fmt(U.tokens)}
 
 // ── earning: an order ──
 function order(amount,mult=1){const before=levelOf(U.spend),bt=tierOf(before);const got=Math.round(amount*mult*U.mult);U.mult=1;
@@ -69,7 +75,7 @@ function collect(got,then){const ov=$('#overlay');ov.hidden=false;ov.className='
   const cnt=ov.querySelector('#cnt');const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(got*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};setTimeout(()=>requestAnimationFrame(f),80);
   $('#okc').onclick=()=>{const [bx,by]=centerOf($('#okc'));burst(bx,by,30,true);ov.hidden=true;then()}}
 function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';const t=tierOf(to);const rw=rewardFor(to);
-  const row=TIERS.map(x=>`<img src="${IMG+x.img}" class="${x.from<=to?(x.n===t.n&&tierChanged?'new':'done'):''}" alt="${x.n}">`).join('');
+  const row=TIERS.map(x=>`<img src="${ICO(TIERICO[x.n])}" class="${x.from<=to?(x.n===t.n&&tierChanged?'new':'done'):''}" alt="${x.n}">`).join('');
   ov.innerHTML=`<div class="sweep"></div><div class="ov"><div class="mono">${tierChanged?'YOU MOVED UP':'LEVEL UP'}</div><div class="rowwrap"><div class="row">${row}</div></div><div class="disp h1">${tierChanged?`You are ${t.n}.`:`Level ${to}.`}</div><p>${tierChanged?t.keep+'. It ships this week.':'Unlocked: '+rw.txt+'.'}${to-from>1?` And ${to-from-1} more level${to-from>2?'s':''} on the way up.`:''}</p><button class="btn" id="okl">Continue</button></div>`;
   const rowEl=ov.querySelector('.row');const idx=TIERS.findIndex(x=>x.n===t.n);
   requestAnimationFrame(()=>{const imgs=[...rowEl.children];const target=imgs[idx];const off=target.offsetLeft+target.offsetWidth/2;rowEl.style.transform=`translateX(${-off}px)`});
@@ -80,15 +86,15 @@ function levelUp(from,to,tierChanged){const ov=$('#overlay');ov.hidden=false;ov.
 const band=(t,s)=>`<div class="band"><div class="disp">${t}</div><div class="mono">${s}</div></div>`;
 function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1),nt=TIERS.find(x=>x.from>l);
   const from=LEVELS[l],to=LEVELS[nl],pct=l>=50?100:Math.max(4,(U.spend-from)/(to-from)*100);
-  const steps=[];for(let i=Math.max(1,l-2);i<=Math.min(50,l+6);i++){const r=rewardFor(i);steps.push(`<div class="step${i<l?' done':i===l?' now':''}"><div class="n">${i}</div><div class="r"><b>${i<l?'EARNED':i===l?'YOU ARE HERE':'$'+fmt(LEVELS[i])}</b>${r.txt}</div><div class="s">${i===l?'':i<l?'✓':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' to go'}</div></div>`)}
+  const steps=[];for(let i=Math.max(1,l-2);i<=Math.min(50,l+6);i++){const r=rewardFor(i);steps.push(`<div class="step${i<l?' done':i===l?' now':''}"><div class="n">${i}</div><img class="ico" src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${i<l?'EARNED':i===l?'YOU ARE HERE':'$'+fmt(LEVELS[i])}</b>${r.txt}</div><div class="s">${i===l?'':i<l?'✓':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' to go'}</div></div>`)}
   return `${band('The road','FIFTY LEVELS · SIX MATERIALS · ONE BRACELET')}
-  <div class="card status"><div class="ring" style="--p:${pct}%"><img src="${IMG+t.img}" alt=""></div><div><div class="mono next">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono mute">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl} · ${rewardFor(nl).txt.toUpperCase()}`:'TOP OF THE ROAD'}</div></div></div>
+  <div class="card status"><div class="ring" style="--p:${pct}%"><img src="${ICO(TIERICO[t.n])}" alt=""></div><div><div class="mono next">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono mute">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl} · ${rewardFor(nl).txt.toUpperCase()}`:'TOP OF THE ROAD'}</div></div></div>
   <div class="card slide"><div class="lab"><div><div class="mono mute">WHAT WOULD IT TAKE</div><div class="disp" id="stitle" style="font-size:14px;margin-top:6px">Drag the token</div></div><div class="mono next" id="ssub"></div></div>
     <div class="track" id="track"><div class="fill" id="sfill"></div><div class="what" id="swhat"></div>${TIERS.map(x=>`<div class="tick t" style="left:${pos(x.at)}%"></div>`).join('')}<div class="knob" id="knob"></div></div>
     <div class="out"><div><div class="disp" id="sout"></div><div class="mono" id="sout2"></div></div><button class="btn pig" id="sjump">Buy it now</button></div>
     <div class="jump"><button class="btn ghost" data-j="10000">Jump to Chrome · $${fmt(Math.max(0,10000-U.spend))}</button><button class="btn" data-j="150000">The Bracelet · $${fmt(Math.max(0,150000-U.spend))}</button></div></div>
   ${band('Next up','EVERY LEVEL IS A REWARD')}<div class="card map">${steps.join('')}</div>
-  ${band('The materials','THE OBJECT AT EACH TIER')}<div class="card">${TIERS.map(x=>`<div class="tierrow"><img src="${IMG+x.img}" alt=""><div><div class="disp">${x.n}</div><div class="mono">${x.at?'LEVEL '+x.from+' · $'+fmt(x.at):'LEVEL 1 · JOIN'} · ${x.keep.toUpperCase()}</div></div></div>`).join('')}</div>
+  ${band('The materials','THE OBJECT AT EACH TIER')}<div class="card">${TIERS.map(x=>`<div class="tierrow"><img src="${ICO(TIERICO[x.n])}" alt=""><div><div class="disp">${x.n}</div><div class="mono">${x.at?'LEVEL '+x.from+' · $'+fmt(x.at):'LEVEL 1 · JOIN'} · ${x.keep.toUpperCase()}</div></div></div>`).join('')}</div>
   <div class="card"><div class="mono mute">DEV · SIMULATE AN ORDER</div><div class="dev"><button data-o="44">ORDER $44</button><button data-o="129">BUNDLE $129</button><button data-o="420" data-m="1.5">BOX $420 · 1.5×</button><button data-o="2500">$2,500</button><button id="reset">RESET</button></div></div>`}
 function pos(spend){/* equal width per tier band, spend interpolates inside */const A=TIERS.map(t=>t.at);for(let i=A.length-1;i>=0;i--){if(spend>=A[i]){if(i===A.length-1)return 100;return (i+(spend-A[i])/(A[i+1]-A[i]))/(A.length-1)*100}}return 0}
 function spendAt(p){const A=TIERS.map(t=>t.at);const seg=(A.length-1)*p/100;const i=Math.min(A.length-2,Math.floor(seg));return Math.round(A[i]+(A[i+1]-A[i])*(seg-i))}
@@ -108,7 +114,7 @@ function wireRoad(){const tr=$('#track'),knob=$('#knob'),fill=$('#sfill'),what=$
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>order(+b.dataset.o,+(b.dataset.m||1)));
   $('#reset').onclick=()=>{U.spend=0;U.tokens=100;header();render()}}
 
-function shelf(){return `${band('The shelf','TOKENS BUY PEPTIDES · A BOX ARRIVES')}${SHELF.map((x,i)=>`<div class="sh${U.tokens>=x.p?' ok':''}"><img src="${IMG+x.img}" alt=""><div class="t"><div class="mono">${fmt(x.p)} TOKENS</div><b>${x.n}</b>${x.w}</div><button class="btn" data-r="${i}"${U.tokens>=x.p?'':' disabled'}>${U.tokens>=x.p?'Redeem':fmt(x.p-U.tokens)+' to go'}</button></div>`).join('')}
+function shelf(){return `${band('The shelf','TOKENS BUY PEPTIDES · A BOX ARRIVES')}${SHELF.map((x,i)=>`<div class="sh${U.tokens>=x.p?' ok':''}"><img src="${ICO(iconFor(x.n+' '+x.w))}" alt=""><div class="t"><div class="mono">${fmt(x.p)} TOKENS</div><b>${x.n}</b>${x.w}</div><button class="btn" data-r="${i}"${U.tokens>=x.p?'':' disabled'}>${U.tokens>=x.p?'Redeem':fmt(x.p-U.tokens)+' to go'}</button></div>`).join('')}
   ${band('The vault','FIVE KINDS OF CODE')}<div class="card"><div class="vin"><input id="vin" placeholder="ENTER A CODE" spellcheck="false"><button class="btn" id="vgo">Reveal</button></div><div class="vout" id="vout"><div class="mono mute">LIVE · CREATOR · IN THE BOX · MULTIPLIER · MYSTERY</div></div><div class="tries">${Object.keys(CODES).map(c=>`<button data-c="${c}">${c}</button>`).join('')}</div></div>`}
 function wireShelf(){document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>redeem(SHELF[+b.dataset.r]));
   const rv=code=>{const k=code.trim().toUpperCase(),c=CODES[k],o=$('#vout');if(!c){o.innerHTML='<div class="mono mute">NOT A CODE</div><p style="font-size:12px;margin-top:6px">Check the box, the live, or your email.</p>';return}
@@ -129,19 +135,19 @@ function redeem(item){const m=$('#view');m.innerHTML=`${band('Redeem','DRAG THE 
       const [x,y]=centerOf(ov.querySelector('.h1'));burst(x,y,36,false);$('#okr').onclick=()=>{ov.hidden=true;go('shelf')}},700)}
   $('#rback').onclick=()=>go('shelf')}
 
-function missions(){return `${band('Missions','DO THIS, GET THAT')}${MISSIONS.map((m,i)=>{const done=m.have>=m.need;return `<div class="mis${done?' done':''}"><span class="chip mono">${m.c}</span><div class="n">${m.n}</div><div class="mono r">${m.rt.toUpperCase()}</div><div class="bar"><i style="width:${Math.round(m.have/m.need*100)}%"></i></div><div class="row"><span class="mono mute">${m.have} / ${m.need}</span>${done?(m.claimed?'<span class="mono" style="color:var(--pig)">CLAIMED</span>':`<button class="btn" data-m="${i}">Claim</button>`):`<button class="btn ghost" data-do="${i}">Do it</button>`}</div></div>`}).join('')}`}
+function missions(){return `${band('Missions','DO THIS, GET THAT')}${MISSIONS.map((m,i)=>{const done=m.have>=m.need;return `<div class="mis${done?' done':''}"><img class="mico" src="${ICO(iconFor(m.rt))}" alt=""><span class="chip mono">${m.c}</span><div class="n">${m.n}</div><div class="mono r">${m.rt.toUpperCase()}</div><div class="bar"><i style="width:${Math.round(m.have/m.need*100)}%"></i></div><div class="row"><span class="mono mute">${m.have} / ${m.need}</span>${done?(m.claimed?'<span class="mono" style="color:var(--pig)">CLAIMED</span>':`<button class="btn" data-m="${i}">Claim</button>`):`<button class="btn ghost" data-do="${i}">Do it</button>`}</div></div>`}).join('')}`}
 function wireMissions(){document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=MISSIONS[+b.dataset.m];m.claimed=true;const [x,y]=centerOf(b);burst(x,y,30,!!m.r);if(m.r){U.tokens+=m.r;header()}render()});
   document.querySelectorAll('[data-do]').forEach(b=>b.onclick=()=>{const m=MISSIONS[+b.dataset.do];m.have=Math.min(m.need,m.have+1);const [x,y]=centerOf(b);burst(x,y,10,false);render()})}
 
 function live(){const have=U.stamps,need=4;return `${band('The live','THURSDAY 6PM PT · TIKTOK @SKOCOMPOUNDS')}
   <div class="card"><div class="mono mute">THIS WEEK</div><div class="disp" style="font-size:18px;margin:8px 0">Double tokens<br>while we are live.</div><div class="mono" style="color:var(--pig)">THE FULL BOX DRAW · EVERY ORDER THIS WEEK IS AN ENTRY</div><button class="btn wide" style="margin-top:12px" id="remind">Set a reminder</button></div>
-  <div class="card"><div class="h"><div class="disp">Stamp card</div><span class="mono mute">${need-have>0?need-have+' MORE TO A FREE BOX':'FREE BOX EARNED'}</span></div><div class="stamps">${Array.from({length:8},(_,i)=>`<div class="stamp${i<have?' on':''}${i===need-1?' goal':''}"><img src="${IMG}edition3/badge-hood.jpg" alt=""><span class="mono">${i<have?'LIVE '+(i+1):i===need-1?'FREE BOX':'—'}</span></div>`).join('')}</div><button class="btn ghost wide" style="margin-top:10px" id="stamp">I was there (dev)</button></div>
+  <div class="card"><div class="h"><div class="disp">Stamp card</div><span class="mono mute">${need-have>0?need-have+' MORE TO A FREE BOX':'FREE BOX EARNED'}</span></div><div class="stamps">${Array.from({length:8},(_,i)=>`<div class="stamp${i<have?' on':''}${i===need-1?' goal':''}"><img src="${ICO('stamp')}" alt=""><span class="mono">${i<have?'LIVE '+(i+1):i===need-1?'FREE BOX':'—'}</span></div>`).join('')}</div><button class="btn ghost wide" style="margin-top:10px" id="stamp">I was there (dev)</button></div>
   <div class="card"><div class="mono mute">THE LIVE CODE</div><p style="font-size:13px;color:var(--mute);margin-top:6px;line-height:1.5">Read out once, on the live, worth 200 tokens. Enter it in the vault on the Shelf tab.</p></div>`}
 function wireLive(){$('#stamp').onclick=e=>{U.stamps=Math.min(8,U.stamps+1);const [x,y]=centerOf(e.target);burst(x,y,16,false);render()};$('#remind').onclick=e=>{e.target.textContent='Reminder set';}}
 
 function refer(){return `${band('Refer','THEY GET 15% · YOU GET 350')}
   <div class="card"><div class="mono mute">YOUR LINK</div><div class="link mono" style="margin-top:8px">skocompounds.com/r/<b>J-MORELLO-8F2</b><button id="copy">COPY</button></div><div class="mono mute" style="margin-top:10px">4 JOINED · 2 ORDERED · 700 TOKENS EARNED</div></div>
-  <div class="card"><div class="h"><div class="disp">The ladder</div><span class="mono mute">BY REFERRALS WHO ORDER</span></div><div class="lad">${LADDER.map(([n,r])=>`<div class="${U.refs>=n?'done':''}"><b>${n}</b><span>${r}</span><i>${U.refs>=n?'EARNED':(n-U.refs)+' TO GO'}</i></div>`).join('')}</div></div>
+  <div class="card"><div class="h"><div class="disp">The ladder</div><span class="mono mute">BY REFERRALS WHO ORDER</span></div><div class="lad">${LADDER.map(([n,r])=>`<div class="${U.refs>=n?'done':''}"><b>${n}</b><span><img class="lico" src="${ICO(iconFor(r))}" alt="">${r}</span><i>${U.refs>=n?'EARNED':(n-U.refs)+' TO GO'}</i></div>`).join('')}</div></div>
   <div class="card"><div class="h"><div class="disp">This month</div><span class="mono mute">READ OUT ON THE LIVE</span></div><div class="lb">${LB.map(([n,l,c],i)=>`<div><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${c} ORDERED</span></div>`).join('')}</div></div>`}
 function wireRefer(){$('#copy').onclick=e=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');e.target.textContent='COPIED'}}
 
