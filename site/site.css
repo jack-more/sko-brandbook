@@ -375,3 +375,14 @@ footer .mono{color:var(--mute)}
  .sh{grid-template-columns:1fr auto;gap:6px 12px}.sh .shw{grid-column:1/3}
  .lrefsplit{grid-template-columns:1fr}
 }
+
+/* The Live Deal */
+.live{display:grid;grid-template-columns:1fr minmax(0,420px);gap:clamp(20px,4vw,56px);align-items:start}
+.livelede{font-size:clamp(15px,1.3vw,19px);line-height:1.55;max-width:46ch;margin-bottom:22px}
+.livetable{border-top:1px solid var(--line)}
+.livecard{border:1px solid var(--navy);padding:clamp(20px,3vw,30px);display:grid;gap:16px;align-content:start}
+.livecard .mono{color:var(--pig)}
+.livename{font-size:clamp(20px,2.2vw,32px);line-height:1.08}
+.livemeta{display:grid;gap:6px;color:var(--mute);border-top:1px solid var(--line);padding-top:16px}
+.livecard .btn{justify-self:start}
+@media(max-width:900px){.live{grid-template-columns:1fr}}

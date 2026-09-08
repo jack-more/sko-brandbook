@@ -132,11 +132,11 @@ const LEVELS=[
  {k:'emboss', n:'Embossed', at:0,      img:'badge-emboss',  keep:'The badge, blind-embossed, on the box',
   u:['Points on every order, 1 per $1','Order history and batch tracking','Your first badge sticker in the box']},
  {k:'cap',    n:'Pressed',  at:500,    img:'badge-cap',     keep:'The badge, pressed into the cap',
-  u:['Free shipping, every order, forever','Your referral link unlocks','First notice when a batch lands']},
+  u:['Free shipping, every order, forever','Your referral link unlocks','A reminder before every live, and the streak that comes with it']},
  {k:'foil',   n:'Foil',     at:2500,   img:'badge-foil',    keep:'The badge, foil-stamped, in the box',
-  u:['5% back in points','First access to a new compound before launch','A second badge sticker, foil']},
+  u:['5% back in points','The Live Deal code, ten minutes before the live opens','First access to a new compound before launch']},
  {k:'cast',   n:'Chrome',   at:10000,  img:'badge-cast',    keep:'A cast chrome badge, shipped to you',
-  u:['10% back in points','Batch COAs before they go public','The cast chrome badge, the real object']},
+  u:['10% back in points','Claim the Live Deal even if you missed the live','Batch COAs before they go public']},
  {k:'pigment',n:'Pigment',  at:40000,  img:'badge-pigment', keep:'Your compound, printed',
   u:['15% back in points','Reserve a vial from a batch before release','The Isometrica print of your most-ordered compound']},
  {k:'bracelet',n:'The Bracelet',at:150000,img:'bracelet',   keep:'The championship bracelet',
@@ -151,6 +151,7 @@ const EARN=[
  ['A referral joins','They open an account from your link','+100'],
  ['Their first order ships','The one that pays for the programme','+250'],
  ['Ordering inside 60 days','Keeps the streak, and the multiplier on it','1.25×'],
+ ['Ordering during a live','The Live Deal, every week on TikTok','2×'],
 ];
 const SPEND=[
  [250,'$25 off any order'],[500,'Bacteriostatic water, free, any order'],
