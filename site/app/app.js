@@ -47,6 +47,8 @@ const CODES={'LIVE0911':{k:'LIVE',w:'+200 tokens · this week\'s live code',t:20
 const MYST=[['+100 tokens',100],['+250 tokens',250],['A foil badge sticker',0],['Bacteriostatic water, free',0],['Any vial under $50, free',0],['Double tokens on your next order',0]];
 const LADDER=[[1,'+350 tokens, every time'],[3,'Any vial under $70, free'],[5,'Any bundle under $130, free'],[10,'Your own creator code · 10% of every order back to you'],[25,'The cast chrome badge · a shout-out on the live'],[50,'A Full Box every quarter']];
 const LB=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Embossed',0],['A. Chen','Pressed',3]];
+const BOARD=[['Kai R.',214800],['D. Ruiz',96400],['Dani O.',61250],['M. Okafor',44900],['S. Rimal',38100],['T. Vance',29750],['A. Chen',21400],['B. Osei',15800],['L. Park',11250],['J. Hall',7600],['R. Adeyemi',4900],['N. Cortez',3100],['P. Mensah',1850],['E. Ward',900]];
+const SEASON='SEPTEMBER';
 
 const U={spend:0,tokens:0,streak:0,refs:0,stamps:0,used:[],mult:1,spins:0,welcomed:false};
 let view='road';
@@ -111,30 +113,34 @@ function spinView(){const m=$('#view');const n=WHEEL.length,seg=360/n;
   $('#spinback').onclick=()=>go('road')}
 
 // ── views ──
-const band=(t,s)=>`<div class="band"><div class="disp">${t}</div><div class="mono">${s}</div></div>`;
+const band=(t,s)=>`<div class="band"><div class="disp">${t}</div>${s?`<div class="mono">${s}</div>`:''}</div>`;
 function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1);
   const from=LEVELS[l],to=LEVELS[nl],pct=l>=50?100:Math.max(4,(U.spend-from)/(to-from)*100);
-  const row=i=>{const r=rewardFor(i),done=i<l,now=i===l;return `<div class="lv${done?' done':now?' now':''}"><div class="n">${i}</div><img src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${r.txt}</b><span>${done?'EARNED':now?'YOU ARE HERE':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' TO GO'}</span></div><div class="s">${done?'✓':now?'':'$'+fmt(LEVELS[i])}</div></div>`};
-  const earned=[];for(let i=Math.max(1,l-2);i<=l;i++)earned.push(row(i));
-  const come=[];for(let i=l+1;i<=Math.min(50,l+4);i++)come.push(row(i));
-  return `<div class="card status"><div class="ring" style="--p:${pct}%"><i><img src="${ICO(TIERICO[t.n])}" alt=""></i></div><div><div class="mono strong">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono strong">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl}`:'TOP OF THE ROAD'}</div></div></div>
+  const row=i=>{const r=rewardFor(i),done=i<l,now=i===l;
+    return `<div class="lv${done?' done':now?' now':''}"><div class="n">${i}</div><img src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${r.txt}</b><span>${done?'EARNED':now?'YOU ARE HERE':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' TO GO'}</span></div></div>`};
+  const near=[];for(let i=Math.max(1,l-1);i<=Math.min(50,l+3);i++)near.push(row(i));
+  const rest=[];for(let i=l+4;i<=Math.min(50,l+12);i++)rest.push(row(i));
+  return `<div class="hero"><div class="ring" style="--p:${pct}%"><i><img src="${ICO(TIERICO[t.n])}" alt=""></i></div>
+    <div class="mono strong pig">LEVEL ${l} · ${t.n.toUpperCase()}</div>
+    <div class="disp huge">${fmt(U.tokens)} <em>TOKENS</em></div>
+    <div class="meter"><i style="width:${pct}%"></i></div>
+    <div class="mono strong">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl}`:'TOP OF THE ROAD'}</div></div>
 
-  <div class="card how"><div class="mono strong pig">HOW IT WORKS</div>
-    <div class="hrow"><img src="${ICO('tokens')}" alt=""><div><b>Earn</b><span>$1 spent = 1 token. Tokens never expire.</span></div></div>
-    <div class="hrow"><img src="${ICO('vial')}" alt=""><div><b>Spend</b><span>Tokens buy free vials, free shipping and boxes on the Shelf.</span></div></div>
-    <div class="hrow"><img src="${ICO(TIERICO['Chrome'])}" alt=""><div><b>Level up</b><span>Every dollar climbs 50 levels. Each level is a gift. Levels never go down.</span></div></div></div>
+  ${U.spins?`<button class="act" id="tospin"><img src="${ICO('spin')}" alt=""><b>${U.spins} spin${U.spins===1?'':'s'} ready</b><span class="mono">SPIN</span></button>`:''}
 
-  <a class="card spincard${U.spins?' ready':''}" id="tospin"><img src="${ICO('spin')}" alt=""><div><div class="disp" style="font-size:16px">${U.spins?`${U.spins} spin${U.spins===1?'':'s'} ready`:'The Spin'}</div><div class="mono strong" style="margin-top:6px">${U.spins?'FREE VIAL · FREE SHIPPING · TOKENS · A BOX':'EVERY ORDER EARNS A SPIN'}</div></div><span class="btn${U.spins?' pig':''}">${U.spins?'Spin':'Locked'}</span></a>
+  ${band('The road')}<div class="card map">${near.join('')}
+    ${rest.length?`<div id="rest" hidden>${rest.join('')}</div><button class="more" id="showmore">Show the next ${rest.length} levels</button>`:''}</div>
 
-  ${band('Earned','YOURS TO KEEP')}<div class="card map">${earned.join('')}</div>
-  ${band('To come','EVERY LEVEL IS A GIFT')}<div class="card map">${come.join('')}</div>
-
-  <div class="card slide"><div class="lab"><div class="disp" style="font-size:14px">See the road ahead</div><div class="mono strong pig" id="ssub"></div></div>
+  ${band('What would it take')}<div class="card slide">
     <div class="track" id="track"><div class="fill" id="sfill"></div><div class="what" id="swhat"></div>${TIERS.map(x=>`<div class="tick t" style="left:${pos(x.at)}%"></div>`).join('')}<div class="knob" id="knob"></div></div>
     <div class="out"><div><div class="disp" id="sout"></div><div class="mono strong" id="sout2"></div></div><button class="btn pig" id="sjump">Buy it now</button></div>
-    <div class="jump"><button class="btn ghost" data-j="10000">Chrome · $${fmt(Math.max(0,10000-U.spend))}</button><button class="btn" data-j="150000">The Bracelet · $${fmt(Math.max(0,150000-U.spend))}</button></div></div>
+    <div class="mats">${TIERS.map(x=>`<div class="mat${x.from<=l?' got':''}"><img src="${ICO(TIERICO[x.n])}" alt=""><b>${x.n}</b><span>${x.at?'$'+fmt(x.at):'JOIN'}</span></div>`).join('')}</div></div>
 
-  <div class="card mats">${TIERS.map(x=>`<div class="mat${x.from<=l?' got':''}"><img src="${ICO(TIERICO[x.n])}" alt=""><b>${x.n}</b><span>${x.at?'$'+fmt(x.at):'JOIN'}</span></div>`).join('')}</div>
+  ${band('How it works')}<div class="card how">
+    <div class="hrow"><img src="${ICO('tokens')}" alt=""><div><b>Earn</b><span>$1 spent is 1 token. Tokens never expire.</span></div></div>
+    <div class="hrow"><img src="${ICO('vial')}" alt=""><div><b>Spend</b><span>Tokens buy free vials and free shipping.</span></div></div>
+    <div class="hrow"><img src="${ICO(TIERICO['Chrome'])}" alt=""><div><b>Level up</b><span>Fifty levels. Every level is a gift, and levels never drop.</span></div></div></div>
+
   <div class="card"><div class="mono mute">DEV · SIMULATE AN ORDER</div><div class="dev"><button data-o="44">ORDER $44</button><button data-o="129">BUNDLE $129</button><button data-o="420" data-m="1.5">BOX $420 · 1.5×</button><button data-o="2500">$2,500</button><button id="reset">RESET</button></div></div>`}
 function pos(spend){/* equal width per tier band, spend interpolates inside */const A=TIERS.map(t=>t.at);for(let i=A.length-1;i>=0;i--){if(spend>=A[i]){if(i===A.length-1)return 100;return (i+(spend-A[i])/(A[i+1]-A[i]))/(A.length-1)*100}}return 0}
 function spendAt(p){const A=TIERS.map(t=>t.at);const seg=(A.length-1)*p/100;const i=Math.min(A.length-2,Math.floor(seg));return Math.round(A[i]+(A[i+1]-A[i])*(seg-i))}
@@ -143,17 +149,17 @@ function wireRoad(){const tr=$('#track'),knob=$('#knob'),fill=$('#sfill'),what=$
     const l=levelOf(sp),t=tierOf(l);const gained=Math.max(0,l-levelOf(U.spend));
     $('#sout').textContent=sp<=U.spend?`Level ${levelOf(U.spend)} · ${tierOf(levelOf(U.spend)).n}`:`Level ${l} · ${t.n}`;
     $('#sout2').textContent=sp<=U.spend?'YOU ARE HERE':`+${gained} LEVEL${gained===1?'':'S'} · ${t.keep.toUpperCase()}`;
-    $('#ssub').textContent=`AT $${fmt(sp)}`;$('#sjump').disabled=sp<=U.spend;$('#sjump').textContent=sp<=U.spend?'Drag to explore':`Buy $${fmt(sp-U.spend)} now`}
+    const sb=$('#ssub');if(sb)sb.textContent=`AT $${fmt(sp)}`;$('#sjump').disabled=sp<=U.spend;$('#sjump').textContent=sp<=U.spend?'Drag to explore':`Buy $${fmt(sp-U.spend)} now`}
   paint(U.spend);
   const move=e=>{const r=tr.getBoundingClientRect();const p=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));paint(spendAt(p))};
   tr.addEventListener('pointerdown',e=>{tr.classList.add('drag');tr.setPointerCapture(e.pointerId);move(e)});
   tr.addEventListener('pointermove',e=>{if(tr.classList.contains('drag'))move(e)});
   const up=()=>tr.classList.remove('drag');tr.addEventListener('pointerup',up);tr.addEventListener('pointercancel',up);
   $('#sjump').onclick=()=>{if(ex>U.spend)order(ex-U.spend)};
-  document.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{const a=+b.dataset.j-U.spend;if(a>0)order(a);else paint(+b.dataset.j)});
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>order(+b.dataset.o,+(b.dataset.m||1)));
   $('#reset').onclick=()=>{U.spend=0;U.tokens=100;U.spins=1;header();render()};
-  const ts=$('#tospin');if(ts)ts.onclick=()=>spinView()}
+  const ts=$('#tospin');if(ts)ts.onclick=()=>spinView();
+  const sm=$('#showmore');if(sm)sm.onclick=()=>{$('#rest').hidden=false;sm.remove()}}
 
 function shelf(){const can=SHELF.filter(x=>U.tokens>=x.p),cant=SHELF.filter(x=>U.tokens<x.p);
   const next=cant[0];
@@ -202,7 +208,21 @@ function refer(){return `${band('Refer','THEY GET 15% · YOU GET 350')}
   <div class="card"><div class="h"><div class="disp">This month</div><span class="mono mute">READ OUT ON THE LIVE</span></div><div class="lb">${[...LB,['J. Morello',tierOf(levelOf(U.spend)).n,U.refs]].filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i).sort((a,b)=>b[2]-a[2]).map(([n,l,c],i)=>`<div class="${n==='J. Morello'?'me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${c} ORDERED</span></div>`).join('')}</div></div>`}
 function wireRefer(){$('#copy').onclick=e=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');e.target.textContent='COPIED'}}
 
-const V={road:[road,wireRoad],shelf:[shelf,wireShelf],missions:[missions,wireMissions],live:[live,wireLive],refer:[refer,wireRefer]};
+function board(){const me=['J. Morello',U.spend];
+  const all=[...BOARD,me].sort((x,y)=>y[1]-x[1]);
+  const rank=all.findIndex(x=>x[0]==='J. Morello')+1;
+  const rows=all.map(([n,pts],i)=>{const lv=levelOf(pts),ti=tierOf(lv),mine=n==='J. Morello';
+    return `<div class="bd${mine?' me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><img src="${ICO(TIERICO[ti.n])}" alt=""><div><b>${n}</b><span class="mono">${ti.n.toUpperCase()} · LEVEL ${lv}</span></div><em class="mono">${fmt(pts)}</em></div>`}).join('');
+  return `<div class="hero"><div class="mono strong pig">${SEASON} · POINTS EARNED</div><div class="disp huge">#${rank} <em>OF ${fmt(2318+all.length)}</em></div><div class="mono strong">${rank>1?`${fmt(all[rank-2][1]-me[1])} POINTS TO PASS ${all[rank-2][0].toUpperCase()}`:'TOP OF THE BOARD'}</div></div>
+  ${band('The board')}<div class="card map">${rows}</div>
+  ${band('How the board works')}<div class="card how">
+    <div class="hrow"><img src="${ICO('tokens')}" alt=""><div><b>Points</b><span>Every token you earn is a point. Spending tokens does not cost you points.</span></div></div>
+    <div class="hrow"><img src="${ICO(TIERICO['Foil'])}" alt=""><div><b>Your material</b><span>Your badge shows next to your name, so everyone can see what you have climbed to.</span></div></div>
+    <div class="hrow"><img src="${ICO('spin')}" alt=""><div><b>The season</b><span>The board resets on the first of each month. The top ten are read out on the live.</span></div></div></div>
+  <p class="mono mute" style="padding:0 2px">BILLY TO SET THE SEASON PRIZE</p>`}
+function wireBoard(){}
+
+const V={road:[road,wireRoad],board:[board,wireBoard],shelf:[shelf,wireShelf],missions:[missions,wireMissions],live:[live,wireLive],refer:[refer,wireRefer]};
 function render(){const [h,w]=V[view];$('#view').innerHTML=h();w();header();document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===view))}
 function go(v){view=v;render();$('main').scrollTo(0,0)}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.t));

@@ -150,7 +150,7 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 .lv .r b{display:block;font-size:14px;font-weight:700;line-height:1.3;color:var(--navy)}.lv .r span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.12em;color:var(--pig);margin-top:4px}
 .lv .s{font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;white-space:nowrap;color:var(--mute)}
 .lv.done .n,.lv.done .s{color:var(--pig)}.lv.done .r span{color:var(--mute)}.lv.now{background:var(--soft);margin:0 -8px;padding:12px 8px}.lv.now+.lv{border-top:0}
-.mats{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:14px 8px}.mat{display:grid;justify-items:center;gap:4px;opacity:.45}.mat.got{opacity:1}.mat img{width:40px;height:40px;object-fit:contain}
+.mats{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}.mat{display:grid;justify-items:center;gap:4px;opacity:.45}.mat.got{opacity:1}.mat img{width:40px;height:40px;object-fit:contain}
 .mat b{font-family:Syncopate,sans-serif;font-size:7.5px;text-transform:uppercase;text-align:center;line-height:1.2}.mat span{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;color:var(--mute)}
 .slide .out .disp{font-size:16px}
 
@@ -180,3 +180,31 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 
 .more{width:100%;background:#fff;border:1px solid var(--line);padding:13px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);cursor:pointer;margin-bottom:12px}
 .more:hover{color:var(--navy)}
+
+/* the linear hero */
+.hero{text-align:center;padding:26px 16px 24px;border-bottom:1px solid var(--line);margin:-18px -18px 16px;background:#fff}
+.hero .ring{margin:0 auto 14px}
+.hero .meter{max-width:260px;margin:12px auto 10px}
+.huge{font-size:44px;line-height:1;letter-spacing:-.01em;margin:8px 0 0;font-variant-numeric:tabular-nums}
+.huge em{font-style:normal;font-size:.28em;color:var(--mute);letter-spacing:.14em;margin-left:4px}
+/* one action */
+.act{display:flex;align-items:center;gap:12px;width:100%;background:var(--pig);color:#fff;border:0;padding:14px 16px;margin-bottom:14px;cursor:pointer;text-align:left}
+.act img{width:38px;height:38px;object-fit:contain}
+.act b{flex:1;font-family:Syncopate,sans-serif;font-weight:700;font-size:13px;text-transform:uppercase}
+.act .mono{font-weight:700;letter-spacing:.14em}
+/* the board */
+.bd{display:grid;grid-template-columns:26px 38px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line)}
+.bd:first-child{border-top:0}
+.bd i{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute);font-style:normal}
+.bd img{width:38px;height:38px;object-fit:contain}
+.bd b{display:block;font-size:14px;font-weight:700;line-height:1.2}
+.bd span{display:block;font-size:9px;color:var(--mute);letter-spacing:.12em;margin-top:3px}
+.bd em{font-style:normal;font-size:13px;font-weight:700;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.bd.me{background:var(--soft);margin:0 -8px;padding:11px 8px}.bd.me b,.bd.me em{color:var(--pig)}
+/* six tabs */
+.tabs{grid-template-columns:repeat(6,1fr)}
+.tabs button img{width:26px;height:26px}
+.tabs button span{font-size:8px}
+/* the slider, quieter */
+.slide .mats{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.band .disp{font-size:13px}
