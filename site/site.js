@@ -85,6 +85,7 @@ if(scene){load().then(({prods,man})=>{const frames=document.getElementById('hfra
     document.getElementById('pname').textContent=p.name;
     document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;
     document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
+    const pe=document.getElementById('pearn');if(pe)pe.textContent=`EARNS ${PRICE[slug]||49} POINTS`;
     document.getElementById('cbtn').querySelector('span').textContent=p.name.toUpperCase()+' · CHANGE';closePanel()}
   const panel=document.getElementById('cpanel'),tabs=document.getElementById('ctabs'),list=document.getElementById('clist'),btn=document.getElementById('cbtn');let tab='All';
   function renderList(){const slugs=tab==='All'?prods.map(p=>p.slug):(CATS[tab]||[]);
@@ -244,3 +245,26 @@ if(lcardEl){
   if(copy)copy.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/'+U.ref);copy.textContent='COPIED'};
   render();
 }
+
+
+// ── Referrals: the page ───────────────────────────────────────────
+const rmsgs=document.querySelector('#rmsgs');
+if(rmsgs){
+  const LINK='skocompounds.com/r/J-MORELLO-8F2';
+  const M=[
+   ['TEXT','Here — 15% off your first order at SKO. Third-party tested, ships cold from LA. '+LINK],
+   ['EMAIL','This is where I get my research peptides. Every batch has a COA and it ships cold from Los Angeles. This link takes 15% off your first order: '+LINK],
+   ['A STORY OR A POST','SKO Compounds. 99% purity, COA on every batch. 15% off your first order with my link: '+LINK],
+   ['THE LAB GROUP CHAT','If anyone still needs a supplier: SKO, third-party HPLC on every batch, COAs public. 15% off the first order — '+LINK],
+  ];
+  rmsgs.innerHTML=M.map(([k,t],i)=>`<button class="rmsg" data-i="${i}"><div class="mono mute">${k}</div><p>${t}</p><span class="mono rcopy">COPY</span></button>`).join('');
+  rmsgs.querySelectorAll('.rmsg').forEach(b=>b.onclick=()=>{navigator.clipboard?.writeText(M[+b.dataset.i][1]);const s=b.querySelector('.rcopy');s.textContent='COPIED';setTimeout(()=>s.textContent='COPY',1600)});
+}
+const rtable=document.querySelector('#rtable');
+if(rtable){
+  const R=[['A. Chen','02 SEP','Ordered · BPC-157, TB-500','+350'],['M. Okafor','28 AUG','Ordered · SKO-NAD','+350'],
+           ['D. Reyes','19 AUG','Joined · no order yet','+100'],['S. Vance','11 AUG','Joined · no order yet','+100']];
+  rtable.innerHTML=R.map(([n,d,w,p])=>`<div><b>${n}</b><i class="mono">${d}</i><span>${w}</span><em class="mono">${p}</em></div>`).join('');
+}
+const rc=document.querySelector('#rcopy');
+if(rc)rc.onclick=()=>{navigator.clipboard?.writeText('skocompounds.com/r/J-MORELLO-8F2');rc.textContent='COPIED'};
