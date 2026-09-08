@@ -71,7 +71,7 @@ function order(amount,mult=1){const before=levelOf(U.spend),bt=tierOf(before);co
   U.spend+=amount;const after=levelOf(U.spend),at=tierOf(after);
   U.spins+=1;collect(got,()=>{U.tokens+=got;header();if(after>before){levelUp(before,after,bt!==at)}else render()})}
 function collect(got,then){const ov=$('#overlay');ov.hidden=false;ov.className='overlay';
-  ov.innerHTML=`<div class="sweep"></div><div class="ov"><img class="bigtoken" src="${IMG}loyalty/token.png" alt=""><div class="mono">TOKENS EARNED</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>Every dollar is a token. Tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
+  ov.innerHTML=`<div class="sweep"></div><div class="ov"><i class="coin3d"></i><div class="mono">TOKENS EARNED</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>Every dollar is a token. Tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
   const [x,y]=centerOf(ov.querySelector('#cnt'));setTimeout(()=>{burst(x,y,44,false);ov.querySelector('.sweep').classList.add('go');tick(ov.querySelector('#cnt'),0,got,1100,'',' ')},80);
   ov.querySelector('#cnt').innerHTML='0 <em>TOKENS</em>';
   const cnt=ov.querySelector('#cnt');const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(got*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};setTimeout(()=>requestAnimationFrame(f),80);
@@ -239,6 +239,6 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.
 $('#bal').onclick=()=>go('shelf');
 render();
 if(!U.welcomed){U.welcomed=true;setTimeout(()=>{const ov=$('#overlay');ov.hidden=false;ov.className='overlay';
-  ov.innerHTML=`<div class="sweep"></div><div class="ov"><img class="bigtoken" src="${IMG}loyalty/token.png" alt=""><div class="mono">WELCOME TO THE BADGE</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>You start on the board, never at zero. Every dollar from here is a token, and tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
+  ov.innerHTML=`<div class="sweep"></div><div class="ov"><i class="coin3d"></i><div class="mono">WELCOME TO THE BADGE</div><div class="disp cnt" id="cnt">0 <em>TOKENS</em></div><p>You start on the board, never at zero. Every dollar from here is a token, and tokens buy peptides.</p><button class="btn pig" id="okc">Collect</button></div>`;
   const cnt=$('#cnt');setTimeout(()=>{ov.querySelector('.sweep').classList.add('go');const [x,y]=centerOf(cnt);burst(x,y,50,false);const t0=performance.now();const f=now=>{const k=Math.min(1,(now-t0)/1100);const e=1-Math.pow(1-k,3);cnt.innerHTML=fmt(100*e)+' <em>TOKENS</em>';if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)},120);
   $('#okc').onclick=()=>{const [bx,by]=centerOf($('#okc'));burst(bx,by,30,true);U.tokens+=100;ov.hidden=true;header();render()}},600)}

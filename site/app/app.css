@@ -116,7 +116,8 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 .band .disp{font-size:12px}.band .mono{color:var(--frost);font-size:8.5px;text-align:right}
 .band+.card{margin-top:0}
 
-.bigtoken{width:150px;height:150px;object-fit:contain;filter:drop-shadow(0 26px 40px rgba(2,11,119,.3));animation:spin 6s linear infinite}
+.coin3d{display:block;width:170px;height:170px;margin:0 auto;background:url(../../img/loyalty/coin-strip.png) 0% 0/800% 100% no-repeat;filter:drop-shadow(0 26px 40px rgba(2,11,119,.3));animation:turncoin 1.6s steps(8) infinite}
+@keyframes turncoin{from{background-position:0% 0}to{background-position:114.2857% 0}}
 @keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
 .burst img{filter:drop-shadow(0 6px 10px rgba(2,11,119,.35))}
 
