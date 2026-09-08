@@ -112,18 +112,29 @@ function spinView(){const m=$('#view');const n=WHEEL.length,seg=360/n;
 
 // ── views ──
 const band=(t,s)=>`<div class="band"><div class="disp">${t}</div><div class="mono">${s}</div></div>`;
-function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1),nt=TIERS.find(x=>x.from>l);
+function road(){const l=levelOf(U.spend),t=tierOf(l),nl=Math.min(50,l+1);
   const from=LEVELS[l],to=LEVELS[nl],pct=l>=50?100:Math.max(4,(U.spend-from)/(to-from)*100);
-  const steps=[];for(let i=Math.max(1,l-2);i<=Math.min(50,l+6);i++){const r=rewardFor(i);steps.push(`<div class="step${i<l?' done':i===l?' now':''}"><div class="n">${i}</div><img class="ico" src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${i<l?'EARNED':i===l?'YOU ARE HERE':'$'+fmt(LEVELS[i])}</b>${r.txt}</div><div class="s">${i===l?'':i<l?'✓':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' to go'}</div></div>`)}
-  return `${band('The road','FIFTY LEVELS · SIX MATERIALS · ONE BRACELET')}
-  <div class="card status"><div class="ring" style="--p:${pct}%"><i><img src="${ICO(TIERICO[t.n])}" alt=""></i></div><div><div class="mono next">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono mute">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl} · ${rewardFor(nl).txt.toUpperCase()}`:'TOP OF THE ROAD'}</div></div></div>
-  <a class="card spincard" id="tospin"><img src="${ICO('spin')}" alt=""><div><div class="mono" style="color:var(--pig)">THE SPIN</div><div class="disp" style="font-size:14px;margin-top:5px">${U.spins?`You have ${U.spins} spin${U.spins===1?'':'s'}.`:'Order to earn a spin.'}</div><div class="mono mute" style="margin-top:5px">FREE SHIPPING · TOKENS · A FREE VIAL · A MYSTERY BOX</div></div><span class="btn${U.spins?' pig':''}">${U.spins?'Spin':'Locked'}</span></a>
-  <div class="card slide"><div class="lab"><div><div class="mono mute">WHAT WOULD IT TAKE</div><div class="disp" id="stitle" style="font-size:14px;margin-top:6px">Drag the token</div></div><div class="mono next" id="ssub"></div></div>
+  const row=i=>{const r=rewardFor(i),done=i<l,now=i===l;return `<div class="lv${done?' done':now?' now':''}"><div class="n">${i}</div><img src="${ICO(r.big?TIERICO[tierOf(i).n]:iconFor(r.txt))}" alt=""><div class="r"><b>${r.txt}</b><span>${done?'EARNED':now?'YOU ARE HERE':'$'+fmt(Math.max(0,LEVELS[i]-U.spend))+' TO GO'}</span></div><div class="s">${done?'✓':now?'':'$'+fmt(LEVELS[i])}</div></div>`};
+  const earned=[];for(let i=Math.max(1,l-2);i<=l;i++)earned.push(row(i));
+  const come=[];for(let i=l+1;i<=Math.min(50,l+4);i++)come.push(row(i));
+  return `<div class="card status"><div class="ring" style="--p:${pct}%"><i><img src="${ICO(TIERICO[t.n])}" alt=""></i></div><div><div class="mono strong">LEVEL ${l} · ${t.n.toUpperCase()}</div><div class="disp big">${fmt(U.tokens)} <em>TOKENS</em></div><div class="meter"><i style="width:${pct}%"></i></div><div class="mono strong">${l<50?`$${fmt(to-U.spend)} TO LEVEL ${nl}`:'TOP OF THE ROAD'}</div></div></div>
+
+  <div class="card how"><div class="mono strong pig">HOW IT WORKS</div>
+    <div class="hrow"><img src="${ICO('tokens')}" alt=""><div><b>Earn</b><span>$1 spent = 1 token. Tokens never expire.</span></div></div>
+    <div class="hrow"><img src="${ICO('vial')}" alt=""><div><b>Spend</b><span>Tokens buy free vials, free shipping and boxes on the Shelf.</span></div></div>
+    <div class="hrow"><img src="${ICO(TIERICO['Chrome'])}" alt=""><div><b>Level up</b><span>Every dollar climbs 50 levels. Each level is a gift. Levels never go down.</span></div></div></div>
+
+  <a class="card spincard${U.spins?' ready':''}" id="tospin"><img src="${ICO('spin')}" alt=""><div><div class="disp" style="font-size:16px">${U.spins?`${U.spins} spin${U.spins===1?'':'s'} ready`:'The Spin'}</div><div class="mono strong" style="margin-top:6px">${U.spins?'FREE VIAL · FREE SHIPPING · TOKENS · A BOX':'EVERY ORDER EARNS A SPIN'}</div></div><span class="btn${U.spins?' pig':''}">${U.spins?'Spin':'Locked'}</span></a>
+
+  ${band('Earned','YOURS TO KEEP')}<div class="card map">${earned.join('')}</div>
+  ${band('To come','EVERY LEVEL IS A GIFT')}<div class="card map">${come.join('')}</div>
+
+  <div class="card slide"><div class="lab"><div class="disp" style="font-size:14px">See the road ahead</div><div class="mono strong pig" id="ssub"></div></div>
     <div class="track" id="track"><div class="fill" id="sfill"></div><div class="what" id="swhat"></div>${TIERS.map(x=>`<div class="tick t" style="left:${pos(x.at)}%"></div>`).join('')}<div class="knob" id="knob"></div></div>
-    <div class="out"><div><div class="disp" id="sout"></div><div class="mono" id="sout2"></div></div><button class="btn pig" id="sjump">Buy it now</button></div>
-    <div class="jump"><button class="btn ghost" data-j="10000">Jump to Chrome · $${fmt(Math.max(0,10000-U.spend))}</button><button class="btn" data-j="150000">The Bracelet · $${fmt(Math.max(0,150000-U.spend))}</button></div></div>
-  ${band('Next up','EVERY LEVEL IS A REWARD')}<div class="card map">${steps.join('')}</div>
-  ${band('The materials','THE OBJECT AT EACH TIER')}<div class="card">${TIERS.map(x=>`<div class="tierrow"><img src="${ICO(TIERICO[x.n])}" alt=""><div><div class="disp">${x.n}</div><div class="mono">${x.at?'LEVEL '+x.from+' · $'+fmt(x.at):'LEVEL 1 · JOIN'} · ${x.keep.toUpperCase()}</div></div></div>`).join('')}</div>
+    <div class="out"><div><div class="disp" id="sout"></div><div class="mono strong" id="sout2"></div></div><button class="btn pig" id="sjump">Buy it now</button></div>
+    <div class="jump"><button class="btn ghost" data-j="10000">Chrome · $${fmt(Math.max(0,10000-U.spend))}</button><button class="btn" data-j="150000">The Bracelet · $${fmt(Math.max(0,150000-U.spend))}</button></div></div>
+
+  <div class="card mats">${TIERS.map(x=>`<div class="mat${x.from<=l?' got':''}"><img src="${ICO(TIERICO[x.n])}" alt=""><b>${x.n}</b><span>${x.at?'$'+fmt(x.at):'JOIN'}</span></div>`).join('')}</div>
   <div class="card"><div class="mono mute">DEV · SIMULATE AN ORDER</div><div class="dev"><button data-o="44">ORDER $44</button><button data-o="129">BUNDLE $129</button><button data-o="420" data-m="1.5">BOX $420 · 1.5×</button><button data-o="2500">$2,500</button><button id="reset">RESET</button></div></div>`}
 function pos(spend){/* equal width per tier band, spend interpolates inside */const A=TIERS.map(t=>t.at);for(let i=A.length-1;i>=0;i--){if(spend>=A[i]){if(i===A.length-1)return 100;return (i+(spend-A[i])/(A[i+1]-A[i]))/(A.length-1)*100}}return 0}
 function spendAt(p){const A=TIERS.map(t=>t.at);const seg=(A.length-1)*p/100;const i=Math.min(A.length-2,Math.floor(seg));return Math.round(A[i]+(A[i+1]-A[i])*(seg-i))}
@@ -131,7 +142,7 @@ function wireRoad(){const tr=$('#track'),knob=$('#knob'),fill=$('#sfill'),what=$
   function paint(sp){ex=sp;const p=pos(sp);knob.style.left=p+'%';fill.style.width=cur+'%';what.style.left=Math.min(cur,p)+'%';what.style.width=Math.abs(p-cur)+'%';
     const l=levelOf(sp),t=tierOf(l);const gained=Math.max(0,l-levelOf(U.spend));
     $('#sout').textContent=sp<=U.spend?`Level ${levelOf(U.spend)} · ${tierOf(levelOf(U.spend)).n}`:`Level ${l} · ${t.n}`;
-    $('#sout2').textContent=sp<=U.spend?'YOU ARE HERE':`$${fmt(sp-U.spend)} MORE · +${gained} LEVEL${gained===1?'':'S'} · ${t.keep.toUpperCase()}`;
+    $('#sout2').textContent=sp<=U.spend?'YOU ARE HERE':`+${gained} LEVEL${gained===1?'':'S'} · ${t.keep.toUpperCase()}`;
     $('#ssub').textContent=`AT $${fmt(sp)}`;$('#sjump').disabled=sp<=U.spend;$('#sjump').textContent=sp<=U.spend?'Drag to explore':`Buy $${fmt(sp-U.spend)} now`}
   paint(U.spend);
   const move=e=>{const r=tr.getBoundingClientRect();const p=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));paint(spendAt(p))};
