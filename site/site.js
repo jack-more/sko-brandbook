@@ -62,17 +62,30 @@ if(pdp){load().then(({prods,man})=>{const s=new URLSearchParams(location.search)
 document.addEventListener('touchend',e=>{const c=e.target.closest('.card');if(c&&c.querySelector('img.alt')&&!c.classList.contains('flip')){c.classList.add('flip');e.preventDefault()}},{passive:false});
 
 
-// the hero shop: category pills, a compound dropdown, the bottle in front of its structure
-const shop=document.querySelector('.hero.shop');
-if(shop){load().then(({prods,man})=>{const cats=document.getElementById('cats'),pick=document.getElementById('pick'),mol=document.getElementById('mol'),vial=document.getElementById('vial');let cat='Recovery';
-  function options(){const list=cat==='All'?prods:(CATS[cat]||[]).map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean);pick.innerHTML=list.map(p=>`<option value="${p.slug}">${p.name} · ${p.dose||''}</option>`).join('');choose(list[0].slug)}
-  function choose(slug){const p=prods.find(x=>x.slug===slug);if(!p)return;pick.value=slug;const k=man[slug]||[];if(k.includes('cut')){vial.src=`../img/products/web/${slug}-cut.png`;vial.classList.add('cut')}else{const kind=k.includes('white')?'white':(k.includes('badge')?'badge':'primary');vial.src=`../img/products/web/${slug}-${kind}.jpg`;vial.classList.remove('cut')}vial.alt=p.name;
-    const reg=REG[slug];if(reg){const src=`https://jackmorello.com/skoembed?c=${reg}&cycle=0&z=${ZOOM[reg]||1.2}&ox=0&spin=0&label=0&t=snow`;if(mol.src!==src)mol.src=src;mol.hidden=false;document.getElementById('phint').textContent='EVERY COMPOUND FROM ITS PUBLISHED COORDINATES · DRAG TO TURN'}else{mol.hidden=true;document.getElementById('phint').textContent='NO PUBLIC COORDINATES FOR THIS COMPOUND · THE BOTTLE STANDS ALONE'}
-    document.getElementById('pname').textContent=p.name;document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
-    document.getElementById('padd').href=`product.html?s=${slug}&add=1`;document.getElementById('pview').href=`product.html?s=${slug}`}
-  if(cats){cats.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
-  cats.querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;cats.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));options()})}else cat='All';
-  pick.onchange=()=>choose(pick.value);options();const first=prods.find(p=>p.slug==='bpc-157');if(first)choose('bpc-157')})}
+// the hero scene and the product row: the structure stands in the snow, the bottle sits small in front of it,
+// the row below carries the compound, a brand-styled selector, the price and Add. Add opens Commonly researched with.
+const scene=document.querySelector('.hero.scene');
+if(scene){load().then(({prods,man})=>{const mol=document.getElementById('mol'),vial=document.getElementById('vial'),thumb=document.getElementById('pthumb');let cur='bpc-157';let cart=[];
+  const catOf=slug=>Object.entries(CATS).find(([c,l])=>l.includes(slug))?.[0]||'';
+  const img=slug=>{const k=man[slug]||[];return k.includes('cut')?`../img/products/web/${slug}-cut.png`:`../img/products/web/${slug}-white.jpg`};
+  function choose(slug){const p=prods.find(x=>x.slug===slug);if(!p)return;cur=slug;vial.src=img(slug);thumb.src=img(slug);vial.alt=thumb.alt=p.name;
+    const reg=REG[slug];if(reg){const src=`https://jackmorello.com/skoembed?c=${reg}&cycle=0&z=${ZOOM[reg]||1.2}&ox=-0.08&spin=0&label=0&t=snow`;if(mol.src!==src)mol.src=src;mol.hidden=false}else mol.hidden=true;
+    document.getElementById('pcat').textContent=(catOf(slug)||'COMPOUND').toUpperCase();document.getElementById('pname').textContent=p.name;document.getElementById('pform').textContent=(p.spray?'Nasal spray':'Lyophilised vial')+` · ${p.dose||''} · 99% purity · research use only`;document.getElementById('pprice').textContent=`$${PRICE[slug]||49}.00`;
+    document.getElementById('cbtn').querySelector('span').textContent=p.name.toUpperCase()+' · CHANGE';closePanel()}
+  // the selector: a panel in the brand, category tabs on top, compounds with their bottles below
+  const panel=document.getElementById('cpanel'),tabs=document.getElementById('ctabs'),list=document.getElementById('clist'),btn=document.getElementById('cbtn');let tab='All';
+  function renderList(){const slugs=tab==='All'?prods.map(p=>p.slug):(CATS[tab]||[]);list.innerHTML=slugs.map(sl=>prods.find(p=>p.slug===sl)).filter(Boolean).map(p=>`<button role="option" data-s="${p.slug}" class="${p.slug===cur?'on':''}"><img src="${img(p.slug)}" alt="" loading="lazy"><span class="n">${p.name}</span><span class="d mono">${p.dose||''}</span><span class="p">$${PRICE[p.slug]||49}</span></button>`).join('');list.querySelectorAll('button').forEach(b=>b.onclick=()=>choose(b.dataset.s))}
+  tabs.innerHTML=['All',...Object.keys(CATS)].map(c=>`<button class="${c===tab?'on':''}" data-c="${c}">${c}</button>`).join('');tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{tab=b.dataset.c;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));renderList()});
+  function openPanel(){renderList();panel.hidden=false;btn.setAttribute('aria-expanded','true')}function closePanel(){panel.hidden=true;btn.setAttribute('aria-expanded','false')}
+  btn.onclick=()=>panel.hidden?openPanel():closePanel();document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});document.addEventListener('click',e=>{if(!e.target.closest('#csel'))closePanel()});
+  // add to cart: count it, then commonly researched with
+  const xs=document.getElementById('xsell');
+  function addToCart(slug){cart.push(slug);const c=document.getElementById('cartlink');if(c)c.textContent=`Cart (${cart.length})`}
+  function xsell(slug){const p=prods.find(x=>x.slug===slug);const pairs=Object.values(BUNDLES).filter(b=>b.members.includes(slug)).flatMap(b=>b.members).filter(m=>m!==slug);const mates=(CATS[catOf(slug)]||[]).filter(m=>m!==slug);const picks=[...new Set([...pairs,...mates])].map(m=>prods.find(x=>x.slug===m)).filter(Boolean).slice(0,3);
+    document.getElementById('xtitle').textContent=`Commonly researched with ${p.name}`;document.getElementById('xgrid').innerHTML=picks.map(q=>`<div class="xc"><img src="${img(q.slug)}" alt="${q.name}"><div class="n disp">${q.name}</div><div class="mute">${q.dose||''} · 99% purity</div><div class="r"><span>$${PRICE[q.slug]||49}.00</span><button class="btn small" data-s="${q.slug}">Add</button></div></div>`).join('');
+    xs.querySelectorAll('button[data-s]').forEach(b=>b.onclick=()=>{addToCart(b.dataset.s);b.textContent='Added';b.disabled=true});xs.hidden=false;xs.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  document.getElementById('padd').onclick=e=>{e.preventDefault();addToCart(cur);xsell(cur)};document.getElementById('xkeep').onclick=e=>{e.preventDefault();xs.hidden=true};
+  choose('bpc-157')})}
 
 // the category band: one card per research category, its lead compound floating, a click filters the grid
 const cg=document.querySelector('#catgrid');
