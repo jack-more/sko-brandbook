@@ -167,7 +167,7 @@ main{flex:1;min-height:0;padding:18px 18px 40px;overflow:auto;-webkit-overflow-s
 .shbar{height:4px;background:#e6ecf7;margin:9px 0 6px;max-width:220px}.shbar i{display:block;height:100%;background:var(--pig)}
 .sh .cost{font-weight:700;color:var(--navy);letter-spacing:.1em}
 .sh.ok .cost{color:var(--pig)}
-.sh:not(.ok) img{filter:grayscale(1) opacity(.55)}
+.sh:not(.ok) img{opacity:.5}
 /* missions, grouped */
 .mis{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);background:#fff;padding:14px 16px;margin-bottom:8px}
 .mis .mico{width:52px;height:52px;object-fit:contain}

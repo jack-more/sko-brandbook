@@ -5,7 +5,7 @@ const TIERICO={Embossed:'tier-emboss',Pressed:'tier-cap',Foil:'tier-foil',Chrome
 function iconFor(txt){const t=txt.toLowerCase();
   if(/bracelet/.test(t))return 'tier-bracelet';if(/golden/.test(t))return 'golden';if(/print/.test(t))return 'print';if(/badge/.test(t)&&/chrome/.test(t))return 'tier-chrome';
   if(/sticker/.test(t))return 'sticker';if(/hat/.test(t))return 'hat';if(/pin/.test(t))return 'pin';if(/spin/.test(t))return 'spin';if(/free shipping/.test(t))return 'freeship';if(/token/.test(t))return 'tokens';if(/water/.test(t))return 'vial';if(/two (vials|peptides)/.test(t))return 'vials';if(/vial|peptide/.test(t))return 'vial';
-  if(/bundle|pair/.test(t))return 'box-open';if(/box cycle|full box/.test(t))return 'shelf';if(/mystery/.test(t))return 'mystery';if(/code/.test(t))return 'code';if(/shipping/.test(t))return 'shipping';
+  if(/bundle|pair/.test(t))return 'box-open';if(/box cycle|full box/.test(t))return 'box-open';if(/mystery/.test(t))return 'mystery';if(/code/.test(t))return 'code';if(/shipping/.test(t))return 'shipping';
   if(/batch|early/.test(t))return 'ticket';if(/double|multiplier/.test(t))return 'token';if(/live|stamp/.test(t))return 'stamp';if(/refer|creator|shout/.test(t))return 'refer';return 'box'}
 const TIERS=[
  {n:'Embossed',from:1, at:0,     img:'edition3/badge-emboss.jpg',  keep:'A foil sticker sheet and 100 tokens, day one'},
