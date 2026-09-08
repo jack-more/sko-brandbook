@@ -300,7 +300,7 @@ const CODES={
  'MYSTERY':   {kind:'MYSTERY', what:null, pts:0},
 };
 const MYSTERY=['+100 points','+250 points','A foil badge sticker','Bacteriostatic water, free','Any vial under $50, free','Double points on your next order'];
-const LEADERBOARD=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Foil',4],['A. Chen','Pressed',3]];
+const LEADERBOARD=[['Kai R.','Chrome',31],['Dani O.','Foil',22],['M. Okafor','Pigment',19],['J. Morello','Foil',2],['A. Chen','Pressed',3]];
 
 function chip(c){return `<span class="mchip mono">${c}</span>`}
 const mboard=document.querySelector('#mboard');
@@ -328,6 +328,7 @@ if(vault){
   vault.querySelectorAll('.vtry').forEach(b=>b.onclick=()=>{inp.value=b.dataset.c;reveal(b.dataset.c)});
 }
 const rlad=document.querySelector('#rladder');
-if(rlad){const have=4;rlad.innerHTML=REFLADDER.map(x=>`<div class="rl${have>=x.n?' done':''}"><b class="mono">${x.n}</b><span>${x.r}</span><i class="mono">${have>=x.n?'EARNED':(x.n-have)+' TO GO'}</i></div>`).join('')}
+if(rlad){const have=2; // referrals who ORDERED. Joining pays 100; the ladder counts orders.
+  rlad.innerHTML=REFLADDER.map(x=>`<div class="rl${have>=x.n?' done':''}"><b class="mono">${x.n}</b><span>${x.r}</span><i class="mono">${have>=x.n?'EARNED':(x.n-have)+' TO GO'}</i></div>`).join('')}
 const lb=document.querySelector('#leaderboard');
 if(lb)lb.innerHTML=LEADERBOARD.map(([n,l,c],i)=>`<div class="${n==='J. Morello'?'me':''}"><i class="mono">${String(i+1).padStart(2,'0')}</i><b>${n}</b><span class="mono">${l.toUpperCase()}</span><em class="mono">${c} ORDERED</em></div>`).join('');
