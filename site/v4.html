@@ -111,7 +111,7 @@ a{color:inherit;text-decoration:none}
 </style>
 
 <div class="hero">
-  <img class="shot" id="shotA" src="../img/products/web/hd/bpc-157-wide.jpg" alt="">
+  <img class="shot" id="shotA" src="../img/products/web/scene.jpg" alt="">
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
   <video class="gust" id="gust" muted playsinline preload="auto">
@@ -255,7 +255,19 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
   menu.addEventListener('mouseover',e=>{const a=e.target.closest('[data-s]');if(a)warm(a.dataset.s)});
   menu.onclick=e=>{e.stopPropagation();const a=e.target.closest('[data-s]');if(!a)return;e.preventDefault();show(by[a.dataset.s]);menu.hidden=true};
 
-  setTimeout(()=>warm(BEST[0]),1200);
+  // The page opens on the empty scene and the first compound drops into it,
+  // so arriving looks the same as choosing. Reduced-motion gets the still.
+  const first=by[BEST[0]];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){
+    const a=document.getElementById('shotA');
+    a.src=`../img/products/web/hd/${first.slug}-wide.jpg`;
+  } else {
+    const c=warm(first.slug);
+    c.ready.then(ok=>{ if(ok) show(first); else {
+      const a=document.getElementById('shotA'); a.src=`../img/products/web/hd/${first.slug}-wide.jpg`; } });
+  }
+  setTimeout(()=>BEST.slice(1,4).forEach(warm),2600);
   bthumbs.innerHTML=BEST.slice(0,4).map(s=>`<img src="../img/products/web/${s}-cut.png" alt="">`).join('');
   grid.innerHTML=BEST.map(s=>{const p=by[s];
     return `<a class="card" href="#">
