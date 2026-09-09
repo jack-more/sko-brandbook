@@ -162,7 +162,7 @@ const BEST=['bpc-157','tb-500','ghk-cu','nad','semax','glutathione','tesamorelin
 let ALL=[];
 
 function priceOf(s){return PRICE[s]||49}
-let front='A', busy=false;
+let front='A', busy=false, held=null;
 const CLIPS={};                      // clips are fetched up front, not at click time
 function warm(slug){
   if(CLIPS[slug]) return CLIPS[slug];
@@ -193,35 +193,30 @@ function show(x){
 
   const pre=new Image(); pre.src=src;                       // the still, ready underneath
   const land=()=>{
+    if(held){held.style.opacity='0';held=null}
     nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
     nxt.style.opacity='1'; cur.style.opacity='0';
     front = front==='A' ? 'B' : 'A';
-    Object.values(CLIPS).forEach(c=>c.el.style.opacity='0');
+    Object.values(CLIPS).forEach(c=>c.el.style.opacity='0'); held=null;
     busy=false;
   };
   const c=warm(x.slug);
   c.ready.then(ok=>{
     if(!ok){ land(); return; }                              // no clip: a clean dissolve
     const v=c.el;
+    if(held && held!==v) held.style.opacity='0';
     v.currentTime=0;
     v.play().then(()=>{
       v.style.opacity='1';                                  // the clip owns the frame
+      // The clip's last frame is close to the photograph but not identical: the
+      // model rebuilds the molecule slightly differently every time. Cutting to
+      // the photograph therefore pops. So we do not cut at all. The clip freezes
+      // on its final frame and that frame stays as the hero. Nothing to match.
       const done=()=>{
-        v.pause();                                   // freeze on the final frame
-        nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
-        nxt.classList.remove('focused'); nxt.classList.add('focusing');
-        nxt.style.opacity='1'; cur.style.opacity='0';
-        front=front==='A'?'B':'A';
-        // let the still finish painting underneath, then dissolve the clip off it.
-        // the clip's last frame and the still are the same picture, so the
-        // handoff reads as a settle rather than a cut.
-        const fade=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          v.style.opacity='0';
-          nxt.classList.add('focused');              // and it sharpens as the clip leaves
-          setTimeout(()=>nxt.classList.remove('focusing'),700);
-        }));
-        (nxt.decode? nxt.decode().then(fade).catch(fade) : fade());
-        setTimeout(()=>{busy=false},560);
+        v.pause();
+        cur.style.opacity='0'; nxt.style.opacity='0';
+        held=v;                                      // this frame is now the hero
+        busy=false;
       };
       v.onended=done;
       setTimeout(()=>{ if(busy) done(); }, 2800);
