@@ -19,10 +19,6 @@ a{color:inherit;text-decoration:none}
   will-change:opacity,filter;transition:opacity .5s ease}
 /* the clip dissolves off the still it ends on */
 .vid{object-fit:cover;object-position:50% 42%;transition:opacity .46s cubic-bezier(.4,0,.2,1)}
-/* the gust: white snow on black, screened over the frame. The swap happens
-   behind it at peak coverage, so the eye never sees the two images meet. */
-.gust{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:4;pointer-events:none;
-  opacity:0;mix-blend-mode:screen;transition:opacity .18s linear}
 /* video compression leaves the clip's last frame softer than the photograph.
    Measured across all 38, the still matches that softness at ~1.1px, so it
    lands there and the two focus together. Without this the still snaps. */
@@ -114,8 +110,6 @@ a{color:inherit;text-decoration:none}
   <img class="shot" id="shotA" src="../img/products/web/scene.jpg" alt="">
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
-  <video class="gust" id="gust" muted playsinline preload="auto">
-    <source src="../img/vid/gust.webm" type="video/webm"><source src="../img/vid/gust.mp4" type="video/mp4"></video>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
     <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">Your account</a><a href="#">Lab</a></div>
@@ -216,27 +210,14 @@ function show(x){
       // model rebuilds the molecule slightly differently every time. Cutting to
       // the photograph therefore pops. So we do not cut at all. The clip freezes
       // on its final frame and that frame stays as the hero. Nothing to match.
-      // The clip's last frame is close to the photograph but never identical:
-      // the model rebuilds the molecule its own way. So we do not cut between
-      // them in the open. A gust of snow blows across the frame and the swap
-      // happens behind it, at peak coverage.
+      // One snow event only, the clip's own. Its burst lands anywhere between
+      // 0.4s and 2.0s depending on the compound, so a second effect can never
+      // sync to it and reads as random. So there is no second effect and no
+      // swap: the clip freezes on its final frame and that frame is the hero.
       const done=()=>{
         v.pause();
-        const g=document.getElementById('gust');
-        const swap=()=>{
-          nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
-          nxt.style.opacity='1'; cur.style.opacity='0';
-          v.style.opacity='0';
-          front=front==='A'?'B':'A';
-        };
-        const finish=()=>{ g.style.opacity='0'; busy=false; };
-        g.currentTime=0;
-        g.play().then(()=>{
-          g.style.opacity='1';
-          setTimeout(swap, 620);          // peak coverage, measured at 0.79s in
-          g.onended=finish;
-          setTimeout(()=>{ if(busy) finish(); }, 1500);
-        }).catch(()=>{ swap(); finish(); });   // no gust: swap plainly
+        cur.style.opacity='0'; nxt.style.opacity='0';
+        busy=false;
       };
       v.onended=done;
       setTimeout(()=>{ if(busy) done(); }, 2800);
