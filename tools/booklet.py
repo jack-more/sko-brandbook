@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Isometrica + Ecophilia booklets. 16:9 pages. Per product: a spec page (the 1:1 in the middle, writing either side)
+"""Isometrica + Botanica booklets. 16:9 pages. Per product: a spec page (the 1:1 in the middle, writing either side)
 and an art page (full bleed). Renders HTML → PDF with Playwright's Chromium.
 usage: booklet.py iso|eco|both"""
 import os,sys,json,re,collections
@@ -106,7 +106,7 @@ table{border-collapse:collapse;width:100%}td{font:400 9pt/1.35 'JetBrains Mono',
 .plate.dark .pn{color:rgba(13,35,80,.55)}
 '''
     return css,[cover,sentence]+pages,'Isometrica',(384,214.3)
-# ---------- Meridian / Ecophilia ----------
+# ---------- Meridian / Botanica ----------
 def mer_pages():
     P=json.load(open(f'{MER}/products.json')); N=len(P); pages=[]
     for i,p in enumerate(P):
@@ -118,20 +118,18 @@ def mer_pages():
         # the plant photographs fill the frame, so the writing gets its own page facing the plate
         pages.append(f'''<section class="say" style="background:{gr}">
   <div class="saybox">
-    <div class="eye">Ecophilia &middot; N&ordm; {i+1:02d} / {N}</div>
-    <h1>{p['name']}</h1>
-    <div class="rule"></div>
+    <div class="head"><div class="eye">Botanica &middot; N&ordm; {i+1:02d} / {N}</div><h1>{p['name']}</h1><div class="rule"></div></div>
     <p class="desc">{desc}</p>
     <table><tr><td>Form</td><td>{form}</td></tr><tr><td>Dose</td><td>{p['dose']}</td></tr><tr><td>Purity</td><td>{p['purity']}</td></tr><tr><td>Category</td><td>{cat}</td></tr><tr><td>Object</td><td>{p['plant'][0].upper()+p['plant'][1:]}</td></tr><tr><td>Use</td><td>Research use only</td></tr></table>
   </div>
   <div class="pn">{2*i+3:02d}</div></section>''')
         pages.append(f'''<section class="plate green" style="background:{gr}"><img class="fit" src="{web(pl,'m-'+s+'-pl',2600)}"><div class="pn">{2*i+4:02d}</div></section>''')
-    cover=f'''<section class="art cover" style="background:{edge_colour(f"{MER}/img/products/tesamorelin-plant.png","left")}"><img class="fit" src="{web(f"{MER}/img/products/tesamorelin-plant.png","m-cover")}"><div class="ct"><div class="eye">meridian · The product book</div><h1>Ecophilia</h1><div class="s">one offering, one branch.</div></div></section>'''
+    cover=f'''<section class="art cover" style="background:{edge_colour(f"{MER}/img/products/tesamorelin-plant.png","left")}"><img class="fit" src="{web(f"{MER}/img/products/tesamorelin-plant.png","m-cover")}"><div class="ct"><div class="eye">meridian · The product book</div><h1>Botanica</h1><div class="s">one offering, one branch.</div></div></section>'''
     sentence='''<section class="text"><div class="eye">The book</div><h1>Every offering, on the piece of nature that belongs to it alone.</h1>
 <div class="cols"><p>One flat green page, one offering, one piece of nature, and nothing else on it.</p>
 <p>One product per page, one picture per page, and never the same natural object twice: lichen, bark, a cut branch, a leaf, a stone.</p>
 <p>This is the only place the green lives, and the only place the product stands on a coloured ground.</p></div>
-<div class="foot"><span>meridian</span><span>Ecophilia · The product book</span><span>02</span></div></section>'''
+<div class="foot"><span>meridian</span><span>Botanica · The product book</span><span>02</span></div></section>'''
     css='''
 @page{size:384mm 257.6mm;margin:0}
 *{box-sizing:border-box;margin:0}html,body{background:#fff;color:#1c1b1a;font-family:Inter,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -152,18 +150,19 @@ table{border-collapse:collapse;width:100%}td{font:400 9pt/1.35 'JetBrains Mono',
 .plate{position:relative}
 .plate>img.fit{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .plate .pn{position:absolute;right:16mm;bottom:12mm;color:rgba(20,32,15,.55);font:500 7.5pt 'JetBrains Mono',monospace;letter-spacing:.16em}
-.say{position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 34mm}
-.say .saybox{max-width:150mm;color:#14200f}
+.say{position:relative;display:grid;align-content:center;padding:0 40mm}
+.say .saybox{color:#14200f;display:grid;grid-template-columns:1.15fr .85fr;gap:26mm;align-items:start}
+.say .head{grid-column:1/-1}
 .say .eye{color:rgba(20,32,15,.6);letter-spacing:.2em}
-.say h1{font-size:40pt;line-height:1;margin:5mm 0 0;color:#14200f}
-.say .rule{width:26mm;height:.5mm;background:rgba(20,32,15,.4);margin:8mm 0}
-.say .desc{font:400 13pt/1.6 Inter,sans-serif;color:#14200f;margin-bottom:12mm}
-.say table{border-collapse:collapse;width:118mm}
+.say h1{font-size:46pt;line-height:1;margin:6mm 0 0;color:#14200f}
+.say .rule{width:26mm;height:.5mm;background:rgba(20,32,15,.4);margin:9mm 0 11mm}
+.say .desc{font:400 14.5pt/1.62 Inter,sans-serif;color:#14200f;margin:0}
+.say table{border-collapse:collapse;width:100%}
 .say td{padding:2.6mm 0;border-bottom:.3mm solid rgba(20,32,15,.22);font:400 9.5pt Inter,sans-serif;color:#14200f;vertical-align:top}
 .say td:first-child{width:34mm;font:500 7.5pt 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(20,32,15,.6);padding-top:3.4mm}
 .say .pn{position:absolute;right:16mm;bottom:12mm;color:rgba(20,32,15,.55);font:500 7.5pt 'JetBrains Mono',monospace;letter-spacing:.16em}
 '''
-    return css,[cover,sentence]+pages,'Ecophilia',(384,257.6)
+    return css,[cover,sentence]+pages,'Botanica',(384,257.6)
 FONTS='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">'
 def render(css,pages,name,size):
     html=f'<!doctype html><html><head><meta charset="utf-8"><title>{name}</title>{FONTS}<style>{css}</style></head><body>{"".join(pages)}</body></html>'
