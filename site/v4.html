@@ -19,6 +19,18 @@ a{color:inherit;text-decoration:none}
   will-change:opacity,filter;transition:opacity .5s ease}
 /* the clip dissolves off the still it ends on */
 .vid{object-fit:cover;object-position:50% 42%;transition:opacity .46s cubic-bezier(.4,0,.2,1)}
+/* The sun. Always on, over both the clip and the photograph, so the two sit
+   under one light. It does not fix the fact that the model rebuilds each
+   molecule its own way, but it stops that difference reading as a change of
+   scene, and it makes every compound look like the same shoot. */
+.sun{position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:screen;
+  background:
+    radial-gradient(46% 62% at 88% 26%,rgba(255,255,255,.92),rgba(214,236,255,.42) 38%,transparent 72%),
+    radial-gradient(120% 70% at 78% 34%,rgba(190,222,255,.30),transparent 66%),
+    linear-gradient(101deg,transparent 40%,rgba(255,255,255,.16) 54%,transparent 66%)}
+.sun:after{content:"";position:absolute;inset:0;
+  background:radial-gradient(14% 22% at 88% 26%,rgba(255,255,255,.95),transparent 70%);filter:blur(6px)}
+
 /* The glare. The book's own light: one hard low winter sun from the right.
    It blooms to near white in 190ms, the swap happens at the peak, and it is
    gone in 420ms. Short and decisive, so nothing reads as a second event. */
@@ -123,6 +135,7 @@ a{color:inherit;text-decoration:none}
   <img class="shot" id="shotA" src="../img/products/web/scene.jpg" alt="">
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
+  <div class="sun"></div>
   <div class="glare" id="glare"></div>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
