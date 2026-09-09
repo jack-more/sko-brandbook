@@ -15,9 +15,15 @@ a{color:inherit;text-decoration:none}
    photograph — the compound and its own molecule, shot together,
    one light, one shadow. Nothing composited, nothing faked. */
 .hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:var(--ink)}
-.hero .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;will-change:transform,opacity}
-                86%{transform:translateY(-.4%) scale(1.002)}
-                100%{transform:none;opacity:1}}
+.hero .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
+  will-change:opacity,filter;transition:opacity .5s ease}
+/* the clip dissolves off the still it ends on */
+.vid{object-fit:cover;object-position:50% 42%;transition:opacity .46s cubic-bezier(.4,0,.2,1)}
+/* video compression leaves the clip's last frame softer than the photograph.
+   Measured across all 38, the still matches that softness at ~1.1px, so it
+   lands there and the two focus together. Without this the still snaps. */
+.shot.focusing{filter:blur(1.1px) saturate(1.02)}
+.shot.focused{filter:none;transition:filter .62s cubic-bezier(.33,.7,.3,1)}
 /* the numbers change with the picture */
 .swap{animation:swapin .5s ease both}
 @keyframes swapin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
