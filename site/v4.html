@@ -191,9 +191,18 @@ function show(x){
     v.currentTime=0;
     v.play().then(()=>{
       v.style.opacity='1';                                  // the clip owns the frame
-      const done=()=>{ nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
-        nxt.style.opacity='1'; cur.style.opacity='0'; front=front==='A'?'B':'A';
-        setTimeout(()=>{v.style.opacity='0';busy=false},80); };
+      const done=()=>{
+        v.pause();                                   // freeze on the final frame
+        nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
+        nxt.style.opacity='1'; cur.style.opacity='0';
+        front=front==='A'?'B':'A';
+        // let the still finish painting underneath, then dissolve the clip off it.
+        // the clip's last frame and the still are the same picture, so the
+        // handoff reads as a settle rather than a cut.
+        const fade=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{v.style.opacity='0'}));
+        (nxt.decode? nxt.decode().then(fade).catch(fade) : fade());
+        setTimeout(()=>{busy=false},560);
+      };
       v.onended=done;
       setTimeout(()=>{ if(busy) done(); }, 2800);
     }).catch(land);
