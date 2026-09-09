@@ -1,4 +1,4 @@
-<meta charset="utf-8"><title>SKO Compounds</title>
+<meta charset="utf-8"><title>SKO Compounds · white studio</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
@@ -10,27 +10,25 @@ body{background:#fff;color:var(--navy);font-family:Inter,system-ui,sans-serif;-w
 a{color:inherit;text-decoration:none}
 
 /* ── hero: one screen, the picture carries it ── */
-.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0b2a63}
-.hero iframe{position:absolute;inset:-6%;width:112%;height:112%;border:0;display:block;filter:blur(17px) saturate(1.06) brightness(1.02);transform:scale(1.06)}
-.hero:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(to top,rgba(2,11,60,.55),rgba(2,11,60,.10) 40%,transparent 62%),
-             linear-gradient(to right,rgba(2,11,60,.42),transparent 46%)}
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#fff}
+.shot{position:absolute;right:2%;top:50%;transform:translateY(-50%);height:104%;width:auto;display:block}
+
 .hero .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vial{position:absolute;right:13%;bottom:21%;height:54%;width:auto;z-index:2;
   filter:drop-shadow(-26px 16px 30px rgba(2,11,60,.42)) drop-shadow(-64px 30px 70px rgba(2,11,60,.30))}
 .nav{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:22px 34px}
 .nav img{height:26px;width:auto}
 .nav .lk{display:flex;gap:26px}
-.nav .lk a,.nav .cart{color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.86}
-.nav .cart{border:1px solid rgba(255,255,255,.45);padding:7px 13px}
-.hcopy{position:absolute;left:52px;top:50%;transform:translateY(-50%);z-index:5;color:#fff;max-width:400px}
+.nav .lk a,.nav .cart{color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.86}
+.nav .cart{border:1px solid var(--line);padding:7px 13px}
+.hcopy{position:absolute;left:52px;top:50%;transform:translateY(-50%);z-index:5;color:var(--navy);max-width:420px}
 .hcopy .l1{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:11px}
-.hcopy .l2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-.hstatus{position:absolute;right:34px;bottom:126px;z-index:5;text-align:right;color:rgba(255,255,255,.82);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:1.8}
-.hstatus b{color:#fff;font-weight:500}
+.hcopy .l2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.hstatus{position:absolute;left:52px;bottom:126px;z-index:5;text-align:left;color:var(--mute);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:1.8}
+.hstatus b{color:var(--navy);font-weight:500}
 
 /* the buy bar: their CTA slot, doing our job */
-.buy{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;background:#fff;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:0}
+.buy{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;background:#fff;border:1px solid var(--frost);display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:0}
 .buy .sel{display:flex;align-items:center;gap:10px;padding:0 20px;border-right:1px solid var(--line);height:64px}
 .buy .sel .mono{color:var(--mute);font-size:10px}
 .buy .sel b{font-size:14px;font-weight:600;letter-spacing:.01em}
@@ -83,10 +81,9 @@ a{color:inherit;text-decoration:none}
 </style>
 
 <div class="hero">
-  <iframe src="https://jackmorello.com/skoembed?c=bpc157&cycle=0&z=2.4&ox=0.16&spin=0&label=0&t=snow" title="BPC-157, in chrome"></iframe>
-  <img class="vial" src="../img/products/web/bpc-157-cut.png" alt="BPC-157">
+  <img class="shot" src="../img/products/web/bpc-157-white.jpg" alt="BPC-157">
   <div class="nav">
-    <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
+    <a href="index.html"><img src="../img/lockup-3x1-navy.png" alt="SKO Compounds"></a>
     <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">The Badge</a><a href="#">Lab</a></div>
     <a class="cart" href="#">Cart · 0</a>
   </div>
