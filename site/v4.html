@@ -16,27 +16,8 @@ a{color:inherit;text-decoration:none}
    one light, one shadow. Nothing composited, nothing faked. */
 .hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:var(--ink)}
 .hero .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;will-change:transform,opacity}
-/* the drop: the outgoing frame settles away, the new one falls in and lands */
-.shot.out{animation:settle .42s cubic-bezier(.4,0,1,1) forwards}
-.shot.in{animation:drop .92s cubic-bezier(.17,.89,.32,1.05) both}
-.vid{object-fit:cover;object-position:50% 42%}
-@keyframes settle{to{transform:translateY(4%) scale(.99);opacity:0}}
-@keyframes drop{0%{transform:translateY(-13%) scale(1.035);opacity:0}
-                34%{opacity:1}
-                72%{transform:translateY(1.1%) scale(.996)}
                 86%{transform:translateY(-.4%) scale(1.002)}
                 100%{transform:none;opacity:1}}
-/* the snow it kicks up when it lands */
-.puff{position:absolute;left:50%;bottom:16%;width:62%;height:26%;transform:translateX(-50%);z-index:2;pointer-events:none;opacity:0}
-.puff.go{animation:puff .95s cubic-bezier(.2,.7,.3,1) forwards}
-@keyframes puff{0%{opacity:0;transform:translateX(-50%) scale(.5)}
-                18%{opacity:.85}
-                100%{opacity:0;transform:translateX(-50%) scale(1.5)}}
-.puff b{position:absolute;inset:0;border-radius:50%;filter:blur(26px);
-  background:radial-gradient(60% 52% at 50% 62%,rgba(255,255,255,.92),rgba(214,232,255,.45) 46%,transparent 72%)}
-.puff i{position:absolute;left:8%;right:8%;bottom:22%;height:34%;filter:blur(9px);
-  background:radial-gradient(52% 60% at 22% 60%,rgba(255,255,255,.7),transparent 70%),
-             radial-gradient(48% 58% at 78% 55%,rgba(255,255,255,.62),transparent 70%)}
 /* the numbers change with the picture */
 .swap{animation:swapin .5s ease both}
 @keyframes swapin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -117,7 +98,6 @@ a{color:inherit;text-decoration:none}
   <img class="shot" id="shotA" src="../img/products/web/hd/bpc-157-wide.jpg" alt="">
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
-  <div class="puff" id="puff"><b></b><i></i></div>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
     <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">The Badge</a><a href="#">Lab</a></div>
@@ -168,46 +148,56 @@ let ALL=[];
 
 function priceOf(s){return PRICE[s]||49}
 let front='A', busy=false;
+const CLIPS={};                      // clips are fetched up front, not at click time
+function warm(slug){
+  if(CLIPS[slug]) return CLIPS[slug];
+  const v=document.createElement('video');
+  v.muted=true; v.playsInline=true; v.preload='auto';
+  v.innerHTML=`<source src="../img/vid/${slug}.webm" type="video/webm"><source src="../img/vid/${slug}.mp4" type="video/mp4">`;
+  v.className='shot vid'; v.style.opacity='0'; v.style.zIndex='3';
+  document.querySelector('.hero').appendChild(v);
+  v.load();
+  CLIPS[slug]={el:v, ready:new Promise(res=>{
+    if(v.readyState>=3) return res(true);
+    v.addEventListener('canplaythrough',()=>res(true),{once:true});
+    v.addEventListener('error',()=>res(false),{once:true});
+    setTimeout(()=>res(v.readyState>=3),9000);
+  })};
+  return CLIPS[slug];
+}
+
 function show(x){
   if(busy) return; busy=true;
   const cur=document.getElementById('shot'+front), nxt=document.getElementById('shot'+(front==='A'?'B':'A'));
   const src=`../img/products/web/hd/${x.slug}-wide.jpg`;
-  const v=document.getElementById('vid');
 
-  // the readout changes with the picture
   [pname,pdose,pform,pprice].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
   pname.textContent=x.name; pdose.textContent=x.dose;
   pform.textContent=x.spray?'Nasal spray':'Lyophilised vial';
   pprice.textContent='$'+priceOf(x.slug).toFixed(2);
 
-  // ── the reliable path: the photograph drops in. This always runs. ──
-  const dropIn=()=>{
-    nxt.src=src; nxt.style.opacity=''; nxt.style.zIndex=1; cur.style.zIndex=0;
-    cur.classList.remove('in'); nxt.classList.remove('out');
-    void nxt.offsetWidth;
-    cur.classList.add('out'); nxt.classList.add('in');
-    setTimeout(()=>{const p=document.getElementById('puff');p.classList.remove('go');void p.offsetWidth;p.classList.add('go')},430);
-    setTimeout(()=>{cur.classList.remove('out');cur.style.opacity='0';front=front==='A'?'B':'A';busy=false},960);
+  const pre=new Image(); pre.src=src;                       // the still, ready underneath
+  const land=()=>{
+    nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
+    nxt.style.opacity='1'; cur.style.opacity='0';
+    front = front==='A' ? 'B' : 'A';
+    Object.values(CLIPS).forEach(c=>c.el.style.opacity='0');
+    busy=false;
   };
-  const pre=new Image(); pre.onload=dropIn; pre.onerror=dropIn; pre.src=src;
-
-  // ── the enhancement: a 2s clip that ends on this exact photograph.
-  //    It is only ever revealed once it is genuinely playing, so a browser
-  //    that will not decode it simply never sees it. ──
-  const hide=()=>{v.style.opacity='0';v.onended=null};
-  hide();
-  v.innerHTML=`<source src="../img/vid/${x.slug}.webm" type="video/webm"><source src="../img/vid/${x.slug}.mp4" type="video/mp4">`;
-  v.load(); v.play().catch(()=>{});
-  let t0=0;
-  const probe=setInterval(()=>{
-    t0+=120;
-    if(v.currentTime>0.08){                 // proof it is actually running
-      clearInterval(probe);
-      v.style.opacity='1';
-      v.onended=hide;
-      setTimeout(hide,2600);                // and never strand the frame
-    } else if(t0>700){ clearInterval(probe); hide(); }
-  },120);
+  const c=warm(x.slug);
+  c.ready.then(ok=>{
+    if(!ok){ land(); return; }                              // no clip: a clean dissolve
+    const v=c.el;
+    v.currentTime=0;
+    v.play().then(()=>{
+      v.style.opacity='1';                                  // the clip owns the frame
+      const done=()=>{ nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
+        nxt.style.opacity='1'; cur.style.opacity='0'; front=front==='A'?'B':'A';
+        setTimeout(()=>{v.style.opacity='0';busy=false},80); };
+      v.onended=done;
+      setTimeout(()=>{ if(busy) done(); }, 2800);
+    }).catch(land);
+  });
 }
 fetch('../products.json').then(r=>r.json()).then(P=>{
   ALL=P; const by=Object.fromEntries(P.map(p=>[p.slug,p]));
@@ -220,6 +210,7 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
   }).join('');
   menu.onclick=e=>{e.stopPropagation();const a=e.target.closest('[data-s]');if(!a)return;e.preventDefault();show(by[a.dataset.s]);menu.hidden=true};
 
+  setTimeout(()=>BEST.forEach(warm),1200);
   bthumbs.innerHTML=BEST.slice(0,4).map(s=>`<img src="../img/products/web/${s}-cut.png" alt="">`).join('');
   grid.innerHTML=BEST.map(s=>{const p=by[s];
     return `<a class="card" href="#">
@@ -233,7 +224,8 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
     .map(([n,d,pu,l])=>`<span><b>${n}</b> ${d} · ${pu}% · lot ${l}<i>●</i></span>`).join('');
   array.innerHTML=('<span>SKO/ARRAY · '+P.length+' COMPOUNDS</span>'+row).repeat(2);
 });
-pick.onclick=e=>{if(menu.contains(e.target))return;e.preventDefault();menu.hidden=!menu.hidden};
+pick.onclick=e=>{if(menu.contains(e.target))return;e.preventDefault();menu.hidden=!menu.hidden;
+  if(!menu.hidden) BEST.forEach(warm);};
 document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
 best.onclick=e=>{e.preventDefault();document.getElementById('sellers').scrollIntoView({behavior:'smooth'})};
 </script>
