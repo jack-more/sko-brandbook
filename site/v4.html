@@ -173,50 +173,41 @@ function show(x){
   const cur=document.getElementById('shot'+front), nxt=document.getElementById('shot'+(front==='A'?'B':'A'));
   const src=`../img/products/web/hd/${x.slug}-wide.jpg`;
   const v=document.getElementById('vid');
-  // a 2s clip per compound: it drops into the snow and its last frame IS this photograph
-  const clip=`../img/vid/${x.slug}.webm`, clipMp4=`../img/vid/${x.slug}.mp4`;
-  const readout=()=>{
-    [pname,pdose,pform,pprice].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
-    pname.textContent=x.name; pdose.textContent=x.dose;
-    pform.textContent=x.spray?'Nasal spray':'Lyophilised vial';
-    pprice.textContent='$'+priceOf(x.slug).toFixed(2);
-  };
-  const useClip=()=>{
+
+  // the readout changes with the picture
+  [pname,pdose,pform,pprice].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
+  pname.textContent=x.name; pdose.textContent=x.dose;
+  pform.textContent=x.spray?'Nasal spray':'Lyophilised vial';
+  pprice.textContent='$'+priceOf(x.slug).toFixed(2);
+
+  // ── the reliable path: the photograph drops in. This always runs. ──
+  const dropIn=()=>{
     nxt.src=src; nxt.style.opacity=''; nxt.style.zIndex=1; cur.style.zIndex=0;
-    v.style.opacity='1'; v.currentTime=0; v.play().catch(()=>{});
-    readout();
-    const land=()=>{ cur.style.opacity='0'; v.style.opacity='0'; front=front==='A'?'B':'A'; busy=false; };
-    v.onended=land;
-    setTimeout(()=>{ if(busy) land(); },2600);   // never strand the page if the clip stalls
-  };
-  const pre=new Image();
-  const run=()=>{
-    nxt.src=src; nxt.style.opacity='';
     cur.classList.remove('in'); nxt.classList.remove('out');
-    nxt.style.zIndex=1; cur.style.zIndex=0;
     void nxt.offsetWidth;
     cur.classList.add('out'); nxt.classList.add('in');
     setTimeout(()=>{const p=document.getElementById('puff');p.classList.remove('go');void p.offsetWidth;p.classList.add('go')},430);
-    setTimeout(()=>{cur.classList.remove('out');cur.style.opacity='0';busy=false},960);
-    front = front==='A' ? 'B' : 'A';
-    // the readout catches up with the picture
-    [pname,pdose,pform,pprice].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
-    pname.textContent=x.name; pdose.textContent=x.dose;
-    pform.textContent=x.spray?'Nasal spray':'Lyophilised vial';
-    pprice.textContent='$'+priceOf(x.slug).toFixed(2);
+    setTimeout(()=>{cur.classList.remove('out');cur.style.opacity='0';front=front==='A'?'B':'A';busy=false},960);
   };
-  pre.onload=()=>{
-    // if this compound has no clip yet, the page still transitions
-    fetch(clip,{method:'HEAD'}).then(r=>{
-      if(r.ok){
-        v.innerHTML=`<source src="${clip}" type="video/webm"><source src="${clipMp4}" type="video/mp4">`;
-        v.oncanplay=useClip; v.load();
-        setTimeout(()=>{if(busy&&v.style.opacity!=='1')run()},1600);
-      }
-      else run();
-    }).catch(run);
-  };
-  pre.onerror=run; pre.src=src;
+  const pre=new Image(); pre.onload=dropIn; pre.onerror=dropIn; pre.src=src;
+
+  // ── the enhancement: a 2s clip that ends on this exact photograph.
+  //    It is only ever revealed once it is genuinely playing, so a browser
+  //    that will not decode it simply never sees it. ──
+  const hide=()=>{v.style.opacity='0';v.onended=null};
+  hide();
+  v.innerHTML=`<source src="../img/vid/${x.slug}.webm" type="video/webm"><source src="../img/vid/${x.slug}.mp4" type="video/mp4">`;
+  v.load(); v.play().catch(()=>{});
+  let t0=0;
+  const probe=setInterval(()=>{
+    t0+=120;
+    if(v.currentTime>0.08){                 // proof it is actually running
+      clearInterval(probe);
+      v.style.opacity='1';
+      v.onended=hide;
+      setTimeout(hide,2600);                // and never strand the frame
+    } else if(t0>700){ clearInterval(probe); hide(); }
+  },120);
 }
 fetch('../products.json').then(r=>r.json()).then(P=>{
   ALL=P; const by=Object.fromEntries(P.map(p=>[p.slug,p]));
