@@ -30,6 +30,12 @@ a{color:inherit;text-decoration:none}
 .nav .lk{display:flex;gap:28px}
 .nav a,.nav .cart{color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
 .nav .cart{border:1px solid rgba(255,255,255,.4);padding:7px 13px;opacity:1}
+.nav .right{display:flex;align-items:center;gap:14px}
+.acct{display:flex;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.4);padding:6px 13px 6px 8px;opacity:1}
+.acct img{width:20px;height:20px;object-fit:contain}
+.acct b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;font-weight:500;color:#fff}
+.acct span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:#9dc4ff;padding-left:9px;border-left:1px solid rgba(255,255,255,.28);white-space:nowrap}
 .hcopy{position:absolute;left:34px;top:50%;transform:translateY(-50%);z-index:4;color:#fff;max-width:430px}
 .hcopy .l1{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.17em;text-transform:uppercase}
 .hcopy .l2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.76);margin-top:12px;line-height:1.9}
@@ -100,8 +106,11 @@ a{color:inherit;text-decoration:none}
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
-    <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">The Badge</a><a href="#">Lab</a></div>
-    <a class="cart" href="#">Cart · 0</a>
+    <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">Your account</a><a href="#">Lab</a></div>
+    <div class="right">
+      <a class="acct" href="#" id="acct"><img src="../img/loyalty/token.png" alt=""><b id="atok">1,240</b><span id="aping"></span></a>
+      <a class="cart" href="#">Cart · 0</a>
+    </div>
   </div>
   <div class="hcopy">
     <div class="l1">Research, refined.</div>
@@ -239,6 +248,19 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
     .map(([n,d,pu,l])=>`<span><b>${n}</b> ${d} · ${pu}% · lot ${l}<i>●</i></span>`).join('');
   array.innerHTML=('<span>SKO/ARRAY · '+P.length+' COMPOUNDS</span>'+row).repeat(2);
 });
+// Your account: the programme never goes quiet. It always says how far the
+// next reward is, so the number is on screen before anyone goes looking for it.
+const U={spend:3180,tokens:1240};
+const REWARDS=[[0,'a foil sticker sheet'],[40,'250 tokens'],[500,'the chrome token pin'],[900,'free shipping'],
+  [1400,'a free vial under $50'],[2500,'the SKO hat'],[3400,'double tokens'],[4200,'free shipping'],
+  [6000,'a free vial under $70'],[10000,'the cast chrome badge'],[40000,'your compound printed at 60 inches'],
+  [150000,'the championship bracelet']];
+function ping(){
+  const nxt=REWARDS.find(r=>r[0]>U.spend);
+  atok.textContent=U.tokens.toLocaleString();
+  aping.textContent = nxt ? `$${(nxt[0]-U.spend).toLocaleString()} to ${nxt[1]}` : 'top of the road';
+}
+ping();
 pick.onclick=e=>{if(menu.contains(e.target))return;e.preventDefault();menu.hidden=!menu.hidden;
   if(!menu.hidden) BEST.slice(0,4).forEach(warm);};
 document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
