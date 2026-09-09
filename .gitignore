@@ -17,3 +17,7 @@ img/hd/
 img/icons/_src/
 img/icons/_v1/
 fonts/try2/
+
+# video masters stay local; only the web-encoded clips ship
+img/vid/_in/
+img/vid/_master/
