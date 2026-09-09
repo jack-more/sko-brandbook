@@ -194,12 +194,17 @@ function show(x){
       const done=()=>{
         v.pause();                                   // freeze on the final frame
         nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
+        nxt.classList.remove('focused'); nxt.classList.add('focusing');
         nxt.style.opacity='1'; cur.style.opacity='0';
         front=front==='A'?'B':'A';
         // let the still finish painting underneath, then dissolve the clip off it.
         // the clip's last frame and the still are the same picture, so the
         // handoff reads as a settle rather than a cut.
-        const fade=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{v.style.opacity='0'}));
+        const fade=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          v.style.opacity='0';
+          nxt.classList.add('focused');              // and it sharpens as the clip leaves
+          setTimeout(()=>nxt.classList.remove('focusing'),700);
+        }));
         (nxt.decode? nxt.decode().then(fade).catch(fade) : fade());
         setTimeout(()=>{busy=false},560);
       };
