@@ -174,7 +174,7 @@ function show(x){
   const src=`../img/products/web/hd/${x.slug}-wide.jpg`;
   const v=document.getElementById('vid');
   // a 2s clip per compound: it drops into the snow and its last frame IS this photograph
-  const clip=`../img/vid/${x.slug}.mp4`;
+  const clip=`../img/vid/${x.slug}.webm`, clipMp4=`../img/vid/${x.slug}.mp4`;
   const readout=()=>{
     [pname,pdose,pform,pprice].forEach(el=>{el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')});
     pname.textContent=x.name; pdose.textContent=x.dose;
@@ -208,7 +208,11 @@ function show(x){
   pre.onload=()=>{
     // if this compound has no clip yet, the page still transitions
     fetch(clip,{method:'HEAD'}).then(r=>{
-      if(r.ok){ v.src=clip; v.oncanplay=useClip; v.load(); setTimeout(()=>{if(busy&&v.style.opacity!=='1')run()},1400); }
+      if(r.ok){
+        v.innerHTML=`<source src="${clip}" type="video/webm"><source src="${clipMp4}" type="video/mp4">`;
+        v.oncanplay=useClip; v.load();
+        setTimeout(()=>{if(busy&&v.style.opacity!=='1')run()},1600);
+      }
       else run();
     }).catch(run);
   };
