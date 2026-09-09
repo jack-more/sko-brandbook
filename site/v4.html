@@ -34,21 +34,30 @@ a{color:inherit;text-decoration:none}
 .hstat i{font-style:normal;color:#7ef0a5}
 
 /* the buy bar: this page exists to sell */
-.buy{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;background:#fff;
-  display:grid;grid-template-columns:auto 1fr auto auto;align-items:stretch}
+.bottom{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;display:flex;align-items:stretch;gap:14px}
+.buy{background:#fff;display:grid;grid-template-columns:auto auto auto auto;align-items:stretch;width:max-content;max-width:100%}
+.best{margin-left:auto;display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.34);padding:0 20px;height:66px;backdrop-filter:blur(6px);cursor:pointer}
+.best .thumbs{display:flex}
+.best .thumbs img{width:34px;height:34px;object-fit:contain;margin-left:-9px}
+.best .thumbs img:first-child{margin-left:0}
+.best span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;white-space:nowrap}
 .buy>*{height:66px;display:flex;align-items:center}
 .pick{position:relative;padding:0 20px;gap:12px;border-right:1px solid var(--line);cursor:pointer;background:#fff}
 .pick .mono{color:var(--mute);font-size:9.5px}
 .pick b{font-size:15px;font-weight:600;display:block;margin-top:2px}
 .pick i{font-style:normal;color:var(--mute);margin-left:auto;padding-left:12px}
-.facts{padding:0 22px;gap:22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.facts{padding:0 26px;gap:24px;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 .price{padding:0 24px;border-left:1px solid var(--line);font-size:18px;font-weight:600}
 .add{background:var(--pig);color:#fff;padding:0 38px;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;justify-content:center}
-.menu{position:absolute;left:0;bottom:66px;width:660px;background:#fff;border:1px solid var(--line);border-bottom:0;
-  display:grid;grid-template-columns:repeat(3,1fr);max-height:340px;overflow:auto}
+.menu{position:absolute;left:0;bottom:66px;width:940px;background:#fff;border:1px solid var(--line);border-bottom:0;
+  max-height:60vh;overflow:auto;padding-bottom:4px}
 .menu[hidden]{display:none}
-.menu a{padding:12px 16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:block}
-.menu a:hover{background:#f4f7fd}
+.menu h4{grid-column:1/-1;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);padding:13px 16px 7px;border-bottom:1px solid var(--frost);background:#fff;position:sticky;top:0}
+.menu .g{display:grid;grid-template-columns:repeat(3,1fr)}
+.menu a{padding:11px 16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:block}
+.menu a:hover{background:#f2f6fd}
 .menu b{display:block;font-size:13px;font-weight:600}
 .menu span{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 
@@ -92,18 +101,21 @@ a{color:inherit;text-decoration:none}
     <div class="l2">99% purity · third-party tested<br>Research use only</div>
   </div>
   <div class="hstat">In stock <i>●</i><br>Shipped cold from <b>Los Angeles</b><br>Batch <b id="hlot">2609-A</b></div>
-  <div class="buy">
-    <div class="pick" id="pick"><div><span class="mono">Compound</span><b id="pname">BPC-157</b></div><i>▾</i>
-      <div class="menu" id="menu" hidden></div></div>
-    <div class="facts"><span>Lyophilised vial</span><span id="pdose">10 mg</span><span id="ppur">99.1% HPLC</span></div>
-    <div class="price" id="pprice">$44.00</div>
-    <a class="add" href="#">Add to cart</a>
+  <div class="bottom">
+    <div class="buy">
+      <div class="pick" id="pick"><div><span class="mono">Compound</span><b id="pname">BPC-157</b></div><i>▾</i>
+        <div class="menu" id="menu" hidden></div></div>
+      <div class="facts"><span id="pform">Lyophilised vial</span><span id="pdose">10 mg</span><span>99% purity</span></div>
+      <div class="price" id="pprice">$44.00</div>
+      <a class="add" href="#">Add to cart</a>
+    </div>
+    <a class="best" href="#sellers" id="best"><span class="thumbs" id="bthumbs"></span><span>Best sellers ↓</span></a>
   </div>
 </div>
 
 <div class="hood"><div class="run" id="array"></div></div>
 
-<div class="wrap">
+<div class="wrap" id="sellers">
   <div class="band"><h2>Top sellers</h2><span class="mono">Batch 2609-A · all 38 compounds →</span></div>
   <div class="grid" id="grid"></div>
 </div>
@@ -111,32 +123,54 @@ a{color:inherit;text-decoration:none}
 <div style="height:70px"></div>
 
 <script>
-const P=[
- {s:'bpc-157',n:'BPC-157',d:'10 mg',p:44,pu:'99.1',lot:'2609-A'},
- {s:'tb-500',n:'TB-500',d:'10 mg',p:49,pu:'99.3',lot:'2609-A'},
- {s:'ghk-cu',n:'GHK-Cu',d:'50 mg',p:39,pu:'99.0',lot:'2608-C'},
- {s:'nad',n:'NAD+',d:'500 mg',p:69,pu:'99.2',lot:'2609-B'},
- {s:'semax',n:'Semax',d:'10 mg',p:54,pu:'98.9',lot:'2608-D'},
- {s:'glutathione',n:'Glutathione',d:'600 mg',p:45,pu:'99.4',lot:'2609-A'},
- {s:'tesamorelin',n:'Tesamorelin',d:'10 mg',p:79,pu:'99.1',lot:'2609-C'},
- {s:'mots-c',n:'MOTS-c',d:'10 mg',p:59,pu:'99.2',lot:'2608-B'}];
+// Prices come from the live prototype's own map. Nine SKUs have no price yet
+// and fall back to $49, the same fallback the prototype already ships. Billy to set them.
+const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathione':45,'semax':54,'selank':54,'kpv':49,
+ 'dsip':39,'cagrilintide':129,'tesamorelin':79,'ipamorelin':39,'sermorelin':49,'igf1-lr3':89,'mt-1':39,'mt-2':39,
+ 'pt-141':44,'ss-31':79,'thymosin-alpha-1':69,'ara-290':59,'aod-9604':49,'kisspeptin':49,'5-amino-1mq':59,'adamax':64,
+ 'glow':99,'wolverine':89,'tesa-ipa':99,'cjc-1295':54};
+const CATS={'Recovery':['bpc-157','tb-500','wolverine','kpv','ara-290'],
+ 'Skin & hair':['ghk-cu','ghk-cu-spray','glow','klow'],
+ 'Cognitive':['semax','selank','semax-spray','selank-spray','adamax','dsip'],
+ 'Cellular & longevity':['nad','nad-spray','mots-c','ss-31','5-amino-1mq','glutathione','thymosin-alpha-1'],
+ 'Growth & performance':['cjc-1295','ipamorelin','sermorelin','tesamorelin','tesa-ipa','igf1-lr3'],
+ 'Metabolic':['sko-3-rt','sko-trz','cagrilintide','aod-9604'],
+ 'Pigment':['mt-1','mt-2','mt-2-spray'],'Libido':['pt-141','kisspeptin'],'Supplies':['bac-water']};
+const BEST=['bpc-157','tb-500','ghk-cu','nad','semax','glutathione','tesamorelin','mots-c'];
+let ALL=[];
 
-// the hero photograph changes with the compound: 38 real shots, each its own molecule
+function priceOf(s){return PRICE[s]||49}
 function show(x){
-  document.getElementById('shot').src=`../img/products/web/hd/${x.s}-wide.jpg`;
-  pname.textContent=x.n; pdose.textContent=x.d; ppur.textContent=x.pu+'% HPLC';
-  pprice.textContent='$'+x.p.toFixed(2); hlot.textContent=x.lot;
+  document.getElementById('shot').src=`../img/products/web/hd/${x.slug}-wide.jpg`;
+  pname.textContent=x.name; pdose.textContent=x.dose;
+  pform.textContent=x.spray?'Nasal spray':'Lyophilised vial';
+  pprice.textContent='$'+priceOf(x.slug).toFixed(2);
 }
-menu.innerHTML=P.map((x,i)=>`<a href="#" data-i="${i}"><b>${x.n}</b><span>${x.d} · $${x.p}</span></a>`).join('');
-pick.onclick=e=>{e.preventDefault();menu.hidden=!menu.hidden};
-menu.onclick=e=>{const a=e.target.closest('[data-i]');if(!a)return;e.preventDefault();show(P[+a.dataset.i]);menu.hidden=true};
-document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
+fetch('../products.json').then(r=>r.json()).then(P=>{
+  ALL=P; const by=Object.fromEntries(P.map(p=>[p.slug,p]));
+  // the whole catalogue, grouped the way the store groups it
+  menu.innerHTML=Object.entries(CATS).map(([c,ss])=>{
+    const items=ss.filter(s=>by[s]);
+    if(!items.length) return '';
+    return `<h4>${c}</h4><div class="g">`+items.map(s=>{const p=by[s];
+      return `<a href="#" data-s="${s}"><b>${p.name}</b><span>${p.dose} · $${priceOf(s)}</span></a>`}).join('')+'</div>';
+  }).join('');
+  menu.onclick=e=>{const a=e.target.closest('[data-s]');if(!a)return;e.preventDefault();show(by[a.dataset.s]);menu.hidden=true};
 
-grid.innerHTML=P.map(x=>`<a class="card" href="#">
-  <div class="im"><img src="../img/products/web/${x.s}-cut.png" alt="${x.n}"></div>
-  <div class="nm">${x.n}</div><div class="sp">Lyophilised vial · ${x.d} · 99% purity</div>
-  <div class="pr">$${x.p}.00 <span>Add →</span></div>
-  <div class="lot">Lot ${x.lot} · ${x.pu}% HPLC <i>● in stock</i></div></a>`).join('');
-const row=P.map(x=>`<span><b>${x.n}</b> ${x.d} · ${x.pu}% · lot ${x.lot}<i>●</i></span>`).join('');
-array.innerHTML='<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row+'<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row;
+  bthumbs.innerHTML=BEST.slice(0,4).map(s=>`<img src="../img/products/web/${s}-cut.png" alt="">`).join('');
+  grid.innerHTML=BEST.map(s=>{const p=by[s];
+    return `<a class="card" href="#">
+      <div class="im"><img src="../img/products/web/${s}-cut.png" alt="${p.name}"></div>
+      <div class="nm">${p.name}</div><div class="sp">${p.spray?'Nasal spray':'Lyophilised vial'} · ${p.dose} · 99% purity</div>
+      <div class="pr">$${priceOf(s)}.00 <span>Add →</span></div>
+      <div class="lot">Batch 2609-A · 99% HPLC <i>● in stock</i></div></a>`}).join('');
+  // the Array reads out the guide's own hood example
+  const row=[['BPC-157','10 mg','99.1','2609-A'],['TB-500','5 mg','99.3','2609-A'],['GHK-Cu','50 mg','99.0','2608-C'],
+             ['MOTS-c','10 mg','99.2','2609-B'],['Semax','10 mg','98.9','2608-D']]
+    .map(([n,d,pu,l])=>`<span><b>${n}</b> ${d} · ${pu}% · lot ${l}<i>●</i></span>`).join('');
+  array.innerHTML=('<span>SKO/ARRAY · '+P.length+' COMPOUNDS</span>'+row).repeat(2);
+});
+pick.onclick=e=>{e.preventDefault();menu.hidden=!menu.hidden};
+document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
+best.onclick=e=>{e.preventDefault();document.getElementById('sellers').scrollIntoView({behavior:'smooth'})};
 </script>
