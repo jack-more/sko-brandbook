@@ -217,9 +217,10 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
     return `<h4>${c}</h4><div class="g">`+items.map(s=>{const p=by[s];
       return `<a href="#" data-s="${s}"><b>${p.name}</b><span>${p.dose} · $${priceOf(s)}</span></a>`}).join('')+'</div>';
   }).join('');
+  menu.addEventListener('mouseover',e=>{const a=e.target.closest('[data-s]');if(a)warm(a.dataset.s)});
   menu.onclick=e=>{e.stopPropagation();const a=e.target.closest('[data-s]');if(!a)return;e.preventDefault();show(by[a.dataset.s]);menu.hidden=true};
 
-  setTimeout(()=>BEST.forEach(warm),1200);
+  setTimeout(()=>warm(BEST[0]),1200);
   bthumbs.innerHTML=BEST.slice(0,4).map(s=>`<img src="../img/products/web/${s}-cut.png" alt="">`).join('');
   grid.innerHTML=BEST.map(s=>{const p=by[s];
     return `<a class="card" href="#">
@@ -234,7 +235,7 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
   array.innerHTML=('<span>SKO/ARRAY · '+P.length+' COMPOUNDS</span>'+row).repeat(2);
 });
 pick.onclick=e=>{if(menu.contains(e.target))return;e.preventDefault();menu.hidden=!menu.hidden;
-  if(!menu.hidden) BEST.forEach(warm);};
+  if(!menu.hidden) BEST.slice(0,4).forEach(warm);};
 document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
 best.onclick=e=>{e.preventDefault();document.getElementById('sellers').scrollIntoView({behavior:'smooth'})};
 </script>
