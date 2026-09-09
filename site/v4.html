@@ -2,91 +2,86 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-:root{--navy:#173384;--ink:#020B77;--pig:#0130C0;--sky:#0148FE;--frost:#88A9E3;--mute:#5b6789;--line:rgba(2,11,119,.14)}
+:root{--navy:#173384;--ink:#020B77;--pig:#0130C0;--sky:#0148FE;--frost:#88A9E3;--mute:#5b6789;--line:rgba(2,11,119,.13)}
 *{box-sizing:border-box;margin:0}
 body{background:#fff;color:var(--navy);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.syn{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase}
 a{color:inherit;text-decoration:none}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.wrap{max-width:1400px;margin:0 auto;padding:0 34px}
 
-/* ── hero: one screen, the picture carries it ── */
-.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#0b2a63}
-.hero iframe{position:absolute;inset:-6%;width:112%;height:112%;border:0;display:block;filter:blur(17px) saturate(1.06) brightness(1.02);transform:scale(1.06)}
-.hero:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(to top,rgba(2,11,60,.55),rgba(2,11,60,.10) 40%,transparent 62%),
-             linear-gradient(to right,rgba(2,11,60,.42),transparent 46%)}
-.hero .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vial{position:absolute;right:13%;bottom:21%;height:54%;width:auto;z-index:2;
-  filter:drop-shadow(-26px 16px 30px rgba(2,11,60,.42)) drop-shadow(-64px 30px 70px rgba(2,11,60,.30))}
-.nav{position:absolute;top:0;left:0;right:0;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:22px 34px}
+/* ══ HERO ═══════════════════════════════════════════════
+   The book allows exactly one exception to the white ground:
+   the home hero is a full-bleed photograph. So it is a real
+   photograph — the compound and its own molecule, shot together,
+   one light, one shadow. Nothing composited, nothing faked. */
+.hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:var(--ink)}
+.hero .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom,rgba(2,11,60,.46),transparent 26%),
+             linear-gradient(to top,rgba(2,11,60,.60),transparent 34%),
+             linear-gradient(to right,rgba(2,11,60,.34),transparent 42%)}
+.nav{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:22px 34px}
 .nav img{height:26px;width:auto}
-.nav .lk{display:flex;gap:26px}
-.nav .lk a,.nav .cart{color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.86}
-.nav .cart{border:1px solid rgba(255,255,255,.45);padding:7px 13px}
-.hcopy{position:absolute;left:52px;top:50%;transform:translateY(-50%);z-index:5;color:#fff;max-width:400px}
-.hcopy .l1{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:11px}
-.hcopy .l2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82)}
-.hstatus{position:absolute;right:34px;bottom:126px;z-index:5;text-align:right;color:rgba(255,255,255,.82);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:1.8}
-.hstatus b{color:#fff;font-weight:500}
+.nav .lk{display:flex;gap:28px}
+.nav a,.nav .cart{color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.nav .cart{border:1px solid rgba(255,255,255,.4);padding:7px 13px;opacity:1}
+.hcopy{position:absolute;left:34px;top:50%;transform:translateY(-50%);z-index:4;color:#fff;max-width:430px}
+.hcopy .l1{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.17em;text-transform:uppercase}
+.hcopy .l2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.76);margin-top:12px;line-height:1.9}
+.hstat{position:absolute;right:34px;bottom:126px;z-index:4;text-align:right;color:rgba(255,255,255,.76);
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;line-height:1.9}
+.hstat b{color:#fff;font-weight:500}
+.hstat i{font-style:normal;color:#7ef0a5}
 
-/* the buy bar: their CTA slot, doing our job */
-.buy{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;background:#fff;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:0}
-.buy .sel{display:flex;align-items:center;gap:10px;padding:0 20px;border-right:1px solid var(--line);height:64px}
-.buy .sel .mono{color:var(--mute);font-size:10px}
-.buy .sel b{font-size:14px;font-weight:600;letter-spacing:.01em}
-.buy .sel i{font-style:normal;color:var(--mute);font-size:11px}
-.buy .facts{display:flex;align-items:center;gap:18px;padding:0 20px;height:64px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.buy .price{padding:0 22px;height:64px;display:flex;align-items:center;font-size:17px;font-weight:600;border-left:1px solid var(--line)}
-.buy .add{background:var(--pig);color:#fff;height:64px;display:flex;align-items:center;padding:0 34px;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+/* the buy bar: this page exists to sell */
+.buy{position:absolute;left:34px;right:34px;bottom:34px;z-index:6;background:#fff;
+  display:grid;grid-template-columns:auto 1fr auto auto;align-items:stretch}
+.buy>*{height:66px;display:flex;align-items:center}
+.pick{position:relative;padding:0 20px;gap:12px;border-right:1px solid var(--line);cursor:pointer;background:#fff}
+.pick .mono{color:var(--mute);font-size:9.5px}
+.pick b{font-size:15px;font-weight:600;display:block;margin-top:2px}
+.pick i{font-style:normal;color:var(--mute);margin-left:auto;padding-left:12px}
+.facts{padding:0 22px;gap:22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.price{padding:0 24px;border-left:1px solid var(--line);font-size:18px;font-weight:600}
+.add{background:var(--pig);color:#fff;padding:0 38px;font-family:Syncopate,sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;justify-content:center}
+.menu{position:absolute;left:0;bottom:66px;width:660px;background:#fff;border:1px solid var(--line);border-bottom:0;
+  display:grid;grid-template-columns:repeat(3,1fr);max-height:340px;overflow:auto}
+.menu[hidden]{display:none}
+.menu a{padding:12px 16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:block}
+.menu a:hover{background:#f4f7fd}
+.menu b{display:block;font-size:13px;font-weight:600}
+.menu span{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 
-/* ── the hood: Ink ground, Frost mono, an instrument panel ── */
-.hood{background:var(--ink);color:var(--frost);overflow:hidden;white-space:nowrap;padding:11px 0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.hood .run{display:inline-block;animation:run 48s linear infinite}
-.hood span{margin:0 26px}
-.hood b{color:#fff;font-weight:400}
-.hood i{font-style:normal;color:#4ade80;margin-left:7px}
+/* ══ THE HOOD · the brand's instrument panel ══ */
+.hood{background:var(--ink);color:var(--frost);overflow:hidden;white-space:nowrap;padding:12px 0;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.hood .run{display:inline-block;animation:run 60s linear infinite}
+.hood span{margin:0 26px}.hood b{color:#fff;font-weight:400}.hood i{font-style:normal;color:#4ade80;margin-left:7px}
 @keyframes run{to{transform:translateX(-50%)}}
 
-/* the glint: the one flourish, a low sun crossing chrome.
-   Note: this sets no position, so it can never override a positioned element.
-   Anything using it must already be positioned. */
-.glint{overflow:hidden}
-.glint:after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(105deg,transparent 44%,rgba(255,255,255,.30) 50%,transparent 56%);
-  transform:translateX(-130%);animation:sweep 7s ease-in-out infinite}
-@keyframes sweep{0%,62%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
-
-/* frost hairlines */
-.frule{height:1px;background:var(--frost);opacity:.55}
-
-/* ── top sellers, straight after ── */
-.wrap{max-width:1360px;margin:0 auto;padding:0 34px}
-.band{display:flex;align-items:baseline;justify-content:space-between;padding:44px 0 22px}
-.band h2{font-family:Syncopate,sans-serif;font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:0}
+/* ══ WHITE BELOW · white ground, navy type, frost rules ══ */
+.band{display:flex;align-items:baseline;justify-content:space-between;padding:52px 0 24px}
+.band h2{font-family:Syncopate,sans-serif;font-weight:700;font-size:20px;text-transform:uppercase}
 .band .mono{color:var(--mute)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-bottom:44px}
-.card{display:block}
-.card{border-top:1px solid var(--frost)}
-.card .im{aspect-ratio:1/1;display:grid;place-items:center;background:#fff}
-.card .im img{width:82%;height:82%;object-fit:contain;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.card:hover .im img{transform:translateY(-8px) scale(1.03)}
-.card .nm{font-size:15px;font-weight:600;margin-top:10px}
-.card .sp{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:5px}
-.card .pr{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:15px;font-weight:600}
-.card .pr span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:var(--pig)}
-.card .lot{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:7px;padding-top:7px;border-top:1px solid var(--frost);opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0 26px}
+.card{display:block;padding:24px 0 26px;border-top:1px solid var(--frost)}
+.card .im{aspect-ratio:1/1;display:grid;place-items:center}
+.card .im img{width:80%;height:80%;object-fit:contain;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.card:hover .im img{transform:translateY(-9px) scale(1.03)}
+.card .nm{font-size:15px;font-weight:600;margin-top:12px}
+.card .sp{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.card .pr{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:15px;font-weight:600}
+.card .pr span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--pig)}
+.card .lot{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);margin-top:10px;padding-top:9px;border-top:1px solid var(--frost)}
 .card .lot i{font-style:normal;color:#16a34a}
-
-/* the power strip: Syncopate, one solid one outline */
-.power{overflow:hidden;white-space:nowrap;padding:26px 0;border-top:1px solid var(--frost);border-bottom:1px solid var(--frost)}
-.power .run{display:inline-block;animation:run 30s linear infinite}
-.power span{font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(26px,5vw,72px);text-transform:uppercase;margin:0 .3em;line-height:1;color:var(--navy)}
+.power{overflow:hidden;white-space:nowrap;padding:30px 0;margin-top:40px;border-top:1px solid var(--frost);border-bottom:1px solid var(--frost)}
+.power .run{display:inline-block;animation:run 32s linear infinite}
+.power span{font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(26px,4.6vw,64px);text-transform:uppercase;margin:0 .3em;color:var(--navy)}
 .power span.o{color:transparent;-webkit-text-stroke:1.4px var(--navy)}
 </style>
 
 <div class="hero">
-  <iframe src="https://jackmorello.com/skoembed?c=bpc157&cycle=0&z=2.4&ox=0.16&spin=0&label=0&t=snow" title="BPC-157, in chrome"></iframe>
-  <img class="vial" src="../img/products/web/bpc-157-cut.png" alt="BPC-157">
+  <img class="shot" id="shot" src="../img/products/web/hd/bpc-157-wide.jpg" alt="">
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
     <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">The Badge</a><a href="#">Lab</a></div>
@@ -94,13 +89,14 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="hcopy">
     <div class="l1">Research, refined.</div>
-    <div class="l2">99% purity · third-party tested · research use only</div>
+    <div class="l2">99% purity · third-party tested<br>Research use only</div>
   </div>
-  <div class="hstatus">In stock · shipped cold<br>from <b>Los Angeles</b><br>Batch <b>2609-A</b></div>
-  <div class="buy glint">
-    <div class="sel"><div><div class="mono">Compound</div><b>BPC-157</b></div><i>▾</i></div>
-    <div class="facts"><span>Lyophilised vial</span><span>10 mg</span><span>99% purity</span></div>
-    <div class="price">$44.00</div>
+  <div class="hstat">In stock <i>●</i><br>Shipped cold from <b>Los Angeles</b><br>Batch <b id="hlot">2609-A</b></div>
+  <div class="buy">
+    <div class="pick" id="pick"><div><span class="mono">Compound</span><b id="pname">BPC-157</b></div><i>▾</i>
+      <div class="menu" id="menu" hidden></div></div>
+    <div class="facts"><span>Lyophilised vial</span><span id="pdose">10 mg</span><span id="ppur">99.1% HPLC</span></div>
+    <div class="price" id="pprice">$44.00</div>
     <a class="add" href="#">Add to cart</a>
   </div>
 </div>
@@ -112,18 +108,35 @@ a{color:inherit;text-decoration:none}
   <div class="grid" id="grid"></div>
 </div>
 <div class="power"><div class="run"><span>SKO</span><span class="o">COMPOUNDS</span><span>PURITY</span><span class="o">POWER</span><span>SKO</span><span class="o">COMPOUNDS</span><span>PURITY</span><span class="o">POWER</span></div></div>
-<div style="height:60px"></div>
+<div style="height:70px"></div>
 
 <script>
-const TOP=[['bpc-157','BPC-157','10 mg',44],['tb-500','TB-500','10 mg',49],['ghk-cu','GHK-Cu','50 mg',39],['nad','NAD+','500 mg',69],
-           ['semax','Semax','10 mg',54],['glutathione','Glutathione','600 mg',45],['tesamorelin','Tesamorelin','10 mg',79],['mots-c','MOTS-c','10 mg',59]];
-const LOT=['2609-A','2609-A','2608-C','2609-B','2608-D','2609-A','2609-C','2608-B'];
-const PUR=['99.1','99.3','99.0','99.2','98.9','99.4','99.1','99.2'];
-document.getElementById('grid').innerHTML=TOP.map(([s,n,d,p],k)=>`<a class="card" href="#">
-  <div class="im"><img src="../img/products/web/${s}-cut.png" alt="${n}"></div>
-  <div class="nm">${n}</div><div class="sp">Lyophilised vial · ${d} · 99% purity</div>
-  <div class="pr">$${p}.00 <span>Add →</span></div>
-  <div class="lot">Lot ${LOT[k]} · ${PUR[k]}% HPLC <i>● in stock</i></div></a>`).join('');
-const row=TOP.map(([s,n,d],k)=>`<span><b>${n}</b> ${d} · ${PUR[k]}% · lot ${LOT[k]}<i>●</i></span>`).join('');
-document.getElementById('array').innerHTML='<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row+'<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row;
+const P=[
+ {s:'bpc-157',n:'BPC-157',d:'10 mg',p:44,pu:'99.1',lot:'2609-A'},
+ {s:'tb-500',n:'TB-500',d:'10 mg',p:49,pu:'99.3',lot:'2609-A'},
+ {s:'ghk-cu',n:'GHK-Cu',d:'50 mg',p:39,pu:'99.0',lot:'2608-C'},
+ {s:'nad',n:'NAD+',d:'500 mg',p:69,pu:'99.2',lot:'2609-B'},
+ {s:'semax',n:'Semax',d:'10 mg',p:54,pu:'98.9',lot:'2608-D'},
+ {s:'glutathione',n:'Glutathione',d:'600 mg',p:45,pu:'99.4',lot:'2609-A'},
+ {s:'tesamorelin',n:'Tesamorelin',d:'10 mg',p:79,pu:'99.1',lot:'2609-C'},
+ {s:'mots-c',n:'MOTS-c',d:'10 mg',p:59,pu:'99.2',lot:'2608-B'}];
+
+// the hero photograph changes with the compound: 38 real shots, each its own molecule
+function show(x){
+  document.getElementById('shot').src=`../img/products/web/hd/${x.s}-wide.jpg`;
+  pname.textContent=x.n; pdose.textContent=x.d; ppur.textContent=x.pu+'% HPLC';
+  pprice.textContent='$'+x.p.toFixed(2); hlot.textContent=x.lot;
+}
+menu.innerHTML=P.map((x,i)=>`<a href="#" data-i="${i}"><b>${x.n}</b><span>${x.d} · $${x.p}</span></a>`).join('');
+pick.onclick=e=>{e.preventDefault();menu.hidden=!menu.hidden};
+menu.onclick=e=>{const a=e.target.closest('[data-i]');if(!a)return;e.preventDefault();show(P[+a.dataset.i]);menu.hidden=true};
+document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
+
+grid.innerHTML=P.map(x=>`<a class="card" href="#">
+  <div class="im"><img src="../img/products/web/${x.s}-cut.png" alt="${x.n}"></div>
+  <div class="nm">${x.n}</div><div class="sp">Lyophilised vial · ${x.d} · 99% purity</div>
+  <div class="pr">$${x.p}.00 <span>Add →</span></div>
+  <div class="lot">Lot ${x.lot} · ${x.pu}% HPLC <i>● in stock</i></div></a>`).join('');
+const row=P.map(x=>`<span><b>${x.n}</b> ${x.d} · ${x.pu}% · lot ${x.lot}<i>●</i></span>`).join('');
+array.innerHTML='<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row+'<span>SKO/ARRAY · 38 COMPOUNDS</span>'+row;
 </script>
