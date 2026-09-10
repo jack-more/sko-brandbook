@@ -15,6 +15,7 @@ a{color:inherit;text-decoration:none}
    photograph — the compound and its own molecule, shot together,
    one light, one shadow. Nothing composited, nothing faked. */
 .hero{position:relative;height:100vh;min-height:660px;overflow:hidden;background:var(--ink)}
+.heromedia{position:absolute;inset:0;overflow:hidden}
 .hero .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;
   will-change:opacity,filter;transition:opacity .5s ease}
 /* the clip dissolves off the still it ends on */
@@ -52,7 +53,7 @@ a{color:inherit;text-decoration:none}
 /* the numbers change with the picture */
 .swap{animation:swapin .5s ease both}
 @keyframes swapin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-.hero:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+.heromedia:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
   background:linear-gradient(to bottom,rgba(2,11,60,.46),transparent 26%),
              linear-gradient(to top,rgba(2,11,60,.60),transparent 34%),
              linear-gradient(to right,rgba(2,11,60,.34),transparent 42%)}
@@ -129,14 +130,52 @@ a{color:inherit;text-decoration:none}
 .power .run{display:inline-block;animation:run 32s linear infinite}
 .power span{font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(26px,4.6vw,64px);text-transform:uppercase;margin:0 .3em;color:var(--navy)}
 .power span.o{color:transparent;-webkit-text-stroke:1.4px var(--navy)}
+
+/* ── phones ───────────────────────────────────────────────
+   A 16:9 clip inside a full-height portrait hero crops to a huge
+   close-up, so on a phone the hero stops being full-bleed: the
+   picture becomes a 16:9 block and the type sits under it on white. */
+@media (max-width:900px){
+  .wrap{padding:0 18px}
+  .hero{height:auto;min-height:0;display:flex;flex-direction:column;background:#fff;overflow:visible}
+  .nav{order:1;position:relative;padding:14px 18px;background:var(--ink)}
+  .nav .lk{display:none}
+  .nav img{height:22px}
+  .acct span{display:none}
+  .acct{padding:6px 10px 6px 7px}
+  .heromedia{order:2;position:relative;inset:auto;width:100%;aspect-ratio:16/9}
+  .hero .shot,.vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hcopy{order:3;position:relative;left:auto;top:auto;transform:none;max-width:none;padding:18px 18px 0;color:var(--navy)}
+  .hcopy .l1{font-size:13px;color:var(--navy)}
+  .hcopy .l2{color:var(--mute);margin-top:8px;line-height:1.8}
+  .hstat{order:4;position:relative;right:auto;bottom:auto;text-align:left;padding:10px 18px 0;color:var(--mute)}
+  .hstat b{color:var(--navy)}
+  .bottom{order:5;position:relative;left:auto;right:auto;bottom:auto;flex-direction:column;gap:10px;padding:16px 18px 0}
+  .buy{width:100%;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;border:1px solid var(--frost)}
+  .buy>*{height:56px}
+  .pick{grid-column:1;grid-row:1}
+  .price{grid-column:2;grid-row:1;border-left:1px solid var(--line)}
+  .facts{grid-column:1/-1;grid-row:2;border-top:1px solid var(--line);font-size:10px;gap:14px;overflow-x:auto}
+  .add{grid-column:1/-1;grid-row:3;height:54px}
+  .best{margin-left:0;width:100%;justify-content:center;background:#fff;border:1px solid var(--frost);height:52px;backdrop-filter:none}
+  .best span{color:var(--navy)}
+  .menu{width:calc(100vw - 36px);left:0;bottom:56px;max-height:52vh}
+  .menu .g{grid-template-columns:1fr 1fr}
+  .band{padding:34px 0 18px}
+  .band h2{font-size:15px}
+  .grid{grid-template-columns:1fr 1fr;gap:0 16px}
+  .power{padding:20px 0;margin-top:26px}
+}
 </style>
 
 <div class="hero">
+  <div class="heromedia" id="heromedia">
   <img class="shot" id="shotA" src="../img/products/web/scene.jpg" alt="">
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
   <div class="sun"></div>
   <div class="glare" id="glare"></div>
+  </div>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
     <div class="lk"><a href="#">Compounds</a><a href="#">Bundles</a><a href="#">Build a box</a><a href="#">Your account</a><a href="#">Lab</a></div>
@@ -195,9 +234,13 @@ function warm(slug){
   if(CLIPS[slug]) return CLIPS[slug];
   const v=document.createElement('video');
   v.muted=true; v.playsInline=true; v.preload='auto';
-  v.innerHTML=`<source src="../img/vid/${slug}.webm" type="video/webm"><source src="../img/vid/${slug}.mp4" type="video/mp4">`;
+  // Eight top sellers ship a 1080p desktop cut and a light 960px mobile cut.
+  // The rest are 720p only, so -m falls back to the same file.
+  const HD=['bpc-157','tb-500','ghk-cu','nad','semax','glutathione','tesamorelin','mots-c'];
+  const m = HD.includes(slug) && matchMedia('(max-width:900px)').matches ? '-m' : '';
+  v.innerHTML=`<source src="../img/vid/${slug}${m}.webm" type="video/webm"><source src="../img/vid/${slug}${m}.mp4" type="video/mp4">`;
   v.className='shot vid'; v.style.opacity='0'; v.style.zIndex='3';
-  document.querySelector('.hero').appendChild(v);
+  document.querySelector('.heromedia').appendChild(v);
   v.load();
   CLIPS[slug]={el:v, ready:new Promise(res=>{
     if(v.readyState>=3) return res(true);
@@ -288,7 +331,7 @@ fetch('../products.json').then(r=>r.json()).then(P=>{
     c.ready.then(ok=>{ if(ok) show(first); else {
       const a=document.getElementById('shotA'); a.src=`../img/products/web/hd/${first.slug}-wide.jpg`; } });
   }
-  setTimeout(()=>BEST.slice(1,4).forEach(warm),2600);
+  if(!matchMedia('(max-width:900px)').matches) setTimeout(()=>BEST.slice(1,4).forEach(warm),2600);
   bthumbs.innerHTML=BEST.slice(0,4).map(s=>`<img src="../img/products/web/${s}-cut.png" alt="">`).join('');
   grid.innerHTML=BEST.map(s=>{const p=by[s];
     return `<a class="card" href="#">
@@ -316,7 +359,7 @@ function ping(){
 }
 ping();
 pick.onclick=e=>{if(menu.contains(e.target))return;e.preventDefault();menu.hidden=!menu.hidden;
-  if(!menu.hidden) BEST.slice(0,4).forEach(warm);};
+  if(!menu.hidden && !matchMedia('(max-width:900px)').matches) BEST.slice(0,4).forEach(warm);};
 document.addEventListener('click',e=>{if(!pick.contains(e.target))menu.hidden=true});
 best.onclick=e=>{e.preventDefault();document.getElementById('sellers').scrollIntoView({behavior:'smooth'})};
 </script>
