@@ -32,24 +32,10 @@ a{color:inherit;text-decoration:none}
 .sun:after{content:"";position:absolute;inset:0;
   background:radial-gradient(14% 22% at 88% 26%,rgba(255,255,255,.95),transparent 70%);filter:blur(6px)}
 
-/* The glare. The book's own light: one hard low winter sun from the right.
-   It blooms to near white in 190ms, the swap happens at the peak, and it is
-   gone in 420ms. Short and decisive, so nothing reads as a second event. */
-.glare{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;
-  background:radial-gradient(152% 116% at 74% 40%,#fff 0%,#fff 30%,rgba(240,248,255,.94) 54%,rgba(206,230,255,.62) 78%,rgba(160,200,250,.20) 100%)}
-.glare.go{animation:glare .5s cubic-bezier(.3,.95,.4,1) forwards}
-@keyframes glare{0%{opacity:0}30%{opacity:1}52%{opacity:1}100%{opacity:0}}
-/* the whole scene blows out with it, so it reads as the sun catching the glass */
-.hero.flash .shot{filter:brightness(1.5) contrast(.94)}
-.hero .shot{transition:opacity .5s ease,filter .16s linear}
-/* inside the white peak the swap is a hard cut. Any fade here would let the
-   outgoing bottle ghost over the incoming one after the light has dropped. */
+.hero .shot{transition:opacity .5s ease}
+/* the swap off the clip is a hard cut: its last frame is the photograph.
+   Any fade here would let the outgoing bottle ghost over the incoming one. */
 .shot.instant{transition:none!important}
-/* video compression leaves the clip's last frame softer than the photograph.
-   Measured across all 38, the still matches that softness at ~1.1px, so it
-   lands there and the two focus together. Without this the still snaps. */
-.shot.focusing{filter:blur(1.1px) saturate(1.02)}
-.shot.focused{filter:none;transition:filter .62s cubic-bezier(.33,.7,.3,1)}
 /* the numbers change with the picture */
 .swap{animation:swapin .5s ease both}
 @keyframes swapin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -174,7 +160,6 @@ a{color:inherit;text-decoration:none}
   <img class="shot" id="shotB" alt="" style="opacity:0">
   <video class="shot vid" id="vid" muted playsinline preload="auto" style="opacity:0;z-index:2"></video>
   <div class="sun"></div>
-  <div class="glare" id="glare"></div>
   </div>
   <div class="nav">
     <a href="index.html"><img src="../img/lockup-3x1-white.png" alt="SKO Compounds"></a>
@@ -230,16 +215,20 @@ let ALL=[];
 function priceOf(s){return PRICE[s]||49}
 let front='A', busy=false;
 const CLIPS={};                      // clips are fetched up front, not at click time
+// Only the eight top sellers have a clip: 1080p on desktop, a 960px cut on
+// mobile. Every other compound goes straight to its still. Each clip's last
+// 0.3s is the catalogue photograph itself (tools/tail_bake.sh), so the cut
+// from clip to still is photo to photo and needs no cover.
+const HD=['bpc-157','tb-500','ghk-cu','nad','semax','glutathione','tesamorelin','mots-c'];
+const NOCLIP={el:null, ready:Promise.resolve(false)};
 function warm(slug){
+  if(!HD.includes(slug)) return NOCLIP;
   if(CLIPS[slug]) return CLIPS[slug];
   const v=document.createElement('video');
   v.muted=true; v.playsInline=true; v.preload='auto';
-  // Eight top sellers ship a 1080p desktop cut and a light 960px mobile cut.
-  // The rest are 720p only, so -m falls back to the same file.
-  const HD=['bpc-157','tb-500','ghk-cu','nad','semax','glutathione','tesamorelin','mots-c'];
-  const m = HD.includes(slug) && matchMedia('(max-width:900px)').matches ? '-m' : '';
+  const m = matchMedia('(max-width:900px)').matches ? '-m' : '';
   v.innerHTML=`<source src="../img/vid/${slug}${m}.webm" type="video/webm"><source src="../img/vid/${slug}${m}.mp4" type="video/mp4">`;
-  v.className='shot vid'; v.style.opacity='0'; v.style.zIndex='3';
+  v.className='shot vid'; v.style.opacity='0'; v.style.zIndex='1'; // above the stills, under the scrim and the sun
   document.querySelector('.heromedia').appendChild(v);
   v.load();
   CLIPS[slug]={el:v, ready:new Promise(res=>{
@@ -276,34 +265,20 @@ function show(x){
     v.currentTime=0;
     v.play().then(()=>{
       v.style.opacity='1';                                  // the clip owns the frame
-      // The clip's last frame is close to the photograph but not identical: the
-      // model rebuilds the molecule slightly differently every time. Cutting to
-      // the photograph therefore pops. So we do not cut at all. The clip freezes
-      // on its final frame and that frame stays as the hero. Nothing to match.
-      // One snow event only, the clip's own. Its burst lands anywhere between
-      // 0.4s and 2.0s depending on the compound, so a second effect can never
-      // sync to it and reads as random. So there is no second effect and no
-      // swap: the clip freezes on its final frame and that frame is the hero.
+      // The clip ends on the photograph (baked into its last frames), so the
+      // swap is a hard cut from the photograph to the photograph. No glare, no
+      // dissolve, no second event. One snow event only, the clip's own.
       const done=()=>{
         v.pause();
-        const g=document.getElementById('glare');
-        const hero=document.querySelector('.hero');
-        g.classList.remove('go'); void g.offsetWidth; g.classList.add('go');
-        hero.classList.add('flash');
-        setTimeout(()=>hero.classList.remove('flash'),300);
-        // the swap happens inside the blown-out peak, so the join is never seen
-        setTimeout(()=>{
-          [cur,nxt,v].forEach(e=>e.classList.add('instant'));
-          nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
-          nxt.style.opacity='1'; cur.style.opacity='0'; v.style.opacity='0';
-          front=front==='A'?'B':'A';
-          requestAnimationFrame(()=>requestAnimationFrame(()=>
-            [cur,nxt,v].forEach(e=>e.classList.remove('instant'))));
-        },195);
-        setTimeout(()=>{busy=false},540);
+        [cur,nxt,v].forEach(e=>e.classList.add('instant'));
+        nxt.src=src; nxt.style.zIndex=1; cur.style.zIndex=0;
+        nxt.style.opacity='1'; cur.style.opacity='0'; v.style.opacity='0';
+        front=front==='A'?'B':'A';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          [cur,nxt,v].forEach(e=>e.classList.remove('instant')); busy=false; }));
       };
       v.onended=done;
-      setTimeout(()=>{ if(busy) done(); }, 2800);
+      setTimeout(()=>{ if(busy) done(); }, 3200);
     }).catch(land);
   });
 }

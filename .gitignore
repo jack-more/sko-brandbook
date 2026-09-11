@@ -21,3 +21,4 @@ fonts/try2/
 # video masters stay local; only the web-encoded clips ship
 img/vid/_in/
 img/vid/_master/
+img/vid/_pre_tail/
