@@ -164,13 +164,13 @@ if(!CODE){ // evergreen
   document.getElementById('card').classList.add('plain');document.getElementById('eyebrow').textContent='SKO Compounds';
   document.getElementById('h1').firstChild.textContent='Research, refined.';
   document.getElementById('sub').textContent='Third-party tested research peptides, shipped cold from Los Angeles.';
-  document.getElementById('gotxt').textContent='Shop the range';
+  document.getElementById('gotxt').textContent='Shop best sellers';
 }
 document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
 setTimeout(()=>document.getElementById('card').classList.add('in'),60);
 let gone=false;
 const toShop=()=>{const t=document.getElementById('shop').getBoundingClientRect().top+scrollY-8;window.scrollTo({top:t,behavior:'smooth'});setTimeout(()=>{if(Math.abs(scrollY-t)>40)window.scrollTo(0,t)},900)};
-function apply(){if(!CODE){toShop();return}if(!gone){gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Code applied · pick your compound'}setTimeout(toShop,700)}
+function apply(){if(gone)return;gone=true;if(!CODE){location.href=BESTURL;return}const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening best sellers';setTimeout(()=>location.href=BESTURL,1100)}
 document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
 document.getElementById('skip').addEventListener('click',e=>{e.preventDefault();location.href=BESTURL});
 
