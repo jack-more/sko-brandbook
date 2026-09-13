@@ -4,19 +4,22 @@
 <style>
 :root{--navy:#173384;--ink:#020B77;--frost:#88A9E3;--pig:#0130C0}
 *{box-sizing:border-box;margin:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+html{scroll-behavior:smooth}body{background:#fff;color:var(--navy);font-family:Inter,ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;overflow:hidden}
 .disp{font:700 1em Syncopate,ui-sans-serif,sans-serif;text-transform:uppercase}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
 /* backdrop: the Isometrica plate, slow drift; dim pulls toward the card side */
-.bg{position:fixed;inset:0;overflow:hidden;background:#fff}
+.bg{position:absolute;inset:0;overflow:hidden;background:#fff}
 .bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 50%;opacity:0;transform:scale(1.04);animation:bg 1.4s ease forwards,drift 26s ease-in-out 1.4s infinite alternate}
 @keyframes bg{to{opacity:1}}
 @keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.1) translate(-1.2%,.8%)}}
 .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.35) 45%,rgba(255,255,255,.82) 100%)}
 .top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,48px);z-index:3;color:var(--navy)}
 .top img{height:24px}
+.top{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,0))}
+.top .r{display:flex;align-items:center;gap:22px}.top a.best{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--navy);padding-bottom:2px}
 /* the pop-up, anchored right so the vial stays in view */
-.wrap{position:fixed;inset:0;display:grid;place-items:center end;padding:72px clamp(16px,7vw,120px) 48px 16px;z-index:2}
+.wrap{position:absolute;inset:0;display:grid;place-items:center end;padding:72px clamp(16px,7vw,120px) 48px 16px;z-index:2}
 .card{position:relative;width:min(92vw,560px);background:#fff;box-shadow:0 60px 140px rgba(2,11,119,.22),0 0 0 1px rgba(136,169,227,.55);opacity:0;transform:translateY(28px) scale(.96);transition:opacity .8s cubic-bezier(.2,.8,.2,1) .2s,transform .8s cubic-bezier(.2,.8,.2,1) .2s}
 .card.in{opacity:1;transform:none}
 .card:before{content:"";position:absolute;inset:8px;border:1px solid rgba(136,169,227,.35);pointer-events:none}
@@ -58,31 +61,99 @@ html,body{height:100%;background:#fff;color:var(--navy);font-family:Inter,ui-san
 .card.ok .glint{animation:none}
 .foot{position:fixed;left:0;right:0;bottom:0;text-align:center;padding:12px 16px;color:#6f86b8;z-index:3}
 .foot b{color:var(--navy);font:inherit}
+/* the shop: every compound on this code, each to its normal product page */
+.shop{position:relative;z-index:1;background:#fff;padding:72px clamp(16px,4vw,48px) 120px;border-top:1px solid rgba(136,169,227,.45)}
+.shop .sh{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.shop h2{font-size:clamp(18px,2.6vw,30px);line-height:1.05}
+.shop .sh p{margin-top:10px;color:#4a5680;font-size:14px}
+.shop .sh p b{color:var(--navy)}
+.bestlink{display:inline-block;background:#fff;color:var(--navy);border:1px solid var(--navy);padding:14px 18px;font:700 11px Syncopate,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.bestlink:hover{background:var(--navy);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tile{display:block;text-decoration:none;color:var(--navy);border:1px solid rgba(2,11,119,.12);background:#fff;transition:transform .25s,box-shadow .25s}
+.tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(2,11,119,.14)}
+.tile .im{aspect-ratio:1;background:#fff;overflow:hidden;position:relative}
+.tile .im img{width:100%;height:100%;object-fit:cover}
+.tile .so{position:absolute;top:10px;left:10px;background:#fff;border:1px solid rgba(2,11,119,.2);padding:4px 7px;color:#4a5680}
+.tile .m{padding:14px 16px 16px}
+.tile .n{font:700 12px Syncopate,sans-serif;text-transform:uppercase}
+.tile .c{margin-top:6px;color:#4a5680;font-size:13px;line-height:1.35;min-height:2.7em}
+.tile .row{margin-top:10px;display:flex;justify-content:space-between;align-items:center;font:600 14px Inter,sans-serif}
+.tile .v{font:700 9px Syncopate,sans-serif;text-transform:uppercase;color:var(--pig)}
+.tile.out .im img{opacity:.55}
+.end{margin-top:40px;text-align:center}
+.end .bestlink{padding:18px 26px}
+.ruo{margin-top:28px;text-align:center;color:#6f86b8}
+@media (max-width:640px){.top .ruo-top{display:none}}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr);gap:10px}.tile .m{padding:10px 10px 12px}.tile .n{font-size:10px}.tile .c{font-size:12px}}
 @media (prefers-reduced-motion:reduce){.card,.bg img,.code span{animation:none;transition:none;opacity:1;transform:none}.glint{display:none}}
 @media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;place-items:start center}.bg:after{background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}.bg img{object-position:50% 50%}.hd,.h1,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
 .card.plain .chip,.card.plain .perf,.card.plain .skip,.card.plain .hd b{display:none}.plain~.foot,.card.plain .glint{display:none}
 </style>
-<div class="bg"><img id="bg" src="../img/edition3/hero-white-structure.jpg?v=2" alt=""></div>
-<div class="top"><img src="../img/lockup-3x1-navy.png" alt="SKO Compounds"><span class="mono">RESEARCH USE ONLY</span></div>
+<section class="hero" id="top"><div class="bg"><img id="bg" src="../img/edition3/hero-white-structure.jpg?v=2" alt=""></div>
+<div class="top"><img src="../img/lockup-3x1-navy.png" alt="SKO Compounds"><div class="r"><span class="mono ruo-top">RESEARCH USE ONLY</span><a class="best mono" id="bestTop" href="#">Shop all best sellers</a></div></div>
 <div class="wrap"><div class="card" id="card">
   <div class="hd mono"><span id="eyebrow">TikTok offer</span><b id="offer"></b></div>
   <div class="h1 disp" id="h1">Your code is ready.<small id="sub">Apply it once. It stays on your order through checkout. Third-party tested, shipped cold from Los Angeles.</small></div>
   <div class="chip"><i></i><i></i><i></i><i></i><div class="lab mono"><span><img src="../img/mark-silver.png" alt="">Code</span><b id="st">Ready</b></div><div class="code disp" id="code"></div><div class="glint"></div></div>
   <div class="perf"></div>
   <div class="spec mono"><div>Applies to<b>Every compound</b></div><div>Ships<b>3–5 business days</b></div><div>Testing<b>COA on every batch</b></div><div>Use<b>Research only</b></div></div>
-  <div class="act"><a class="btn disp" id="go" href="#"><span id="gotxt">Apply code</span><div class="glint"></div></a><a class="skip mono" id="skip" href="#">Or <u>go straight to top sellers</u></a></div>
-</div></div>
+  <div class="act"><a class="btn disp" id="go" href="#"><span id="gotxt">Apply code</span><div class="glint"></div></a><a class="skip mono" id="skip" href="#">Or <u>shop all best sellers</u></a></div>
+</div></div></section>
+<section class="shop" id="shop">
+  <div class="sh"><div><h2 class="disp" id="shopH">Every compound on this code</h2><p id="shopP"></p></div><a class="bestlink" id="bestMid" href="#">Shop all best sellers &rarr;</a></div>
+  <div class="tiles" id="tiles"></div>
+  <div class="end"><a class="bestlink" id="bestEnd" href="#">Shop all best sellers &rarr;</a></div>
+  <p class="ruo mono">Research use only · Third-party tested · COA on every batch</p>
+</section>
 <div class="foot mono">Code <b id="code2"></b><span id="sep"> · </span><b id="offer2"></b></div>
 <script>
 // the whole page is the funnel. edit these lines for the next offer.
 // the ad URL is the source of truth: ?lp_code=LABOR&lp_offer=Buy%20one%2C%20get%20one%20free
 // no lp_code in the URL = evergreen: no card chip, no code anywhere, just the door to top sellers.
-const BEST='https://skocompounds.com/products?sort=best';   // top sellers; where everyone ends up
+const BEST='https://skocompounds.com/products?sort=best';   // the main best-seller catalogue
+const SHOP='https://skocompounds.com/products/';             // + store slug = the normal product page
+const IMG='../img/products/web/';
+// The ad-safe range, as agreed 13 Sep 2026. [store slug, name, category line, price, image slug, sold out]
+const P=[
+ ['bpc-157','BPC-157','Gastric pentadecapeptide','69.99','bpc-157'],
+ ['tb-500','TB-500','Actin-binding research peptide','59.99','tb-500'],
+ ['wolverine-blend','Wolverine Blend','BPC-157 and TB-500','84.99','wolverine'],
+ ['ghk-cu','GHK-Cu','Copper peptide complex','54.99','ghk-cu'],
+ ['glow','GLOW','Dermal research formula','129.99','glow'],
+ ['klow','KLOW','Multi-peptide dermal blend','149.99','klow'],
+ ['kpv','KPV','Tripeptide research compound','64.99','kpv'],
+ ['mt-1','MT-1','Melanocortin research peptide','54.99','mt-1'],
+ ['mt-2','MT-2','Melanocortin research peptide','54.99','mt-2'],
+ ['pt-141','PT-141','Research peptide','69.99','pt-141'],
+ ['cjc-1295-ipamorelin','CJC 1295 + Ipamorelin','Growth hormone secretagogue blend','89.99','cjc-1295'],
+ ['ipamorelin','Ipamorelin','Growth hormone secretagogue','79.99','ipamorelin'],
+ ['sermorelin','Sermorelin','Research peptide','99.99','sermorelin'],
+ ['tesamorelin','Tesamorelin','GHRH analogue peptide','114.99','tesamorelin'],
+ ['tesa-ipa-blend','TESA/IPA Blend','Research peptide blend','139.99','tesa-ipa'],
+ ['igf1-lr3','IGF1-LR3','Research peptide','89.99','igf1-lr3',1],
+ ['nad-plus','SKO-NAD','Coenzyme research compound','77.99','nad'],
+ ['glutathione','Glutathione','Antioxidant tripeptide','64.99','glutathione',1],
+ ['ss31','SS-31','Mitochondrial research peptide','69.99','ss-31'],
+ ['semax','Semax','Neuropeptide research compound','64.99','semax'],
+ ['selank','Selank','Tuftsin analogue peptide','66.99','selank'],
+ ['dsip','DSIP','Circadian research peptide','79.99','dsip'],
+ ['thymosin-alpha-1','Thymosin Alpha-1','Research peptide','109.99','thymosin-alpha-1'],
+ ['kisspeptin-10','Kisspeptin','Research peptide','79.99','kisspeptin'],
+ ['ara290','ARA-290','Research peptide','74.99','ara-290'],
+ ['adamax','ADAMAX','Research peptide','79.99','adamax'],
+ ['bacteriostatic-water','Bacteriostatic Water','Laboratory diluent','19.99','bac-water'],
+];
 const q=new URLSearchParams(location.search);
 const CODE=(q.get('lp_code')||'').trim().toUpperCase().replace(/[^A-Z0-9-]/g,'');
 const OFFER=(q.get('lp_offer')||'').trim().slice(0,60);
 if(!CODE){q.delete('lp_code')}else{q.set('lp_code',CODE)}if(OFFER)q.set('lp_offer',OFFER);const qs=q.toString();
 const BESTURL=BEST+(qs?(BEST.includes('?')?'&':'?')+qs:'');
+const pdp=slug=>SHOP+slug+(qs?'?'+qs:'');
+document.getElementById('tiles').innerHTML=P.map(([slug,name,cat,price,img,out])=>`<a class="tile${out?' out':''}" href="${pdp(slug)}"><div class="im"><img loading="lazy" src="${IMG}${img}-white.jpg" alt="${name}">${out?'<span class="so mono">Sold out</span>':''}</div><div class="m"><div class="n">${name}</div><div class="c">${cat}</div><div class="row"><span>${slug==='bacteriostatic-water'?'From ':''}$${price}</span><span class="v">View &rarr;</span></div></div></a>`).join('');
+for(const id of['bestTop','bestMid','bestEnd'])document.getElementById(id).href=BESTURL;
+document.getElementById('shopP').innerHTML=CODE?`Code <b>${CODE}</b>${OFFER?' · '+OFFER.replace(/[<>&]/g,''):''}. Tap any compound for its full page.`:'Tap any compound for its full page.';
+if(!CODE)document.getElementById('shopH').textContent='The range';
 if(!CODE)document.querySelector('.foot').hidden=true;
 if(matchMedia('(max-aspect-ratio: 1/1)').matches)document.getElementById('bg').src='../img/edition3/hero-white-structure.jpg?v=2';
 for(const id of['offer','offer2'])document.getElementById(id).textContent=OFFER;
@@ -93,14 +164,14 @@ if(!CODE){ // evergreen
   document.getElementById('card').classList.add('plain');document.getElementById('eyebrow').textContent='SKO Compounds';
   document.getElementById('h1').firstChild.textContent='Research, refined.';
   document.getElementById('sub').textContent='Third-party tested research peptides, shipped cold from Los Angeles.';
-  document.getElementById('gotxt').textContent='Shop top sellers';
+  document.getElementById('gotxt').textContent='Shop the range';
 }
 document.getElementById('go').href=BESTURL;document.getElementById('skip').href=BESTURL;
 setTimeout(()=>document.getElementById('card').classList.add('in'),60);
 let gone=false;
-function apply(){if(gone)return;gone=true;if(!CODE){location.href=BESTURL;return}const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Opening top sellers';setTimeout(()=>location.href=BESTURL,1100)}
+const toShop=()=>{const t=document.getElementById('shop').getBoundingClientRect().top+scrollY-8;window.scrollTo({top:t,behavior:'smooth'});setTimeout(()=>{if(Math.abs(scrollY-t)>40)window.scrollTo(0,t)},900)};
+function apply(){if(!CODE){toShop();return}if(!gone){gone=true;const c=document.getElementById('card');c.classList.add('ok');document.getElementById('st').textContent='Applied';document.getElementById('gotxt').textContent='Code applied · pick your compound'}setTimeout(toShop,700)}
 document.getElementById('go').addEventListener('click',e=>{e.preventDefault();apply()});
 document.getElementById('skip').addEventListener('click',e=>{e.preventDefault();location.href=BESTURL});
-// a tap on the backdrop also forwards, with the code
-document.querySelector('.bg').addEventListener('click',()=>location.href=BESTURL);
+
 </script>
