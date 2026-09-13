@@ -69,11 +69,11 @@ html{scroll-behavior:smooth}body{background:#fff;color:var(--navy);font-family:I
 .shop .sh p b{color:var(--navy)}
 .bestlink{display:inline-block;background:#fff;color:var(--navy);border:1px solid var(--navy);padding:14px 18px;font:700 11px Syncopate,sans-serif;text-transform:uppercase;text-decoration:none;white-space:nowrap}
 .bestlink:hover{background:var(--navy);color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.tile{display:block;text-decoration:none;color:var(--navy);border:1px solid rgba(2,11,119,.12);background:#fff;transition:transform .25s,box-shadow .25s}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tile{display:block;min-width:0;text-decoration:none;color:var(--navy);border:1px solid rgba(2,11,119,.12);background:#fff;transition:transform .25s,box-shadow .25s}
 .tile:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(2,11,119,.14)}
-.tile .im{aspect-ratio:1;background:#fff;overflow:hidden;position:relative}
-.tile .im img{width:100%;height:100%;object-fit:cover}
+.tile .im{aspect-ratio:1;background:#fff;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;padding:7% 0 5%}
+.tile .im img{height:100%;width:100%;object-fit:contain;filter:drop-shadow(0 16px 14px rgba(2,11,119,.13))}
 .tile .so{position:absolute;top:10px;left:10px;background:#fff;border:1px solid rgba(2,11,119,.2);padding:4px 7px;color:#4a5680}
 .tile .m{padding:14px 16px 16px}
 .tile .n{font:700 12px Syncopate,sans-serif;text-transform:uppercase}
@@ -85,7 +85,7 @@ html{scroll-behavior:smooth}body{background:#fff;color:var(--navy);font-family:I
 .end .bestlink{padding:18px 26px}
 .ruo{margin-top:28px;text-align:center;color:#6f86b8}
 @media (max-width:640px){.top .ruo-top{display:none}}
-@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr);gap:10px}.tile .m{padding:10px 10px 12px}.tile .n{font-size:10px}.tile .c{font-size:12px}}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile .m{padding:10px 10px 12px}.tile .n{font-size:10px}.tile .c{font-size:12px}}
 @media (prefers-reduced-motion:reduce){.card,.bg img,.code span{animation:none;transition:none;opacity:1;transform:none}.glint{display:none}}
 @media (max-aspect-ratio:1/1){.wrap{padding:64px 12px 40px;place-items:start center}.bg:after{background:radial-gradient(80% 70% at 50% 50%,rgba(2,11,119,.25),rgba(2,11,119,.8))}.bg img{object-position:50% 50%}.hd,.h1,.spec,.act{padding-left:20px;padding-right:20px}.chip{margin-left:20px;margin-right:20px}}
 .card.plain .chip,.card.plain .perf,.card.plain .skip,.card.plain .hd b{display:none}.plain~.foot,.card.plain .glint{display:none}
@@ -113,7 +113,7 @@ html{scroll-behavior:smooth}body{background:#fff;color:var(--navy);font-family:I
 // no lp_code in the URL = evergreen: no card chip, no code anywhere, just the door to top sellers.
 const BEST='https://skocompounds.com/products?sort=best';   // the main best-seller catalogue
 const SHOP='https://skocompounds.com/products/';             // + store slug = the normal product page
-const IMG='../img/products/web/';
+const IMG='../img/products/lp/';   // the catalogue bottle cut out, one bottle every label
 // The ad-safe range, as agreed 13 Sep 2026. [store slug, name, category line, price, image slug, sold out]
 const P=[
  ['bpc-157','BPC-157','Gastric pentadecapeptide','69.99','bpc-157'],
@@ -150,7 +150,7 @@ const OFFER=(q.get('lp_offer')||'').trim().slice(0,60);
 if(!CODE){q.delete('lp_code')}else{q.set('lp_code',CODE)}if(OFFER)q.set('lp_offer',OFFER);const qs=q.toString();
 const BESTURL=BEST+(qs?(BEST.includes('?')?'&':'?')+qs:'');
 const pdp=slug=>SHOP+slug+(qs?'?'+qs:'');
-document.getElementById('tiles').innerHTML=P.map(([slug,name,cat,price,img,out])=>`<a class="tile${out?' out':''}" href="${pdp(slug)}"><div class="im"><img loading="lazy" src="${IMG}${img}-white.jpg" alt="${name}">${out?'<span class="so mono">Sold out</span>':''}</div><div class="m"><div class="n">${name}</div><div class="c">${cat}</div><div class="row"><span>${slug==='bacteriostatic-water'?'From ':''}$${price}</span><span class="v">View &rarr;</span></div></div></a>`).join('');
+document.getElementById('tiles').innerHTML=P.map(([slug,name,cat,price,img,out])=>`<a class="tile${out?' out':''}" href="${pdp(slug)}"><div class="im"><img loading="lazy" src="${IMG}${img}.webp" alt="${name}">${out?'<span class="so mono">Sold out</span>':''}</div><div class="m"><div class="n">${name}</div><div class="c">${cat}</div><div class="row"><span>${slug==='bacteriostatic-water'?'From ':''}$${price}</span><span class="v">View &rarr;</span></div></div></a>`).join('');
 for(const id of['bestTop','bestMid','bestEnd'])document.getElementById(id).href=BESTURL;
 document.getElementById('shopP').innerHTML=CODE?`Code <b>${CODE}</b>${OFFER?' · '+OFFER.replace(/[<>&]/g,''):''}. Tap any compound for its full page.`:'Tap any compound for its full page.';
 if(!CODE)document.getElementById('shopH').textContent='The range';
