@@ -90,16 +90,16 @@
     const showPerson = (last.type === "packing" || last.type === "packed") && o.packer;
     $("person").hidden = !showPerson;
     if (showPerson) { $("pname").textContent = o.packer.name; $("initials").textContent = o.packer.name[0]; }
-    // the road: five landmarks, the box moves to where the order is
-    const STOPS = [["box", "Beverly Hills", 8], ["shipping", "Picked up", 36], ["shipping", "On the truck", 64], ["check", "Your door", 92]];
-    const POS = { confirmed: 8, warehouse: 8, packing: 8, packed: 8, picked_up: 36, facility: 50, out_for_delivery: 64, delivered: 92, rate: 92 };
-    const stopIdx = { confirmed: 0, warehouse: 0, packing: 0, packed: 0, picked_up: 1, facility: 1, out_for_delivery: 2, delivered: 3, rate: 3 }[last.type];
-    $("stops").innerHTML = STOPS.map(([ic, lb, x], i) => `<div class="stop ${i <= stopIdx ? "done" : ""} ${i === stopIdx ? "now" : ""}" style="left:${x}%"><img src="${ICON(ic)}" alt=""><span>${lb}</span></div>`).join("");
-    const mv = $("mover"), x = POS[last.type];
-    requestAnimationFrame(() => { mv.style.left = x + "%"; $("roadfill").setAttribute("stroke-dasharray", `${Math.max(0, (x - 4) / 92 * 100)} 100`); });
+    // the road: five stops on one axis; the box sits on its stop, or rides between two
+    const STOPS = [["shelf", "Beverly<br>Hills", 8], ["stamp", "Packed", 29], ["freeship", "Picked<br>up", 50], ["road", "On the<br>way", 71], [done ? "check" : "pin", "Your<br>door", 92]];
+    const AT = { confirmed: 0, warehouse: 0, packing: 0, packed: 1, picked_up: 2, facility: 2.5, out_for_delivery: 3, delivered: 4, rate: 4 };
+    const at = AT[last.type], stopIdx = Math.floor(at);
+    $("stops").innerHTML = STOPS.map(([ic, lb, x], i) => `<div class="stop ${i < stopIdx || done ? "done" : ""} ${i === stopIdx && !done ? "now" : ""}" style="left:${x}%"><div class="ring"><img src="${ICON(ic)}" alt=""></div><span>${lb}</span></div>`).join("");
+    const xs = STOPS.map(s => s[2]), x = Number.isInteger(at) ? xs[at] : (xs[Math.floor(at)] + xs[Math.ceil(at)]) / 2;
+    const mv = $("mover");
+    requestAnimationFrame(() => { mv.style.left = x + "%"; $("roadfill").style.width = ((x - 8) / 84 * 100) + "%"; });
     mv.querySelector("img").src = ICON(idx >= 3 ? "box" : "box-open");
     mv.className = "mover " + (last.type === "packing" ? "pack" : ["picked_up", "facility", "out_for_delivery"].includes(last.type) ? "ride" : done ? "home" : "");
-
     // pickup: only while packed and waiting on the truck
     $("pickup").hidden = last.type !== "packed";
     if (last.type === "packed") {
@@ -158,8 +158,8 @@
     const n = member ? spinsLeft() : 0;
     $("boredh").textContent = order && order.events.at(-1).type === "delivered" ? "One more for the road" : "Bored?";
     const done = order && order.events.at(-1).type === "delivered";
-    $("boredp").textContent = n ? `You've got ${n === 1 ? "a free spin" : n + " free spins"}${done ? "." : " while it's on the way."}` : done ? "Come back tomorrow for your free daily spin." : "Your next spin unlocks at the next update.";
-    $("openspin").disabled = !n; $("openspin").textContent = n ? "Spin the wheel" : "No spins right now";
+    $("play").href = `../run/?order=${orderNo}${member ? "&member=1" : ""}`;
+    $("openspin").disabled = !n; $("openspin").textContent = n ? `Spin the wheel${n > 1 ? " · " + n + " spins" : ""}` : "No spins right now";
   }
   function renderPrizes() {
     const p = ledger().prizes.filter(x => x.n !== "Spin again");

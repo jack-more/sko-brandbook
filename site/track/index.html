@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="track.css?v=7">
+<link rel="stylesheet" href="track.css?v=10">
 
 <div class="stage">
   <!-- 1. lookup -->
@@ -42,12 +42,9 @@
         <div><b id="pname"></b><span>Packing team · Beverly Hills</span></div>
       </div>
       <div class="road" id="road">
-        <svg viewBox="0 0 100 20" preserveAspectRatio="none"><defs><linearGradient id="irid" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0"><stop offset="0" stop-color="#9DBFD9"/><stop offset=".5" stop-color="#BAC7F2"/><stop offset="1" stop-color="#C3AFD7"/></linearGradient></defs>
-          <path d="M4 10 H96" stroke="rgba(255,255,255,.16)" stroke-width="2.4" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"/>
-          <path id="roadfill" d="M4 10 H96" stroke="url(#irid)" stroke-width="2.4" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" pathLength="100" stroke-dasharray="0 100"/>
-        </svg>
-        <div class="mover" id="mover"><img src="../../img/icons/sm/box-open.png" alt=""></div>
+        <div class="track"><i id="roadfill"></i></div>
         <div class="stops" id="stops"></div>
+        <div class="mover" id="mover"><div class="drift"><img src="../../img/icons/sm/box-open.png" alt=""></div></div>
       </div>
     </section>
 
@@ -89,9 +86,10 @@
     <section class="card" id="boredc">
       <div class="bored">
         <img src="../../img/icons/sm/spin.png" alt="">
-        <div><b id="boredh">Bored?</b><p id="boredp"></p></div>
+        <div><b id="boredh">Bored?</b><p id="boredp">Run your vials home. Bring more across the line for better odds.</p></div>
       </div>
-      <button class="btn navy" id="openspin">Spin the wheel</button>
+      <a class="btn navy" id="play" href="../run/">Play Vial Run</a>
+      <button class="btn quiet" id="openspin">Spin the wheel</button>
     </section>
 
     <section class="card" id="prizec" hidden>
@@ -124,4 +122,4 @@
 <canvas id="fx"></canvas>
 
 <script src="data.js?v=5"></script>
-<script src="track.js?v=7"></script>
+<script src="track.js?v=10"></script>
