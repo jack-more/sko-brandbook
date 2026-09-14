@@ -54,7 +54,7 @@
 
   const PRESETS = {                       // minutes before "now" that the order was placed
     "4821": 9,                            // packing right now
-    "4822": 3 * 24 * 60,                  // delivered
+    "4822": 3 * 24 * 60 + 90,             // delivered (packed before that day's 3 PM truck)
     "4823": 32,                           // packed, waiting on the 3 PM truck
   };
   const placedCache = {};

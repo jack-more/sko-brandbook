@@ -62,14 +62,14 @@
     const ev = o.events, last = ev[ev.length - 1], name = o.packer?.name || "Our team";
     const at = t => ev.filter(e => e.type === t).pop();
     switch (last.type) {
-      case "confirmed": return ["Order confirmed.", "We've got it. It's headed to the warehouse."];
-      case "warehouse": return ["The warehouse has your order.", "Beverly Hills, CA. It's next in line to be packed."];
-      case "packing": return [`${name} is packing your order.`, `Started at ${fmtTime(new Date(last.at))}. It only takes a few minutes.`];
-      case "packed": return [`Packed by ${name}.`, `Sealed at ${fmtTime(new Date(last.at))} and the label's printed.`];
-      case "picked_up": return ["It's on its way.", `UPS picked it up in Beverly Hills, ${whenInline(last.at)}.`];
-      case "facility": return [`At the UPS facility in ${last.location}.`, "It's being sorted. Next stop is your area."];
-      case "out_for_delivery": return ["Out for delivery today.", "It's on the truck. Keep an eye on the door."];
-      case "delivered": return ["Delivered.", `Left at your front door, ${whenInline(last.at)}.`];
+      case "confirmed": return ["Got it.", "Your order just landed in Beverly Hills."];
+      case "warehouse": return ["In the queue.", `Next up on ${name === "Our team" ? "the" : name + "'s"} table.`];
+      case "packing": return [`${name}'s on it.`, `Packing your order right now. A few minutes, tops.`];
+      case "packed": return [`Sealed by ${name}.`, `Label's on. UPS rolls up at 3.`];
+      case "picked_up": return ["On the truck.", `UPS grabbed it in Beverly Hills, ${whenInline(last.at)}.`];
+      case "facility": return [`Sorting in ${last.location}.`, "Next stop: your neighbourhood."];
+      case "out_for_delivery": return ["Today's the day.", "It's on the truck to your door."];
+      case "delivered": return ["It's home.", `Left at your front door, ${whenInline(last.at)}. Go get it.`];
     }
   }
 
@@ -87,7 +87,15 @@
     const showPerson = (last.type === "packing" || last.type === "packed") && o.packer;
     $("person").hidden = !showPerson;
     if (showPerson) { $("pname").textContent = o.packer.name; $("initials").textContent = o.packer.name[0]; }
-    $("bar").innerHTML = STEPS.map((_, i) => `<i class="${i < idx || done ? "done" : i === idx ? "now" : ""}" style="--p:${(i / 7 * 100).toFixed(1)}%"></i>`).join("");
+    // the road: five landmarks, the box moves to where the order is
+    const STOPS = [["box", "Beverly Hills", 8], ["shipping", "Picked up", 29], ["stamp", "Sorting", 50], ["shipping", "On the truck", 71], ["check", "Your door", 92]];
+    const POS = { confirmed: 8, warehouse: 8, packing: 8, packed: 8, picked_up: 29, facility: 50, out_for_delivery: 71, delivered: 92 };
+    const stopIdx = { confirmed: 0, warehouse: 0, packing: 0, packed: 0, picked_up: 1, facility: 2, out_for_delivery: 3, delivered: 4 }[last.type];
+    $("stops").innerHTML = STOPS.map(([ic, lb, x], i) => `<div class="stop ${i <= stopIdx ? "done" : ""} ${i === stopIdx ? "now" : ""}" style="left:${x}%"><img src="${ICON(ic)}" alt=""><span>${lb}</span></div>`).join("");
+    const mv = $("mover"), x = POS[last.type];
+    requestAnimationFrame(() => { mv.style.left = x + "%"; $("roadfill").setAttribute("stroke-dasharray", `${Math.max(0, (x - 4) / 92 * 100)} 100`); });
+    mv.querySelector("img").src = ICON(idx >= 3 ? "box" : "box-open");
+    mv.className = "mover " + (last.type === "packing" ? "pack" : ["picked_up", "facility", "out_for_delivery"].includes(last.type) ? "ride" : done ? "home" : "");
 
     // pickup: only while packed and waiting on the truck
     $("pickup").hidden = last.type !== "packed";

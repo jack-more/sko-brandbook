@@ -22,7 +22,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--signal);outline-off
 .eyebrow{font:600 11px/1 var(--text);letter-spacing:.16em;color:var(--halo);display:flex;align-items:center;gap:8px}
 .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--halo);box-shadow:0 0 0 0 rgba(157,191,217,.7);animation:ping 1.8s ease-out infinite}
 @keyframes ping{70%{box-shadow:0 0 0 9px rgba(157,191,217,0)}100%{box-shadow:0 0 0 0 rgba(157,191,217,0)}}
-.hero h1{font:800 31px/1.08 var(--disp);letter-spacing:-.01em;margin:14px 0 8px;text-wrap:balance}
+.hero h1{font:800 34px/1.05 var(--disp);letter-spacing:-.01em;margin:14px 0 8px;text-wrap:balance}
 .hero p{margin:0;color:rgba(255,255,255,.72);font-size:15px}
 .swap{transition:opacity .28s ease,transform .28s ease}
 .swap.out{opacity:0;transform:translateY(6px)}
@@ -177,3 +177,29 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-in
 .join .bored b,.join .bored p{color:var(--white)}
 .join .bored p{opacity:.72}
 .join .btn.navy{background:var(--white);color:var(--navy)}
+
+/* the road: your box, travelling from Beverly Hills to your door */
+.road{position:relative;margin-top:26px;height:112px}
+.road svg{position:absolute;left:0;right:0;top:34px;width:100%;height:20px;overflow:visible}
+#roadfill{transition:stroke-dasharray 1.4s cubic-bezier(.3,.8,.3,1)}
+.stops{position:absolute;inset:0}
+.stop{position:absolute;top:58px;width:22%;text-align:center;transform:translateX(-50%);opacity:.34;transition:opacity .6s}
+.stop.done{opacity:1}
+.stop img{width:30px;height:30px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
+.stop span{display:block;font:600 9px/1.2 var(--text);letter-spacing:.08em;color:rgba(255,255,255,.8);margin-top:5px;text-transform:uppercase}
+.stop.now span{color:#fff}
+.mover{position:absolute;top:8px;width:52px;height:52px;margin-left:-26px;transition:left 1.4s cubic-bezier(.3,.8,.3,1);z-index:2}
+.mover img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.5))}
+.mover.pack img{animation:wiggle .75s ease-in-out infinite}
+.mover.ride img{animation:ride 1s ease-in-out infinite}
+.mover.home img{animation:land .6s cubic-bezier(.2,1.5,.4,1)}
+@keyframes wiggle{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg) translateY(-3px)}}
+@keyframes ride{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes land{from{transform:scale(.6) translateY(-20px)}}
+.mono{width:48px;height:48px;font-size:18px}
+/* every step, folded */
+.every summary{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.every summary::-webkit-details-marker{display:none}
+.every summary .kicker::after{content:"  ›";display:inline-block;transform:rotate(90deg);margin-left:6px;transition:transform .2s}
+.every[open] summary .kicker::after{transform:rotate(-90deg)}
+.every .steps{margin-top:8px}
