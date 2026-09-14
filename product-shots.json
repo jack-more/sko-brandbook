@@ -1,0 +1,3024 @@
+{
+ "version": "2026-09-14",
+ "count": 38,
+ "shot_order": [
+  "primary",
+  "chrome",
+  "frost",
+  "white",
+  "pigment",
+  "water"
+ ],
+ "products": [
+  {
+   "slug": "5-amino-1mq",
+   "name": "5-Amino-1MQ",
+   "dose": "5 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/5-amino-1mq-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/5-amino-1mq-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "adamax",
+   "name": "Adamax",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/adamax-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/adamax-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "aod-9604",
+   "name": "AOD-9604",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/aod-9604-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/aod-9604-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "ara-290",
+   "name": "ARA-290",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ara-290-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ara-290-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "bac-water",
+   "name": "Bacteriostatic Water",
+   "dose": "30 mL",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bac-water-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bac-water-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "bpc-157",
+   "name": "BPC-157",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-wide.jpg"
+    },
+    {
+     "shot": "detail",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-detail.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-detail.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/bpc-157-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/bpc-157-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "cagrilintide",
+   "name": "Cagrilintide",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cagrilintide-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cagrilintide-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "cjc-1295",
+   "name": "CJC-1295 no DAC",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/cjc-1295-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/cjc-1295-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "dsip",
+   "name": "DSIP",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/dsip-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/dsip-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "ghk-cu",
+   "name": "GHK-Cu",
+   "dose": "50 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "glow",
+   "name": "GLOW",
+   "dose": "70 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glow-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glow-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "glutathione",
+   "name": "Glutathione",
+   "dose": "600 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/glutathione-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/glutathione-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "igf1-lr3",
+   "name": "IGF1-LR3",
+   "dose": "1 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/igf1-lr3-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/igf1-lr3-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "ipamorelin",
+   "name": "Ipamorelin",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ipamorelin-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ipamorelin-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "kisspeptin",
+   "name": "Kisspeptin-10",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kisspeptin-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kisspeptin-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "klow",
+   "name": "KLOW",
+   "dose": "80 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/klow-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/klow-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "kpv",
+   "name": "KPV",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/kpv-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/kpv-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "mots-c",
+   "name": "MOTS-c",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mots-c-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mots-c-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "mt-1",
+   "name": "MT-1",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-1-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-1-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "mt-2",
+   "name": "MT-2",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "nad",
+   "name": "NAD+",
+   "dose": "500 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "pt-141",
+   "name": "PT-141",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/pt-141-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/pt-141-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "selank",
+   "name": "Selank",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "semax",
+   "name": "Semax",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "sermorelin",
+   "name": "Sermorelin",
+   "dose": "5 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sermorelin-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sermorelin-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "sko-3-rt",
+   "name": "SKO-3 RT",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-3-rt-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-3-rt-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "sko-trz",
+   "name": "SKO-TRZ",
+   "dose": "15 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-wide.jpg"
+    },
+    {
+     "shot": "detail",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-detail.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-detail.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/sko-trz-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/sko-trz-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "ss-31",
+   "name": "SS-31",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ss-31-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ss-31-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "tb-500",
+   "name": "TB-500",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tb-500-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tb-500-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "tesamorelin",
+   "name": "Tesamorelin",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesamorelin-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesamorelin-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "tesa-ipa",
+   "name": "Tesamorelin + Ipamorelin",
+   "dose": "13 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/tesa-ipa-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/tesa-ipa-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "thymosin-alpha-1",
+   "name": "Thymosin Alpha-1",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/thymosin-alpha-1-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/thymosin-alpha-1-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "wolverine",
+   "name": "Wolverine Blend",
+   "dose": "10 mg",
+   "spray": false,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-square.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/wolverine-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/wolverine-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "ghk-cu-spray",
+   "name": "GHK-Cu Spray",
+   "dose": "100 mg",
+   "spray": true,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/ghk-cu-spray-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/ghk-cu-spray-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "mt-2-spray",
+   "name": "MT-2 Spray",
+   "dose": "10 mg",
+   "spray": true,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/mt-2-spray-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/mt-2-spray-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "nad-spray",
+   "name": "NAD+ Spray",
+   "dose": "500 mg",
+   "spray": true,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/nad-spray-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/nad-spray-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "selank-spray",
+   "name": "Selank Spray",
+   "dose": "10 mg",
+   "spray": true,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/selank-spray-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/selank-spray-cut.jpg"
+    }
+   ]
+  },
+  {
+   "slug": "semax-spray",
+   "name": "Semax Spray",
+   "dose": "10 mg",
+   "spray": true,
+   "shots": [
+    {
+     "shot": "primary",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-primary.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-primary.jpg"
+    },
+    {
+     "shot": "chrome",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-chrome.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-chrome.jpg"
+    },
+    {
+     "shot": "frost",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-frost.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-frost.jpg"
+    },
+    {
+     "shot": "white",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-white.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-white.jpg"
+    },
+    {
+     "shot": "pigment",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-pigment.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-pigment.jpg"
+    },
+    {
+     "shot": "water",
+     "core": true,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-water.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-water.jpg"
+    },
+    {
+     "shot": "wide",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-wide.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-wide.jpg"
+    },
+    {
+     "shot": "rock",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-rock.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-rock.jpg"
+    },
+    {
+     "shot": "square",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-square.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-square.jpg"
+    },
+    {
+     "shot": "structure",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-structure.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-structure.jpg"
+    },
+    {
+     "shot": "badge",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-badge.jpg",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-badge.jpg"
+    },
+    {
+     "shot": "cut",
+     "core": false,
+     "url": "https://jack-more.github.io/sko-brandbook/img/products/web/semax-spray-cut.png",
+     "thumb": "https://jack-more.github.io/sko-brandbook/img/products/thumb/semax-spray-cut.jpg"
+    }
+   ]
+  }
+ ]
+}
