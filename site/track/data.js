@@ -15,16 +15,19 @@
  *   trackingNumber: "1Z9X2V410355182047" | null,
  *   events: [ { type, at, location? } ]       // oldest first
  * }
- * event.type and what fires it (Jack, 14 Sep 2026):
+ * event.type and what fires it (Jack, 14 Sep 2026). Two systems only: PackMaster and EasyPost.
  *   confirmed         order received (store)
  *   warehouse         order arrives in the PackMaster queue
- *   packing           label bought in PackMaster  -> packer = the associate who bought it
- *   packed            barcode on the packing slip scanned
- *   picked_up         first UPS scan (courier)
- *   facility          UPS webhook, in transit at a facility (detail only, not a step)
- *   out_for_delivery  UPS webhook
- *   delivered         UPS webhook
+ *   packing           label bought (EasyPost tracker.created) -> packer = the associate who bought it in PackMaster
+ *   packed            the packing-slip barcode scan in PackMaster. One scan per order; there are no other scans.
+ *   picked_up         EasyPost tracker.updated, first in_transit detail (the carrier's acceptance scan)
+ *   facility          EasyPost tracker.updated, later in_transit details: city + state shown in the carrier card
+ *   out_for_delivery  EasyPost status out_for_delivery
+ *   delivered         EasyPost status delivered
+ *   exception         EasyPost status return_to_sender | failure | error | available_for_pickup
  *   rate              48 hours after delivered -> "rate your experience"
+ * carrier is whatever EasyPost reports (UPS or USPS today); trackingUrl is the tracker's public_url.
+ * UPS and USPS APIs are not called directly: EasyPost already normalises both.
  */
 (function () {
   const TEAM = ["Angel", "Maria", "Luis", "Dani"];      // the packing team; the demo cycles through it
@@ -94,8 +97,9 @@
     return {
       order: String(no), placedAt: P.toISOString(),
       packer: has("packing") ? { name: TEAM[hash(no) % TEAM.length] } : null,
-      carrier: "UPS", service: "Ground",
+      carrier: no === "4823" ? "USPS" : "UPS", service: no === "4823" ? "Ground Advantage" : "Ground",
       trackingNumber: has("packed") ? "1Z9X2V41" + String(1e10 + hash(no) % 9e9).slice(1) : null,
+      trackingUrl: has("packed") ? "https://track.easypost.com/djE6dHJrXzEyMzQ1Njc4OTA" : null,   // EasyPost public_url (demo value)
       events, nextPickup: nextPickup(packed).toISOString(), now: V.toISOString(),
     };
   }

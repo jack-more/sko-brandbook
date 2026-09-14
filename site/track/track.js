@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const ICON = n => `../../img/icons/sm/${n}.png`;
   const { SOURCE, now } = window.SKOTrack;
+  let C = "UPS";                                             // the carrier on this order, from EasyPost
   const qs = new URLSearchParams(location.search);
   const FAST = +qs.get("speed") > 1;
   // production: the session decides. A guest checkout gets a guest record; registering upgrades it in place.
@@ -66,19 +67,21 @@
       case "confirmed": return ["Got it.", "Your order just landed in Beverly Hills."];
       case "warehouse": return ["In the queue.", `Next up on ${name === "Our team" ? "the" : name + "'s"} table.`];
       case "packing": return [`${name}'s on it.`, `Packing your order right now. A few minutes, tops.`];
-      case "packed": return [`Sealed by ${name}.`, `Label's on. UPS rolls up at 3.`];
-      case "picked_up": return ["On the truck.", `UPS grabbed it in Beverly Hills, ${whenInline(last.at)}.`];
+      case "packed": return [`Sealed by ${name}.`, `Label's on. ${C} rolls up at 3.`];
+      case "picked_up": return ["On the truck.", `${C} grabbed it in Beverly Hills, ${whenInline(last.at)}.`];
       case "facility": return [`Sorting in ${last.location}.`, "Next stop: your neighbourhood."];
       case "out_for_delivery": return ["Today's the day.", "It's on the truck to your door."];
       case "delivered": return ["It's home.", `Left at your front door, ${whenInline(last.at)}. Go get it.`];
+      case "exception": return ["We're on it.", `${C} hit a snag with the delivery. The team has already been alerted and will reach out.`];
       case "rate": return ["How was it?", `Delivered ${whenInline(at("delivered").at)}. Tell ${name === "Our team" ? "the team" : name} how it went.`];
     }
   }
 
   function render(o, first) {
-    order = o;
+    order = o; C = o.carrier || "UPS";
+    $("carrier").textContent = `${C} · ${o.service || ""}`.toUpperCase();
     const ev = o.events, last = ev[ev.length - 1];
-    const idx = STEPS.indexOf(stepOf(last.type)), done = last.type === "delivered" || last.type === "rate";
+    const idx = STEPS.indexOf(stepOf(last.type === "exception" ? "picked_up" : last.type)), done = last.type === "delivered" || last.type === "rate";
     $("ordno").textContent = `ORDER #${o.order}`;
     const [h, s] = copyFor(o);
     if (first || $("head").textContent !== h) {
@@ -92,7 +95,7 @@
     if (showPerson) { $("pname").textContent = o.packer.name; $("initials").textContent = o.packer.name[0]; }
     // the road: five stops on one axis; the box sits on its stop, or rides between two
     const STOPS = [["shelf", "Beverly<br>Hills", 8], ["stamp", "Packed", 29], ["freeship", "Picked<br>up", 50], ["road", "On the<br>way", 71], [done ? "check" : "pin", "Your<br>door", 92]];
-    const AT = { confirmed: 0, warehouse: 0, packing: 0, packed: 1, picked_up: 2, facility: 2.5, out_for_delivery: 3, delivered: 4, rate: 4 };
+    const AT = { confirmed: 0, warehouse: 0, packing: 0, packed: 1, picked_up: 2, facility: 2.5, out_for_delivery: 3, delivered: 4, rate: 4, exception: 2.5 };
     const at = AT[last.type], stopIdx = Math.floor(at);
     $("stops").innerHTML = STOPS.map(([ic, lb, x], i) => `<div class="stop ${i < stopIdx || done ? "done" : ""} ${i === stopIdx && !done ? "now" : ""}" style="left:${x}%"><div class="ring"><img src="${ICON(ic)}" alt=""></div><span>${lb}</span></div>`).join("");
     const xs = STOPS.map(s => s[2]), x = Number.isInteger(at) ? xs[at] : (xs[Math.floor(at)] + xs[Math.ceil(at)]) / 2;
@@ -105,24 +108,24 @@
     if (last.type === "packed") {
       const dw = dayWord(o.nextPickup);
       $("ptext").textContent = `Picks up ${dw} at 3:00 PM`;
-      $("pkick").textContent = dw === "today" ? "UPS PICKUP" : "PACKED AFTER TODAY'S 3 PM PICKUP";
+      $("pkick").textContent = dw === "today" ? `${C} PICKUP` : "PACKED AFTER TODAY'S 3 PM PICKUP";
     }
     tick();
 
     // carrier: the latest scan once UPS has it
-    const scans = ev.filter(e => ["picked_up", "facility", "out_for_delivery", "delivered"].includes(e.type));
+    const scans = ev.filter(e => ["picked_up", "facility", "out_for_delivery", "delivered", "exception"].includes(e.type));
     $("track").hidden = !scans.length;
     if (scans.length) {
       const sc = scans[scans.length - 1];
-      const label = { picked_up: `Picked up in ${sc.location}`, facility: `Arrived at UPS facility, ${sc.location}`, out_for_delivery: "Out for delivery", delivered: "Delivered, front door" }[sc.type];
+      const label = { picked_up: `Picked up in ${sc.location}`, facility: `Arrived at ${C} facility, ${sc.location}`, out_for_delivery: "Out for delivery", delivered: "Delivered, front door", exception: sc.location || "Delivery exception" }[sc.type];
       $("scanb").textContent = label; $("scant").textContent = when(sc.at);
-      const mapq = sc.type === "facility" || sc.type === "picked_up" ? `UPS ${sc.location}` : "";
+      const mapq = sc.type === "facility" || sc.type === "picked_up" ? `${C} ${sc.location}` : "";
       $("map").hidden = !mapq; $("map").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mapq);
-      $("carrier").textContent = `${o.carrier} · ${o.service}`.toUpperCase();
     }
     if (o.trackingNumber) {
       $("copy").textContent = o.trackingNumber.replace(/^(.{2})(.{3})(.{3})(.{2})(.{4})(.+)$/, "$1 $2 $3 $4 $5 $6");
-      $("upslink").href = "https://www.ups.com/track?tracknum=" + o.trackingNumber;
+      $("upslink").href = o.trackingUrl || (C === "USPS" ? "https://tools.usps.com/go/TrackConfirmAction?tLabels=" : "https://www.ups.com/track?tracknum=") + o.trackingNumber;
+      $("upslink").textContent = `Track on ${C}`;
     }
 
     // timeline
@@ -134,7 +137,7 @@
         confirmed: "Order received", warehouse: "The warehouse has your order",
         packing: e && name ? `${name} is packing your order` : "Packing your order",
         packed: e && name ? `${name} packed your order` : "Packed",
-        picked_up: e ? "UPS has picked up your package" : `UPS pickup, ${dayWord(o.nextPickup)} at 3:00 PM`,
+        picked_up: e ? `${C} has picked up your package` : `${C} pickup, ${dayWord(o.nextPickup)} at 3:00 PM`,
         out_for_delivery: "Out for delivery", delivered: "Delivered", rate: "Rate your experience",
       }[t];
       return `<li class="${c}"><i class="pt"></i><span class="t">${label}</span><span class="tm">${e ? when(e.at) : ""}</span></li>`;
