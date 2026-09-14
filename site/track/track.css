@@ -203,3 +203,11 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-in
 .every summary .kicker::after{content:"  ›";display:inline-block;transform:rotate(90deg);margin-left:6px;transition:transform .2s}
 .every[open] summary .kicker::after{transform:rotate(-90deg)}
 .every .steps{margin-top:8px}
+
+.eyebrow em{font-style:normal;color:rgba(255,255,255,.55);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.eyebrow em::before{content:"·";margin:0 6px 0 2px}
+.stars{display:flex;gap:6px;margin-top:10px}
+.stars button{font-size:34px;line-height:1;color:var(--mist);padding:2px 4px;transition:transform .12s,color .12s}
+.stars button.on{color:#F2B705}
+.stars button:active{transform:scale(1.2)}
+.rthanks{margin:8px 0 0;font-size:13px;color:var(--graph)}

@@ -15,7 +15,16 @@
  *   trackingNumber: "1Z9X2V410355182047" | null,
  *   events: [ { type, at, location? } ]       // oldest first
  * }
- * event.type: confirmed | warehouse | packing | packed | picked_up | facility | out_for_delivery | delivered
+ * event.type and what fires it (Jack, 14 Sep 2026):
+ *   confirmed         order received (store)
+ *   warehouse         order arrives in the PackMaster queue
+ *   packing           label bought in PackMaster  -> packer = the associate who bought it
+ *   packed            barcode on the packing slip scanned
+ *   picked_up         first UPS scan (courier)
+ *   facility          UPS webhook, in transit at a facility (detail only, not a step)
+ *   out_for_delivery  UPS webhook
+ *   delivered         UPS webhook
+ *   rate              48 hours after delivered -> "rate your experience"
  */
 (function () {
   const TEAM = ["Angel", "Maria", "Luis", "Dani"];      // the packing team; the demo cycles through it
@@ -55,6 +64,7 @@
   const PRESETS = {                       // minutes before "now" that the order was placed
     "4821": 9,                            // packing right now
     "4822": 3 * 24 * 60 + 90,             // delivered (packed before that day's 3 PM truck)
+    "4824": 6 * 24 * 60 + 90,             // delivered, rate-your-experience is up
     "4823": 32,                           // packed, waiting on the 3 PM truck
   };
   const placedCache = {};
@@ -77,6 +87,7 @@
       { type: "facility", at: new Date(+pick + 6.2 * HOUR), location: "Ontario, CA" },
       { type: "out_for_delivery", at: new Date(+pick + 17 * HOUR), location: "Your area" },
       { type: "delivered", at: new Date(+pick + 22.5 * HOUR), location: "Front door" },
+      { type: "rate", at: new Date(+pick + 70.5 * HOUR) },                       // 48 h after delivered
     ];
     const events = plan.filter(e => e.at <= V).map(e => ({ ...e, at: e.at.toISOString() }));
     const has = t => events.some(e => e.type === t);

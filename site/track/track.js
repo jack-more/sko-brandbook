@@ -9,7 +9,8 @@
   let member = qs.get("member") === "1" || (() => { try { return localStorage.getItem("sko_member") === "1"; } catch (e) { return false; } })();
 
   // the eight steps, in order; facility can repeat and the step shows the latest one
-  const STEPS = ["confirmed", "warehouse", "packing", "packed", "picked_up", "facility", "out_for_delivery", "delivered"];
+  const STEPS = ["confirmed", "warehouse", "packing", "packed", "picked_up", "out_for_delivery", "delivered", "rate"];
+  const stepOf = t => t === "facility" ? "picked_up" : t;          // facility scans are detail under "picked up"
   const SPIN_EVENTS = ["packed", "picked_up", "facility", "out_for_delivery", "delivered"];   // each new update earns a spin
 
   // ---------- time words ----------
@@ -70,27 +71,29 @@
       case "facility": return [`Sorting in ${last.location}.`, "Next stop: your neighbourhood."];
       case "out_for_delivery": return ["Today's the day.", "It's on the truck to your door."];
       case "delivered": return ["It's home.", `Left at your front door, ${whenInline(last.at)}. Go get it.`];
+      case "rate": return ["How was it?", `Delivered ${whenInline(at("delivered").at)}. Tell ${name === "Our team" ? "the team" : name} how it went.`];
     }
   }
 
   function render(o, first) {
     order = o;
     const ev = o.events, last = ev[ev.length - 1];
-    const idx = STEPS.indexOf(last.type), done = last.type === "delivered";
+    const idx = STEPS.indexOf(stepOf(last.type)), done = last.type === "delivered" || last.type === "rate";
     $("ordno").textContent = `ORDER #${o.order}`;
     const [h, s] = copyFor(o);
     if (first || $("head").textContent !== h) {
       const sw = $("swap"); const apply = () => { $("head").textContent = h; $("sub").textContent = s; sw.classList.remove("out"); };
       if (first) apply(); else { sw.classList.add("out"); setTimeout(apply, 200); }
     } else $("sub").textContent = s;
-    $("eyebrow").textContent = done ? "DELIVERED" : "RIGHT NOW";
+    lastAt = new Date(last.at); ago();
+    $("ratec").hidden = last.type !== "rate";
     const showPerson = (last.type === "packing" || last.type === "packed") && o.packer;
     $("person").hidden = !showPerson;
     if (showPerson) { $("pname").textContent = o.packer.name; $("initials").textContent = o.packer.name[0]; }
     // the road: five landmarks, the box moves to where the order is
-    const STOPS = [["box", "Beverly Hills", 8], ["shipping", "Picked up", 29], ["stamp", "Sorting", 50], ["shipping", "On the truck", 71], ["check", "Your door", 92]];
-    const POS = { confirmed: 8, warehouse: 8, packing: 8, packed: 8, picked_up: 29, facility: 50, out_for_delivery: 71, delivered: 92 };
-    const stopIdx = { confirmed: 0, warehouse: 0, packing: 0, packed: 0, picked_up: 1, facility: 2, out_for_delivery: 3, delivered: 4 }[last.type];
+    const STOPS = [["box", "Beverly Hills", 8], ["shipping", "Picked up", 36], ["shipping", "On the truck", 64], ["check", "Your door", 92]];
+    const POS = { confirmed: 8, warehouse: 8, packing: 8, packed: 8, picked_up: 36, facility: 50, out_for_delivery: 64, delivered: 92, rate: 92 };
+    const stopIdx = { confirmed: 0, warehouse: 0, packing: 0, packed: 0, picked_up: 1, facility: 1, out_for_delivery: 2, delivered: 3, rate: 3 }[last.type];
     $("stops").innerHTML = STOPS.map(([ic, lb, x], i) => `<div class="stop ${i <= stopIdx ? "done" : ""} ${i === stopIdx ? "now" : ""}" style="left:${x}%"><img src="${ICON(ic)}" alt=""><span>${lb}</span></div>`).join("");
     const mv = $("mover"), x = POS[last.type];
     requestAnimationFrame(() => { mv.style.left = x + "%"; $("roadfill").setAttribute("stroke-dasharray", `${Math.max(0, (x - 4) / 92 * 100)} 100`); });
@@ -128,12 +131,11 @@
       const c = i < idx || done ? "done" : i === idx ? "now" : "later";
       const name = o.packer?.name;
       const label = {
-        confirmed: "Order confirmed", warehouse: "At the warehouse",
-        packing: e && name ? `${name} started packing` : "Packing",
-        packed: "Packed, label printed",
-        picked_up: e ? "Picked up by UPS" : `UPS pickup, ${dayWord(o.nextPickup)} at 3:00 PM`,
-        facility: e ? `At the UPS facility, ${e.location}` : "At the UPS facility",
-        out_for_delivery: "Out for delivery", delivered: "Delivered",
+        confirmed: "Order received", warehouse: "The warehouse has your order",
+        packing: e && name ? `${name} is packing your order` : "Packing your order",
+        packed: e && name ? `${name} packed your order` : "Packed",
+        picked_up: e ? "UPS has picked up your package" : `UPS pickup, ${dayWord(o.nextPickup)} at 3:00 PM`,
+        out_for_delivery: "Out for delivery", delivered: "Delivered", rate: "Rate your experience",
       }[t];
       return `<li class="${c}"><i class="pt"></i><span class="t">${label}</span><span class="tm">${e ? when(e.at) : ""}</span></li>`;
     }).join("");
@@ -165,6 +167,20 @@
     $("prizes").innerHTML = p.map(x => `<li><img src="${ICON(x.ico)}" alt=""><div><b>${x.n}</b><span>${x.d}</span></div></li>`).join("");
   }
 
+  // "last updated · 12s ago", ticking
+  let lastAt = null;
+  function ago() {
+    if (!lastAt) return;
+    const s = Math.max(0, Math.floor((now() - lastAt) / 1000));
+    $("ago").textContent = s < 5 ? "just now" : s < 60 ? `${s}s ago` : s < 3600 ? `${Math.floor(s / 60)}m ago` : s < 86400 ? `${Math.floor(s / 3600)}h ago` : `${Math.floor(s / 86400)}d ago`;
+  }
+  setInterval(ago, 1000);
+  // rating: five taps, remembered per order (production: POST to the store)
+  document.querySelectorAll("#stars button").forEach((b, i) => b.onclick = () => {
+    document.querySelectorAll("#stars button").forEach((x, k) => x.classList.toggle("on", k <= i));
+    $("rthanks").textContent = i >= 3 ? "Thank you. That goes straight to the team." : "Thanks. Someone from the team will reach out.";
+    try { localStorage.setItem(`sko_rate_${orderNo}`, i + 1); } catch (e) {}
+  });
   // pickup countdown on the page's clock
   function tick() {
     if (!order || $("pickup").hidden) return;

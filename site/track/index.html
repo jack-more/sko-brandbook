@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="track.css?v=6">
+<link rel="stylesheet" href="track.css?v=7">
 
 <div class="stage">
   <!-- 1. lookup -->
@@ -22,6 +22,7 @@
       <button data-o="4821">#4821 <span>being packed now</span></button>
       <button data-o="4823">#4823 <span>packed, waiting on the truck</span></button>
       <button data-o="4822">#4822 <span>delivered</span></button>
+      <button data-o="4824">#4824 <span>delivered · rate it</span></button>
     </div>
   </main>
 
@@ -34,7 +35,7 @@
     <a class="acct" id="acct" href="../app/" hidden><span class="mono sm" id="acctI">J</span><span><b id="acctN">Your account</b><em id="acctL">Level 12 · Foil · 1,240 tokens</em></span><span class="arrow">›</span></a>
 
     <section class="hero" aria-live="polite">
-      <div class="eyebrow"><i></i><span id="eyebrow">RIGHT NOW</span></div>
+      <div class="eyebrow"><i></i><span>LAST UPDATED</span><em id="ago">just now</em></div>
       <div class="swap" id="swap"><h1 id="head"></h1><p id="sub"></p></div>
       <div class="person" id="person" hidden>
         <div class="mono" id="initials"></div>
@@ -54,6 +55,12 @@
       <summary><span class="kicker">EVERY STEP</span><span class="live"><i></i>Live</span></summary>
       <ol class="steps" id="steps"></ol>
     </details>
+
+    <section class="card" id="ratec" hidden>
+      <div class="kicker">RATE YOUR EXPERIENCE</div>
+      <div class="stars" id="stars"><button>★</button><button>★</button><button>★</button><button>★</button><button>★</button></div>
+      <p class="rthanks" id="rthanks">Two taps. It goes straight to the team.</p>
+    </section>
 
     <section class="card" id="pickup" hidden>
       <div class="row">
@@ -116,5 +123,5 @@
 <div class="toast" id="toast"></div>
 <canvas id="fx"></canvas>
 
-<script src="data.js?v=4"></script>
-<script src="track.js?v=6"></script>
+<script src="data.js?v=5"></script>
+<script src="track.js?v=7"></script>
