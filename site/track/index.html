@@ -1,0 +1,107 @@
+<meta charset="utf-8">
+<title>Track your order · SKO</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="track.css?v=3">
+
+<div class="stage">
+  <!-- 1. lookup -->
+  <main class="phone look" id="lookup" hidden>
+    <img src="../../img/lockup-3x1-navy.png" alt="SKO Compounds" style="height:28px">
+    <h1>Where's my order?</h1>
+    <p>Every step, from the warehouse in Beverly Hills to your door.</p>
+    <form id="lf" novalidate>
+      <label class="field"><span>ORDER NUMBER</span><input id="lno" inputmode="numeric" autocomplete="off" placeholder="4821"></label>
+      <label class="field"><span>ZIP CODE</span><input id="lzip" inputmode="numeric" autocomplete="postal-code" placeholder="90210"></label>
+      <div class="err" id="lerr"></div>
+      <button class="btn signal" type="submit">Track my order</button>
+    </form>
+    <div class="try">
+      <div class="kicker">DEMO ORDERS</div>
+      <button data-o="4821">#4821 <span>being packed now</span></button>
+      <button data-o="4823">#4823 <span>packed, waiting on the truck</span></button>
+      <button data-o="4822">#4822 <span>delivered</span></button>
+    </div>
+  </main>
+
+  <!-- 2. tracker -->
+  <main class="phone" id="tracker" hidden>
+    <header class="top">
+      <img src="../../img/lockup-3x1-navy.png" alt="SKO Compounds">
+      <div class="ordno" id="ordno">ORDER #</div>
+    </header>
+
+    <section class="hero" aria-live="polite">
+      <div class="eyebrow"><i></i><span id="eyebrow">RIGHT NOW</span></div>
+      <div class="swap" id="swap"><h1 id="head"></h1><p id="sub"></p></div>
+      <div class="person" id="person" hidden>
+        <div class="mono" id="initials"></div>
+        <div><b id="pname"></b><span>Packing team · Beverly Hills</span></div>
+      </div>
+      <div class="bar" id="bar"></div>
+      <div class="barlbl"><span>Ordered</span><span>At your door</span></div>
+    </section>
+
+    <section class="card" id="pickup" hidden>
+      <div class="row">
+        <img src="../../img/icons/sm/shipping.png" alt="">
+        <div><div class="kicker" id="pkick">UPS PICKUP</div><div class="big" id="ptext"></div></div>
+        <div class="count"><b id="pcount"></b><span>until pickup</span></div>
+      </div>
+    </section>
+
+    <section class="card" id="track" hidden>
+      <div class="kicker" id="carrier">UPS · GROUND</div>
+      <div class="scan">
+        <i class="dot"></i>
+        <div><b id="scanb"></b><span id="scant"></span></div>
+        <a id="map" href="#" target="_blank" rel="noopener">Map ↗</a>
+      </div>
+      <div class="tnum"><span>Tracking number</span><button id="copy" title="Copy"></button></div>
+      <a class="btn signal" id="upslink" href="#" target="_blank" rel="noopener">Track on UPS</a>
+    </section>
+
+    <section class="card" id="boredc">
+      <div class="bored">
+        <img src="../../img/icons/sm/spin.png" alt="">
+        <div><b id="boredh">Bored?</b><p id="boredp"></p></div>
+      </div>
+      <button class="btn navy" id="openspin">Spin the wheel</button>
+    </section>
+
+    <section class="card" id="prizec" hidden>
+      <div class="kicker">YOUR PRIZES · SHIP INSIDE YOUR NEXT ORDER</div>
+      <ul class="prizes" id="prizes"></ul>
+    </section>
+
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="kicker">WHAT'S HAPPENED</div><div class="live"><i></i>Live</div></div>
+      <ol class="steps" id="steps"></ol>
+    </section>
+
+    <p class="fine">One free spin every day, no purchase needed. Prizes ship inside your next order.<br>Preview: orders, names, prizes and odds are placeholders.</p>
+    <div style="text-align:center"><button class="back" id="other">Track a different order</button></div>
+  </main>
+</div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="wh">
+  <div class="sheet">
+    <div class="grab"></div>
+    <h2 id="wh">Spin while it travels</h2>
+    <p class="sub">Every slice is a prize. Whatever you win ships with your next order.</p>
+    <div class="wheelbox">
+      <div class="pointer"></div>
+      <div class="rim"><div class="wheel" id="wheel"></div></div>
+      <div class="hub"><img src="../../img/icons/sm/token.png" alt=""></div>
+    </div>
+    <div class="result" id="result"></div>
+    <button class="btn signal" id="spin">Spin</button>
+    <button class="btn quiet" id="close">Back to my order</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<canvas id="fx"></canvas>
+
+<script src="data.js?v=3"></script>
+<script src="track.js?v=3"></script>
