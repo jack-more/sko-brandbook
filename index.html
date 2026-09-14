@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
 <style>
 :root{
@@ -47,10 +48,12 @@ img{display:block;max-width:100%}
 /* cover — the flat-field rule, executed */
 .cover{padding:0;grid-template-columns:1fr;grid-template-rows:1fr}
 .cover .art{position:relative;width:100%;height:100%;min-height:clamp(300px,46vw,760px);
-  aspect-ratio:16/9;overflow:hidden;background:var(--field)}
-.cover .plate{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center}
+  aspect-ratio:16/9;overflow:hidden;background:var(--blue)}
+.cover .plate{position:absolute;top:0;bottom:0;right:0;width:58%;height:100%;object-fit:cover;object-position:62% center}
+.cover .plate::before{content:""}
+.cover .fade{position:absolute;top:0;bottom:0;left:38%;width:10%;background:linear-gradient(90deg,var(--blue),rgba(23,51,132,0));z-index:1}
 .cover .ctype{position:absolute;left:clamp(28px,4.2vw,64px);top:50%;transform:translateY(-54%);
-  max-width:52%;z-index:2}
+  width:36%;max-width:36%;z-index:2}
 .cover .clogo{display:block;width:clamp(150px,19vw,300px);height:auto;margin-bottom:clamp(16px,2vw,30px)}
 .cover .eyebrow{display:block;font-family:'Inter',sans-serif;font-size:clamp(8px,.78vw,10.5px);
   letter-spacing:.30em;color:rgba(255,255,255,.72);margin-bottom:clamp(10px,1.3vw,18px)}
@@ -67,7 +70,12 @@ img{display:block;max-width:100%}
 .cover .stamp a:hover{border-color:#fff}
 .cover .seal{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--foil);z-index:2}
 @media (max-width:900px){
-  .cover .ctype{max-width:82%;top:auto;bottom:96px;transform:none}
+  .page.cover{aspect-ratio:auto;height:auto}
+  .cover .art{aspect-ratio:auto;min-height:0;height:auto;padding:26px 22px 220px}
+  .cover .plate{width:100%;height:200px;top:auto;bottom:0;object-position:60% center}
+  .cover .fade{display:none}
+  .cover .ctype{position:static;transform:none;width:100%;max-width:100%}
+  .cover .stamp{position:static;margin-top:22px}
 }
 
 /* colour spec table */
@@ -238,7 +246,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 /* edition three additions */
 .disp{font-family:'Syncopate',ui-sans-serif,system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;line-height:1.02}
 .col h2{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;font-size:14px;line-height:1.25}
-.cover h1{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;font-size:clamp(26px,4.6vw,72px);line-height:1.05}
+.cover h1{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0;font-size:clamp(22px,3.3vw,52px);line-height:1.05}
 .sentence{background:var(--field);color:#fff;display:grid;place-items:center;text-align:left;
   padding:clamp(40px,7vw,120px) clamp(28px,6vw,100px);min-height:clamp(320px,44vw,640px)}
 .sentence .disp{font-size:clamp(22px,4vw,64px);max-width:22ch;text-wrap:balance}
@@ -267,7 +275,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 .board{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(110px,11.5vw,180px);gap:12px}
 .bt{position:relative;overflow:hidden;border-radius:6px;min-height:0}
 .bt>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.bt.pad{padding:clamp(14px,1.6vw,26px)}
+.bt.pad{padding:clamp(14px,1.6vw,26px);padding-bottom:clamp(30px,3vw,44px)}
 .bt .lbl{position:absolute;left:12px;bottom:10px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.14em;color:rgba(255,255,255,.7)}
 .bt.paper{background:#EFEEEC;color:#173384}
 .bt.navy{background:#173384;color:#fff}
@@ -307,7 +315,7 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 
 <div class="page cover">
   <div class="art">
-    <img class="plate" src="img/products/web/hd/bpc-157-wide.jpg" alt="BPC-157 and its structure in liquid chrome, in the snow">
+    <img class="plate" src="img/products/web/hd/bpc-157-wide.jpg" alt="BPC-157 and its structure in liquid chrome, in the snow"><div class="fade"></div>
     <div class="ctype">
       <img class="clogo" src="img/lockup-3x1-white.png" alt="SKO Compounds">
       <h1>Brand Book</h1>
