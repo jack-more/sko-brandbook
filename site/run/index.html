@@ -1,0 +1,207 @@
+<meta charset="utf-8">
+<title>Vial Run · SKO</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--navy:#16265C;--ink:#0B0E1A;--graph:#6B7684;--mist:#DDDCE1;--signal:#1447D6;--halo:#9DBFD9;--soft:#E9EEF7;--vapor:#F3F5F7;
+  --irid:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#46678B,#7578B0,#C3AFD7);
+  --disp:"DM Sans","Helvetica Neue",Arial,sans-serif;--text:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--vapor);color:var(--ink);font:400 15px/1.45 var(--text);overflow:hidden;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.stage{position:fixed;inset:0;display:flex;justify-content:center;background:var(--vapor)}
+.phone{position:relative;width:100%;max-width:430px;height:100%;background:#0B1B6B;overflow:hidden;touch-action:none}
+canvas{display:block;width:100%;height:100%}
+.hud{position:absolute;left:0;right:0;top:0;padding:max(14px,env(safe-area-inset-top)) 16px 0;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:3}
+.hud img{height:22px;filter:brightness(0) invert(1);opacity:.9}
+.count{text-align:right;color:#fff}
+.count b{display:block;font:800 40px/1 var(--disp);letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-shadow:0 3px 10px rgba(0,0,0,.35)}
+.count span{font:600 10px/1 var(--text);letter-spacing:.18em;opacity:.7}
+.prog{position:absolute;left:16px;right:16px;top:calc(max(14px,env(safe-area-inset-top)) + 64px);height:4px;border-radius:4px;background:rgba(255,255,255,.18);z-index:3;pointer-events:none}
+.prog i{display:block;height:100%;width:0;border-radius:4px;background:var(--irid);background-size:600% 100%}
+.veil{position:absolute;inset:0;z-index:5;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(11,27,107,.2),rgba(11,27,107,.75));opacity:0;pointer-events:none;transition:opacity .3s}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{width:100%;background:#fff;border-radius:28px 28px 0 0;padding:16px 22px calc(26px + env(safe-area-inset-bottom));text-align:center;transform:translateY(30px);transition:transform .35s cubic-bezier(.2,.9,.2,1)}
+.veil.on .sheet{transform:none}
+.grab{width:40px;height:4px;border-radius:4px;background:var(--mist);margin:0 auto 14px}
+.kicker{font:600 11px/1 var(--text);letter-spacing:.16em;color:var(--graph)}
+h1,h2{font:800 26px/1.1 var(--disp);color:var(--navy);margin:8px 0 6px;text-wrap:balance}
+.sub{margin:0;color:var(--graph);font-size:14px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:54px;border-radius:14px;margin-top:12px;font:700 16px/1 var(--disp);text-decoration:none}
+.btn.signal{background:var(--signal);color:#fff}.btn.quiet{background:var(--soft);color:var(--navy)}
+.btn:active{transform:scale(.985)}
+.how{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:16px 0 4px}
+.how div{background:var(--soft);border-radius:14px;padding:12px 8px;font:600 12px/1.3 var(--text);color:var(--navy)}
+.how b{display:block;font:800 22px/1 var(--disp);margin-bottom:4px}
+.odds{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--soft);text-align:left}
+.odds div b{display:block;font:800 18px/1.1 var(--disp);color:var(--navy);font-variant-numeric:tabular-nums}
+.odds div span{font-size:12px;color:var(--graph)}
+.prize{display:flex;align-items:center;gap:14px;text-align:left;margin-top:14px;padding:14px;border-radius:16px;background:var(--navy);color:#fff}
+.prize img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4))}
+.prize b{display:block;font:800 19px/1.1 var(--disp)}.prize span{font-size:13px;opacity:.75}
+.pop{animation:pop .45s cubic-bezier(.2,1.5,.4,1)}@keyframes pop{from{transform:scale(.7);opacity:0}}
+.fine{margin:12px 0 0;font-size:11px;color:#9AA3B5;line-height:1.5}
+canvas#fx{position:absolute;inset:0;z-index:6;pointer-events:none}
+.flash{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font:800 44px/1 var(--disp);color:#fff;text-shadow:0 4px 14px rgba(0,0,0,.4);pointer-events:none;z-index:4;opacity:0}
+.flash.go{animation:fl .9s ease-out}
+@keyframes fl{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-90%) scale(1)}}
+.flash.bad{color:#FF6B6B}
+</style>
+<div class="stage"><div class="phone" id="phone">
+  <canvas id="g"></canvas>
+  <div class="hud"><img src="../../img/lockup-3x1-navy.png" alt="SKO"><div class="count"><b id="n">1</b><span>VIALS</span></div></div>
+  <div class="prog"><i id="prog"></i></div>
+  <div class="flash" id="flash"></div>
+  <canvas id="fx"></canvas>
+
+  <div class="veil on" id="intro"><div class="sheet">
+    <div class="grab"></div>
+    <div class="kicker">SKO · VIAL RUN</div>
+    <h1>Bring the crowd home.</h1>
+    <p class="sub">Drag to steer. Pick the good gates, dodge the blocks. The more vials you bring across the line, the better your odds.</p>
+    <div class="how"><div><b>×2</b>Blue gates grow the crowd</div><div><b>−5</b>Red gates cut it</div><div><b>■</b>Blocks smash what they hit</div></div>
+    <div class="odds"><div><b>1 in 15 → 1 in 5</b><span>a free prize, scales with your finish</span></div><div><b>1 in 100</b><span>THE FULL BOX, every run</span></div></div>
+    <button class="btn signal" id="start">Run</button>
+    <p class="fine">One free run a day, no purchase needed. Prizes ship inside your next order. Preview: prizes and odds are placeholders until signed off.</p>
+  </div></div>
+
+  <div class="veil" id="end"><div class="sheet">
+    <div class="grab"></div>
+    <div class="kicker">FINISH</div>
+    <h2 id="eh">87 vials home.</h2>
+    <p class="sub" id="es"></p>
+    <div class="odds"><div><b id="oc">1 in 8</b><span>free prize this run</span></div><div><b>1 in 100</b><span>THE FULL BOX</span></div></div>
+    <div id="pr"></div>
+    <button class="btn signal" id="again">Run again</button>
+    <a class="btn quiet" id="back" href="../track/">Back to my order</a>
+  </div></div>
+</div></div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const phone=$("phone"), cv=$("g"), cx=cv.getContext("2d");
+let W=0,H=0,DPR=Math.min(2,devicePixelRatio||1);
+function fit(){W=phone.clientWidth;H=phone.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);fx.width=W*DPR;fx.height=H*DPR;fc.setTransform(DPR,0,0,DPR,0,0)}
+const fx=$("fx"),fc=fx.getContext("2d");
+addEventListener("resize",fit);
+
+// ---------- assets ----------
+const IMG={};for(const n of ["vial","box","golden","freeship","hat","mystery","vials"]){const i=new Image();i.src=`../../img/icons/sm/${n}.png`;IMG[n]=i}
+
+// ---------- world ----------
+// x: -1..1 across the road. z: distance ahead of the crowd (0 = at the crowd). Perspective: s = 1/(1+z*K)
+const K=.55, HORIZON=.30, ROAD=.92;            // road half-width at z=0 as a fraction of W/2
+const proj=(x,z)=>{const s=1/(1+z*K);return {x:W/2+x*(W/2)*ROAD*s,y:H*HORIZON+(H-H*HORIZON)*s,s}};
+const LEN=64;                                   // road length; ~28 s at speed
+let G=null;
+function newGame(){
+  G={t:0,dist:0,speed:2.1,cx:0,tx:0,units:[],gates:[],blocks:[],done:false,over:false,shake:0};
+  for(let i=0;i<8;i++)G.units.push(unit());
+  let z=7;
+  while(z<LEN-6){
+    // a pair of gates: one good, one that could be worse
+    const good=pick([["+5",n=>n+5],["+10",n=>n+10],["×2",n=>n*2],["+15",n=>n+15],["×3",n=>n*3]]);
+    const other=Math.random()<.6?pick([["−5",n=>n-5],["÷2",n=>Math.floor(n/2)],["−10",n=>n-10]]):pick([["+3",n=>n+3],["+5",n=>n+5]]);
+    const left=Math.random()<.5;
+    G.gates.push({z,side:-1,label:left?good[0]:other[0],op:left?good[1]:other[1],hit:false});
+    G.gates.push({z,side:1,label:left?other[0]:good[0],op:left?other[1]:good[1],hit:false});
+    if(z<LEN-12){const bz=z+4.5,bx=pick([-.55,0,.55]);G.blocks.push({z:bz,x:bx,w:.42,hit:false})}
+    z+=9;
+  }
+}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function unit(){return {ox:(Math.random()-.5)*.5,oz:Math.random()*.9,ph:Math.random()*6.3}}
+function setCount(n){const cur=G.units.length;n=Math.max(0,Math.min(400,Math.round(n)));
+  if(n>cur)for(let i=cur;i<n;i++)G.units.push(unit()); else G.units.length=n;
+  $("n").textContent=G.units.length}
+function flash(t,bad){const f=$("flash");f.textContent=t;f.className="flash"+(bad?" bad":"");void f.offsetWidth;f.classList.add("go")}
+
+// ---------- input ----------
+let dragging=false,dx0=0,cx0=0;
+const px=e=>(e.touches?e.touches[0].clientX:e.clientX)-phone.getBoundingClientRect().left;
+phone.addEventListener("pointerdown",e=>{if(!G||G.over)return;dragging=true;dx0=px(e);cx0=G.tx});
+addEventListener("pointermove",e=>{if(!dragging||!G)return;G.tx=Math.max(-.78,Math.min(.78,cx0+(px(e)-dx0)/(W*.42)))});
+addEventListener("pointerup",()=>dragging=false);
+addEventListener("keydown",e=>{if(!G)return;if(e.key==="ArrowLeft")G.tx=Math.max(-.78,G.tx-.3);if(e.key==="ArrowRight")G.tx=Math.min(.78,G.tx+.3)});
+
+// ---------- loop ----------
+let last=0,raf=0;
+function loop(t){raf=requestAnimationFrame(loop);const dt=Math.min(.05,(t-last)/1000||0);last=t;if(G&&!G.over)step(dt);draw()}
+function step(dt){
+  G.t+=dt;G.speed=Math.min(3.2,2.1+G.dist*.02);G.dist+=G.speed*dt;
+  G.cx+=(G.tx-G.cx)*Math.min(1,dt*10);
+  $("prog").style.width=Math.min(100,G.dist/LEN*100)+"%";
+  for(const g of G.gates){g.z-=G.speed*dt;if(!g.hit&&g.z<=.6){g.hit=true;const mine=Math.sign(G.cx||.01)===g.side||Math.abs(G.cx)<.12&&g.side===1;
+    if(mine){const before=G.units.length;setCount(g.op(before));const bad=G.units.length<before;flash(g.label,bad);if(bad)G.shake=.25;}}}
+  for(const b of G.blocks){b.z-=G.speed*dt;if(!b.hit&&b.z<=.6){b.hit=true;
+    const before=G.units.length;G.units=G.units.filter(u=>Math.abs(G.cx+u.ox*.5-b.x)>b.w/2+.04);const lost=before-G.units.length;
+    if(lost){$("n").textContent=G.units.length;flash(`−${lost}`,true);G.shake=.35}}}
+  if(G.units.length===0){G.over=true;setTimeout(()=>finish(),500)}
+  if(G.dist>=LEN){G.over=true;setTimeout(()=>finish(),600)}
+}
+function draw(){
+  if(!G){cx.fillStyle="#0B1B6B";cx.fillRect(0,0,W,H);return}
+  const sh=G.shake>0?(Math.random()-.5)*G.shake*14:0;G.shake=Math.max(0,G.shake-.02);
+  cx.save();cx.translate(sh,0);
+  // sky + ground
+  const sky=cx.createLinearGradient(0,0,0,H*HORIZON);sky.addColorStop(0,"#0A2AB8");sky.addColorStop(1,"#5BAEE5");cx.fillStyle=sky;cx.fillRect(-20,0,W+40,H*HORIZON+2);
+  cx.fillStyle="#E8EEF8";cx.fillRect(-20,H*HORIZON,W+40,H);
+  // road
+  const a=proj(-1,0),b=proj(1,0),c=proj(1,60),d=proj(-1,60);
+  const rg=cx.createLinearGradient(0,H*HORIZON,0,H);rg.addColorStop(0,"#9DBFD9");rg.addColorStop(1,"#173384");
+  cx.fillStyle=rg;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.lineTo(c.x,c.y);cx.lineTo(d.x,d.y);cx.closePath();cx.fill();
+  // lane stripes scrolling
+  cx.strokeStyle="rgba(255,255,255,.35)";cx.lineWidth=2;
+  for(let z=(-(G.dist%2));z<60;z+=2){const p=proj(0,z),q=proj(0,z+.8);if(q.y>a.y||p.y<H*HORIZON)continue;cx.lineWidth=2*p.s+.5;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}
+  // finish line
+  {const z=LEN-G.dist;if(z>0&&z<60){const l=proj(-1,z),r=proj(1,z);cx.fillStyle="#fff";cx.fillRect(l.x,l.y-3*l.s-1,r.x-l.x,6*l.s+2);cx.fillStyle="#16265C";for(let i=0;i<8;i+=2){const w=(r.x-l.x)/8;cx.fillRect(l.x+i*w,l.y-3*l.s-1,w,6*l.s+2)}}}
+  // far to near
+  const items=[...G.blocks.map(o=>({...o,k:"b"})),...G.gates.map(o=>({...o,k:"g"}))].filter(o=>o.z>-.6&&o.z<60).sort((p,q)=>q.z-p.z);
+  for(const o of items){
+    if(o.k==="g"){const p=proj(o.side*.5,o.z),w=(W/2)*ROAD*.92*p.s,h=w*.62;
+      const good=/^[+×]/.test(o.label);cx.globalAlpha=o.hit?.35:1;
+      cx.fillStyle=good?"rgba(20,71,214,.85)":"rgba(210,50,60,.85)";cx.fillRect(p.x-w/2,p.y-h,w,h);
+      cx.fillStyle="#fff";cx.font=`800 ${Math.max(10,h*.42)}px "DM Sans",sans-serif`;cx.textAlign="center";cx.textBaseline="middle";cx.fillText(o.label,p.x,p.y-h/2);cx.globalAlpha=1}
+    else{const p=proj(o.x,o.z),w=(W/2)*ROAD*o.w*p.s,h=w*.75;if(o.hit)continue;
+      cx.fillStyle="#16265C";cx.fillRect(p.x-w/2,p.y-h,w,h);cx.fillStyle="#2C3E8F";cx.fillRect(p.x-w/2,p.y-h,w,h*.18);
+      if(IMG.box.complete)cx.drawImage(IMG.box,p.x-w*.35,p.y-h*.95,w*.7,h*.7)}
+  }
+  // the crowd
+  const us=[...G.units].sort((p,q)=>q.oz-p.oz);
+  for(const u of us){const bob=Math.sin(G.t*14+u.ph)*2;const p=proj(G.cx+u.ox*.5,u.oz*.9);const s=Math.max(.35,p.s);const w=22*s,h=32*s;
+    if(IMG.vial.complete)cx.drawImage(IMG.vial,p.x-w/2,p.y-h-bob,w,h);else{cx.fillStyle="#fff";cx.fillRect(p.x-w/2,p.y-h,w,h)}}
+  cx.restore();
+}
+
+// ---------- the drop ----------
+const CHEAP=[{n:"Free shipping",d:"On your next order",ico:"freeship",w:40},{n:"A free vial",d:"Any vial up to $49",ico:"vial",w:25},{n:"The SKO hat",d:"Ships with your next order",ico:"hat",w:20},{n:"A mystery box",d:"Sealed. Something good inside",ico:"mystery",w:15}];
+const CRAZY={n:"THE FULL BOX",d:"A full box of whatever you pick",ico:"golden"};
+function finish(){
+  cancelAnimationFrame(raf);
+  const n=G.units.length;
+  // production: the server takes the finish count and rolls; the page only shows the result
+  const pCheap=1/15+(1/5-1/15)*Math.min(1,n/120);      // 1 in 15 at a small finish → 1 in 5 at 120+
+  const r=Math.random();let won=null,tokens=50+n*5;
+  if(r<1/100)won=CRAZY;else if(Math.random()<pCheap){const t=CHEAP.reduce((a,p)=>a+p.w,0);let x=Math.random()*t;won=CHEAP.find(p=>(x-=p.w)<=0)||CHEAP[0]}
+  $("eh").textContent=n?`${n} vial${n===1?"":"s"} home.`:"The crowd didn't make it.";
+  $("es").textContent=n?`+${tokens} tokens for the run.`:"Still +50 tokens for trying. Run it back.";
+  $("oc").textContent=`1 in ${Math.round(1/pCheap)}`;
+  $("pr").innerHTML=won?`<div class="prize pop"><img src="../../img/icons/sm/${won.ico}.png" alt=""><div><b>${won.n}</b><span>${won.d} · ships inside your next order</span></div></div>`
+                      :`<p class="sub" style="margin-top:14px">No drop this run. The tokens are yours; your next run's odds are shown above.</p>`;
+  $("end").classList.add("on");
+  if(won)confetti(won===CRAZY?260:110);
+  try{const k="sko_run";const l=JSON.parse(localStorage.getItem(k)||"[]");l.push({n,won:won&&won.n,t:Date.now()});localStorage.setItem(k,JSON.stringify(l.slice(-50)))}catch(e){}
+}
+$("start").onclick=()=>{$("intro").classList.remove("on");fit();newGame();last=performance.now();raf=requestAnimationFrame(loop)};
+$("again").onclick=()=>{$("end").classList.remove("on");newGame();$("n").textContent=G.units.length;last=performance.now();raf=requestAnimationFrame(loop)};
+const q=new URLSearchParams(location.search);if(q.get("order"))$("back").href="../track/?order="+q.get("order")+(q.get("member")?"&member=1":"");
+
+// confetti
+let parts=[],fr=0;
+function confetti(n){const cols=["#16265C","#9DBFD9","#BAC7F2","#5BAEE5","#C3AFD7","#FFFFFF"];for(let i=0;i<n;i++)parts.push({x:W/2,y:H*.4,vx:(Math.random()-.5)*13,vy:-Math.random()*13-4,s:4+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.35,c:cols[i%cols.length],l:0});if(!fr)cl()}
+function cl(){fc.clearRect(0,0,W,H);parts=parts.filter(p=>p.l<170&&p.y<H+30);for(const p of parts){p.vy+=.36;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l++;fc.save();fc.translate(p.x,p.y);fc.rotate(p.r);fc.fillStyle=p.c;fc.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);fc.restore()}fr=parts.length?requestAnimationFrame(cl):0}
+fit();draw();
+})();
+</script>
