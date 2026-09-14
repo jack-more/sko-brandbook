@@ -310,6 +310,38 @@ a.tile:hover{box-shadow:0 0 0 2px var(--blue)}
 #catalogue .pmore{margin-top:8px;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-size:10px;letter-spacing:.04em;color:var(--mid)}
 #catalogue .pmore a{color:var(--ink)}
 @media (max-width:900px){#catalogue .pstrip{grid-template-columns:repeat(3,1fr)}}
+
+/* ===== every image shows whole. Jack, 14 Sep 2026: no crops, anywhere in the book. =====
+   Tiles take the picture's own shape instead of forcing the picture into the tile's. */
+.page .tiles{height:auto!important;min-height:0!important;max-height:none!important;flex:none!important;align-items:start}
+.page a.tile:has(img.fill),.page .tile:has(img.fill),.page .tile:has(img.edge){display:block;aspect-ratio:auto!important;height:auto!important;background:transparent!important}
+.page .tile img.fill,.page .tile img.edge,#helix .tile img,#helix-cuts .tile img,#compound .tile img,#photo-studio .tile img,#photo-moments .tile img{
+  position:static!important;display:block;width:100%!important;height:auto!important;object-fit:contain!important;inset:auto!important}
+#compound .tiles{min-height:0!important;max-height:none!important}
+/* tiles that hold words, swatches or marks keep their height; only pictures take their own shape */
+.page .tile:not(:has(img.fill)):not(:has(img.edge)){min-height:clamp(130px,13vw,200px);padding-bottom:30px!important}
+/* the system board becomes a moodboard: columns, every plate at its own size */
+.board{display:block!important;column-count:3;column-gap:12px}
+.board .bt{break-inside:avoid;display:block!important;margin:0 0 12px;height:auto!important;grid-column:auto!important;grid-row:auto!important}
+.board .bt>img{position:static!important;width:100%!important;height:auto!important;object-fit:contain!important}
+.board .bt.pad{min-height:clamp(200px,17vw,280px);gap:18px;display:flex!important;flex-direction:column;justify-content:space-between}
+.board .bt .sw{height:clamp(220px,20vw,300px)}
+.board .bt.white.pad{display:grid!important;place-items:center;padding:24px}
+.board .phone{width:min(62%,240px)}
+@media (max-width:1100px){.board{column-count:2}}
+@media (max-width:600px){.board{column-count:1}}
+/* every product: whole shots, bottoms aligned so the captions line up */
+#catalogue .pstrip{align-items:end}
+#catalogue .pstrip .tile{aspect-ratio:auto!important}
+@media (max-width:600px){.page .tiles{grid-template-columns:repeat(2,1fr)!important}#catalogue .pstrip{grid-template-columns:repeat(3,1fr)!important}}
+/* the cover: the words above, the whole photograph below */
+.page.cover{aspect-ratio:auto!important;height:auto}
+.cover .art{aspect-ratio:auto!important;min-height:0!important;height:auto!important;padding:0!important;display:flex;flex-direction:column;background:var(--blue)}
+.cover .ctype{order:1;position:static!important;transform:none!important;width:auto!important;max-width:none!important;padding:clamp(28px,4vw,56px) clamp(28px,4.2vw,64px) clamp(14px,1.6vw,22px)}
+.cover .stamp{order:2;position:static!important;padding:0 clamp(28px,4.2vw,64px) clamp(24px,2.6vw,36px)}
+.cover .plate{order:3;position:static!important;width:100%!important;height:auto!important;object-fit:contain!important}
+.cover .fade{display:none!important}
+.cover .seal{order:4;position:static!important}
 </style>
 <title>SKO Brand Book</title>
 
@@ -415,8 +447,10 @@ JetBrains Mono. Ink ground, Frost text. Data only. Never a headline.</div></div>
   <div class="body"><div class="tiles t2" style="flex:none;height:clamp(150px,17vw,240px);margin-bottom:12px">
     <div class="tile" style="background:#fff;border:1px solid var(--line);display:grid;place-items:center;padding:18px"><div style="font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(15px,1.9vw,26px);line-height:1.05;color:#173384;text-transform:uppercase">Research,<br>refined.</div><span class="cap" data-role="production-note" style="color:#173384">SAY THIS &middot; THE ONLY TAGLINE</span></div>
     <div class="tile" style="background:#fff;border:1px solid rgba(192,57,43,.5);display:grid;place-items:center;padding:18px"><div style="font-family:Syncopate,sans-serif;font-weight:700;font-size:clamp(15px,1.9vw,26px);line-height:1.05;color:#c0392b;text-transform:uppercase;text-decoration:line-through;text-decoration-thickness:2px">Chrome first.<br>Snow second.</div><span class="cap" data-role="production-note" style="color:#c0392b">NEVER SAY THIS &middot; IT IS A SHOT ORDER</span></div></div>
-  <div class="tiles" style="grid-template-columns:repeat(3,1fr);flex:none;height:clamp(120px,14vw,190px)">
-    </div>
+  <div class="tiles" style="grid-template-columns:repeat(2,1fr);flex:none;height:clamp(120px,14vw,190px)">
+    <div class="tile" style="background:#fff;border:1px solid rgba(192,57,43,.5);display:grid;place-items:center;padding:14px"><div class="mono" style="color:#c0392b;font-size:11px;letter-spacing:.14em;text-align:center;line-height:1.6">THE WHITE STUDIO<br>THE DARK SET<br>THE HOOD</div><span class="cap" data-role="production-note" style="color:#c0392b">OUR NAMES FOR OUR OWN SETS &middot; NEVER COPY</span></div>
+    <div class="tile" style="background:#fff;border:1px solid var(--line);display:grid;place-items:center;padding:14px"><div class="mono" style="color:#173384;font-size:11px;letter-spacing:.14em;text-align:center;line-height:1.6">10 MG &middot; 99% PURITY<br>RESEARCH USE ONLY</div><span class="cap" data-role="production-note" style="color:#173384">SAY THIS &middot; FACTS OFF THE LABEL</span></div>
+  </div></div>
   <div class="foot"><span class="l"><img src="img/shield.png" alt="">SKO BRAND BOOK</span><span>WORDS</span></div>
 </div>
 
