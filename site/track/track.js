@@ -5,6 +5,8 @@
   const { SOURCE, now } = window.SKOTrack;
   const qs = new URLSearchParams(location.search);
   const FAST = +qs.get("speed") > 1;
+  // production: the session decides. A guest checkout gets a guest record; registering upgrades it in place.
+  let member = qs.get("member") === "1" || (() => { try { return localStorage.getItem("sko_member") === "1"; } catch (e) { return false; } })();
 
   // the eight steps, in order; facility can repeat and the step shows the latest one
   const STEPS = ["confirmed", "warehouse", "packing", "packed", "picked_up", "facility", "out_for_delivery", "delivered"];
@@ -128,7 +130,7 @@
       return `<li class="${c}"><i class="pt"></i><span class="t">${label}</span><span class="tm">${e ? when(e.at) : ""}</span></li>`;
     }).join("");
 
-    renderSpins(); renderPrizes();
+    renderAccount(); renderSpins(); renderPrizes();
 
     // a new update while the page is open: say so, and hand over the spin it earned
     if (lastCount >= 0 && ev.length > lastCount) {
@@ -138,8 +140,12 @@
     lastCount = ev.length;
   }
 
+  function renderAccount() {
+    $("acct").hidden = !member; $("joinc").hidden = member; $("boredc").hidden = !member;
+  }
+  $("join").onclick = () => { member = true; try { localStorage.setItem("sko_member", "1"); } catch (e) {} renderAccount(); renderSpins(); renderPrizes(); toast("<span>Account created · <b>your spin is ready</b></span><em>+1 spin</em>"); };
   function renderSpins() {
-    const n = spinsLeft();
+    const n = member ? spinsLeft() : 0;
     $("boredh").textContent = order && order.events.at(-1).type === "delivered" ? "One more for the road" : "Bored?";
     const done = order && order.events.at(-1).type === "delivered";
     $("boredp").textContent = n ? `You've got ${n === 1 ? "a free spin" : n + " free spins"}${done ? "." : " while it's on the way."}` : done ? "Come back tomorrow for your free daily spin." : "Your next spin unlocks at the next update.";
@@ -147,7 +153,7 @@
   }
   function renderPrizes() {
     const p = ledger().prizes.filter(x => x.n !== "Spin again");
-    $("prizec").hidden = !p.length;
+    $("prizec").hidden = !member || !p.length;
     $("prizes").innerHTML = p.map(x => `<li><img src="${ICON(x.ico)}" alt=""><div><b>${x.n}</b><span>${x.d}</span></div></li>`).join("");
   }
 
@@ -156,7 +162,8 @@
     if (!order || $("pickup").hidden) return;
     let s = Math.max(0, Math.floor((new Date(order.nextPickup) - now()) / 1000));
     const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
-    $("pcount").textContent = h ? `${h}h ${String(m).padStart(2, "0")}m` : `${m}m ${String(x).padStart(2, "0")}s`;
+    $("pcount").textContent = s === 0 ? "any minute" : h ? `${h}h ${String(m).padStart(2, "0")}m` : `${m}m ${String(x).padStart(2, "0")}s`;
+    $("pcount").style.fontSize = s === 0 ? "20px" : "";
   }
   setInterval(tick, 1000);
 
