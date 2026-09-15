@@ -104,7 +104,7 @@ header.solid .acct{border-color:var(--mist);background:#fff}
 @keyframes float{0%,100%{transform:translate(-50%,0) rotate(-1.5deg)}50%{transform:translate(-50%,-12px) rotate(1.5deg)}}
 @keyframes shadow{0%,100%{transform:translateX(-50%) scale(1);opacity:1}50%{transform:translateX(-50%) scale(.82);opacity:.7}}
 .card .ph .life{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s}
-@media (hover:hover){.card:hover .ph .life{opacity:1} .card:hover .ph .fl,.card:hover .ph .shadow{opacity:0}}
+@media (hover:hover){.card.go .ph .life{opacity:1} .card.go .ph .fl,.card.go .ph .shadow{opacity:0}}
 .card .nm{margin-top:14px;font:600 15px/1.25 var(--text);color:var(--ink)}
 .card .mt{display:flex;justify-content:space-between;margin-top:4px;font:500 13.5px/1.3 var(--text);color:var(--graph)}
 .card .mt b{color:var(--navy);font-weight:600;font-variant-numeric:tabular-nums}
@@ -183,9 +183,9 @@ header nav,.hr .cartl{font:500 11.5px/1 var(--mono)!important;letter-spacing:.14
 .card .ph .scan{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:3;opacity:0;pointer-events:none;background:#fff;
   box-shadow:0 0 10px 2px rgba(150,185,255,.95),0 0 34px 10px rgba(60,110,255,.55)}
 @media (hover:hover){
-  .card:hover .ph .life{clip-path:inset(0 0 0 0)}
-  .card:hover .ph .fl,.card:hover .ph .shadow{opacity:1}
-  .card:hover .ph .scan{animation:scan .75s var(--scan) forwards}
+  .card.go .ph .life{clip-path:inset(0 0 0 0)}
+  .card.go .ph .fl,.card.go .ph .shadow{opacity:1}
+  .card.go .ph .scan{animation:scan .75s var(--scan) forwards}
 }
 @keyframes scan{0%{bottom:0;opacity:1}85%{opacity:1}100%{bottom:100%;opacity:0}}
 .chips{border-bottom:1px solid var(--line)}
@@ -387,6 +387,8 @@ main.pd{padding:calc(102px + 18px) var(--pad) 0;max-width:1440px;margin:0 auto}
   // pairs well with
   const card=x=>{const c=D[x],t=Math.round(parseFloat(c.p.replace("$",""))*K);return `<a class="card" href="item.html?s=${x}"><span class="ph"><img class="life" src="../../img/products/card/${x}-frost.jpg" alt="" loading="lazy"><span class="shadow"></span><img class="fl" src="../../img/products/float/${x}.webp" alt="${c.n}" loading="lazy"><span class="scan"></span></span><span class="nm">${c.n}</span><span class="mt"><span>${c.z}</span><b>${c.p}</b></span><span class="tok"><img src="../../img/icons/sm/token.png" alt="">Earns ${fmt(t)} tokens</span><span class="add">View</span></a>`};
   $("rel").innerHTML=d.rel.map(card).join("");
+  const warm=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;const i=en.target.querySelector(".life");if(i){i.loading="eager";if(i.decode)i.decode().catch(()=>{})}warm.unobserve(en.target)}),{rootMargin:"900px 0px"});
+  document.querySelectorAll("#rel .card").forEach(c=>{warm.observe(c);c.addEventListener("pointerenter",ev=>{if(ev.pointerType==="touch")return;const i=c.querySelector(".life"),go=()=>{if(c.matches(":hover"))c.classList.add("go")};if(i.complete&&i.naturalWidth)go();else(i.decode?i.decode():Promise.reject()).then(go,()=>i.addEventListener("load",go,{once:true}))});c.addEventListener("pointerleave",()=>c.classList.remove("go"))});
   // header: white from the start, slides up over the bar once you scroll
   const hd=$("hd");addEventListener("scroll",()=>hd.classList.toggle("up",scrollY>34),{passive:true});
   const M=["Beverly Hills","Third party tested","Fast shipping","Customer support"];let i=0;const el=$("msg");
