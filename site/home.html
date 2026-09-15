@@ -38,7 +38,8 @@ header .logo .dk{display:none} header.solid .logo .lt{display:none} header.solid
 .btn.w{background:#fff;color:var(--navy)} .btn.g{border:1px solid rgba(255,255,255,.7);color:#fff}
 .btn.n{background:var(--navy);color:#fff}
 /* loyalty, baked in: the header pill, the hero invite, the earn line on every card, the rewards band */
-.hl,.hr{display:flex;align-items:center;gap:26px} .hr{justify-content:flex-end}
+.hl,.hr{display:flex;align-items:center;gap:26px;white-space:nowrap} .hr{justify-content:flex-end}
+@media (max-width:1280px){.hr nav.r{display:none} .hl,.hr{gap:20px} header nav{gap:20px}}
 .acct{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px 0 4px;border-radius:999px;border:1px solid rgba(255,255,255,.38);font:600 12px/1 var(--text);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:border-color .3s,background .3s}
 header.solid .acct{border-color:var(--mist);background:#fff}
 .acct img{width:30px;height:30px;display:block}
