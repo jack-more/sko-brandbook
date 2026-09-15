@@ -148,21 +148,23 @@
     // a new update while the page is open: say so, and hand over the spin it earned
     if (lastCount >= 0 && ev.length > lastCount) {
       const earned = SPIN_EVENTS.includes(last.type);
-      toast(`<span>New update · <b>${h.replace(/\.$/, "")}</b></span>${earned ? "<em>+1 spin</em>" : ""}`);
+      toast(`<span>New update · <b>${h.replace(/\.$/, "")}</b></span>${earned ? "<em>+1 drop</em>" : ""}`);
     }
     lastCount = ev.length;
   }
 
   function renderAccount() {
-    $("acct").hidden = !member; $("joinc").hidden = member; $("boredc").hidden = !member;
+    $("acct").hidden = !member; $("joinc").hidden = member; $("boredc").hidden = false;
   }
-  $("join").onclick = () => { member = true; try { localStorage.setItem("sko_member", "1"); } catch (e) {} renderAccount(); renderSpins(); renderPrizes(); toast("<span>Account created · <b>your spin is ready</b></span><em>+1 spin</em>"); };
+  $("join").onclick = () => { member = true; try { localStorage.setItem("sko_member", "1"); } catch (e) {} renderAccount(); renderSpins(); renderPrizes(); toast("<span>Account created · <b>your drop is ready</b></span><em>+1 drop</em>"); };
   function renderSpins() {
     const n = member ? spinsLeft() : 0;
     $("boredh").textContent = order && order.events.at(-1).type === "delivered" ? "One more for the road" : "Bored?";
     const done = order && order.events.at(-1).type === "delivered";
-    $("play").href = `../run/?order=${orderNo}${member ? "&member=1" : ""}`;
-    $("openspin").disabled = !n; $("openspin").textContent = n ? `Spin the wheel${n > 1 ? " · " + n + " spins" : ""}` : "No spins right now";
+    $("boredp").textContent = member ? (n ? `You have ${n} drop${n > 1 ? "s" : ""} waiting. A full box is 1 in 100, and every drop pays tokens.` : "Your next free drop lands tomorrow, or with the next shipping update.")
+                                     : "Your first drop is on us. A full box is 1 in 100, and every drop pays tokens.";
+    $("play").href = `../plinko/?order=${orderNo}${member ? "&member=1&drops=" + n : ""}`;
+    $("play").textContent = member ? (n ? `Play The Drop · ${n}` : "Look at the board") : "Play your free drop";
   }
   function renderPrizes() {
     const p = ledger().prizes.filter(x => x.n !== "Spin again");
@@ -229,7 +231,7 @@
   const idle = () => { $("result").innerHTML = "<span>Tap spin. It always lands on something.</span>"; };
   function openSheet() { $("veil").classList.add("on"); idle(); const n = spinsLeft(); $("spin").disabled = !n; $("spin").textContent = n ? "Spin" : "No spins right now"; }
   function closeSheet() { if (busy) return; $("veil").classList.remove("on"); renderSpins(); renderPrizes(); }
-  $("openspin").onclick = openSheet; $("close").onclick = closeSheet;
+  $("close").onclick = closeSheet;
   $("veil").onclick = e => { if (e.target.id === "veil") closeSheet(); };
   addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
   $("spin").onclick = () => {
