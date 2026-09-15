@@ -131,7 +131,8 @@ const LABEL={box:["BOX","FULL"],v99:["$99","VIAL"],v49:["$49","VIAL"],ship:["SHI
 
 // ---------- state (production: the account's ledger on the server) ----------
 const member=q.get("member")==="1";
-const store={get(k,d){try{const v=localStorage.getItem("sko_drop_"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("sko_drop_"+k,JSON.stringify(v))}catch(e){}}};
+const PFX="sko_drop_"+(member?"m_":"");   // guest and member demos keep separate balances
+const store={get(k,d){try{const v=localStorage.getItem(PFX+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
 let S={drops:store.get("drops",q.has("drops")?+q.get("drops"):member?3:1), tokens:store.get("tokens",member?1240:0), meter:store.get("meter",0), hist:store.get("hist",[]), sound:store.get("sound",true), guestUsed:store.get("guestUsed",false)};
 const save=()=>{for(const k of ["drops","tokens","meter","hist","sound","guestUsed"])store.set(k,S[k])};
 const METER=10;
