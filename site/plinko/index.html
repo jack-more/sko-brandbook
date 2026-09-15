@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=DM+Sans:opsz,wght@9..40,600;9..40,800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=DM+Sans:opsz,wght@9..40,600;9..40,800&family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 :root{--night:#050B26;--navy:#16265C;--label:#173384;--halo:#9DBFD9;--frost:#BAC7F2;--white:#fff;--graph:#8C98B8;
   --irid:linear-gradient(100deg,#6E9EB6,#9CA1DF,#BAC7F2,#A1CEF5,#5BAEE5,#4775BB,#46678B,#7578B0,#C3AFD7);
@@ -70,6 +70,14 @@ html.em .wrap{display:block;max-width:none;padding:0}
 html.em .top,html.em .side,html.em .title,html.em .fine{display:none}
 html.em .meter{margin-top:10px}
 html.em .board{touch-action:pan-y}
+/* the SKO system (from the Hightech ad), when the page asks for it */
+html.sys{--num:"JetBrains Mono",ui-monospace,Menlo,monospace}
+html.sys .drop{border-radius:2px;font:800 17px/1 var(--num);letter-spacing:.2em}
+html.sys .meter{border-radius:2px} html.sys .meter .row{font-family:var(--num);font-size:11px;letter-spacing:.12em}
+html.sys .meter .bar,html.sys .meter .bar i{border-radius:0;height:4px}
+html.sys .hint{font-family:var(--num);font-size:11.5px}
+html.sys .sheet{border-radius:4px 4px 0 0} html.sys .btn{border-radius:2px;font:700 13px/1 var(--num);letter-spacing:.1em;text-transform:uppercase}
+html.sys .sheet h2{font:800 24px/1.1 var(--num)} html.sys .sheet .kick{font-family:var(--num)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -108,7 +116,9 @@ html.em .board{touch-action:pan-y}
 <canvas id="fx"></canvas>
 
 <script>
-const EMBED=new URLSearchParams(location.search).get("embed")==="1";
+const EMBED=new URLSearchParams(location.search).get("embed")==="1", SYS=new URLSearchParams(location.search).get("sys")==="1";
+if(SYS)document.documentElement.classList.add("sys");
+const FACE=SYS?'"JetBrains Mono",monospace':'"DM Sans",sans-serif';
 if(EMBED)document.documentElement.classList.add("em");
 (()=>{
 const $=id=>document.getElementById(id);
@@ -243,8 +253,8 @@ function draw(){
     cx.fillStyle="rgba(255,255,255,.18)";roundRect(x+2,y+2,w-4,10,5);cx.fill();                  // gloss
     const im=IMG[c.ico];if(im&&im.complete){const s2=c.tier>=2?26:22;cx.drawImage(im,x+w/2-s2/2,y+8,s2,s2*(im.height/im.width))}
     const [big,small]=LABEL[c.k];cx.fillStyle=heat==="IRID"?"#0B1446":"#fff";cx.textAlign="center";
-    cx.font=`800 ${big.length>3?10.5:12}px "DM Sans",sans-serif`;cx.fillText(big,x+w/2,y+55);
-    cx.globalAlpha=.75;cx.font='800 6.4px "DM Sans",sans-serif';cx.fillText(small,x+w/2,y+66);cx.globalAlpha=1;
+    cx.font=`800 ${big.length>3?(SYS?9.5:10.5):(SYS?11:12)}px ${FACE}`;cx.fillText(big,x+w/2,y+55);
+    cx.globalAlpha=.75;cx.font=`700 ${SYS?5.8:6.4}px ${FACE}`;cx.fillText(small,x+w/2,y+66);cx.globalAlpha=1;
     cx.restore()}
   // the chip in flight
   if(ball){const f=Math.min(ball.frames-1,Math.floor((performance.now()-ball.t0)/1000*120*ball.speed));
