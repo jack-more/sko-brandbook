@@ -197,7 +197,7 @@ header .bag{justify-self:end}
     <ul class="earn"><li>Every order<b>10 tokens per $1 + a drop</b></li><li>Every day<b>One free drop</b></li><li>Order during the live<b>Double tokens</b></li><li>A friend orders<b>Tokens for you both</b></li></ul>
     <div class="ctas"><a class="btn w" id="rwCta" href="app/">Create my account</a><a class="btn g" href="plinko/">Play full screen</a></div>
   </div>
-  <div class="rw-board"><iframe id="dropf" title="The Drop" loading="lazy" src="plinko/?embed=1&v=1789501208"></iframe></div>
+  <div class="rw-board"><iframe id="dropf" title="The Drop" loading="lazy" src="plinko/?embed=1&v=1789515599"></iframe></div>
 </section>
 
 <nav class="chips" id="shop"><a href="#recovery">Recovery</a><a href="#skin-hair">Skin &amp; hair</a><a href="#cognitive">Cognitive</a><a href="#cellular-longevity">Cellular &amp; longevity</a><a href="#growth-performance">Growth &amp; performance</a><a href="#metabolic">Metabolic</a><a href="#pigment">Pigment</a><a href="#libido">Libido</a><a href="#supplies">Supplies</a></nav>
@@ -264,6 +264,8 @@ header .bag{justify-self:end}
   document.querySelectorAll(".cat").forEach(s=>io.observe(s));
   // guest or member: one switch drives the header pill, the hero invite, the band and the board
   const P=new URLSearchParams(location.search);
+  const FREE=P.get("free")==="1";   // unlimited board, for us
+  if(FREE){const f=document.getElementById("dropf");f.src=f.src+"&free=1";document.querySelectorAll('a[href^="plinko/"]').forEach(a=>a.href+=(a.href.includes("?")?"&":"?")+"free=1")}
   let member=P.get("member")==="1";try{if(P.has("member"))localStorage.setItem("sko_member",member?"1":"0");else member=localStorage.getItem("sko_member")==="1"}catch(_){}
   try{const n=+localStorage.getItem("sko_cart_n")||0;if(n)document.querySelector(".cartl").textContent="Cart · "+n}catch(_){}
   const SHELF=[[1000, "bac water"], [2500, "a free vial"], [4000, "a $99 vial"], [7000, "a free bundle"], [20000, "the full box"]];
@@ -290,7 +292,7 @@ header .bag{justify-self:end}
     document.getElementById("acct").href="app/";
     document.getElementById("rwK").textContent="Your account · Level 12 · Foil";document.getElementById("rewards").classList.add("mem");
     document.getElementById("rwCta").textContent="Open your account";
-    document.getElementById("dropf").src="plinko/?embed=1&member=1&drops=3&v=1789501208";
+    document.getElementById("dropf").src="plinko/?embed=1&member=1&drops=3&v=1789515599"+(FREE?"&free=1":"");
     paint(1240,3);
   }
   addEventListener("message",ev=>{if(member&&ev.data&&typeof ev.data.skoTokens==="number")paint(ev.data.skoTokens,ev.data.skoDrops)});
