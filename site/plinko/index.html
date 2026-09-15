@@ -65,6 +65,11 @@ canvas#g{display:block;width:100%;height:auto}
 .pop{animation:pop .5s cubic-bezier(.2,1.5,.4,1)}@keyframes pop{from{transform:scale(.6);opacity:0}}
 canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
 @media (max-width:1000px){.wrap{grid-template-columns:1fr}.stage{grid-column:1}.side{padding-top:0}.side.l{order:3}.side.r{order:4}}
+html.em,html.em body{height:auto;background:transparent}
+html.em .wrap{display:block;max-width:none;padding:0}
+html.em .top,html.em .side,html.em .title,html.em .fine{display:none}
+html.em .meter{margin-top:10px}
+html.em .board{touch-action:pan-y}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -103,6 +108,8 @@ canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-in
 <canvas id="fx"></canvas>
 
 <script>
+const EMBED=new URLSearchParams(location.search).get("embed")==="1";
+if(EMBED)document.documentElement.classList.add("em");
 (()=>{
 const $=id=>document.getElementById(id);
 const ICON=n=>`../../img/icons/sm/${n}.png`;
@@ -140,6 +147,7 @@ const cv=$("g"),cx=cv.getContext("2d");let scale=1,DPR=Math.min(2,devicePixelRat
 function fit(){const w=$("board").clientWidth;scale=w/BW;cv.width=Math.round(w*DPR);cv.height=Math.round(BH*scale*DPR);cv.style.height=(BH*scale)+"px";cx.setTransform(scale*DPR,0,0,scale*DPR,0,0);fx.width=innerWidth*DPR;fx.height=innerHeight*DPR;fc.setTransform(DPR,0,0,DPR,0,0)}
 const fx=$("fx"),fc=fx.getContext("2d");
 addEventListener("resize",fit);
+if(EMBED)new ResizeObserver(()=>parent.postMessage({skoDrop:document.querySelector(".wrap").offsetHeight},"*")).observe(document.querySelector(".wrap"));
 
 const IMG={};for(const n of ["token","golden","vials","vial","freeship"]){const i=new Image();i.src=ICON(n);IMG[n]=i}
 
@@ -281,7 +289,7 @@ function result(c,bonus){
   $("sheet").innerHTML=`<div class="grab"></div><div class="kick">${c.tier===4?"THE BIG ONE":won?"YOU WON":"EVERY DROP PAYS"}</div>
     <img class="pop" src="${ICON(c.ico)}" alt=""><h2>${c.n}</h2><p>${won?c.d+" · ships inside your next order":"Added to your account."}</p>
     ${bonus?`<p style="margin-top:12px;color:#1447D6;font-weight:600">Shipping meter full: free shipping on your next order.</p>`:""}
-    ${S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`}
+    ${S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:(EMBED?`<a class="btn n" href="../app/" target="_top">Create my account · keep dropping</a>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`)}
     <button class="btn q" id="closer">Back to the board</button>`;
   $("veil").classList.add("on");
   const a=$("again");if(a&&!a.disabled)a.onclick=()=>{$("veil").classList.remove("on");setTimeout(dropBall,250)};
@@ -290,7 +298,7 @@ function result(c,bonus){
 function outOfDrops(){
   $("sheet").innerHTML=`<div class="grab"></div><div class="kick">OUT OF DROPS</div><img src="${ICON("token")}" alt=""><h2>${member?"Back tomorrow":"Register to keep dropping"}</h2>
    <p>${member?"Your free daily drop refills at midnight. Every order and every shipping update adds one.":"Guests get one drop. An account gets a free drop every day, plus one with every order."}</p>
-   ${member?"":`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Create my account</a>`}<button class="btn q" id="closer">Close</button>`;
+   ${member?"":`<a class="btn n" href="${EMBED?"../app/":"../track/?order="+(q.get("order")||"4823")}" target="_top">Create my account</a>`}<button class="btn q" id="closer">Close</button>`;
   $("veil").classList.add("on");$("closer").onclick=()=>$("veil").classList.remove("on");
 }
 $("veil").onclick=e=>{if(e.target.id==="veil")$("veil").classList.remove("on")};
