@@ -141,9 +141,10 @@ const LABEL={box:["BOX","FULL"],v99:["$99","VIAL"],v49:["$49","VIAL"],ship:["SHI
 
 // ---------- state (production: the account's ledger on the server) ----------
 const member=q.get("member")==="1";
-const PFX="sko_drop_"+(member?"m_":"");   // guest and member demos keep separate balances
+const FREE=q.get("free")==="1";   // ?free=1 : drops never run out, for testing the board
+const PFX="sko_drop_"+(FREE?"f_":member?"m_":"");   // guest, member and test runs keep separate balances
 const store={get(k,d){try{const v=localStorage.getItem(PFX+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
-let S={drops:store.get("drops",q.has("drops")?+q.get("drops"):member?3:1), tokens:store.get("tokens",member?1240:0), meter:store.get("meter",0), hist:store.get("hist",[]), sound:store.get("sound",true), guestUsed:store.get("guestUsed",false)};
+let S={drops:FREE?999:store.get("drops",q.has("drops")?+q.get("drops"):member?3:1), tokens:store.get("tokens",member?1240:0), meter:store.get("meter",0), hist:store.get("hist",[]), sound:store.get("sound",true), guestUsed:store.get("guestUsed",false)};
 const save=()=>{for(const k of ["drops","tokens","meter","hist","sound","guestUsed"])store.set(k,S[k])};
 const METER=10;
 
@@ -274,7 +275,7 @@ function loop(t){tNow=t/1000;draw();requestAnimationFrame(loop)}
 function dropBall(){
   if(ball)return;
   if(S.drops<=0){return outOfDrops()}
-  ac();S.drops--;
+  ac();if(!FREE)S.drops--;
   const k=pickOutcome();
   // aim decides which side of the board a winning cup is on; the odds don't change
   const both=SLOTS.map((s,i)=>CUPS[s].k===k?i:-1).filter(i=>i>=0);
@@ -300,7 +301,7 @@ function result(c,bonus){
   $("sheet").innerHTML=`<div class="grab"></div><div class="kick">${c.tier===4?"THE BIG ONE":won?"YOU WON":"EVERY DROP PAYS"}</div>
     <img class="pop" src="${ICON(c.ico)}" alt=""><h2>${c.n}</h2><p>${won?c.d+" · ships inside your next order":"Added to your account."}</p>
     ${bonus?`<p style="margin-top:12px;color:#1447D6;font-weight:600">Shipping meter full: free shipping on your next order.</p>`:""}
-    ${S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:(EMBED?`<a class="btn n" href="../app/" target="_top">Create my account · keep dropping</a>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`)}
+    ${FREE?`<button class="btn n" id="again">Drop again</button>`:S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:(EMBED?`<a class="btn n" href="../app/" target="_top">Create my account · keep dropping</a>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`)}
     <button class="btn q" id="closer">Back to the board</button>`;
   $("veil").classList.add("on");
   const a=$("again");if(a&&!a.disabled)a.onclick=()=>{$("veil").classList.remove("on");setTimeout(dropBall,250)};
@@ -319,7 +320,7 @@ addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();dropBall(
 function render(){
   $("tokens").textContent=S.tokens.toLocaleString();
   if(EMBED)parent.postMessage({skoTokens:S.tokens,skoDrops:S.drops},"*");
-  $("drop").disabled=!!ball;$("drop").textContent=S.drops>0?`DROP · ${S.drops}`:"NO DROPS LEFT";
+  $("drop").disabled=!!ball;$("drop").textContent=FREE?"DROP":(S.drops>0?`DROP · ${S.drops}`:"NO DROPS LEFT");
   const left=METER-S.meter;$("mbar").style.width=(S.meter/METER*100)+"%";$("mtxt").textContent=left===1?"Next drop fills it":`${left} drops to free shipping`;
   $("hist").innerHTML=S.hist.length?S.hist.map(h=>`<li><span>${h.n}</span><em>${new Date(h.t).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}</em></li>`).join(""):'<li><span>No drops yet</span><em>—</em></li>';
   $("hint").textContent=member?"Drag across the top to aim, then drop.":S.guestUsed?"That was your guest drop. Register for a free drop every day.":"Your first drop is on us. Drag across the top to aim.";
