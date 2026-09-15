@@ -141,7 +141,7 @@ const LABEL={box:["BOX","FULL"],v99:["$99","VIAL"],v49:["$49","VIAL"],ship:["SHI
 
 // ---------- state (production: the account's ledger on the server) ----------
 const member=q.get("member")==="1";
-const FREE=q.get("free")==="1";   // ?free=1 : drops never run out, for testing the board
+const FREE=q.get("limit")!=="1";   // the practice board never runs out; ?limit=1 shows the real one-drop guest flow
 const PFX="sko_drop_"+(FREE?"f_":member?"m_":"");   // guest, member and test runs keep separate balances
 const store={get(k,d){try{const v=localStorage.getItem(PFX+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
 let S={drops:FREE?999:store.get("drops",q.has("drops")?+q.get("drops"):member?3:1), tokens:store.get("tokens",member?1240:0), meter:store.get("meter",0), hist:store.get("hist",[]), sound:store.get("sound",true), guestUsed:store.get("guestUsed",false)};
