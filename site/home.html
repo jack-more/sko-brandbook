@@ -260,25 +260,32 @@ header .bag{justify-self:end}
   let member=P.get("member")==="1";try{if(!P.has("member")&&localStorage.getItem("sko_member")==="1")member=true}catch(_){}
   const SHELF=[[1000, "bac water"], [2500, "a free vial"], [4000, "a $99 vial"], [7000, "a free bundle"], [20000, "the full box"]];
   const fmt=n=>n.toLocaleString("en-US");
-  if(member){
-    const tokens=1240,drops=3,next=SHELF.find(([n])=>n>tokens);
-    const toGo="$"+Math.ceil((next[0]-tokens)/10);
-    document.getElementById("acctF").innerHTML=`<b>${fmt(tokens)}</b> · <em>${toGo} to ${next[1]}</em>`;
+  // one function paints every loyalty surface; the board calls it again after every win
+  let shown=null;
+  function paint(tokens,drops){
+    const k0=SHELF.findIndex(([n])=>n>tokens),k=k0<0?SHELF.length:k0,next=SHELF[Math.min(k,SHELF.length-1)];
+    const toGo=k0<0?"":"$"+Math.ceil((next[0]-tokens)/10);
+    const goal=k0<0?"Every reward unlocked":`${toGo} to ${next[1]}`;
+    document.getElementById("acctF").innerHTML=`<b>${fmt(tokens)}</b> · <em>${goal}</em>`;
     document.getElementById("acctS").innerHTML=`<b>${fmt(tokens)}</b>`;
-    document.getElementById("acct").href="app/";
-    document.getElementById("perkT").textContent=`You have ${drops} drops waiting · ${fmt(tokens)} tokens`;
-    document.getElementById("rwK").textContent="Your account · Level 12 · Foil";document.getElementById("rewards").classList.add("mem");
-    document.getElementById("rwH").textContent=`${toGo} to ${next[1]}.`;
-    document.getElementById("rwP").textContent=`You have ${fmt(tokens)} tokens and ${drops} drops waiting. Every order adds tokens and another drop; the full box is 1 in 100 on every one.`;
-    const cta=document.getElementById("rwCta");cta.textContent="Open your account";
-    document.getElementById("dropf").src="plinko/?embed=1&member=1&drops="+drops;
-    // the rail: evenly spaced rungs, filled up to where this member is
-    const lis=[...document.querySelectorAll(".shelf li")],k=SHELF.findIndex(([n])=>n>tokens);
-    lis.forEach((li,i)=>li.classList.toggle("got",i<k));
-    const lo=k?SHELF[k-1][0]:0,pos=(k-1+(tokens-lo)/(SHELF[k][0]-lo))/(SHELF.length-1)*100;
-    const you=document.getElementById("rwYou");you.hidden=false;you.textContent="You · "+fmt(tokens);you.style.left=Math.max(0,pos)+"%";
-    requestAnimationFrame(()=>document.getElementById("rwFill").style.width=Math.max(0,pos)+"%");
+    document.getElementById("perkT").textContent=`You have ${drops} drop${drops===1?"":"s"} waiting · ${fmt(tokens)} tokens`;
+    document.getElementById("rwH").textContent=goal+".";
+    document.getElementById("rwP").textContent=`You have ${fmt(tokens)} tokens and ${drops} drop${drops===1?"":"s"} waiting. Every order adds tokens and another drop; the full box is 1 in 100 on every one.`;
+    [...document.querySelectorAll(".shelf li")].forEach((li,i)=>li.classList.toggle("got",i<k));
+    const lo=k?SHELF[k-1][0]:0,pos=k>=SHELF.length?100:Math.max(0,(k-1+(tokens-lo)/(SHELF[k][0]-lo))/(SHELF.length-1)*100);
+    const you=document.getElementById("rwYou");you.hidden=false;you.textContent="You · "+fmt(tokens);you.style.left=pos+"%";
+    requestAnimationFrame(()=>document.getElementById("rwFill").style.width=pos+"%");
+    if(shown!==null&&tokens>shown){const a=document.getElementById("acct");a.animate([{transform:"scale(1)"},{transform:"scale(1.12)",boxShadow:"0 0 0 6px rgba(186,199,242,.45)"},{transform:"scale(1)"}],{duration:700,easing:"cubic-bezier(.2,1.4,.4,1)"})}
+    shown=tokens;
   }
+  if(member){
+    document.getElementById("acct").href="app/";
+    document.getElementById("rwK").textContent="Your account · Level 12 · Foil";document.getElementById("rewards").classList.add("mem");
+    document.getElementById("rwCta").textContent="Open your account";
+    document.getElementById("dropf").src="plinko/?embed=1&member=1&drops=3";
+    paint(1240,3);
+  }
+  addEventListener("message",ev=>{if(member&&ev.data&&typeof ev.data.skoTokens==="number")paint(ev.data.skoTokens,ev.data.skoDrops)});
   // the board sizes itself
   addEventListener("message",ev=>{if(ev.data&&ev.data.skoDrop)document.getElementById("dropf").style.height=(ev.data.skoDrop+4)+"px"});
   // carry lp_code, utm_* etc. through to the store

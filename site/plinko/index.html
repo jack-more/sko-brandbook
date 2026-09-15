@@ -307,6 +307,7 @@ addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();dropBall(
 
 function render(){
   $("tokens").textContent=S.tokens.toLocaleString();
+  if(EMBED)parent.postMessage({skoTokens:S.tokens,skoDrops:S.drops},"*");
   $("drop").disabled=!!ball;$("drop").textContent=S.drops>0?`DROP · ${S.drops}`:"NO DROPS LEFT";
   const left=METER-S.meter;$("mbar").style.width=(S.meter/METER*100)+"%";$("mtxt").textContent=left===1?"Next drop fills it":`${left} drops to free shipping`;
   $("hist").innerHTML=S.hist.length?S.hist.map(h=>`<li><span>${h.n}</span><em>${new Date(h.t).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}</em></li>`).join(""):'<li><span>No drops yet</span><em>—</em></li>';
