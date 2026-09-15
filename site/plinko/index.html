@@ -70,6 +70,7 @@ html.em .wrap{display:block;max-width:none;padding:0}
 html.em .top,html.em .side,html.em .title,html.em .fine{display:none}
 html.em .meter{margin-top:10px}
 html.em .board{touch-action:pan-y}
+html.em .board:active{touch-action:none}
 /* the SKO system (from the Hightech ad), when the page asks for it */
 html.sys{--num:"JetBrains Mono",ui-monospace,Menlo,monospace}
 html.sys .drop{border-radius:2px;font:800 17px/1 var(--num);letter-spacing:.2em}
@@ -100,7 +101,7 @@ html.sys .sheet h2{font:800 24px/1.1 var(--num)} html.sys .sheet .kick{font-fami
     <div class="board" id="board"><canvas id="g"></canvas></div>
     <div class="meter"><div class="row"><span>SHIPPING METER</span><b id="mtxt">10 drops to free shipping</b></div><div class="bar"><i id="mbar"></i></div></div>
     <button class="drop" id="drop">DROP</button>
-    <div class="hint" id="hint">Drag across the top to aim, then drop.</div>
+    <div class="hint" id="hint">Tap the board to place the chip, then press drop.</div>
   </main>
 
   <aside class="side r">
@@ -166,8 +167,8 @@ const IMG={};for(const n of ["token","golden","vials","vial","freeship"]){const 
 // ---------- aim ----------
 let aim=BW/2, aiming=false;
 const toLogical=e=>{const r=cv.getBoundingClientRect();return ((e.touches?e.touches[0].clientX:e.clientX)-r.left)/scale};
-const clampAim=x=>Math.max(BW/2-SX*1.1,Math.min(BW/2+SX*1.1,x));
-$("board").addEventListener("pointerdown",e=>{aiming=true;aim=clampAim(toLogical(e))});
+const clampAim=x=>Math.max(BW/2-SX*2.6,Math.min(BW/2+SX*2.6,x));   // the chip follows your finger across the top
+$("board").addEventListener("pointerdown",e=>{if(ball)return;aiming=true;aim=clampAim(toLogical(e));e.target.setPointerCapture&&e.target.setPointerCapture(e.pointerId)});
 addEventListener("pointermove",e=>{if(aiming)aim=clampAim(toLogical(e))});
 addEventListener("pointerup",e=>{if(aiming){aiming=false;if(e.target.closest&&e.target.closest("#board"))dropBall()}});
 
@@ -323,7 +324,7 @@ function render(){
   $("drop").disabled=!!ball;$("drop").textContent=FREE?"DROP":(S.drops>0?`DROP · ${S.drops}`:"NO DROPS LEFT");
   const left=METER-S.meter;$("mbar").style.width=(S.meter/METER*100)+"%";$("mtxt").textContent=left===1?"Next drop fills it":`${left} drops to free shipping`;
   $("hist").innerHTML=S.hist.length?S.hist.map(h=>`<li><span>${h.n}</span><em>${new Date(h.t).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}</em></li>`).join(""):'<li><span>No drops yet</span><em>—</em></li>';
-  $("hint").textContent=member?"Drag across the top to aim, then drop.":S.guestUsed?"That was your guest drop. Register for a free drop every day.":"Your first drop is on us. Drag across the top to aim.";
+  $("hint").textContent=(!FREE&&S.guestUsed)?"That was your guest drop. Register for a free drop every day.":"Tap the board to place the chip, then press drop.";
 }
 // the odds, shown plainly
 const seen=new Set();$("plist").innerHTML=["box","v99","v49","ship","t50","t25"].map(k=>{const c=CUPS.find(x=>x.k===k);const odds=W[k]>=10?`${W[k]}%`:`1 in ${Math.round(100/W[k])}`;
