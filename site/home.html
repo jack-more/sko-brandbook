@@ -66,9 +66,9 @@ header.solid .acct{border-color:var(--mist);background:#fff}
 .shelf li img{width:44px;height:44px;object-fit:contain}
 .shelf li b{font:700 14px/1 var(--text);font-variant-numeric:tabular-nums;margin-top:4px}
 .shelf li span{font-size:12px;line-height:1.3;opacity:.72;max-width:12ch}
-.earn{list-style:none;padding:0;margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.earn{list-style:none;padding:0;margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:0 28px}
 .earn li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:13.5px}
-.earn li b{font-weight:600;color:#BAC7F2;text-align:right}
+.earn li b{font-weight:600;color:#BAC7F2;text-align:right;white-space:nowrap}
 .reward .ctas{justify-content:flex-start;margin-top:28px}
 .rw-board{width:100%;max-width:440px;justify-self:center}
 .rw-board iframe{display:block;width:100%;height:720px;border:0;background:transparent}
@@ -185,7 +185,7 @@ header .bag{justify-self:end}
     <h2 id="rwH">Your first drop is on us.</h2>
     <p class="lede" id="rwP">Every order earns tokens and a drop on the board. Tokens buy free product. Every drop pays, and the full box is 1 in 100.</p>
     <div class="shelf"><div class="rail"><i id="rwFill"></i><span class="you" id="rwYou" hidden></span></div>
-      <ol><li data-at="1000"><span class="orb"><img src="../img/icons/sm/vial.png" alt=""></span><b>1,000</b><span>Bac water</span></li><li data-at="2500"><span class="orb"><img src="../img/icons/sm/vial.png" alt=""></span><b>2,500</b><span>A vial up to $49</span></li><li data-at="4000"><span class="orb"><img src="../img/icons/sm/vials.png" alt=""></span><b>4,000</b><span>A vial up to $99</span></li><li data-at="7000"><span class="orb"><img src="../img/icons/sm/box.png" alt=""></span><b>7,000</b><span>Any bundle</span></li><li data-at="20000"><span class="orb"><img src="../img/icons/sm/golden.png" alt=""></span><b>20,000</b><span>The full box</span></li></ol></div>
+      <ol><li data-at="1000"><span class="orb"><img src="../img/icons/sm/vial.png" alt=""></span><b>1,000</b><span>Bac water</span></li><li data-at="2500"><span class="orb"><img src="../img/icons/sm/vial.png" alt=""></span><b>2,500</b><span>A $49 vial</span></li><li data-at="4000"><span class="orb"><img src="../img/icons/sm/vials.png" alt=""></span><b>4,000</b><span>A $99 vial</span></li><li data-at="7000"><span class="orb"><img src="../img/icons/sm/box.png" alt=""></span><b>7,000</b><span>Any bundle</span></li><li data-at="20000"><span class="orb"><img src="../img/icons/sm/golden.png" alt=""></span><b>20,000</b><span>The full box</span></li></ol></div>
     <ul class="earn"><li>Every order<b>10 tokens per $1 + a drop</b></li><li>Every day<b>One free drop</b></li><li>Order during the live<b>Double tokens</b></li><li>A friend orders<b>Tokens for you both</b></li></ul>
     <div class="ctas"><a class="btn w" id="rwCta" href="app/">Create my account</a><a class="btn g" href="plinko/">Play full screen</a></div>
   </div>
