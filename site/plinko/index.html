@@ -37,6 +37,9 @@ canvas#g{display:block;width:100%;height:auto}
   background:linear-gradient(180deg,#fff,#DCE4F5);box-shadow:0 8px 0 #7F93C9,0 18px 34px rgba(0,0,0,.35);transition:transform .08s,box-shadow .08s}
 .drop:active{transform:translateY(6px);box-shadow:0 2px 0 #7F93C9,0 8px 18px rgba(0,0,0,.3)}
 .drop[disabled]{opacity:.45;cursor:default}
+.buy{margin-top:10px;width:100%;height:46px;border-radius:14px;border:1px solid rgba(186,199,242,.45);color:#DDE4F5;font:700 13px/1 var(--num);letter-spacing:.12em}
+.buy:disabled{opacity:.4}
+html.sys .buy{border-radius:2px;font-family:var(--num);letter-spacing:.14em}
 .hint{margin-top:10px;font-size:12.5px;color:var(--graph);text-align:center}
 .side{padding-top:74px}
 .side h3{font:600 10.5px/1 var(--text);letter-spacing:.18em;color:var(--halo);margin-bottom:12px}
@@ -101,6 +104,7 @@ html.sys .sheet h2{font:800 24px/1.1 var(--num)} html.sys .sheet .kick{font-fami
     <div class="board" id="board"><canvas id="g"></canvas></div>
     <div class="meter"><div class="row"><span>SHIPPING METER</span><b id="mtxt">10 drops to free shipping</b></div><div class="bar"><i id="mbar"></i></div></div>
     <button class="drop" id="drop">DROP</button>
+    <button class="buy" id="buy" hidden>ANOTHER DROP · 250 TOKENS</button>
     <div class="hint" id="hint">Tap the board to place the chip, then press drop.</div>
   </main>
 
@@ -142,6 +146,7 @@ const LABEL={box:["BOX","FULL"],v99:["$99","VIAL"],v49:["$49","VIAL"],ship:["SHI
 
 // ---------- state (production: the account's ledger on the server) ----------
 const member=q.get("member")==="1";
+const DROP_COST=250;   // tokens for one more drop
 const FREE=q.get("limit")!=="1";   // the practice board never runs out; ?limit=1 shows the real one-drop guest flow
 const PFX="sko_drop_"+(FREE?"f_":member?"m_":"");   // guest, member and test runs keep separate balances
 const store={get(k,d){try{const v=localStorage.getItem(PFX+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
@@ -174,14 +179,14 @@ addEventListener("pointerup",e=>{if(aiming){aiming=false;if(e.target.closest&&e.
 
 // ---------- physics: simulate a path that ends in the chosen cup ----------
 function simulate(x0,target,strength){
-  let x=x0,y=TOPY-46,vx=(Math.random()-.5)*20,vy=0;const dt=1/120,g=980,path=[],hits=[];let t=0;
+  let x=x0,y=TOPY-46,vx=(Math.random()-.5)*16,vy=0;const dt=1/120,g=640,path=[],hits=[];let t=0;   // low gravity: the chip falls like it is heavier than air, so every bounce reads
   for(let step=0;step<1200;step++){
     vy+=g*dt;x+=vx*dt;y+=vy*dt;t+=dt;
     for(let i=0;i<pegs.length;i++){const p=pegs[i],dx=x-p.x,dy=y-p.y,d=Math.hypot(dx,dy),m=PR+BR;
       if(d<m){const nx=dx/d,ny=dy/d;x=p.x+nx*m;y=p.y+ny*m;const vn=vx*nx+vy*ny;
-        if(vn<0){vx-=1.52*vn*nx;vy-=1.52*vn*ny;
+        if(vn<0){vx-=1.42*vn*nx;vy-=1.42*vn*ny;   // bounce keeps more of its speed
           const tx=cupX(target),bias=Math.max(-1,Math.min(1,(tx-x)/60));
-          vx+= (Math.random()-.5)*70 + bias*strength*90; vx*=.92; vy*=.82;
+          vx+= (Math.random()-.5)*55 + bias*strength*82; vx*=.95; vy*=.80;
           hits.push({i,step});}}}
     // side walls follow the triangle so the chip can't escape
     const row=Math.max(0,Math.min(ROWS-1,Math.round((y-TOPY)/SY))),n=row+3,half=((n-1)*SX)/2+SX*.45;
@@ -192,8 +197,16 @@ function simulate(x0,target,strength){
   return null;
 }
 function pathTo(target){
-  for(let a=0;a<120;a++){const r=simulate(aim+(Math.random()-.5)*6,target,.35+a*.03);if(r&&r.slot===target)return r}
-  return simulate(aim,target,3);
+  // find several honest paths into the chosen cup and play the briskest one, so no drop drags
+  const CAP=5.4*120*2;   // frames*2 (x,y per frame): a drop should not run past about 5.4s
+  let best=null;
+  for(let a=0;a<120;a++){
+    const r=simulate(aim+(Math.random()-.5)*6,target,.35+a*.03);
+    if(!r||r.slot!==target)continue;
+    if(!best||r.path.length<best.path.length)best=r;
+    if(best.path.length<=CAP&&a>=12)break;
+  }
+  return best||simulate(aim,target,3);
 }
 // the server's job in production: pick the outcome by the published odds
 function pickOutcome(){
@@ -302,10 +315,11 @@ function result(c,bonus){
   $("sheet").innerHTML=`<div class="grab"></div><div class="kick">${c.tier===4?"THE BIG ONE":won?"YOU WON":"EVERY DROP PAYS"}</div>
     <img class="pop" src="${ICON(c.ico)}" alt=""><h2>${c.n}</h2><p>${won?c.d+" · ships inside your next order":"Added to your account."}</p>
     ${bonus?`<p style="margin-top:12px;color:#1447D6;font-weight:600">Shipping meter full: free shipping on your next order.</p>`:""}
-    ${FREE?`<button class="btn n" id="again">Drop again</button>`:S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:(EMBED?`<a class="btn n" href="../app/" target="_top">Create my account · keep dropping</a>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`)}
+    ${FREE?`<button class="btn n" id="again">Drop again</button>`:S.drops>0?`<button class="btn n" id="again">Drop again · ${S.drops} left</button>`:S.tokens>=DROP_COST?`<button class="btn n" id="buy2">Another drop · ${DROP_COST} tokens</button>`:member?`<button class="btn n" id="again" disabled>Next free drop tomorrow</button>`:(EMBED?`<a class="btn n" href="../app/" target="_top">Create my account · keep dropping</a>`:`<a class="btn n" href="../track/?order=${q.get("order")||"4823"}">Register · keep dropping</a>`)}
     <button class="btn q" id="closer">Back to the board</button>`;
   $("veil").classList.add("on");
   const a=$("again");if(a&&!a.disabled)a.onclick=()=>{$("veil").classList.remove("on");setTimeout(dropBall,250)};
+  const b2=$("buy2");if(b2)b2.onclick=()=>{S.tokens-=DROP_COST;S.drops++;save();render();$("veil").classList.remove("on");setTimeout(dropBall,250)};
   $("closer").onclick=()=>$("veil").classList.remove("on");
 }
 function outOfDrops(){
@@ -316,12 +330,14 @@ function outOfDrops(){
 }
 $("veil").onclick=e=>{if(e.target.id==="veil")$("veil").classList.remove("on")};
 $("drop").onclick=dropBall;
+$("buy").onclick=()=>{if(S.tokens<DROP_COST||ball)return;S.tokens-=DROP_COST;S.drops++;save();render();SND.peg&&SND.peg(1);};
 addEventListener("keydown",e=>{if(e.code==="Space"){e.preventDefault();dropBall()}if(e.key==="ArrowLeft")aim=clampAim(aim-8);if(e.key==="ArrowRight")aim=clampAim(aim+8)});
 
 function render(){
   $("tokens").textContent=S.tokens.toLocaleString();
   if(EMBED)parent.postMessage({skoTokens:S.tokens,skoDrops:S.drops},"*");
   $("drop").disabled=!!ball;$("drop").textContent=FREE?"DROP":(S.drops>0?`DROP · ${S.drops}`:"NO DROPS LEFT");
+  $("buy").hidden=FREE;$("buy").disabled=S.tokens<DROP_COST||!!ball;$("buy").textContent=`ANOTHER DROP · ${DROP_COST} TOKENS`;
   const left=METER-S.meter;$("mbar").style.width=(S.meter/METER*100)+"%";$("mtxt").textContent=left===1?"Next drop fills it":`${left} drops to free shipping`;
   $("hist").innerHTML=S.hist.length?S.hist.map(h=>`<li><span>${h.n}</span><em>${new Date(h.t).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})}</em></li>`).join(""):'<li><span>No drops yet</span><em>—</em></li>';
   $("hint").textContent=(!FREE&&S.guestUsed)?"That was your guest drop. Register for a free drop every day.":"Tap the board to place the chip, then press drop.";
