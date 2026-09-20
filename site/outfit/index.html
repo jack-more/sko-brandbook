@@ -6,7 +6,7 @@
 <title>SKO COMPOUNDS® — storefront study</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ---------------------------------------------------------------
    SKO storefront study.
@@ -29,7 +29,7 @@
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--ground);color:var(--ink);
-  font-family:"DM Sans",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  font-family:"Inter",system-ui,-apple-system,Helvetica,Arial,sans-serif;
   font-size:15px;line-height:1.35;letter-spacing:-.01em;
   transition:background .45s ease,color .45s ease;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -51,8 +51,8 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- hero ---------- */
 .hero{padding:104px 0 0}
-.word{display:inline-block;font-weight:700;letter-spacing:-.052em;line-height:.82;
-  text-transform:uppercase;white-space:nowrap;font-size:120px}
+.word{display:inline-block;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.005em;
+  line-height:1;text-transform:uppercase;white-space:nowrap;font-size:120px}
 .word sup{font-size:.14em;vertical-align:top;top:.22em;position:relative;letter-spacing:0}
 .rule{height:3px;background:var(--ink);margin:16px 0 14px}
 .meta{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:24px;font-size:13px;font-weight:500;padding-bottom:52px}
@@ -72,10 +72,10 @@ a{color:inherit;text-decoration:none}
 .bandtext{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;
   justify-content:space-between;gap:24px;padding:34px 38px;color:#F2F0EA}
 .claims{display:flex;gap:46px;align-items:flex-end}
-.claims b{display:block;font-size:clamp(24px,3.3vw,54px);font-weight:700;letter-spacing:-.035em;line-height:.95}
+.claims b{display:block;font-family:"Syncopate",sans-serif;font-size:clamp(15px,2vw,30px);font-weight:700;letter-spacing:-.01em;line-height:1.05}
 .claims span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.82;margin-top:8px}
 .club{text-align:right;max-width:30ch}
-.club b{display:block;font-size:clamp(18px,1.7vw,26px);font-weight:700;letter-spacing:-.03em}
+.club b{display:block;font-family:"Syncopate",sans-serif;font-size:clamp(13px,1.2vw,18px);font-weight:700}
 .club span{display:block;font-size:13px;opacity:.82;margin:6px 0 12px}
 .club a{display:inline-block;border:1px solid rgba(242,240,234,.5);padding:10px 18px;border-radius:2px;
   font-size:12px;letter-spacing:.1em;text-transform:uppercase}
@@ -83,6 +83,7 @@ a{color:inherit;text-decoration:none}
 /* ---------- grid ---------- */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding-bottom:140px}
 .card{grid-column:span 1;display:block;position:relative;cursor:pointer;border:0;background:none;padding:0;text-align:left;color:inherit;font:inherit}
+.card .stage{will-change:transform}
 .card.w2{grid-column:span 2}
 .stage{display:block;position:relative;aspect-ratio:1/1.16}
 .card.w2 .stage{aspect-ratio:2.09/1.16}
@@ -92,13 +93,13 @@ a{color:inherit;text-decoration:none}
   will-change:transform;opacity:.92;filter:saturate(var(--scene))}
 .clip:after{content:"";position:absolute;inset:0;
   background:radial-gradient(120% 92% at 50% 46%,rgba(4,10,32,0) 38%,rgba(4,10,32,.26) 100%)}
-.obj{position:absolute;left:50%;top:50%;width:27%;max-width:118px;
+.obj{position:absolute;left:50%;top:50%;height:62%;width:auto;
   transform:translate(-50%,-50%);transform-origin:50% 62%;will-change:transform;pointer-events:none;
   filter:drop-shadow(0 18px 26px rgba(4,10,32,.35))}
-.card.w2 .obj{width:13%}
+.card.w2 .obj{height:62%}
 .cap{display:block;position:absolute;left:0;right:0;bottom:8%;text-align:center;opacity:0;
   color:#F4F2EC;text-shadow:0 2px 18px rgba(4,10,32,.75);font-size:13px;font-weight:500;pointer-events:none}
-.cap b{display:block;font-size:18px;font-weight:700;letter-spacing:-.02em}
+.cap b{display:block;font-family:"Syncopate",sans-serif;font-size:15px;font-weight:700;letter-spacing:-.01em}
 .info{display:flex;justify-content:space-between;gap:12px;padding:9px 2px 0;font-size:15px;font-weight:500}
 .info .nm{max-width:16ch;line-height:1.15}
 .tag{display:flex;align-items:center;gap:6px;padding-top:5px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
@@ -112,7 +113,7 @@ a{color:inherit;text-decoration:none}
 .sheet .shot{position:relative;z-index:2;padding:26px}
 .sheet .shot img{width:100%;max-width:200px;margin:0 auto;display:block;filter:drop-shadow(0 26px 34px rgba(4,10,32,.5))}
 .sheet .txt{position:relative;z-index:2;padding:34px 34px 34px 0;color:#F2F0EA}
-.sheet h3{margin:0;font-size:clamp(34px,4.6vw,62px);font-weight:700;letter-spacing:-.045em;line-height:.95}
+.sheet h3{margin:0;font-family:"Syncopate",sans-serif;font-size:clamp(20px,2.8vw,40px);font-weight:700;letter-spacing:-.01em;line-height:1.05}
 .sheet .sub{margin:10px 0 16px;font-size:13px;letter-spacing:.09em;text-transform:uppercase;opacity:.74}
 .sheet p{margin:0 0 22px;max-width:44ch;line-height:1.45;opacity:.9}
 .row{display:flex;gap:12px}
@@ -155,10 +156,7 @@ a{color:inherit;text-decoration:none}
 
 <main class="wrap">
   <section class="hero">
-    <h1 style="margin:0">
-      <span class="word">SKO</span><br>
-      <span class="word">Compounds<sup>®</sup></span>
-    </h1>
+    <h1 style="margin:0"><span class="word">SKO Compounds<sup>®</sup></span></h1>
     <div class="rule"></div>
     <div class="meta">
       <div><h4>SKO</h4></div>
@@ -247,6 +245,8 @@ function paint(c,p,travel){
   const lift=-0.22*p*c.stage.clientHeight;
   c.obj.style.transform=`translate(-50%,-50%) translateY(${lift.toFixed(1)}px) rotate(${(roll*0.12).toFixed(2)}deg) scale(${(1+0.55*p).toFixed(3)})`;
   c.obj.style.filter=`drop-shadow(${(-roll*0.35).toFixed(1)}px ${(18+40*p).toFixed(0)}px ${(26+34*p).toFixed(0)}px rgba(4,10,32,${(0.35+0.15*p).toFixed(2)}))`;
+  // the module scales with its object, so card and product move as one
+  c.stage.style.transform=`scale(${(0.955+0.125*p).toFixed(3)})`;
   c.el.style.zIndex=p>0.3?20:'';
   c.cap.style.opacity=Math.max(0,(p-0.45)/0.55).toFixed(3);
   c.info.style.opacity=(1-0.7*p).toFixed(3);
