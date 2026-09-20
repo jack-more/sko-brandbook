@@ -5,7 +5,13 @@
   "file": "5-amino-1mq.png",
   "spray": false,
   "label": "5-AMINO-1MQ",
-  "dose": "5 mg"
+  "dose": "5 mg",
+  "category": "Research Compound",
+  "group": "Peptides",
+  "rank": 18,
+  "rating": 4.8,
+  "reviews": 3871,
+  "blurb": "Selective NNMT inhibitor for NAD+ salvage and adipocyte metabolism research."
  },
  {
   "slug": "cjc-1295",
@@ -13,7 +19,13 @@
   "file": "cjc1295-new.png",
   "spray": false,
   "label": "CJC+IPA",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Growth Hormone Secretagogue Blend",
+  "group": "Blends and sets",
+  "rank": 6,
+  "rating": 4.7,
+  "reviews": 6524,
+  "blurb": "Growth hormone secretagogue blend for GHRH signaling research."
  },
  {
   "slug": "ghk-cu",
@@ -21,7 +33,13 @@
   "file": "ghkcu-new.png",
   "spray": false,
   "label": "GHK-Cu",
-  "dose": "50 mg"
+  "dose": "50 mg",
+  "category": "Copper Peptide Complex",
+  "group": "Peptides",
+  "rank": 3,
+  "rating": 4.7,
+  "reviews": 6195,
+  "blurb": "Copper peptide complex for extracellular matrix and collagen pathway studies."
  },
  {
   "slug": "glow",
@@ -29,7 +47,13 @@
   "file": "glow-new.png",
   "spray": false,
   "label": "GLOW",
-  "dose": "70 mg"
+  "dose": "70 mg",
+  "category": "Dermal Research Formula",
+  "group": "Peptides",
+  "rank": 9,
+  "rating": 4.7,
+  "reviews": 5208,
+  "blurb": "Multi-peptide dermal research formula for in-vitro cutaneous studies."
  },
  {
   "slug": "glutathione",
@@ -37,7 +61,13 @@
   "file": "glutathione-new.png",
   "spray": false,
   "label": "GLUTA",
-  "dose": "600 mg"
+  "dose": "600 mg",
+  "category": "Antioxidant Tripeptide",
+  "group": "Peptides",
+  "rank": 12,
+  "rating": 4.8,
+  "reviews": 7602,
+  "blurb": "Master antioxidant tripeptide for redox and detoxification pathway research."
  },
  {
   "slug": "mots-c",
@@ -45,7 +75,13 @@
   "file": "mots-c-new.png",
   "spray": false,
   "label": "MOTS-c",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Mitochondrial-Derived Peptide",
+  "group": "Peptides",
+  "rank": 4,
+  "rating": 4.9,
+  "reviews": 2002,
+  "blurb": "Mitochondrial-derived peptide for metabolic and cellular energy research."
  },
  {
   "slug": "adamax",
@@ -53,7 +89,13 @@
   "file": "product-adamax.png",
   "spray": false,
   "label": "ADAMAX",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 28,
+  "rating": 4.8,
+  "reviews": 3563,
+  "blurb": "Proprietary research peptide blend for in-vitro exploratory studies."
  },
  {
   "slug": "aod-9604",
@@ -61,7 +103,13 @@
   "file": "product-aod-9604.png",
   "spray": false,
   "label": "AOD",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 999,
+  "rating": 4.8,
+  "reviews": 3647,
+  "blurb": "Modified C-terminal fragment (176\u2013191) of human growth hormone for lipolysis pathway research."
  },
  {
   "slug": "ara-290",
@@ -69,7 +117,13 @@
   "file": "product-ara290.png",
   "spray": false,
   "label": "ARA-290",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 29,
+  "rating": 4.8,
+  "reviews": 3871,
+  "blurb": "Innate repair receptor agonist (Cibinetide) derived from erythropoietin's helix B for tissue-protection research."
  },
  {
   "slug": "bpc-157",
@@ -77,7 +131,13 @@
   "file": "product-bpc157-B3DMlXLe.png",
   "spray": false,
   "label": "BPC-157",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Gastric Pentadecapeptide",
+  "group": "Peptides",
+  "rank": 10,
+  "rating": 4.9,
+  "reviews": 5733,
+  "blurb": "Synthetic pentadecapeptide derived from gastric juice for laboratory research."
  },
  {
   "slug": "cagrilintide",
@@ -85,7 +145,13 @@
   "file": "product-cagrilintide.png",
   "spray": false,
   "label": "CAG",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 30,
+  "rating": 4.9,
+  "reviews": 3339,
+  "blurb": "Long-acting amylin analogue for receptor-binding and metabolic pathway research."
  },
  {
   "slug": "dsip",
@@ -93,7 +159,13 @@
   "file": "product-dsip.png",
   "spray": false,
   "label": "DSIP",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Circadian Research Peptide",
+  "group": "Peptides",
+  "rank": 26,
+  "rating": 4.8,
+  "reviews": 3871,
+  "blurb": "Delta sleep-inducing peptide for sleep architecture research."
  },
  {
   "slug": "igf1-lr3",
@@ -101,7 +173,13 @@
   "file": "product-igf1-lr3-new.png",
   "spray": false,
   "label": "IGF1-LR3",
-  "dose": "1 mg"
+  "dose": "1 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 20,
+  "rating": 4.8,
+  "reviews": 6636,
+  "blurb": "Long-acting Arg\u00b3 IGF-1 analogue for IGF-1R signaling and anabolic pathway research."
  },
  {
   "slug": "ipamorelin",
@@ -109,7 +187,13 @@
   "file": "product-ipamorelin-new.png",
   "spray": false,
   "label": "IPAMORELIN",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Growth Hormone Secretagogue",
+  "group": "Peptides",
+  "rank": 23,
+  "rating": 4.9,
+  "reviews": 9296,
+  "blurb": "Selective GH secretagogue for pituitary signaling research."
  },
  {
   "slug": "kisspeptin",
@@ -117,7 +201,13 @@
   "file": "product-kisspeptin.png",
   "spray": false,
   "label": "KISSPEPTIN",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 31,
+  "rating": 4.8,
+  "reviews": 3780,
+  "blurb": "KISS1-derived neuropeptide for GnRH pulse and HPG-axis research."
  },
  {
   "slug": "kpv",
@@ -125,7 +215,13 @@
   "file": "product-kpv.png",
   "spray": false,
   "label": "KPV",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Tripeptide Research Compound",
+  "group": "Peptides",
+  "rank": 13,
+  "rating": 4.8,
+  "reviews": 4788,
+  "blurb": "Lysine-Proline-Valine tripeptide for inflammatory pathway research."
  },
  {
   "slug": "mt-1",
@@ -133,7 +229,13 @@
   "file": "product-mt1-BDr9K4qu.png",
   "spray": false,
   "label": "MT-1",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Melanocortin Research Peptide",
+  "group": "Peptides",
+  "rank": 19,
+  "rating": 4.8,
+  "reviews": 6174,
+  "blurb": "Melanocortin receptor agonist for pigmentation pathway research."
  },
  {
   "slug": "mt-2",
@@ -141,7 +243,13 @@
   "file": "product-mt2-Bw_Ky05C.png",
   "spray": false,
   "label": "MT-2",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Melanocortin Research Peptide",
+  "group": "Peptides",
+  "rank": 11,
+  "rating": 4.8,
+  "reviews": 7140,
+  "blurb": "Melanocortin receptor agonist for pigmentation pathway research."
  },
  {
   "slug": "nad",
@@ -149,7 +257,13 @@
   "file": "product-nad-new.png",
   "spray": false,
   "label": "NAD",
-  "dose": "500 mg"
+  "dose": "500 mg",
+  "category": "Coenzyme Research Compound",
+  "group": "Peptides",
+  "rank": 7,
+  "rating": 4.8,
+  "reviews": 6377,
+  "blurb": "Coenzyme research compound for in-vitro cellular metabolism studies."
  },
  {
   "slug": "pt-141",
@@ -157,7 +271,13 @@
   "file": "product-pt141.png",
   "spray": false,
   "label": "PT-141",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 25,
+  "rating": 4.8,
+  "reviews": 4613,
+  "blurb": "Melanocortin receptor agonist (Bremelanotide) for MC3R/MC4R signaling research."
  },
  {
   "slug": "selank",
@@ -165,7 +285,13 @@
   "file": "product-selank.png",
   "spray": false,
   "label": "SELANK",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Tuftsin Analogue Peptide",
+  "group": "Peptides",
+  "rank": 22,
+  "rating": 4.8,
+  "reviews": 5887,
+  "blurb": "Synthetic tuftsin analogue for GABAergic and neuroimmune pathway research."
  },
  {
   "slug": "semax",
@@ -173,7 +299,13 @@
   "file": "product-semax-GAtACDa-.png",
   "spray": false,
   "label": "SEMAX",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Neuropeptide Research Compound",
+  "group": "Peptides",
+  "rank": 17,
+  "rating": 4.8,
+  "reviews": 6636,
+  "blurb": "ACTH(4-10) analogue heptapeptide for BDNF and neurotrophic pathway research."
  },
  {
   "slug": "sermorelin",
@@ -181,7 +313,13 @@
   "file": "product-sermorelin.png",
   "spray": false,
   "label": "SERM",
-  "dose": "5 mg"
+  "dose": "5 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 32,
+  "rating": 4.8,
+  "reviews": 4354,
+  "blurb": "GHRH(1-29) analogue for growth hormone releasing hormone research."
  },
  {
   "slug": "ss-31",
@@ -189,7 +327,13 @@
   "file": "product-ss31-new.png",
   "spray": false,
   "label": "SS-31",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Mitochondrial Research Peptide",
+  "group": "Peptides",
+  "rank": 16,
+  "rating": 4.8,
+  "reviews": 5054,
+  "blurb": "Mitochondria-targeted tetrapeptide (Elamipretide) for cardiolipin and bioenergetics research."
  },
  {
   "slug": "thymosin-alpha-1",
@@ -197,7 +341,13 @@
   "file": "product-ta1.png",
   "spray": false,
   "label": "TA1",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Peptide",
+  "group": "Peptides",
+  "rank": 27,
+  "rating": 4.9,
+  "reviews": 4088,
+  "blurb": "28-amino-acid immunomodulatory peptide for T-cell and innate immunity research."
  },
  {
   "slug": "tb-500",
@@ -205,7 +355,13 @@
   "file": "product-tb500-C7fPiVPG.png",
   "spray": false,
   "label": "TB-500",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Actin-Binding Research Peptide",
+  "group": "Peptides",
+  "rank": 21,
+  "rating": 4.9,
+  "reviews": 10000,
+  "blurb": "Thymosin Beta-4 fragment for actin-binding and angiogenesis pathway research."
  },
  {
   "slug": "tesa-ipa",
@@ -213,7 +369,13 @@
   "file": "product-tesa-ipa-new.png",
   "spray": false,
   "label": "TESA/IPA",
-  "dose": "13 mg"
+  "dose": "13 mg",
+  "category": "Research Peptide Blend",
+  "group": "Blends and sets",
+  "rank": 24,
+  "rating": 4.9,
+  "reviews": 2660,
+  "blurb": "Tesamorelin + Ipamorelin combined research blend."
  },
  {
   "slug": "ghk-cu-spray",
@@ -221,7 +383,13 @@
   "file": "spray-ghk-cu-cRPkFf7n.png",
   "spray": true,
   "label": "GHK-Cu SPRAY",
-  "dose": "100 mg"
+  "dose": "100 mg",
+  "category": "Research Spray",
+  "group": "Sprays",
+  "rank": 999,
+  "rating": 0.0,
+  "reviews": 0,
+  "blurb": "100MG nasal research spray. 10ML, 100 sprays per bottle."
  },
  {
   "slug": "mt-2-spray",
@@ -229,7 +397,13 @@
   "file": "spray-mt-2-CHfPPrtx.png",
   "spray": true,
   "label": "MT-2",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Spray",
+  "group": "Sprays",
+  "rank": 999,
+  "rating": 0.0,
+  "reviews": 0,
+  "blurb": "10MG nasal research spray. 10ML, 100 sprays per bottle."
  },
  {
   "slug": "nad-spray",
@@ -237,7 +411,13 @@
   "file": "spray-nad-DIBRzmeD.png",
   "spray": true,
   "label": "NAD+ Spray",
-  "dose": "500 mg"
+  "dose": "500 mg",
+  "category": "Research Spray",
+  "group": "Sprays",
+  "rank": 999,
+  "rating": 0.0,
+  "reviews": 0,
+  "blurb": "500MG nasal research spray. 10ML, 100 sprays per bottle."
  },
  {
   "slug": "selank-spray",
@@ -245,7 +425,13 @@
   "file": "spray-selank-D_OUA_LF.png",
   "spray": true,
   "label": "SELANK",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Spray",
+  "group": "Sprays",
+  "rank": 999,
+  "rating": 0.0,
+  "reviews": 0,
+  "blurb": "10MG nasal research spray. 10ML, 100 sprays per bottle."
  },
  {
   "slug": "semax-spray",
@@ -253,7 +439,13 @@
   "file": "spray-semax-BRY66jNO.png",
   "spray": true,
   "label": "SEMAX",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Research Spray",
+  "group": "Sprays",
+  "rank": 999,
+  "rating": 0.0,
+  "reviews": 0,
+  "blurb": "10MG nasal research spray. 10ML, 100 sprays per bottle."
  },
  {
   "slug": "tesamorelin",
@@ -261,7 +453,13 @@
   "file": "tesamorelin.png",
   "spray": false,
   "label": "TESA",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "GHRH Analogue Peptide",
+  "group": "Peptides",
+  "rank": 2,
+  "rating": 4.9,
+  "reviews": 5957,
+  "blurb": "GHRH analogue for somatotropic axis and metabolic pathway research."
  },
  {
   "slug": "wolverine",
@@ -269,7 +467,13 @@
   "file": "wolverine-new.png",
   "spray": false,
   "label": "WOLVERINE",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Multi-Peptide Research Blend",
+  "group": "Blends and sets",
+  "rank": 8,
+  "rating": 4.8,
+  "reviews": 5453,
+  "blurb": "Multi-peptide research blend for in-vitro studies."
  },
  {
   "slug": "klow",
@@ -277,7 +481,13 @@
   "file": "product-klow-new.png",
   "spray": false,
   "label": "KLOW",
-  "dose": "80 mg"
+  "dose": "80 mg",
+  "category": "Multi-Peptide Dermal Blend",
+  "group": "Blends and sets",
+  "rank": 14,
+  "rating": 4.9,
+  "reviews": 7602,
+  "blurb": "Multi-peptide dermal research blend for skin and tissue studies."
  },
  {
   "slug": "bac-water",
@@ -285,7 +495,13 @@
   "file": "product-bacwater.png",
   "spray": false,
   "label": "BAC WATER",
-  "dose": "30 mL"
+  "dose": "30 mL",
+  "category": "Laboratory Diluent",
+  "group": "Supplies",
+  "rank": 1,
+  "rating": 4.9,
+  "reviews": 7098,
+  "blurb": "Sterile bacteriostatic water supplied as a laboratory diluent."
  },
  {
   "slug": "sko-3-rt",
@@ -293,7 +509,13 @@
   "file": "sko3rt-vial.png",
   "spray": false,
   "label": "SKO-3 RT",
-  "dose": "10 mg"
+  "dose": "10 mg",
+  "category": "Triple-Receptor Agonist Peptide",
+  "group": "Peptides",
+  "rank": 999,
+  "rating": 4.8,
+  "reviews": 6748,
+  "blurb": "SKO-3 receptor research peptide for gastrointestinal studies."
  },
  {
   "slug": "sko-trz",
@@ -301,6 +523,12 @@
   "file": "sko-trz-vial.png",
   "spray": false,
   "label": "SKO-TRZ",
-  "dose": "15 mg"
+  "dose": "15 mg",
+  "category": "GLP-1 / GIP Dual Receptor Agonist",
+  "group": "Peptides",
+  "rank": 15,
+  "rating": 4.8,
+  "reviews": 4858,
+  "blurb": "Dual receptor agonist research peptide for in-vitro pathway studies."
  }
 ]

@@ -75,9 +75,11 @@ a{color:inherit;text-decoration:none}
 .claims{display:flex;gap:46px;align-items:flex-end}
 .claims b{display:block;font-family:"Syncopate",sans-serif;font-size:clamp(15px,2vw,30px);font-weight:700;letter-spacing:-.01em;line-height:1.05}
 .claims span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.82;margin-top:8px}
-.club{text-align:right;max-width:30ch}
+.club{text-align:right;max-width:40ch}
 .club b{display:block;font-family:"Syncopate",sans-serif;font-size:clamp(13px,1.2vw,18px);font-weight:700}
 .club span{display:block;font-size:13px;opacity:.82;margin:6px 0 12px}
+.club .cats{line-height:1.6}
+.club .cats b{display:inline;font-family:"Inter",sans-serif;font-size:13px;font-weight:600;opacity:1}
 .club a{display:inline-block;border:1px solid rgba(242,240,234,.5);padding:10px 18px;border-radius:2px;
   font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
@@ -137,8 +139,22 @@ a{color:inherit;text-decoration:none}
   transition:opacity calc(var(--d)*.45) var(--e)}
 .grid.focus .side{opacity:0}
 .side .nm{display:block;font-size:24px;font-weight:600;letter-spacing:-.015em}
+/* section leads and the category headings under the film */
+.lead{max-width:900px;margin:0 auto 20px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.lead h2{margin:0;font-family:"Syncopate",sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
+.lead p{margin:0;font-size:13px;color:var(--ink-soft)}
+.cat{max-width:900px;margin:34px auto 16px;display:flex;align-items:baseline;gap:10px;
+  font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;
+  padding-bottom:8px;border-bottom:1px solid var(--line,rgba(23,51,132,.24));
+  transition:max-width var(--d) var(--e)}
+.grid.focus .cat{max-width:520px}
+.cat i{font-style:normal;font-family:"Inter",sans-serif;font-weight:500;color:var(--ink-soft);letter-spacing:.1em}
+.cat:first-child{margin-top:0}
+
 .side .cd{display:block;font-size:13px;color:var(--ink-soft);margin-top:6px}
-.side .pr{display:block;margin-top:16px;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.14em}
+.side .rt{display:block;font-size:13px;margin-top:8px;font-variant-numeric:tabular-nums}
+.side .rt i{font-style:normal;color:var(--ink-soft)}
+.side .pr{display:block;margin-top:14px;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.14em}
 
 .under{display:block;height:0;overflow:hidden;opacity:0;text-align:center;
   transition:height var(--d) var(--e),opacity var(--d) var(--e),margin-top var(--d) var(--e)}
@@ -222,7 +238,10 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <section class="band" id="band" aria-label="SKO">
+  <section class="lead"><h2>Top sellers</h2><p>The eight people reorder, in order.</p></section>
+  <section class="grid" id="grid-top" aria-label="Top sellers"></section>
+
+  <section class="band" id="band" aria-label="The rest of the shelf">
     <video poster="vid/band.jpg" muted loop playsinline preload="metadata" aria-hidden="true">
       <source src="vid/band.webm" type="video/webm">
       <source src="vid/band.mp4" type="video/mp4">
@@ -234,14 +253,16 @@ a{color:inherit;text-decoration:none}
         <div><b>Third&nbsp;party</b><span>Tested, batch by batch</span></div>
       </div>
       <div class="club">
-        <b>SKO Club</b>
-        <span>Points on every order, and they never expire.</span>
-        <a href="#club">Join the club</a>
+        <b>The rest of the shelf</b>
+        <span class="cats" id="bandcats"></span>
+        <a href="#rest">See everything</a>
       </div>
     </div>
   </section>
 
-  <section class="grid" id="grid" aria-label="Catalogue"></section>
+
+  <section class="lead" id="rest"><h2>Everything else</h2><p>Thirty more, by category.</p></section>
+  <section class="grid" id="grid-rest" aria-label="Catalogue"></section>
   <footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
 </main>
 
@@ -251,33 +272,53 @@ const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathi
  'pt-141':44,'ss-31':79,'thymosin-alpha-1':69,'ara-290':59,'aod-9604':49,'kisspeptin':49,'5-amino-1mq':59,'adamax':64,
  'glow':99,'wolverine':89,'tesa-ipa':99,'cjc-1295':54};
 const priceOf=s=>PRICE[s]||49;
-const grid=document.getElementById('grid');
+const gTop=document.getElementById('grid-top'), gRest=document.getElementById('grid-rest');
+const grids=[gTop,gRest];
 let cards=[], PRODUCTS=[];
+const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
 
-fetch('products.json').then(r=>r.json()).then(P=>{
-  PRODUCTS=P;
-  grid.innerHTML=P.map((p,i)=>`
+const row=(p,i,eager)=>`
     <div class="card" data-i="${i}" role="button" tabindex="0" aria-expanded="false">
       <span class="stage">
         <span class="film"><video data-src="vid/p/${p.slug}.mp4" poster="vid/p/${p.slug}.jpg"
           muted loop playsinline preload="none" aria-hidden="true"></video></span>
         <span class="side">
           <span class="nm">${p.name}</span>
-          <span class="cd">${p.spray?'Nasal spray':'Lyophilised vial'} \u00b7 ${p.dose} \u00b7 research use only</span>
+          <span class="cd">${p.category} \u00b7 ${p.dose}</span>
+          <span class="rt">${p.rating.toFixed(1)} <i>\u00b7 ${p.reviews.toLocaleString()} reviews</i></span>
           <span class="pr">$${priceOf(p.slug)}.00</span>
         </span>
-        <img class="obj" src="img/${p.slug}.webp" alt="${p.name}" loading="${i<6?'eager':'lazy'}" decoding="async">
+        <img class="obj" src="img/${p.slug}.webp" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
       </span>
       <span class="under">
         <b>${p.name}</b>
-        <span>${p.spray?'Nasal spray':'Lyophilised vial'} \u00b7 ${p.dose}</span>
+        <span>${p.category} \u00b7 ${p.dose} \u00b7 ${p.rating.toFixed(1)} (${p.reviews.toLocaleString()})</span>
         <em>$${priceOf(p.slug)}.00</em>
         <button class="add" type="button">Add to bag</button>
       </span>
-    </div>`).join('');
-  cards=[...grid.querySelectorAll('.card')].map(el=>({
-    el, stage:el.querySelector('.stage'), vid:el.querySelector('.film video')
+    </div>`;
+
+fetch('products.json').then(r=>r.json()).then(P=>{
+  PRODUCTS=P;
+  P.forEach((p,i)=>p._i=i);
+  const top=[...P].sort((a,b)=>a.rank-b.rank).slice(0,8);
+  const topSet=new Set(top.map(p=>p.slug));
+  const rest=P.filter(p=>!topSet.has(p.slug));
+
+  gTop.innerHTML=top.map(p=>row(p,p._i,true)).join('');
+
+  const byGroup=GROUPS.map(g=>[g,rest.filter(p=>p.group===g)]).filter(([,l])=>l.length);
+  gRest.innerHTML=byGroup.map(([g,list])=>
+    `<h3 class="cat" id="cat-${g.replace(/\s+/g,'-').toLowerCase()}">${g}<i>${list.length}</i></h3>`+
+    list.map(p=>row(p,p._i,false)).join('')).join('');
+
+  document.getElementById('bandcats').innerHTML=
+    byGroup.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
+
+  cards=grids.flatMap(g=>[...g.querySelectorAll('.card')]).map(el=>({
+    el, grid:el.closest('.grid'), stage:el.querySelector('.stage'), vid:el.querySelector('.film video')
   }));
+  cards.forEach((c,n)=>c.el.dataset.c=n);
 });
 
 /* ---------------------------------------------------------------
@@ -298,7 +339,7 @@ function closeCard(){
   const c=openCard; openCard=null;
   c.el.classList.remove('on');
   c.el.setAttribute('aria-expanded','false');
-  grid.classList.remove('focus');
+  grids.forEach(g=>g.classList.remove('focus'));
   c.vid.pause();
 }
 function openAt(c){
@@ -306,7 +347,7 @@ function openAt(c){
   const before=c.el.getBoundingClientRect().top;
   if(openCard){ openCard.el.classList.remove('on'); openCard.el.setAttribute('aria-expanded','false'); openCard.vid.pause(); }
   openCard=c;
-  grid.classList.add('focus');
+  grids.forEach(g=>g.classList.add('focus'));
   c.el.classList.add('on');
   c.el.setAttribute('aria-expanded','true');
   if(!c.vid.src){ c.vid.src=c.vid.dataset.src; }
@@ -331,17 +372,18 @@ new IntersectionObserver(es=>es.forEach(e=>{
 /* click to open, click again to close; the Add button never opens a row */
 let bag=0;
 const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
-grid.addEventListener('click',e=>{
-  const el=e.target.closest('.card'); if(!el) return;
-  const c=cards[+el.dataset.i];
-  if(e.target.closest('.add')){ bag++; bagLink.textContent=`Bag (${bag})`; return; }
-  openAt(c);
-});
-grid.addEventListener('keydown',e=>{
-  if(e.key!=='Enter'&&e.key!==' ') return;
-  const el=e.target.closest('.card'); if(!el||e.target.closest('.add')) return;
-  e.preventDefault(); openAt(cards[+el.dataset.i]);
-});
+for(const g of grids){
+  g.addEventListener('click',e=>{
+    const el=e.target.closest('.card'); if(!el) return;
+    if(e.target.closest('.add')){ bag++; bagLink.textContent=`Bag (${bag})`; return; }
+    openAt(cards[+el.dataset.c]);
+  });
+  g.addEventListener('keydown',e=>{
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    const el=e.target.closest('.card'); if(!el||e.target.closest('.add')) return;
+    e.preventDefault(); openAt(cards[+el.dataset.c]);
+  });
+}
 addEventListener('keydown',e=>{ if(e.key==='Escape') closeCard(); });
 
 /* both lines of the wordmark are set to the measure */
