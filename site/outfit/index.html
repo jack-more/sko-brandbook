@@ -82,82 +82,74 @@ a{color:inherit;text-decoration:none}
   font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
 /* ---------- catalogue ----------------------------------------------------
-   Measured off the reference at 60fps (the right-hand phone), not eyeballed.
+   Measured off the reference at 60fps, then bent to fit what we actually
+   have: a film of every single vial, shot blue on snow, from the brand book.
 
-   browse   card 368x171, facts left, object at 79% across, centred in the row
-   focus    clicking a row re-sets the WHOLE list, not just that row: the list
-            pinches from 368 to 268 wide (x0.73), every row turns from a
-            horizontal band into a column - object centred, facts centred
-            beneath - the gaps tighten, and the rows you did not click fade
-            back. The row you did click grows 1.46x taller about its own
-            centre, so its neighbours are pushed apart, and its object grows
-            1.6x and breaks up through the top edge of its plate by about a
-            fifth of its own height.
+   browse   wide plate, facts left, the vial large at 78% across - big enough
+            to read the label, which is the whole point of the row
+   focus    clicking a row re-sets the WHOLE list: it pinches to 480, every
+            row turns from a band into a column with its vial centred, the
+            rows you did not click fade back - and the row you did click
+            breaks back out past the pinch to 150% and becomes a 16:9 film
+            of that exact vial landing in the snow. The cutout hands over to
+            the footage; the two are never on screen together.
 
-   Every property moves on one curve, cubic-bezier(.28,.06,.28,.96), and
-   opening is quicker than closing - 340ms out, 520ms back. That asymmetry
-   and the single shared curve are most of why it reads as smooth: nothing
-   arrives early, nothing arrives late, and reversing mid-flight just turns.
+   One curve for everything, cubic-bezier(.28,.06,.28,.96), 340ms opening and
+   520ms closing - both fitted to the reference's own height track.
    -------------------------------------------------------------------------- */
 .grid{--d:520ms;--e:cubic-bezier(.28,.06,.28,.96);
-  display:block;max-width:760px;margin:0 auto;padding-bottom:150px;
+  display:block;max-width:820px;margin:0 auto;padding-bottom:150px;
   transition:max-width var(--d) var(--e)}
 .grid.focus{--d:340ms;max-width:480px}
 
-.card{display:block;position:relative;width:100%;cursor:pointer;margin:0 0 24px;
-  transition:margin-bottom var(--d) var(--e),opacity var(--d) var(--e)}
+.card{display:block;position:relative;width:100%;margin:0 0 26px;cursor:pointer;
+  transition:margin-bottom var(--d) var(--e),opacity var(--d) var(--e),
+             width var(--d) var(--e),margin-left var(--d) var(--e)}
 .card:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.grid.focus .card{margin-bottom:70px;opacity:.5}
-.grid.focus .card.on{opacity:1}
+.grid.focus .card{margin-bottom:60px;opacity:.45}
+.grid.focus .card.on{opacity:1;width:150%;margin-left:-25%}
 
-/* the plate. overflow is visible so the object can break the top edge; the
-   scene is clipped by its own layer instead. */
-.stage{display:block;position:relative;height:146px;border-radius:4px;
+.stage{display:block;position:relative;height:200px;border-radius:4px;
   background:var(--tile);overflow:visible;will-change:height;
   transition:height var(--d) var(--e)}
 .grid.focus .stage{height:250px}
-.grid.focus .card.on .stage{height:420px}
+.grid.focus .card.on .stage{height:438px}
 
-/* the shot the product was taken in, revealed only under the open row and
-   rolled left and right by scroll so it reads as a place, not a backdrop */
-.scn{position:absolute;inset:0;border-radius:4px;overflow:hidden;opacity:0;
-  pointer-events:none;transition:opacity var(--d) var(--e)}
-.scn img{position:absolute;top:0;left:-14%;width:128%;height:100%;object-fit:cover;
-  filter:blur(2px) saturate(.9);will-change:transform}
-.scn:after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(4,10,32,.6),rgba(4,10,32,.24) 50%,rgba(4,10,32,.6))}
-.grid.focus .card.on .scn{opacity:1}
+/* that product's own film. nothing loads until the row is opened. */
+.film{position:absolute;inset:0;border-radius:4px;overflow:hidden;opacity:0;
+  pointer-events:none;transition:opacity calc(var(--d)*.55) var(--e) calc(var(--d)*.45)}
+.film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform}
+.grid.focus .card.on .film{opacity:1}
 
-.obj{position:absolute;top:50%;left:79%;height:78px;width:auto;
-  transform:translate(-50%,-50%);transform-origin:50% 50%;pointer-events:none;
-  will-change:transform,left,top;
-  filter:drop-shadow(0 9px 13px rgba(4,10,32,.2));
+/* the cutout. it travels and centres, then hands over to the film. */
+.obj{position:absolute;top:50%;left:78%;height:150px;width:auto;
+  transform:translate(-50%,-50%);pointer-events:none;will-change:transform,left,opacity;
+  filter:drop-shadow(0 14px 18px rgba(4,10,32,.22));
   transition:left var(--d) var(--e),top var(--d) var(--e),
-             transform var(--d) var(--e),filter var(--d) var(--e)}
-.grid.focus .obj{left:50%;transform:translate(-50%,-50%) scale(1.79)}
-.grid.focus .card.on .obj{top:16.7%;transform:translate(-50%,-50%) scale(3.13);
-  filter:drop-shadow(0 26px 30px rgba(4,10,32,.34))}
+             transform var(--d) var(--e),opacity calc(var(--d)*.5) var(--e)}
+.card:hover .obj{transform:translate(-50%,-52%) scale(1.045)}
+.grid.focus .obj{left:50%;transform:translate(-50%,-50%) scale(1.08)}
+.grid.focus .card:hover .obj{transform:translate(-50%,-52%) scale(1.12)}
+.grid.focus .card.on .obj{opacity:0}
 
-/* the facts, beside the object while browsing */
-.side{position:absolute;left:24px;right:30%;top:50%;transform:translateY(-50%);z-index:2;
+.side{position:absolute;left:30px;right:30%;top:50%;transform:translateY(-50%);z-index:2;
   transition:opacity calc(var(--d)*.45) var(--e)}
 .grid.focus .side{opacity:0}
-.side .nm{display:block;font-size:19px;font-weight:600;letter-spacing:-.01em}
-.side .cd{display:block;font-size:12px;color:var(--ink-soft);margin-top:4px}
-.side .pr{display:block;margin-top:12px;font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.14em}
+.side .nm{display:block;font-size:24px;font-weight:600;letter-spacing:-.015em}
+.side .cd{display:block;font-size:13px;color:var(--ink-soft);margin-top:6px}
+.side .pr{display:block;margin-top:16px;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.14em}
 
-/* and centred beneath it once the list re-sets. this is a real block, not an
-   overlay, so the row's own height carries it and the page reflows. */
 .under{display:block;height:0;overflow:hidden;opacity:0;text-align:center;
   transition:height var(--d) var(--e),opacity var(--d) var(--e),margin-top var(--d) var(--e)}
 .grid.focus .under{height:58px;margin-top:14px;opacity:1}
-.grid.focus .card.on .under{height:100px}
+.grid.focus .card.on .under{height:104px}
 .under b{display:block;font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700}
 .under span{display:block;font-size:11px;color:var(--ink-soft);margin-top:4px}
 .under em{display:block;font-style:normal;margin-top:6px;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.14em}
-.add{margin-top:12px;border:1px solid var(--ink);background:none;color:var(--ink);
+.add{margin-top:14px;border:1px solid var(--ink);background:none;color:var(--ink);
   font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:9px 20px;border-radius:2px;cursor:pointer;opacity:0;pointer-events:none;
+  padding:10px 22px;border-radius:2px;cursor:pointer;opacity:0;pointer-events:none;
   transition:opacity calc(var(--d)*.6) var(--e)}
 .grid.focus .card.on .add{opacity:1;pointer-events:auto}
 .add:hover{background:var(--ink);color:var(--bg)}
@@ -166,8 +158,8 @@ a{color:inherit;text-decoration:none}
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 
 @media (min-width:901px){
-  .grid{max-width:820px}
-  .grid.focus{max-width:480px}
+  .grid{max-width:900px}
+  .grid.focus{max-width:520px}
 }
 @media (max-width:900px){
   .meta{grid-template-columns:1fr 1fr;gap:18px}
@@ -179,28 +171,27 @@ a{color:inherit;text-decoration:none}
   .grid{max-width:none}
   .grid.focus{max-width:none;padding:0 13%}
   .card{margin-bottom:18px}
-  .grid.focus .card{margin-bottom:46px}
-  .stage{height:112px}
-  .obj{height:62px}
-  .grid.focus .stage{height:150px}
-  .grid.focus .card.on .stage{height:240px}
-  .grid.focus .obj{transform:translate(-50%,-50%) scale(1.35)}
-  .grid.focus .card.on .obj{transform:translate(-50%,-50%) scale(2.24)}
+  .grid.focus .card{margin-bottom:40px}
+  .grid.focus .card.on{width:135%;margin-left:-17.5%}
+  .stage{height:150px}
+  .obj{height:112px}
+  .grid.focus .stage{height:190px}
+  .grid.focus .card.on .stage{height:195px}
   .under b{font-size:11px}
   .under span{font-size:10px;margin-top:3px}
   .under em{margin-top:4px;font-size:13px}
   .grid.focus .under{height:52px;margin-top:11px}
-  .grid.focus .card.on .under{height:90px}
-  .add{margin-top:9px;padding:8px 16px;font-size:10px}
+  .grid.focus .card.on .under{height:94px}
+  .add{margin-top:10px;padding:9px 18px;font-size:10px}
   .side{left:16px;right:31%}
-  .side .nm{font-size:15px}
+  .side .nm{font-size:17px}
   .side .cd{font-size:11px}
   .side .pr{margin-top:8px;font-size:13px}
   .nav{gap:16px;font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){
   .band{opacity:1;transform:none}
-  .grid,.card,.stage,.obj,.side,.under,.scn,.add{transition:none}
+  .grid,.card,.stage,.obj,.side,.under,.film,.add{transition:none}
 }
 </style>
 </head>
@@ -268,13 +259,14 @@ fetch('products.json').then(r=>r.json()).then(P=>{
   grid.innerHTML=P.map((p,i)=>`
     <div class="card" data-i="${i}" role="button" tabindex="0" aria-expanded="false">
       <span class="stage">
-        <span class="scn"><img src="bg/scene.webp" alt="" loading="lazy" decoding="async"></span>
+        <span class="film"><video data-src="vid/p/${p.slug}.mp4" poster="vid/p/${p.slug}.jpg"
+          muted loop playsinline preload="none" aria-hidden="true"></video></span>
         <span class="side">
           <span class="nm">${p.name}</span>
           <span class="cd">${p.spray?'Nasal spray':'Lyophilised vial'} \u00b7 ${p.dose} \u00b7 research use only</span>
           <span class="pr">$${priceOf(p.slug)}.00</span>
         </span>
-        <img class="obj" src="img/${p.slug}.webp" alt="${p.name}" loading="${i<8?'eager':'lazy'}" decoding="async">
+        <img class="obj" src="img/${p.slug}.webp" alt="${p.name}" loading="${i<6?'eager':'lazy'}" decoding="async">
       </span>
       <span class="under">
         <b>${p.name}</b>
@@ -284,57 +276,50 @@ fetch('products.json').then(r=>r.json()).then(P=>{
       </span>
     </div>`).join('');
   cards=[...grid.querySelectorAll('.card')].map(el=>({
-    el, stage:el.querySelector('.stage'), scn:el.querySelector('.scn img')
+    el, stage:el.querySelector('.stage'), vid:el.querySelector('.film video')
   }));
 });
 
 /* ---------------------------------------------------------------
    Clicking a row re-sets the whole list, not just that row. The list
-   pinches narrower, every row turns from a band into a column, the
-   rows you did not click fade back, and the one you did grows and
-   pushes its neighbours apart while its object breaks up out of the
-   plate. All of it is two classes and one shared curve, so reversing
-   mid-flight just turns instead of restarting.
+   pinches, every row turns from a band into a column, the rows you
+   did not click fade back - and the one you did breaks back out past
+   the pinch and plays that product's own film: the vial landing in
+   the snow. The cutout fades out before the footage fades in, so
+   there is never a second vial on screen.
 
-   Scroll does one job here: it rolls the shot behind the open row.
+   Nothing downloads until a row is opened.
    --------------------------------------------------------------- */
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let openCard=null;
 
 function closeCard(){
   if(!openCard) return;
-  openCard.el.classList.remove('on');
-  openCard.el.setAttribute('aria-expanded','false');
-  openCard.scn.style.transform='';
-  openCard=null;
+  const c=openCard; openCard=null;
+  c.el.classList.remove('on');
+  c.el.setAttribute('aria-expanded','false');
   grid.classList.remove('focus');
+  c.vid.pause();
 }
 function openAt(c){
   if(openCard===c){ closeCard(); return; }
   const before=c.el.getBoundingClientRect().top;
-  if(openCard){ openCard.el.classList.remove('on'); openCard.el.setAttribute('aria-expanded','false'); }
+  if(openCard){ openCard.el.classList.remove('on'); openCard.el.setAttribute('aria-expanded','false'); openCard.vid.pause(); }
   openCard=c;
   grid.classList.add('focus');
   c.el.classList.add('on');
   c.el.setAttribute('aria-expanded','true');
-  // the list above this row just changed height, so hold the row still
-  // rather than letting the page jump under the pointer
+  if(!c.vid.src){ c.vid.src=c.vid.dataset.src; }
+  c.vid.currentTime=0;
+  if(!reduce) c.vid.play().catch(()=>{});
+  // the rows above just changed height, so hold this row still instead of
+  // letting the page jump out from under the pointer
   requestAnimationFrame(()=>{
     const after=c.el.getBoundingClientRect().top;
     if(Math.abs(after-before)>1) scrollBy({top:after-before,behavior:'instant'});
     if(!reduce) c.el.scrollIntoView({behavior:'smooth',block:'center'});
   });
 }
-
-function roll(){
-  if(openCard){
-    const r=openCard.stage.getBoundingClientRect();
-    const t=Math.min(1,Math.max(0,(r.top+r.height/2)/innerHeight));
-    openCard.scn.style.transform=`translateX(${(7-14*t).toFixed(2)}%)`;
-  }
-  requestAnimationFrame(roll);
-}
-if(!reduce) roll();
 
 /* the old hero shot rises in, and plays only while it is on screen */
 const band=document.getElementById('band'), bandVid=band.querySelector('video');
