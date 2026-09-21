@@ -330,6 +330,82 @@ a{color:inherit;text-decoration:none}
   .pbuy{width:100%;justify-content:space-between}
   .nav{gap:16px;font-size:16px}
 }
+/* ---------- phones: 1:1 with the reference clip ----------
+   Rest: one column of soft cards. Name, research line, dose, and the price
+   in wide-tracked mono on the left; the bottle small on the right at ~79%.
+   Tap a card: the whole list pinches, every card re-sets to a centred
+   column with its bottle above, the others fall back, and the tapped card
+   grows with its bottle breaking up through the top edge. Tap again to
+   close. Same curve as the reference: .28,.06,.28,.96 — 340ms open,
+   520ms close. */
+.mline,.madd{display:none}
+@media (max-width:600px){
+  .top{padding:12px 16px}
+  .mark img{height:26px}
+  .nav{gap:14px;font-size:15px;align-items:center}
+  .nav a{display:inline-flex;align-items:center;line-height:1;padding:6px 0;border-bottom:2px solid transparent}
+  .nav a.on{padding-bottom:6px}
+  .nav .club{gap:5px;margin:0}
+  .nav .lg{display:none}
+  .nav .club svg{width:17px;height:17px}
+  .dots{display:none}
+  .wrap{padding:0 16px}
+  .hero{padding-top:74px}
+  .strip{gap:6px;padding-bottom:30px}
+  .scell{padding:14px 14px 12px;gap:8px}
+  .scell .k{font-size:10px;letter-spacing:.12em}
+  .statement p{font-size:17px}
+  .shead{gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .shead h2{font-size:30px;flex:1 1 100%}
+  .shead .sn,.shead .sa{padding-bottom:0}
+  .cat{margin-top:30px}
+
+  .grid{--d:520ms;--e:cubic-bezier(.28,.06,.28,.96);grid-template-columns:1fr;gap:30px;
+    transition:padding var(--d) var(--e)}
+  .grid.mfocus{--d:340ms;padding:0 9%}
+  .tile{transition:opacity var(--d) var(--e)}
+  .grid.mfocus .tile{opacity:.42}
+  .grid.mfocus .tile.mon{opacity:1}
+  .tile:hover .lift{animation:none}
+  .shot i,.quick,.plate:after{display:none}
+
+  .shot{aspect-ratio:auto;height:152px;overflow:visible;transition:height var(--d) var(--e)}
+  .plate{inset:0;border-radius:16px;background:var(--tile);box-shadow:none}
+  .stage3d{left:63%;right:auto;width:28%;top:20px;bottom:auto;height:112px;transform:none;
+    transition:left var(--d) var(--e),width var(--d) var(--e),top var(--d) var(--e),height var(--d) var(--e)}
+  .btl{object-position:center center;filter:drop-shadow(0 8px 10px rgba(var(--cast),.22))}
+
+  .face3{left:0;right:38%;top:0;bottom:0;padding:18px 0 16px 20px;display:flex;flex-direction:column;justify-content:center;
+    text-align:left;align-items:flex-start;
+    transition:left var(--d) var(--e),right var(--d) var(--e),top var(--d) var(--e),padding var(--d) var(--e)}
+  .face3 .nm{display:contents}
+  .face3 .eyeb,.face3 .rcat{display:none}
+  .face3 .nm b{order:1;font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.15;white-space:normal;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .face3 .mline{display:block;order:2;margin-top:6px;font-size:13px;color:var(--ink-soft);line-height:1.3}
+  .face3 .nm em{order:3;margin-top:14px;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:21px;font-weight:400;
+    letter-spacing:.12em;color:var(--ink-soft)}
+  .face3 .perks{order:4;display:none}
+  .face3 .madd{order:5}
+
+  /* focus: every card becomes a centred column */
+  .grid.mfocus .shot{height:190px}
+  .grid.mfocus .stage3d{left:36%;width:28%;top:14px;height:76px}
+  .grid.mfocus .face3{left:0;right:0;top:92px;padding:0 16px 14px;justify-content:flex-start;align-items:center;text-align:center}
+  .grid.mfocus .face3 .nm b{font-size:16px}
+  .grid.mfocus .face3 .nm em{margin-top:8px;font-size:17px}
+
+  /* the tapped card grows, and its bottle breaks the top edge */
+  .grid.mfocus .tile.mon .shot{height:344px}
+  .grid.mfocus .tile.mon .stage3d{left:24%;width:52%;top:-34px;height:184px}
+  .grid.mfocus .tile.mon .face3{top:160px}
+  .grid.mfocus .tile.mon .face3 .nm b{font-size:21px}
+  .grid.mfocus .tile.mon .face3 .nm em{font-size:22px;color:var(--ink)}
+  .grid.mfocus .tile.mon .face3 .perks{display:flex;justify-content:center;gap:14px;margin-top:10px;padding-top:0;border:0;font-size:9.5px}
+  .grid.mfocus .tile.mon .madd{display:block;margin-top:14px;width:100%;border:0;border-radius:99px;padding:14px 16px;
+    background:var(--ink);color:var(--ground);font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .grid.mfocus .tile.mon .madd.in{background:#1E7A4F;color:#fff}
+}
 @media (prefers-reduced-motion:reduce){
   .band{opacity:1;transform:none}
   .grid,.tile,.panel,.btl,.plate{transition:none}
@@ -346,7 +422,7 @@ a{color:inherit;text-decoration:none}
     <a href="club/" class="club" id="clubOpen" aria-label="Open SKO Club" aria-controls="drawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
-      </svg>SKO Club</a>
+      </svg><span class="lg">SKO&nbsp;</span>Club</a>
     <a href="#bag">Bag (0)</a>
     <span class="dots" role="group" aria-label="Ground">
       <button data-set="bone" aria-pressed="true" aria-label="Bone"></button>
@@ -484,6 +560,8 @@ const tile=(p,i,eager)=>`
         <span class="nm"><b>${p.name}</b><em>${money(p.price)}</em></span>
         <span class="rcat">${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
         <span class="perks"><span><s>${pts(p.price)} pts</s> SKO Club</span><span>The Drop <s>1 in 100</s></span></span>
+        <span class="mline">${p.research}${p.dose?' \u00b7 '+p.dose:''}</span>
+        <button class="madd" type="button" data-add="${p.slug}">Add to bag \u00b7 ${money(p.price)}</button>
       </span>
     </span>
   </div>`;
@@ -689,8 +767,21 @@ function openTile(el){
   });
 }
 
+const phone=matchMedia('(max-width:600px)');
+let mOn=null;
+function mFocus(el){
+  const g=el.closest('.grid');
+  if(mOn===el){ g.classList.remove('mfocus'); el.classList.remove('mon'); mOn=null; return; }
+  grids.forEach(x=>x.classList.remove('mfocus')); if(mOn) mOn.classList.remove('mon');
+  mOn=el; g.classList.add('mfocus'); el.classList.add('mon');
+  setTimeout(()=>{ if(mOn===el) el.scrollIntoView({behavior:'smooth',block:'center'}); },200);
+}
 for(const g of grids){
   g.addEventListener('click',e=>{
+    const ma=e.target.closest('.madd');
+    if(ma){ e.stopPropagation(); addToBag(ma.dataset.add); ma.classList.add('in');
+      ma.textContent=`In bag \u00b7 ${BAG.get(ma.dataset.add)}`; return; }
+    if(phone.matches){ const el=e.target.closest('.tile'); if(el){ mFocus(el); return; } }
     const q=e.target.closest('.quick');
     if(q){ e.stopPropagation(); addToBag(q.dataset.add); return; }
     const el=e.target.closest('.tile'); if(!el) return;
