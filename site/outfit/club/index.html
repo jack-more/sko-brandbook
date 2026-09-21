@@ -124,6 +124,24 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 14px 40px rgba(4,10,32,.35);transition:transform .4s cubic-bezier(.28,.06,.28,.96),opacity .4s ease}
 .toast.on{transform:translate(-50%,0);opacity:1}
 .toast b{color:#71A7F2}
+.about{background:var(--tile);border-radius:12px;padding:24px;margin:0 0 40px;display:grid;gap:22px}
+.aq{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
+.al b{display:block;font-size:16px;font-weight:650;letter-spacing:-.01em}
+.al span{display:block;margin-top:4px;font-size:13px;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--rule);background:transparent;color:var(--ink);font:inherit;font-size:13px;font-weight:600;
+  padding:10px 14px;border-radius:99px;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.af{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:18px;border-top:1px solid var(--rule)}
+.af .prog{flex:1;max-width:360px}
+.af .prog span{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:8px}
+.about .meter2{height:6px;border-radius:99px;background:rgba(var(--cast),.1);overflow:hidden}
+.about .meter2 i{display:block;height:100%;background:#173384;border-radius:99px;transition:width .4s ease}
+.about .go{border:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  padding:13px 20px;border-radius:99px;background:var(--ink);color:var(--ground)}
+.about .go[disabled]{background:rgba(var(--cast),.1);color:var(--ink-soft);cursor:default}
+.about .go.done{background:#1E7A4F;color:#fff}
 .jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 40px}
 .job{background:var(--tile);border-radius:6px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:8px;
   border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
@@ -194,6 +212,8 @@ a{color:inherit;text-decoration:none}
   .member>*+*{border-left:0;border-top:1px solid rgba(242,240,234,.12)}
   .member>*{padding:22px 20px}
   .jobs{grid-template-columns:1fr}
+  .aq{grid-template-columns:1fr;gap:10px}
+  .af{flex-direction:column;align-items:stretch}
   .rail2{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:-20px;padding-right:20px}
   .rail2 .card2{flex:0 0 84%;scroll-snap-align:start}
   .lvls{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;margin-right:-20px;padding-right:20px}
@@ -248,6 +268,22 @@ a{color:inherit;text-decoration:none}
 
   <div class="sec" id="challenges"><h2>Challenges</h2><span>Do the thing, post it, get the reward.</span></div>
   <div class="rail2" id="chal"></div>
+
+  <div class="sec" id="about"><h2>About you</h2><span>Tell us what you research and the shelf sorts itself around it.</span></div>
+  <div class="about">
+    <div class="aq">
+      <div class="al"><b>What do you research?</b><span>Pick any. The shop leads with these.</span></div>
+      <div class="chips" id="areas"></div>
+    </div>
+    <div class="aq">
+      <div class="al"><b>How often do you order?</b><span>So restock reminders land when you need them.</span></div>
+      <div class="chips" id="cadence"></div>
+    </div>
+    <div class="af">
+      <div class="prog"><span id="aprog">0 of 2 answered</span><div class="meter2"><i id="abar" style="width:0%"></i></div></div>
+      <button class="go" type="button" id="asave" disabled>Save &middot; +10 pts</button>
+    </div>
+  </div>
 
   <div class="sec"><h2>Rewards</h2><span>Points buy product. Some things can&rsquo;t be bought &mdash; they have to be earned.</span></div>
   <div class="rail2" id="rew"></div>
@@ -345,7 +381,12 @@ const toast=document.createElement('div'); toast.className='toast'; document.bod
 let tt; function say(h){ toast.innerHTML=h; toast.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('on'),2200); }
 
 /* the board actually pays out, so the numbers move while you read them */
-let PTS=0;
+/* one balance for the whole study, shared with the store's club drawer.
+   It only lives in this browser; the real one comes from the account. */
+const KEY='sko-club-v1';
+const load=()=>{ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } };
+const save=o=>{ try{ localStorage.setItem(KEY,JSON.stringify(Object.assign(load(),o))); }catch(e){} };
+let PTS=+load().pts||0;
 const fmt=n=>n.toLocaleString();
 const ptsEl=document.getElementById('pts'), sub=document.getElementById('ptsub'),
       bar=document.getElementById('bar');
@@ -354,7 +395,7 @@ function countTo(v){ const a=shown, t0=performance.now();
   (function f(t){ const k=Math.min(1,(t-t0)/600), e=1-Math.pow(1-k,3);
     shown=Math.round(a+(v-a)*e); ptsEl.textContent=fmt(shown); if(k<1) requestAnimationFrame(f); })(t0); }
 function paint(){
-  countTo(PTS); paintRewards();
+  save({pts:PTS}); countTo(PTS); paintRewards();
   const to=Math.max(0,400-(PTS%400));
   sub.textContent=PTS>=400?`That is ${Math.floor(PTS/400)} free peptide${PTS>=800?'s':''} on the shelf.`
                           :`400 points is a free peptide. You are ${fmt(to)} away.`;
@@ -375,7 +416,27 @@ document.addEventListener('click',e=>{
   const r=e.target.closest('[data-r]'); if(r&&!r.disabled){ const rw=REW[+r.dataset.r];
     PTS-=rw.cost; paint(); say(`<b>Redeemed</b> \u2014 ${rw.t}`); }
 });
-paint();
+/* About you: two questions, paid once when both are answered */
+const AREAS=['Metabolic','Repair & recovery','Growth hormone axis','Skin & pigment','Cognitive & sleep','Immune & signalling'];
+const CAD=['Every month','Every 2\u20133 months','A few times a year','Just starting'];
+const st=load(), pick={areas:new Set(st.areas||[]),cad:st.cad||null};
+const chip=(t,on)=>`<button class="chip" type="button" aria-pressed="${on}">${t}</button>`;
+function paintAbout(){
+  $('areas').innerHTML=AREAS.map(a=>chip(a,pick.areas.has(a))).join('');
+  $('cadence').innerHTML=CAD.map(a=>chip(a,pick.cad===a)).join('');
+  const n=(pick.areas.size?1:0)+(pick.cad?1:0);
+  $('aprog').textContent=`${n} of 2 answered`; $('abar').style.width=(n*50)+'%';
+  const b=$('asave'), paid=!!load().profilePaid;
+  b.disabled=paid||n<2; b.classList.toggle('done',paid);
+  b.textContent=paid?'Saved \u2713':'Save \u00b7 +10 pts';
+}
+$('areas').addEventListener('click',e=>{const c=e.target.closest('.chip'); if(!c) return;
+  const t=c.textContent; pick.areas.has(t)?pick.areas.delete(t):pick.areas.add(t); save({areas:[...pick.areas]}); paintAbout();});
+$('cadence').addEventListener('click',e=>{const c=e.target.closest('.chip'); if(!c) return;
+  pick.cad=c.textContent; save({cad:pick.cad}); paintAbout();});
+$('asave').addEventListener('click',()=>{ if(load().profilePaid) return;
+  PTS+=10; save({profilePaid:true}); paint(); paintAbout(); say('<b>+10 pts</b> \u2014 Profile complete'); });
+paintAbout();
 paint();
 
 document.querySelector('.dots').addEventListener('click',e=>{
