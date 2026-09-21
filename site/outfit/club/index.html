@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" data-theme="bone">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKO Club — storefront study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------
+   SKO storefront study.
+   Structure and typographic scale: outfit.hellohello.is.
+   Product behaviour: the artifact app — the object climbs out of its
+   tile as it crosses the focus band, and the scene it was shot in
+   rolls behind it, so a tile has depth instead of being a swatch.
+   --------------------------------------------------------------- */
+:root{
+  --ground:#EAE7E1; --ink:#173384; --ink-soft:rgba(23,51,132,.55);
+  --tile:#E2DED7; --rule:rgba(23,51,132,.35); --shadow:23,51,132; --scene:1;
+  --plate-a:#EDEFF5; --plate-b:#C4CADA; --glow:130,180,248; --glow-o:.95; --cast:4,10,32;
+}
+:root[data-theme="night"]{
+  --ground:#0C0D10; --ink:#EFEDE8; --ink-soft:rgba(239,237,232,.5);
+  --tile:#17181C; --rule:rgba(239,237,232,.28); --shadow:0,0,0; --scene:.85;
+  --plate-a:#1E222B; --plate-b:#0D0E12; --glow:113,167,242; --glow-o:.55; --cast:0,0,0;
+}
+:root[data-theme="blue"]{
+  --ground:#173384; --ink:#EDEAE3; --ink-soft:rgba(237,234,227,.6);
+  --tile:#20408F; --rule:rgba(237,234,227,.34); --shadow:4,12,46; --scene:.9;
+  --plate-a:#24469E; --plate-b:#132B6E; --glow:150,192,255; --glow-o:.42; --cast:2,8,34;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.35;letter-spacing:-.01em;
+  transition:background .45s ease,color .45s ease;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{padding:0 20px}
+
+.top{position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;padding:16px 20px;
+  background:color-mix(in srgb,var(--ground) 84%,transparent);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease}
+.top.stuck{border-bottom-color:var(--rule)}
+.mark{display:block;line-height:0}
+.mark img{height:30px;width:auto;display:block}
+.mark .w{display:none}
+:root[data-theme="night"] .mark .b,:root[data-theme="blue"] .mark .b{display:none}
+:root[data-theme="night"] .mark .w,:root[data-theme="blue"] .mark .w{display:block}
+.nav{display:flex;align-items:center;gap:30px;font-size:19px;font-weight:500}
+.nav a.on{border-bottom:2px solid var(--ink);padding-bottom:2px}
+.nav .club{display:inline-flex;align-items:center;gap:8px}
+.nav .club svg{width:19px;height:19px;flex:0 0 auto}
+.dots{display:flex;gap:9px;margin-left:6px}
+.dots button{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink);padding:0;cursor:pointer;background:transparent}
+.dots button[data-set="bone"]{background:#F2EFEA}
+.dots button[data-set="night"]{background:#0C0D10;border-color:#0C0D10}
+.dots button[data-set="blue"]{background:#173384;border-color:#173384}
+.dots button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:2px}
+
+
+/* ---------- SKO Club ------------------------------------------------------
+   Modelled on the Bum Club's machinery — a named currency, a balance and a
+   level, a board of jobs each worth a fixed amount, a redeem rate you can
+   see, and a rewards shelf — on SKO's own numbers, which come from the
+   brand book's loyalty page and the Plinko page, not from anywhere else.
+   -------------------------------------------------------------------------- */
+.wrap{padding:0 20px;max-width:1180px;margin:0 auto}
+.chero{padding:104px 0 26px}
+.chero h1{margin:0;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.02em;
+  line-height:.95;text-transform:uppercase;font-size:clamp(38px,8.4vw,120px)}
+.chero p{margin:14px 0 0;max-width:46ch;font-size:16px;line-height:1.45}
+.rule{height:3px;background:var(--ink);margin:18px 0 0}
+
+.bal{display:grid;grid-template-columns:1.15fr 1fr;gap:6px;margin:26px 0 34px}
+.bal .box{background:var(--tile);border-radius:6px;padding:26px 24px}
+.bal .box.dark{background:#0b1430;color:#F2F0EA;position:relative;overflow:hidden}
+.bal .box.dark:after{content:"";position:absolute;inset:0;
+  background:radial-gradient(62% 52% at 78% 12%,rgba(113,167,242,.5),rgba(113,167,242,0) 70%)}
+.bal .box.dark>*{position:relative;z-index:2}
+.k{font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+.bignum{font-size:clamp(38px,6vw,66px);font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;margin:10px 0 0}
+.sub{font-size:13px;opacity:.78;margin-top:8px}
+.meter{height:6px;border-radius:99px;background:rgba(242,240,234,.22);margin:18px 0 8px;overflow:hidden}
+.meter i{display:block;height:100%;background:#F2F0EA;border-radius:99px}
+
+.sec{margin:0 0 12px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.sec h2{margin:0;font-family:"Syncopate",sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
+.sec span{font-size:13px;color:var(--ink-soft)}
+
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 40px}
+.job{background:var(--tile);border-radius:6px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:8px;
+  border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
+  transition:transform .3s var(--e,cubic-bezier(.28,.06,.28,.96)),background .3s ease}
+.job:hover{transform:translateY(-3px)}
+.job b{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.job .pt{font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em}
+.job p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.42}
+.job .go{margin-top:auto;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+
+.redeem{background:var(--tile);border-radius:6px;padding:26px 24px;margin:0 0 40px}
+.redeem .row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.redeem input[type=range]{width:100%;margin:20px 0 6px;accent-color:var(--ink)}
+.redeem .out{font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.redeem .fine{font-size:12px;color:var(--ink-soft);margin-top:4px}
+
+.levels{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:0 0 40px}
+.lv{background:var(--tile);border-radius:6px;overflow:hidden}
+.lv img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.lv .t{padding:14px 14px 16px}
+.lv .t b{display:block;font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em}
+.lv .t span{display:block;margin-top:6px;font-size:11px;color:var(--ink-soft)}
+
+.ways{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0 0 60px}
+.way{background:var(--tile);border-radius:6px;padding:20px}
+.way .k{opacity:.6}
+.way b{display:block;margin:10px 0 6px;font-size:15px;font-weight:600}
+.way p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+
+.foot{border-top:3px solid var(--ink);padding:16px 0 70px;display:flex;justify-content:space-between;
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+
+@media (max-width:900px){
+  .bal{grid-template-columns:1fr}
+  .jobs{grid-template-columns:1fr}
+  .levels{grid-template-columns:repeat(3,1fr)}
+  .ways{grid-template-columns:1fr 1fr}
+  .nav{gap:14px;font-size:15px}
+  .chero{padding:88px 0 20px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="mark" href="../" aria-label="SKO Compounds"><img class="b" src="../img/ui/shield-blue.png" alt=""><img class="w" src="../img/ui/shield-white.png" alt=""></a>
+  <nav class="nav">
+    <a href="../">Shop</a>
+    <a href="#" class="on club" aria-label="SKO Club">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
+      </svg>SKO Club</a>
+    <a href="../#bag">Bag (0)</a>
+    <span class="dots" role="group" aria-label="Ground">
+      <button data-set="bone" aria-pressed="true" aria-label="Bone"></button>
+      <button data-set="night" aria-pressed="false" aria-label="Night"></button>
+      <button data-set="blue" aria-pressed="false" aria-label="Blue"></button>
+    </span>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="chero">
+    <h1>SKO Club</h1>
+    <p>One point per dollar, on everything. Points buy product &mdash; four hundred is a free peptide.
+       Levels are lifetime spend, they are never taken away, and each one hands you an object you keep.</p>
+    <div class="rule"></div>
+  </section>
+
+  <section class="bal">
+    <div class="box dark">
+      <div class="k">Your points</div>
+      <div class="bignum" id="pts">0</div>
+      <div class="sub" id="ptsub">400 points is a free peptide. You are 400 away.</div>
+      <div class="meter"><i id="bar" style="width:0%"></i></div>
+      <div class="k" style="opacity:.55">Progress to your next free vial</div>
+    </div>
+    <div class="box">
+      <div class="k">Your level</div>
+      <div class="bignum">01</div>
+      <div class="sub">Pigment. Lifetime spend sets the level, and the last one &mdash; the bracelet, at
+        $150,000 lifetime &mdash; is made once.</div>
+    </div>
+  </section>
+
+  <div class="sec"><h2>Earn</h2><span>Spend is one road. There are five more.</span></div>
+  <div class="jobs" id="jobs"></div>
+
+  <div class="sec"><h2>Redeem</h2><span>Points buy product, and mostly they buy vials.</span></div>
+  <div class="redeem">
+    <div class="row"><div class="k">Free peptide</div><div class="k" id="have">0 points available</div></div>
+    <input type="range" id="sl" min="0" max="1200" step="50" value="0" aria-label="Points to spend">
+    <div class="row">
+      <div><div class="out" id="out">0 points</div>
+        <div class="fine" id="fine">400 points is a free peptide. About a tenth of what you spent comes back on every rung.</div></div>
+      <button class="pbuy-btn" id="rd" style="border:0;background:var(--ink);color:var(--ground);font:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border-radius:2px;cursor:pointer">Redeem</button>
+    </div>
+  </div>
+
+  <div class="sec"><h2>The six levels</h2><span>Thresholds beyond the last one are still Billy&rsquo;s to set.</span></div>
+  <div class="levels" id="levels"></div>
+
+  <div class="sec"><h2>Ways to win</h2><span>Missions &middot; The Live &middot; Codes &middot; Referrals &middot; The Drop</span></div>
+  <div class="ways" id="ways"></div>
+
+  <footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
+</main>
+
+<script>
+const JOBS=[
+ {n:'Leave a review',       p:'+100 pts', d:'A written review on the vial you actually ran. One per product.', go:'Write one'},
+ {n:'Leave a comment',      p:'+25 pts',  d:'Comment on a post or a live and it lands in your balance.', go:'Go comment'},
+ {n:'Follow SKO',           p:'+50 pts',  d:'Follow the page once, on any platform. Counts one time.', go:'Follow'},
+ {n:'Catch the live code',  p:'+200 pts', d:'Read out once, every week on the live. Four lives in a row is a free box.', go:'When we go live'},
+ {n:'Refer a researcher',   p:'+350 pts', d:'Each. Three who order is a free vial. Ten is your own code with ten percent back.', go:'Get your link'},
+ {n:'Take your daily drop', p:'Free',     d:'One free drop a day for account holders, no purchase needed. Tokens every time.', go:'Open The Drop'},
+];
+const LEVELS=[
+ ['01','Pigment','badge-pigment'],['02','Foil','badge-foil'],['03','Emboss','badge-emboss'],
+ ['04','Cast','badge-cast'],['05','Cap','badge-cap'],['06','The bracelet','badge-mark'],
+];
+const WAYS=[
+ ['01','Missions','A board of small jobs with a reward on each: a review, three orders in ninety days, four lives in a row. Progress bars, not fine print.'],
+ ['02','The Live','Stamps for showing up. Every live you attend is a stamp, four in a row is a free box, and the code read out is worth two hundred.'],
+ ['03','Codes','Five kinds: live codes, creator codes, codes printed inside the box, multiplier codes, and mystery codes that could be anything on the shelf.'],
+ ['04','Referrals','A ladder, not a link. Three who order is a free vial, ten is your own creator code with ten percent back, fifty is a Full Box every quarter.'],
+ ['05','The Drop','One order in a hundred ships with a chrome cap instead of navy. Same compound, same batch, same COA &mdash; and a Full Box free when you post it.'],
+];
+document.getElementById('jobs').innerHTML=JOBS.map(j=>
+ `<button class="job" type="button" data-p="${j.p}"><span class="pt">${j.p}</span><b>${j.n}</b><p>${j.d}</p><span class="go">${j.go} &rarr;</span></button>`).join('');
+document.getElementById('levels').innerHTML=LEVELS.map(([n,t,img],i)=>
+ `<div class="lv"><img src="../img/badge/${img}.webp" alt="" loading="lazy"><div class="t"><b>${n} &middot; ${t}</b>
+  <span>${i===5?'$150,000 lifetime':'Threshold: Billy confirms'}</span></div></div>`).join('');
+document.getElementById('ways').innerHTML=WAYS.map(([k,t,d])=>
+ `<div class="way"><div class="k">${k}</div><b>${t}</b><p>${d}</p></div>`).join('');
+
+/* the board actually pays out, so the numbers move while you read them */
+let PTS=0;
+const fmt=n=>n.toLocaleString();
+const ptsEl=document.getElementById('pts'), sub=document.getElementById('ptsub'),
+      bar=document.getElementById('bar'), have=document.getElementById('have'),
+      sl=document.getElementById('sl'), out=document.getElementById('out'), fine=document.getElementById('fine');
+function paint(){
+  ptsEl.textContent=fmt(PTS);
+  const to=Math.max(0,400-(PTS%400));
+  sub.textContent=PTS>=400?`That is ${Math.floor(PTS/400)} free peptide${PTS>=800?'s':''} on the shelf.`
+                          :`400 points is a free peptide. You are ${fmt(to)} away.`;
+  bar.style.width=Math.min(100,(PTS%400)/4)+'%';
+  have.textContent=`${fmt(PTS)} points available`;
+  sl.max=Math.max(400,Math.ceil(PTS/50)*50);
+  if(+sl.value>PTS) sl.value=PTS;
+  paintSlider();
+}
+function paintSlider(){
+  const v=+sl.value;
+  out.textContent=`${fmt(v)} points`;
+  const vials=Math.floor(v/400);
+  fine.textContent=vials?`${vials} free peptide${vials>1?'s':''}. 400 points is one.`
+                        :'400 points is a free peptide. About a tenth of what you spent comes back on every rung.';
+}
+sl.addEventListener('input',paintSlider);
+document.getElementById('jobs').addEventListener('click',e=>{
+  const b=e.target.closest('.job'); if(!b) return;
+  const m=/\+([0-9]+)/.exec(b.dataset.p); if(!m) return;
+  PTS+=+m[1]; paint();
+});
+document.getElementById('rd').addEventListener('click',()=>{ PTS=Math.max(0,PTS-(+sl.value)); sl.value=0; paint(); });
+paint();
+
+document.querySelector('.dots').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.documentElement.dataset.theme=b.dataset.set;
+  document.querySelectorAll('.dots button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+});
+</script>
+</body>
+</html>

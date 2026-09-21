@@ -14,7 +14,8 @@
   "kind": "vial",
   "tile": "img/v/5-amino-1mq.webp",
   "film": "vid/p/5-amino-1mq.mp4",
-  "poster": "vid/p/5-amino-1mq.jpg"
+  "poster": "vid/p/5-amino-1mq.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "cjc-1295",
@@ -31,7 +32,8 @@
   "kind": "vial",
   "tile": "img/v/cjc-1295-ipamorelin.webp",
   "film": "vid/p/cjc-1295.mp4",
-  "poster": "vid/p/cjc-1295.jpg"
+  "poster": "vid/p/cjc-1295.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "ghk-cu",
@@ -48,7 +50,8 @@
   "kind": "vial",
   "tile": "img/v/ghk-cu.webp",
   "film": "vid/p/ghk-cu.mp4",
-  "poster": "vid/p/ghk-cu.jpg"
+  "poster": "vid/p/ghk-cu.jpg",
+  "research": "Skin & pigment"
  },
  {
   "slug": "glow",
@@ -65,7 +68,8 @@
   "kind": "vial",
   "tile": "img/v/glow.webp",
   "film": "vid/p/glow.mp4",
-  "poster": "vid/p/glow.jpg"
+  "poster": "vid/p/glow.jpg",
+  "research": "Skin & pigment"
  },
  {
   "slug": "glutathione",
@@ -82,7 +86,8 @@
   "kind": "vial",
   "tile": "img/v/glutathione.webp",
   "film": "vid/p/glutathione.mp4",
-  "poster": "vid/p/glutathione.jpg"
+  "poster": "vid/p/glutathione.jpg",
+  "research": "Skin & pigment"
  },
  {
   "slug": "mots-c",
@@ -99,7 +104,8 @@
   "kind": "vial",
   "tile": "img/v/mots-c.webp",
   "film": "vid/p/mots-c.mp4",
-  "poster": "vid/p/mots-c.jpg"
+  "poster": "vid/p/mots-c.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "adamax",
@@ -116,7 +122,8 @@
   "kind": "vial",
   "tile": "img/v/adamax.webp",
   "film": "vid/p/adamax.mp4",
-  "poster": "vid/p/adamax.jpg"
+  "poster": "vid/p/adamax.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "aod-9604",
@@ -133,7 +140,8 @@
   "kind": "vial",
   "tile": "img/v/aod-9604.webp",
   "film": "vid/p/aod-9604.mp4",
-  "poster": "vid/p/aod-9604.jpg"
+  "poster": "vid/p/aod-9604.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "ara-290",
@@ -150,7 +158,8 @@
   "kind": "vial",
   "tile": "img/v/ara290.webp",
   "film": "vid/p/ara-290.mp4",
-  "poster": "vid/p/ara-290.jpg"
+  "poster": "vid/p/ara-290.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "bpc-157",
@@ -167,7 +176,8 @@
   "kind": "vial",
   "tile": "img/v/bpc-157.webp",
   "film": "vid/p/bpc-157.mp4",
-  "poster": "vid/p/bpc-157.jpg"
+  "poster": "vid/p/bpc-157.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "cagrilintide",
@@ -184,7 +194,8 @@
   "kind": "vial",
   "tile": "img/v/cagrilintide.webp",
   "film": "vid/p/cagrilintide.mp4",
-  "poster": "vid/p/cagrilintide.jpg"
+  "poster": "vid/p/cagrilintide.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "dsip",
@@ -201,7 +212,8 @@
   "kind": "vial",
   "tile": "img/v/dsip.webp",
   "film": "vid/p/dsip.mp4",
-  "poster": "vid/p/dsip.jpg"
+  "poster": "vid/p/dsip.jpg",
+  "research": "Cognitive & sleep"
  },
  {
   "slug": "igf1-lr3",
@@ -218,7 +230,8 @@
   "kind": "vial",
   "tile": "img/v/igf1-lr3.webp",
   "film": "vid/p/igf1-lr3.mp4",
-  "poster": "vid/p/igf1-lr3.jpg"
+  "poster": "vid/p/igf1-lr3.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "ipamorelin",
@@ -235,7 +248,8 @@
   "kind": "vial",
   "tile": "img/v/ipamorelin.webp",
   "film": "vid/p/ipamorelin.mp4",
-  "poster": "vid/p/ipamorelin.jpg"
+  "poster": "vid/p/ipamorelin.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "kisspeptin",
@@ -252,7 +266,8 @@
   "kind": "vial",
   "tile": "img/v/kisspeptin-10.webp",
   "film": "vid/p/kisspeptin.mp4",
-  "poster": "vid/p/kisspeptin.jpg"
+  "poster": "vid/p/kisspeptin.jpg",
+  "research": "Immune & signalling"
  },
  {
   "slug": "kpv",
@@ -269,7 +284,8 @@
   "kind": "vial",
   "tile": "img/v/kpv.webp",
   "film": "vid/p/kpv.mp4",
-  "poster": "vid/p/kpv.jpg"
+  "poster": "vid/p/kpv.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "mt-1",
@@ -286,7 +302,8 @@
   "kind": "vial",
   "tile": "img/v/mt-1.webp",
   "film": "vid/p/mt-1.mp4",
-  "poster": "vid/p/mt-1.jpg"
+  "poster": "vid/p/mt-1.jpg",
+  "research": "Skin & pigment"
  },
  {
   "slug": "mt-2",
@@ -303,7 +320,8 @@
   "kind": "vial",
   "tile": "img/v/mt-2.webp",
   "film": "vid/p/mt-2.mp4",
-  "poster": "vid/p/mt-2.jpg"
+  "poster": "vid/p/mt-2.jpg",
+  "research": "Skin & pigment"
  },
  {
   "slug": "nad",
@@ -320,7 +338,8 @@
   "kind": "vial",
   "tile": "img/v/nad-plus.webp",
   "film": "vid/p/nad.mp4",
-  "poster": "vid/p/nad.jpg"
+  "poster": "vid/p/nad.jpg",
+  "research": "Immune & signalling"
  },
  {
   "slug": "pt-141",
@@ -337,7 +356,8 @@
   "kind": "vial",
   "tile": "img/v/pt-141.webp",
   "film": "vid/p/pt-141.mp4",
-  "poster": "vid/p/pt-141.jpg"
+  "poster": "vid/p/pt-141.jpg",
+  "research": "Immune & signalling"
  },
  {
   "slug": "selank",
@@ -354,7 +374,8 @@
   "kind": "vial",
   "tile": "img/v/selank.webp",
   "film": "vid/p/selank.mp4",
-  "poster": "vid/p/selank.jpg"
+  "poster": "vid/p/selank.jpg",
+  "research": "Cognitive & sleep"
  },
  {
   "slug": "semax",
@@ -371,7 +392,8 @@
   "kind": "vial",
   "tile": "img/v/semax.webp",
   "film": "vid/p/semax.mp4",
-  "poster": "vid/p/semax.jpg"
+  "poster": "vid/p/semax.jpg",
+  "research": "Cognitive & sleep"
  },
  {
   "slug": "sermorelin",
@@ -388,7 +410,8 @@
   "kind": "vial",
   "tile": "img/v/sermorelin.webp",
   "film": "vid/p/sermorelin.mp4",
-  "poster": "vid/p/sermorelin.jpg"
+  "poster": "vid/p/sermorelin.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "ss-31",
@@ -405,7 +428,8 @@
   "kind": "vial",
   "tile": "img/v/ss31.webp",
   "film": "vid/p/ss-31.mp4",
-  "poster": "vid/p/ss-31.jpg"
+  "poster": "vid/p/ss-31.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "thymosin-alpha-1",
@@ -422,7 +446,8 @@
   "kind": "vial",
   "tile": "img/v/thymosin-alpha-1.webp",
   "film": "vid/p/thymosin-alpha-1.mp4",
-  "poster": "vid/p/thymosin-alpha-1.jpg"
+  "poster": "vid/p/thymosin-alpha-1.jpg",
+  "research": "Immune & signalling"
  },
  {
   "slug": "tb-500",
@@ -439,7 +464,8 @@
   "kind": "vial",
   "tile": "img/v/tb-500.webp",
   "film": "vid/p/tb-500.mp4",
-  "poster": "vid/p/tb-500.jpg"
+  "poster": "vid/p/tb-500.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "tesa-ipa",
@@ -456,7 +482,8 @@
   "kind": "vial",
   "tile": "img/v/tesa-ipa-blend.webp",
   "film": "vid/p/tesa-ipa.mp4",
-  "poster": "vid/p/tesa-ipa.jpg"
+  "poster": "vid/p/tesa-ipa.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "tesamorelin",
@@ -473,7 +500,8 @@
   "kind": "vial",
   "tile": "img/v/tesamorelin.webp",
   "film": "vid/p/tesamorelin.mp4",
-  "poster": "vid/p/tesamorelin.jpg"
+  "poster": "vid/p/tesamorelin.jpg",
+  "research": "Growth hormone axis"
  },
  {
   "slug": "wolverine",
@@ -490,7 +518,8 @@
   "kind": "vial",
   "tile": "img/v/wolverine-blend.webp",
   "film": "vid/p/wolverine.mp4",
-  "poster": "vid/p/wolverine.jpg"
+  "poster": "vid/p/wolverine.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "klow",
@@ -507,7 +536,8 @@
   "kind": "vial",
   "tile": "img/v/klow.webp",
   "film": "vid/p/klow.mp4",
-  "poster": "vid/p/klow.jpg"
+  "poster": "vid/p/klow.jpg",
+  "research": "Repair & recovery"
  },
  {
   "slug": "bac-water",
@@ -524,7 +554,8 @@
   "kind": "vial",
   "tile": "img/v/bacteriostatic-water.webp",
   "film": "vid/p/bac-water.mp4",
-  "poster": "vid/p/bac-water.jpg"
+  "poster": "vid/p/bac-water.jpg",
+  "research": "Supplies"
  },
  {
   "slug": "sko-3-rt",
@@ -541,7 +572,8 @@
   "kind": "vial",
   "tile": "img/v/glp-3-rt.webp",
   "film": "vid/p/sko-3-rt.mp4",
-  "poster": "vid/p/sko-3-rt.jpg"
+  "poster": "vid/p/sko-3-rt.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "sko-trz",
@@ -558,7 +590,8 @@
   "kind": "vial",
   "tile": "img/v/glp-2-trz.webp",
   "film": "vid/p/sko-trz.mp4",
-  "poster": "vid/p/sko-trz.jpg"
+  "poster": "vid/p/sko-trz.jpg",
+  "research": "Metabolic"
  },
  {
   "slug": "metabolic-reference-bundle",
@@ -575,7 +608,8 @@
   "kind": "bundle",
   "tile": "img/v/metabolic-reference-bundle.webp",
   "film": null,
-  "poster": "img/bundle/metabolic-reference-bundle.jpg"
+  "poster": "img/bundle/metabolic-reference-bundle.jpg",
+  "research": "Stacks"
  },
  {
   "slug": "kpv-ghk-cu-glutathione-bundle",
@@ -592,7 +626,8 @@
   "kind": "bundle",
   "tile": "img/v/kpv-ghk-cu-glutathione-bundle.webp",
   "film": null,
-  "poster": "img/bundle/kpv-ghk-cu-glutathione-bundle.jpg"
+  "poster": "img/bundle/kpv-ghk-cu-glutathione-bundle.jpg",
+  "research": "Stacks"
  },
  {
   "slug": "nad-mots-c-bundle",
@@ -609,7 +644,8 @@
   "kind": "bundle",
   "tile": "img/v/nad-mots-c-bundle.webp",
   "film": null,
-  "poster": "img/bundle/nad-mots-c-bundle.jpg"
+  "poster": "img/bundle/nad-mots-c-bundle.jpg",
+  "research": "Stacks"
  },
  {
   "slug": "ss31-mots-c-bundle",
@@ -626,7 +662,8 @@
   "kind": "bundle",
   "tile": "img/v/ss31-mots-c-bundle.webp",
   "film": null,
-  "poster": "img/bundle/ss31-mots-c-bundle.jpg"
+  "poster": "img/bundle/ss31-mots-c-bundle.jpg",
+  "research": "Stacks"
  },
  {
   "slug": "kpv-ghk-cu-bundle",
@@ -643,7 +680,8 @@
   "kind": "bundle",
   "tile": "img/v/kpv-ghk-cu-bundle.webp",
   "film": null,
-  "poster": "img/bundle/kpv-ghk-cu-bundle.jpg"
+  "poster": "img/bundle/kpv-ghk-cu-bundle.jpg",
+  "research": "Stacks"
  },
  {
   "slug": "semax-selank-bundle",
@@ -660,6 +698,7 @@
   "kind": "bundle",
   "tile": "img/v/semax-selank-bundle.webp",
   "film": null,
-  "poster": "img/bundle/semax-selank-bundle.jpg"
+  "poster": "img/bundle/semax-selank-bundle.jpg",
+  "research": "Stacks"
  }
 ]

@@ -156,6 +156,8 @@ a{color:inherit;text-decoration:none}
 /* everything the card has to say, set on the card under the bottle */
 .face3{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 14px 14px;
   color:var(--ink)}
+.face3 .eyeb{display:block;margin-bottom:5px;font-family:"Syncopate",sans-serif;
+  font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
 .face3 .nm{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .face3 .nm b{font-size:15px;font-weight:600;letter-spacing:-.012em;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -265,7 +267,7 @@ a{color:inherit;text-decoration:none}
   <a class="mark" href="#" aria-label="SKO Compounds"><img class="b" src="img/ui/shield-blue.png" alt=""><img class="w" src="img/ui/shield-white.png" alt=""></a>
   <nav class="nav">
     <a href="#shop" class="on">Shop</a>
-    <a href="#club" class="club" aria-label="SKO Club">
+    <a href="club/" class="club" aria-label="SKO Club">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
       </svg>SKO Club</a>
@@ -297,9 +299,6 @@ a{color:inherit;text-decoration:none}
   </div>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
 
-  <section class="lead"><h2>Stacks</h2></section>
-  <section class="grid" id="grid-stacks" aria-label="Stacks"></section>
-
   <section class="band" id="band" aria-label="The rest of the shelf">
     <video poster="vid/band.jpg" muted loop playsinline preload="metadata" aria-hidden="true">
       <source src="vid/band.webm" type="video/webm">
@@ -321,7 +320,7 @@ a{color:inherit;text-decoration:none}
   </section>
 
 
-  <section class="lead" id="rest"><h2>Everything else</h2></section>
+  <section class="lead" id="rest"><h2>Research categories</h2></section>
   <section class="grid" id="grid-rest" aria-label="Catalogue"></section>
   <div class="bar" id="bar" aria-live="polite">
   <div class="l"><span class="n" id="barn">0 items</span><span class="t" id="bart">$0.00</span></div>
@@ -332,9 +331,8 @@ a{color:inherit;text-decoration:none}
 
 <script>
 
-const gTop=document.getElementById('grid-top'), gStack=document.getElementById('grid-stacks'),
-      gRest=document.getElementById('grid-rest');
-const grids=[gTop,gStack,gRest];
+const gTop=document.getElementById('grid-top'), gRest=document.getElementById('grid-rest');
+const grids=[gTop,gRest];
 const money=n=>'$'+n.toFixed(2);
 const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -353,6 +351,7 @@ const tile=(p,i,eager)=>`
         </span></span></span>
       <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 ${money(p.price)}</button>
       <span class="face3">
+        <span class="eyeb">${p.research}</span>
         <span class="nm"><b>${p.name}</b><em>${money(p.price)}</em></span>
         <span class="rcat">${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
         <span class="perks"><span><s>${pts(p.price)} pts</s> SKO Club</span><span>The Drop <s>1 in 100</s></span></span>
@@ -360,32 +359,29 @@ const tile=(p,i,eager)=>`
     </span>
   </div>`;
 
+const RORDER=['Metabolic','Repair & recovery','Growth hormone axis','Skin & pigment',
+              'Cognitive & sleep','Immune & signalling','Stacks','Supplies'];
 fetch('products.json').then(r=>r.json()).then(P=>{
   P.forEach(p=>BY[p.slug]=p);
-  const vials=P.filter(p=>p.kind==='vial');
-  const stacks=P.filter(p=>p.group==='Stacks');
-  const top=[...vials].sort((a,b)=>a.rank-b.rank).slice(0,8);
+  const top=[...P].filter(p=>p.kind==='vial').sort((a,b)=>a.rank-b.rank).slice(0,8);
   const topSet=new Set(top.map(p=>p.slug));
-  const rest=vials.filter(p=>!topSet.has(p.slug));
+  const rest=P.filter(p=>!topSet.has(p.slug));
 
   gTop.innerHTML=top.map((p,n)=>tile(p,n+1,true)).join('');
-  gStack.innerHTML=stacks.map((p,n)=>tile(p,n+1,true)).join('');
 
-  const GROUPS=['Peptides','Blends','Supplies'];
-  const byGroup=GROUPS.map(g=>[g,rest.filter(p=>p.group===g)]).filter(([,l])=>l.length);
+  const byR=RORDER.map(g=>[g,rest.filter(p=>p.research===g)]).filter(([,l])=>l.length);
   let n=0;
-  gRest.innerHTML=byGroup.map(([g,list])=>
-    `<h3 class="cat" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
+  gRest.innerHTML=byR.map(([g,list])=>
+    `<h3 class="cat" id="r-${g.replace(/[^a-z]+/gi,'-').toLowerCase()}" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
     list.map(p=>tile(p,++n,false)).join('')).join('');
 
   const eight=top.map(p=>p.slug);
-  const eightTotal=eight.reduce((a,s)=>a+BY[s].price,0);
   document.getElementById('alltot').textContent=
-    `\u2014 all eight best sellers, ${money(eightTotal)}`;
+    `\u2014 all eight best sellers, ${money(eight.reduce((a,s)=>a+BY[s].price,0))}`;
   document.getElementById('allbtn').addEventListener('click',()=>eight.forEach(s=>addToBag(s)));
 
   document.getElementById('bandcats').innerHTML=
-    byGroup.concat([['Stacks',stacks]]).map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
+    byR.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
 });
 
 /* the film rises in and plays only while it is on screen.
