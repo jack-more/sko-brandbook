@@ -55,8 +55,8 @@ a{color:inherit;text-decoration:none}
 .nav .club svg{width:19px;height:19px;flex:0 0 auto}
 .dots{display:flex;gap:9px;margin-left:6px}
 .dots button{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink);padding:0;cursor:pointer;background:transparent}
-.dots button[data-set="bone"]{background:#0C0D10;border-color:#0C0D10}
-.dots button[data-set="night"]{background:#F2EFEA}
+.dots button[data-set="bone"]{background:#F2EFEA}
+.dots button[data-set="night"]{background:#0C0D10;border-color:#0C0D10}
 .dots button[data-set="blue"]{background:#173384;border-color:#173384}
 .dots button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:2px}
 
@@ -441,7 +441,7 @@ let open=null;                       // {grid, tile, panel, slug}
 function makePanel(){
   const el=document.createElement('div');
   el.className='panel';
-  el.innerHTML=`<video muted loop playsinline preload="none" aria-hidden="true"></video>
+  el.innerHTML=`<video muted playsinline preload="none" aria-hidden="true"></video>
     <button class="pclose" type="button" aria-label="Close">×</button>
     <div class="pinfo">
       <div><h3></h3><span class="sub"></span><span class="rt"></span><a class="coa" target="_blank" rel="noopener">Batch certificate \u2197</a></div>
