@@ -36,7 +36,11 @@ a{color:inherit;text-decoration:none}
 .wrap{padding:0 20px}
 
 .top{position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
-  justify-content:space-between;padding:18px 22px}
+  justify-content:space-between;padding:16px 20px;
+  background:color-mix(in srgb,var(--ground) 84%,transparent);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease}
+.top.stuck{border-bottom-color:var(--rule)}
 .mark{display:flex;gap:4px}
 .mark i{width:13px;height:13px;background:var(--ink);display:block}
 .mark i:nth-child(2){opacity:.45}
@@ -109,6 +113,14 @@ a{color:inherit;text-decoration:none}
 .shot i{position:absolute;left:10px;top:10px;z-index:2;font-style:normal;
   font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;
   color:rgba(242,240,234,.72)}
+.quick{position:absolute;left:8px;right:8px;bottom:8px;z-index:3;
+  border:0;background:rgba(242,240,234,.94);color:#0b1430;font:inherit;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:11px 0;border-radius:2px;cursor:pointer;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .22s var(--e),transform .22s var(--e)}
+.tile:hover .quick,.tile:focus-within .quick{opacity:1;transform:none}
+.quick.in{background:#173384;color:#F2F0EA}
 .cap{display:block;min-width:0;padding:11px 2px 4px}
 .cap b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
 .cap span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px;
@@ -143,6 +155,27 @@ a{color:inherit;text-decoration:none}
   font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;
   padding-bottom:8px;border-bottom:1px solid rgba(23,51,132,.24)}
 .cat i{font-style:normal;font-family:"Inter",sans-serif;font-weight:500;color:var(--ink-soft);letter-spacing:.1em}
+
+/* the bag, once there is something in it */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;padding:14px 20px;color:#F2F0EA;background:#0b1430;
+  transform:translateY(105%);transition:transform .42s cubic-bezier(.28,.06,.28,.96)}
+.bar.up{transform:none}
+.bar .n{font-size:13px;letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.bar .t{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.bar .l{display:flex;align-items:baseline;gap:18px}
+.bar button{border:0;background:#F2F0EA;color:#0b1430;font:inherit;font-size:12px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border-radius:2px;cursor:pointer}
+.bar a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;cursor:pointer}
+
+/* take the whole row */
+.allrow{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  margin:0 0 34px;padding:16px 18px;border:1px solid var(--rule)}
+.allrow b{font-family:"Syncopate",sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em}
+.allrow span{font-size:13px;color:var(--ink-soft)}
+.allrow button{border:1px solid var(--ink);background:var(--ink);color:var(--ground);font:inherit;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:12px 22px;border-radius:2px;cursor:pointer}
 
 .foot{border-top:3px solid var(--ink);padding:16px 0 70px;display:flex;justify-content:space-between;
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
@@ -195,6 +228,10 @@ a{color:inherit;text-decoration:none}
   </section>
 
   <section class="lead"><h2>Top sellers</h2></section>
+  <div class="allrow" id="allrow">
+    <div><b>Take the eight</b> <span id="alltot"></span></div>
+    <button type="button" id="allbtn">Add all eight</button>
+  </div>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
 
   <section class="band" id="band" aria-label="The rest of the shelf">
@@ -219,7 +256,11 @@ a{color:inherit;text-decoration:none}
 
   <section class="lead" id="rest"><h2>Everything else</h2></section>
   <section class="grid" id="grid-rest" aria-label="Catalogue"></section>
-  <footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
+  <div class="bar" id="bar" aria-live="polite">
+  <div class="l"><span class="n" id="barn">0 items</span><span class="t" id="bart">$0.00</span></div>
+  <div class="l"><a id="barclear">Clear</a><button type="button">Checkout</button></div>
+</div>
+<footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
 </main>
 
 <script>
@@ -232,7 +273,7 @@ const gTop=document.getElementById('grid-top'), gRest=document.getElementById('g
 const grids=[gTop,gRest];
 const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let PRODUCTS=[], bag=0;
+let PRODUCTS=[];
 const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
 
 const tile=(p,i,eager)=>`
@@ -240,6 +281,7 @@ const tile=(p,i,eager)=>`
     <span class="shot">
       <i>${String(i).padStart(2,'0')}</i>
       <img src="vid/p/${p.slug}-tile.jpg" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
+      <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 $${priceOf(p.slug)}</button>
     </span>
     <span class="cap">
       <b>${p.name}</b>
@@ -264,10 +306,51 @@ fetch('products.json').then(r=>r.json()).then(P=>{
     `<h3 class="cat" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
     list.map(p=>tile(p,++n,false)).join('')).join('');
 
+  const eight=top.map(p=>p.slug);
+  const eightTotal=eight.reduce((a,s)=>a+priceOf(s),0);
+  document.getElementById('alltot').textContent=
+    `\u2014 all eight best sellers, $${eightTotal.toFixed(2)}`;
+  document.getElementById('allbtn').addEventListener('click',()=>eight.forEach(s=>addToBag(s)));
+
   document.getElementById('bandcats').innerHTML=
     byGroup.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' · ');
 });
 
+/* the film rises in and plays only while it is on screen.
+   without this the band sits at opacity 0 and leaves a hole in the page. */
+const band=document.getElementById('band'), bandVid=band.querySelector('video');
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){ band.classList.add('in'); if(!reduce) bandVid.play().catch(()=>{}); }
+  else bandVid.pause();
+}),{threshold:.15}).observe(band);
+
+/* the bar only shows a rule once the page has moved under it */
+const topbar=document.querySelector('.top');
+addEventListener('scroll',()=>topbar.classList.toggle('stuck',scrollY>12),{passive:true});
+
+
+/* ---------------------------------------------------------------
+   The bag. Add straight off a tile, off the open panel, or take the
+   whole top eight in one go. The bar only appears once there is
+   something in it.
+   --------------------------------------------------------------- */
+const BAG=new Map();
+const bar=document.getElementById('bar'), barn=document.getElementById('barn'), bart=document.getElementById('bart');
+function paintBag(){
+  const n=[...BAG.values()].reduce((a,b)=>a+b,0);
+  const t=[...BAG].reduce((a,[s,q])=>a+priceOf(s)*q,0);
+  barn.textContent=n===1?'1 item':`${n} items`;
+  bart.textContent='$'+t.toFixed(2);
+  bar.classList.toggle('up',n>0);
+  bagLink.textContent=`Bag (${n})`;
+  document.querySelectorAll('.quick').forEach(b=>{
+    const inBag=BAG.has(b.dataset.add);
+    b.classList.toggle('in',inBag);
+    b.textContent=inBag?`In bag · ${BAG.get(b.dataset.add)}`:`Add · $${priceOf(b.dataset.add)}`;
+  });
+}
+function addToBag(slug,q=1){ BAG.set(slug,(BAG.get(slug)||0)+q); paintBag(); }
+document.getElementById('barclear').addEventListener('click',()=>{BAG.clear();paintBag();});
 /* ---------------------------------------------------------------
    Clicking a tile re-sets the whole grid: everything else falls
    back, and a full-width panel opens under that tile's row playing
@@ -288,7 +371,7 @@ function makePanel(){
     </div>`;
   el.querySelector('.pclose').addEventListener('click',e=>{e.stopPropagation();closePanel();});
   el.querySelector('.pbuy button').addEventListener('click',e=>{
-    e.stopPropagation(); bag++; bagLink.textContent=`Bag (${bag})`;
+    e.stopPropagation(); if(open) addToBag(open.slug);
   });
   return el;
 }
@@ -341,6 +424,8 @@ function openTile(el){
 
 for(const g of grids){
   g.addEventListener('click',e=>{
+    const q=e.target.closest('.quick');
+    if(q){ e.stopPropagation(); addToBag(q.dataset.add); return; }
     const el=e.target.closest('.tile'); if(!el) return;
     openTile(el);
   });
