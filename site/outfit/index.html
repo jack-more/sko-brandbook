@@ -119,7 +119,7 @@ a{color:inherit;text-decoration:none}
    the real alpha projected by drop-shadow, not a drawn shape.
    Hovering spins the bottle once and bounces it. */
 .shot{position:relative;display:block;aspect-ratio:5/7;overflow:hidden}
-.plate{position:absolute;left:0;right:0;top:18%;bottom:0;border-radius:6px;overflow:hidden;
+.plate{position:absolute;left:0;right:0;top:16%;bottom:0;border-radius:6px;overflow:hidden;
   background:radial-gradient(58% 34% at 50% 22%,rgba(var(--glow),var(--glow-o)),rgba(var(--glow),0) 72%),
              linear-gradient(180deg,var(--plate-a),var(--plate-b));
   box-shadow:inset 0 0 0 1px rgba(var(--cast),.07);
@@ -129,7 +129,7 @@ a{color:inherit;text-decoration:none}
   background:radial-gradient(50% 50% at 50% 50%,rgba(var(--cast),.44),rgba(var(--cast),0) 74%)}
 .tile:hover .plate{box-shadow:inset 0 0 0 1px rgba(var(--cast),.13)}
 
-.stage3d{position:absolute;left:50%;bottom:36%;width:56%;height:54%;z-index:2;
+.stage3d{position:absolute;left:50%;bottom:37%;width:58%;height:56%;z-index:2;
   transform:translateX(-50%);perspective:1200px;pointer-events:none}
 .lift{display:block;width:100%;height:100%;transform-origin:50% 100%}
 .spin{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d}
@@ -154,32 +154,34 @@ a{color:inherit;text-decoration:none}
 .tile:hover .lift,.tile:focus-within .lift{animation:sko-bounce .62s cubic-bezier(.32,.04,.24,1)}
 
 /* everything the card has to say, set on the card under the bottle */
-.face3{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 14px 14px;
-  color:var(--ink)}
-.face3 .eyeb{display:block;margin-bottom:5px;font-family:"Syncopate",sans-serif;
-  font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-.face3 .nm{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.face3 .nm b{font-size:15px;font-weight:600;letter-spacing:-.012em;
+.face3{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 18px 17px;color:var(--ink)}
+.face3 .eyeb{display:block;margin-bottom:7px;font-family:"Syncopate",sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.face3 .nm{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.face3 .nm b{font-size:21px;font-weight:650;letter-spacing:-.022em;line-height:1.05;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.face3 .nm em{font-style:normal;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.06em;flex:0 0 auto}
-.face3 .rcat{display:block;margin-top:5px;font-family:"Inter",sans-serif;font-weight:400;letter-spacing:0;text-transform:none;font-size:11.5px;color:var(--ink-soft);
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.face3 .perks{display:flex;justify-content:space-between;gap:10px;margin-top:11px;padding-top:9px;
+.face3 .nm em{font-style:normal;font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em;flex:0 0 auto}
+.face3 .rcat{display:block;margin-top:6px;font-family:"Inter",sans-serif;font-weight:400;letter-spacing:0;
+  text-transform:none;font-size:13px;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face3 .perks{display:flex;justify-content:space-between;gap:10px;margin-top:13px;padding-top:11px;
   border-top:1px solid rgba(var(--cast),.14);
-  font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
-.face3 .perks s{text-decoration:none;color:var(--ink);opacity:.85}
-
+  font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.face3 .perks s{text-decoration:none;color:var(--ink)}
 .shot i{position:absolute;left:10px;top:10px;z-index:4;font-style:normal;
   font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;
   color:var(--ink-soft)}
-.quick{position:absolute;left:10px;right:10px;top:calc(18% + 10px);z-index:5;
-  border:0;background:rgba(242,240,234,.94);color:#0b1430;font:inherit;
-  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:10px 0;border-radius:2px;cursor:pointer;
-  opacity:0;transform:translateY(-8px);
-  transition:opacity .22s var(--e),transform .22s var(--e)}
-.tile:hover .quick,.tile:focus-within .quick{opacity:1;transform:none}
-.quick.in{background:#173384;color:#F2F0EA}
+.quick{position:absolute;right:12px;top:calc(16% + 12px);z-index:5;
+  height:38px;min-width:38px;padding:0 12px;border-radius:19px;border:0;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  background:var(--ink);color:var(--ground);font:inherit;font-size:12px;font-weight:700;letter-spacing:.06em;
+  box-shadow:0 6px 16px rgba(var(--cast),.22);
+  transition:transform .25s var(--e),background .25s ease}
+.quick:before{content:"+";font-size:20px;font-weight:400;line-height:1;margin-top:-2px}
+.quick span{display:none}
+.tile:hover .quick span,.quick:focus-visible span{display:inline}
+.quick:hover{transform:scale(1.04)}
+.quick.in{background:#1E7A4F;color:#fff}
+.quick.in:before{content:"\2713";font-size:14px;margin-top:0}
 /* the film opens full width under the row you clicked */
 .panel{grid-column:1/-1;position:relative;height:0;overflow:hidden;background:#0b1430;
   transition:height var(--d) var(--e),margin var(--d) var(--e)}
@@ -349,7 +351,7 @@ const tile=(p,i,eager)=>`
       <span class="stage3d"><span class="lift"><span class="spin">
         <span class="face"><img class="btl" src="${p.tile}" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async"></span>
         </span></span></span>
-      <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 ${money(p.price)}</button>
+      <button class="quick" type="button" data-add="${p.slug}" aria-label="Add ${p.name} to bag"><span>Add</span></button>
       <span class="face3">
         <span class="eyeb">${p.research}</span>
         <span class="nm"><b>${p.name}</b><em>${money(p.price)}</em></span>
@@ -420,7 +422,7 @@ function paintBag(){
   document.querySelectorAll('.quick').forEach(b=>{
     const inBag=BAG.has(b.dataset.add);
     b.classList.toggle('in',inBag);
-    b.textContent=inBag?`In bag · ${BAG.get(b.dataset.add)}`:`Add · ${money(BY[b.dataset.add].price)}`;
+    b.innerHTML=inBag?`<span>${BAG.get(b.dataset.add)} in bag</span>`:'<span>Add</span>';
   });
 }
 function addToBag(slug,q=1){ BAG.set(slug,(BAG.get(slug)||0)+q); paintBag(); }

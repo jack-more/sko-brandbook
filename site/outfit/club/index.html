@@ -107,36 +107,46 @@ a{color:inherit;text-decoration:none}
 .redeem .out{font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .redeem .fine{font-size:12px;color:var(--ink-soft);margin-top:4px}
 
-/* the six levels: one display case, one light, one baseline. The coins are
-   the brand book's matched tier renders, all shot on the same white, so they
-   sit in one continuous case with no tile edges between them. Each is a size
-   up on the last, so the climb reads before you read a word. */
-.case{position:relative;background:#FFFFFF;border-radius:6px;overflow:hidden;margin:0 0 12px;
-  padding:34px 26px 26px;box-shadow:inset 0 -60px 60px -60px rgba(11,20,48,.10),0 1px 0 rgba(11,20,48,.06)}
-.rail{display:grid;grid-template-columns:repeat(6,1fr);align-items:start;gap:10px}
-.coin{margin:0;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:default}
-/* every coin gets the same square to stand in, bottom-aligned, so the
-   captions line up and only the object changes size */
-.coin .ph{width:100%;aspect-ratio:1;display:flex;align-items:flex-end;justify-content:center}
-.coin img{display:block;width:var(--s);height:auto;mix-blend-mode:multiply;
-  transition:transform .6s cubic-bezier(.28,.06,.28,.96)}
-.coin:hover img{transform:translateY(-8px) scale(1.04)}
-.coin.c1{--s:64%}.coin.c2{--s:71%}.coin.c3{--s:78%}.coin.c4{--s:85%}.coin.c5{--s:92%}.coin.c6{--s:100%}
-.coin figcaption{margin-top:16px;color:#0b1430}
-.coin .n{display:block;font-size:10px;font-weight:600;letter-spacing:.18em;color:rgba(11,20,48,.45);
-  font-variant-numeric:tabular-nums}
-.coin .m{display:block;margin-top:6px;font-family:"Syncopate",sans-serif;font-size:12.5px;font-weight:700;
-  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.coin .v{display:block;margin-top:6px;font-size:11px;color:rgba(11,20,48,.55)}
-
-/* the climb, drawn once underneath: where you are, and how far the top is */
-.track{position:relative;height:2px;margin:26px 3% 0;background:rgba(11,20,48,.10);border-radius:2px}
-.track i{position:absolute;left:0;top:0;height:100%;width:0%;background:#173384;border-radius:2px}
-.track b{position:absolute;top:50%;left:0;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;
-  background:#173384;box-shadow:0 0 0 4px rgba(23,51,132,.16)}
-.track span{position:absolute;top:14px;left:0;transform:translateX(-10%);white-space:nowrap;
-  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#173384}
-.casenote{font-size:12px;color:var(--ink-soft);margin:0 0 40px}
+/* the six levels as cards: each one says what the level hands you, what it
+   unlocks, and whether you are there yet. The coin is the level's icon, not a
+   photograph to stare at. */
+.lvls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
+.lvc{position:relative;border-radius:10px;padding:22px 22px 20px;background:var(--tile);
+  display:flex;flex-direction:column;gap:14px;overflow:hidden;
+  transition:transform .35s cubic-bezier(.28,.06,.28,.96)}
+.lvc:hover{transform:translateY(-3px)}
+.lvc .hd{display:flex;align-items:center;gap:14px}
+.lvc .hd img{width:62px;height:62px;flex:0 0 auto;object-fit:contain;mix-blend-mode:multiply;
+  background:#fff;border-radius:50%;padding:4px}
+.lvc .lv{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.lvc h3{margin:3px 0 0;font-family:"Syncopate",sans-serif;font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+.lvc .st{margin-left:auto;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;padding:6px 10px;border-radius:99px;background:rgba(var(--cast),.08);color:var(--ink-soft);
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.lvc .st svg{width:12px;height:12px}
+.lvc ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.lvc li{position:relative;padding-left:18px;font-size:14px;line-height:1.35}
+.lvc li:before{content:"";position:absolute;left:2px;top:.52em;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.55}
+.lvc li.obj{font-weight:600}
+.lvc .pg{margin-top:auto;padding-top:14px;border-top:1px solid rgba(var(--cast),.12)}
+.lvc .pg .row{display:flex;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink-soft)}
+.lvc .pg .bar{height:6px;border-radius:99px;background:rgba(var(--cast),.1);margin-top:8px;overflow:hidden}
+.lvc .pg .bar i{display:block;height:100%;border-radius:99px;background:currentColor}
+.lvc.locked{color:var(--ink)}
+.lvc.locked ul,.lvc.locked .hd img{opacity:.55}
+/* you are here */
+.lvc.on{background:#0b1430;color:#F2F0EA}
+.lvc.on:after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 60% at 85% 0%,rgba(113,167,242,.45),rgba(113,167,242,0) 70%)}
+.lvc.on>*{position:relative;z-index:2}
+.lvc.on .lv,.lvc.on .pg .row{color:rgba(242,240,234,.66)}
+.lvc.on .st{background:#71A7F2;color:#0b1430}
+.lvc.on .pg{border-top-color:rgba(242,240,234,.16)}
+.lvc.on .pg .bar{background:rgba(242,240,234,.16)}
+.lvc.top{grid-column:span 1}
+.lvnote{font-size:12px;color:var(--ink-soft);margin:0 0 40px}
+.draft{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:99px;
+  border:1px solid var(--rule);color:var(--ink-soft)}
 .ways{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0 0 60px}
 .way{background:var(--tile);border-radius:6px;padding:20px}
 .way .k{opacity:.6}
@@ -149,9 +159,8 @@ a{color:inherit;text-decoration:none}
 @media (max-width:900px){
   .bal{grid-template-columns:1fr}
   .jobs{grid-template-columns:1fr}
-  .rail{grid-template-columns:repeat(3,1fr);row-gap:26px}
-  .coin .m{font-size:11px}
-  .track{display:none}
+  .lvls{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;margin-right:-20px;padding-right:20px}
+  .lvc{flex:0 0 82%;scroll-snap-align:start}
   .ways{grid-template-columns:1fr 1fr}
   .nav{gap:14px;font-size:15px}
   .chero{padding:88px 0 20px}
@@ -214,12 +223,9 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
-  <div class="sec"><h2>The six levels</h2><span>Lifetime spend. Never spent, never taken away.</span></div>
-  <div class="case">
-    <div class="rail" id="levels"></div>
-    <div class="track"><i></i><b></b><span>You are here</span></div>
-  </div>
-  <p class="casenote">Each level casts your badge in a better material, and the material is a real object you keep. Thresholds for levels one to five are being set.</p>
+  <div class="sec"><h2>The six levels</h2><span>Lifetime spend. Never spent, never taken away.</span><span class="draft">Draft perks</span></div>
+  <div class="lvls" id="levels"></div>
+  <p class="lvnote">Each level casts your badge in a better material, and the badge is a real object that ships to you. Perks per level and the thresholds for levels one to five are a proposal for Jack and Billy to set; level six is $150,000 lifetime.</p>
 
   <div class="sec"><h2>Ways to win</h2><span>Missions &middot; The Live &middot; Codes &middot; Referrals &middot; The Drop</span></div>
   <div class="ways" id="ways"></div>
@@ -236,10 +242,30 @@ const JOBS=[
  {n:'Refer a researcher',   p:'+350 pts', d:'Each. Three who order is a free vial. Ten is your own code with ten percent back.', go:'Get your link'},
  {n:'Take your daily drop', p:'Free',     d:'One free drop a day for account holders, no purchase needed. Tokens every time.', go:'Open The Drop'},
 ];
+/* each level keeps everything below it. Every perk here is built from a
+   mechanic that already exists in the brand book - the drop, the live,
+   codes, referrals, boxes you never asked for, the streak multiplier. */
 const LEVELS=[
- ['01','Pigment','pigment'],['02','Foil','foil'],['03','Emboss','emboss'],
- ['04','Chrome','chrome'],['05','Cap','cap'],['06','The Bracelet','bracelet'],
+ {n:'01',t:'Pigment',img:'pigment',on:true,p:[
+   'Your badge, pressed in pigment','1 point for every $1, on everything',
+   'A free drop every day','Every order enters the weekly Full Box draw']},
+ {n:'02',t:'Foil',img:'foil',p:[
+   'Your badge, stamped in foil','Live codes count double',
+   'First in line when anything restocks']},
+ {n:'03',t:'Emboss',img:'emboss',p:[
+   'Your badge, embossed','A box you never asked for, once a year',
+   'Your streak multiplier starts at 1.5\u00d7']},
+ {n:'04',t:'Chrome',img:'chrome',p:[
+   'Your badge, in chrome','Mystery codes, before anyone else',
+   'Free shipping on every order']},
+ {n:'05',t:'Cap',img:'cap',p:[
+   'Your badge, capped in navy','A Full Box every quarter',
+   'Your own creator code, ten percent back']},
+ {n:'06',t:'The Bracelet',img:'bracelet',p:[
+   'The bracelet, made once','Everything above, for good',
+   '$150,000 lifetime']},
 ];
+const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 const WAYS=[
  ['01','Missions','A board of small jobs with a reward on each: a review, three orders in ninety days, four lives in a row. Progress bars, not fine print.'],
  ['02','The Live','Stamps for showing up. Every live you attend is a stamp, four in a row is a free box, and the code read out is worth two hundred.'],
@@ -249,9 +275,17 @@ const WAYS=[
 ];
 document.getElementById('jobs').innerHTML=JOBS.map(j=>
  `<button class="job" type="button" data-p="${j.p}"><span class="pt">${j.p}</span><b>${j.n}</b><p>${j.d}</p><span class="go">${j.go} &rarr;</span></button>`).join('');
-document.getElementById('levels').innerHTML=LEVELS.map(([n,t,img],i)=>
- `<figure class="coin c${i+1}"><span class="ph"><img src="../img/tier/${img}.webp" alt="${t} badge" loading="lazy"></span>
-   <figcaption><span class="n">${n}</span><span class="m">${t}</span>${i===5?'<span class="v">$150,000 lifetime</span>':''}</figcaption></figure>`).join('');
+document.getElementById('levels').innerHTML=LEVELS.map((L,i)=>`
+ <article class="lvc ${L.on?'on':'locked'}">
+   <div class="hd"><img src="../img/tier/${L.img}.webp" alt="${L.t} badge" loading="lazy">
+     <div><div class="lv">Level ${L.n}</div><h3>${L.t}</h3></div>
+     <span class="st">${L.on?'You are here':LOCK+' Locked'}</span></div>
+   <ul>${L.p.map((x,k)=>`<li${k===0?' class="obj"':''}>${x}</li>`).join('')}</ul>
+   <div class="pg">${L.on
+     ?`<div class="row"><span>Next free peptide</span><span id="lvp">0 / 400 pts</span></div><div class="bar"><i id="lvbar" style="width:0%"></i></div>`
+     :`<div class="row"><span>Unlocks at level ${L.n}</span><span>${i===5?'$150,000':'Threshold being set'}</span></div><div class="bar"><i style="width:0%"></i></div>`}
+   </div>
+ </article>`).join('');
 document.getElementById('ways').innerHTML=WAYS.map(([k,t,d])=>
  `<div class="way"><div class="k">${k}</div><b>${t}</b><p>${d}</p></div>`).join('');
 
@@ -267,6 +301,8 @@ function paint(){
   sub.textContent=PTS>=400?`That is ${Math.floor(PTS/400)} free peptide${PTS>=800?'s':''} on the shelf.`
                           :`400 points is a free peptide. You are ${fmt(to)} away.`;
   bar.style.width=Math.min(100,(PTS%400)/4)+'%';
+  const lvp=document.getElementById('lvp'), lvb=document.getElementById('lvbar');
+  if(lvp){ lvp.textContent=`${PTS%400} / 400 pts`; lvb.style.width=Math.min(100,(PTS%400)/4)+'%'; }
   have.textContent=`${fmt(PTS)} points available`;
   sl.max=Math.max(400,Math.ceil(PTS/50)*50);
   if(+sl.value>PTS) sl.value=PTS;
