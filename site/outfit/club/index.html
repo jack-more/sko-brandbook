@@ -107,13 +107,36 @@ a{color:inherit;text-decoration:none}
 .redeem .out{font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .redeem .fine{font-size:12px;color:var(--ink-soft);margin-top:4px}
 
-.levels{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:0 0 40px}
-.lv{background:var(--tile);border-radius:6px;overflow:hidden}
-.lv img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
-.lv .t{padding:14px 14px 16px}
-.lv .t b{display:block;font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em}
-.lv .t span{display:block;margin-top:6px;font-size:11px;color:var(--ink-soft)}
+/* the six levels: one display case, one light, one baseline. The coins are
+   the brand book's matched tier renders, all shot on the same white, so they
+   sit in one continuous case with no tile edges between them. Each is a size
+   up on the last, so the climb reads before you read a word. */
+.case{position:relative;background:#FFFFFF;border-radius:6px;overflow:hidden;margin:0 0 12px;
+  padding:34px 26px 26px;box-shadow:inset 0 -60px 60px -60px rgba(11,20,48,.10),0 1px 0 rgba(11,20,48,.06)}
+.rail{display:grid;grid-template-columns:repeat(6,1fr);align-items:start;gap:10px}
+.coin{margin:0;display:flex;flex-direction:column;align-items:center;text-align:center;cursor:default}
+/* every coin gets the same square to stand in, bottom-aligned, so the
+   captions line up and only the object changes size */
+.coin .ph{width:100%;aspect-ratio:1;display:flex;align-items:flex-end;justify-content:center}
+.coin img{display:block;width:var(--s);height:auto;mix-blend-mode:multiply;
+  transition:transform .6s cubic-bezier(.28,.06,.28,.96)}
+.coin:hover img{transform:translateY(-8px) scale(1.04)}
+.coin.c1{--s:64%}.coin.c2{--s:71%}.coin.c3{--s:78%}.coin.c4{--s:85%}.coin.c5{--s:92%}.coin.c6{--s:100%}
+.coin figcaption{margin-top:16px;color:#0b1430}
+.coin .n{display:block;font-size:10px;font-weight:600;letter-spacing:.18em;color:rgba(11,20,48,.45);
+  font-variant-numeric:tabular-nums}
+.coin .m{display:block;margin-top:6px;font-family:"Syncopate",sans-serif;font-size:12.5px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.coin .v{display:block;margin-top:6px;font-size:11px;color:rgba(11,20,48,.55)}
 
+/* the climb, drawn once underneath: where you are, and how far the top is */
+.track{position:relative;height:2px;margin:26px 3% 0;background:rgba(11,20,48,.10);border-radius:2px}
+.track i{position:absolute;left:0;top:0;height:100%;width:0%;background:#173384;border-radius:2px}
+.track b{position:absolute;top:50%;left:0;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;
+  background:#173384;box-shadow:0 0 0 4px rgba(23,51,132,.16)}
+.track span{position:absolute;top:14px;left:0;transform:translateX(-10%);white-space:nowrap;
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#173384}
+.casenote{font-size:12px;color:var(--ink-soft);margin:0 0 40px}
 .ways{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0 0 60px}
 .way{background:var(--tile);border-radius:6px;padding:20px}
 .way .k{opacity:.6}
@@ -126,7 +149,9 @@ a{color:inherit;text-decoration:none}
 @media (max-width:900px){
   .bal{grid-template-columns:1fr}
   .jobs{grid-template-columns:1fr}
-  .levels{grid-template-columns:repeat(3,1fr)}
+  .rail{grid-template-columns:repeat(3,1fr);row-gap:26px}
+  .coin .m{font-size:11px}
+  .track{display:none}
   .ways{grid-template-columns:1fr 1fr}
   .nav{gap:14px;font-size:15px}
   .chero{padding:88px 0 20px}
@@ -189,8 +214,12 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
-  <div class="sec"><h2>The six levels</h2><span>Thresholds beyond the last one are still Billy&rsquo;s to set.</span></div>
-  <div class="levels" id="levels"></div>
+  <div class="sec"><h2>The six levels</h2><span>Lifetime spend. Never spent, never taken away.</span></div>
+  <div class="case">
+    <div class="rail" id="levels"></div>
+    <div class="track"><i></i><b></b><span>You are here</span></div>
+  </div>
+  <p class="casenote">Each level casts your badge in a better material, and the material is a real object you keep. Thresholds for levels one to five are being set.</p>
 
   <div class="sec"><h2>Ways to win</h2><span>Missions &middot; The Live &middot; Codes &middot; Referrals &middot; The Drop</span></div>
   <div class="ways" id="ways"></div>
@@ -208,8 +237,8 @@ const JOBS=[
  {n:'Take your daily drop', p:'Free',     d:'One free drop a day for account holders, no purchase needed. Tokens every time.', go:'Open The Drop'},
 ];
 const LEVELS=[
- ['01','Pigment','badge-pigment'],['02','Foil','badge-foil'],['03','Emboss','badge-emboss'],
- ['04','Cast','badge-cast'],['05','Cap','badge-cap'],['06','The bracelet','badge-mark'],
+ ['01','Pigment','pigment'],['02','Foil','foil'],['03','Emboss','emboss'],
+ ['04','Chrome','chrome'],['05','Cap','cap'],['06','The Bracelet','bracelet'],
 ];
 const WAYS=[
  ['01','Missions','A board of small jobs with a reward on each: a review, three orders in ninety days, four lives in a row. Progress bars, not fine print.'],
@@ -221,8 +250,8 @@ const WAYS=[
 document.getElementById('jobs').innerHTML=JOBS.map(j=>
  `<button class="job" type="button" data-p="${j.p}"><span class="pt">${j.p}</span><b>${j.n}</b><p>${j.d}</p><span class="go">${j.go} &rarr;</span></button>`).join('');
 document.getElementById('levels').innerHTML=LEVELS.map(([n,t,img],i)=>
- `<div class="lv"><img src="../img/badge/${img}.webp" alt="" loading="lazy"><div class="t"><b>${n} &middot; ${t}</b>
-  <span>${i===5?'$150,000 lifetime':'Threshold: Billy confirms'}</span></div></div>`).join('');
+ `<figure class="coin c${i+1}"><span class="ph"><img src="../img/tier/${img}.webp" alt="${t} badge" loading="lazy"></span>
+   <figcaption><span class="n">${n}</span><span class="m">${t}</span>${i===5?'<span class="v">$150,000 lifetime</span>':''}</figcaption></figure>`).join('');
 document.getElementById('ways').innerHTML=WAYS.map(([k,t,d])=>
  `<div class="way"><div class="k">${k}</div><b>${t}</b><p>${d}</p></div>`).join('');
 
