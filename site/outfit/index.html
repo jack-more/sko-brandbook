@@ -139,7 +139,15 @@ a{color:inherit;text-decoration:none}
 .pinfo h3{margin:0;font-family:"Syncopate",sans-serif;font-size:clamp(16px,2vw,28px);font-weight:700;letter-spacing:-.01em}
 .pinfo .sub{display:block;margin-top:8px;font-size:13px;opacity:.84}
 .pinfo .rt{display:block;margin-top:4px;font-size:13px;opacity:.72;font-variant-numeric:tabular-nums}
-.pbuy{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.pbuy{display:flex;align-items:center;gap:16px;flex:0 0 auto;flex-wrap:wrap}
+.pinfo .coa{display:inline-block;margin-top:10px;font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;border-bottom:1px solid rgba(242,240,234,.45);padding-bottom:2px;opacity:.9}
+.tiers{display:flex;gap:6px}
+.tiers button{border:1px solid rgba(242,240,234,.45);background:transparent;color:#F2F0EA;font:inherit;
+  font-size:13px;font-weight:600;padding:8px 12px;border-radius:2px;cursor:pointer;line-height:1.1;
+  display:flex;flex-direction:column;align-items:center;gap:3px;min-width:56px}
+.tiers button i{font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.tiers button.on{background:#F2F0EA;color:#0b1430;border-color:#F2F0EA}
 .pbuy .pr{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.1em}
 .pbuy button{border:0;background:#F2F0EA;color:#0b1430;font:inherit;font-size:12px;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:2px;cursor:pointer}
@@ -234,6 +242,9 @@ a{color:inherit;text-decoration:none}
   </div>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
 
+  <section class="lead"><h2>Stacks</h2></section>
+  <section class="grid" id="grid-stacks" aria-label="Stacks"></section>
+
   <section class="band" id="band" aria-label="The rest of the shelf">
     <video poster="vid/band.jpg" muted loop playsinline preload="metadata" aria-hidden="true">
       <source src="vid/band.webm" type="video/webm">
@@ -264,56 +275,57 @@ a{color:inherit;text-decoration:none}
 </main>
 
 <script>
-const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathione':45,'semax':54,'selank':54,'kpv':49,
- 'dsip':39,'cagrilintide':129,'tesamorelin':79,'ipamorelin':39,'sermorelin':49,'igf1-lr3':89,'mt-1':39,'mt-2':39,
- 'pt-141':44,'ss-31':79,'thymosin-alpha-1':69,'ara-290':59,'aod-9604':49,'kisspeptin':49,'5-amino-1mq':59,'adamax':64,
- 'glow':99,'wolverine':89,'tesa-ipa':99,'cjc-1295':54};
-const priceOf=s=>PRICE[s]||49;
-const gTop=document.getElementById('grid-top'), gRest=document.getElementById('grid-rest');
-const grids=[gTop,gRest];
+
+const gTop=document.getElementById('grid-top'), gStack=document.getElementById('grid-stacks'),
+      gRest=document.getElementById('grid-rest');
+const grids=[gTop,gStack,gRest];
+const money=n=>'$'+n.toFixed(2);
 const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let PRODUCTS=[];
 const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
 
+const BY={};
 const tile=(p,i,eager)=>`
   <div class="tile" data-slug="${p.slug}" role="button" tabindex="0" aria-expanded="false">
     <span class="shot">
       <i>${String(i).padStart(2,'0')}</i>
-      <img src="vid/p/${p.slug}-tile.jpg" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
-      <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 $${priceOf(p.slug)}</button>
+      <img src="${p.tile}" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
+      <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 ${money(p.price)}</button>
     </span>
     <span class="cap">
       <b>${p.name}</b>
-      <span>${p.category} · ${p.dose}</span>
-      <em>$${priceOf(p.slug)}.00   <span style="letter-spacing:0">${p.rating.toFixed(1)} · ${p.reviews.toLocaleString()}</span></em>
+      <span>${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
+      <em>${money(p.price)}</em>
     </span>
   </div>`;
 
 fetch('products.json').then(r=>r.json()).then(P=>{
-  PRODUCTS=P;
-  const bySlug=Object.fromEntries(P.map(p=>[p.slug,p]));
-  window.__bySlug=bySlug;
-  const top=[...P].sort((a,b)=>a.rank-b.rank).slice(0,8);
+  P.forEach(p=>BY[p.slug]=p);
+  const vials=P.filter(p=>p.kind==='vial');
+  const stacks=P.filter(p=>p.group==='Stacks');
+  const top=[...vials].sort((a,b)=>a.rank-b.rank).slice(0,8);
   const topSet=new Set(top.map(p=>p.slug));
-  const rest=P.filter(p=>!topSet.has(p.slug));
+  const rest=vials.filter(p=>!topSet.has(p.slug));
 
   gTop.innerHTML=top.map((p,n)=>tile(p,n+1,true)).join('');
+  gStack.innerHTML=stacks.map((p,n)=>tile(p,n+1,true)).join('');
 
+  const GROUPS=['Peptides','Blends','Supplies'];
   const byGroup=GROUPS.map(g=>[g,rest.filter(p=>p.group===g)]).filter(([,l])=>l.length);
-  let n=8;
+  let n=0;
   gRest.innerHTML=byGroup.map(([g,list])=>
     `<h3 class="cat" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
     list.map(p=>tile(p,++n,false)).join('')).join('');
 
   const eight=top.map(p=>p.slug);
-  const eightTotal=eight.reduce((a,s)=>a+priceOf(s),0);
+  const eightTotal=eight.reduce((a,s)=>a+BY[s].price,0);
   document.getElementById('alltot').textContent=
-    `\u2014 all eight best sellers, $${eightTotal.toFixed(2)}`;
+    `\u2014 all eight best sellers, ${money(eightTotal)}`;
   document.getElementById('allbtn').addEventListener('click',()=>eight.forEach(s=>addToBag(s)));
 
   document.getElementById('bandcats').innerHTML=
-    byGroup.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' · ');
+    byGroup.concat([['Stacks',stacks]]).map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
 });
 
 /* the film rises in and plays only while it is on screen.
@@ -336,17 +348,23 @@ addEventListener('scroll',()=>topbar.classList.toggle('stuck',scrollY>12),{passi
    --------------------------------------------------------------- */
 const BAG=new Map();
 const bar=document.getElementById('bar'), barn=document.getElementById('barn'), bart=document.getElementById('bart');
+/* the live store's own tiering: two of anything is 10% off, three or
+   more is 15% off, per SKU. 3 x $114.99 x .85 = $293.22, which is the
+   3-pack price skocompounds.com lists for Tesamorelin. */
+const line=(slug,q)=>{const u=BY[slug].price;
+  return q>=3?u*q*0.85:q===2?u*2*0.9:u*q;};
 function paintBag(){
   const n=[...BAG.values()].reduce((a,b)=>a+b,0);
-  const t=[...BAG].reduce((a,[s,q])=>a+priceOf(s)*q,0);
-  barn.textContent=n===1?'1 item':`${n} items`;
-  bart.textContent='$'+t.toFixed(2);
+  const t=[...BAG].reduce((a,[s,q])=>a+line(s,q),0);
+  const full=[...BAG].reduce((a,[s,q])=>a+BY[s].price*q,0);
+  barn.textContent=(n===1?'1 item':`${n} items`)+(full-t>0.005?`  \u00b7  saving ${money(full-t)}`:'');
+  bart.textContent=money(t);
   bar.classList.toggle('up',n>0);
   bagLink.textContent=`Bag (${n})`;
   document.querySelectorAll('.quick').forEach(b=>{
     const inBag=BAG.has(b.dataset.add);
     b.classList.toggle('in',inBag);
-    b.textContent=inBag?`In bag · ${BAG.get(b.dataset.add)}`:`Add · $${priceOf(b.dataset.add)}`;
+    b.textContent=inBag?`In bag · ${BAG.get(b.dataset.add)}`:`Add · ${money(BY[b.dataset.add].price)}`;
   });
 }
 function addToBag(slug,q=1){ BAG.set(slug,(BAG.get(slug)||0)+q); paintBag(); }
@@ -366,12 +384,15 @@ function makePanel(){
   el.innerHTML=`<video muted loop playsinline preload="none" aria-hidden="true"></video>
     <button class="pclose" type="button" aria-label="Close">×</button>
     <div class="pinfo">
-      <div><h3></h3><span class="sub"></span><span class="rt"></span></div>
-      <div class="pbuy"><span class="pr"></span><button type="button">Add to bag</button></div>
+      <div><h3></h3><span class="sub"></span><span class="rt"></span><a class="coa" target="_blank" rel="noopener">Batch certificate \u2197</a></div>
+      <div class="pbuy">
+        <span class="tiers"></span>
+        <span class="pr"></span><button type="button">Add to bag</button>
+      </div>
     </div>`;
   el.querySelector('.pclose').addEventListener('click',e=>{e.stopPropagation();closePanel();});
   el.querySelector('.pbuy button').addEventListener('click',e=>{
-    e.stopPropagation(); if(open) addToBag(open.slug);
+    e.stopPropagation(); if(open) addToBag(open.slug, open.panel.getQty?open.panel.getQty():1);
   });
   return el;
 }
@@ -389,7 +410,7 @@ function closePanel(){
 }
 
 function openTile(el){
-  const grid=el.closest('.grid'), slug=el.dataset.slug, p=window.__bySlug[slug];
+  const grid=el.closest('.grid'), slug=el.dataset.slug, p=BY[slug];
   if(open&&open.tile===el){ closePanel(); return; }
   closePanel();
   const tiles=[...grid.querySelectorAll('.tile')];
@@ -403,11 +424,27 @@ function openTile(el){
   last.after(panel);
 
   const v=panel.querySelector('video');
-  v.poster=`vid/p/${slug}.jpg`; v.src=`vid/p/${slug}.mp4`;
+  if(p.film){ v.poster=p.poster; v.src=p.film; v.style.display=''; panel.style.backgroundImage=''; }
+  else { v.style.display='none'; panel.style.backgroundImage=`url("${p.poster}")`;
+         panel.style.backgroundSize='cover'; panel.style.backgroundPosition='center'; }
   panel.querySelector('h3').textContent=p.name;
   panel.querySelector('.sub').textContent=`${p.category} · ${p.dose} · research use only`;
   panel.querySelector('.rt').textContent=`${p.rating.toFixed(1)} · ${p.reviews.toLocaleString()} reviews`;
-  panel.querySelector('.pr').textContent=`$${priceOf(slug)}.00`;
+  const coa=panel.querySelector('.coa');
+  if(p.coa){ coa.href=p.coa; coa.style.display='inline-block'; } else coa.style.display='none';
+  // 1 / 2 / 3 bottles, the same tiering the live store runs: 10% and 15% off
+  const tiers=[[1,p.price,''],[2,Math.round(p.price*2*0.9*100)/100,'10% off'],
+               [3,p.price3||Math.round(p.price*3*0.85*100)/100,'15% off']];
+  let qty=1;
+  const tw=panel.querySelector('.tiers');
+  tw.innerHTML=tiers.map(([q,,off],k)=>`<button type="button" data-q="${q}"${k===0?' class="on"':''}>${q}<i>${off||'single'}</i></button>`).join('');
+  const setQ=q=>{ qty=q;
+    tw.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.q===q));
+    panel.querySelector('.pr').textContent=money(tiers.find(t=>t[0]===q)[1]); };
+  tw.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; e.stopPropagation(); setQ(+b.dataset.q);});
+  setQ(1);
+  panel.dataset.qty='1';
+  panel.getQty=()=>qty;
 
   grid.classList.add('focus');
   el.classList.add('on'); el.setAttribute('aria-expanded','true');
@@ -416,7 +453,7 @@ function openTile(el){
   requestAnimationFrame(()=>{
     panel.classList.add('on');
     panel.style.height=panelH(grid)+'px';
-    if(!reduce) v.play().catch(()=>{});
+    if(p.film&&!reduce) v.play().catch(()=>{});
     setTimeout(()=>{ if(open&&open.panel===panel&&!reduce)
       panel.scrollIntoView({behavior:'smooth',block:'center'}); },360);
   });
