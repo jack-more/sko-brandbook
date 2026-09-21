@@ -219,7 +219,7 @@ a{color:inherit;text-decoration:none}
    rather than boxes. Company and socials, the statement and the way in,
    a live ship-today clock (UPS really does pick up at 3 PM), and the
    one number that matters. */
-.strip{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:10px;padding:0 0 26px}
+.strip{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:10px;padding:0 0 44px}
 .scell{position:relative;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-height:128px}
 .scell:before,.scell:after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--ink);opacity:.55}
 .scell:before{left:0;top:0;border-right:0;border-bottom:0}
@@ -241,7 +241,7 @@ a{color:inherit;text-decoration:none}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,179,107,.55)}80%,100%{box-shadow:0 0 0 9px rgba(47,179,107,0)}}
 
 /* the claims, running */
-.ticker{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -20px 46px;padding:13px 0}
+.ticker{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:10px -20px 40px;padding:13px 0}
 .run{display:flex;gap:44px;width:max-content;animation:tick 42s linear infinite;
   font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 .run span{display:flex;align-items:center;gap:44px}
@@ -353,14 +353,14 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <div class="ticker" aria-hidden="true"><div class="run" id="run"></div></div>
-
   <header class="shead" id="shop">
     <h2>Top sellers</h2>
     <span class="sn">01&ndash;08</span>
     <a class="sa" href="#rest">Shop all 39 <span aria-hidden="true">&#8594;</span></a>
   </header>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
+
+  <div class="ticker" aria-hidden="true"><div class="run" id="run"></div></div>
 
   <section class="band" id="band" aria-label="The rest of the shelf">
     <video poster="vid/band.jpg" muted loop playsinline preload="metadata" aria-hidden="true">
@@ -377,7 +377,7 @@ a{color:inherit;text-decoration:none}
         <b>SKO Club</b>
         <span class="cats">1 point per $1, on everything. Points buy product, and they never expire.<br>
         <b class="drop">The Drop</b> &mdash; one in a hundred orders ships with a chrome cap. Find it and a full box is on its way.</span>
-        <a href="#rest">See everything &mdash; <span id="bandcats"></span></a>
+        <a href="#rest">See every research category &rarr;</a>
       </div>
     </div>
   </section>
@@ -442,8 +442,6 @@ fetch('products.json').then(r=>r.json()).then(P=>{
     list.map(p=>tile(p,++n,false)).join('')).join('');
 
   document.getElementById('rcount').textContent=`${rest.length} more`;
-  document.getElementById('bandcats').innerHTML=
-    byR.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
 });
 
 /* ship today: UPS collects at 3 PM Pacific on weekdays; after that it rolls to the next one */
