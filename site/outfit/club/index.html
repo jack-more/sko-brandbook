@@ -68,24 +68,28 @@ a{color:inherit;text-decoration:none}
    brand book's loyalty page and the Plinko page, not from anywhere else.
    -------------------------------------------------------------------------- */
 .wrap{padding:0 20px;max-width:1180px;margin:0 auto}
-.chero{padding:104px 0 26px}
-.chero h1{margin:0;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.02em;
-  line-height:.95;text-transform:uppercase;font-size:clamp(38px,8.4vw,120px)}
-.chero p{margin:14px 0 0;max-width:46ch;font-size:16px;line-height:1.45}
-.rule{height:3px;background:var(--ink);margin:18px 0 0}
-
-.bal{display:grid;grid-template-columns:1.15fr 1fr;gap:6px;margin:26px 0 34px}
-.bal .box{background:var(--tile);border-radius:6px;padding:26px 24px}
-.bal .box.dark{background:#0b1430;color:#F2F0EA;position:relative;overflow:hidden}
-.bal .box.dark:after{content:"";position:absolute;inset:0;
-  background:radial-gradient(62% 52% at 78% 12%,rgba(113,167,242,.5),rgba(113,167,242,0) 70%)}
-.bal .box.dark>*{position:relative;z-index:2}
+.member{margin:84px 0 34px;border-radius:12px;background:#0b1430;color:#F2F0EA;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.25fr 1fr .95fr;gap:0}
+.member:before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(55% 90% at 12% 0%,rgba(113,167,242,.42),rgba(113,167,242,0) 70%),
+             radial-gradient(40% 70% at 100% 100%,rgba(113,167,242,.18),rgba(113,167,242,0) 70%)}
+.member>*{position:relative;z-index:2;padding:30px 30px 28px}
+.member>*+*{border-left:1px solid rgba(242,240,234,.12)}
 .k{font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
-.bignum{font-size:clamp(38px,6vw,66px);font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;margin:10px 0 0}
-.sub{font-size:13px;opacity:.78;margin-top:8px}
-.meter{height:6px;border-radius:99px;background:rgba(242,240,234,.22);margin:18px 0 8px;overflow:hidden}
-.meter i{display:block;height:100%;background:#F2F0EA;border-radius:99px}
-
+.member h1{margin:12px 0 0;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1;
+  font-size:clamp(24px,2.7vw,38px);text-transform:uppercase}
+.member .who p{margin:12px 0 0;max-width:36ch;font-size:14px;line-height:1.45;opacity:.82}
+.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.cta a{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 18px;border-radius:99px}
+.cta .solid{background:#F2F0EA;color:#0b1430}
+.cta .ghost{border:1px solid rgba(242,240,234,.4)}
+.bignum{font-size:clamp(46px,5.4vw,76px);font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums;line-height:.95;margin:12px 0 0}
+.sub{font-size:13px;opacity:.78;margin-top:10px}
+.meter{height:8px;border-radius:99px;background:rgba(242,240,234,.16);margin:18px 0 0;overflow:hidden}
+.meter i{display:block;height:100%;background:#71A7F2;border-radius:99px;transition:width .5s cubic-bezier(.28,.06,.28,.96)}
+.stat.lvl{display:flex;align-items:center;gap:18px}
+.stat.lvl img{width:92px;height:92px;flex:0 0 auto;border-radius:50%;background:#fff;padding:6px;object-fit:contain}
+.lvname{margin-top:10px;font-family:"Syncopate",sans-serif;font-size:18px;font-weight:700;letter-spacing:-.005em}
 .sec{margin:0 0 12px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
   padding-bottom:9px;border-bottom:1px solid var(--rule)}
 .sec h2{margin:0;font-family:"Syncopate",sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
@@ -157,13 +161,14 @@ a{color:inherit;text-decoration:none}
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 
 @media (max-width:900px){
-  .bal{grid-template-columns:1fr}
+  .member{grid-template-columns:1fr;margin-top:76px}
+  .member>*+*{border-left:0;border-top:1px solid rgba(242,240,234,.12)}
+  .member>*{padding:22px 20px}
   .jobs{grid-template-columns:1fr}
   .lvls{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;margin-right:-20px;padding-right:20px}
   .lvc{flex:0 0 82%;scroll-snap-align:start}
   .ways{grid-template-columns:1fr 1fr}
   .nav{gap:14px;font-size:15px}
-  .chero{padding:88px 0 20px}
 }
 </style>
 </head>
@@ -186,30 +191,31 @@ a{color:inherit;text-decoration:none}
 </header>
 
 <main class="wrap">
-  <section class="chero">
-    <h1>SKO Club</h1>
-    <p>One point per dollar, on everything. Points buy product &mdash; four hundred is a free peptide.
-       Levels are lifetime spend, they are never taken away, and each one hands you an object you keep.</p>
-    <div class="rule"></div>
-  </section>
-
-  <section class="bal">
-    <div class="box dark">
+  <!-- the tracker is the first thing on the page: who you are, what you have, how close the next free vial is -->
+  <section class="member" aria-label="Your SKO Club">
+    <div class="who">
+      <div class="k">SKO Club</div>
+      <h1>Welcome back, Jack</h1>
+      <p>1 point for every $1. 400 points is a free peptide, and your level never goes down.</p>
+      <div class="cta"><a href="#earn" class="solid">Earn points</a><a href="../../plinko/" class="ghost">Take today&rsquo;s drop</a></div>
+    </div>
+    <div class="stat">
       <div class="k">Your points</div>
       <div class="bignum" id="pts">0</div>
-      <div class="sub" id="ptsub">400 points is a free peptide. You are 400 away.</div>
       <div class="meter"><i id="bar" style="width:0%"></i></div>
-      <div class="k" style="opacity:.55">Progress to your next free vial</div>
+      <div class="sub" id="ptsub">400 points is a free peptide. You are 400 away.</div>
     </div>
-    <div class="box">
-      <div class="k">Your level</div>
-      <div class="bignum">01</div>
-      <div class="sub">Pigment. Lifetime spend sets the level, and the last one &mdash; the bracelet, at
-        $150,000 lifetime &mdash; is made once.</div>
+    <div class="stat lvl">
+      <img src="../img/tier/pigment.webp" alt="">
+      <div>
+        <div class="k">Your level</div>
+        <div class="lvname">01 &middot; Pigment</div>
+        <div class="sub">Next level: Foil</div>
+      </div>
     </div>
   </section>
 
-  <div class="sec"><h2>Earn</h2><span>Spend is one road. There are five more.</span></div>
+  <div class="sec" id="earn"><h2>Earn</h2><span>Spend is one road. There are five more.</span></div>
   <div class="jobs" id="jobs"></div>
 
   <div class="sec"><h2>Redeem</h2><span>Points buy product, and mostly they buy vials.</span></div>
