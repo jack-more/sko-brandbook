@@ -52,6 +52,8 @@ a{color:inherit;text-decoration:none}
 .nav{display:flex;align-items:center;gap:30px;font-size:19px;font-weight:500}
 .nav a.on{border-bottom:2px solid var(--ink);padding-bottom:2px}
 .nav .club{display:inline-flex;align-items:center;gap:8px}
+.nav .club span{display:inline;font-size:inherit;opacity:1;margin:0;max-width:none;line-height:inherit}
+.nav .club .sm{display:none}
 .nav .club svg{width:19px;height:19px;flex:0 0 auto}
 .dots{display:flex;gap:9px;margin-left:6px}
 .dots button{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink);padding:0;cursor:pointer;background:transparent}
@@ -179,29 +181,57 @@ a{color:inherit;text-decoration:none}
 .quick.in{background:#1E7A4F;color:#fff}
 .quick.in:before{content:"\2713";font-size:14px;margin-top:0}
 /* the film opens full width under the row you clicked */
-.panel{grid-column:1/-1;position:relative;height:0;overflow:hidden;background:#0b1430;
-  transition:height var(--d) var(--e),margin var(--d) var(--e)}
+.panel{grid-column:1/-1;position:relative;height:0;overflow:hidden;border-radius:14px;
+  background:var(--tile);transition:height var(--d) var(--e),margin var(--d) var(--e)}
 .panel.on{margin:8px 0 22px}
-.panel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pinfo{position:absolute;left:0;right:0;bottom:0;z-index:2;color:#F2F0EA;
-  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:26px 28px;
-  background:linear-gradient(180deg,rgba(4,10,32,0),rgba(4,10,32,.16) 40%,rgba(4,10,32,.8))}
-.pinfo h3{margin:0;font-family:"Syncopate",sans-serif;font-size:clamp(16px,2vw,28px);font-weight:700;letter-spacing:-.01em}
-.pinfo .sub{display:block;margin-top:8px;font-size:13px;opacity:.84}
-.pinfo .rt{display:block;margin-top:4px;font-size:13px;opacity:.72;font-variant-numeric:tabular-nums}
-.pbuy{display:flex;align-items:center;gap:16px;flex:0 0 auto;flex-wrap:wrap}
-.pinfo .coa{display:inline-block;margin-top:10px;font-size:12px;letter-spacing:.08em;
-  text-transform:uppercase;border-bottom:1px solid rgba(242,240,234,.45);padding-bottom:2px;opacity:.9}
-.tiers{display:flex;gap:6px}
-.tiers button{border:1px solid rgba(242,240,234,.45);background:transparent;color:#F2F0EA;font:inherit;
-  font-size:13px;font-weight:600;padding:8px 12px;border-radius:2px;cursor:pointer;line-height:1.1;
-  display:flex;flex-direction:column;align-items:center;gap:3px;min-width:56px}
-.tiers button i{font-style:normal;font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
-.tiers button.on{background:#F2F0EA;color:#0b1430;border-color:#F2F0EA}
-.pbuy .pr{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.1em}
-.pbuy button{border:0;background:#F2F0EA;color:#0b1430;font:inherit;font-size:12px;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:2px;cursor:pointer}
-.pclose{position:absolute;right:18px;top:16px;z-index:3;width:34px;height:34px;border-radius:50%;
+/* the buy panel: the film on the left, cropped to the vial so it stays sharp,
+   and a buy column on the right that is built to close the sale */
+.pgrid{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,1fr)}
+.pfilm{position:relative;overflow:hidden;background:#0b1430}
+.pfilm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% 60%}
+.pfilm .badge{position:absolute;left:18px;top:18px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 12px;border-radius:99px;background:rgba(242,240,234,.92);color:#0b1430}
+.pbuy{padding:32px 36px 28px;display:flex;flex-direction:column;gap:15px;color:var(--ink)}
+.pbuy .eyeb{font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.pbuy h3{margin:-6px 0 0;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1;
+  font-size:clamp(30px,3vw,46px);text-transform:uppercase}
+.pbuy .sub{font-size:15px;color:var(--ink-soft);margin-top:-6px}
+.pbuy .rt{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.pbuy .rt i{font-style:normal;color:#E0A43A;letter-spacing:1px}
+.pbuy .rt span{color:var(--ink-soft);font-weight:500}
+.pbuy .prow{display:flex;align-items:baseline;gap:12px}
+.pbuy .pr{font-size:clamp(34px,3.2vw,48px);font-weight:650;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pbuy .was{font-size:17px;color:var(--ink-soft);text-decoration:line-through}
+.pbuy .each{font-size:13px;font-weight:600;color:#1E7A4F}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tiers button{position:relative;border:1.5px solid var(--rule);background:var(--ground);color:var(--ink);font:inherit;
+  padding:14px 8px 12px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease}
+.tiers button:hover{border-color:var(--ink);transform:translateY(-1px)}
+.tiers button b{font-size:22px;font-weight:650;line-height:1}
+.tiers button small{font-size:11px;font-weight:600;color:var(--ink-soft)}
+.tiers button i{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1E7A4F}
+.tiers button em{position:absolute;top:-9px;left:50%;transform:translateX(-50%);white-space:nowrap;font-style:normal;
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:99px;background:#173384;color:#F2F0EA}
+.tiers button.on{border-color:var(--ink);background:var(--ink);color:var(--ground)}
+.tiers button.on small,.tiers button.on i{color:inherit;opacity:.85}
+.pbuy .addbig{border:0;border-radius:14px;padding:19px 22px;background:#173384;color:#F2F0EA;font:inherit;font-size:15px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  box-shadow:0 10px 26px rgba(23,51,132,.28);transition:transform .2s ease,background .2s ease}
+.pbuy .addbig:hover{transform:translateY(-1px)}
+.pbuy .addbig.in{background:#1E7A4F}
+.pbuy .ship{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600}
+.pbuy .ship .dot{flex:0 0 auto}
+.pbuy .why{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px}
+.pbuy .why div{background:var(--ground);border-radius:12px;padding:12px 14px}
+.pbuy .why b{display:block;font-size:13.5px;font-weight:650}
+.pbuy .why span{display:block;font-size:12px;color:var(--ink-soft);margin-top:2px}
+.pbuy .why a{text-decoration:underline;text-underline-offset:2px}
+.pbuy .bens{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:13.5px}
+.pbuy .bens li{padding-left:18px;position:relative}
+.pbuy .bens li:before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:#71A7F2}
+.pbuy .ruo{font-size:11px;color:var(--ink-soft);margin-top:auto}
+.pclose{position:absolute;right:16px;top:16px;z-index:5;width:34px;height:34px;border-radius:50%;
   border:1px solid rgba(242,240,234,.5);background:rgba(4,10,32,.3);color:#F2F0EA;
   font:inherit;font-size:16px;line-height:1;cursor:pointer}
 
@@ -326,8 +356,7 @@ a{color:inherit;text-decoration:none}
   .club{text-align:left;margin-top:18px;max-width:none}
   .grid{grid-template-columns:repeat(2,1fr);gap:5px}
   .cap b{font-size:14px}
-  .pinfo{flex-direction:column;align-items:flex-start;gap:14px;padding:18px}
-  .pbuy{width:100%;justify-content:space-between}
+  .pgrid{grid-template-columns:1fr}
   .nav{gap:16px;font-size:16px}
 }
 /* ---------- phones: 1:1 with the reference clip ----------
@@ -346,7 +375,8 @@ a{color:inherit;text-decoration:none}
   .nav a{display:inline-flex;align-items:center;line-height:1;padding:6px 0;border-bottom:2px solid transparent}
   .nav a.on{padding-bottom:6px}
   .nav .club{gap:5px;margin:0}
-  .nav .lg{display:none}
+  .nav .club .lg{display:none}
+  .nav .club .sm{display:inline}
   .nav .club svg{width:17px;height:17px}
   .dots{display:none}
   .wrap{padding:0 16px}
@@ -423,7 +453,7 @@ a{color:inherit;text-decoration:none}
     <a href="club/" class="club" id="clubOpen" aria-label="Open SKO Club" aria-controls="drawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
-      </svg><span class="lg">SKO&nbsp;</span>Club</a>
+      </svg><span class="lg">SKO Club</span><span class="sm">Club</span></a>
     <a href="#bag">Bag (0)</a>
     <span class="dots" role="group" aria-label="Ground">
       <button data-set="bone" aria-pressed="true" aria-label="Bone"></button>
@@ -661,7 +691,7 @@ const bar=document.getElementById('bar'), barn=document.getElementById('barn'), 
    more is 15% off, per SKU. 3 x $114.99 x .85 = $293.22, which is the
    3-pack price skocompounds.com lists for Tesamorelin. */
 const line=(slug,q)=>{const u=BY[slug].price;
-  return q>=3?u*q*0.85:q===2?u*2*0.9:u*q;};
+  return q>=10?u*q*0.8:q>=3?u*q*0.85:q===2?u*2*0.9:u*q;};
 function paintBag(){
   const n=[...BAG.values()].reduce((a,b)=>a+b,0);
   const t=[...BAG].reduce((a,[s,q])=>a+line(s,q),0);
@@ -690,22 +720,33 @@ let open=null;                       // {grid, tile, panel, slug}
 function makePanel(){
   const el=document.createElement('div');
   el.className='panel';
-  el.innerHTML=`<video muted playsinline preload="none" aria-hidden="true"></video>
-    <button class="pclose" type="button" aria-label="Close">×</button>
-    <div class="pinfo">
-      <div><h3></h3><span class="sub"></span><span class="rt"></span><a class="coa" target="_blank" rel="noopener">Batch certificate \u2197</a></div>
+  el.innerHTML=`<button class="pclose" type="button" aria-label="Close">\u00d7</button>
+    <div class="pgrid">
+      <div class="pfilm"><video muted playsinline preload="none" aria-hidden="true"></video><span class="badge"></span></div>
       <div class="pbuy">
-        <span class="tiers"></span>
-        <span class="pr"></span><button type="button">Add to bag</button>
+        <span class="eyeb"></span>
+        <h3></h3>
+        <span class="sub"></span>
+        <span class="rt"></span>
+        <div class="prow"><span class="pr"></span><span class="was"></span><span class="each"></span></div>
+        <div class="tiers"></div>
+        <button class="addbig" type="button"><span class="al">Add to bag</span><span class="ar"></span></button>
+        <div class="ship"><i class="dot" aria-hidden="true"></i><span class="st"></span></div>
+        <div class="why"></div>
+        <ul class="bens"></ul>
+        <span class="ruo">For laboratory research use only. Not for human or veterinary use.</span>
       </div>
     </div>`;
   el.querySelector('.pclose').addEventListener('click',e=>{e.stopPropagation();closePanel();});
-  el.querySelector('.pbuy button').addEventListener('click',e=>{
-    e.stopPropagation(); if(open) addToBag(open.slug, open.panel.getQty?open.panel.getQty():1);
+  el.querySelector('.addbig').addEventListener('click',e=>{
+    e.stopPropagation(); if(!open) return;
+    const q=open.panel.getQty?open.panel.getQty():1; addToBag(open.slug,q);
+    const b=e.currentTarget; b.classList.add('in'); b.querySelector('.al').textContent=`Added \u2713 \u00b7 ${BAG.get(open.slug)} in bag`;
   });
   return el;
 }
-const panelH=grid=>Math.round(grid.clientWidth*9/16);
+const panelH=(grid,panel)=>{const b=panel&&panel.querySelector('.pbuy');
+  return Math.max(600,b?b.scrollHeight:0);};
 
 function closePanel(){
   if(!open) return;
@@ -736,22 +777,39 @@ function openTile(el){
   if(p.film){ v.poster=p.poster; v.src=p.film; v.style.display=''; panel.style.backgroundImage=''; }
   else { v.style.display='none'; panel.style.backgroundImage=`url("${p.poster}")`;
          panel.style.backgroundSize='cover'; panel.style.backgroundPosition='center'; }
-  panel.querySelector('h3').textContent=p.name;
-  panel.querySelector('.sub').textContent=`${p.category} · ${p.dose} · research use only`;
-  panel.querySelector('.rt').textContent=`${p.rating.toFixed(1)} · ${p.reviews.toLocaleString()} reviews`;
-  const coa=panel.querySelector('.coa');
-  if(p.coa){ coa.href=p.coa; coa.style.display='inline-block'; } else coa.style.display='none';
-  // 1 / 2 / 3 bottles, the same tiering the live store runs: 10% and 15% off
-  const tiers=[[1,p.price,''],[2,Math.round(p.price*2*0.9*100)/100,'10% off'],
-               [3,p.price3||Math.round(p.price*3*0.85*100)/100,'15% off']];
+  const q$=c=>panel.querySelector(c);
+  q$('.badge').textContent=p.rank<=8?`Top seller \u00b7 #${p.rank===0?1:p.rank}`:p.research;
+  q$('.eyeb').textContent=p.research;
+  q$('h3').textContent=p.name;
+  q$('.sub').textContent=[p.category,p.dose].filter(Boolean).join(' \u00b7 ');
+  q$('.rt').innerHTML=p.reviews?`<i>\u2605\u2605\u2605\u2605\u2605</i>${p.rating.toFixed(1)} <span>\u00b7 ${p.reviews.toLocaleString()} reviews</span>`:'';
+  // the live store's own ladder: 2 is 10% off, 3 to 9 is 15% off, 10 is 20% off
+  const r2=x=>Math.round(x*100)/100;
+  const tiers=[[1,p.price,'',''],[2,r2(p.price*2*.9),'10% off',''],
+               [3,r2(p.price*3*.85),'15% off','Most popular'],[10,r2(p.price*10*.8),'20% off','Best value']];
   let qty=1;
-  const tw=panel.querySelector('.tiers');
-  tw.innerHTML=tiers.map(([q,,off],k)=>`<button type="button" data-q="${q}"${k===0?' class="on"':''}>${q}<i>${off||'single'}</i></button>`).join('');
-  const setQ=q=>{ qty=q;
+  const tw=q$('.tiers');
+  tw.innerHTML=tiers.map(([q,t,off,tag],k)=>`<button type="button" data-q="${q}"${k===0?' class="on"':''}>${tag?`<em>${tag}</em>`:''}
+    <b>${q}</b><small>${q===1?'vial':'vials'}</small><i>${off||'\u00a0'}</i></button>`).join('');
+  const setQ=q=>{ qty=q; const t=tiers.find(x=>x[0]===q);
     tw.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.q===q));
-    panel.querySelector('.pr').textContent=money(tiers.find(t=>t[0]===q)[1]); };
+    q$('.pr').textContent=money(t[1]);
+    q$('.was').textContent=q>1?money(r2(p.price*q)):'';
+    q$('.each').textContent=q>1?`${money(r2(t[1]/q))} each \u00b7 save ${money(r2(p.price*q-t[1]))}`:'';
+    q$('.ar').textContent=money(t[1]); };
   tw.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; e.stopPropagation(); setQ(+b.dataset.q);});
   setQ(1);
+  q$('.st').textContent=document.getElementById('shipk').textContent==='Ships today'
+    ?`Order in the next ${document.getElementById('shipt').textContent} \u2014 ships cold today`
+    :`Ships cold on ${document.getElementById('shipt').textContent}'s UPS truck`;
+  if(document.querySelector('.dot.late')) q$('.ship .dot').classList.add('late');
+  q$('.why').innerHTML=[
+    ['Third party tested', p.coa?`<a href="${p.coa}" target="_blank" rel="noopener">See this batch\u2019s certificate</a>`:'Batch by batch'],
+    ['Shipped cold', 'From Beverly Hills, same day before 3 PM PT'],
+    [`Earns ${Math.floor(p.price)} pts`, '400 points is a free peptide'],
+    ['The Drop', '1 in 100 orders ships a Full Box free'],
+  ].map(([b,t])=>`<div><b>${b}</b><span>${t}</span></div>`).join('');
+  q$('.bens').innerHTML=(p.benefits||[]).map(x=>`<li>${x}</li>`).join('');
   panel.dataset.qty='1';
   panel.getQty=()=>qty;
 
@@ -761,7 +819,7 @@ function openTile(el){
 
   requestAnimationFrame(()=>{
     panel.classList.add('on');
-    panel.style.height=panelH(grid)+'px';
+    panel.style.height=panelH(grid,panel)+'px';
     if(p.film&&!reduce) v.play().catch(()=>{});
     setTimeout(()=>{ if(open&&open.panel===panel&&!reduce)
       panel.scrollIntoView({behavior:'smooth',block:'center'}); },360);
@@ -795,7 +853,7 @@ for(const g of grids){
   });
 }
 addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
-addEventListener('resize',()=>{ if(open) open.panel.style.height=panelH(open.grid)+'px'; });
+addEventListener('resize',()=>{ if(open) open.panel.style.height=panelH(open.grid,open.panel)+'px'; });
 
 /* both lines of the wordmark are set to the measure */
 const words=[...document.querySelectorAll('.word')];

@@ -15,7 +15,14 @@
   "tile": "img/v/5-amino-1mq.webp",
   "film": "vid/p/5-amino-1mq.mp4",
   "poster": "vid/p/5-amino-1mq.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "Selective NNMT enzyme inhibition",
+   "NAD+ / SAM salvage pathway studies",
+   "Adipocyte lipogenesis research",
+   "Sirtuin-linked metabolic regulation"
+  ],
+  "desc": "Selective NNMT inhibitor for NAD+ salvage and adipocyte metabolism research."
  },
  {
   "slug": "cjc-1295",
@@ -33,7 +40,14 @@
   "tile": "img/v/cjc-1295-ipamorelin.webp",
   "film": "vid/p/cjc-1295.mp4",
   "poster": "vid/p/cjc-1295.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "GHRH + GHS-R dual pathway research",
+   "Pulsatile GH secretion modeling",
+   "Cortisol/prolactin-sparing secretagogue studies",
+   "Somatotropic axis & IGF-1 analysis"
+  ],
+  "desc": "Growth hormone secretagogue blend for GHRH signaling research."
  },
  {
   "slug": "ghk-cu",
@@ -51,7 +65,14 @@
   "tile": "img/v/ghk-cu.webp",
   "film": "vid/p/ghk-cu.mp4",
   "poster": "vid/p/ghk-cu.jpg",
-  "research": "Skin & pigment"
+  "research": "Skin & pigment",
+  "benefits": [
+   "Collagen synthesis pathway studies",
+   "Extracellular matrix remodeling",
+   "Antioxidant enzyme regulation",
+   "Copper-peptide binding research"
+  ],
+  "desc": "Copper peptide complex for extracellular matrix and collagen pathway studies."
  },
  {
   "slug": "glow",
@@ -69,7 +90,14 @@
   "tile": "img/v/glow.webp",
   "film": "vid/p/glow.mp4",
   "poster": "vid/p/glow.jpg",
-  "research": "Skin & pigment"
+  "research": "Skin & pigment",
+  "benefits": [
+   "Cutaneous peptide delivery research",
+   "Extracellular matrix pathway studies",
+   "Keratinocyte / fibroblast assay research",
+   "Antioxidant activity analysis"
+  ],
+  "desc": "Multi-peptide dermal research formula for in-vitro cutaneous studies."
  },
  {
   "slug": "glutathione",
@@ -87,7 +115,14 @@
   "tile": "img/v/glutathione.webp",
   "film": "vid/p/glutathione.mp4",
   "poster": "vid/p/glutathione.jpg",
-  "research": "Skin & pigment"
+  "research": "Skin & pigment",
+  "benefits": [
+   "Redox homeostasis studies",
+   "Oxidative stress research",
+   "Phase II detoxification models",
+   "Cellular antioxidant pathway analysis"
+  ],
+  "desc": "Master antioxidant tripeptide for redox and detoxification pathway research."
  },
  {
   "slug": "mots-c",
@@ -105,7 +140,14 @@
   "tile": "img/v/mots-c.webp",
   "film": "vid/p/mots-c.mp4",
   "poster": "vid/p/mots-c.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "AMPK pathway activation studies",
+   "Cellular energy homeostasis research",
+   "Mitochondrial signaling analysis",
+   "Metabolic regulation models"
+  ],
+  "desc": "Mitochondrial-derived peptide for metabolic and cellular energy research."
  },
  {
   "slug": "adamax",
@@ -123,7 +165,14 @@
   "tile": "img/v/adamax.webp",
   "film": "vid/p/adamax.mp4",
   "poster": "vid/p/adamax.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "Proprietary research blend",
+   "Lyophilized for stability",
+   ">99% verified purity",
+   "For qualified in-vitro research"
+  ],
+  "desc": "Proprietary research peptide blend for in-vitro exploratory studies."
  },
  {
   "slug": "aod-9604",
@@ -141,7 +190,14 @@
   "tile": "img/v/aod-9604.webp",
   "film": "vid/p/aod-9604.mp4",
   "poster": "vid/p/aod-9604.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "hGH fragment 176\u2013191 research",
+   "Lipolysis / lipogenesis pathway studies",
+   "Non-somatogenic GH fragment model",
+   ">99% verified purity"
+  ],
+  "desc": "Modified C-terminal fragment (176\u2013191) of human growth hormone for lipolysis pathway research."
  },
  {
   "slug": "ara-290",
@@ -159,7 +215,14 @@
   "tile": "img/v/ara290.webp",
   "film": "vid/p/ara-290.mp4",
   "poster": "vid/p/ara-290.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "Innate repair receptor (IRR) research",
+   "EPO helix B peptide pharmacology",
+   "Anti-inflammatory pathway studies",
+   "Small-fiber neuropathy models"
+  ],
+  "desc": "Innate repair receptor agonist (Cibinetide) derived from erythropoietin's helix B for tissue-protection research."
  },
  {
   "slug": "bpc-157",
@@ -177,7 +240,14 @@
   "tile": "img/v/bpc-157.webp",
   "film": "vid/p/bpc-157.mp4",
   "poster": "vid/p/bpc-157.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "Gastric peptide signaling studies",
+   "Nitric oxide pathway research",
+   "Growth factor modulation analysis",
+   "Gastrointestinal tissue models"
+  ],
+  "desc": "Synthetic pentadecapeptide derived from gastric juice for laboratory research."
  },
  {
   "slug": "cagrilintide",
@@ -195,7 +265,14 @@
   "tile": "img/v/cagrilintide.webp",
   "film": "vid/p/cagrilintide.mp4",
   "poster": "vid/p/cagrilintide.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "Amylin & calcitonin receptor research",
+   "Gastric-motility signaling models",
+   "Glucagon suppression pathway studies",
+   "Combinatorial GLP-1/amylin research"
+  ],
+  "desc": "Long-acting amylin analogue for receptor-binding and metabolic pathway research."
  },
  {
   "slug": "dsip",
@@ -213,7 +290,14 @@
   "tile": "img/v/dsip.webp",
   "film": "vid/p/dsip.mp4",
   "poster": "vid/p/dsip.jpg",
-  "research": "Cognitive & sleep"
+  "research": "Cognitive & sleep",
+  "benefits": [
+   "Sleep architecture studies",
+   "Delta-wave research",
+   "Stress modulation models",
+   "Circadian rhythm analysis"
+  ],
+  "desc": "Delta sleep-inducing peptide for sleep architecture research."
  },
  {
   "slug": "igf1-lr3",
@@ -231,7 +315,14 @@
   "tile": "img/v/igf1-lr3.webp",
   "film": "vid/p/igf1-lr3.mp4",
   "poster": "vid/p/igf1-lr3.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "IGF-1R binding & signaling studies",
+   "Reduced IGFBP affinity / extended half-life",
+   "PI3K-Akt & MAPK pathway research",
+   "Myoblast proliferation models"
+  ],
+  "desc": "Long-acting Arg\u00b3 IGF-1 analogue for IGF-1R signaling and anabolic pathway research."
  },
  {
   "slug": "ipamorelin",
@@ -249,7 +340,14 @@
   "tile": "img/v/ipamorelin.webp",
   "film": "vid/p/ipamorelin.mp4",
   "poster": "vid/p/ipamorelin.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "Pituitary signaling research",
+   "GH pulse modeling",
+   "Ghrelin receptor studies",
+   "Selective secretagogue analysis"
+  ],
+  "desc": "Selective GH secretagogue for pituitary signaling research."
  },
  {
   "slug": "kisspeptin",
@@ -267,7 +365,14 @@
   "tile": "img/v/kisspeptin-10.webp",
   "film": "vid/p/kisspeptin.mp4",
   "poster": "vid/p/kisspeptin.jpg",
-  "research": "Immune & signalling"
+  "research": "Immune & signalling",
+  "benefits": [
+   "GPR54 / KISS1R receptor research",
+   "GnRH pulse generation studies",
+   "HPG-axis signaling modeling",
+   "Reproductive endocrinology research"
+  ],
+  "desc": "KISS1-derived neuropeptide for GnRH pulse and HPG-axis research."
  },
  {
   "slug": "kpv",
@@ -285,7 +390,14 @@
   "tile": "img/v/kpv.webp",
   "film": "vid/p/kpv.mp4",
   "poster": "vid/p/kpv.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "NF-\u03baB pathway research",
+   "Mast cell & macrophage modulation studies",
+   "Intestinal barrier / colitis models",
+   "\u03b1-MSH C-terminal fragment analysis"
+  ],
+  "desc": "Lysine-Proline-Valine tripeptide for inflammatory pathway research."
  },
  {
   "slug": "mt-1",
@@ -303,7 +415,14 @@
   "tile": "img/v/mt-1.webp",
   "film": "vid/p/mt-1.mp4",
   "poster": "vid/p/mt-1.jpg",
-  "research": "Skin & pigment"
+  "research": "Skin & pigment",
+  "benefits": [
+   "Melanocortin receptor research",
+   "Pigmentation pathway studies",
+   "Selective MC1R agonist studies",
+   "Stable lyophilized form"
+  ],
+  "desc": "Melanocortin receptor agonist for pigmentation pathway research."
  },
  {
   "slug": "mt-2",
@@ -321,7 +440,14 @@
   "tile": "img/v/mt-2.webp",
   "film": "vid/p/mt-2.mp4",
   "poster": "vid/p/mt-2.jpg",
-  "research": "Skin & pigment"
+  "research": "Skin & pigment",
+  "benefits": [
+   "Melanocortin receptor research",
+   "Pigmentation pathway studies",
+   "MC3R / MC4R binding assays",
+   "Stable lyophilized form"
+  ],
+  "desc": "Melanocortin receptor agonist for pigmentation pathway research."
  },
  {
   "slug": "nad",
@@ -339,7 +465,14 @@
   "tile": "img/v/nad-plus.webp",
   "film": "vid/p/nad.mp4",
   "poster": "vid/p/nad.jpg",
-  "research": "Immune & signalling"
+  "research": "Immune & signalling",
+  "benefits": [
+   "In-vitro cellular metabolism research",
+   "DNA-repair mechanism characterization",
+   "Sirtuin signaling pathway assays",
+   "Mitochondrial pathway analysis"
+  ],
+  "desc": "Coenzyme research compound for in-vitro cellular metabolism studies."
  },
  {
   "slug": "pt-141",
@@ -357,7 +490,14 @@
   "tile": "img/v/pt-141.webp",
   "film": "vid/p/pt-141.mp4",
   "poster": "vid/p/pt-141.jpg",
-  "research": "Immune & signalling"
+  "research": "Immune & signalling",
+  "benefits": [
+   "MC3R / MC4R receptor research",
+   "Central melanocortin pathway studies",
+   "Hypothalamic signaling models",
+   "\u03b1-MSH analogue pharmacology"
+  ],
+  "desc": "Melanocortin receptor agonist (Bremelanotide) for MC3R/MC4R signaling research."
  },
  {
   "slug": "selank",
@@ -375,7 +515,14 @@
   "tile": "img/v/selank.webp",
   "film": "vid/p/selank.mp4",
   "poster": "vid/p/selank.jpg",
-  "research": "Cognitive & sleep"
+  "research": "Cognitive & sleep",
+  "benefits": [
+   "GABAergic receptor assays",
+   "GABAergic research",
+   "Neuroimmune signaling",
+   "Tuftsin analogue analysis"
+  ],
+  "desc": "Synthetic tuftsin analogue for GABAergic and neuroimmune pathway research."
  },
  {
   "slug": "semax",
@@ -393,7 +540,14 @@
   "tile": "img/v/semax.webp",
   "film": "vid/p/semax.mp4",
   "poster": "vid/p/semax.jpg",
-  "research": "Cognitive & sleep"
+  "research": "Cognitive & sleep",
+  "benefits": [
+   "BDNF pathway research",
+   "Neurotrophic signaling assays",
+   "Neuropeptide pathway analysis",
+   "ACTH analogue analysis"
+  ],
+  "desc": "ACTH(4-10) analogue heptapeptide for BDNF and neurotrophic pathway research."
  },
  {
   "slug": "sermorelin",
@@ -411,7 +565,14 @@
   "tile": "img/v/sermorelin.webp",
   "film": "vid/p/sermorelin.mp4",
   "poster": "vid/p/sermorelin.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "GHRH receptor agonist research",
+   "Pulsatile GH secretion modeling",
+   "Somatotropic axis studies",
+   "IGF-1 pathway analysis"
+  ],
+  "desc": "GHRH(1-29) analogue for growth hormone releasing hormone research."
  },
  {
   "slug": "ss-31",
@@ -429,7 +590,14 @@
   "tile": "img/v/ss31.webp",
   "film": "vid/p/ss-31.mp4",
   "poster": "vid/p/ss-31.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "Cardiolipin binding & cristae stabilization",
+   "Electron transport chain research",
+   "Mitochondrial ROS reduction studies",
+   "Ischemia-reperfusion & heart failure models"
+  ],
+  "desc": "Mitochondria-targeted tetrapeptide (Elamipretide) for cardiolipin and bioenergetics research."
  },
  {
   "slug": "thymosin-alpha-1",
@@ -447,7 +615,14 @@
   "tile": "img/v/thymosin-alpha-1.webp",
   "film": "vid/p/thymosin-alpha-1.mp4",
   "poster": "vid/p/thymosin-alpha-1.jpg",
-  "research": "Immune & signalling"
+  "research": "Immune & signalling",
+  "benefits": [
+   "TLR2 / TLR9 pathway research",
+   "T-cell maturation & differentiation studies",
+   "Dendritic cell activation models",
+   "Innate & adaptive immunity signaling"
+  ],
+  "desc": "28-amino-acid immunomodulatory peptide for T-cell and innate immunity research."
  },
  {
   "slug": "tb-500",
@@ -465,7 +640,14 @@
   "tile": "img/v/tb-500.webp",
   "film": "vid/p/tb-500.mp4",
   "poster": "vid/p/tb-500.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "Cell migration assay research",
+   "Angiogenesis research",
+   "Actin sequestration models",
+   "Thymosin Beta-4 analysis"
+  ],
+  "desc": "Thymosin Beta-4 fragment for actin-binding and angiogenesis pathway research."
  },
  {
   "slug": "tesa-ipa",
@@ -483,7 +665,14 @@
   "tile": "img/v/tesa-ipa-blend.webp",
   "film": "vid/p/tesa-ipa.mp4",
   "poster": "vid/p/tesa-ipa.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "Combined GHRH/GHRP research",
+   "Synergistic pathway studies",
+   "Somatotropic axis modeling",
+   "Premium research blend"
+  ],
+  "desc": "Tesamorelin + Ipamorelin combined research blend."
  },
  {
   "slug": "tesamorelin",
@@ -501,7 +690,14 @@
   "tile": "img/v/tesamorelin.webp",
   "film": "vid/p/tesamorelin.mp4",
   "poster": "vid/p/tesamorelin.jpg",
-  "research": "Growth hormone axis"
+  "research": "Growth hormone axis",
+  "benefits": [
+   "Endogenous GH secretion studies",
+   "Adipose tissue pathway research",
+   "Metabolic pathway analysis",
+   "Stable GHRH analogue"
+  ],
+  "desc": "GHRH analogue for somatotropic axis and metabolic pathway research."
  },
  {
   "slug": "wolverine",
@@ -519,7 +715,14 @@
   "tile": "img/v/wolverine-blend.webp",
   "film": "vid/p/wolverine.mp4",
   "poster": "vid/p/wolverine.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "Multi-peptide synergy research",
+   "Signaling pathway analysis",
+   "Preclinical model studies",
+   "Cellular mechanism investigation"
+  ],
+  "desc": "Multi-peptide research blend for in-vitro studies."
  },
  {
   "slug": "klow",
@@ -537,7 +740,14 @@
   "tile": "img/v/klow.webp",
   "film": "vid/p/klow.mp4",
   "poster": "vid/p/klow.jpg",
-  "research": "Repair & recovery"
+  "research": "Repair & recovery",
+  "benefits": [
+   "Dermal peptide synergy research",
+   "Collagen pathway analysis",
+   "Skin tissue remodeling studies",
+   "Keratinocyte / fibroblast assay research"
+  ],
+  "desc": "Multi-peptide dermal research blend for skin and tissue studies."
  },
  {
   "slug": "bac-water",
@@ -555,7 +765,14 @@
   "tile": "img/v/bacteriostatic-water.webp",
   "film": "vid/p/bac-water.mp4",
   "poster": "vid/p/bac-water.jpg",
-  "research": "Supplies"
+  "research": "Supplies",
+  "benefits": [
+   "Standard laboratory diluent",
+   "Inhibits microbial growth",
+   "Stable laboratory-grade solution",
+   "USP-grade sterile water"
+  ],
+  "desc": "Sterile bacteriostatic water supplied as a laboratory diluent."
  },
  {
   "slug": "sko-3-rt",
@@ -573,7 +790,14 @@
   "tile": "img/v/glp-3-rt.webp",
   "film": "vid/p/sko-3-rt.mp4",
   "poster": "vid/p/sko-3-rt.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "High receptor selectivity",
+   "Gastrointestinal research applications",
+   "Metabolic pathway studies",
+   "Stable lyophilized form"
+  ],
+  "desc": "SKO-3 receptor research peptide for gastrointestinal studies."
  },
  {
   "slug": "sko-trz",
@@ -591,7 +815,14 @@
   "tile": "img/v/glp-2-trz.webp",
   "film": "vid/p/sko-trz.mp4",
   "poster": "vid/p/sko-trz.jpg",
-  "research": "Metabolic"
+  "research": "Metabolic",
+  "benefits": [
+   "Dual GLP-1 / GIP receptor signaling assays",
+   "Incretin pathway characterization studies",
+   "In-vitro metabolic research models",
+   "Stable lyophilized research-grade form"
+  ],
+  "desc": "Dual receptor agonist research peptide for in-vitro pathway studies."
  },
  {
   "slug": "metabolic-reference-bundle",
@@ -609,7 +840,14 @@
   "tile": "img/v/metabolic-reference-bundle.webp",
   "film": null,
   "poster": "img/bundle/metabolic-reference-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Three distinct peptide classes in one reference set",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Three-vial reference set: SKO-3 RT 10MG, Tesamorelin 10MG, and MOTS-c 10MG."
  },
  {
   "slug": "kpv-ghk-cu-glutathione-bundle",
@@ -627,7 +865,14 @@
   "tile": "img/v/kpv-ghk-cu-glutathione-bundle.webp",
   "film": null,
   "poster": "img/bundle/kpv-ghk-cu-glutathione-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Three distinct peptide classes in one reference set",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Three-vial reference set: KPV 10MG, GHK-Cu 50MG, and Glutathione 600MG."
  },
  {
   "slug": "nad-mots-c-bundle",
@@ -645,7 +890,14 @@
   "tile": "img/v/nad-mots-c-bundle.webp",
   "film": null,
   "poster": "img/bundle/nad-mots-c-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Two complementary cellular-energy research compounds",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Two-vial reference set: SKO-NAD 500MG and MOTS-c 10MG."
  },
  {
   "slug": "ss31-mots-c-bundle",
@@ -663,7 +915,14 @@
   "tile": "img/v/ss31-mots-c-bundle.webp",
   "film": null,
   "poster": "img/bundle/ss31-mots-c-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Two mitochondrial-pathway research peptides",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Two-vial reference set: SS-31 10MG and MOTS-c 10MG."
  },
  {
   "slug": "kpv-ghk-cu-bundle",
@@ -681,7 +940,14 @@
   "tile": "img/v/kpv-ghk-cu-bundle.webp",
   "film": null,
   "poster": "img/bundle/kpv-ghk-cu-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Two complementary dermal-pathway research peptides",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Two-vial reference set: KPV 10MG and GHK-Cu 50MG."
  },
  {
   "slug": "semax-selank-bundle",
@@ -699,6 +965,13 @@
   "tile": "img/v/semax-selank-bundle.webp",
   "film": null,
   "poster": "img/bundle/semax-selank-bundle.jpg",
-  "research": "Stacks"
+  "research": "Stacks",
+  "benefits": [
+   "Two neuropeptide research compounds",
+   "Lot-matched certificate of analysis for every vial",
+   ">99% purity, sealed lyophilized vials",
+   "Comparative in-vitro study design"
+  ],
+  "desc": "Two-vial reference set: Semax 10MG and Selank 10MG."
  }
 ]
