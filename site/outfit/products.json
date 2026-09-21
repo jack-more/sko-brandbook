@@ -12,7 +12,7 @@
   "rank": 18,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/5-amino-1mq-tile.jpg",
+  "tile": "img/v/5-amino-1mq.webp",
   "film": "vid/p/5-amino-1mq.mp4",
   "poster": "vid/p/5-amino-1mq.jpg"
  },
@@ -29,7 +29,7 @@
   "rank": 6,
   "group": "Blends",
   "kind": "vial",
-  "tile": "vid/p/cjc-1295-tile.jpg",
+  "tile": "img/v/cjc-1295-ipamorelin.webp",
   "film": "vid/p/cjc-1295.mp4",
   "poster": "vid/p/cjc-1295.jpg"
  },
@@ -46,7 +46,7 @@
   "rank": 3,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/ghk-cu-tile.jpg",
+  "tile": "img/v/ghk-cu.webp",
   "film": "vid/p/ghk-cu.mp4",
   "poster": "vid/p/ghk-cu.jpg"
  },
@@ -63,7 +63,7 @@
   "rank": 9,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/glow-tile.jpg",
+  "tile": "img/v/glow.webp",
   "film": "vid/p/glow.mp4",
   "poster": "vid/p/glow.jpg"
  },
@@ -80,7 +80,7 @@
   "rank": 12,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/glutathione-tile.jpg",
+  "tile": "img/v/glutathione.webp",
   "film": "vid/p/glutathione.mp4",
   "poster": "vid/p/glutathione.jpg"
  },
@@ -97,7 +97,7 @@
   "rank": 4,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/mots-c-tile.jpg",
+  "tile": "img/v/mots-c.webp",
   "film": "vid/p/mots-c.mp4",
   "poster": "vid/p/mots-c.jpg"
  },
@@ -114,7 +114,7 @@
   "rank": 28,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/adamax-tile.jpg",
+  "tile": "img/v/adamax.webp",
   "film": "vid/p/adamax.mp4",
   "poster": "vid/p/adamax.jpg"
  },
@@ -131,7 +131,7 @@
   "rank": 999,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/aod-9604-tile.jpg",
+  "tile": "img/v/aod-9604.webp",
   "film": "vid/p/aod-9604.mp4",
   "poster": "vid/p/aod-9604.jpg"
  },
@@ -148,7 +148,7 @@
   "rank": 29,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/ara-290-tile.jpg",
+  "tile": "img/v/ara290.webp",
   "film": "vid/p/ara-290.mp4",
   "poster": "vid/p/ara-290.jpg"
  },
@@ -165,7 +165,7 @@
   "rank": 10,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/bpc-157-tile.jpg",
+  "tile": "img/v/bpc-157.webp",
   "film": "vid/p/bpc-157.mp4",
   "poster": "vid/p/bpc-157.jpg"
  },
@@ -182,7 +182,7 @@
   "rank": 30,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/cagrilintide-tile.jpg",
+  "tile": "img/v/cagrilintide.webp",
   "film": "vid/p/cagrilintide.mp4",
   "poster": "vid/p/cagrilintide.jpg"
  },
@@ -199,7 +199,7 @@
   "rank": 26,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/dsip-tile.jpg",
+  "tile": "img/v/dsip.webp",
   "film": "vid/p/dsip.mp4",
   "poster": "vid/p/dsip.jpg"
  },
@@ -216,7 +216,7 @@
   "rank": 20,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/igf1-lr3-tile.jpg",
+  "tile": "img/v/igf1-lr3.webp",
   "film": "vid/p/igf1-lr3.mp4",
   "poster": "vid/p/igf1-lr3.jpg"
  },
@@ -233,7 +233,7 @@
   "rank": 23,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/ipamorelin-tile.jpg",
+  "tile": "img/v/ipamorelin.webp",
   "film": "vid/p/ipamorelin.mp4",
   "poster": "vid/p/ipamorelin.jpg"
  },
@@ -250,7 +250,7 @@
   "rank": 31,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/kisspeptin-tile.jpg",
+  "tile": "img/v/kisspeptin-10.webp",
   "film": "vid/p/kisspeptin.mp4",
   "poster": "vid/p/kisspeptin.jpg"
  },
@@ -267,7 +267,7 @@
   "rank": 13,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/kpv-tile.jpg",
+  "tile": "img/v/kpv.webp",
   "film": "vid/p/kpv.mp4",
   "poster": "vid/p/kpv.jpg"
  },
@@ -284,7 +284,7 @@
   "rank": 19,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/mt-1-tile.jpg",
+  "tile": "img/v/mt-1.webp",
   "film": "vid/p/mt-1.mp4",
   "poster": "vid/p/mt-1.jpg"
  },
@@ -301,7 +301,7 @@
   "rank": 11,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/mt-2-tile.jpg",
+  "tile": "img/v/mt-2.webp",
   "film": "vid/p/mt-2.mp4",
   "poster": "vid/p/mt-2.jpg"
  },
@@ -318,7 +318,7 @@
   "rank": 7,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/nad-tile.jpg",
+  "tile": "img/v/nad-plus.webp",
   "film": "vid/p/nad.mp4",
   "poster": "vid/p/nad.jpg"
  },
@@ -335,7 +335,7 @@
   "rank": 25,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/pt-141-tile.jpg",
+  "tile": "img/v/pt-141.webp",
   "film": "vid/p/pt-141.mp4",
   "poster": "vid/p/pt-141.jpg"
  },
@@ -352,7 +352,7 @@
   "rank": 22,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/selank-tile.jpg",
+  "tile": "img/v/selank.webp",
   "film": "vid/p/selank.mp4",
   "poster": "vid/p/selank.jpg"
  },
@@ -369,7 +369,7 @@
   "rank": 17,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/semax-tile.jpg",
+  "tile": "img/v/semax.webp",
   "film": "vid/p/semax.mp4",
   "poster": "vid/p/semax.jpg"
  },
@@ -386,7 +386,7 @@
   "rank": 32,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/sermorelin-tile.jpg",
+  "tile": "img/v/sermorelin.webp",
   "film": "vid/p/sermorelin.mp4",
   "poster": "vid/p/sermorelin.jpg"
  },
@@ -403,7 +403,7 @@
   "rank": 16,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/ss-31-tile.jpg",
+  "tile": "img/v/ss31.webp",
   "film": "vid/p/ss-31.mp4",
   "poster": "vid/p/ss-31.jpg"
  },
@@ -420,7 +420,7 @@
   "rank": 27,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/thymosin-alpha-1-tile.jpg",
+  "tile": "img/v/thymosin-alpha-1.webp",
   "film": "vid/p/thymosin-alpha-1.mp4",
   "poster": "vid/p/thymosin-alpha-1.jpg"
  },
@@ -437,7 +437,7 @@
   "rank": 21,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/tb-500-tile.jpg",
+  "tile": "img/v/tb-500.webp",
   "film": "vid/p/tb-500.mp4",
   "poster": "vid/p/tb-500.jpg"
  },
@@ -454,7 +454,7 @@
   "rank": 24,
   "group": "Blends",
   "kind": "vial",
-  "tile": "vid/p/tesa-ipa-tile.jpg",
+  "tile": "img/v/tesa-ipa-blend.webp",
   "film": "vid/p/tesa-ipa.mp4",
   "poster": "vid/p/tesa-ipa.jpg"
  },
@@ -471,7 +471,7 @@
   "rank": 2,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/tesamorelin-tile.jpg",
+  "tile": "img/v/tesamorelin.webp",
   "film": "vid/p/tesamorelin.mp4",
   "poster": "vid/p/tesamorelin.jpg"
  },
@@ -488,7 +488,7 @@
   "rank": 8,
   "group": "Blends",
   "kind": "vial",
-  "tile": "vid/p/wolverine-tile.jpg",
+  "tile": "img/v/wolverine-blend.webp",
   "film": "vid/p/wolverine.mp4",
   "poster": "vid/p/wolverine.jpg"
  },
@@ -505,7 +505,7 @@
   "rank": 14,
   "group": "Blends",
   "kind": "vial",
-  "tile": "vid/p/klow-tile.jpg",
+  "tile": "img/v/klow.webp",
   "film": "vid/p/klow.mp4",
   "poster": "vid/p/klow.jpg"
  },
@@ -522,7 +522,7 @@
   "rank": 1,
   "group": "Supplies",
   "kind": "vial",
-  "tile": "vid/p/bac-water-tile.jpg",
+  "tile": "img/v/bacteriostatic-water.webp",
   "film": "vid/p/bac-water.mp4",
   "poster": "vid/p/bac-water.jpg"
  },
@@ -539,7 +539,7 @@
   "rank": 999,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/sko-3-rt-tile.jpg",
+  "tile": "img/v/glp-3-rt.webp",
   "film": "vid/p/sko-3-rt.mp4",
   "poster": "vid/p/sko-3-rt.jpg"
  },
@@ -556,7 +556,7 @@
   "rank": 15,
   "group": "Peptides",
   "kind": "vial",
-  "tile": "vid/p/sko-trz-tile.jpg",
+  "tile": "img/v/glp-2-trz.webp",
   "film": "vid/p/sko-trz.mp4",
   "poster": "vid/p/sko-trz.jpg"
  },
@@ -573,7 +573,7 @@
   "rank": 5,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/metabolic-reference-bundle-tile.jpg",
+  "tile": "img/v/metabolic-reference-bundle.webp",
   "film": null,
   "poster": "img/bundle/metabolic-reference-bundle.jpg"
  },
@@ -590,7 +590,7 @@
   "rank": 999,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/kpv-ghk-cu-glutathione-bundle-tile.jpg",
+  "tile": "img/v/kpv-ghk-cu-glutathione-bundle.webp",
   "film": null,
   "poster": "img/bundle/kpv-ghk-cu-glutathione-bundle.jpg"
  },
@@ -607,7 +607,7 @@
   "rank": 999,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/nad-mots-c-bundle-tile.jpg",
+  "tile": "img/v/nad-mots-c-bundle.webp",
   "film": null,
   "poster": "img/bundle/nad-mots-c-bundle.jpg"
  },
@@ -624,7 +624,7 @@
   "rank": 999,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/ss31-mots-c-bundle-tile.jpg",
+  "tile": "img/v/ss31-mots-c-bundle.webp",
   "film": null,
   "poster": "img/bundle/ss31-mots-c-bundle.jpg"
  },
@@ -641,7 +641,7 @@
   "rank": 999,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/kpv-ghk-cu-bundle-tile.jpg",
+  "tile": "img/v/kpv-ghk-cu-bundle.webp",
   "film": null,
   "poster": "img/bundle/kpv-ghk-cu-bundle.jpg"
  },
@@ -658,7 +658,7 @@
   "rank": 999,
   "group": "Stacks",
   "kind": "bundle",
-  "tile": "img/bundle/semax-selank-bundle-tile.jpg",
+  "tile": "img/v/semax-selank-bundle.webp",
   "film": null,
   "poster": "img/bundle/semax-selank-bundle.jpg"
  }
