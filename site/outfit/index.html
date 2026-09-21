@@ -66,10 +66,6 @@ a{color:inherit;text-decoration:none}
   line-height:.92;text-transform:uppercase;white-space:nowrap;font-size:120px}
 .word sup{font-size:.14em;vertical-align:top;top:.22em;position:relative;letter-spacing:0}
 .rule{height:3px;background:var(--ink);margin:14px 0 12px}
-.meta{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:24px;font-size:13px;font-weight:500;padding-bottom:30px}
-.meta h4{margin:0 0 10px;font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
-.meta p{margin:0;max-width:34ch;font-size:15px;line-height:1.4}
-.meta .right{text-align:right;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
 
 /* ---------- the blue water shot, as a band ---------- */
 .band{position:relative;margin:0 0 60px;border-radius:2px;overflow:hidden;
@@ -218,6 +214,49 @@ a{color:inherit;text-decoration:none}
   padding-bottom:8px;border-bottom:1px solid rgba(23,51,132,.24)}
 .cat i{font-style:normal;font-family:"Inter",sans-serif;font-weight:500;color:var(--ink-soft);letter-spacing:.1em}
 
+/* ---------- the instrument strip under the wordmark ----------
+   After System Labs: every cell does a job, framed with bracket corners
+   rather than boxes. Company and socials, the statement and the way in,
+   a live ship-today clock (UPS really does pick up at 3 PM), and the
+   one number that matters. */
+.strip{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:10px;padding:0 0 26px}
+.scell{position:relative;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-height:128px}
+.scell:before,.scell:after{content:"";position:absolute;width:12px;height:12px;border:1.5px solid var(--ink);opacity:.55}
+.scell:before{left:0;top:0;border-right:0;border-bottom:0}
+.scell:after{right:0;bottom:0;border-left:0;border-top:0}
+.scell .k{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.scell .big{font-family:"Syncopate",sans-serif;font-weight:700;font-size:clamp(22px,2.3vw,34px);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.scell .small{margin-top:auto;font-size:12px;color:var(--ink-soft);letter-spacing:.02em}
+.soc{display:flex;gap:8px}
+.soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--rule);
+  transition:background .25s ease,color .25s ease,border-color .25s ease}
+.soc a:hover{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.soc svg{width:18px;height:18px}
+.statement p{margin:0;font-size:clamp(17px,1.5vw,22px);line-height:1.3;font-weight:500;letter-spacing:-.012em;max-width:30ch}
+.scell .cta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;background:var(--ink);color:var(--ground);font-size:13px;font-weight:600;letter-spacing:.02em;border-radius:2px}
+.scell .cta span{font-size:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#2FB36B;box-shadow:0 0 0 0 rgba(47,179,107,.5);animation:pulse 1.8s infinite}
+.dot.late{background:#E0A43A;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,179,107,.55)}80%,100%{box-shadow:0 0 0 9px rgba(47,179,107,0)}}
+
+/* the claims, running */
+.ticker{overflow:hidden;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -20px 46px;padding:13px 0}
+.run{display:flex;gap:44px;width:max-content;animation:tick 42s linear infinite;
+  font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.run span{display:flex;align-items:center;gap:44px}
+.run span:after{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink);opacity:.4}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* section headings you can actually see */
+.shead{display:flex;align-items:flex-end;gap:18px;margin:0 0 20px;padding-bottom:14px;border-bottom:3px solid var(--ink)}
+.shead h2{margin:0;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.02em;line-height:.95;
+  text-transform:uppercase;font-size:clamp(34px,5.4vw,78px)}
+.shead .sn{font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--ink-soft);padding-bottom:6px;font-variant-numeric:tabular-nums}
+.shead .sa{margin-left:auto;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-bottom:6px;
+  border-bottom:1.5px solid currentColor}
+#rest.shead{margin-top:10px}
+
 /* the bag, once there is something in it */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:90;display:flex;align-items:center;
   justify-content:space-between;gap:20px;padding:14px 20px;color:#F2F0EA;background:#0b1430;
@@ -244,8 +283,9 @@ a{color:inherit;text-decoration:none}
 
 @media (min-width:1500px){ .grid{grid-template-columns:repeat(5,1fr)} }
 @media (max-width:900px){
-  .meta{grid-template-columns:1fr 1fr;gap:18px}
-  .meta .right{text-align:left}
+  .strip{grid-template-columns:1fr 1fr}
+  .scell.statement{grid-column:1/-1;order:-1}
+  .scell{min-height:0}
   .band{aspect-ratio:4/5}
   .bandtext{flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:22px}
   .claims{gap:22px;flex-wrap:wrap}
@@ -286,19 +326,40 @@ a{color:inherit;text-decoration:none}
   <section class="hero">
     <h1 style="margin:0"><span class="word">SKO Compounds<sup>®</sup></span></h1>
     <div class="rule"></div>
-    <div class="meta">
-      <div><h4>SKO</h4></div>
-      <div><h4>Why</h4><p>Research peptides, third party tested, shipped cold from Beverly Hills. Every batch carries its own certificate.</p></div>
-      <div class="right">Research use only</div>
-      <div class="right">© 2026</div>
+    <div class="strip">
+      <div class="scell">
+        <span class="k">SKO Compounds &middot; Beverly Hills</span>
+        <div class="soc">
+          <a href="#" data-handle="tiktok" aria-label="SKO on TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.3 2.2 1.6 3.7 3.9 3.9v3.1c-1.4.1-2.7-.3-3.9-1.1v6.3c0 3.6-2.9 5.8-5.9 5.8-3.2 0-5.7-2.5-5.7-5.6 0-3.4 3-6 6.6-5.5v3.2c-1.6-.4-3.3.6-3.3 2.3 0 1.4 1.1 2.5 2.4 2.5 1.5 0 2.5-1 2.5-2.9V3h3.4z"/></svg></a>
+          <a href="#" data-handle="instagram" aria-label="SKO on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-handle="x" aria-label="SKO on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.3l4.4 5.9L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        </div>
+        <span class="small">The Live &middot; every Thursday on TikTok</span>
+      </div>
+      <div class="scell statement">
+        <p>Research peptides, third party tested and shipped cold from Beverly Hills. Every batch carries its own certificate.</p>
+        <a class="cta" href="#shop">Shop the shelf <span aria-hidden="true">&#9654;</span></a>
+      </div>
+      <div class="scell">
+        <span class="k"><i class="dot" aria-hidden="true"></i><span id="shipk">Ships today</span></span>
+        <span class="big" id="shipt">&mdash;</span>
+        <span class="small" id="shipd">UPS picks up at 3 PM PT, every weekday</span>
+      </div>
+      <div class="scell">
+        <span class="k">Orders shipped</span>
+        <span class="big">50,000+</span>
+        <span class="small">Research use only &middot; &copy; 2026</span>
+      </div>
     </div>
   </section>
 
-  <section class="lead"><h2>Top sellers</h2></section>
-  <div class="allrow" id="allrow">
-    <div><b>Take the eight</b> <span id="alltot"></span></div>
-    <button type="button" id="allbtn">Add all eight</button>
-  </div>
+  <div class="ticker" aria-hidden="true"><div class="run" id="run"></div></div>
+
+  <header class="shead" id="shop">
+    <h2>Top sellers</h2>
+    <span class="sn">01&ndash;08</span>
+    <a class="sa" href="#rest">Shop all 39 <span aria-hidden="true">&#8594;</span></a>
+  </header>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
 
   <section class="band" id="band" aria-label="The rest of the shelf">
@@ -322,7 +383,10 @@ a{color:inherit;text-decoration:none}
   </section>
 
 
-  <section class="lead" id="rest"><h2>Research categories</h2></section>
+  <header class="shead" id="rest">
+    <h2>Research categories</h2>
+    <span class="sn" id="rcount"></span>
+  </header>
   <section class="grid" id="grid-rest" aria-label="Catalogue"></section>
   <div class="bar" id="bar" aria-live="polite">
   <div class="l"><span class="n" id="barn">0 items</span><span class="t" id="bart">$0.00</span></div>
@@ -377,14 +441,37 @@ fetch('products.json').then(r=>r.json()).then(P=>{
     `<h3 class="cat" id="r-${g.replace(/[^a-z]+/gi,'-').toLowerCase()}" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
     list.map(p=>tile(p,++n,false)).join('')).join('');
 
-  const eight=top.map(p=>p.slug);
-  document.getElementById('alltot').textContent=
-    `\u2014 all eight best sellers, ${money(eight.reduce((a,s)=>a+BY[s].price,0))}`;
-  document.getElementById('allbtn').addEventListener('click',()=>eight.forEach(s=>addToBag(s)));
-
+  document.getElementById('rcount').textContent=`${rest.length} more`;
   document.getElementById('bandcats').innerHTML=
     byR.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
 });
+
+/* ship today: UPS collects at 3 PM Pacific on weekdays; after that it rolls to the next one */
+(function(){
+  const k=document.getElementById('shipk'), t=document.getElementById('shipt'), d=document.getElementById('shipd'),
+        dot=document.querySelector('.dot');
+  function pt(){ return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'})); }
+  function tickClock(){
+    const n=pt(), day=n.getDay(), cut=new Date(n); cut.setHours(15,0,0,0);
+    const weekday=day>=1&&day<=5;
+    if(weekday&&n<cut){
+      const ms=cut-n, h=Math.floor(ms/3.6e6), m=Math.floor(ms%3.6e6/6e4), s=Math.floor(ms%6e4/1e3);
+      k.textContent='Ships today'; dot.classList.remove('late');
+      t.textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      d.textContent='Order before 3 PM PT and it goes out on today\u2019s UPS truck';
+    }else{
+      const next=new Date(n); do{ next.setDate(next.getDate()+1); }while(next.getDay()===0||next.getDay()===6);
+      k.textContent='Next truck'; dot.classList.add('late');
+      t.textContent=next.toLocaleDateString('en-US',{weekday:'long'});
+      d.textContent='UPS picks up at 3 PM PT, every weekday';
+    }
+  }
+  tickClock(); setInterval(tickClock,1000);
+  const items=['Third party tested','Shipped cold','Beverly Hills','A certificate with every batch',
+               '1 point for every $1','400 points is a free peptide','The Drop \u00b7 1 in 100','The Live \u00b7 Thursdays'];
+  const one=items.map(x=>`<span>${x}</span>`).join('');
+  document.getElementById('run').innerHTML=one+one;
+})();
 
 /* the film rises in and plays only while it is on screen.
    without this the band sits at opacity 0 and leaves a hole in the page. */
