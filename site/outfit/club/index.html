@@ -95,6 +95,35 @@ a{color:inherit;text-decoration:none}
 .sec h2{margin:0;font-family:"Syncopate",sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
 .sec span{font-size:13px;color:var(--ink-soft)}
 
+.rail2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 40px}
+.card2{position:relative;border-radius:12px;overflow:hidden;background:var(--tile);display:flex;flex-direction:column;
+  transition:transform .35s cubic-bezier(.28,.06,.28,.96),box-shadow .35s ease}
+.card2:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(var(--cast),.14)}
+.card2 .cv{position:relative;aspect-ratio:4/3;background:#fff;overflow:hidden}
+.card2 .cv img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.28,.06,.28,.96)}
+.card2:hover .cv img{transform:scale(1.04)}
+.card2 .tag{position:absolute;left:14px;top:14px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:7px 11px;border-radius:99px;background:#0b1430;color:#F2F0EA}
+.card2 .tag.gold{background:linear-gradient(135deg,#F3E3A6,#C9A24A);color:#2A1E05}
+.card2 .bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card2 h3{margin:0;font-size:20px;font-weight:650;letter-spacing:-.02em;line-height:1.15}
+.card2 .rw{display:flex;align-items:center;gap:8px;font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em}
+.card2 .rw i{width:18px;height:18px;border-radius:50%;background:#173384;display:inline-block;flex:0 0 auto;
+  box-shadow:inset 0 0 0 3px #71A7F2}
+.card2 p{margin:0;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
+.card2 .ft{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card2 .when{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase}
+.card2 .go{border:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  padding:11px 16px;border-radius:99px;background:var(--ink);color:var(--ground)}
+.card2 .go[disabled]{background:rgba(var(--cast),.1);color:var(--ink-soft);cursor:default}
+.card2 .go.done{background:#1E7A4F;color:#fff}
+.card2 .meter2{height:6px;border-radius:99px;background:rgba(var(--cast),.1);overflow:hidden}
+.card2 .meter2 i{display:block;height:100%;background:#173384;border-radius:99px;transition:width .5s cubic-bezier(.28,.06,.28,.96)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:120;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+  background:#0b1430;color:#F2F0EA;padding:14px 20px;border-radius:99px;font-size:14px;font-weight:600;
+  box-shadow:0 14px 40px rgba(4,10,32,.35);transition:transform .4s cubic-bezier(.28,.06,.28,.96),opacity .4s ease}
+.toast.on{transform:translate(-50%,0);opacity:1}
+.toast b{color:#71A7F2}
 .jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 40px}
 .job{background:var(--tile);border-radius:6px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:8px;
   border:0;text-align:left;font:inherit;color:inherit;cursor:pointer;
@@ -165,6 +194,8 @@ a{color:inherit;text-decoration:none}
   .member>*+*{border-left:0;border-top:1px solid rgba(242,240,234,.12)}
   .member>*{padding:22px 20px}
   .jobs{grid-template-columns:1fr}
+  .rail2{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-right:-20px;padding-right:20px}
+  .rail2 .card2{flex:0 0 84%;scroll-snap-align:start}
   .lvls{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:8px;margin-right:-20px;padding-right:20px}
   .lvc{flex:0 0 82%;scroll-snap-align:start}
   .ways{grid-template-columns:1fr 1fr}
@@ -215,26 +246,18 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <div class="sec" id="earn"><h2>Earn</h2><span>Spend is one road. There are five more.</span></div>
-  <div class="jobs" id="jobs"></div>
+  <div class="sec" id="challenges"><h2>Challenges</h2><span>Do the thing, post it, get the reward.</span></div>
+  <div class="rail2" id="chal"></div>
 
-  <div class="sec"><h2>Redeem</h2><span>Points buy product, and mostly they buy vials.</span></div>
-  <div class="redeem">
-    <div class="row"><div class="k">Free peptide</div><div class="k" id="have">0 points available</div></div>
-    <input type="range" id="sl" min="0" max="1200" step="50" value="0" aria-label="Points to spend">
-    <div class="row">
-      <div><div class="out" id="out">0 points</div>
-        <div class="fine" id="fine">400 points is a free peptide. About a tenth of what you spent comes back on every rung.</div></div>
-      <button class="pbuy-btn" id="rd" style="border:0;background:var(--ink);color:var(--ground);font:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px 26px;border-radius:2px;cursor:pointer">Redeem</button>
-    </div>
-  </div>
+  <div class="sec"><h2>Rewards</h2><span>Points buy product. Some things can&rsquo;t be bought &mdash; they have to be earned.</span></div>
+  <div class="rail2" id="rew"></div>
+
+  <div class="sec" id="earn"><h2>Every day</h2><span>Small jobs, each one pays straight into your balance.</span></div>
+  <div class="jobs" id="jobs"></div>
 
   <div class="sec"><h2>The six levels</h2><span>Lifetime spend. Never spent, never taken away.</span><span class="draft">Draft perks</span></div>
   <div class="lvls" id="levels"></div>
   <p class="lvnote">Each level casts your badge in a better material, and the badge is a real object that ships to you. Perks per level and the thresholds for levels one to five are a proposal for Jack and Billy to set; level six is $150,000 lifetime.</p>
-
-  <div class="sec"><h2>Ways to win</h2><span>Missions &middot; The Live &middot; Codes &middot; Referrals &middot; The Drop</span></div>
-  <div class="ways" id="ways"></div>
 
   <footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
 </main>
@@ -272,13 +295,6 @@ const LEVELS=[
    '$150,000 lifetime']},
 ];
 const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
-const WAYS=[
- ['01','Missions','A board of small jobs with a reward on each: a review, three orders in ninety days, four lives in a row. Progress bars, not fine print.'],
- ['02','The Live','Stamps for showing up. Every live you attend is a stamp, four in a row is a free box, and the code read out is worth two hundred.'],
- ['03','Codes','Five kinds: live codes, creator codes, codes printed inside the box, multiplier codes, and mystery codes that could be anything on the shelf.'],
- ['04','Referrals','A ladder, not a link. Three who order is a free vial, ten is your own creator code with ten percent back, fifty is a Full Box every quarter.'],
- ['05','The Drop','One order in a hundred ships with a chrome cap instead of navy. Same compound, same batch, same COA &mdash; and a Full Box free when you post it.'],
-];
 document.getElementById('jobs').innerHTML=JOBS.map(j=>
  `<button class="job" type="button" data-p="${j.p}"><span class="pt">${j.p}</span><b>${j.n}</b><p>${j.d}</p><span class="go">${j.go} &rarr;</span></button>`).join('');
 document.getElementById('levels').innerHTML=LEVELS.map((L,i)=>`
@@ -292,42 +308,74 @@ document.getElementById('levels').innerHTML=LEVELS.map((L,i)=>`
      :`<div class="row"><span>Unlocks at level ${L.n}</span><span>${i===5?'$150,000':'Threshold being set'}</span></div><div class="bar"><i style="width:0%"></i></div>`}
    </div>
  </article>`).join('');
-document.getElementById('ways').innerHTML=WAYS.map(([k,t,d])=>
- `<div class="way"><div class="k">${k}</div><b>${t}</b><p>${d}</p></div>`).join('');
+
+/* challenges: bigger, posted, image-led. Rewards: what points buy, and what
+   can only be earned. Mechanics are all from the brand book; the point costs
+   marked draft are a proposal. */
+const CHAL=[
+ {img:'golden-vial',tag:'The Drop',gold:true,t:'Find the Golden Vial',r:'A Full Box, free',
+  d:'One order in a hundred ships with a chrome cap. Post it, tag us, and a Full Box is on its way.',when:'Every order',cta:'How it works',pts:0},
+ {img:'box-open',tag:'Challenge',t:'Unbox it on camera',r:'+300 pts',
+  d:'Film your box coming open and post it with the tag. Your first unboxing only.',when:'Open now',cta:'I posted it',pts:300},
+ {img:'box-stack',tag:'The Live',t:'Four lives in a row',r:'A free box',
+  d:'Every live you catch is a stamp. Four in a row and a box ships to you. Each live code is worth 200 on its own.',when:'Thursdays',cta:'Get reminded',pts:0},
+];
+const REW=[
+ {img:'box-sealed',tag:'Redeem',t:'A free peptide',cost:400,d:'Any single vial on the shelf. About a tenth of what you spent comes back.'},
+ {img:'box-ribbon',tag:'Earned, not bought',t:'A box you never asked for',cost:null,
+  d:'It arrives on its own, sealed, with nothing to redeem. The difference between a discount and a gift.',when:'From Emboss up'},
+ {img:'bracelet',tag:'Level 06',gold:true,t:'The Bracelet',cost:null,
+  d:'Made once. The last level, and the only thing on this page that cannot be bought at any price.',when:'$150,000 lifetime'},
+];
+const $=id=>document.getElementById(id);
+$('chal').innerHTML=CHAL.map((c,i)=>`
+ <article class="card2"><div class="cv"><img src="../img/club/${c.img}.webp" alt="" loading="lazy"><span class="tag${c.gold?' gold':''}">${c.tag}</span></div>
+  <div class="bd"><div class="rw"><i></i>${c.r}</div><h3>${c.t}</h3><p>${c.d}</p>
+  <div class="ft"><span class="when">${c.when}</span><button class="go" type="button" data-c="${i}">${c.cta}</button></div></div></article>`).join('');
+function paintRewards(){
+ $('rew').innerHTML=REW.map((r,i)=>{
+  const can=r.cost&&PTS>=r.cost, pct=r.cost?Math.min(100,PTS/r.cost*100):0;
+  return `<article class="card2"><div class="cv"><img src="../img/club/${r.img}.webp" alt="" loading="lazy"><span class="tag${r.gold?' gold':''}">${r.tag}</span></div>
+   <div class="bd"><div class="rw"><i></i>${r.cost?r.cost+' pts':r.when}</div><h3>${r.t}</h3><p>${r.d}</p>
+   ${r.cost?`<div class="meter2"><i style="width:${pct}%"></i></div>`:''}
+   <div class="ft"><span class="when">${r.cost?(can?'Ready to redeem':`${fmt(r.cost-PTS)} pts to go`):'Cannot be redeemed'}</span>
+   ${r.cost?`<button class="go" type="button" data-r="${i}"${can?'':' disabled'}>Redeem</button>`:''}</div></div></article>`}).join('');
+}
+const toast=document.createElement('div'); toast.className='toast'; document.body.appendChild(toast);
+let tt; function say(h){ toast.innerHTML=h; toast.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>toast.classList.remove('on'),2200); }
 
 /* the board actually pays out, so the numbers move while you read them */
 let PTS=0;
 const fmt=n=>n.toLocaleString();
 const ptsEl=document.getElementById('pts'), sub=document.getElementById('ptsub'),
-      bar=document.getElementById('bar'), have=document.getElementById('have'),
-      sl=document.getElementById('sl'), out=document.getElementById('out'), fine=document.getElementById('fine');
+      bar=document.getElementById('bar');
+let shown=0;
+function countTo(v){ const a=shown, t0=performance.now();
+  (function f(t){ const k=Math.min(1,(t-t0)/600), e=1-Math.pow(1-k,3);
+    shown=Math.round(a+(v-a)*e); ptsEl.textContent=fmt(shown); if(k<1) requestAnimationFrame(f); })(t0); }
 function paint(){
-  ptsEl.textContent=fmt(PTS);
+  countTo(PTS); paintRewards();
   const to=Math.max(0,400-(PTS%400));
   sub.textContent=PTS>=400?`That is ${Math.floor(PTS/400)} free peptide${PTS>=800?'s':''} on the shelf.`
                           :`400 points is a free peptide. You are ${fmt(to)} away.`;
   bar.style.width=Math.min(100,(PTS%400)/4)+'%';
   const lvp=document.getElementById('lvp'), lvb=document.getElementById('lvbar');
   if(lvp){ lvp.textContent=`${PTS%400} / 400 pts`; lvb.style.width=Math.min(100,(PTS%400)/4)+'%'; }
-  have.textContent=`${fmt(PTS)} points available`;
-  sl.max=Math.max(400,Math.ceil(PTS/50)*50);
-  if(+sl.value>PTS) sl.value=PTS;
-  paintSlider();
+
 }
-function paintSlider(){
-  const v=+sl.value;
-  out.textContent=`${fmt(v)} points`;
-  const vials=Math.floor(v/400);
-  fine.textContent=vials?`${vials} free peptide${vials>1?'s':''}. 400 points is one.`
-                        :'400 points is a free peptide. About a tenth of what you spent comes back on every rung.';
-}
-sl.addEventListener('input',paintSlider);
 document.getElementById('jobs').addEventListener('click',e=>{
   const b=e.target.closest('.job'); if(!b) return;
   const m=/\+([0-9]+)/.exec(b.dataset.p); if(!m) return;
-  PTS+=+m[1]; paint();
+  PTS+=+m[1]; paint(); say(`<b>+${m[1]} pts</b> \u2014 ${b.querySelector('b').textContent}`);
 });
-document.getElementById('rd').addEventListener('click',()=>{ PTS=Math.max(0,PTS-(+sl.value)); sl.value=0; paint(); });
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-c]'); if(c){ const ch=CHAL[+c.dataset.c];
+    if(ch.pts&&!c.classList.contains('done')){ PTS+=ch.pts; c.classList.add('done'); c.textContent='Submitted'; paint(); say(`<b>+${ch.pts} pts</b> \u2014 ${ch.t}`); }
+    else if(!ch.pts) say(ch.t+' \u2014 '+ch.r); return; }
+  const r=e.target.closest('[data-r]'); if(r&&!r.disabled){ const rw=REW[+r.dataset.r];
+    PTS-=rw.cost; paint(); say(`<b>Redeemed</b> \u2014 ${rw.t}`); }
+});
+paint();
 paint();
 
 document.querySelector('.dots').addEventListener('click',e=>{
