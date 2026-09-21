@@ -44,11 +44,15 @@ a{color:inherit;text-decoration:none}
   -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
   border-bottom:1px solid transparent;transition:border-color .3s ease}
 .top.stuck{border-bottom-color:var(--rule)}
-.mark{display:flex;gap:4px}
-.mark i{width:13px;height:13px;background:var(--ink);display:block}
-.mark i:nth-child(2){opacity:.45}
+.mark{display:block;line-height:0}
+.mark img{height:30px;width:auto;display:block}
+.mark .w{display:none}
+:root[data-theme="night"] .mark .b,:root[data-theme="blue"] .mark .b{display:none}
+:root[data-theme="night"] .mark .w,:root[data-theme="blue"] .mark .w{display:block}
 .nav{display:flex;align-items:center;gap:30px;font-size:19px;font-weight:500}
 .nav a.on{border-bottom:2px solid var(--ink);padding-bottom:2px}
+.nav .club{display:inline-flex;align-items:center;gap:8px}
+.nav .club svg{width:19px;height:19px;flex:0 0 auto}
 .dots{display:flex;gap:9px;margin-left:6px}
 .dots button{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink);padding:0;cursor:pointer;background:transparent}
 .dots button[data-set="bone"]{background:#0C0D10;border-color:#0C0D10}
@@ -109,45 +113,71 @@ a{color:inherit;text-decoration:none}
 .tile:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .grid.focus .tile{opacity:.34}
 .grid.focus .tile.on{opacity:1}
-/* the product: a 3D bottle render standing in front of a flat 2D card,
-   breaking its top edge, with the card wearing the bottle's own cast
-   shadow and the glow behind it. The shadow is the bottle's real alpha
-   projected by drop-shadow, not a drawn shape. */
-.shot{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:none}
-.plate{position:absolute;left:0;right:0;top:34%;bottom:4%;border-radius:6px;overflow:hidden;
-  background:radial-gradient(62% 52% at 50% 26%,rgba(var(--glow),var(--glow-o)),rgba(var(--glow),0) 72%),
+/* the product: a 3D bottle render standing in front of a flat 2D card
+   that carries the name, the research category, the price, the points
+   and The Drop. The card wears the bottle's own cast shadow - that is
+   the real alpha projected by drop-shadow, not a drawn shape.
+   Hovering spins the bottle once and bounces it. */
+.shot{position:relative;display:block;aspect-ratio:5/7;overflow:hidden}
+.plate{position:absolute;left:0;right:0;top:18%;bottom:0;border-radius:6px;overflow:hidden;
+  background:radial-gradient(58% 34% at 50% 22%,rgba(var(--glow),var(--glow-o)),rgba(var(--glow),0) 72%),
              linear-gradient(180deg,var(--plate-a),var(--plate-b));
   box-shadow:inset 0 0 0 1px rgba(var(--cast),.07);
   transition:box-shadow .7s var(--e)}
-/* the bottle's contact shadow, landing on the card */
-.plate:after{content:"";position:absolute;left:50%;bottom:24%;width:46%;height:11%;
+.plate:after{content:"";position:absolute;left:50%;top:55.5%;width:46%;height:5%;
   transform:translateX(-50%);border-radius:50%;
-  background:radial-gradient(50% 50% at 50% 50%,rgba(var(--cast),.46),rgba(var(--cast),0) 74%)}
-.btl{position:absolute;left:50%;bottom:20%;height:62%;width:auto;z-index:2;
-  transform:translateX(-50%);
-  filter:drop-shadow(0 14px 16px rgba(var(--cast),.32)) drop-shadow(0 2px 4px rgba(var(--cast),.3));
-  transition:transform .7s var(--e),filter .7s var(--e)}
-.tile:hover .btl{transform:translateX(-50%) translateY(-9px) scale(1.035);
-  filter:drop-shadow(0 26px 26px rgba(var(--cast),.32)) drop-shadow(0 3px 5px rgba(var(--cast),.3))}
-.tile:hover .plate{box-shadow:inset 0 0 0 1px rgba(var(--cast),.12)}
-.shot i{position:absolute;left:10px;top:10px;z-index:3;font-style:normal;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(var(--cast),.44),rgba(var(--cast),0) 74%)}
+.tile:hover .plate{box-shadow:inset 0 0 0 1px rgba(var(--cast),.13)}
+
+.stage3d{position:absolute;left:50%;bottom:36%;width:56%;height:54%;z-index:2;
+  transform:translateX(-50%);perspective:1200px;pointer-events:none}
+.lift{display:block;width:100%;height:100%;transform-origin:50% 100%}
+.spin{display:block;width:100%;height:100%;position:relative;transform-style:preserve-3d}
+.face,.backw{position:absolute;inset:0;display:block;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face{transform:rotateY(0deg)}
+.backw{transform:rotateY(180deg)}
+.btl{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.btl{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;
+  filter:drop-shadow(0 12px 14px rgba(var(--cast),.32)) drop-shadow(0 2px 4px rgba(var(--cast),.3))}
+.backw .btl{transform:scaleX(-1)}
+@keyframes sko-spin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@keyframes sko-front{0%,24.4%{opacity:1}24.6%,75.4%{opacity:0}75.6%,100%{opacity:1}}
+@keyframes sko-back{0%,24.4%{opacity:0}24.6%,75.4%{opacity:1}75.6%,100%{opacity:0}}
+@keyframes sko-bounce{
+  0%{transform:translateY(0) scale(1,1)}
+  26%{transform:translateY(-13%) scale(.985,1.025)}
+  56%{transform:translateY(0) scale(1.035,.962)}
+  74%{transform:translateY(-4.5%) scale(.995,1.008)}
+  100%{transform:translateY(0) scale(1,1)}}
+.backw{opacity:0}
+.tile:hover .lift,.tile:focus-within .lift{animation:sko-bounce .62s cubic-bezier(.32,.04,.24,1)}
+
+/* everything the card has to say, set on the card under the bottle */
+.face3{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 14px 14px;
+  color:var(--ink)}
+.face3 .nm{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.face3 .nm b{font-size:15px;font-weight:600;letter-spacing:-.012em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face3 .nm em{font-style:normal;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.06em;flex:0 0 auto}
+.face3 .rcat{display:block;margin-top:5px;font-family:"Inter",sans-serif;font-weight:400;letter-spacing:0;text-transform:none;font-size:11.5px;color:var(--ink-soft);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face3 .perks{display:flex;justify-content:space-between;gap:10px;margin-top:11px;padding-top:9px;
+  border-top:1px solid rgba(var(--cast),.14);
+  font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.face3 .perks s{text-decoration:none;color:var(--ink);opacity:.85}
+
+.shot i{position:absolute;left:10px;top:10px;z-index:4;font-style:normal;
   font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;
   color:var(--ink-soft)}
-.quick{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;
+.quick{position:absolute;left:10px;right:10px;top:calc(18% + 10px);z-index:5;
   border:0;background:rgba(242,240,234,.94);color:#0b1430;font:inherit;
   font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:11px 0;border-radius:2px;cursor:pointer;
-  opacity:0;transform:translateY(8px);
+  padding:10px 0;border-radius:2px;cursor:pointer;
+  opacity:0;transform:translateY(-8px);
   transition:opacity .22s var(--e),transform .22s var(--e)}
 .tile:hover .quick,.tile:focus-within .quick{opacity:1;transform:none}
 .quick.in{background:#173384;color:#F2F0EA}
-.cap{display:block;min-width:0;padding:11px 2px 4px}
-.cap b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
-.cap span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cap em{display:block;font-style:normal;margin-top:7px;font-size:13px;
-  font-variant-numeric:tabular-nums;letter-spacing:.12em}
-
 /* the film opens full width under the row you clicked */
 .panel{grid-column:1/-1;position:relative;height:0;overflow:hidden;background:#0b1430;
   transition:height var(--d) var(--e),margin var(--d) var(--e)}
@@ -225,15 +255,20 @@ a{color:inherit;text-decoration:none}
 @media (prefers-reduced-motion:reduce){
   .band{opacity:1;transform:none}
   .grid,.tile,.panel,.btl,.plate{transition:none}
+  .tile:hover .spin,.tile:hover .lift{animation:none}
 }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <a class="mark" href="#" aria-label="SKO Compounds"><i></i><i></i></a>
+  <a class="mark" href="#" aria-label="SKO Compounds"><img class="b" src="img/ui/shield-blue.png" alt=""><img class="w" src="img/ui/shield-white.png" alt=""></a>
   <nav class="nav">
     <a href="#shop" class="on">Shop</a>
+    <a href="#club" class="club" aria-label="SKO Club">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
+      </svg>SKO Club</a>
     <a href="#bag">Bag (0)</a>
     <span class="dots" role="group" aria-label="Ground">
       <button data-set="bone" aria-pressed="true" aria-label="Bone"></button>
@@ -277,9 +312,10 @@ a{color:inherit;text-decoration:none}
         <div><b>Third&nbsp;party</b><span>Tested, batch by batch</span></div>
       </div>
       <div class="club">
-        <b>The rest of the shelf</b>
-        <span class="cats" id="bandcats"></span>
-        <a href="#rest">See everything</a>
+        <b>SKO Club</b>
+        <span class="cats">1 point per $1, on everything. Points buy product, and they never expire.<br>
+        <b class="drop">The Drop</b> &mdash; one in a hundred orders ships with a chrome cap. Find it and a full box is on its way.</span>
+        <a href="#rest">See everything &mdash; <span id="bandcats"></span></a>
       </div>
     </div>
   </section>
@@ -303,21 +339,24 @@ const money=n=>'$'+n.toFixed(2);
 const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let PRODUCTS=[];
-const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
+const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.trim().startsWith('Bag'));
 
 const BY={};
+const pts=n=>Math.floor(n);
 const tile=(p,i,eager)=>`
   <div class="tile" data-slug="${p.slug}" role="button" tabindex="0" aria-expanded="false">
     <span class="shot">
       <span class="plate"></span>
       <i>${String(i).padStart(2,'0')}</i>
-      <img class="btl" src="${p.tile}" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
+      <span class="stage3d"><span class="lift"><span class="spin">
+        <span class="face"><img class="btl" src="${p.tile}" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async"></span>
+        </span></span></span>
       <button class="quick" type="button" data-add="${p.slug}">Add \u00b7 ${money(p.price)}</button>
-    </span>
-    <span class="cap">
-      <b>${p.name}</b>
-      <span>${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
-      <em>${money(p.price)}</em>
+      <span class="face3">
+        <span class="nm"><b>${p.name}</b><em>${money(p.price)}</em></span>
+        <span class="rcat">${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
+        <span class="perks"><span><s>${pts(p.price)} pts</s> SKO Club</span><span>The Drop <s>1 in 100</s></span></span>
+      </span>
     </span>
   </div>`;
 
