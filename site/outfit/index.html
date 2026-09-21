@@ -33,7 +33,7 @@ body{margin:0;background:var(--ground);color:var(--ink);
   font-size:15px;line-height:1.35;letter-spacing:-.01em;
   transition:background .45s ease,color .45s ease;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-.wrap{padding:0 22px}
+.wrap{padding:0 20px}
 
 .top{position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
   justify-content:space-between;padding:18px 22px}
@@ -50,12 +50,12 @@ a{color:inherit;text-decoration:none}
 .dots button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:2px}
 
 /* ---------- hero ---------- */
-.hero{padding:104px 0 0}
-.word{display:inline-block;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.005em;
-  line-height:1;text-transform:uppercase;white-space:nowrap;font-size:120px}
+.hero{padding:92px 0 0}
+.word{display:inline-block;font-family:"Syncopate",sans-serif;font-weight:700;letter-spacing:-.03em;
+  line-height:.92;text-transform:uppercase;white-space:nowrap;font-size:120px}
 .word sup{font-size:.14em;vertical-align:top;top:.22em;position:relative;letter-spacing:0}
-.rule{height:3px;background:var(--ink);margin:16px 0 14px}
-.meta{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:24px;font-size:13px;font-weight:500;padding-bottom:52px}
+.rule{height:3px;background:var(--ink);margin:14px 0 12px}
+.meta{display:grid;grid-template-columns:1fr 1.5fr 1fr auto;gap:24px;font-size:13px;font-weight:500;padding-bottom:30px}
 .meta h4{margin:0 0 10px;font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
 .meta p{margin:0;max-width:34ch;font-size:15px;line-height:1.4}
 .meta .right{text-align:right;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em}
@@ -83,131 +83,87 @@ a{color:inherit;text-decoration:none}
 .club a{display:inline-block;border:1px solid rgba(242,240,234,.5);padding:10px 18px;border-radius:2px;
   font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 
-/* ---------- catalogue ----------------------------------------------------
-   Measured off the reference at 60fps, then bent to fit what we actually
-   have: a film of every single vial, shot blue on snow, from the brand book.
+/* ---------- catalogue -----------------------------------------------------
+   OUTFIT's structure: a dense grid of photographs, small caption underneath,
+   nothing floating in space. Every tile is a frame from that product's own
+   film, shot blue on snow, so the shelf is photographic before you touch it.
 
-   browse   wide plate, facts left, the vial large at 78% across - big enough
-            to read the label, which is the whole point of the row
-   focus    clicking a row re-sets the WHOLE list: it pinches to 480, every
-            row turns from a band into a column with its vial centred, the
-            rows you did not click fade back - and the row you did click
-            breaks back out past the pinch to 150% and becomes a 16:9 film
-            of that exact vial landing in the snow. The cutout hands over to
-            the footage; the two are never on screen together.
-
-   One curve for everything, cubic-bezier(.28,.06,.28,.96), 340ms opening and
-   520ms closing - both fitted to the reference's own height track.
+   The tantan move on top of it: click a tile and the whole grid re-sets -
+   everything else falls back to 38%, and a full-width 16:9 panel opens under
+   that tile's row playing the film. One curve for all of it,
+   cubic-bezier(.28,.06,.28,.96), 340ms opening and 520ms closing.
    -------------------------------------------------------------------------- */
 .grid{--d:520ms;--e:cubic-bezier(.28,.06,.28,.96);
-  display:block;max-width:820px;margin:0 auto;padding-bottom:150px;
-  transition:max-width var(--d) var(--e)}
-.grid.focus{--d:340ms;max-width:480px}
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 34px}
+.grid.focus{--d:340ms}
 
-.card{display:block;position:relative;width:100%;margin:0 0 26px;cursor:pointer;
-  transition:margin-bottom var(--d) var(--e),opacity var(--d) var(--e),
-             width var(--d) var(--e),margin-left var(--d) var(--e)}
-.card:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
-.grid.focus .card{margin-bottom:60px;opacity:.45}
-.grid.focus .card.on{opacity:1;width:150%;margin-left:-25%}
+.tile{position:relative;display:block;min-width:0;cursor:pointer;text-align:left;
+  transition:opacity var(--d) var(--e)}
+.tile:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.grid.focus .tile{opacity:.34}
+.grid.focus .tile.on{opacity:1}
+.shot{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:var(--tile)}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform 700ms var(--e)}
+.tile:hover .shot img{transform:scale(1.04)}
+.shot i{position:absolute;left:10px;top:10px;z-index:2;font-style:normal;
+  font-family:"Syncopate",sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;
+  color:rgba(242,240,234,.72)}
+.cap{display:block;min-width:0;padding:11px 2px 4px}
+.cap b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.cap span{display:block;font-size:12px;color:var(--ink-soft);margin-top:3px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cap em{display:block;font-style:normal;margin-top:7px;font-size:13px;
+  font-variant-numeric:tabular-nums;letter-spacing:.12em}
 
-.stage{display:block;position:relative;height:200px;border-radius:4px;
-  background:var(--tile);overflow:visible;will-change:height;
-  transition:height var(--d) var(--e)}
-.grid.focus .stage{height:250px}
-.grid.focus .card.on .stage{height:438px}
+/* the film opens full width under the row you clicked */
+.panel{grid-column:1/-1;position:relative;height:0;overflow:hidden;background:#0b1430;
+  transition:height var(--d) var(--e),margin var(--d) var(--e)}
+.panel.on{margin:8px 0 22px}
+.panel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pinfo{position:absolute;left:0;right:0;bottom:0;z-index:2;color:#F2F0EA;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:26px 28px;
+  background:linear-gradient(180deg,rgba(4,10,32,0),rgba(4,10,32,.16) 40%,rgba(4,10,32,.8))}
+.pinfo h3{margin:0;font-family:"Syncopate",sans-serif;font-size:clamp(16px,2vw,28px);font-weight:700;letter-spacing:-.01em}
+.pinfo .sub{display:block;margin-top:8px;font-size:13px;opacity:.84}
+.pinfo .rt{display:block;margin-top:4px;font-size:13px;opacity:.72;font-variant-numeric:tabular-nums}
+.pbuy{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+.pbuy .pr{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.pbuy button{border:0;background:#F2F0EA;color:#0b1430;font:inherit;font-size:12px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;padding:13px 24px;border-radius:2px;cursor:pointer}
+.pclose{position:absolute;right:18px;top:16px;z-index:3;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(242,240,234,.5);background:rgba(4,10,32,.3);color:#F2F0EA;
+  font:inherit;font-size:16px;line-height:1;cursor:pointer}
 
-/* that product's own film. nothing loads until the row is opened. */
-.film{position:absolute;inset:0;border-radius:4px;overflow:hidden;opacity:0;
-  pointer-events:none;transition:opacity calc(var(--d)*.55) var(--e) calc(var(--d)*.45)}
-.film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  will-change:transform}
-.grid.focus .card.on .film{opacity:1}
-
-/* the cutout. it travels and centres, then hands over to the film. */
-.obj{position:absolute;top:50%;left:78%;height:150px;width:auto;
-  transform:translate(-50%,-50%);pointer-events:none;will-change:transform,left,opacity;
-  filter:drop-shadow(0 14px 18px rgba(4,10,32,.22));
-  transition:left var(--d) var(--e),top var(--d) var(--e),
-             transform var(--d) var(--e),opacity calc(var(--d)*.5) var(--e)}
-.card:hover .obj{transform:translate(-50%,-52%) scale(1.045)}
-.grid.focus .obj{left:50%;transform:translate(-50%,-50%) scale(1.08)}
-.grid.focus .card:hover .obj{transform:translate(-50%,-52%) scale(1.12)}
-.grid.focus .card.on .obj{opacity:0}
-
-.side{position:absolute;left:30px;right:30%;top:50%;transform:translateY(-50%);z-index:2;
-  transition:opacity calc(var(--d)*.45) var(--e)}
-.grid.focus .side{opacity:0}
-.side .nm{display:block;font-size:24px;font-weight:600;letter-spacing:-.015em}
 /* section leads and the category headings under the film */
-.lead{max-width:900px;margin:0 auto 20px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.lead{margin:0 0 14px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
 .lead h2{margin:0;font-family:"Syncopate",sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
 .lead p{margin:0;font-size:13px;color:var(--ink-soft)}
-.cat{max-width:900px;margin:34px auto 16px;display:flex;align-items:baseline;gap:10px;
+.cat{margin:34px 0 14px;display:flex;align-items:baseline;gap:10px;
   font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;
-  padding-bottom:8px;border-bottom:1px solid var(--line,rgba(23,51,132,.24));
-  transition:max-width var(--d) var(--e)}
-.grid.focus .cat{max-width:520px}
+  padding-bottom:8px;border-bottom:1px solid rgba(23,51,132,.24)}
 .cat i{font-style:normal;font-family:"Inter",sans-serif;font-weight:500;color:var(--ink-soft);letter-spacing:.1em}
-.cat:first-child{margin-top:0}
-
-.side .cd{display:block;font-size:13px;color:var(--ink-soft);margin-top:6px}
-.side .rt{display:block;font-size:13px;margin-top:8px;font-variant-numeric:tabular-nums}
-.side .rt i{font-style:normal;color:var(--ink-soft)}
-.side .pr{display:block;margin-top:14px;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:.14em}
-
-.under{display:block;height:0;overflow:hidden;opacity:0;text-align:center;
-  transition:height var(--d) var(--e),opacity var(--d) var(--e),margin-top var(--d) var(--e)}
-.grid.focus .under{height:58px;margin-top:14px;opacity:1}
-.grid.focus .card.on .under{height:104px}
-.under b{display:block;font-family:"Syncopate",sans-serif;font-size:12px;font-weight:700}
-.under span{display:block;font-size:11px;color:var(--ink-soft);margin-top:4px}
-.under em{display:block;font-style:normal;margin-top:6px;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.14em}
-.add{margin-top:14px;border:1px solid var(--ink);background:none;color:var(--ink);
-  font:inherit;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  padding:10px 22px;border-radius:2px;cursor:pointer;opacity:0;pointer-events:none;
-  transition:opacity calc(var(--d)*.6) var(--e)}
-.grid.focus .card.on .add{opacity:1;pointer-events:auto}
-.add:hover{background:var(--ink);color:var(--bg)}
 
 .foot{border-top:3px solid var(--ink);padding:16px 0 70px;display:flex;justify-content:space-between;
   font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 
-@media (min-width:901px){
-  .grid{max-width:900px}
-  .grid.focus{max-width:520px}
-}
+@media (min-width:1500px){ .grid{grid-template-columns:repeat(5,1fr)} }
 @media (max-width:900px){
   .meta{grid-template-columns:1fr 1fr;gap:18px}
   .meta .right{text-align:left}
   .band{aspect-ratio:4/5}
   .bandtext{flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:22px}
   .claims{gap:22px;flex-wrap:wrap}
-  .club{text-align:left;margin-top:18px}
-  .grid{max-width:none}
-  .grid.focus{max-width:none;padding:0 13%}
-  .card{margin-bottom:18px}
-  .grid.focus .card{margin-bottom:40px}
-  .grid.focus .card.on{width:135%;margin-left:-17.5%}
-  .stage{height:150px}
-  .obj{height:112px}
-  .grid.focus .stage{height:190px}
-  .grid.focus .card.on .stage{height:195px}
-  .under b{font-size:11px}
-  .under span{font-size:10px;margin-top:3px}
-  .under em{margin-top:4px;font-size:13px}
-  .grid.focus .under{height:52px;margin-top:11px}
-  .grid.focus .card.on .under{height:94px}
-  .add{margin-top:10px;padding:9px 18px;font-size:10px}
-  .side{left:16px;right:31%}
-  .side .nm{font-size:17px}
-  .side .cd{font-size:11px}
-  .side .pr{margin-top:8px;font-size:13px}
+  .club{text-align:left;margin-top:18px;max-width:none}
+  .grid{grid-template-columns:repeat(2,1fr);gap:5px}
+  .cap b{font-size:14px}
+  .pinfo{flex-direction:column;align-items:flex-start;gap:14px;padding:18px}
+  .pbuy{width:100%;justify-content:space-between}
   .nav{gap:16px;font-size:16px}
 }
 @media (prefers-reduced-motion:reduce){
   .band{opacity:1;transform:none}
-  .grid,.card,.stage,.obj,.side,.under,.film,.add{transition:none}
+  .grid,.tile,.panel,.shot img{transition:none}
 }
 </style>
 </head>
@@ -238,7 +194,7 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <section class="lead"><h2>Top sellers</h2><p>The eight people reorder, in order.</p></section>
+  <section class="lead"><h2>Top sellers</h2></section>
   <section class="grid" id="grid-top" aria-label="Top sellers"></section>
 
   <section class="band" id="band" aria-label="The rest of the shelf">
@@ -261,7 +217,7 @@ a{color:inherit;text-decoration:none}
   </section>
 
 
-  <section class="lead" id="rest"><h2>Everything else</h2><p>Thirty more, by category.</p></section>
+  <section class="lead" id="rest"><h2>Everything else</h2></section>
   <section class="grid" id="grid-rest" aria-label="Catalogue"></section>
   <footer class="foot"><span>SKO Compounds</span><span>Research, refined.</span></footer>
 </main>
@@ -274,117 +230,128 @@ const PRICE={'bpc-157':44,'tb-500':49,'ghk-cu':39,'mots-c':59,'nad':69,'glutathi
 const priceOf=s=>PRICE[s]||49;
 const gTop=document.getElementById('grid-top'), gRest=document.getElementById('grid-rest');
 const grids=[gTop,gRest];
-let cards=[], PRODUCTS=[];
 const GROUPS=['Peptides','Blends and sets','Sprays','Supplies'];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let PRODUCTS=[], bag=0;
+const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
 
-const row=(p,i,eager)=>`
-    <div class="card" data-i="${i}" role="button" tabindex="0" aria-expanded="false">
-      <span class="stage">
-        <span class="film"><video data-src="vid/p/${p.slug}.mp4" poster="vid/p/${p.slug}.jpg"
-          muted loop playsinline preload="none" aria-hidden="true"></video></span>
-        <span class="side">
-          <span class="nm">${p.name}</span>
-          <span class="cd">${p.category} \u00b7 ${p.dose}</span>
-          <span class="rt">${p.rating.toFixed(1)} <i>\u00b7 ${p.reviews.toLocaleString()} reviews</i></span>
-          <span class="pr">$${priceOf(p.slug)}.00</span>
-        </span>
-        <img class="obj" src="img/${p.slug}.webp" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
-      </span>
-      <span class="under">
-        <b>${p.name}</b>
-        <span>${p.category} \u00b7 ${p.dose} \u00b7 ${p.rating.toFixed(1)} (${p.reviews.toLocaleString()})</span>
-        <em>$${priceOf(p.slug)}.00</em>
-        <button class="add" type="button">Add to bag</button>
-      </span>
-    </div>`;
+const tile=(p,i,eager)=>`
+  <div class="tile" data-slug="${p.slug}" role="button" tabindex="0" aria-expanded="false">
+    <span class="shot">
+      <i>${String(i).padStart(2,'0')}</i>
+      <img src="vid/p/${p.slug}-tile.jpg" alt="${p.name}" loading="${eager?'eager':'lazy'}" decoding="async">
+    </span>
+    <span class="cap">
+      <b>${p.name}</b>
+      <span>${p.category} · ${p.dose}</span>
+      <em>$${priceOf(p.slug)}.00   <span style="letter-spacing:0">${p.rating.toFixed(1)} · ${p.reviews.toLocaleString()}</span></em>
+    </span>
+  </div>`;
 
 fetch('products.json').then(r=>r.json()).then(P=>{
   PRODUCTS=P;
-  P.forEach((p,i)=>p._i=i);
+  const bySlug=Object.fromEntries(P.map(p=>[p.slug,p]));
+  window.__bySlug=bySlug;
   const top=[...P].sort((a,b)=>a.rank-b.rank).slice(0,8);
   const topSet=new Set(top.map(p=>p.slug));
   const rest=P.filter(p=>!topSet.has(p.slug));
 
-  gTop.innerHTML=top.map(p=>row(p,p._i,true)).join('');
+  gTop.innerHTML=top.map((p,n)=>tile(p,n+1,true)).join('');
 
   const byGroup=GROUPS.map(g=>[g,rest.filter(p=>p.group===g)]).filter(([,l])=>l.length);
+  let n=8;
   gRest.innerHTML=byGroup.map(([g,list])=>
-    `<h3 class="cat" id="cat-${g.replace(/\s+/g,'-').toLowerCase()}">${g}<i>${list.length}</i></h3>`+
-    list.map(p=>row(p,p._i,false)).join('')).join('');
+    `<h3 class="cat" style="grid-column:1/-1">${g}<i>${list.length}</i></h3>`+
+    list.map(p=>tile(p,++n,false)).join('')).join('');
 
   document.getElementById('bandcats').innerHTML=
-    byGroup.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' \u00b7 ');
-
-  cards=grids.flatMap(g=>[...g.querySelectorAll('.card')]).map(el=>({
-    el, grid:el.closest('.grid'), stage:el.querySelector('.stage'), vid:el.querySelector('.film video')
-  }));
-  cards.forEach((c,n)=>c.el.dataset.c=n);
+    byGroup.map(([g,l])=>`<b>${g}</b> ${l.length}`).join(' · ');
 });
 
 /* ---------------------------------------------------------------
-   Clicking a row re-sets the whole list, not just that row. The list
-   pinches, every row turns from a band into a column, the rows you
-   did not click fade back - and the one you did breaks back out past
-   the pinch and plays that product's own film: the vial landing in
-   the snow. The cutout fades out before the footage fades in, so
-   there is never a second vial on screen.
-
-   Nothing downloads until a row is opened.
+   Clicking a tile re-sets the whole grid: everything else falls
+   back, and a full-width panel opens under that tile's row playing
+   that product's own film. Clicking it again, another tile, the
+   close button or Escape puts the grid back. Nothing downloads
+   until a tile is opened.
    --------------------------------------------------------------- */
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let openCard=null;
+let open=null;                       // {grid, tile, panel, slug}
 
-function closeCard(){
-  if(!openCard) return;
-  const c=openCard; openCard=null;
-  c.el.classList.remove('on');
-  c.el.setAttribute('aria-expanded','false');
-  grids.forEach(g=>g.classList.remove('focus'));
-  c.vid.pause();
+function makePanel(){
+  const el=document.createElement('div');
+  el.className='panel';
+  el.innerHTML=`<video muted loop playsinline preload="none" aria-hidden="true"></video>
+    <button class="pclose" type="button" aria-label="Close">×</button>
+    <div class="pinfo">
+      <div><h3></h3><span class="sub"></span><span class="rt"></span></div>
+      <div class="pbuy"><span class="pr"></span><button type="button">Add to bag</button></div>
+    </div>`;
+  el.querySelector('.pclose').addEventListener('click',e=>{e.stopPropagation();closePanel();});
+  el.querySelector('.pbuy button').addEventListener('click',e=>{
+    e.stopPropagation(); bag++; bagLink.textContent=`Bag (${bag})`;
+  });
+  return el;
 }
-function openAt(c){
-  if(openCard===c){ closeCard(); return; }
-  const before=c.el.getBoundingClientRect().top;
-  if(openCard){ openCard.el.classList.remove('on'); openCard.el.setAttribute('aria-expanded','false'); openCard.vid.pause(); }
-  openCard=c;
-  grids.forEach(g=>g.classList.add('focus'));
-  c.el.classList.add('on');
-  c.el.setAttribute('aria-expanded','true');
-  if(!c.vid.src){ c.vid.src=c.vid.dataset.src; }
-  c.vid.currentTime=0;
-  if(!reduce) c.vid.play().catch(()=>{});
-  // the rows above just changed height, so hold this row still instead of
-  // letting the page jump out from under the pointer
+const panelH=grid=>Math.round(grid.clientWidth*9/16);
+
+function closePanel(){
+  if(!open) return;
+  const o=open; open=null;
+  o.tile.classList.remove('on'); o.tile.setAttribute('aria-expanded','false');
+  o.grid.classList.remove('focus');
+  o.panel.classList.remove('on');
+  o.panel.style.height='0px';
+  const v=o.panel.querySelector('video'); v.pause();
+  setTimeout(()=>{ if(!open||open.panel!==o.panel) o.panel.remove(); }, 560);
+}
+
+function openTile(el){
+  const grid=el.closest('.grid'), slug=el.dataset.slug, p=window.__bySlug[slug];
+  if(open&&open.tile===el){ closePanel(); return; }
+  closePanel();
+  const tiles=[...grid.querySelectorAll('.tile')];
+  const cols=getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+  const i=tiles.indexOf(el);
+  // the panel goes after the last tile on this row
+  const rowStart=tiles.slice(0,i+1).reverse().findIndex((t,k)=>k>0&&t.getBoundingClientRect().top!==el.getBoundingClientRect().top);
+  const sameRow=tiles.filter(t=>Math.abs(t.getBoundingClientRect().top-el.getBoundingClientRect().top)<2);
+  const last=sameRow[sameRow.length-1];
+  const panel=makePanel();
+  last.after(panel);
+
+  const v=panel.querySelector('video');
+  v.poster=`vid/p/${slug}.jpg`; v.src=`vid/p/${slug}.mp4`;
+  panel.querySelector('h3').textContent=p.name;
+  panel.querySelector('.sub').textContent=`${p.category} · ${p.dose} · research use only`;
+  panel.querySelector('.rt').textContent=`${p.rating.toFixed(1)} · ${p.reviews.toLocaleString()} reviews`;
+  panel.querySelector('.pr').textContent=`$${priceOf(slug)}.00`;
+
+  grid.classList.add('focus');
+  el.classList.add('on'); el.setAttribute('aria-expanded','true');
+  open={grid,tile:el,panel,slug};
+
   requestAnimationFrame(()=>{
-    const after=c.el.getBoundingClientRect().top;
-    if(Math.abs(after-before)>1) scrollBy({top:after-before,behavior:'instant'});
-    if(!reduce) c.el.scrollIntoView({behavior:'smooth',block:'center'});
+    panel.classList.add('on');
+    panel.style.height=panelH(grid)+'px';
+    if(!reduce) v.play().catch(()=>{});
+    setTimeout(()=>{ if(open&&open.panel===panel&&!reduce)
+      panel.scrollIntoView({behavior:'smooth',block:'center'}); },360);
   });
 }
 
-/* the old hero shot rises in, and plays only while it is on screen */
-const band=document.getElementById('band'), bandVid=band.querySelector('video');
-new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){ band.classList.add('in'); bandVid.play().catch(()=>{}); }
-  else { bandVid.pause(); }
-}),{threshold:.2}).observe(band);
-
-/* click to open, click again to close; the Add button never opens a row */
-let bag=0;
-const bagLink=[...document.querySelectorAll('.nav a')].find(a=>a.textContent.startsWith('Bag'));
 for(const g of grids){
   g.addEventListener('click',e=>{
-    const el=e.target.closest('.card'); if(!el) return;
-    if(e.target.closest('.add')){ bag++; bagLink.textContent=`Bag (${bag})`; return; }
-    openAt(cards[+el.dataset.c]);
+    const el=e.target.closest('.tile'); if(!el) return;
+    openTile(el);
   });
   g.addEventListener('keydown',e=>{
     if(e.key!=='Enter'&&e.key!==' ') return;
-    const el=e.target.closest('.card'); if(!el||e.target.closest('.add')) return;
-    e.preventDefault(); openAt(cards[+el.dataset.c]);
+    const el=e.target.closest('.tile'); if(!el) return;
+    e.preventDefault(); openTile(el);
   });
 }
-addEventListener('keydown',e=>{ if(e.key==='Escape') closeCard(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape') closePanel(); });
+addEventListener('resize',()=>{ if(open) open.panel.style.height=panelH(open.grid)+'px'; });
 
 /* both lines of the wordmark are set to the measure */
 const words=[...document.querySelectorAll('.word')];
