@@ -86,6 +86,23 @@
 .handband .ht p{margin-top:20px;max-width:32ch;line-height:1.6;color:rgba(255,255,255,.82);font-size:16.5px}
 .handband .mono{color:rgba(255,255,255,.72)}
 
+.steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 28px}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:0 14px;padding:20px 0;
+  border-bottom:1px solid var(--line)}
+.steps .no{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--frost);padding-top:3px}
+.steps h3{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;font-size:12px;
+  margin:0 0 7px;color:var(--navy)}
+.steps p{margin:0;font-size:15px;color:var(--mute);line-height:1.6}
+
+.tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.tri div{background:#fff;padding:22px}
+.tri .n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--pig)}
+.tri h3{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;font-size:13px;
+  margin:10px 0 9px;color:var(--navy)}
+.tri p{margin:0;font-size:15px;color:var(--mute);line-height:1.62}
+
 .skus{display:flex;flex-wrap:wrap;gap:8px}
 .skus span{border:1px solid var(--line);padding:8px 13px;font-family:'JetBrains Mono',monospace;
   font-size:11.5px;letter-spacing:.06em;color:var(--navy)}
@@ -99,6 +116,7 @@
   .reqs li{grid-template-columns:1fr;gap:9px}
   .reqs .tag{justify-self:start;padding:4px 9px}
   .tbl td:first-child{width:auto}
+  .steps{grid-template-columns:1fr}
   .handband{grid-template-columns:1fr}
   .handband img{max-height:440px}
 }
@@ -113,9 +131,10 @@
 </nav>
 
 <div class="cnav"><div class="wrap">
-  <a href="#deal">01 THE DEAL</a><a href="#money">02 WHAT YOU EARN</a><a href="#week1">03 WEEK ONE</a>
-  <a href="#beats">04 THE ELEVEN BEATS</a><a href="#shapes">05 FIVE SHAPES</a><a href="#day7">06 DAY SEVEN</a>
-  <a href="#rules">07 HARD RULES</a><a href="#products">08 PRODUCTS</a><a href="#working">09 TOGETHER</a>
+  <a href="#deal">01 THE DEAL</a><a href="#money">02 WHAT YOU EARN</a><a href="#start">03 START HERE</a>
+  <a href="#week1">04 WEEK ONE</a><a href="#beats">05 THE ELEVEN BEATS</a><a href="#shapes">06 FIVE SHAPES</a>
+  <a href="#day7">07 DAY SEVEN</a><a href="#after">08 WEEK TWO ONWARD</a><a href="#rules">09 HARD RULES</a>
+  <a href="#products">10 PRODUCTS</a><a href="#working">11 TOGETHER</a>
 </div></div>
 
 <section class="wrap chero">
@@ -153,8 +172,24 @@
   </div>
 </section>
 
+<section class="wrap" id="start">
+  <div class="sec-h rv"><h2 class="disp">Start here</h2><span class="mono mute">YOUR FIRST 48 HOURS</span></div>
+  <ol class="steps rv">
+    <li><span class="no">01</span><div><h3>Get your code</h3>
+      <p>We issue it — it is yours alone and nobody else's videos can claim it. Nothing you post before you have it can be paid, so get it first.</p></div></li>
+    <li><span class="no">02</span><div><h3>Join the group</h3>
+      <p>Every link, every takedown notice and every question goes there. It is also where your numbers come back to you.</p></div></li>
+    <li><span class="no">03</span><div><h3>Pick two or three products</h3>
+      <p>From the cleared list further down. Learn those properly rather than mentioning nine — and tell us which ones, so we send you what we have on them.</p></div></li>
+    <li><span class="no">04</span><div><h3>Read the hard rules</h3>
+      <p>Section 09. It takes two minutes and it is the part that protects your account. If anything in it is unclear, ask before your first post.</p></div></li>
+    <li><span class="no">05</span><div><h3>Make your first five</h3>
+      <p>The five shapes in section 06, in your own editing style. That is week one.</p></div></li>
+  </ol>
+</section>
+
 <section class="wrap" id="week1">
-  <div class="sec-h rv"><h2 class="disp">Week one is a test</h2><span class="mono mute">03 · FIVE VIDEOS, FIVE SHAPES</span></div>
+  <div class="sec-h rv"><h2 class="disp">Week one is a test</h2><span class="mono mute">04 · FIVE VIDEOS, FIVE SHAPES</span></div>
   <div class="rv" style="max-width:66ch">
     <p style="line-height:1.7;color:var(--mute)">Most creator programs hand you a script and then wonder why the videos feel dead. Yours will not, because you know your audience and we do not. So in week one you make <strong style="color:var(--navy)">five videos in five different shapes</strong> — all in your own editing style, all built on the beats below.</p>
     <p style="line-height:1.7;color:var(--mute);margin-top:16px">Then we look at what actually happened and you spend the rest of the month making more of whatever won. If one shape clearly outperforms, that becomes your format. If nothing does, we change the approach rather than asking you to try harder.</p>
@@ -163,7 +198,7 @@
 </section>
 
 <section class="wrap" id="beats">
-  <div class="sec-h rv"><h2 class="disp">The eleven beats</h2><span class="mono mute">04 · A MENU, NOT A CHECKLIST</span></div>
+  <div class="sec-h rv"><h2 class="disp">The eleven beats</h2><span class="mono mute">05 · A MENU, NOT A CHECKLIST</span></div>
   <p class="rv" style="color:var(--mute);line-height:1.7;max-width:62ch;margin-bottom:26px">A 45-second video can use all eleven. A 20-second video uses four or five. The ones marked <em style="font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#fff;background:var(--pig);padding:3px 7px">CORE</em> belong in every video you make.</p>
 
   <ol class="beats rv">
@@ -194,7 +229,7 @@
 </section>
 
 <section class="wrap" id="shapes">
-  <div class="sec-h rv"><h2 class="disp">Five shapes</h2><span class="mono mute">05 · ONE EACH, ANY ORDER</span></div>
+  <div class="sec-h rv"><h2 class="disp">Five shapes</h2><span class="mono mute">06 · ONE EACH, ANY ORDER</span></div>
   <div class="shapes rv">
     <div><span class="n">SHAPE 01</span><h3>Talking to camera</h3>
       <p>You, your room, no edit tricks. Not the lazy option — our best-performing videos so far are exactly this, one person talking straight into the lens.</p></div>
@@ -210,7 +245,7 @@
 </section>
 
 <section class="wrap" id="day7">
-  <div class="sec-h rv"><h2 class="disp">Day seven</h2><span class="mono mute">06 · FOUR NUMBERS, TOGETHER</span></div>
+  <div class="sec-h rv"><h2 class="disp">Day seven</h2><span class="mono mute">07 · FOUR NUMBERS, TOGETHER</span></div>
   <table class="tbl rv">
     <thead><tr><th>What we look at</th><th>Why it matters</th></tr></thead>
     <tbody>
@@ -223,6 +258,18 @@
   <p class="rv" style="margin-top:18px;color:var(--mute);max-width:62ch;line-height:1.65">A video with 400,000 views and no sales loses to a video with 9,000 views and six. We will tell you which of your five did what, and why we think so.</p>
 </section>
 
+<section class="wrap" id="after">
+  <div class="sec-h rv"><h2 class="disp">Week two onward</h2><span class="mono mute">HONE IN, OR FIX</span></div>
+  <div class="tri rv">
+    <div><span class="n">IF ONE SHAPE WON</span><h3>Hone in</h3>
+      <p>That becomes your format for the rest of the month. Keep the shape and change one thing at a time — the hook, the product, the length — so you always know what moved the number.</p></div>
+    <div><span class="n">IF NOTHING WON</span><h3>Fix</h3>
+      <p>We change the approach rather than asking you to try harder. Usually it is the first two seconds or a missing beat 07, and both are fixable in a week.</p></div>
+    <div><span class="n">IF EVERYTHING WON</span><h3>Widen</h3>
+      <p>Keep all five in rotation and add a sixth of your own invention. You have found something that works on your page and we would rather learn it than standardise it away.</p></div>
+  </div>
+</section>
+
 <div class="handband">
   <div class="ht rv"><div class="mono">BEAT 07 · VISUAL PROOF</div><h3 class="disp">Show the<br>product.</h3>
     <p>Every video that sells has the vial in it. Not a mention — the object, in your hand, on camera.</p></div>
@@ -230,7 +277,7 @@
 </div>
 
 <section class="wrap" id="rules">
-  <div class="sec-h rv"><h2 class="disp">Hard rules</h2><span class="mono mute">07 · NOT STYLE PREFERENCES</span></div>
+  <div class="sec-h rv"><h2 class="disp">Hard rules</h2><span class="mono mute">09 · NOT STYLE PREFERENCES</span></div>
   <p class="rv" style="color:var(--mute);max-width:62ch;line-height:1.7;margin-bottom:24px">Breaking one of these can cost you your account or cost us our ad account. If you are unsure whether something crosses a line, ask in the group before you post, not after.</p>
   <ul class="reqs rv">
     <li><span class="tag">NEVER</span><p><b>Say what to take, how much, or what it does to a body.</b> No dosing, no protocols, no "I take this for that." These are research compounds, and the moment a video sounds like medical advice it is a problem for you and for us.</p></li>
@@ -248,7 +295,7 @@
 </section>
 
 <section class="wrap" id="products">
-  <div class="sec-h rv"><h2 class="disp">What you can feature</h2><span class="mono mute">08 · TWENTY-FIVE CLEARED</span></div>
+  <div class="sec-h rv"><h2 class="disp">What you can feature</h2><span class="mono mute">10 · TWENTY-FIVE CLEARED</span></div>
   <div class="skus rv">
     <span>BPC-157</span><span>GHK-Cu</span><span>GLOW</span><span>KLOW</span><span>KPV</span><span>MT-1</span>
     <span>MT-2</span><span>PT-141</span><span>CJC-1295 no DAC + Ipamorelin</span><span>Ipamorelin</span>
@@ -261,7 +308,7 @@
 </section>
 
 <section class="wrap" id="working">
-  <div class="sec-h rv"><h2 class="disp">Working together</h2><span class="mono mute">09 · WHAT WE OWE EACH OTHER</span></div>
+  <div class="sec-h rv"><h2 class="disp">Working together</h2><span class="mono mute">11 · WHAT WE OWE EACH OTHER</span></div>
   <table class="tbl rv">
     <thead><tr><th>You</th><th>Us</th></tr></thead>
     <tbody>
