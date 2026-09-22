@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><title>SKO Creator Program</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{--navy:#173384;--pig:#0130C0;--plate:#023AB1;--ink:#020B77;--frost:#88A9E3;
+  --mute:#4a5680;--line:#D9DFEC}
+@page{size:8.5in 11in;margin:0}
+*{box-sizing:border-box;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:Inter,-apple-system,sans-serif;color:var(--ink);background:#fff}
+.page{width:8.5in;height:11in;padding:.72in .78in;position:relative;overflow:hidden;
+  page-break-after:always;background:#fff}
+.page:last-child{page-break-after:auto}
+.disp{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.15em;font-size:8pt;text-transform:uppercase}
+
+/* running furniture */
+.rule{position:absolute;left:.78in;right:.78in;border-top:1px solid var(--line)}
+.head{top:.46in}
+.foot{bottom:.46in}
+.ftxt{position:absolute;bottom:.28in;font-family:'JetBrains Mono',monospace;font-size:7pt;
+  letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+.fl{left:.78in}.fr{right:.78in}
+.htxt{position:absolute;top:.28in;font-family:'JetBrains Mono',monospace;font-size:7pt;
+  letter-spacing:.14em;color:var(--mute);text-transform:uppercase}
+
+h1{font-size:34pt;line-height:.98;letter-spacing:-.01em;color:var(--navy)}
+h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:15pt;line-height:1.1;color:var(--navy);margin-bottom:6pt}
+.kick{font-family:'JetBrains Mono',monospace;font-size:8pt;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--pig);margin-bottom:9pt}
+.lede{font-size:11.5pt;line-height:1.5;color:var(--mute);max-width:46em;margin-bottom:20pt}
+
+/* ---------- cover ---------- */
+.cover{background:var(--plate);color:#fff;padding:0}
+.cover img{position:absolute;right:-1.95in;top:-.25in;height:11.5in;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);
+  mask-image:linear-gradient(to right,transparent 0,#000 22%)}
+.cover .ct{position:absolute;left:.78in;top:1.5in;width:4.5in}
+.cover h1{color:#fff;font-size:44pt}
+.cover .kick{color:rgba(255,255,255,.72)}
+.cover p{margin-top:20pt;font-size:12pt;line-height:1.55;color:rgba(255,255,255,.86);width:3.7in}
+.cover .base{position:absolute;left:.78in;bottom:.6in;color:rgba(255,255,255,.7)}
+.cover .lock{position:absolute;left:.78in;top:.62in;height:.26in}
+
+/* ---------- spec rows ---------- */
+.spec{border-top:1px solid var(--line)}
+.spec>div{display:grid;grid-template-columns:1.45in 1fr;gap:14pt;padding:9.5pt 0;
+  border-bottom:1px solid var(--line);align-items:baseline}
+.spec .k{font-family:'JetBrains Mono',monospace;font-size:7.5pt;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--mute)}
+.spec .v{font-size:11pt;line-height:1.45}
+.spec .v b{color:var(--navy);font-weight:600}
+
+/* ---------- beats ---------- */
+.beats{border-top:1px solid var(--line)}
+.beats .b{display:grid;grid-template-columns:.34in 2.05in 1fr;gap:10pt;padding:7pt 0;
+  border-bottom:1px solid var(--line)}
+.beats .n{font-family:'JetBrains Mono',monospace;font-size:8pt;color:var(--frost);padding-top:2pt}
+.beats .t{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:8.2pt;line-height:1.35;color:var(--navy);padding-top:1pt}
+.beats .t em{font-style:normal;display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:6.2pt;letter-spacing:.12em;background:var(--pig);color:#fff;padding:1.5pt 3.5pt;
+  margin-top:3pt}
+.beats .d{font-size:9.8pt;line-height:1.42;color:var(--mute)}
+.beats .d b{color:var(--navy);font-weight:600}
+.note{margin-top:11pt;border:1px solid var(--navy);padding:11pt 13pt;font-size:10pt;
+  line-height:1.5;color:var(--navy)}
+.note b{font-weight:600}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.cards>div{background:#fff;padding:13pt 14pt}
+.cards .n{font-family:'JetBrains Mono',monospace;font-size:7pt;letter-spacing:.14em;color:var(--frost)}
+.cards h3{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:9pt;margin:6pt 0 5pt;color:var(--navy)}
+.cards p{font-size:9.8pt;line-height:1.45;color:var(--mute)}
+.wide{grid-column:1 / -1}
+
+/* ---------- rules ---------- */
+.reqs{border-top:1px solid var(--line)}
+.reqs>div{display:grid;grid-template-columns:.62in 1fr;gap:12pt;padding:9pt 0;
+  border-bottom:1px solid var(--line)}
+.reqs .tag{font-family:'JetBrains Mono',monospace;font-size:6.5pt;letter-spacing:.12em;
+  color:#fff;background:var(--navy);padding:2.5pt 0;text-align:center;height:fit-content}
+.reqs p{font-size:10pt;line-height:1.45;color:var(--mute)}
+.reqs p b{color:var(--navy);font-weight:600}
+.never{border:1px solid var(--navy);padding:12pt 14pt;margin-top:14pt}
+.never .k{font-family:'JetBrains Mono',monospace;font-size:7pt;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--navy);margin-bottom:6pt}
+.never p{font-size:10pt;line-height:1.55;color:var(--navy)}
+
+.skus{display:flex;flex-wrap:wrap;gap:5pt}
+.skus span{border:1px solid var(--line);padding:4.5pt 8pt;font-family:'JetBrains Mono',monospace;
+  font-size:7.6pt;letter-spacing:.04em;color:var(--navy)}
+
+/* ---------- numbers ---------- */
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-bottom:16pt}
+.four>div{background:#fff;padding:13pt}
+.four b{display:block;font-family:Syncopate,sans-serif;font-weight:700;font-size:8.5pt;
+  text-transform:uppercase;color:var(--navy);margin-bottom:5pt;line-height:1.3}
+.four p{font-size:9.3pt;line-height:1.4;color:var(--mute)}
+
+.closer{position:absolute;left:.78in;right:.78in;bottom:1.2in;border-top:1px solid var(--line);
+  padding-top:16pt}
+.closer h2{margin-bottom:8pt}
+.closer p{font-size:11pt;line-height:1.5;color:var(--mute);max-width:36em}
+</style>
+
+<!-- ========================= 1 · COVER ========================= -->
+<section class="page cover">
+  <img src="../img/edition3/hand.jpg" alt="">
+  <img class="lock" src="../img/lockup-3x1-white.png" alt="SKO Compounds">
+  <div class="ct">
+    <div class="kick">Creator Program</div>
+    <h1 class="disp">How this<br>works</h1>
+    <p>Thirty videos a month, your own code, your own editing. Everything you need is in here.</p>
+  </div>
+  <div class="base mono">SKO Compounds · Research use only</div>
+</section>
+
+<!-- ========================= 2 · THE DEAL ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">The deal</div>
+  <h2>You get paid when you sell</h2>
+  <p class="lede">There is no per-video fee. Every dollar you earn comes from sales your code drove — which is why everything in here points at the sale rather than the view.</p>
+
+  <div class="spec">
+    <div><span class="k">Volume</span><span class="v"><b>30 videos a month.</b> Roughly one a day.</span></div>
+    <div><span class="k">Your code</span><span class="v">Your viewer gets <b>10% off</b>. You earn <b>5%</b> of what they actually pay.</span></div>
+    <div><span class="k">How you're paid</span><span class="v"><b>Commission only.</b> No per-video fee.</span></div>
+    <div><span class="k">Repeat buyers</span><span class="v">If someone bought on your code and buys again, <b>you earn on that too</b>.</span></div>
+    <div><span class="k">Editing</span><span class="v"><b>You edit your own way.</b> There is no template to copy.</span></div>
+    <div><span class="k">Takedowns</span><span class="v">If TikTok removes a video you replace it. It does not count against you.</span></div>
+  </div>
+
+  <div style="margin-top:26pt">
+    <div class="kick">Do this first</div>
+    <h2>Your first 48 hours</h2>
+  </div>
+  <div class="spec" style="margin-top:12pt">
+    <div><span class="k">Get your code</span><span class="v">We issue it. Nothing you post before you have it can be paid.</span></div>
+    <div><span class="k">Join the group</span><span class="v">Post every link there the day you publish. Your numbers come back there.</span></div>
+    <div><span class="k">Pick 2–3 products</span><span class="v">From the list at the back. Tell us which ones and we will send you what we have.</span></div>
+    <div><span class="k">Read the rules</span><span class="v">Two minutes, at the back. It is the part that protects your account.</span></div>
+    <div><span class="k">Make five videos</span><span class="v">One in each style. That is your first week.</span></div>
+  </div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">The deal</div><div class="ftxt fr mono">2</div>
+</section>
+
+<!-- ========================= 3 · THE SCRIPT ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">Your script</div>
+  <h2>Eleven beats</h2>
+  <p class="lede" style="margin-bottom:14pt">A 45-second video can use all eleven. A 20-second video uses four or five. The ones marked <span style="font-family:'JetBrains Mono',monospace;font-size:6.2pt;letter-spacing:.12em;background:var(--pig);color:#fff;padding:1.5pt 3.5pt">ALWAYS</span> belong in every video you make.</p>
+
+  <div class="beats">
+    <div class="b"><span class="n">01</span><span class="t">Problem<br><em>ALWAYS</em></span>
+      <span class="d">Name the thing your viewer already deals with, in the first two seconds. Use one you actually have — an invented problem reads as an ad instantly.</span></div>
+    <div class="b"><span class="n">02</span><span class="t">Statistic</span>
+      <span class="d">One real number. The only one we give you is <b>40,000+ orders shipped</b>. If you do not have a number you can stand behind, skip this beat — never invent one.</span></div>
+    <div class="b"><span class="n">03</span><span class="t">FOMO</span>
+      <span class="d">What they are missing while they keep putting it off. Not urgency theatre and not a fake deadline — the actual cost of waiting.</span></div>
+    <div class="b"><span class="n">04</span><span class="t">Self-<br>identification<br><em>ALWAYS</em></span>
+      <span class="d">The line that makes the right viewer realise this video is for them. "If you're someone who…" is the plain version; yours should sound like you.</span></div>
+    <div class="b"><span class="n">05</span><span class="t">Product<br>discovery</span>
+      <span class="d">How you came across SKO. This is the first time the brand is named, and it should sound like a story rather than a handoff into an ad read.</span></div>
+    <div class="b"><span class="n">06</span><span class="t">Objection</span>
+      <span class="d">Say their doubt out loud before they think it. Whatever made you hesitate is almost certainly what is making them hesitate.</span></div>
+    <div class="b"><span class="n">07</span><span class="t">Visual proof<br><em>ALWAYS</em></span>
+      <span class="d">Show it. The vial in your hand, the box on your counter, the label, your order screen. Talking about a product you never show is the most common reason these videos do not convert.</span></div>
+    <div class="b"><span class="n">08</span><span class="t">Social<br>normalization</span>
+      <span class="d">Other people are already doing this. It stops being a risk and starts being a thing people do.</span></div>
+    <div class="b"><span class="n">09</span><span class="t">Credibility<br><em>ALWAYS</em></span>
+      <span class="d">Three facts, in your own words, and only these three: <b>third-party tested</b>, <b>Beverly Hills based</b>, <b>40,000+ orders shipped</b>. Nothing about purity or percentages.</span></div>
+    <div class="b"><span class="n">10</span><span class="t">Simplicity</span>
+      <span class="d">How easy it actually was to order. Most people assume it is complicated and stop there.</span></div>
+    <div class="b"><span class="n">11</span><span class="t">Call to action<br><em>ALWAYS</em></span>
+      <span class="d">Your code, 10% off, where to go. Say it out loud <b>and</b> put it on screen. You are paid on this beat and it is the one people forget.</span></div>
+  </div>
+
+  <div class="note">Under 25 seconds, use the short version: <b>Problem → Self-identification → Visual proof → Credibility → Call to action.</b></div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">Your script</div><div class="ftxt fr mono">3</div>
+</section>
+
+<!-- ========================= 4 · FIVE STYLES ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">Week one</div>
+  <h2>Five videos, five styles</h2>
+  <p class="lede">Most creator programs hand you a script and then wonder why the videos feel dead. Yours will not, because you know your audience and we do not. Make one of each, in your own editing style, then we keep whatever worked. Do not make the same video five times with different backgrounds.</p>
+
+  <div class="cards">
+    <div><div class="n">STYLE ONE</div><h3>Talking to camera</h3>
+      <p>You, your room, no edit tricks. Not the lazy option — our best-performing videos so far are exactly this, one person talking straight into the lens.</p></div>
+    <div><div class="n">STYLE TWO</div><h3>In hand / unboxing</h3>
+      <p>The box arrives, you open it, you read the label out loud. Heavy on visual proof, and the easiest one to make convincing.</p></div>
+    <div><div class="n">STYLE THREE</div><h3>In your routine</h3>
+      <p>Where it actually sits in your day. Shot like the rest of your day-in-the-life content, not like a commercial.</p></div>
+    <div><div class="n">STYLE FOUR</div><h3>Street or reaction</h3>
+      <p>You asking someone else what they think, or reacting to something on screen. Works when the other person's reaction is real.</p></div>
+    <div class="wide"><div class="n">STYLE FIVE</div><h3>Your own format</h3>
+      <p>Whatever already performs on your page, with the beats built inside it. Honestly, this is the one we are most interested in — if it works we would rather learn it than standardise it away.</p></div>
+  </div>
+
+  <div style="margin-top:26pt">
+    <div class="kick">Day seven</div>
+    <h2>What we look at</h2>
+  </div>
+  <div class="four" style="margin-top:12pt">
+    <div><b>3-second<br>hold</b><p>Whether your first beat worked. If this is low, nothing after it was seen.</p></div>
+    <div><b>Average<br>watch %</b><p>Where people leave. Tells us which beat to cut.</p></div>
+    <div><b>Code<br>uses</b><p>How many people got as far as typing it in.</p></div>
+    <div><b>Sales</b><p>What you are paid on.</p></div>
+  </div>
+  <p style="font-size:10.5pt;line-height:1.5;color:var(--mute)">A video with 400,000 views and no sales loses to a video with 9,000 views and six. We will tell you which of your five did what, and why we think so.</p>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">Week one</div><div class="ftxt fr mono">4</div>
+</section>
+
+<!-- ========================= 5 · RULES ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">Hard rules</div>
+  <h2>Not style preferences</h2>
+  <p class="lede">Breaking one of these can cost you your account or cost us our ad account. If you are unsure whether something crosses a line, ask in the group before you post, not after.</p>
+
+  <div class="reqs">
+    <div><span class="tag">NEVER</span><p><b>Say what to take, how much, or what it does to a body.</b> No dosing, no protocols, no "I take this for that." These are research compounds, and the moment a video sounds like medical advice it is a problem for you and for us.</p></div>
+    <div><span class="tag">NEVER</span><p><b>Post before-and-afters.</b> No body transformation shots and no results claims.</p></div>
+    <div><span class="tag">NEVER</span><p><b>Use weight-loss language</b> — spoken, on screen, or in the caption. That includes every brand name in that category.</p></div>
+    <div><span class="tag">NEVER</span><p><b>Make purity claims.</b> Not a percentage, not "tested eight times." The only trust line is <b>third-party tested</b>. The number printed on the physical label is part of the product and can be visible on camera — just do not read it out or put it in your caption.</p></div>
+    <div><span class="tag">NEVER</span><p><b>Buy comments or use engagement groups.</b> It is against TikTok's rules and it is the fastest way to lose a page you spent years building.</p></div>
+    <div><span class="tag">ALWAYS</span><p><b>Leave TikTok's AI label on</b> if you used AI anywhere in the edit. Removing it is how accounts get actioned.</p></div>
+    <div><span class="tag">ALWAYS</span><p><b>Replace a taken-down video within 48 hours</b>, and tell us in the group what the notice said, so everyone else can avoid it.</p></div>
+  </div>
+
+  <div class="never">
+    <div class="k">Never name these in a video, on screen, or in a caption</div>
+    <p>SKO-3 RT · SKO-TRZ · Cagrilintide · Metabolic Reference Bundle · AOD-9604 · MOTS-c · 5-Amino-1MQ · TB-500 · Wolverine Blend</p>
+  </div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">Hard rules</div><div class="ftxt fr mono">5</div>
+</section>
+
+<!-- ========================= 6 · PRODUCTS / CLOSE ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">What you can feature</div>
+  <h2>Twenty-five cleared</h2>
+  <p class="lede">Anything not on this list, ask first. Pick two or three and get to know them properly — a creator who clearly knows one product outsells one who lists nine.</p>
+
+  <div class="skus">
+    <span>BPC-157</span><span>GHK-Cu</span><span>GLOW</span><span>KLOW</span><span>KPV</span>
+    <span>MT-1</span><span>MT-2</span><span>PT-141</span><span>CJC-1295 no DAC + Ipamorelin</span>
+    <span>Ipamorelin</span><span>Sermorelin</span><span>Tesamorelin</span><span>TESA/IPA Blend</span>
+    <span>IGF1-LR3</span><span>SKO-NAD</span><span>Glutathione</span><span>SS-31</span><span>Semax</span>
+    <span>Selank</span><span>DSIP</span><span>Thymosin Alpha-1</span><span>Kisspeptin</span>
+    <span>ARA-290</span><span>ADAMAX</span><span>Bacteriostatic Water</span>
+  </div>
+
+  <div class="closer">
+    <div class="kick">Last thing</div>
+    <h2 class="disp">Questions go in<br>the group</h2>
+    <p>Not a DM. If you are wondering something, four other people are wondering the same thing and the answer should reach all of you.</p>
+  </div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">SKO Compounds · Research use only · Not for human consumption</div>
+  <div class="ftxt fr mono">6</div>
+</section>
+</html>
