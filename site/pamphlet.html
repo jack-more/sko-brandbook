@@ -14,7 +14,6 @@ body{font-family:Inter,-apple-system,sans-serif;color:var(--ink);background:#fff
 .disp{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase}
 .mono{font-family:'JetBrains Mono',monospace;letter-spacing:.15em;font-size:8pt;text-transform:uppercase}
 
-/* running furniture */
 .rule{position:absolute;left:.78in;right:.78in;border-top:1px solid var(--line)}
 .head{top:.46in}
 .foot{bottom:.46in}
@@ -29,7 +28,13 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
   font-size:15pt;line-height:1.1;color:var(--navy);margin-bottom:6pt}
 .kick{font-family:'JetBrains Mono',monospace;font-size:8pt;letter-spacing:.16em;
   text-transform:uppercase;color:var(--pig);margin-bottom:9pt}
-.lede{font-size:11.5pt;line-height:1.5;color:var(--mute);max-width:46em;margin-bottom:20pt}
+.lede{font-size:11.5pt;line-height:1.5;color:var(--mute);max-width:46em;margin-bottom:18pt}
+.body{font-size:11pt;line-height:1.55;color:var(--mute);max-width:44em}
+.body + .body{margin-top:11pt}
+.body b{color:var(--navy);font-weight:600}
+.pull{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:13pt;line-height:1.3;color:var(--navy);border-left:3px solid var(--pig);
+  padding-left:14pt;margin:20pt 0}
 
 /* ---------- cover ---------- */
 .cover{background:var(--plate);color:#fff;padding:0}
@@ -52,21 +57,21 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
 .spec .v{font-size:11pt;line-height:1.45}
 .spec .v b{color:var(--navy);font-weight:600}
 
+/* ---------- angle bank ---------- */
+.angles{columns:2;column-gap:26pt;margin-top:4pt}
+.angles div{break-inside:avoid;padding:7pt 0;border-bottom:1px solid var(--line);
+  font-size:10.2pt;line-height:1.42;color:var(--mute)}
+.angles div b{display:block;color:var(--navy);font-weight:600;font-size:10.4pt;margin-bottom:2pt}
+
 /* ---------- beats ---------- */
-.beats{border-top:1px solid var(--line)}
-.beats .b{display:grid;grid-template-columns:.34in 2.05in 1fr;gap:10pt;padding:7pt 0;
+.beats{border-top:1px solid var(--line);columns:2;column-gap:24pt}
+.beats .b{break-inside:avoid;display:grid;grid-template-columns:.3in 1fr;gap:9pt;padding:7pt 0;
   border-bottom:1px solid var(--line)}
-.beats .n{font-family:'JetBrains Mono',monospace;font-size:8pt;color:var(--frost);padding-top:2pt}
+.beats .n{font-family:'JetBrains Mono',monospace;font-size:7.5pt;color:var(--frost);padding-top:2pt}
 .beats .t{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
-  font-size:8.2pt;line-height:1.35;color:var(--navy);padding-top:1pt}
-.beats .t em{font-style:normal;display:inline-block;font-family:'JetBrains Mono',monospace;
-  font-size:6.2pt;letter-spacing:.12em;background:var(--pig);color:#fff;padding:1.5pt 3.5pt;
-  margin-top:3pt}
-.beats .d{font-size:9.8pt;line-height:1.42;color:var(--mute)}
+  font-size:7.6pt;color:var(--navy);display:block;margin-bottom:3pt}
+.beats .d{font-size:9.6pt;line-height:1.4;color:var(--mute)}
 .beats .d b{color:var(--navy);font-weight:600}
-.note{margin-top:11pt;border:1px solid var(--navy);padding:11pt 13pt;font-size:10pt;
-  line-height:1.5;color:var(--navy)}
-.note b{font-weight:600}
 
 /* ---------- cards ---------- */
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
@@ -78,34 +83,27 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
 .cards p{font-size:9.8pt;line-height:1.45;color:var(--mute)}
 .wide{grid-column:1 / -1}
 
-/* ---------- rules ---------- */
-.reqs{border-top:1px solid var(--line)}
-.reqs>div{display:grid;grid-template-columns:.62in 1fr;gap:12pt;padding:9pt 0;
-  border-bottom:1px solid var(--line)}
-.reqs .tag{font-family:'JetBrains Mono',monospace;font-size:6.5pt;letter-spacing:.12em;
-  color:#fff;background:var(--navy);padding:2.5pt 0;text-align:center;height:fit-content}
-.reqs p{font-size:10pt;line-height:1.45;color:var(--mute)}
-.reqs p b{color:var(--navy);font-weight:600}
-.never{border:1px solid var(--navy);padding:12pt 14pt;margin-top:14pt}
-.never .k{font-family:'JetBrains Mono',monospace;font-size:7pt;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--navy);margin-bottom:6pt}
-.never p{font-size:10pt;line-height:1.55;color:var(--navy)}
+/* ---------- flags ---------- */
+.flags{border-top:1px solid var(--line)}
+.flags>div{padding:9.5pt 0;border-bottom:1px solid var(--line);font-size:10.4pt;
+  line-height:1.5;color:var(--mute)}
+.flags>div b{color:var(--navy);font-weight:600}
+.soft{border:1px solid var(--line);background:#fafbfe;padding:13pt 15pt;margin-top:16pt;
+  font-size:10.5pt;line-height:1.55;color:var(--navy)}
 
 .skus{display:flex;flex-wrap:wrap;gap:5pt}
 .skus span{border:1px solid var(--line);padding:4.5pt 8pt;font-family:'JetBrains Mono',monospace;
   font-size:7.6pt;letter-spacing:.04em;color:var(--navy)}
 
-/* ---------- numbers ---------- */
 .four{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line);margin-bottom:16pt}
+  border:1px solid var(--line);margin-bottom:14pt}
 .four>div{background:#fff;padding:13pt}
 .four b{display:block;font-family:Syncopate,sans-serif;font-weight:700;font-size:8.5pt;
   text-transform:uppercase;color:var(--navy);margin-bottom:5pt;line-height:1.3}
 .four p{font-size:9.3pt;line-height:1.4;color:var(--mute)}
 
-.closer{position:absolute;left:.78in;right:.78in;bottom:1.2in;border-top:1px solid var(--line);
+.closer{position:absolute;left:.78in;right:.78in;bottom:1.15in;border-top:1px solid var(--line);
   padding-top:16pt}
-.closer h2{margin-bottom:8pt}
 .closer p{font-size:11pt;line-height:1.5;color:var(--mute);max-width:36em}
 </style>
 
@@ -116,7 +114,7 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
   <div class="ct">
     <div class="kick">Creator Program</div>
     <h1 class="disp">How this<br>works</h1>
-    <p>Thirty videos a month, your own code, your own editing. Everything you need is in here.</p>
+    <p>Thirty videos a month, your own code, your own voice. Everything you need is in here.</p>
   </div>
   <div class="base mono">SKO Compounds · Research use only</div>
 </section>
@@ -126,7 +124,7 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
   <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
   <div class="kick">The deal</div>
   <h2>You get paid when you sell</h2>
-  <p class="lede">There is no per-video fee. Every dollar you earn comes from sales your code drove — which is why everything in here points at the sale rather than the view.</p>
+  <p class="lede">There is no per-video fee. Every dollar you earn comes from sales your code drove.</p>
 
   <div class="spec">
     <div><span class="k">Volume</span><span class="v"><b>30 videos a month.</b> Roughly one a day.</span></div>
@@ -137,7 +135,7 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
     <div><span class="k">Takedowns</span><span class="v">If TikTok removes a video you replace it. It does not count against you.</span></div>
   </div>
 
-  <div style="margin-top:26pt">
+  <div style="margin-top:24pt">
     <div class="kick">Do this first</div>
     <h2>Your first 48 hours</h2>
   </div>
@@ -145,115 +143,166 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
     <div><span class="k">Get your code</span><span class="v">We issue it. Nothing you post before you have it can be paid.</span></div>
     <div><span class="k">Join the group</span><span class="v">Post every link there the day you publish. Your numbers come back there.</span></div>
     <div><span class="k">Pick 2–3 products</span><span class="v">From the list at the back. Tell us which ones and we will send you what we have.</span></div>
-    <div><span class="k">Read the rules</span><span class="v">Two minutes, at the back. It is the part that protects your account.</span></div>
-    <div><span class="k">Make five videos</span><span class="v">One in each style. That is your first week.</span></div>
+    <div><span class="k">Start filming</span><span class="v">Five videos, five different swings. See page five.</span></div>
   </div>
 
   <div class="rule foot"></div>
   <div class="ftxt fl mono">The deal</div><div class="ftxt fr mono">2</div>
 </section>
 
-<!-- ========================= 3 · THE SCRIPT ========================= -->
+<!-- ========================= 3 · YOU ARE THE STORY ========================= -->
 <section class="page">
   <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
-  <div class="kick">Your script</div>
-  <h2>Eleven beats</h2>
-  <p class="lede" style="margin-bottom:14pt">A 45-second video can use all eleven. A 20-second video uses four or five. The ones marked <span style="font-family:'JetBrains Mono',monospace;font-size:6.2pt;letter-spacing:.12em;background:var(--pig);color:#fff;padding:1.5pt 3.5pt">ALWAYS</span> belong in every video you make.</p>
+  <div class="kick">The part that actually matters</div>
+  <h2>You are the story</h2>
+  <p class="lede">Over thirty videos you are not making thirty ads. You are letting people watch you be into something — how you got here, what you got wrong early on, what you look for now.</p>
 
-  <div class="beats">
-    <div class="b"><span class="n">01</span><span class="t">Problem<br><em>ALWAYS</em></span>
-      <span class="d">Name the thing your viewer already deals with, in the first two seconds. Use one you actually have — an invented problem reads as an ad instantly.</span></div>
-    <div class="b"><span class="n">02</span><span class="t">Statistic</span>
-      <span class="d">One real number. The only one we give you is <b>40,000+ orders shipped</b>. If you do not have a number you can stand behind, skip this beat — never invent one.</span></div>
-    <div class="b"><span class="n">03</span><span class="t">FOMO</span>
-      <span class="d">What they are missing while they keep putting it off. Not urgency theatre and not a fake deadline — the actual cost of waiting.</span></div>
-    <div class="b"><span class="n">04</span><span class="t">Self-<br>identification<br><em>ALWAYS</em></span>
-      <span class="d">The line that makes the right viewer realise this video is for them. "If you're someone who…" is the plain version; yours should sound like you.</span></div>
-    <div class="b"><span class="n">05</span><span class="t">Product<br>discovery</span>
-      <span class="d">How you came across SKO. This is the first time the brand is named, and it should sound like a story rather than a handoff into an ad read.</span></div>
-    <div class="b"><span class="n">06</span><span class="t">Objection</span>
-      <span class="d">Say their doubt out loud before they think it. Whatever made you hesitate is almost certainly what is making them hesitate.</span></div>
-    <div class="b"><span class="n">07</span><span class="t">Visual proof<br><em>ALWAYS</em></span>
-      <span class="d">Show it. The vial in your hand, the box on your counter, the label, your order screen. Talking about a product you never show is the most common reason these videos do not convert.</span></div>
-    <div class="b"><span class="n">08</span><span class="t">Social<br>normalization</span>
-      <span class="d">Other people are already doing this. It stops being a risk and starts being a thing people do.</span></div>
-    <div class="b"><span class="n">09</span><span class="t">Credibility<br><em>ALWAYS</em></span>
-      <span class="d">Three facts, in your own words, and only these three: <b>third-party tested</b>, <b>Beverly Hills based</b>, <b>40,000+ orders shipped</b>. Nothing about purity or percentages.</span></div>
-    <div class="b"><span class="n">10</span><span class="t">Simplicity</span>
-      <span class="d">How easy it actually was to order. Most people assume it is complicated and stop there.</span></div>
-    <div class="b"><span class="n">11</span><span class="t">Call to action<br><em>ALWAYS</em></span>
-      <span class="d">Your code, 10% off, where to go. Say it out loud <b>and</b> put it on screen. You are paid on this beat and it is the one people forget.</span></div>
-  </div>
+  <p class="body">Nobody follows a creator for a product pitch. They follow a person. The videos that work for us are the ones where someone is clearly talking about their own life and the product happens to be in it — not the ones where a script is being performed at a camera.</p>
 
-  <div class="note">Under 25 seconds, use the short version: <b>Problem → Self-identification → Visual proof → Credibility → Call to action.</b></div>
+  <p class="body">So be candid. Say the thing you would say to a friend, including the unflattering parts. "I spent six months buying from whoever was cheapest and I regret it" is a better video than anything we could write for you. Your skepticism is interesting. Your standards are interesting. The reason you care is interesting.</p>
+
+  <div class="pull">Tell the story of<br>how you got here.</div>
+
+  <p class="body">One thing worth knowing as you shape it: keep the story about <b>you</b> rather than about what a compound did to your body. Not because we are policing you — because "here is what I research and why" is a story you can tell thirty different ways, and "here is what it did to me" is one video that also tends to get pulled.</p>
+
+  <p class="body">Two things we do ask for in every video, and they are the only two: <b>the product on screen somewhere</b>, and <b>your code</b>, said out loud and put on screen. Everything between those is yours.</p>
 
   <div class="rule foot"></div>
-  <div class="ftxt fl mono">Your script</div><div class="ftxt fr mono">3</div>
+  <div class="ftxt fl mono">You are the story</div><div class="ftxt fr mono">3</div>
 </section>
 
-<!-- ========================= 4 · FIVE STYLES ========================= -->
+<!-- ========================= 4 · THIRTY A MONTH ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">Where thirty a month comes from</div>
+  <h2>Angles, not scripts</h2>
+  <p class="lede">One format runs out by week two. These are starting points people have got real videos out of — steal any of them, change them, or ignore the lot and use your own.</p>
+
+  <div class="angles">
+    <div><b>Why you started</b>The actual reason, not the tidy version.</div>
+    <div><b>What you got wrong</b>The first year, the money wasted, the thing you believed that turned out to be nonsense.</div>
+    <div><b>What you check now</b>What you look at before buying from anyone.</div>
+    <div><b>The unboxing</b>What turned up, what the packaging is like, what you noticed.</div>
+    <div><b>Your setup</b>Where it lives, how you keep it organised.</div>
+    <div><b>Answering a comment</b>Someone asked a real question. Answer it on camera.</div>
+    <div><b>Reacting to a bad take</b>Someone confidently wrong on your feed.</div>
+    <div><b>Day one advice</b>What you would tell someone starting this week.</div>
+    <div><b>The question you get most</b>You already know what it is.</div>
+    <div><b>What third-party tested means</b>In your own words, for someone who has never heard it.</div>
+    <div><b>How long you have been at this</b>Your own history with it.</div>
+    <div><b>The price conversation</b>What you think cheap actually costs.</div>
+    <div><b>Show the paperwork</b>Pull up a COA and talk through what you look at.</div>
+    <div><b>The shipping</b>Ordered when, arrived when, how it showed up.</div>
+    <div><b>"Is this legit?"</b>The question everyone in your comments is thinking.</div>
+    <div><b>Talking to a friend</b>Someone asks you about it off camera. Film that conversation.</div>
+    <div><b>What you would never do again</b>Yours, specifically.</div>
+    <div><b>A day where it shows up</b>Normal life, product in it, no announcement.</div>
+    <div><b>Comparing to what you used</b>What changed about how you buy.</div>
+    <div><b>Your own idea</b>The one you have already thought of while reading this.</div>
+  </div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">Thirty a month</div><div class="ftxt fr mono">4</div>
+</section>
+
+<!-- ========================= 5 · WEEK ONE ========================= -->
 <section class="page">
   <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
   <div class="kick">Week one</div>
-  <h2>Five videos, five styles</h2>
-  <p class="lede">Most creator programs hand you a script and then wonder why the videos feel dead. Yours will not, because you know your audience and we do not. Make one of each, in your own editing style, then we keep whatever worked. Do not make the same video five times with different backgrounds.</p>
+  <h2>Five swings, five shapes</h2>
+  <p class="lede">We do not know what works on your page and neither do you until you try. Make one of each, in your own editing style, then we keep whatever landed. Just do not make the same video five times with different backgrounds.</p>
 
   <div class="cards">
-    <div><div class="n">STYLE ONE</div><h3>Talking to camera</h3>
-      <p>You, your room, no edit tricks. Not the lazy option — our best-performing videos so far are exactly this, one person talking straight into the lens.</p></div>
-    <div><div class="n">STYLE TWO</div><h3>In hand / unboxing</h3>
-      <p>The box arrives, you open it, you read the label out loud. Heavy on visual proof, and the easiest one to make convincing.</p></div>
-    <div><div class="n">STYLE THREE</div><h3>In your routine</h3>
+    <div><div class="n">SHAPE ONE</div><h3>Talking to camera</h3>
+      <p>You, your room, no edit tricks. Not the lazy option — the best-performing videos we have are exactly this, one person talking straight into the lens.</p></div>
+    <div><div class="n">SHAPE TWO</div><h3>In hand / unboxing</h3>
+      <p>The box arrives, you open it, you talk through what you are looking at. The easiest one to make convincing.</p></div>
+    <div><div class="n">SHAPE THREE</div><h3>In your routine</h3>
       <p>Where it actually sits in your day. Shot like the rest of your day-in-the-life content, not like a commercial.</p></div>
-    <div><div class="n">STYLE FOUR</div><h3>Street or reaction</h3>
+    <div><div class="n">SHAPE FOUR</div><h3>Street or reaction</h3>
       <p>You asking someone else what they think, or reacting to something on screen. Works when the other person's reaction is real.</p></div>
-    <div class="wide"><div class="n">STYLE FIVE</div><h3>Your own format</h3>
-      <p>Whatever already performs on your page, with the beats built inside it. Honestly, this is the one we are most interested in — if it works we would rather learn it than standardise it away.</p></div>
+    <div class="wide"><div class="n">SHAPE FIVE</div><h3>Your own format</h3>
+      <p>Whatever already performs on your page. Honestly, this is the one we are most interested in — if it works we would rather learn it from you than talk you out of it.</p></div>
   </div>
 
-  <div style="margin-top:26pt">
+  <div style="margin-top:24pt">
     <div class="kick">Day seven</div>
     <h2>What we look at</h2>
   </div>
   <div class="four" style="margin-top:12pt">
-    <div><b>3-second<br>hold</b><p>Whether your first beat worked. If this is low, nothing after it was seen.</p></div>
-    <div><b>Average<br>watch %</b><p>Where people leave. Tells us which beat to cut.</p></div>
-    <div><b>Code<br>uses</b><p>How many people got as far as typing it in.</p></div>
+    <div><b>3-second<br>hold</b><p>Whether your opening worked. If this is low, nothing after it was seen.</p></div>
+    <div><b>Average<br>watch %</b><p>Where people leave.</p></div>
+    <div><b>Code<br>uses</b><p>How many got as far as typing it in.</p></div>
     <div><b>Sales</b><p>What you are paid on.</p></div>
   </div>
-  <p style="font-size:10.5pt;line-height:1.5;color:var(--mute)">A video with 400,000 views and no sales loses to a video with 9,000 views and six. We will tell you which of your five did what, and why we think so.</p>
+  <p class="body">A video with 400,000 views and no sales loses to a video with 9,000 views and six. We will tell you which of your five did what and what we think it means — then you make more of that one.</p>
 
   <div class="rule foot"></div>
-  <div class="ftxt fl mono">Week one</div><div class="ftxt fr mono">4</div>
+  <div class="ftxt fl mono">Week one</div><div class="ftxt fr mono">5</div>
 </section>
 
-<!-- ========================= 5 · RULES ========================= -->
+<!-- ========================= 6 · IF IT ISN'T LANDING ========================= -->
 <section class="page">
   <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
-  <div class="kick">Hard rules</div>
-  <h2>Not style preferences</h2>
-  <p class="lede">Breaking one of these can cost you your account or cost us our ad account. If you are unsure whether something crosses a line, ask in the group before you post, not after.</p>
+  <div class="kick">Only if you want it</div>
+  <h2>If a video isn't landing</h2>
+  <p class="lede">This is not the shape of every video and you should not work through it like a checklist — plenty of good videos use two of these. It is a list of what tends to be missing when something flopped. Read it when one does, ignore it the rest of the time.</p>
 
-  <div class="reqs">
-    <div><span class="tag">NEVER</span><p><b>Say what to take, how much, or what it does to a body.</b> No dosing, no protocols, no "I take this for that." These are research compounds, and the moment a video sounds like medical advice it is a problem for you and for us.</p></div>
-    <div><span class="tag">NEVER</span><p><b>Post before-and-afters.</b> No body transformation shots and no results claims.</p></div>
-    <div><span class="tag">NEVER</span><p><b>Use weight-loss language</b> — spoken, on screen, or in the caption. That includes every brand name in that category.</p></div>
-    <div><span class="tag">NEVER</span><p><b>Make purity claims.</b> Not a percentage, not "tested eight times." The only trust line is <b>third-party tested</b>. The number printed on the physical label is part of the product and can be visible on camera — just do not read it out or put it in your caption.</p></div>
-    <div><span class="tag">NEVER</span><p><b>Buy comments or use engagement groups.</b> It is against TikTok's rules and it is the fastest way to lose a page you spent years building.</p></div>
-    <div><span class="tag">ALWAYS</span><p><b>Leave TikTok's AI label on</b> if you used AI anywhere in the edit. Removing it is how accounts get actioned.</p></div>
-    <div><span class="tag">ALWAYS</span><p><b>Replace a taken-down video within 48 hours</b>, and tell us in the group what the notice said, so everyone else can avoid it.</p></div>
+  <div class="beats">
+    <div class="b"><span class="n">01</span><div><span class="t">Problem</span>
+      <span class="d">Something a viewer already deals with, early. Use one you actually have — an invented problem reads as an ad instantly.</span></div></div>
+    <div class="b"><span class="n">02</span><div><span class="t">Statistic</span>
+      <span class="d">A real number. The only one we can give you is <b>40,000+ orders shipped</b>. Skip it rather than invent one.</span></div></div>
+    <div class="b"><span class="n">03</span><div><span class="t">FOMO</span>
+      <span class="d">What they are missing by putting it off. Not a fake deadline — the actual cost of waiting.</span></div></div>
+    <div class="b"><span class="n">04</span><div><span class="t">Self-identification</span>
+      <span class="d">The line that makes the right viewer realise the video is for them.</span></div></div>
+    <div class="b"><span class="n">05</span><div><span class="t">Product discovery</span>
+      <span class="d">How you came across SKO. Better as a story than a handoff into an ad read.</span></div></div>
+    <div class="b"><span class="n">06</span><div><span class="t">Objection</span>
+      <span class="d">Their doubt, said out loud before they think it. Whatever made you hesitate is making them hesitate.</span></div></div>
+    <div class="b"><span class="n">07</span><div><span class="t">Visual proof</span>
+      <span class="d">Show it. Vial in your hand, the box, the label, your order screen. Talking about something you never show is the most common reason a video does not convert.</span></div></div>
+    <div class="b"><span class="n">08</span><div><span class="t">Social normalization</span>
+      <span class="d">Other people already do this. It stops being a risk and starts being a thing people do.</span></div></div>
+    <div class="b"><span class="n">09</span><div><span class="t">Credibility</span>
+      <span class="d">Whatever you can say honestly. Ours are <b>third-party tested</b>, <b>Beverly Hills based</b>, <b>40,000+ orders shipped</b>.</span></div></div>
+    <div class="b"><span class="n">10</span><div><span class="t">Simplicity</span>
+      <span class="d">How easy it actually was. Most people assume it is complicated and stop there.</span></div></div>
+    <div class="b"><span class="n">11</span><div><span class="t">Call to action</span>
+      <span class="d">Your code, 10% off, where to go. Out loud <b>and</b> on screen — this is the one people forget.</span></div></div>
   </div>
 
-  <div class="never">
-    <div class="k">Never name these in a video, on screen, or in a caption</div>
-    <p>SKO-3 RT · SKO-TRZ · Cagrilintide · Metabolic Reference Bundle · AOD-9604 · MOTS-c · 5-Amino-1MQ · TB-500 · Wolverine Blend</p>
-  </div>
+  <div class="soft">Under 25 seconds there is not room for most of this. Something that hooks, something shown, and your code is usually the whole video.</div>
 
   <div class="rule foot"></div>
-  <div class="ftxt fl mono">Hard rules</div><div class="ftxt fr mono">5</div>
+  <div class="ftxt fl mono">If it isn't landing</div><div class="ftxt fr mono">6</div>
 </section>
 
-<!-- ========================= 6 · PRODUCTS / CLOSE ========================= -->
+<!-- ========================= 7 · FLAGS ========================= -->
+<section class="page">
+  <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
+  <div class="kick">Worth knowing</div>
+  <h2>What gets videos pulled</h2>
+  <p class="lede">None of this is house style or us policing your voice — be as blunt as you like. It is the short list of things TikTok and the regulators actually act on, so a good video doesn't cost you a page you spent years building.</p>
+
+  <div class="flags">
+    <div><b>Telling people what to take, or how much.</b> Dosing, protocols, "I take this for that" — it reads as medical advice and it is the quickest way to lose a video. Talking about your research, your reasoning and your standards is fine.</div>
+    <div><b>Before-and-afters and results claims.</b> Body transformation shots get pulled, and they tend to put the account at risk rather than just the post.</div>
+    <div><b>Weight-loss language.</b> Flagged automatically, including the brand names in that category. Worth avoiding in captions too.</div>
+    <div><b>Purity percentages.</b> "Third-party tested" holds up; a specific percentage is a claim someone has to defend. The number printed on the physical label is part of the product and can be on camera — just don't read it out.</div>
+    <div><b>Bought comments or engagement groups.</b> This one risks the account itself rather than the video.</div>
+    <div><b>Removing TikTok's AI label.</b> If you used AI anywhere in the edit, leaving it on costs you nothing and taking it off gets accounts actioned.</div>
+    <div><b>A few products aren't cleared for ads.</b> Naming these usually brings the video down: SKO-3 RT, SKO-TRZ, Cagrilintide, Metabolic Reference Bundle, AOD-9604, MOTS-c, 5-Amino-1MQ, TB-500, Wolverine Blend.</div>
+  </div>
+
+  <div class="soft">If something feels borderline, put it in the group before you post — nobody is going to be annoyed. And if a video does come down, tell us what the notice said so everyone else can avoid it.</div>
+
+  <div class="rule foot"></div>
+  <div class="ftxt fl mono">Worth knowing</div><div class="ftxt fr mono">7</div>
+</section>
+
+<!-- ========================= 8 · PRODUCTS ========================= -->
 <section class="page">
   <div class="rule head"></div><div class="htxt fl">SKO Creator Program</div>
   <div class="kick">What you can feature</div>
@@ -277,6 +326,6 @@ h2{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
 
   <div class="rule foot"></div>
   <div class="ftxt fl mono">SKO Compounds · Research use only · Not for human consumption</div>
-  <div class="ftxt fr mono">6</div>
+  <div class="ftxt fr mono">8</div>
 </section>
 </html>
