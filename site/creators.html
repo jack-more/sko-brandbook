@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><title>SKO Compounds · Creator Program</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="site.css?v=56">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* Creator guide — white studio: white ground, navy type and hairlines, frost rules,
+   Pigment only on the small accents (core tags, links, the one number). */
+.chero{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(20px,4vw,56px);align-items:center;
+  padding-top:clamp(30px,5vw,70px);padding-bottom:clamp(30px,5vw,70px)}
+.chero h1{font-size:clamp(30px,5.2vw,68px);line-height:1}
+.chero p{margin-top:20px;font-size:clamp(15px,1.25vw,19px);line-height:1.6;color:var(--mute);max-width:36ch}
+.chero img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#fff}
+
+.cnav{position:sticky;top:64px;z-index:15;background:#fff;border-bottom:1px solid var(--line);
+  overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cnav div{display:flex;gap:0}
+.cnav a{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);padding:14px 16px;white-space:nowrap;border-bottom:2px solid transparent}
+.cnav a:hover{color:var(--navy);border-bottom-color:var(--navy)}
+
+.spec{border-top:1px solid var(--line)}
+.spec div{display:grid;grid-template-columns:200px 1fr;gap:6px 24px;padding:16px 0;
+  border-bottom:1px solid var(--line);align-items:baseline}
+.spec .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute)}
+.spec .v{font-size:16.5px;line-height:1.55}
+.spec .v b{color:var(--navy);font-weight:600}
+
+.money{border:1px solid var(--line);padding:clamp(24px,4vw,44px);margin-top:30px;background:#fff}
+.money .big{font-size:clamp(28px,5.5vw,62px);line-height:1;color:var(--navy)}
+.money .sum{display:flex;flex-wrap:wrap;gap:8px 28px;margin:22px 0 18px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.09em;color:var(--mute)}
+.money .sum b{color:var(--pig);font-weight:400}
+.money p{margin:0;color:var(--mute);line-height:1.65;max-width:62ch}
+
+.beats{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.beats li{display:grid;grid-template-columns:54px 1fr;gap:0 18px;padding:20px 0;
+  border-bottom:1px solid var(--line)}
+.beats .no{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--frost);padding-top:4px}
+.beats h3{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:13px;letter-spacing:.01em;margin:0 0 8px;color:var(--navy)}
+.beats h3 em{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;
+  color:#fff;background:var(--pig);padding:3px 7px;margin-left:10px;vertical-align:1px}
+.beats p{margin:0;color:var(--mute);line-height:1.62;font-size:15.5px;max-width:60ch}
+.beats p b{color:var(--navy);font-weight:600}
+.short{margin-top:24px;border:1px solid var(--line);padding:18px 20px;font-size:15.5px;color:var(--mute)}
+.short b{color:var(--navy)}
+
+.shapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line)}
+.shapes div{background:#fff;padding:20px}
+.shapes .n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--frost)}
+.shapes h3{font-family:Syncopate,sans-serif;font-weight:700;text-transform:uppercase;font-size:12px;
+  margin:9px 0 8px;color:var(--navy)}
+.shapes p{margin:0;font-size:15px;color:var(--mute);line-height:1.6}
+
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px}
+.tbl th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mute);font-weight:400;padding:0 18px 12px 0;
+  border-bottom:1px solid var(--line)}
+.tbl td{padding:15px 18px 15px 0;border-bottom:1px solid var(--line);vertical-align:top;
+  color:var(--mute);line-height:1.6}
+.tbl td:first-child{color:var(--navy);font-weight:500;width:32%}
+
+.reqs{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.reqs li{padding:18px 0 18px 0;border-bottom:1px solid var(--line);display:grid;
+  grid-template-columns:96px 1fr;gap:18px}
+.reqs .tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#fff;
+  background:var(--navy);padding:4px 7px;height:fit-content;text-align:center}
+.reqs p{margin:0;font-size:16px;line-height:1.6;color:var(--mute)}
+.reqs p b{color:var(--navy);font-weight:600}
+.never{border:1px solid var(--navy);padding:20px 22px;margin-top:26px}
+.never .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--navy);margin-bottom:10px}
+.never p{margin:0;font-size:16px;line-height:1.7;color:var(--navy)}
+
+/* The hand sits on its own Pigment ground, never cropped: the plate's own background
+   is sampled from the plate itself (#023AB1), so contain reads as full bleed. */
+.handband{background:#023AB1;display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  color:#fff;overflow:hidden}
+.handband .ht{padding:clamp(28px,4vw,60px) clamp(20px,4vw,56px)}
+.handband img{width:100%;max-height:620px;object-fit:contain;display:block}
+.handband .ht h3{font-size:clamp(26px,4vw,58px);line-height:1;margin-top:14px}
+.handband .ht p{margin-top:20px;max-width:32ch;line-height:1.6;color:rgba(255,255,255,.82);font-size:16.5px}
+.handband .mono{color:rgba(255,255,255,.72)}
+
+.skus{display:flex;flex-wrap:wrap;gap:8px}
+.skus span{border:1px solid var(--line);padding:8px 13px;font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;letter-spacing:.06em;color:var(--navy)}
+
+@media(max-width:820px){
+  .chero{grid-template-columns:1fr;gap:26px}
+  .chero img{order:-1}
+  .cnav{top:64px}
+  .spec div{grid-template-columns:1fr;gap:4px}
+  .beats li{grid-template-columns:38px 1fr;gap:0 12px}
+  .reqs li{grid-template-columns:1fr;gap:9px}
+  .reqs .tag{justify-self:start;padding:4px 9px}
+  .tbl td:first-child{width:auto}
+  .handband{grid-template-columns:1fr}
+  .handband img{max-height:440px}
+}
+</style>
+
+<nav class="wrap">
+  <a href="index.html"><img src="../img/lockup-3x1-navy.png" alt="SKO Compounds"></a>
+  <div class="lk">
+    <a class="keep" href="#deal">The deal</a><a href="#beats">The beats</a>
+    <a href="#week1">Week one</a><a href="#rules">Rules</a><a href="#products">Products</a>
+  </div>
+</nav>
+
+<div class="cnav"><div class="wrap">
+  <a href="#deal">01 THE DEAL</a><a href="#money">02 WHAT YOU EARN</a><a href="#week1">03 WEEK ONE</a>
+  <a href="#beats">04 THE ELEVEN BEATS</a><a href="#shapes">05 FIVE SHAPES</a><a href="#day7">06 DAY SEVEN</a>
+  <a href="#rules">07 HARD RULES</a><a href="#products">08 PRODUCTS</a><a href="#working">09 TOGETHER</a>
+</div></div>
+
+<section class="wrap chero">
+  <div>
+    <div class="mono mute">SKO COMPOUNDS · CREATOR PROGRAM · V1</div>
+    <h1 class="disp">How this<br>works.</h1>
+    <p>Thirty videos a month, your own code, your own editing. Read this once before your first post — it is everything you need and nothing you don't.</p>
+  </div>
+  <img src="../img/edition3/hero-white-structure.jpg" alt="SKO BPC-157 vial beside its molecular structure in chrome">
+</section>
+
+<div class="marq"><div>
+  <span><b>30 videos</b> a month</span><span>your viewer gets <b>10% off</b></span><span>you earn <b>5%</b></span>
+  <span><b>commission only</b></span><span>you edit <b>your way</b></span><span><b>research use only</b></span>
+  <span><b>30 videos</b> a month</span><span>your viewer gets <b>10% off</b></span><span>you earn <b>5%</b></span>
+  <span><b>commission only</b></span><span>you edit <b>your way</b></span><span><b>research use only</b></span>
+</div></div>
+
+<section class="wrap" id="deal">
+  <div class="sec-h rv"><h2 class="disp">The deal</h2><span class="mono mute">01 · EVERYTHING IN ONE PLACE</span></div>
+  <div class="spec rv">
+    <div><span class="k">Volume</span><span class="v"><b>30 videos a month.</b> Roughly one a day.</span></div>
+    <div><span class="k">Your code</span><span class="v">Your viewer gets <b>10% off</b>. You earn <b>5%</b> of what they actually pay.</span></div>
+    <div><span class="k">How you're paid</span><span class="v"><b>Commission only.</b> There is no per-video fee — every dollar you make comes from sales your code drove.</span></div>
+    <div><span class="k">Editing</span><span class="v"><b>You edit your own way.</b> We are not sending you a template to copy.</span></div>
+    <div><span class="k">Repeat buyers</span><span class="v">If someone bought on your code and buys again, <b>you earn on that too.</b></span></div>
+    <div><span class="k">Takedowns</span><span class="v">If TikTok removes a video, you replace it. It does not count against you.</span></div>
+  </div>
+
+  <div class="money rv" id="money">
+    <div class="disp big">One sale is<br>about $9.45.</div>
+    <div class="sum"><span><b>$210</b> AVERAGE ORDER</span><span><b>−10%</b> YOUR VIEWER'S DISCOUNT</span>
+      <span><b>$189</b> WHAT THEY PAY</span><span><b>5%</b> YOUR SHARE</span></div>
+    <p>That is the real figure, from orders creators actually drove — not a projection. It means volume on its own does not pay. Thirty videos nobody buys from earn nothing, and three videos that each drive ten sales earn more than a month of filling a quota. Everything in this guide is aimed at the sale, not the view.</p>
+  </div>
+</section>
+
+<section class="wrap" id="week1">
+  <div class="sec-h rv"><h2 class="disp">Week one is a test</h2><span class="mono mute">03 · FIVE VIDEOS, FIVE SHAPES</span></div>
+  <div class="rv" style="max-width:66ch">
+    <p style="line-height:1.7;color:var(--mute)">Most creator programs hand you a script and then wonder why the videos feel dead. Yours will not, because you know your audience and we do not. So in week one you make <strong style="color:var(--navy)">five videos in five different shapes</strong> — all in your own editing style, all built on the beats below.</p>
+    <p style="line-height:1.7;color:var(--mute);margin-top:16px">Then we look at what actually happened and you spend the rest of the month making more of whatever won. If one shape clearly outperforms, that becomes your format. If nothing does, we change the approach rather than asking you to try harder.</p>
+    <p style="line-height:1.7;color:var(--mute);margin-top:16px">One rule for week one: do not make the same video five times with different backgrounds. The point is five genuinely different attempts.</p>
+  </div>
+</section>
+
+<section class="wrap" id="beats">
+  <div class="sec-h rv"><h2 class="disp">The eleven beats</h2><span class="mono mute">04 · A MENU, NOT A CHECKLIST</span></div>
+  <p class="rv" style="color:var(--mute);line-height:1.7;max-width:62ch;margin-bottom:26px">A 45-second video can use all eleven. A 20-second video uses four or five. The ones marked <em style="font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#fff;background:var(--pig);padding:3px 7px">CORE</em> belong in every video you make.</p>
+
+  <ol class="beats rv">
+    <li><span class="no">01</span><div><h3>Problem<em>CORE</em></h3>
+      <p>Name the thing your viewer already deals with, in the first two seconds. Use one you actually have — an invented problem reads as an ad instantly.</p></div></li>
+    <li><span class="no">02</span><div><h3>Statistic</h3>
+      <p>One real number. The only one we have given you is that SKO has shipped <b>40,000+ orders</b>. If you do not have a number you can stand behind, skip this beat — never invent one.</p></div></li>
+    <li><span class="no">03</span><div><h3>FOMO</h3>
+      <p>What they are missing while they keep putting it off. Not urgency theatre and not a fake deadline — the actual cost of waiting.</p></div></li>
+    <li><span class="no">04</span><div><h3>Self-identification<em>CORE</em></h3>
+      <p>The line that makes the right viewer realise this video is for them. "If you're someone who…" is the plain version; yours should sound like you.</p></div></li>
+    <li><span class="no">05</span><div><h3>Product discovery</h3>
+      <p>How you came across SKO. This is the first time the brand is named, and it should sound like a story rather than a handoff into an ad read.</p></div></li>
+    <li><span class="no">06</span><div><h3>Objection</h3>
+      <p>Say their doubt out loud before they think it. Whatever made you hesitate is almost certainly what is making them hesitate.</p></div></li>
+    <li><span class="no">07</span><div><h3>Visual proof<em>CORE</em></h3>
+      <p>Show it. The vial in your hand, the box on your counter, the label, your order screen. Talking about a product you never show is the most common reason these videos do not convert.</p></div></li>
+    <li><span class="no">08</span><div><h3>Social normalization</h3>
+      <p>Other people are already doing this. It stops being a risk and starts being a thing people do.</p></div></li>
+    <li><span class="no">09</span><div><h3>Credibility<em>CORE</em></h3>
+      <p>Three facts, in your own words, and only these three: <b>third-party tested</b>, <b>Beverly Hills based</b>, <b>40,000+ orders shipped</b>. Nothing about purity, percentages, or how many times anything was tested.</p></div></li>
+    <li><span class="no">10</span><div><h3>Simplicity</h3>
+      <p>How easy it actually was to order. Most people assume it is complicated and stop there.</p></div></li>
+    <li><span class="no">11</span><div><h3>Call to action<em>CORE</em></h3>
+      <p>Your code, 10% off, where to go. Say it out loud <b>and</b> put it on screen. You are paid on this beat and it is the one people forget.</p></div></li>
+  </ol>
+  <div class="short rv">Under 25 seconds, use the short version: <b>Problem → Self-identification → Visual proof → Credibility → Call to action.</b></div>
+</section>
+
+<section class="wrap" id="shapes">
+  <div class="sec-h rv"><h2 class="disp">Five shapes</h2><span class="mono mute">05 · ONE EACH, ANY ORDER</span></div>
+  <div class="shapes rv">
+    <div><span class="n">SHAPE 01</span><h3>Talking to camera</h3>
+      <p>You, your room, no edit tricks. Not the lazy option — our best-performing videos so far are exactly this, one person talking straight into the lens.</p></div>
+    <div><span class="n">SHAPE 02</span><h3>In hand / unboxing</h3>
+      <p>The box arrives, you open it, you read the label out loud. Heavy on beat 07, and the easiest one to make convincing.</p></div>
+    <div><span class="n">SHAPE 03</span><h3>In your routine</h3>
+      <p>Where it actually sits in your day. Shot like the rest of your day-in-the-life content, not like a commercial.</p></div>
+    <div><span class="n">SHAPE 04</span><h3>Street or reaction</h3>
+      <p>You asking someone else what they think, or reacting to something on screen. Works when the other person's reaction is real.</p></div>
+    <div><span class="n">SHAPE 05</span><h3>Your own format</h3>
+      <p>Whatever already performs on your page, with the beats built inside it. Honestly, this is the one we are most interested in.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="day7">
+  <div class="sec-h rv"><h2 class="disp">Day seven</h2><span class="mono mute">06 · FOUR NUMBERS, TOGETHER</span></div>
+  <table class="tbl rv">
+    <thead><tr><th>What we look at</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>3-second hold</td><td>Whether your first beat worked. If this is low, nothing after it was seen.</td></tr>
+      <tr><td>Average watch %</td><td>Where people leave. Tells us which beat to cut.</td></tr>
+      <tr><td>Code uses</td><td>How many people got as far as typing it in.</td></tr>
+      <tr><td>Sales</td><td>What you are paid on.</td></tr>
+    </tbody>
+  </table>
+  <p class="rv" style="margin-top:18px;color:var(--mute);max-width:62ch;line-height:1.65">A video with 400,000 views and no sales loses to a video with 9,000 views and six. We will tell you which of your five did what, and why we think so.</p>
+</section>
+
+<div class="handband">
+  <div class="ht rv"><div class="mono">BEAT 07 · VISUAL PROOF</div><h3 class="disp">Show the<br>product.</h3>
+    <p>Every video that sells has the vial in it. Not a mention — the object, in your hand, on camera.</p></div>
+  <img src="../img/edition3/hand.jpg" alt="Chrome hand holding an SKO vial">
+</div>
+
+<section class="wrap" id="rules">
+  <div class="sec-h rv"><h2 class="disp">Hard rules</h2><span class="mono mute">07 · NOT STYLE PREFERENCES</span></div>
+  <p class="rv" style="color:var(--mute);max-width:62ch;line-height:1.7;margin-bottom:24px">Breaking one of these can cost you your account or cost us our ad account. If you are unsure whether something crosses a line, ask in the group before you post, not after.</p>
+  <ul class="reqs rv">
+    <li><span class="tag">NEVER</span><p><b>Say what to take, how much, or what it does to a body.</b> No dosing, no protocols, no "I take this for that." These are research compounds, and the moment a video sounds like medical advice it is a problem for you and for us.</p></li>
+    <li><span class="tag">NEVER</span><p><b>Post before-and-afters.</b> No body transformation shots and no results claims.</p></li>
+    <li><span class="tag">NEVER</span><p><b>Use weight-loss language</b> — spoken, on screen, or in the caption. That includes every brand name in that category.</p></li>
+    <li><span class="tag">NEVER</span><p><b>Make purity claims.</b> Not a percentage, not "tested eight times." The only trust line is <b>third-party tested</b>. The number printed on the physical label is part of the product and can be visible on camera — just do not read it out or put it in your caption.</p></li>
+    <li><span class="tag">NEVER</span><p><b>Buy comments or use engagement groups.</b> It is against TikTok's rules and it is the fastest way to lose a page you spent years building.</p></li>
+    <li><span class="tag">ALWAYS</span><p><b>Leave TikTok's AI label on</b> if you used AI anywhere in the edit. Removing it is how accounts get actioned.</p></li>
+    <li><span class="tag">ALWAYS</span><p><b>Replace a taken-down video within 48 hours</b>, and tell us in the group what the notice said, so everyone else can avoid it.</p></li>
+  </ul>
+  <div class="never rv">
+    <div class="k">Never name these in a video, on screen, or in a caption</div>
+    <p>SKO-3 RT · SKO-TRZ · Cagrilintide · Metabolic Reference Bundle · AOD-9604 · MOTS-c · 5-Amino-1MQ · TB-500 · Wolverine Blend</p>
+  </div>
+</section>
+
+<section class="wrap" id="products">
+  <div class="sec-h rv"><h2 class="disp">What you can feature</h2><span class="mono mute">08 · TWENTY-FIVE CLEARED</span></div>
+  <div class="skus rv">
+    <span>BPC-157</span><span>GHK-Cu</span><span>GLOW</span><span>KLOW</span><span>KPV</span><span>MT-1</span>
+    <span>MT-2</span><span>PT-141</span><span>CJC-1295 no DAC + Ipamorelin</span><span>Ipamorelin</span>
+    <span>Sermorelin</span><span>Tesamorelin</span><span>TESA/IPA Blend</span><span>IGF1-LR3</span>
+    <span>SKO-NAD</span><span>Glutathione</span><span>SS-31</span><span>Semax</span><span>Selank</span>
+    <span>DSIP</span><span>Thymosin Alpha-1</span><span>Kisspeptin</span><span>ARA-290</span><span>ADAMAX</span>
+    <span>Bacteriostatic Water</span>
+  </div>
+  <p class="rv" style="margin-top:20px;color:var(--mute);max-width:62ch;line-height:1.65">Anything not on this list, ask first. Pick two or three and get to know them properly — a creator who clearly knows one product outsells one who lists nine.</p>
+</section>
+
+<section class="wrap" id="working">
+  <div class="sec-h rv"><h2 class="disp">Working together</h2><span class="mono mute">09 · WHAT WE OWE EACH OTHER</span></div>
+  <table class="tbl rv">
+    <thead><tr><th>You</th><th>Us</th></tr></thead>
+    <tbody>
+      <tr><td>Post the link in the group the same day you publish.</td><td>Your numbers back within the week, with a read on what they mean.</td></tr>
+      <tr><td>Tell us when something is taken down, and what the notice said.</td><td>A warning to everyone else before it happens to them.</td></tr>
+      <tr><td>Keep to roughly one a day rather than twenty at the end of the month.</td><td>Steady commission instead of one spike.</td></tr>
+      <tr><td>Ask before featuring anything not on the cleared list.</td><td>A fast yes or no, not a week of silence.</td></tr>
+    </tbody>
+  </table>
+  <p class="rv" style="margin-top:22px;color:var(--mute);max-width:62ch;line-height:1.65">Questions go in the group rather than a DM. If you are wondering something, four other people are wondering the same thing and the answer should reach all of you.</p>
+</section>
+
+<div class="power"><div><span>SKO</span><span class="o">CREATORS</span><span>SHOW</span><span class="o">THE PRODUCT</span><span>SKO</span><span class="o">CREATORS</span><span>SHOW</span><span class="o">THE PRODUCT</span></div></div>
+
+<footer class="wrap"><div class="f">
+  <div><div class="mono">SKO COMPOUNDS · CREATOR PROGRAM · V1 · 22 SEPTEMBER 2026</div>
+    <div class="disp big">Research,<br>refined.</div></div>
+  <div class="mono">RESEARCH USE ONLY · NOT FOR HUMAN CONSUMPTION · © 2026</div>
+</div></footer>
+
+<script>
+// Reveal on scroll. Everything is shown unconditionally if the observer never fires
+// (hidden panes, reduced motion, old browsers) so the page is never blank.
+(function () {
+  var els = [].slice.call(document.querySelectorAll('.rv'));
+  var show = function (e) { e.classList.add('in'); };
+  if (!('IntersectionObserver' in window)) { els.forEach(show); return; }
+  var io = new IntersectionObserver(function (rows) {
+    rows.forEach(function (r) { if (r.isIntersecting) { show(r.target); io.unobserve(r.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (e) { io.observe(e); });
+  setTimeout(function () { els.forEach(show); }, 2500);
+})();
+</script>
+</html>
