@@ -77,7 +77,7 @@ body{background:var(--ground)}
 .side a.on{background:var(--tile);color:var(--ink);font-weight:650}
 .side a:hover{color:var(--ink)}
 .side hr{border:0;border-top:1px solid var(--rule);margin:10px 4px}
-main{min-width:0;display:grid;gap:34px}
+main{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:34px}
 .k{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 
 /* hero */
@@ -196,6 +196,71 @@ main{min-width:0;display:grid;gap:34px}
 .chips[hidden],.cash .empty[hidden],.cash .amt[hidden]{display:none}
 .cash .empty{margin-top:14px;font-size:14px;line-height:1.45;color:rgba(242,240,234,.8)}
 
+.vrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.vrow .val{margin-top:0}
+.pend{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:99px;background:rgba(240,176,72,.16);color:#F7C77A;font-size:14px;font-weight:600}
+.pend:before{content:"";width:8px;height:8px;border-radius:50%;background:#F0B048;box-shadow:0 0 10px #F0B048}
+.pend[hidden]{display:none}
+/* task states */
+.task .state{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:99px}
+.task.pending{box-shadow:inset 0 0 0 1.5px #E7A94B}
+.task.pending .state{background:#FBE9CC;color:#8A5A12}
+.task.locked{opacity:.62}
+.task.locked .state{background:rgba(23,51,132,.08);color:#4A6394}
+.task.cool .state{background:rgba(242,240,234,.14);color:#F2F0EA}
+.task.done .state{background:#D8F0E2;color:#1E7A4F}
+/* the sheet */
+.sheet{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px}
+.sheet[hidden]{display:none}
+.sbg{position:absolute;inset:0;background:rgba(6,12,32,.5);opacity:0;transition:opacity .3s ease}
+.sheet.on .sbg{opacity:1}
+.spanel{position:relative;width:min(540px,100%);max-height:calc(100vh - 40px);overflow:auto;border-radius:22px;background:var(--ground);color:var(--ink);
+  padding:30px 28px 26px;transform:translateY(20px) scale(.98);opacity:0;transition:transform .4s cubic-bezier(.28,.06,.28,.96),opacity .3s ease;
+  box-shadow:0 30px 80px rgba(6,12,32,.4)}
+.spanel.wide{width:min(620px,100%);background:#0a1330;color:#F2F0EA;padding:22px 18px 14px}
+.sheet.on .spanel{transform:none;opacity:1}
+.sx{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(23,51,132,.08);color:inherit;font-size:20px;cursor:pointer;z-index:2}
+.spanel.wide .sx{background:rgba(242,240,234,.12)}
+.sk{font-family:"Syncopate",sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#173384}
+.spanel h3{margin:8px 44px 6px 0;font-size:26px;font-weight:650;letter-spacing:-.02em;line-height:1.1}
+.spanel .lede{margin:0 0 20px;font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+.step{display:flex;gap:12px;align-items:flex-start;margin:0 0 16px}
+.step>b{flex:0 0 26px;height:26px;border-radius:50%;background:#173384;color:#F2F0EA;display:grid;place-items:center;font-size:12px}
+.step>div{flex:1;min-width:0}
+.step p{margin:3px 0 10px;font-size:14px;font-weight:600}
+.fld{display:block;width:100%;border:1.5px solid var(--rule);border-radius:12px;background:#fff;color:#0a1330;font:inherit;font-size:15px;padding:13px 14px;outline:none}
+.fld:focus{border-color:#173384;box-shadow:0 0 0 3px rgba(23,51,132,.12)}
+textarea.fld{min-height:120px;resize:vertical;line-height:1.45}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:24px;letter-spacing:.3em;text-transform:uppercase;text-align:center}
+.cnt{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-top:6px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.picks button{border:1.5px solid var(--rule);background:#fff;border-radius:14px;padding:10px 6px 9px;cursor:pointer;font:inherit;font-size:12.5px;font-weight:650;color:#0a1330;display:grid;justify-items:center;gap:6px}
+.picks img{height:64px;width:auto}
+.picks button.on{border-color:#173384;box-shadow:0 0 0 3px rgba(23,51,132,.14)}
+.stars{display:flex;gap:6px}
+.stars button{border:0;background:none;font-size:32px;line-height:1;cursor:pointer;color:#D8D5CE;padding:0}
+.stars button.on{color:#E0A43A}
+.sbtn{display:flex;justify-content:center;align-items:center;gap:8px;width:100%;border:0;border-radius:14px;padding:16px;margin-top:6px;
+  background:#173384;color:#F2F0EA;font:inherit;font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.sbtn[disabled]{opacity:.35;cursor:default}
+.sbtn.ghost{background:transparent;color:#173384;box-shadow:inset 0 0 0 1.5px #173384;margin-top:0}
+.err{color:#B3261E;font-size:13px;font-weight:600;min-height:18px;margin-top:6px}
+.lvtime{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:14px;background:#0a1330;color:#F2F0EA;margin-bottom:16px}
+.lvtime b{font-size:22px;font-weight:650;font-variant-numeric:tabular-nums}
+.lvtime span{font-size:12px;opacity:.75}
+.hint{font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+.okstate{text-align:center;padding:10px 0 4px}
+.okstate .big{font-size:52px;line-height:1}
+.okstate h3{margin:12px 0 6px}
+.dropframe{display:block;width:100%;height:640px;border:0;border-radius:14px;background:#0a1330}
+.dropfoot{display:flex;justify-content:space-between;gap:10px;padding:10px 6px 2px;font-size:12.5px;color:rgba(242,240,234,.75)}
+@media (max-width:900px){
+  .sheet{padding:0;place-items:end stretch}
+  .spanel,.spanel.wide{width:100%;max-height:92vh;border-radius:22px 22px 0 0;padding:26px 18px 22px;transform:translateY(40px)}
+  .spanel.wide{padding:18px 10px 10px}
+  .dropframe{height:560px}
+}
+
 /* ---------- colour blocking: each section is its own panel, so the page reads in chunks ----------
    Earn is pale Halo blue (doing), Redeem is SKO blue (spending), Your level is
    metal grey (the badges are metal), the streak is warm. */
@@ -233,7 +298,7 @@ summary::-webkit-details-marker{display:none}
 summary em{font-style:normal;font-size:13px;font-weight:500;color:var(--ink-soft);margin-left:auto}
 summary:after{content:"+";font-size:22px;font-weight:400;line-height:1;transition:transform .25s ease}
 details[open] summary:after{transform:rotate(45deg)}
-.dbody{padding:0 0 22px;display:grid;gap:12px;font-size:14px}
+.dbody{padding:0 0 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:12px;font-size:14px}
 .ref{display:flex;gap:8px}
 .ref code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:13px 14px;border-radius:10px;background:var(--ground);font-size:13px}
 .ref button{border:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:0 18px;border-radius:10px;background:var(--ink);color:var(--ground);cursor:pointer}
@@ -255,7 +320,8 @@ details[open] summary:after{transform:rotate(45deg)}
 .toast b{color:#71A7F2}
 
 @media (max-width:900px){
-  .shell{grid-template-columns:1fr;gap:18px;padding:78px 16px 60px}
+  .shell{grid-template-columns:minmax(0,1fr);gap:18px;padding:78px 16px 60px}
+  .shell>*{min-width:0}
   .side{position:static;display:flex;overflow-x:auto;gap:6px;margin:0 -16px;padding:0 16px}
   .side a{white-space:nowrap;padding:10px 14px;background:var(--tile)}
   .side a.on{background:var(--ink);color:var(--ground)}
@@ -322,7 +388,7 @@ details[open] summary:after{transform:rotate(45deg)}
         <div class="bal">
           <div class="k" style="opacity:.7">Your points</div>
           <div class="num"><span id="pts">0</span><small>pts</small></div>
-          <div class="val"><i></i><span id="val">= $0.00 off your next order</span></div>
+          <div class="vrow"><div class="val"><i></i><span id="val">= $0.00 off your next order</span></div><div class="pend" id="pend" hidden></div></div>
         </div>
       </div>
       <div class="hr">
@@ -344,7 +410,7 @@ details[open] summary:after{transform:rotate(45deg)}
 
     <!-- 2. earn -->
     <section class="blk b-earn" aria-labelledby="earnh">
-      <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are five more.</span></div>
+      <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are five more, and they all pay.</span></div>
       <div class="earn" id="earn"></div>
     </section>
 
@@ -398,6 +464,14 @@ details[open] summary:after{transform:rotate(45deg)}
         </ul></div></details>
     </section>
   </main>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sbg" data-close></div>
+  <div class="spanel" role="dialog" aria-modal="true" aria-labelledby="stitle">
+    <button class="sx" type="button" aria-label="Close" data-close>&times;</button>
+    <div id="sbody"></div>
+  </div>
 </div>
 
 <script>
@@ -457,22 +531,169 @@ const M=['May','Jun','Jul','Aug','Sep','Oct'];
 $('months').innerHTML=M.map((m,i)=>`<i class="${i>=2&&i<=4?'y':i===5?'now':''}">${m}</i>`).join('');
 
 /* earn: each pays once and moves the balance */
+/* earn: every card opens a real action. Rewards that need checking (a
+   review, a follow, a comment) go to pending; the live code is checked on
+   the spot; the drop is the real Plinko board, played right here. */
+const TT='https://www.tiktok.com/@skocompounds';
+const ORDERED=NEW?[]:[['sko-3-rt','glp-3-rt','SKO-3 RT'],['bpc-157','bpc-157','BPC-157'],['ghk-cu','ghk-cu','GHK-Cu']];
 const TASKS=[
- {id:'drop', pt:'Daily', t:"Today's free drop", d:'One free Plinko drop a day. Every drop pays.', go:'Play', link:'../../plinko/', drop:true,odds:[['The Full Box','1 in 100'],['A free vial','1 in 18'],['Free shipping','1 in 11'],['Tokens','every drop']]},
- {id:'review',pt:'+500 pts',t:'Review a vial you ran',d:'A written review on any product you ordered.',go:'Write one'},
- {id:'follow',pt:'+250 pts',t:'Follow SKO',d:'Once, on TikTok or Instagram.',go:'Follow'},
- {id:'live', pt:'+200 pts',t:'Catch the live code',d:'Read out once every Thursday on TikTok.',go:'Get reminded'},
- {id:'comment',pt:'+100 pts',t:'Leave a comment',d:'On a post or during a live.',go:'Comment'},
+ {id:'drop', pt:'Daily', t:"Today's free drop", d:'One free Plinko drop a day. Every drop pays.', go:'Play', drop:true,
+  odds:[['The Full Box','1 in 100'],['A free vial','1 in 18'],['Free shipping','1 in 11'],['Tokens','every drop']]},
+ {id:'review',pts:500,t:'Review a vial you ran',d:'Stars and a few lines on something you ordered. One per product.',go:'Write a review'},
+ {id:'follow',pts:250,t:'Follow @skocompounds',d:'On TikTok. Once, and it counts for good.',go:'Follow'},
+ {id:'live',pts:200,t:'Catch the live code',d:'Read out once, Thursdays 6 PM PT on TikTok.',go:'Enter the code'},
+ {id:'comment',pts:100,t:'Comment on our latest post',d:'One a day. Paste the link and it lands in your balance.',go:'Comment'},
 ];
+const today=()=>new Date().toISOString().slice(0,10);
+let TS=st['ts_'+K]||{};                       // id -> {s:'pending'|'done', d:date, pts}
+const tsave=()=>save({['ts_'+K]:TS});
+function stateOf(k){
+  const t=TS[k.id]||{};
+  if(k.id==='drop'||k.id==='comment') return t.d===today()?(k.id==='drop'?'cool':t.s):'open';
+  if(k.id==='review'&&!ORDERED.length) return 'locked';
+  return t.s||'open';
+}
+function untilMidnight(){const n=new Date(),m=new Date(n);m.setHours(24,0,0,0);const x=m-n;return `${Math.floor(x/3.6e6)}h ${Math.floor(x%3.6e6/6e4)}m`}
 function paintEarn(){
-  $('earn').innerHTML=TASKS.map(k=>`<button class="task${k.drop?' drop':''}${done.has(k.id)?' done':''}" type="button" data-id="${k.id}">
-    <span class="pt">${k.pt}</span><b>${k.t}</b><span>${k.d}</span>${k.odds?`<span class="odds">${k.odds.map(([a,b])=>`<i><em>${a}</em><strong>${b}</strong></i>`).join('')}</span>`:''}<span class="go">${done.has(k.id)?'Done ✓':k.go+' →'}</span></button>`).join('');
+  $('earn').innerHTML=TASKS.map(k=>{
+    const s=stateOf(k), pt=k.pt||`+${k.pts} pts`;
+    const tag=s==='pending'?`<span class="state">Pending · +${(TS[k.id]||{}).pts||k.pts}</span>`
+            :s==='done'?`<span class="state">Earned ✓</span>`
+            :s==='locked'?`<span class="state">After your first order</span>`
+            :s==='cool'?`<span class="state">Next drop in ${untilMidnight()}</span>`:'';
+    const go=s==='open'?k.go+' →':s==='pending'?'Submitted':s==='done'?'Done':s==='cool'?'Played today':'Locked';
+    return `<button class="task${k.drop?' drop':''} ${s}" type="button" data-id="${k.id}"${s==='locked'?' aria-disabled="true"':''}>
+      <span class="pt">${pt}</span><b>${k.t}</b><span>${k.d}</span>
+      ${k.odds?`<span class="odds">${k.odds.map(([a,b])=>`<i><em>${a}</em><strong>${b}</strong></i>`).join('')}</span>`:''}
+      ${tag}<span class="go">${go}</span></button>`}).join('');
+  const pend=Object.values(TS).filter(t=>t.s==='pending').reduce((a,t)=>a+(t.pts||0),0);
+  $('pend').hidden=!pend; $('pend').textContent=`+${pend.toLocaleString()} pending`;
 }
 $('earn').addEventListener('click',e=>{
   const b=e.target.closest('.task'); if(!b) return; const k=TASKS.find(x=>x.id===b.dataset.id);
-  if(k.link){ location.href=k.link; return; }
-  if(done.has(k.id)) return;
-  const n=+k.pt.replace(/\D/g,''); done.add(k.id); save({['done_'+K]:[...done]}); add(n,k.t); paintEarn();
+  const s=stateOf(k);
+  if(s==='locked'){ say('Reviews open once your first order arrives'); return; }
+  if(s==='pending'){ say(`<b>Pending</b> — we check these within a day`); return; }
+  if(s==='done'){ say(`Already earned — ${k.t}`); return; }
+  if(s==='cool'){ say(`<b>Next drop</b> in ${untilMidnight()}`); return; }
+  openTask(k);
+});
+
+/* the sheet */
+const sheet=$('sheet'), sbody=$('sbody'), spanel=sheet.querySelector('.spanel');
+let lastFocus=null;
+function openSheet(html,wide){
+  lastFocus=document.activeElement; spanel.classList.toggle('wide',!!wide); sbody.innerHTML=html;
+  sheet.hidden=false; requestAnimationFrame(()=>sheet.classList.add('on'));
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const f=sbody.querySelector('input,textarea,button'); if(f) f.focus();},60);
+}
+function closeSheet(){
+  sheet.classList.remove('on'); document.body.style.overflow='';
+  setTimeout(()=>{sheet.hidden=true; sbody.innerHTML=''; paintEarn(); if(lastFocus) lastFocus.focus();},300);
+}
+sheet.addEventListener('click',e=>{ if(e.target.closest('[data-close]')) closeSheet(); });
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&!sheet.hidden) closeSheet(); });
+function success(icon,title,body){
+  sbody.innerHTML=`<div class="okstate"><div class="big">${icon}</div><h3 id="stitle">${title}</h3><p class="lede">${body}</p>
+    <button class="sbtn" type="button" data-close>Done</button></div>`;
+}
+function pendingOK(k,extra){ TS[k.id]={s:'pending',d:today(),pts:k.pts}; tsave(); paintEarn();
+  logAct(k.t,`+${k.pts} pending`);
+  success('⏳',`+${k.pts} pts on the way`,`${extra} It shows as pending in your balance until then.`); }
+
+/* next Thursday 6 PM Pacific */
+function nextLive(){
+  const pt=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'})), off=new Date()-pt;
+  const t=new Date(pt); const add=(4-t.getDay()+7)%7; t.setDate(t.getDate()+add); t.setHours(18,0,0,0);
+  if(t<=pt) t.setDate(t.getDate()+7);
+  return new Date(t.getTime()+off);
+}
+function ics(){
+  const d=nextLive(), f=x=>x.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z', e=new Date(d.getTime()+3600e3);
+  const body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//SKO//Live//EN','BEGIN:VEVENT',`UID:sko-live-${f(d)}@skocompounds.com`,
+    `DTSTAMP:${f(new Date())}`,`DTSTART:${f(d)}`,`DTEND:${f(e)}`,'RRULE:FREQ=WEEKLY;BYDAY=TH','SUMMARY:SKO Live on TikTok',
+    `DESCRIPTION:The code is read out once — enter it in SKO Rewards for 200 points. ${TT}/live`,`URL:${TT}/live`,
+    'BEGIN:VALARM','TRIGGER:-PT10M','ACTION:DISPLAY','DESCRIPTION:SKO Live starts in 10 minutes','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([body],{type:'text/calendar'})); a.download='sko-live.ics'; a.click();
+}
+
+function openTask(k){
+  if(k.id==='drop'){
+    openSheet(`<iframe class="dropframe" id="dropf" title="The Drop" src="../../plinko/?embed=1&limit=1&member=1&sys=1"></iframe>
+      <div class="dropfoot"><span>One free drop a day. Prizes ship inside your next order.</span><span id="dropwin"></span></div>`,true);
+    TS.drop={s:'cool',d:today()}; tsave();
+    return;
+  }
+  if(k.id==='review'){
+    openSheet(`<div class="sk">+${k.pts} pts</div><h3 id="stitle">Review a vial you ran</h3>
+      <p class="lede">Pick the product, rate it, and tell other researchers how it went.</p>
+      <div class="step"><b>1</b><div><p>Which one?</p><div class="picks" id="rp">${ORDERED.map(([sl,img,n])=>`<button type="button" data-p="${sl}"><img src="../img/v/${img}.webp" alt="">${n}</button>`).join('')}</div></div></div>
+      <div class="step"><b>2</b><div><p>Your rating</p><div class="stars" id="rs">${[1,2,3,4,5].map(i=>`<button type="button" data-s="${i}" aria-label="${i} star${i>1?'s':''}">★</button>`).join('')}</div></div></div>
+      <div class="step"><b>3</b><div><p>Your review</p><textarea class="fld" id="rt" maxlength="800" placeholder="How it reconstituted, how it shipped, how it compared to other suppliers…"></textarea>
+        <div class="cnt"><span id="rc">0 / 40 characters minimum</span><span>Shown with your first name</span></div></div></div>
+      <button class="sbtn" type="button" id="rgo" disabled>Submit review · +${k.pts} pts</button>`);
+    let P=null,R=0; const t=$('rt'), go=$('rgo');
+    const chk=()=>{const n=t.value.trim().length; $('rc').textContent=n<40?`${n} / 40 characters minimum`:`${n} characters ✓`; go.disabled=!(P&&R&&n>=40);};
+    $('rp').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; P=b.dataset.p; $('rp').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); chk();});
+    $('rs').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; R=+b.dataset.s; $('rs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',+x.dataset.s<=R)); chk();});
+    t.addEventListener('input',chk);
+    go.addEventListener('click',()=>pendingOK(k,'Your review goes up once we check it, usually within a day.'));
+    return;
+  }
+  if(k.id==='follow'){
+    openSheet(`<div class="sk">+${k.pts} pts</div><h3 id="stitle">Follow @skocompounds</h3>
+      <p class="lede">Lives, restocks and the drop codes go out there first.</p>
+      <div class="step"><b>1</b><div><p>Follow us on TikTok</p><a class="sbtn ghost" id="fo" href="${TT}" target="_blank" rel="noopener">Open @skocompounds ↗</a></div></div>
+      <div class="step"><b>2</b><div><p>Your TikTok username, so we can match you</p><input class="fld" id="fh" placeholder="@yourname" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="err" id="fe"></div></div></div>
+      <button class="sbtn" type="button" id="fgo" disabled>Claim +${k.pts} pts</button>`);
+    const h=$('fh'), go=$('fgo'); let opened=false;
+    $('fo').addEventListener('click',()=>{opened=true; chk();});
+    const ok=v=>/^@?[a-z0-9._]{2,24}$/i.test(v.trim());
+    const chk=()=>{go.disabled=!(opened&&ok(h.value)); $('fe').textContent=h.value&&!ok(h.value)?'Letters, numbers, dots and underscores only':'';};
+    h.addEventListener('input',chk);
+    go.addEventListener('click',()=>pendingOK(k,`We’ll check that ${h.value.trim().replace(/^@?/,'@')} follows us and add your points.`));
+    return;
+  }
+  if(k.id==='live'){
+    const d=nextLive(), hrs=Math.max(0,Math.round((d-new Date())/3.6e6));
+    const when=hrs<24?`in ${hrs}h`:d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+    openSheet(`<div class="sk">+${k.pts} pts</div><h3 id="stitle">Catch the live code</h3>
+      <p class="lede">We read one code out during every live. Type it in before the live ends and the points are yours.</p>
+      <div class="lvtime"><div><span>Next live</span><br><b>${when}</b></div><div style="text-align:right"><span>Thursdays</span><br><b>6 PM PT</b></div></div>
+      <button class="sbtn ghost" type="button" id="lcal">Add every Thursday to my calendar</button>
+      <div class="step" style="margin-top:18px"><b>•</b><div><p>Heard the code? Enter it</p><input class="fld code" id="lc" maxlength="10" placeholder="••••••" autocomplete="off" autocapitalize="characters" spellcheck="false"><div class="err" id="le"></div></div></div>
+      <button class="sbtn" type="button" id="lgo" disabled>Redeem code</button>
+      <div class="hint">Study only: this week’s code is SKOLIVE.</div>`);
+    $('lcal').addEventListener('click',()=>{ics(); say('<b>Added</b> — every Thursday, 6 PM PT');});
+    const c=$('lc'), go=$('lgo');
+    c.addEventListener('input',()=>{c.value=c.value.toUpperCase().replace(/[^A-Z0-9]/g,''); go.disabled=c.value.length<4; $('le').textContent='';});
+    go.addEventListener('click',()=>{
+      if(c.value!=='SKOLIVE'){ $('le').textContent='That’s not this week’s code. It’s read out once during the live.'; c.select(); return; }
+      TS.live={s:'done',d:today(),pts:k.pts}; tsave(); PTS+=k.pts; paintBal(); paintEarn(); logAct('Live code',`+${k.pts}`);
+      success('🎙️',`+${k.pts} pts`,`That was this week’s code. Four lives in a row and a box ships to you.`);
+    });
+    return;
+  }
+  if(k.id==='comment'){
+    openSheet(`<div class="sk">+${k.pts} pts · once a day</div><h3 id="stitle">Comment on our latest post</h3>
+      <p class="lede">Say something real on our newest TikTok, then paste the link to your comment here.</p>
+      <div class="step"><b>1</b><div><p>Open our latest post</p><a class="sbtn ghost" id="co" href="${TT}" target="_blank" rel="noopener">Open @skocompounds ↗</a></div></div>
+      <div class="step"><b>2</b><div><p>Link to your comment</p><input class="fld" id="cl" inputmode="url" placeholder="https://www.tiktok.com/@skocompounds/video/…" autocomplete="off"><div class="err" id="ce"></div>
+        <div class="hint">In TikTok: hold your comment → Copy link.</div></div></div>
+      <button class="sbtn" type="button" id="cgo" disabled>Claim +${k.pts} pts</button>`);
+    const l=$('cl'), go=$('cgo');
+    const ok=v=>/^https?:\/\/(www\.|vm\.|vt\.)?tiktok\.com\/.+/i.test(v.trim());
+    l.addEventListener('input',()=>{go.disabled=!ok(l.value); $('ce').textContent=l.value&&!ok(l.value)?'That needs to be a TikTok link':'';});
+    go.addEventListener('click',()=>{ pendingOK(k,'We check comments once a day and add the points.'); TS.comment.d=today(); tsave(); });
+    return;
+  }
+}
+/* the embedded drop reports its height and tokens */
+addEventListener('message',e=>{
+  const d=e.data||{}, f=$('dropf'); if(!f) return;
+  if(d.skoDrop) f.style.height=Math.min(Math.max(d.skoDrop+20,420),window.innerHeight*.8)+'px';
+  if(d.skoTokens!=null) $('dropwin').textContent=`${d.skoTokens.toLocaleString()} tokens`;
 });
 
 /* balance */
