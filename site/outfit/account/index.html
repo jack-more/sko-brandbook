@@ -671,7 +671,7 @@ function openTask(k){
     go.addEventListener('click',()=>{
       if(c.value!=='SKOLIVE'){ $('le').textContent='That’s not this week’s code. It’s read out once during the live.'; c.select(); return; }
       TS.live={s:'done',d:today(),pts:k.pts}; tsave(); PTS+=k.pts; paintBal(); paintEarn(); logAct('Live code',`+${k.pts}`);
-      success('🎙️',`+${k.pts} pts`,`That was this week’s code. Four lives in a row and a box ships to you.`);
+      success('🎙️',`+${k.pts} pts`,`That was this week’s code. The points are in your balance.`);
     });
     return;
   }

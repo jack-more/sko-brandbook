@@ -450,7 +450,7 @@ a{color:inherit;text-decoration:none}
   <a class="mark" href="#" aria-label="SKO Compounds"><img class="b" src="img/ui/shield-blue.png" alt=""><img class="w" src="img/ui/shield-white.png" alt=""></a>
   <nav class="nav">
     <a href="#shop" class="on">Shop</a>
-    <a href="club/" class="club" id="clubOpen" aria-label="Open SKO Club" aria-controls="drawer" aria-expanded="false">
+    <a href="account/" class="club" id="clubOpen" aria-label="Open SKO Club" aria-controls="drawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>
       </svg><span class="lg">SKO Club</span><span class="sm">Club</span></a>
@@ -516,8 +516,8 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="club">
         <b>SKO Club</b>
-        <span class="cats">1 point per $1, on everything. Points buy product, and they never expire.<br>
-        <b class="drop">The Drop</b> &mdash; one in a hundred orders ships with a chrome cap. Find it and a full box is on its way.</span>
+        <span class="cats">1 point per $1, 2&times; from Researcher. 100 points is $1 off at checkout.<br>
+        <b class="drop">The Drop</b> &mdash; a free Plinko drop every day. The Full Box lands 1 in 100.</span>
         <a href="#rest">See every research category &rarr;</a>
       </div>
     </div>
@@ -550,13 +550,13 @@ a{color:inherit;text-decoration:none}
     <div class="dbal">
       <div class="dk">Your points</div>
       <div class="dnum" id="dpts">0</div>
-      <div class="dtxt">Earn 1 point on every $1 spent. 400 is a free peptide.</div>
+      <div class="dtxt">1 point per $1, 2&times; from Researcher. 100 points = $1 off.</div>
       <div class="dm"><i id="dbar"></i></div>
-      <div class="dtxt" id="dto">400 to your next free peptide</div>
+      <div class="dtxt" id="dto">= $0.00 off your next order</div>
     </div>
-    <a class="drow" href="club/#earn"><span><b>Leave a review</b><em>On a vial you ran</em></span><strong>+100</strong></a>
-    <a class="drow" href="club/#earn"><span><b>Follow SKO</b><em>Once, any platform</em></span><strong>+50</strong></a>
-    <a class="drow" href="club/#earn"><span><b>Leave a comment</b><em>On a post or a live</em></span><strong>+25</strong></a>
+    <a class="drow" href="account/#earnh"><span><b>Leave a review</b><em>On a vial you ran</em></span><strong>+100</strong></a>
+    <a class="drow" href="account/#earnh"><span><b>Follow SKO</b><em>Once, any platform</em></span><strong>+50</strong></a>
+    <a class="drow" href="account/#earnh"><span><b>Leave a comment</b><em>On a post or a live</em></span><strong>+25</strong></a>
     <a class="dgo" href="account/">Open your rewards <span aria-hidden="true">&rarr;</span></a>
   </div>
 </aside>
@@ -589,7 +589,7 @@ const tile=(p,i,eager)=>`
         <span class="eyeb">${p.research}</span>
         <span class="nm"><b>${p.name}</b><em>${money(p.price)}</em></span>
         <span class="rcat">${p.category}${p.dose?' \u00b7 '+p.dose:''}</span>
-        <span class="perks"><span><s>${pts(p.price)} pts</s> SKO Club</span><span>The Drop <s>1 in 100</s></span></span>
+        <span class="perks"><span><s>${pts(p.price)} pts</s> SKO Club</span><span>Free daily <s>drop</s></span></span>
         <span class="mline">${p.research}${p.dose?' \u00b7 '+p.dose:''}</span>
         <button class="madd" type="button" data-add="${p.slug}">Add to bag \u00b7 ${money(p.price)}</button>
       </span>
@@ -637,21 +637,21 @@ fetch('products.json').then(r=>r.json()).then(P=>{
   }
   tickClock(); setInterval(tickClock,1000);
   const items=['Third party tested','Shipped cold','Beverly Hills','A certificate with every batch',
-               '1 point for every $1','400 points is a free peptide','The Drop \u00b7 1 in 100','The Live \u00b7 Thursdays'];
+               '1 point for every $1','100 points = $1 off','A free drop every day','The Live \u00b7 Thursdays 6 PM PT'];
   const one=items.map(x=>`<span>${x}</span>`).join('');
   document.getElementById('run').innerHTML=one+one;
 })();
 
 /* the club drawer reads the same balance the club page writes */
 (function(){
-  const KEY='sko-club-v1', dr=document.getElementById('drawer'), veil=document.getElementById('dveil'),
+  const KEY='sko-rewards-demo', dr=document.getElementById('drawer'), veil=document.getElementById('dveil'),
         open=document.getElementById('clubOpen');
   const load=()=>{ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } };
   function fill(){
-    const st=load(), pts=+st.pts||0, r=pts%400;
+    const st=load(), pts=+(st.pts_new!=null?st.pts_new:0), r=pts%400;
     document.getElementById('dpts').textContent=pts.toLocaleString();
-    document.getElementById('dbar').style.width=(r/4)+'%';
-    document.getElementById('dto').textContent=pts>=400?`${Math.floor(pts/400)} free peptide${pts>=800?'s':''} ready in the club`:`${400-r} to your next free peptide`;
+    document.getElementById('dbar').style.width=Math.min(100,pts/5)+'%';
+    document.getElementById('dto').textContent=`= $${(pts/100).toFixed(2)} off your next order`;
   }
   function show(on){
     if(on){ fill(); veil.hidden=false; requestAnimationFrame(()=>{ veil.classList.add('on'); dr.classList.add('on'); }); }
@@ -804,8 +804,8 @@ function openTile(el){
   q$('.why').innerHTML=[
     ['Third party tested', p.coa?`<a href="${p.coa}" target="_blank" rel="noopener">See this batch\u2019s certificate</a>`:'Batch by batch'],
     ['Shipped cold', 'From Beverly Hills, same day before 3 PM PT'],
-    [`Earns ${Math.floor(p.price)} pts`, '400 points is a free peptide'],
-    ['The Drop', '1 in 100 orders ships a Full Box free'],
+    [`Earns ${Math.floor(p.price)} pts`, `$${(Math.floor(p.price)/100).toFixed(2)} back \u00b7 2\u00d7 from Researcher`],
+    ['The Drop', 'A free Plinko drop every day \u00b7 Full Box 1 in 100'],
   ].map(([b,t])=>`<div><b>${b}</b><span>${t}</span></div>`).join('');
   q$('.bens').innerHTML=(p.benefits||[]).map(x=>`<li>${x}</li>`).join('');
   panel.dataset.qty='1';
