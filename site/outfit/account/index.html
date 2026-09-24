@@ -622,7 +622,7 @@ function openTask(k){
   if(k.id==='drop'){
     openSheet(`<iframe class="dropframe" id="dropf" title="The Drop" src="../../plinko/?embed=1&limit=1&member=1&sys=1"></iframe>
       <div class="dropfoot"><span>One free drop a day. Prizes ship inside your next order.</span><span id="dropwin"></span></div>`,true);
-    TS.drop={s:'cool',d:today()}; tsave();
+    TS.drop={s:'cool',d:today()}; tsave(); paintEarn();
     return;
   }
   if(k.id==='review'){
