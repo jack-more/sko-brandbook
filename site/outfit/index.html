@@ -554,7 +554,6 @@ a{color:inherit;text-decoration:none}
       <div class="dm"><i id="dbar"></i></div>
       <div class="dtxt" id="dto">400 to your next free peptide</div>
     </div>
-    <a class="drow hot" id="dprof" href="club/#about"><span><b>Complete your profile</b><em>Two questions</em></span><strong>+10</strong></a>
     <a class="drow" href="club/#earn"><span><b>Leave a review</b><em>On a vial you ran</em></span><strong>+100</strong></a>
     <a class="drow" href="club/#earn"><span><b>Follow SKO</b><em>Once, any platform</em></span><strong>+50</strong></a>
     <a class="drow" href="club/#earn"><span><b>Leave a comment</b><em>On a post or a live</em></span><strong>+25</strong></a>
@@ -653,7 +652,6 @@ fetch('products.json').then(r=>r.json()).then(P=>{
     document.getElementById('dpts').textContent=pts.toLocaleString();
     document.getElementById('dbar').style.width=(r/4)+'%';
     document.getElementById('dto').textContent=pts>=400?`${Math.floor(pts/400)} free peptide${pts>=800?'s':''} ready in the club`:`${400-r} to your next free peptide`;
-    document.getElementById('dprof').hidden=!!st.profilePaid;
   }
   function show(on){
     if(on){ fill(); veil.hidden=false; requestAnimationFrame(()=>{ veil.classList.add('on'); dr.classList.add('on'); }); }

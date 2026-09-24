@@ -128,7 +128,7 @@ main{min-width:0;display:grid;gap:34px}
 .sh span{font-size:13px;color:var(--ink-soft)}
 
 /* earn */
-.earn{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.earn{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:10px}
 .task{position:relative;text-align:left;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:16px;padding:18px;background:var(--tile);
   display:flex;flex-direction:column;gap:6px;min-height:132px;transition:transform .25s ease,background .25s ease}
 .task:hover{transform:translateY(-2px)}
@@ -179,6 +179,22 @@ main{min-width:0;display:grid;gap:34px}
 .lv.on .tag{background:#71A7F2;color:#0a1330}
 .lv.done{opacity:.6}
 .lv.lock img{filter:grayscale(.6);opacity:.7}
+
+/* study-only preview switch */
+.viewas{display:flex;align-items:center;gap:6px;margin-bottom:-18px;font-size:12px}
+.viewas span{font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}
+.viewas a{padding:7px 12px;border-radius:99px;border:1.5px solid var(--rule);font-weight:650}
+.viewas a.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.hero.new .bal .num{font-size:clamp(46px,5vw,72px)}
+.streak.new .months{display:none}
+.earn .task.drop{grid-row:span 2}
+.b-redeem .vt .imgs img{height:92px}
+.task .odds{display:grid;gap:0;margin:8px 0 4px;border-top:1px solid rgba(242,240,234,.14)}
+.task .odds i{display:flex;justify-content:space-between;font-style:normal;padding:8px 0;border-bottom:1px solid rgba(242,240,234,.14);font-size:13px}
+.task .odds em{font-style:normal;color:rgba(242,240,234,.8)}
+.task .odds strong{font-weight:650;color:#fff}
+.chips[hidden],.cash .empty[hidden],.cash .amt[hidden]{display:none}
+.cash .empty{margin-top:14px;font-size:14px;line-height:1.45;color:rgba(242,240,234,.8)}
 
 /* ---------- colour blocking: each section is its own panel, so the page reads in chunks ----------
    Earn is pale Halo blue (doing), Redeem is SKO blue (spending), Your level is
@@ -257,6 +273,8 @@ details[open] summary:after{transform:rotate(45deg)}
   .blk{padding:20px 16px 22px;border-radius:18px;margin:0 -4px}
   .b-level .ladder{margin:0 -16px;padding:0 16px 4px}
   .earn{grid-template-columns:1fr 1fr;gap:8px}
+  .earn .task.drop{grid-row:auto;grid-column:1/-1;min-height:120px}
+  .viewas{margin-bottom:-8px;flex-wrap:wrap}
   .task{min-height:150px;padding:15px}
   .task b{font-size:15px}
   .ladder{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;margin:0 -16px;padding:0 16px 4px}
@@ -289,11 +307,18 @@ details[open] summary:after{transform:rotate(45deg)}
   </nav>
 
   <main>
+    <!-- study only: see the page the second an account is created, or months in -->
+    <div class="viewas" role="group" aria-label="Preview">
+      <span>Preview</span>
+      <a href="?state=new" id="vNew">Just signed up</a>
+      <a href="?state=ret" id="vRet">Returning member</a>
+    </div>
+
     <!-- 1. the hero: who you are, one number, one goal -->
     <section class="hero" aria-label="Your rewards">
       <div class="hl">
         <div class="who"><img class="coin" id="hcoin" src="../img/tier/foil.webp" alt="">
-          <div><b id="htier">Researcher</b><span>Jack &middot; 2&times; points on every order</span></div></div>
+          <div><b id="htier">Researcher</b><span id="hwho">Jack</span></div></div>
         <div class="bal">
           <div class="k" style="opacity:.7">Your points</div>
           <div class="num"><span id="pts">0</span><small>pts</small></div>
@@ -313,13 +338,13 @@ details[open] summary:after{transform:rotate(45deg)}
     <!-- the streak: tracked on the live site, never shown until now -->
     <section class="streak" aria-label="Your streak">
       <span class="fl" aria-hidden="true">&#128293;</span>
-      <div><b>3-month streak</b><span>Order by Oct 31 to make it 4. Miss a month and it resets.</span></div>
+      <div><b id="skb">3-month streak</b><span id="sks">Order by Oct 31 to make it 4. Miss a month and it resets.</span></div>
       <div class="months" id="months"></div>
     </section>
 
     <!-- 2. earn -->
     <section class="blk b-earn" aria-labelledby="earnh">
-      <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are six more.</span></div>
+      <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are five more.</span></div>
       <div class="earn" id="earn"></div>
     </section>
 
@@ -328,12 +353,12 @@ details[open] summary:after{transform:rotate(45deg)}
       <div class="sh"><h2 id="redh">Redeem</h2><span>One reward per order. Applied automatically at checkout.</span></div>
       <div class="redeem">
         <div class="card">
-          <div class="k" style="color:var(--ink-soft)">Free vial on your next order</div>
+          <div class="k" style="color:var(--ink-soft)">Free bac water with your order</div>
           <div class="vials">
-            <div class="vt" data-t="150"><div class="imgs"><img src="../img/v/bpc-157.webp" alt=""><img src="../img/v/ghk-cu.webp" alt=""><img src="../img/v/tb-500.webp" alt=""></div>
-              <b>$150+ order</b><span>Pick a free vial from the shelf</span><button type="button">Reserve</button></div>
-            <div class="vt" data-t="300"><div class="imgs"><img src="../img/v/glow.webp" alt=""><img src="../img/v/klow.webp" alt=""><img src="../img/v/nad-plus.webp" alt=""></div>
-              <b>$300+ order</b><span>Pick a premium vial</span><button type="button">Reserve</button></div>
+            <div class="vt" data-t="100"><div class="imgs"><img src="../img/v/bacteriostatic-water.webp" alt=""></div>
+              <b>$100+ order</b><span>Free Bacteriostatic Water, 10mL</span><button type="button">Add to order</button></div>
+            <div class="vt" data-t="200"><div class="imgs"><img src="../img/v/bacteriostatic-water.webp" alt=""><img src="../img/v/bacteriostatic-water.webp" alt=""></div>
+              <b>$200+ order</b><span>Free Bacteriostatic Water, 30mL</span><button type="button">Add to order</button></div>
           </div>
         </div>
         <div class="card cash">
@@ -341,6 +366,7 @@ details[open] summary:after{transform:rotate(45deg)}
           <div class="amt" id="camt">$0.00</div>
           <div class="sub">100 points = $1 off</div>
           <div class="chips" id="chips"></div>
+          <p class="empty">Every $1 you spend is a point. Once you have 500, you can take $5 off right here.</p>
           <div class="fine">Can&rsquo;t be combined with a free vial or a code on the same order.</div>
         </div>
       </div>
@@ -361,12 +387,13 @@ details[open] summary:after{transform:rotate(45deg)}
         </div></details>
       <details><summary>Recent activity <em>Last 30 days</em></summary>
         <div class="dbody act" id="act"></div></details>
-      <details><summary>How rewards work</summary>
+      <details id="how"><summary>How rewards work</summary>
         <div class="dbody"><ul class="rules">
           <li>Earn 1 point per $1 as Explorer, 2 points per $1 from Researcher up (capped at 2&times;).</li>
           <li>100 points = $1 off. Points and rewards apply automatically at checkout.</li>
           <li>Your level is set by your spend over the last 6 months. Shipping credits refill every 6 months.</li>
-          <li>Free vial: reserve a tier any time; it adds as a $0 line once your cart crosses $150 or $300. Returning customers only.</li>
+          <li>Free bac water: 10mL on orders over $100, 30mL over $200. It adds itself as a $0 line once your cart crosses the line.</li>
+          <li>Your account is your membership &mdash; everything starts the moment you sign up.</li>
           <li>One reward per order &mdash; a code can&rsquo;t combine with a free vial or points off.</li>
         </ul></div></details>
     </section>
@@ -379,9 +406,15 @@ const KEY='sko-rewards-demo';
 const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
 const save=o=>{try{localStorage.setItem(KEY,JSON.stringify(Object.assign(load(),o)))}catch(e){}};
 const st=load();
-let PTS=st.pts!=null?st.pts:1240;
-const SPEND=570;                       // last 6 months, demo account
-const done=new Set(st.done||[]);
+/* everything the sign-up form collected. Production reads it from the
+   account; nothing here is asked for again. */
+const USER={first:'Jack',role:'Independent Researcher',joined:'Sep 24, 2026'};
+const NEW=new URLSearchParams(location.search).get('state')!=='ret';
+$(NEW?'vNew':'vRet').classList.add('on');
+const K=NEW?'new':'ret';
+let PTS=st['pts_'+K]!=null?st['pts_'+K]:(NEW?0:1240);
+const SPEND=NEW?0:570;                 // last 6 months
+const done=new Set(st['done_'+K]||[]);
 
 /* tiers: the live store's ladder, each paired with a badge from the brand book */
 const TIERS=[
@@ -392,7 +425,21 @@ const TIERS=[
 ];
 const cur=TIERS.reduce((a,t,i)=>SPEND>=t.at?i:a,0), next=TIERS[cur+1];
 $('htier').textContent=TIERS[cur].n; $('hcoin').src=`../img/tier/${TIERS[cur].coin}.webp`;
-if(next){
+$('hwho').textContent=NEW?`Welcome, ${USER.first} \u00b7 ${USER.role} \u00b7 member since today`
+                        :`${USER.first} \u00b7 ${USER.role} \u00b7 2\u00d7 points on every order`;
+if(NEW){
+  document.querySelector('.hero').classList.add('new');
+  $('ncoin').src='../img/v/bacteriostatic-water.webp'; $('ncoin').classList.remove('ncoin');
+  $('gtitle').textContent='Your first order';
+  $('gsub').textContent='Spend $100 and your bac water is free. Every $1 earns a point.';
+  $('gl').textContent='$0 so far'; $('gr').textContent='$100';
+  document.querySelector('.hbtns .p').textContent='Start shopping';
+  const g=document.querySelector('.hbtns .g'); g.textContent='How it works'; g.href='#how';
+  g.addEventListener('click',()=>{ $('how').open=true; });
+  document.querySelector('.streak').classList.add('new');
+  $('skb').textContent='Your streak starts with your first order';
+  $('sks').textContent='Order once a month and it keeps growing. We\u2019ll remind you before it runs out.';
+}else if(next){
   $('gtitle').textContent=`$${next.at-SPEND} to ${next.n}`;
   $('ncoin').src=`../img/tier/${next.coin}.webp`;
   $('gsub').textContent=next.n==='Scientist'?'Unlocks a free shipping credit every 6 months':'Unlocks 4 shipping credits and birthday 2×';
@@ -411,29 +458,28 @@ $('months').innerHTML=M.map((m,i)=>`<i class="${i>=2&&i<=4?'y':i===5?'now':''}">
 
 /* earn: each pays once and moves the balance */
 const TASKS=[
- {id:'drop', pt:'Daily', t:"Today's free drop", d:'Plinko. Tokens every time, a Full Box 1 in 100.', go:'Play', link:'../../plinko/', drop:true},
+ {id:'drop', pt:'Daily', t:"Today's free drop", d:'One free Plinko drop a day. Every drop pays.', go:'Play', link:'../../plinko/', drop:true,odds:[['The Full Box','1 in 100'],['A free vial','1 in 18'],['Free shipping','1 in 11'],['Tokens','every drop']]},
  {id:'review',pt:'+500 pts',t:'Review a vial you ran',d:'A written review on any product you ordered.',go:'Write one'},
  {id:'follow',pt:'+250 pts',t:'Follow SKO',d:'Once, on TikTok or Instagram.',go:'Follow'},
  {id:'live', pt:'+200 pts',t:'Catch the live code',d:'Read out once every Thursday on TikTok.',go:'Get reminded'},
  {id:'comment',pt:'+100 pts',t:'Leave a comment',d:'On a post or during a live.',go:'Comment'},
- {id:'profile',pt:'+100 pts',t:'Complete your profile',d:'Two questions: what you research, how often.',go:'Answer'},
 ];
 function paintEarn(){
   $('earn').innerHTML=TASKS.map(k=>`<button class="task${k.drop?' drop':''}${done.has(k.id)?' done':''}" type="button" data-id="${k.id}">
-    <span class="pt">${k.pt}</span><b>${k.t}</b><span>${k.d}</span><span class="go">${done.has(k.id)?'Done ✓':k.go+' →'}</span></button>`).join('');
+    <span class="pt">${k.pt}</span><b>${k.t}</b><span>${k.d}</span>${k.odds?`<span class="odds">${k.odds.map(([a,b])=>`<i><em>${a}</em><strong>${b}</strong></i>`).join('')}</span>`:''}<span class="go">${done.has(k.id)?'Done ✓':k.go+' →'}</span></button>`).join('');
 }
 $('earn').addEventListener('click',e=>{
   const b=e.target.closest('.task'); if(!b) return; const k=TASKS.find(x=>x.id===b.dataset.id);
   if(k.link){ location.href=k.link; return; }
   if(done.has(k.id)) return;
-  const n=+k.pt.replace(/\D/g,''); done.add(k.id); save({done:[...done]}); add(n,k.t); paintEarn();
+  const n=+k.pt.replace(/\D/g,''); done.add(k.id); save({['done_'+K]:[...done]}); add(n,k.t); paintEarn();
 });
 
 /* balance */
 let shown=0;
 function countTo(v){const a=shown,t0=performance.now();(function f(t){const q=Math.min(1,(t-t0)/700),e=1-Math.pow(1-q,3);
   shown=Math.round(a+(v-a)*e);$('pts').textContent=shown.toLocaleString();if(q<1)requestAnimationFrame(f)})(t0)}
-function paintBal(){ save({pts:PTS}); countTo(PTS); $('val').textContent=`= $${(PTS/100).toFixed(2)} off your next order`; paintChips(); }
+function paintBal(){ save({['pts_'+K]:PTS}); countTo(PTS); $('val').textContent=`= $${(PTS/100).toFixed(2)} off your next order`; paintChips(); }
 const toast=document.createElement('div'); toast.className='toast'; document.body.appendChild(toast);
 let tt; function say(h){toast.innerHTML=h;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2200)}
 function add(n,why){ PTS+=n; paintBal(); say(`<b>+${n} pts</b> — ${why}`); logAct(why,`+${n}`); }
@@ -441,25 +487,26 @@ function add(n,why){ PTS+=n; paintBal(); say(`<b>+${n} pts</b> — ${why}`); log
 /* redeem */
 let pick=0;
 function paintChips(){
+  const e=document.querySelector('.cash .empty'); if(e) e.hidden=PTS>=500; $('chips').hidden=PTS<500; $('camt').hidden=PTS<500;
   const opts=[500,1000,PTS].filter((v,i,a)=>v>0&&a.indexOf(v)===i).sort((a,b)=>a-b);
   $('chips').innerHTML=opts.map(v=>`<button type="button" data-v="${v}"${v>PTS?' disabled':''} class="${v===pick?'on':''}">${v===PTS?'All · ':''}${v.toLocaleString()} pts</button>`).join('');
   $('camt').textContent=`$${(pick/100).toFixed(2)}`;
 }
 $('chips').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||b.disabled) return;
-  pick=pick===+b.dataset.v?0:+b.dataset.v; document.querySelectorAll('.vt').forEach(v=>{v.classList.remove('res');v.querySelector('button').textContent='Reserve'});
+  pick=pick===+b.dataset.v?0:+b.dataset.v; document.querySelectorAll('.vt').forEach(v=>{v.classList.remove('res');v.querySelector('button').textContent='Add to order'});
   paintChips(); if(pick) say(`<b>$${(pick/100).toFixed(2)} off</b> — applies at checkout`);});
 document.querySelectorAll('.vt').forEach(v=>v.querySelector('button').addEventListener('click',()=>{
   const on=!v.classList.contains('res');
-  document.querySelectorAll('.vt').forEach(x=>{x.classList.remove('res');x.querySelector('button').textContent='Reserve'});
-  if(on){ v.classList.add('res'); v.querySelector('button').textContent='Reserved ✓'; pick=0; paintChips();
-    say(`<b>Free vial reserved</b> — adds itself at $${v.dataset.t}+`); }
+  document.querySelectorAll('.vt').forEach(x=>{x.classList.remove('res');x.querySelector('button').textContent='Add to order'});
+  if(on){ v.classList.add('res'); v.querySelector('button').textContent='Added ✓'; pick=0; paintChips();
+    say(`<b>Free bac water added</b> — it drops in at $${v.dataset.t}+`); }
 }));
 
 /* activity */
-const ACT=st.act||[
+const ACT=st['act_'+K]||(NEW?[['Joined SKO Club',`${USER.joined} \u00b7 at sign-up`,'Explorer']]:[
  ['Order #4821','Researcher 2×','+376'],['Free vial','BPC-157 on order #4790','$0'],
- ['Referral','Mike placed his first order','+200'],['Redeemed','$5.00 off order #4755','−500']];
-function logAct(t,n){ ACT.unshift([t,'Just now',n]); save({act:ACT.slice(0,8)}); paintAct(); }
+ ['Referral','Mike placed his first order','+200'],['Redeemed','$5.00 off order #4755','−500']]);
+function logAct(t,n){ ACT.unshift([t,'Just now',n]); save({['act_'+K]:ACT.slice(0,8)}); paintAct(); }
 function paintAct(){ $('act').innerHTML=ACT.slice(0,6).map(([a,b,c])=>`<div><span>${a}<small>${b}</small></span><em class="${c.startsWith('−')||c==='$0'?'m':''}">${c}</em></div>`).join(''); }
 
 $('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('rlink').textContent)}catch(e){} $('copy').textContent='Copied'; setTimeout(()=>$('copy').textContent='Copy link',1600)});
