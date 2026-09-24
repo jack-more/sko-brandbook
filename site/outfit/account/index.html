@@ -180,6 +180,35 @@ main{min-width:0;display:grid;gap:34px}
 .lv.done{opacity:.6}
 .lv.lock img{filter:grayscale(.6);opacity:.7}
 
+/* ---------- colour blocking: each section is its own panel, so the page reads in chunks ----------
+   Earn is pale Halo blue (doing), Redeem is SKO blue (spending), Your level is
+   metal grey (the badges are metal), the streak is warm. */
+.blk{border-radius:22px;padding:26px 26px 28px}
+.blk .sh{margin-bottom:18px}
+.b-earn{background:#DCE7FA}
+.b-earn .sh h2{color:#173384}.b-earn .sh span{color:#4A6394}
+.b-earn .task{background:rgba(255,255,255,.72)}
+.b-earn .task.done{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(23,51,132,.2)}
+.b-earn .task.drop{background:#0a1330}
+.b-redeem{background:#173384;color:#F2F0EA}
+.b-redeem .sh h2{color:#F2F0EA}.b-redeem .sh span{color:rgba(242,240,234,.72)}
+.b-redeem .card{background:rgba(255,255,255,.08);color:#F2F0EA}
+.b-redeem .card .k{color:rgba(242,240,234,.7)!important}
+.b-redeem .vt{background:#F2F0EA;color:#0a1330}
+.b-redeem .vt span{color:#4A5470}
+.b-redeem .vt button{background:#173384;color:#F2F0EA}
+.b-redeem .cash .amt{color:#fff}
+.b-redeem .cash .sub,.b-redeem .fine{color:rgba(242,240,234,.72)}
+.b-redeem .chips button{background:transparent;border-color:rgba(242,240,234,.4);color:#F2F0EA}
+.b-redeem .chips button.on{background:#F2F0EA;border-color:#F2F0EA;color:#173384}
+.b-level{background:#E3E5EA}
+.b-level .sh span{color:#5C6273}
+.b-level .lv{background:#F7F7F9}
+.b-level .lv.on{background:#0a1330}
+.streak{background:#F6E7D2}
+.streak span{color:#7A5A34}
+.months i{background:rgba(255,255,255,.6);border-color:rgba(122,90,52,.35);color:#7A5A34}
+
 /* one tap deep */
 .deep{display:grid;gap:10px}
 details{border-radius:16px;background:var(--tile);padding:0 22px}
@@ -225,6 +254,8 @@ details[open] summary:after{transform:rotate(45deg)}
   .months{margin-left:0;width:100%;justify-content:space-between}
   .months i{width:auto;flex:1;height:36px}
   .sh{flex-direction:column;align-items:flex-start;gap:4px}
+  .blk{padding:20px 16px 22px;border-radius:18px;margin:0 -4px}
+  .b-level .ladder{margin:0 -16px;padding:0 16px 4px}
   .earn{grid-template-columns:1fr 1fr;gap:8px}
   .task{min-height:150px;padding:15px}
   .task b{font-size:15px}
@@ -287,13 +318,13 @@ details[open] summary:after{transform:rotate(45deg)}
     </section>
 
     <!-- 2. earn -->
-    <section aria-labelledby="earnh">
+    <section class="blk b-earn" aria-labelledby="earnh">
       <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are six more.</span></div>
       <div class="earn" id="earn"></div>
     </section>
 
     <!-- 3. redeem -->
-    <section id="redeem" aria-labelledby="redh">
+    <section class="blk b-redeem" id="redeem" aria-labelledby="redh">
       <div class="sh"><h2 id="redh">Redeem</h2><span>One reward per order. Applied automatically at checkout.</span></div>
       <div class="redeem">
         <div class="card">
@@ -316,7 +347,7 @@ details[open] summary:after{transform:rotate(45deg)}
     </section>
 
     <!-- 4. your level -->
-    <section aria-labelledby="lvh">
+    <section class="blk b-level" aria-labelledby="lvh">
       <div class="sh"><h2 id="lvh">Your level</h2><span>Set by your last 6 months of spend. Each level ships you its badge.</span></div>
       <div class="ladder" id="ladder"></div>
     </section>
