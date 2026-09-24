@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en" data-theme="bone">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKO Rewards — storefront study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------------------------
+   SKO storefront study.
+   Structure and typographic scale: outfit.hellohello.is.
+   Product behaviour: the artifact app — the object climbs out of its
+   tile as it crosses the focus band, and the scene it was shot in
+   rolls behind it, so a tile has depth instead of being a swatch.
+   --------------------------------------------------------------- */
+:root{
+  --ground:#EAE7E1; --ink:#173384; --ink-soft:rgba(23,51,132,.55);
+  --tile:#E2DED7; --rule:rgba(23,51,132,.35); --shadow:23,51,132; --scene:1;
+  --plate-a:#EDEFF5; --plate-b:#C4CADA; --glow:130,180,248; --glow-o:.95; --cast:4,10,32;
+}
+:root[data-theme="night"]{
+  --ground:#0C0D10; --ink:#EFEDE8; --ink-soft:rgba(239,237,232,.5);
+  --tile:#17181C; --rule:rgba(239,237,232,.28); --shadow:0,0,0; --scene:.85;
+  --plate-a:#1E222B; --plate-b:#0D0E12; --glow:113,167,242; --glow-o:.55; --cast:0,0,0;
+}
+:root[data-theme="blue"]{
+  --ground:#173384; --ink:#EDEAE3; --ink-soft:rgba(237,234,227,.6);
+  --tile:#20408F; --rule:rgba(237,234,227,.34); --shadow:4,12,46; --scene:.9;
+  --plate-a:#24469E; --plate-b:#132B6E; --glow:150,192,255; --glow-o:.42; --cast:2,8,34;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.35;letter-spacing:-.01em;
+  transition:background .45s ease,color .45s ease;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{padding:0 20px}
+
+.top{position:fixed;inset:0 0 auto 0;z-index:80;display:flex;align-items:center;
+  justify-content:space-between;padding:16px 20px;
+  background:color-mix(in srgb,var(--ground) 84%,transparent);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease}
+.top.stuck{border-bottom-color:var(--rule)}
+.mark{display:block;line-height:0}
+.mark img{height:30px;width:auto;display:block}
+.mark .w{display:none}
+:root[data-theme="night"] .mark .b,:root[data-theme="blue"] .mark .b{display:none}
+:root[data-theme="night"] .mark .w,:root[data-theme="blue"] .mark .w{display:block}
+.nav{display:flex;align-items:center;gap:30px;font-size:19px;font-weight:500}
+.nav a.on{border-bottom:2px solid var(--ink);padding-bottom:2px}
+.nav .club{display:inline-flex;align-items:center;gap:8px}
+.nav .club svg{width:19px;height:19px;flex:0 0 auto}
+.dots{display:flex;gap:9px;margin-left:6px}
+.dots button{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink);padding:0;cursor:pointer;background:transparent}
+.dots button[data-set="bone"]{background:#F2EFEA}
+.dots button[data-set="night"]{background:#0C0D10;border-color:#0C0D10}
+.dots button[data-set="blue"]{background:#173384;border-color:#173384}
+.dots button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:2px}
+
+
+
+/* ---------- Rewards: the account page, redesigned ----------------------------
+   The live page's rules, shown properly. One hero, one number, one goal.
+   Below it three rows only (Earn, Redeem, Your level); everything else is
+   one tap deep. Numbers are the live store's: 100 pts = $1, 1 pt per $1 at
+   Explorer and 2x from Researcher, tiers on 6-month spend, free vial at
+   $150+ and $300+, referral $15 off / +200 pts.
+   ------------------------------------------------------------------------ */
+body{background:var(--ground)}
+.shell{max-width:1180px;margin:0 auto;padding:92px 20px 80px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px}
+.side{position:sticky;top:92px;align-self:start;display:grid;gap:4px}
+.side a{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-size:14.5px;font-weight:500;color:var(--ink-soft)}
+.side a svg{width:17px;height:17px;flex:0 0 auto}
+.side a.on{background:var(--tile);color:var(--ink);font-weight:650}
+.side a:hover{color:var(--ink)}
+.side hr{border:0;border-top:1px solid var(--rule);margin:10px 4px}
+main{min-width:0;display:grid;gap:34px}
+.k{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;background:#0a1330;color:#F2F0EA;
+  display:grid;grid-template-columns:1.1fr 1fr;min-height:330px}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 90% at 8% 0%,rgba(113,167,242,.5),rgba(113,167,242,0) 70%),
+             radial-gradient(50% 80% at 100% 100%,rgba(23,51,132,.9),rgba(23,51,132,0) 70%)}
+.hero>*{position:relative;z-index:2}
+.hl{padding:30px 32px;display:flex;flex-direction:column;gap:14px}
+.who{display:flex;align-items:center;gap:14px}
+.coin{width:64px;height:64px;border-radius:50%;background:#fff;padding:4px;object-fit:contain;box-shadow:0 0 0 3px rgba(242,240,234,.12),0 10px 24px rgba(0,0,0,.35)}
+.who b{display:block;font-family:"Syncopate",sans-serif;font-size:17px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.who span{display:block;font-size:13px;opacity:.72;margin-top:3px}
+.bal{margin-top:auto}
+.bal .num{font-size:clamp(64px,7vw,104px);font-weight:600;letter-spacing:-.05em;line-height:.9;font-variant-numeric:tabular-nums}
+.bal .num small{font-size:.26em;font-weight:500;letter-spacing:0;margin-left:8px;opacity:.7}
+.bal .val{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 13px;border-radius:99px;background:rgba(242,240,234,.1);font-size:14px;font-weight:600}
+.bal .val i{width:8px;height:8px;border-radius:50%;background:#46D38A;box-shadow:0 0 10px #46D38A}
+.hr{padding:30px 32px;display:flex;flex-direction:column;gap:18px;border-left:1px solid rgba(242,240,234,.1);background:rgba(242,240,234,.03)}
+.goal{display:flex;gap:18px;align-items:center}
+.goal img{height:118px;width:auto;filter:drop-shadow(0 16px 20px rgba(0,0,0,.45))}
+.goal .ncoin{width:96px;height:96px;border-radius:50%;background:#fff;padding:5px;object-fit:contain;flex:0 0 auto}
+.goal h3{margin:6px 0 4px;font-size:24px;font-weight:650;letter-spacing:-.02em;line-height:1.1}
+.goal p{margin:0;font-size:13.5px;opacity:.75}
+.bar{height:9px;border-radius:99px;background:rgba(242,240,234,.14);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#71A7F2,#B8D4FF);transition:width .7s cubic-bezier(.28,.06,.28,.96)}
+.barrow{display:flex;justify-content:space-between;font-size:12px;font-weight:600;opacity:.8;margin-top:8px}
+.hbtns{display:flex;gap:8px;margin-top:auto}
+.hbtns a{flex:1;text-align:center;padding:13px 14px;border-radius:12px;font-size:13px;font-weight:700;letter-spacing:.04em}
+.hbtns .p{background:#F2F0EA;color:#0a1330}
+.hbtns .g{border:1px solid rgba(242,240,234,.3)}
+
+/* streak */
+.streak{display:flex;align-items:center;gap:22px;padding:18px 22px;border-radius:16px;background:var(--tile)}
+.streak .fl{font-size:30px;line-height:1}
+.streak b{display:block;font-size:17px;font-weight:650}
+.streak span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+.months{margin-left:auto;display:flex;gap:6px}
+.months i{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;font-style:normal;font-size:10.5px;font-weight:700;
+  letter-spacing:.06em;background:var(--ground);color:var(--ink-soft);border:1px dashed var(--rule)}
+.months i.y{background:#173384;color:#F2F0EA;border:0}
+.months i.now{border:2px solid #173384;color:#173384;border-style:solid}
+
+/* section head */
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:14px}
+.sh h2{margin:0;font-family:"Syncopate",sans-serif;font-size:clamp(20px,2.2vw,28px);font-weight:700;letter-spacing:-.01em;text-transform:uppercase}
+.sh span{font-size:13px;color:var(--ink-soft)}
+
+/* earn */
+.earn{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.task{position:relative;text-align:left;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:16px;padding:18px;background:var(--tile);
+  display:flex;flex-direction:column;gap:6px;min-height:132px;transition:transform .25s ease,background .25s ease}
+.task:hover{transform:translateY(-2px)}
+.task .pt{font-family:"Syncopate",sans-serif;text-transform:uppercase;font-size:12px;font-weight:700;letter-spacing:.06em;color:#173384}
+.task b{font-size:16px;font-weight:650;letter-spacing:-.01em}
+.task span{font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+.task .go{margin-top:auto;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.task.done{background:transparent;box-shadow:inset 0 0 0 1.5px var(--rule);opacity:.7}
+.task.done .go{color:#1E7A4F}
+.task.drop{background:#0a1330;color:#F2F0EA}
+.task.drop:before{content:"";position:absolute;inset:0;border-radius:16px;background:radial-gradient(70% 90% at 100% 0%,rgba(113,167,242,.45),rgba(113,167,242,0) 70%)}
+.task.drop>*{position:relative}
+.task.drop .pt{color:#71A7F2}
+.task.drop span{color:rgba(242,240,234,.72)}
+
+/* redeem */
+.redeem{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}
+.card{border-radius:16px;background:var(--tile);padding:22px}
+.vials{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.vt{border-radius:14px;background:var(--ground);padding:16px;display:flex;flex-direction:column;gap:10px;border:1.5px solid transparent;transition:border-color .2s ease}
+.vt.res{border-color:#173384}
+.vt .imgs{display:flex;align-items:flex-end;justify-content:center;gap:2px;height:96px}
+.vt .imgs img{height:88px;width:auto;filter:drop-shadow(0 8px 8px rgba(var(--cast),.22))}
+.vt .imgs img:nth-child(2){height:96px}
+.vt b{font-size:18px;font-weight:650}
+.vt span{font-size:12.5px;color:var(--ink-soft)}
+.vt button{border:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px;border-radius:10px;cursor:pointer;background:var(--ink);color:var(--ground)}
+.vt.res button{background:#1E7A4F;color:#fff}
+.cash .amt{font-size:44px;font-weight:600;letter-spacing:-.04em;margin:10px 0 2px;font-variant-numeric:tabular-nums}
+.cash .sub{font-size:13px;color:var(--ink-soft)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.chips button{border:1.5px solid var(--rule);background:var(--ground);color:var(--ink);font:inherit;font-size:13px;font-weight:650;padding:10px 14px;border-radius:99px;cursor:pointer}
+.chips button.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.chips button:disabled{opacity:.35;cursor:default}
+.fine{font-size:11.5px;color:var(--ink-soft)}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.lv{border-radius:16px;background:var(--tile);padding:20px 18px;display:flex;flex-direction:column;gap:10px;position:relative}
+.lv img{width:72px;height:72px;border-radius:50%;background:#fff;padding:4px;object-fit:contain}
+.lv .nm{font-family:"Syncopate",sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+.lv .sp{font-size:12px;font-weight:650;color:var(--ink-soft)}
+.lv ul{margin:0;padding:0;list-style:none;display:grid;gap:5px;font-size:13px}
+.lv li:before{content:"\2713";margin-right:7px;color:#1E7A4F;font-weight:700}
+.lv .tag{position:absolute;top:16px;right:14px;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;background:var(--ground);color:var(--ink-soft)}
+.lv.on{background:#0a1330;color:#F2F0EA}
+.lv.on .sp{color:rgba(242,240,234,.7)}
+.lv.on .tag{background:#71A7F2;color:#0a1330}
+.lv.done{opacity:.6}
+.lv.lock img{filter:grayscale(.6);opacity:.7}
+
+/* one tap deep */
+.deep{display:grid;gap:10px}
+details{border-radius:16px;background:var(--tile);padding:0 22px}
+summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 0;font-size:16px;font-weight:650}
+summary::-webkit-details-marker{display:none}
+summary em{font-style:normal;font-size:13px;font-weight:500;color:var(--ink-soft);margin-left:auto}
+summary:after{content:"+";font-size:22px;font-weight:400;line-height:1;transition:transform .25s ease}
+details[open] summary:after{transform:rotate(45deg)}
+.dbody{padding:0 0 22px;display:grid;gap:12px;font-size:14px}
+.ref{display:flex;gap:8px}
+.ref code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:13px 14px;border-radius:10px;background:var(--ground);font-size:13px}
+.ref button{border:0;font:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:0 18px;border-radius:10px;background:var(--ink);color:var(--ground);cursor:pointer}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.two div{background:var(--ground);border-radius:12px;padding:14px}
+.two b{display:block;font-size:22px;font-weight:650}
+.two span{font-size:12px;color:var(--ink-soft)}
+.act{display:grid}
+.act div{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--rule);font-size:13.5px}
+.act div:last-child{border:0}
+.act em{font-style:normal;font-weight:650;font-variant-numeric:tabular-nums}
+.act em.m{color:var(--ink-soft)}
+.act small{display:block;color:var(--ink-soft);font-size:12px}
+.rules{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-soft)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:120;transform:translate(-50%,24px);opacity:0;pointer-events:none;
+  background:#0a1330;color:#F2F0EA;padding:14px 20px;border-radius:99px;font-size:14px;font-weight:600;box-shadow:0 14px 40px rgba(4,10,32,.35);
+  transition:transform .4s cubic-bezier(.28,.06,.28,.96),opacity .4s ease}
+.toast.on{transform:translate(-50%,0);opacity:1}
+.toast b{color:#71A7F2}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:18px;padding:78px 16px 60px}
+  .side{position:static;display:flex;overflow-x:auto;gap:6px;margin:0 -16px;padding:0 16px}
+  .side a{white-space:nowrap;padding:10px 14px;background:var(--tile)}
+  .side a.on{background:var(--ink);color:var(--ground)}
+  .side hr,.side .out{display:none}
+  main{gap:28px}
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hl,.hr{padding:22px}
+  .hr{border-left:0;border-top:1px solid rgba(242,240,234,.1)}
+  .goal img{height:92px}
+  .goal h3{font-size:20px}
+  .streak{flex-wrap:wrap;gap:12px;padding:16px}
+  .months{margin-left:0;width:100%;justify-content:space-between}
+  .months i{width:auto;flex:1;height:36px}
+  .sh{flex-direction:column;align-items:flex-start;gap:4px}
+  .earn{grid-template-columns:1fr 1fr;gap:8px}
+  .task{min-height:150px;padding:15px}
+  .task b{font-size:15px}
+  .ladder{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;margin:0 -16px;padding:0 16px 4px}
+  .goal .ncoin{width:78px;height:78px}
+  .lv{flex:0 0 78%;scroll-snap-align:start}
+  .redeem{grid-template-columns:1fr}
+  .top .dots{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="mark" href="../" aria-label="SKO Compounds"><img class="b" src="../img/ui/shield-blue.png" alt=""><img class="w" src="../img/ui/shield-white.png" alt=""></a>
+  <nav class="nav">
+    <a href="../">Shop</a>
+    <a href="../club/" class="club on" aria-label="SKO Club">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/></svg><span>Rewards</span></a>
+    <a href="../#bag">Bag (0)</a>
+  </nav>
+</header>
+
+<div class="shell">
+  <nav class="side" aria-label="Account">
+    <a class="on" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1s6 1 6 1 6 2 6-1-4-3-6 1"/></svg>Rewards</a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>Orders</a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg>Account details</a>
+    <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Addresses</a>
+    <hr>
+    <a class="out" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Sign out</a>
+  </nav>
+
+  <main>
+    <!-- 1. the hero: who you are, one number, one goal -->
+    <section class="hero" aria-label="Your rewards">
+      <div class="hl">
+        <div class="who"><img class="coin" id="hcoin" src="../img/tier/foil.webp" alt="">
+          <div><b id="htier">Researcher</b><span>Jack &middot; 2&times; points on every order</span></div></div>
+        <div class="bal">
+          <div class="k" style="opacity:.7">Your points</div>
+          <div class="num"><span id="pts">0</span><small>pts</small></div>
+          <div class="val"><i></i><span id="val">= $0.00 off your next order</span></div>
+        </div>
+      </div>
+      <div class="hr">
+        <div class="k" style="opacity:.7">Next up</div>
+        <div class="goal"><img class="ncoin" id="ncoin" src="../img/tier/chrome.webp" alt="">
+          <div><h3 id="gtitle">$180 to Scientist</h3><p id="gsub">Unlocks a free shipping credit every 6 months</p></div></div>
+        <div><div class="bar"><i id="gbar" style="width:0%"></i></div>
+          <div class="barrow"><span id="gl">$570 in 6 months</span><span id="gr">$750</span></div></div>
+        <div class="hbtns"><a class="p" href="../">Shop &amp; earn 2&times;</a><a class="g" href="#redeem">Use points</a></div>
+      </div>
+    </section>
+
+    <!-- the streak: tracked on the live site, never shown until now -->
+    <section class="streak" aria-label="Your streak">
+      <span class="fl" aria-hidden="true">&#128293;</span>
+      <div><b>3-month streak</b><span>Order by Oct 31 to make it 4. Miss a month and it resets.</span></div>
+      <div class="months" id="months"></div>
+    </section>
+
+    <!-- 2. earn -->
+    <section aria-labelledby="earnh">
+      <div class="sh"><h2 id="earnh">Earn</h2><span>Spending is one way. Here are six more.</span></div>
+      <div class="earn" id="earn"></div>
+    </section>
+
+    <!-- 3. redeem -->
+    <section id="redeem" aria-labelledby="redh">
+      <div class="sh"><h2 id="redh">Redeem</h2><span>One reward per order. Applied automatically at checkout.</span></div>
+      <div class="redeem">
+        <div class="card">
+          <div class="k" style="color:var(--ink-soft)">Free vial on your next order</div>
+          <div class="vials">
+            <div class="vt" data-t="150"><div class="imgs"><img src="../img/v/bpc-157.webp" alt=""><img src="../img/v/ghk-cu.webp" alt=""><img src="../img/v/tb-500.webp" alt=""></div>
+              <b>$150+ order</b><span>Pick a free vial from the shelf</span><button type="button">Reserve</button></div>
+            <div class="vt" data-t="300"><div class="imgs"><img src="../img/v/glow.webp" alt=""><img src="../img/v/klow.webp" alt=""><img src="../img/v/nad-plus.webp" alt=""></div>
+              <b>$300+ order</b><span>Pick a premium vial</span><button type="button">Reserve</button></div>
+          </div>
+        </div>
+        <div class="card cash">
+          <div class="k" style="color:var(--ink-soft)">Points off your order</div>
+          <div class="amt" id="camt">$0.00</div>
+          <div class="sub">100 points = $1 off</div>
+          <div class="chips" id="chips"></div>
+          <div class="fine">Can&rsquo;t be combined with a free vial or a code on the same order.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. your level -->
+    <section aria-labelledby="lvh">
+      <div class="sh"><h2 id="lvh">Your level</h2><span>Set by your last 6 months of spend. Each level ships you its badge.</span></div>
+      <div class="ladder" id="ladder"></div>
+    </section>
+
+    <!-- everything else, one tap deep -->
+    <section class="deep">
+      <details><summary>Refer a friend <em>They get $15 off &middot; you get 200 pts</em></summary>
+        <div class="dbody">
+          <div class="ref"><code id="rlink">https://skocompounds.com/?r=0PHGGZ7G7V</code><button type="button" id="copy">Copy link</button></div>
+          <div class="two"><div><b>2</b><span>Friends who ordered</span></div><div><b>400</b><span>Points earned from referrals</span></div></div>
+        </div></details>
+      <details><summary>Recent activity <em>Last 30 days</em></summary>
+        <div class="dbody act" id="act"></div></details>
+      <details><summary>How rewards work</summary>
+        <div class="dbody"><ul class="rules">
+          <li>Earn 1 point per $1 as Explorer, 2 points per $1 from Researcher up (capped at 2&times;).</li>
+          <li>100 points = $1 off. Points and rewards apply automatically at checkout.</li>
+          <li>Your level is set by your spend over the last 6 months. Shipping credits refill every 6 months.</li>
+          <li>Free vial: reserve a tier any time; it adds as a $0 line once your cart crosses $150 or $300. Returning customers only.</li>
+          <li>One reward per order &mdash; a code can&rsquo;t combine with a free vial or points off.</li>
+        </ul></div></details>
+    </section>
+  </main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const KEY='sko-rewards-demo';
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}};
+const save=o=>{try{localStorage.setItem(KEY,JSON.stringify(Object.assign(load(),o)))}catch(e){}};
+const st=load();
+let PTS=st.pts!=null?st.pts:1240;
+const SPEND=570;                       // last 6 months, demo account
+const done=new Set(st.done||[]);
+
+/* tiers: the live store's ladder, each paired with a badge from the brand book */
+const TIERS=[
+ {n:'Explorer',  at:0,    coin:'pigment',perks:['1 pt per $1','All flash offers']},
+ {n:'Researcher',at:250,  coin:'foil',   perks:['2 pts per $1','Loyalty ladder discounts']},
+ {n:'Scientist', at:750,  coin:'chrome', perks:['2 pts per $1','1 free shipping credit / 6 mo','Early access to new compounds']},
+ {n:'Elite',     at:1500, coin:'cap',    perks:['2 pts per $1','4 free shipping credits / 6 mo','Birthday 2× + exclusive offers']},
+];
+const cur=TIERS.reduce((a,t,i)=>SPEND>=t.at?i:a,0), next=TIERS[cur+1];
+$('htier').textContent=TIERS[cur].n; $('hcoin').src=`../img/tier/${TIERS[cur].coin}.webp`;
+if(next){
+  $('gtitle').textContent=`$${next.at-SPEND} to ${next.n}`;
+  $('ncoin').src=`../img/tier/${next.coin}.webp`;
+  $('gsub').textContent=next.n==='Scientist'?'Unlocks a free shipping credit every 6 months':'Unlocks 4 shipping credits and birthday 2×';
+  $('gl').textContent=`$${SPEND} in 6 months`; $('gr').textContent=`$${next.at.toLocaleString()}`;
+  requestAnimationFrame(()=>setTimeout(()=>$('gbar').style.width=((SPEND-TIERS[cur].at)/(next.at-TIERS[cur].at)*100)+'%',200));
+}
+$('ladder').innerHTML=TIERS.map((t,i)=>`<div class="lv ${i===cur?'on':i<cur?'done':'lock'}">
+  <span class="tag">${i===cur?'You are here':i<cur?'Passed':'$'+t.at.toLocaleString()+'+'}</span>
+  <img src="../img/tier/${t.coin}.webp" alt="">
+  <div><div class="nm">${t.n}</div><div class="sp">${t.at?'$'+t.at.toLocaleString()+'+ in 6 months':'Where everyone starts'}</div></div>
+  <ul>${t.perks.map(p=>`<li>${p}</li>`).join('')}</ul></div>`).join('');
+
+/* streak: six months, three kept */
+const M=['May','Jun','Jul','Aug','Sep','Oct'];
+$('months').innerHTML=M.map((m,i)=>`<i class="${i>=2&&i<=4?'y':i===5?'now':''}">${m}</i>`).join('');
+
+/* earn: each pays once and moves the balance */
+const TASKS=[
+ {id:'drop', pt:'Daily', t:"Today's free drop", d:'Plinko. Tokens every time, a Full Box 1 in 100.', go:'Play', link:'../../plinko/', drop:true},
+ {id:'review',pt:'+500 pts',t:'Review a vial you ran',d:'A written review on any product you ordered.',go:'Write one'},
+ {id:'follow',pt:'+250 pts',t:'Follow SKO',d:'Once, on TikTok or Instagram.',go:'Follow'},
+ {id:'live', pt:'+200 pts',t:'Catch the live code',d:'Read out once every Thursday on TikTok.',go:'Get reminded'},
+ {id:'comment',pt:'+100 pts',t:'Leave a comment',d:'On a post or during a live.',go:'Comment'},
+ {id:'profile',pt:'+100 pts',t:'Complete your profile',d:'Two questions: what you research, how often.',go:'Answer'},
+];
+function paintEarn(){
+  $('earn').innerHTML=TASKS.map(k=>`<button class="task${k.drop?' drop':''}${done.has(k.id)?' done':''}" type="button" data-id="${k.id}">
+    <span class="pt">${k.pt}</span><b>${k.t}</b><span>${k.d}</span><span class="go">${done.has(k.id)?'Done ✓':k.go+' →'}</span></button>`).join('');
+}
+$('earn').addEventListener('click',e=>{
+  const b=e.target.closest('.task'); if(!b) return; const k=TASKS.find(x=>x.id===b.dataset.id);
+  if(k.link){ location.href=k.link; return; }
+  if(done.has(k.id)) return;
+  const n=+k.pt.replace(/\D/g,''); done.add(k.id); save({done:[...done]}); add(n,k.t); paintEarn();
+});
+
+/* balance */
+let shown=0;
+function countTo(v){const a=shown,t0=performance.now();(function f(t){const q=Math.min(1,(t-t0)/700),e=1-Math.pow(1-q,3);
+  shown=Math.round(a+(v-a)*e);$('pts').textContent=shown.toLocaleString();if(q<1)requestAnimationFrame(f)})(t0)}
+function paintBal(){ save({pts:PTS}); countTo(PTS); $('val').textContent=`= $${(PTS/100).toFixed(2)} off your next order`; paintChips(); }
+const toast=document.createElement('div'); toast.className='toast'; document.body.appendChild(toast);
+let tt; function say(h){toast.innerHTML=h;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),2200)}
+function add(n,why){ PTS+=n; paintBal(); say(`<b>+${n} pts</b> — ${why}`); logAct(why,`+${n}`); }
+
+/* redeem */
+let pick=0;
+function paintChips(){
+  const opts=[500,1000,PTS].filter((v,i,a)=>v>0&&a.indexOf(v)===i).sort((a,b)=>a-b);
+  $('chips').innerHTML=opts.map(v=>`<button type="button" data-v="${v}"${v>PTS?' disabled':''} class="${v===pick?'on':''}">${v===PTS?'All · ':''}${v.toLocaleString()} pts</button>`).join('');
+  $('camt').textContent=`$${(pick/100).toFixed(2)}`;
+}
+$('chips').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||b.disabled) return;
+  pick=pick===+b.dataset.v?0:+b.dataset.v; document.querySelectorAll('.vt').forEach(v=>{v.classList.remove('res');v.querySelector('button').textContent='Reserve'});
+  paintChips(); if(pick) say(`<b>$${(pick/100).toFixed(2)} off</b> — applies at checkout`);});
+document.querySelectorAll('.vt').forEach(v=>v.querySelector('button').addEventListener('click',()=>{
+  const on=!v.classList.contains('res');
+  document.querySelectorAll('.vt').forEach(x=>{x.classList.remove('res');x.querySelector('button').textContent='Reserve'});
+  if(on){ v.classList.add('res'); v.querySelector('button').textContent='Reserved ✓'; pick=0; paintChips();
+    say(`<b>Free vial reserved</b> — adds itself at $${v.dataset.t}+`); }
+}));
+
+/* activity */
+const ACT=st.act||[
+ ['Order #4821','Researcher 2×','+376'],['Free vial','BPC-157 on order #4790','$0'],
+ ['Referral','Mike placed his first order','+200'],['Redeemed','$5.00 off order #4755','−500']];
+function logAct(t,n){ ACT.unshift([t,'Just now',n]); save({act:ACT.slice(0,8)}); paintAct(); }
+function paintAct(){ $('act').innerHTML=ACT.slice(0,6).map(([a,b,c])=>`<div><span>${a}<small>${b}</small></span><em class="${c.startsWith('−')||c==='$0'?'m':''}">${c}</em></div>`).join(''); }
+
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('rlink').textContent)}catch(e){} $('copy').textContent='Copied'; setTimeout(()=>$('copy').textContent='Copy link',1600)});
+paintEarn(); paintAct(); paintBal();
+/* on phones the ladder opens on your level, not the one you've passed */
+if(matchMedia('(max-width:900px)').matches){ const l=$('ladder'), on=l.querySelector('.lv.on'); if(on) l.scrollLeft=on.offsetLeft-16; }
+</script>
+</body>
+</html>
