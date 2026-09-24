@@ -478,7 +478,7 @@ a{color:inherit;text-decoration:none}
         <span class="small">The Live &middot; every Thursday on TikTok</span>
       </div>
       <div class="scell statement">
-        <p>Research peptides, third party tested and shipped cold from Beverly Hills. Every batch carries its own certificate.</p>
+        <p>Research peptides, third party tested and shipped from Beverly Hills. Every batch carries its own certificate.</p>
         <a class="cta" href="#shop">Shop the shelf <span aria-hidden="true">&#9654;</span></a>
       </div>
       <div class="scell">
@@ -488,7 +488,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="scell">
         <span class="k">Orders shipped</span>
-        <span class="big">50,000+</span>
+        <span class="big">40,000+</span>
         <span class="small">Research use only &middot; &copy; 2026</span>
       </div>
     </div>
@@ -510,8 +510,8 @@ a{color:inherit;text-decoration:none}
     </video>
     <div class="bandtext">
       <div class="claims">
-        <div><b>50,000+</b><span>Orders shipped</span></div>
-        <div><b>Beverly&nbsp;Hills</b><span>Shipped cold, same day</span></div>
+        <div><b>40,000+</b><span>Orders shipped</span></div>
+        <div><b>Beverly&nbsp;Hills</b><span>Order by 3 PM, ships same day</span></div>
         <div><b>Third&nbsp;party</b><span>Tested, batch by batch</span></div>
       </div>
       <div class="club">
@@ -636,7 +636,7 @@ fetch('products.json').then(r=>r.json()).then(P=>{
     }
   }
   tickClock(); setInterval(tickClock,1000);
-  const items=['Third party tested','Shipped cold','Beverly Hills','A certificate with every batch',
+  const items=['Third party tested','Ships same day before 3 PM','Beverly Hills','A certificate with every batch',
                '1 point for every $1','100 points = $1 off','A free drop every day','The Live \u00b7 Thursdays 6 PM PT'];
   const one=items.map(x=>`<span>${x}</span>`).join('');
   document.getElementById('run').innerHTML=one+one;
@@ -798,12 +798,12 @@ function openTile(el){
   tw.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; e.stopPropagation(); setQ(+b.dataset.q);});
   setQ(1);
   q$('.st').textContent=document.getElementById('shipk').textContent==='Ships today'
-    ?`Order in the next ${document.getElementById('shipt').textContent} \u2014 ships cold today`
-    :`Ships cold on ${document.getElementById('shipt').textContent}'s UPS truck`;
+    ?`Order in the next ${document.getElementById('shipt').textContent} \u2014 ships today`
+    :`Ships on ${document.getElementById('shipt').textContent}'s UPS truck`;
   if(document.querySelector('.dot.late')) q$('.ship .dot').classList.add('late');
   q$('.why').innerHTML=[
     ['Third party tested', p.coa?`<a href="${p.coa}" target="_blank" rel="noopener">See this batch\u2019s certificate</a>`:'Batch by batch'],
-    ['Shipped cold', 'From Beverly Hills, same day before 3 PM PT'],
+    ['Ships same day', 'From Beverly Hills, when you order before 3 PM PT'],
     [`Earns ${Math.floor(p.price)} pts`, `$${(Math.floor(p.price)/100).toFixed(2)} back \u00b7 2\u00d7 from Researcher`],
     ['The Drop', 'A free Plinko drop every day \u00b7 Full Box 1 in 100'],
   ].map(([b,t])=>`<div><b>${b}</b><span>${t}</span></div>`).join('');
